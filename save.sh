@@ -12,6 +12,7 @@ cp ~/.vimrc save
 #clear gits
 cd save
 find . -name "*.git" -mindepth 2 -type d -exec rm -rf {} \;
+find . -name ".DS_Store" -type d -exec rm -rf {} \;
 
 #git save
 git add .
