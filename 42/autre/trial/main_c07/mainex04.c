@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 18:47:13 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/08/25 17:12:56 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/08/25 17:37:38 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
 int	main(int ac, char **av)
 {
 	(void) ac;
+	//(void) av;
 	printf("%s\n", ft_convert_base(av[1], av[2], av[3]));
+	//printf("%s\n", ft_convert_base("-9", "0123456789", "0123456789"));
 	return (0);
 }
