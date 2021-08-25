@@ -116,7 +116,7 @@ void	ft_rev_tab(int ac, char *av)
 	char	str;
 
 	i = 0;
-	while (i <= (ac / 2))
+	while (i <= (ac / 2 - 1))
 	{
 		str = av[i];
 		av[i] = av[ac - i - 1];
