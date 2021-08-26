@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 19:37:58 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/08/25 19:42:56 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/08/26 13:15:56 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@ char	**ft_split(char *str, char *charset);
 
 int	main(int ac, char **ac)
 {
-	(void) ac;)
+	(void) ac;
 	printf()
 }

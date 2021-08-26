@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 12:50:24 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/08/24 18:33:30 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/08/26 11:28:08 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ char	*ft_strjoin(int size, char **strs, char *sep);
 
 int main()
 {
-	char	*tab[] = {"yo"};
+	char	*tab[] = {"yo", "voila", "tu", "grandmot", "0123456789"};
 
-	printf("%s\n", ft_strjoin(1, tab, "WESH"));
+	printf("%s\n", ft_strjoin(5, tab, " "));
 	return(0);
 }
