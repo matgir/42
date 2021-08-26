@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 19:37:58 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/08/26 15:45:54 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/08/26 15:47:05 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int	main(int ac, char **av)
 	unsigned int	j;
 
 	(void) ac;
-	(void) av;
-	tab = ft_split("en voila une belle maison toute rouge", " e");
+//	(void) av;
+//	tab = ft_split("en voila une belle maison toute rouge", " e");
+	tab = ft_split(av[1], av[2]);
 	i = 0;
 	while (tab[i])
 	{
