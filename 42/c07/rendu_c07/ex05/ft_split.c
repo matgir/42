@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 19:40:43 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/08/26 15:45:50 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/08/26 16:45:30 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ char	**ft_split(char *str, char *charset)
 
 	nbword = ft_count_word(str, charset);
 	tab = malloc(sizeof(*tab) * (nbword + 1));
-	if (tab == 0)
-		return (tab);
 	i = get_first_word(str, charset);
 	start = i;
 	if (nbword == 0 && str[i] && chek_if_charset(str[i], charset) != 1)
