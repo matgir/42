@@ -1,25 +1,25 @@
-# creer un dossier save et mettre le .git du repo 42 dedans
-# creer un dossier contenant le dossier save et le save.sh au meme niveau
+#creer un dossier save et mettre le .git du repo 42 dedans
+#creer un dossier contenant le dossier save et save.sh au meme niveau
 
-#fait que la suite du doc sera lu comme du bash
+#fait que la suite du programme sera lu comme du bash
 #!/bin/bash
 
 #clear save folder
 rm -Rf save/*
 
-#copy all document in save folder
-cp -R /Users/mgirardo/Desktop/42 save # -R veut dire que ca va copier le dossier en recursif donc jusqu a la derniere stratt inferieur
-cp ~/shell/save.sh save
+#copy all documents in save folder
+cp -R ~/Desktop/42/Libft save # -R veut dire que ca va copier le dossier en recursif ( donc jusqu a la derniere stratt inferieur
+cp -R ~/Desktop/42/Picsine save # -R veut dire que ca va copier le dossier en recursif ( donc jusqu a la derniere stratt inferieur
+cp ~/Sauvegarde/save.sh save
 cp ~/.zshrc save
 cp ~/.vimrc save
 
 #clear gits
 cd save
-  #mac os
-find . -name "*.git" -mindepth 2 -type d -exec rm -rf {} \;
-  #linux
+	#mac os
+#find . -name "*.git" -mindepth 2 -type d -exec rm -rf {} \;
+	#linux
 find . -mindepth 2 -name "*.git" -type d -exec rm -rf {} \;
-
 
 #git save
 git add .
