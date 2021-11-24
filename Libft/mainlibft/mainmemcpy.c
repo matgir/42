@@ -1,29 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   mainmemcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 10:44:37 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/11/24 16:41:30 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/11/24 16:47:44 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/11/24 17:45:10 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stddef.h>
 
-void	*ft_memset(void *s, int c, size_t n)
-{
-	unsigned int	i;
-	unsigned char	*dooble;
-
-	i = 0;
-	dooble = s;
-	while (i <= n)
-	{
-		dooble[i] = (unsigned char) c;
-		i++;
-		//dooble++;
-	}
-	return (s);
-}
