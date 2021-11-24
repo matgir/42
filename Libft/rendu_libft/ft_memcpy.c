@@ -6,8 +6,13 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 16:48:12 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/11/24 17:45:07 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:07:06 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include<stddef.h>
 
+void	*memcpy(void *dest, const void *src, size_t n)
+{
+	
+}
