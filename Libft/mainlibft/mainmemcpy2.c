@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   mainmemcpy2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 16:41:08 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/11/25 17:03:06 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/11/25 17:37:07 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/11/25 17:43:20 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *nptr)
-{
-	unsigned long		i;
-	int			sign;
-	long int		nbr;
+#include<stddef.h>
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
 
-	i = 0;
-	sign = 1;
-	nbr = 0;
-	while ((nptr[i] >= '\t' && nptr[i] <= '\r') || nptr[i] == ' ')
-		i++;
-	if (nptr[i] == '+' || nptr[i] == '-')
-	{
-		if (nptr[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while ((nptr[i] >= '0' && nptr[i] <= '9'))
-	{
-		nbr = nbr * 10 + (nptr[i] - 48);
-		i++;
-	}
-	return (nbr * sign);
+int	main()
+{
+	char		dest1[] = "bonjour a vous";
+	const char	src1[] = "Bonsoir de vous et de lui";
+	size_t		n;
+
+	n = 57;
+	printf("%s\n", dest1);
+	memcpy(dest1, src1, n);
+	printf("%s\n", dest1);
+	return (0);
 }
