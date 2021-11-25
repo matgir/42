@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mainmemtruc.c                                      :+:      :+:    :+:   */
+/*   mainmemset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:47:12 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/11/24 16:29:22 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/11/25 15:45:31 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,68 +17,83 @@
 
 void	*ft_memset(void *s, int c, size_t n);
 
-/*int	main(void)
-  {
-  void	*s;
-  int	c;
-  size_t	n;
-
-  c = 5;
-  n = 2;
-  s = &s;
-  printf("%p\n", s);
-  ft_memset(s, c, n);
-  printf("%p", s);
-  return (0);
-  }
-
-  void printArray(int arr[], int n)
-  {	
-  for (int i = 0; i < n; i++)
-  printf("%d ", arr[i]);
-  }
-
-  int main()
-  {
-
-  int n = 10;
-  int arr[n];
-
-// Fill whole array with 0.
-memset(arr, 0, n*sizeof(arr[0]));
-printf("Array after memset()\n");
-printArray(arr, n);
-
-return (0);
-}
-
-int main()
+int	main(void)
 {
-
-int n = 10;
-int arr[n];
-
-// Fill whole array with 100.
-memset(arr, 8, n*sizeof(arr[0]));
-printf("Array after memset()\n");
-printArray(arr, n);
-
-return (0);
+	char	s[] = "bonjour a vous";
+	char	l[] = "bonjour a vous";
+	int	c;
+	size_t	n;
+	
+	c = 9;
+	n = 6;
+	printf("%s\n", s);
+	ft_memset(s, c, n);
+	printf("%s\n", s);
+	
+	c = 9;
+	n = 6;
+	printf("%s\n", l);
+	memset(l, c, n);
+	printf("%s\n", l);
+	
+	return (0);
 }
+
+
+/*
+void	printArray(char arr[], int n)
+{	
+	for (int i = 0; i < n; i++)
+		printf("%c ", arr[i]);
+}
+
+
 
 int	main()
 {
-char 	str[50];
-int	c = 48;
+	int n = 10;
+	int arr[n];
 
-strcpy(str, "this is string.h library function");
-puts(str);
+	// Fill whole array with 0.
+	memset(arr, 0, n*sizeof(arr[0]));
+	printf("Array after memset()\n");
+	printArray(arr, n);
 
-ft_memset(str, c, 7);
-puts(str);
+	return (0);
+}
 
-return (0);
-}*/
+
+
+int	main()
+{
+	int n = 10;
+	char *arr = malloc(n);
+
+	// Fill whole array with 100.
+	memset(arr, '8', n);
+	printf("Array after memset()\n");
+	printArray(arr, n);
+
+	return (0);
+}
+
+
+
+int	main()
+{
+	char 	str[50];
+	int	c = 48;
+
+	strcpy(str, "this is string.h library function");
+	puts(str);
+
+	ft_memset(str, c, 7);
+	puts(str);
+
+	return (0);
+}
+
+
 
 int	main()
 {
@@ -96,4 +111,4 @@ int	main()
 		printf("%d\n", array[lengh]);
 	printf("%p\n", a);
 	return (0);
-}
+}*/
