@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 14:32:49 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/11/25 17:59:24 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/11/25 17:55:07 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/11/25 17:59:00 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+void	ft_bzero(void *s, size_t n)
 {
-	size_t	i;
-
-	if (size > '0')
-	{
-		i = 0;
-		while (i < size - 1)
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0';
-	}
-	return (ft_strlen(src));
+	ft_memset(s, 0, n);
 }
