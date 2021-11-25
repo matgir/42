@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:47:12 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/11/25 15:45:31 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/11/25 16:27:53 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	main(void)
 	int	c;
 	size_t	n;
 	
-	c = 9;
-	n = 6;
+	c = 65;
+	n = 8;
 	printf("%s\n", s);
 	ft_memset(s, c, n);
 	printf("%s\n", s);
 	
-	c = 9;
-	n = 6;
+	c = 65;
+	n = 8;
 	printf("%s\n", l);
 	memset(l, c, n);
 	printf("%s\n", l);
