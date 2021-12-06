@@ -18,8 +18,8 @@ cp ~/.vimrc save
 cd save
 	#mac os
 find . -name "*.git" -mindepth 2 -type d -exec rm -rf {} \;
-find . -name "*.DS_Store" -mindepth 2 -type d -exec rm -rf {} \;
-find . -name "a.out" -mindepth 2 -type d -exec rm -rf {} \;
+#find . -name "*.DS_Store" -mindepth 2 -type d -exec rm -rf {} \;
+#find . -name "a.out" -mindepth 2 -type d -exec rm -rf {} \;
 	#linux
 #find . -mindepth 2 -name "*.git" -type d -exec rm -rf {} \;
 
