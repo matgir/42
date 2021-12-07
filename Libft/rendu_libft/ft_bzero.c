@@ -6,9 +6,11 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:55:07 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/11/25 17:59:00 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/07 16:26:05 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

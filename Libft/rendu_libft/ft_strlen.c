@@ -6,11 +6,13 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:17:06 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/11/23 14:32:22 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/07 16:25:25 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-size_t	strlen(const char *s)
+#include <stddef.h>
+
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 

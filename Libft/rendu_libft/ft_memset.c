@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:44:37 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/11/25 16:28:35 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/07 14:33:05 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	*ft_memset(void *s, int c, size_t n)
 		*dooble++ = (unsigned char) c;
 	return (s);
 }*/
-
 
 void	*ft_memset(void *s, int c, size_t n)
 {
