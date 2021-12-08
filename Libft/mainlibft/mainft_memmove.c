@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mainmemcpy.c                                       :+:      :+:    :+:   */
+/*   mainft_memmove.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/08 12:24:09 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/08 12:24:13 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/12/08 14:23:19 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/12/08 15:07:01 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stddef.h>
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stddef.h>
 
-int	main()
+void	ft_memmove(void *dest, const void *src, size_t n);
+
+int	main()\
 {
-	char		dest1[] = "bonjour a vous";
-	const char	src1[] = "Bonsoir de vous et de lui";
-	size_t		n;
+	char		dest[] = "bonsoir";
+	const char	src[] = "hello hello";
+	size_t		n = 75;
 
-	n = 57;
-	printf("%s\n", dest1);
-	memcpy(dest1, src1, n);
-	printf("%s\n", dest1);
-	return (0);
+	printf("%s\n", dest); ft_memmove(dest,src,n); printf("%s\n", dest);
+	//printf("%s\n", dest); memmove(dest,src,n); printf("%s\n", dest);
 }

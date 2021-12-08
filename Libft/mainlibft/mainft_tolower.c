@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mainmemcpy.c                                       :+:      :+:    :+:   */
+/*   mainft_tolower.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/08 12:24:09 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/08 12:24:13 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/12/08 14:14:09 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/12/08 15:11:42 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stddef.h>
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 
-int	main()
+int	ft_tolower(int c);
+
+int main()
 {
-	char		dest1[] = "bonjour a vous";
-	const char	src1[] = "Bonsoir de vous et de lui";
-	size_t		n;
+    char c;
 
-	n = 57;
-	printf("%s\n", dest1);
-	memcpy(dest1, src1, n);
-	printf("%s\n", dest1);
-	return (0);
+    c = 'm';
+    printf("%c -> %c/%c", c, tolower(c),ft_tolower(c));
+
+    c = 'D';
+    printf("\n%c -> %c/%c", c, tolower(c),ft_tolower(c));
+
+    c = '9';
+    printf("\n%c -> %c/%c", c, tolower(c), ft_tolower(c));
+    
+    c = '=';
+    printf("\n%c -> %c/%c", c, tolower(c), ft_tolower(c));
+return ( 0);
 }

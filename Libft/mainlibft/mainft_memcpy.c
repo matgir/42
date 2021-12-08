@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mainmemcpy.c                                       :+:      :+:    :+:   */
+/*   mainft_memcpy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/08 12:24:09 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/08 12:24:13 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/12/08 12:22:28 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/12/08 12:23:44 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 #include<string.h>
 #include<stdlib.h>
 
-int	main()
-{
-	char		dest1[] = "bonjour a vous";
-	const char	src1[] = "Bonsoir de vous et de lui";
-	size_t		n;
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 
+int	main(void)
+{
+	char		dest2[] = "bonjour a vous";
+	const char	src2[] = "Bonsoir de vous et de lui";
+	size_t		n;
+	
 	n = 57;
-	printf("%s\n", dest1);
-	memcpy(dest1, src1, n);
-	printf("%s\n", dest1);
+	printf("%s\n", dest2);
+	ft_memcpy(dest2, src2, n);
+	printf("%s\n", dest2);
 	return (0);
 }

@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mainex03.c                                         :+:      :+:    :+:   */
+/*   essaistrncmp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/13 22:11:48 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/08 12:53:10 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/12/08 15:19:50 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/12/08 15:34:07 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int	ft_strncmp(char *s1, char *s2, unsigned int n)
+{
+	while (n-- != 0)
+	{
+		if (*((unsigned char *) s1++) != *((unsigned char *) s2++))
+			break;
+	}
+	return (*((unsigned char *) --s1) - *((unsigned char *) --s2));
+}
+
 
 #include <stdio.h>
 #include <string.h>
 
-char	*ft_strncat(char *dest, char *src, unsigned int nb);
-
-int	main(void)
+int main(void)
 {
-	char	src[] = " je suis la suite";
-	char	dest[6] = "hello";
-	char	srce[] = " je suis la suite";
-	char	dst[6] = "hello";
-	unsigned int 	nb;
 	
-	nb = 9;
-	printf("%s   %s\n\n", src, dest);
-	printf("%s   %s\n\n", src, ft_strncat(dest, src, nb));
-	printf("%s   %s\n\n", srce, dst);
-	printf("%s   %s\n\n", srce, strncat(dst, srce, nb));
+	char	s1[] = "bonsoir je suis un A";
+	char	s2[] = "bonsour je suis un A";
+	unsigned int 	n = 12;
+
+	printf("%d\n", ft_strncmp(s1, s2, n));
+	printf("%d", strncmp(s1, s2, n));
 	return (0);
 }
+
