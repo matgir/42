@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/07 14:53:41 by mgirardo          #+#    #+#              #
-#    Updated: 2021/12/07 16:11:37 by mgirardo         ###   ########.fr        #
+#    Updated: 2021/12/07 17:28:07 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 #ranlib libft.a			permet de creer un index dans la bibliotheque pour optimiser le temps dexecution du programme
 #gcc main.c -L. -lft		-L. permet de faire appelle a une bibliotheque lors de la compilation, -lft represente le nom du *.a que lon veut utiliser
 
-SRCS	= !!!
+SRCS	= ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_memcpy.c ft_memset.c ft_strlcpy.c ft_strlen.c
 
 OBJS	= ${SRCS:.c=.o}
 
