@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:19:53 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/09 15:04:21 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:50:08 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@ size_t	strlcpy(char * dst, const char * src, size_t maxlen)
 	return (srclen);
 }
 
+//interchanger ft_strlcpy et strlcpy pour verif complete
+
 int	main(void)
 {
 	char	strsrc[] = "je suis un test il ce peut que je concatene";
 	char	strdest[] = "voila";
 	unsigned int	i = 15;
 
-	printf("%s\n%s\n", strsrc, strdest);
+	printf("\n%s\n%s\n", strsrc, strdest);
 	printf("%ld\n", ft_strlcpy(strdest, strsrc, i));
 	printf("%s\n%s\n", strsrc, strdest);
 
@@ -44,9 +46,9 @@ int	main(void)
 	char	strdest2[] = "voila";
 	unsigned int	i2 = 15;
 
-	printf("%s\n%s\n", strsrc2, strdest2);
-	printf("%ld\n", strlcpy(strdest2, strsrc2, i2));
-	printf("%s\n%s\n", strsrc2, strdest2);
+	printf("\n%s\n%s\n", strsrc2, strdest2);
+	printf("%ld\n", ft_strlcpy(strdest2, strsrc2, i2));
+	printf("%s\n%s\n\n", strsrc2, strdest2);
 
 	return (0);
 }
