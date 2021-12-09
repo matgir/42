@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   mainft_memcmp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/08 15:34:55 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/09 09:50:01 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/12/09 09:37:59 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/12/09 10:02:45 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include <string.h>
+#include <stdio.h>
 
-int ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n);
+
+int	main()
 {
-	if (n == 0)
-		return (0);
-	while (n-- != 0)
-	{
-		if (*((unsigned char *) s1++) != *((unsigned char *) s2++))
-			break;
-	}
-	return (*((unsigned char *) --s1) - *((unsigned char *) --s2));
+	char	s1[] = "voila j'ai reussi";
+	char	s2[] = "voila j'ai russi";
+	size_t	n = 13;
+
+	printf("%d\n", ft_memcmp(s1, s2, n));
+	printf("%d\n", memcmp(s1, s2, n));
+	return (0);
 }
