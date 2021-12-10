@@ -6,43 +6,35 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 12:30:11 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/09 17:10:16 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:10:42 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include "libft.h"
 
-/*size_t	ft_strlcat(char *dst, const char *src, size_t size)
+/*
+lors de lexecution si ldst < lsrc et size > ldst+1
+alors src va etre modifier et cela est normal
+*/
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	
-}*/
+	size_t	ldst;
+	size_t	lsrc;
+	size_t	i;
 
-int    ft_strlen(char *str)
-{	
-    int    i;
-
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
-}
-
-unsigned int    ft_strlcat(char *dest, char *src, unsigned int size)
-{
-    unsigned int    i;
-    unsigned int    len_src;
-    unsigned int    len_dest;
-
-    len_src = ft_strlen(src);
-    len_dest = ft_strlen(dest);
-    i = 0;
-    if (len_dest >= size)
-        return (len_src + size);
-    while (src[i] && ((len_dest + i) < (size - 1)))
-    {
-        dest[len_dest + i] = src[i];
-        i++;
-    }
-    dest[len_dest + i] = '\0';
-    return ( (len_src + len_dest));
+	ldst = ft_strlen(dst);
+	lsrc = ft_strlen(src);
+	i = 0;
+	if (ldst >= size)
+		return (lsrc + size);
+	while ((size - ldst - 1) != 0 && src[i])
+	{
+		dst[ldst + i] = src[i];
+		size--;
+		i++;
+	}
+	dst[ldst + i] = '\0';
+	return (lsrc + ldst);
 }
