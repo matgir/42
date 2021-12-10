@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   mainft_strrchr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 16:27:47 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/10 16:54:49 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/12/10 16:57:46 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/12/10 16:58:09 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strchr(const char *s, int c)
+#include <string.h>
+#include <stdio.h>
+
+char	*ft_strrchr(const char *s, int c);
+
+int	main(void)
 {
-	while (s)
-	{
-		if (*s == (const char)c)
-			return ((char *)s);
-		s++;
-	}
-	return (0);
+	const char	s[] = "";
+	int		c = 116;
+
+	printf("%s\n", ft_strrchr(s, c));
+	printf("%s\n", strrchr(s, c));
 }
