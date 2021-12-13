@@ -6,14 +6,14 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 15:36:57 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/09 12:32:24 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/13 14:53:07 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stddef.h>
 
-char	*verif(const char *big, const char *little, size_t i, size_t len)
+static char	*verif(const char *big, const char *little, size_t i, size_t len)
 {
 	size_t	l;
 	size_t	j;
