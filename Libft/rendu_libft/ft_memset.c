@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:44:37 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/13 14:15:23 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:06:48 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	*ft_memset(void *s, int c, size_t n)
 void	*ft_memset(void *s, int c, size_t n)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (n != 0)
 	{
@@ -62,6 +62,5 @@ void	*ft_memset(void *s, int c, size_t n)
 		n--;
 		i++;
 	}
-
 	return (s);
 }

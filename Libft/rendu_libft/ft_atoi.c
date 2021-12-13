@@ -6,14 +6,14 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:41:08 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/11/25 17:03:06 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:10:40 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_atoi(const char *nptr)
 {
-	unsigned long		i;
-	int			sign;
+	unsigned long	i;
+	int				sign;
 	long int		nbr;
 
 	i = 0;

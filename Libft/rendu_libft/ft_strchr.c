@@ -6,17 +6,22 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:27:47 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/10 16:54:49 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:08:28 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
+
 char	*ft_strchr(const char *s, int c)
 {
-	while (s)
+	size_t	i;
+
+	i = 0;
+	while (s[i])
 	{
-		if (*s == (const char)c)
-			return ((char *)s);
-		s++;
+		if (s[i] == (const char)c)
+			return ((char *)s + i);
+		i++;
 	}
 	return (0);
 }
