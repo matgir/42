@@ -3,7 +3,7 @@ $> hostname; uname -msr
 e2r3p12.clusters.42paris.fr
 Linux 5.4.0-90-generic x86_64
 $> date
-Mon 13 Dec 2021 06:27:01 PM CET
+Mon 13 Dec 2021 06:49:18 PM CET
 $> gcc --version
 gcc (Ubuntu 10.3.0-1ubuntu1~20.04) 10.3.0
 Copyright (C) 2020 Free Software Foundation, Inc.
@@ -69,7 +69,7 @@ $> make bonus
 make: *** No rule to make target 'bonus'.  Stop.
 
 $> ls -la libft.a
--rw-r--r-- 1 mgirardo 2021_paris 36976 Dec 13 18:27 /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/dirlibft/libft.a
+-rw-r--r-- 1 mgirardo 2021_paris 36976 Dec 13 18:49 /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/dirlibft/libft.a
 
 = Part1_functions ==============================================================
 
@@ -160,7 +160,7 @@ Diff OK :D
 = Test 3 ===================================================
 $> ./user_exe 03
 $> diff -U 3 user_output_test03 test03.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_memmove/user_output_test03	2021-12-13 18:27:05.413423614 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_memmove/user_output_test03	2021-12-13 18:49:21.774954231 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_memmove/test03.output	2021-12-13 17:01:44.112189101 +0100$
 @@ -1 +1 @@$
 -llllllllum dolor sit a$
@@ -252,7 +252,7 @@ Diff OK :D
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_memcmp/user_output_test07	2021-12-13 18:27:06.813433642 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_memcmp/user_output_test07	2021-12-13 18:49:23.158964098 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_memcmp/test07.output	2021-12-13 17:01:44.088188929 +0100$
 @@ -1 +1 @@$
 --1$
@@ -426,7 +426,7 @@ Diff OK :D
 = Test 5 ===================================================
 $> ./user_exe 05
 $> diff -U 3 user_output_test05 test05.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strchr/user_output_test05	2021-12-13 18:27:10.357459028 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strchr/user_output_test05	2021-12-13 18:49:26.718989478 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strchr/test05.output	1979-06-23 07:50:17.000000000 +0200$
 @@ -1 +0,0 @@$
 -NULL$
@@ -436,7 +436,7 @@ Diff KO :(
 = Test 6 ===================================================
 $> ./user_exe 06
 $> diff -U 3 user_output_test06 test06.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strchr/user_output_test06	2021-12-13 18:27:10.401459343 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strchr/user_output_test06	2021-12-13 18:49:26.758989764 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strchr/test06.output	1979-06-23 07:50:17.000000000 +0200$
 @@ -1 +0,0 @@$
 -NULL$
@@ -451,7 +451,7 @@ $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_strrchr.c main.c libft.
 = Test 1 ===================================================
 $> ./user_exe 01
 $> diff -U 3 user_output_test01 test01.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strrchr/user_output_test01	2021-12-13 18:27:10.817462322 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strrchr/user_output_test01	2021-12-13 18:49:27.170992701 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strrchr/test01.output	2021-12-13 17:01:44.296190444 +0100$
 @@ -1 +1 @@$
 -NULL$
@@ -488,7 +488,7 @@ Diff OK :D
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strrchr/user_output_test07	2021-12-13 18:27:11.073464156 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strrchr/user_output_test07	2021-12-13 18:49:27.434994583 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strrchr/test07.output	1979-06-23 07:50:56.000000000 +0200$
 @@ -1 +0,0 @@$
 -NULL$
@@ -508,7 +508,7 @@ $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_strnstr.c main.c libft.
 = Test 1 ===================================================
 $> ./user_exe 01
 $> diff -U 3 user_output_test01 test01.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test01	2021-12-13 18:27:11.553467594 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test01	2021-12-13 18:49:27.914998005 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/test01.output	2021-12-13 17:01:44.276190301 +0100$
 @@ -1 +1 @@$
 -NULL$
@@ -520,7 +520,7 @@ Diff KO :(
 = Test 2 ===================================================
 $> ./user_exe 02
 $> diff -U 3 user_output_test02 test02.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test02	2021-12-13 18:27:11.597467909 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test02	2021-12-13 18:49:27.958998319 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/test02.output	2021-12-13 17:01:44.280190331 +0100$
 @@ -1 +1 @@$
 -NULL$
@@ -532,7 +532,7 @@ Diff KO :(
 = Test 3 ===================================================
 $> ./user_exe 03
 $> diff -U 3 user_output_test03 test03.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test03	2021-12-13 18:27:11.641468224 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test03	2021-12-13 18:49:28.002998633 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/test03.output	2021-12-13 17:01:44.280190331 +0100$
 @@ -1 +1 @@$
 -NULL$
@@ -549,7 +549,7 @@ Diff OK :D
 = Test 5 ===================================================
 $> ./user_exe 05
 $> diff -U 3 user_output_test05 test05.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test05	2021-12-13 18:27:11.713468740 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test05	2021-12-13 18:49:28.074999146 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/test05.output	2021-12-13 17:01:44.284190360 +0100$
 @@ -0,0 +1 @@$
 +NULL$
@@ -559,7 +559,7 @@ Diff KO :(
 = Test 6 ===================================================
 $> ./user_exe 06
 $> diff -U 3 user_output_test06 test06.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test06	2021-12-13 18:27:11.785469256 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test06	2021-12-13 18:49:28.146999659 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/test06.output	2021-12-13 17:01:44.284190360 +0100$
 @@ -0,0 +1 @@$
 +dolor sit amet$
@@ -569,7 +569,7 @@ Diff KO :(
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test07	2021-12-13 18:27:11.853469742 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test07	2021-12-13 18:49:28.223000201 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/test07.output	2021-12-13 17:01:44.288190389 +0100$
 @@ -0,0 +1 @@$
 +NULL$
@@ -634,7 +634,7 @@ Diff OK :D
 = Test 8 ===================================================
 $> ./user_exe 08
 $> diff -U 3 user_output_test08 test08.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strncmp/user_output_test08	2021-12-13 18:27:12.757476217 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strncmp/user_output_test08	2021-12-13 18:49:29.127006647 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strncmp/test08.output	2021-12-13 17:01:44.252190127 +0100$
 @@ -1 +1 @@$
 --1$
@@ -646,7 +646,7 @@ Diff KO :(
 = Test 9 ===================================================
 $> ./user_exe 09
 $> diff -U 3 user_output_test09 test09.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strncmp/user_output_test09	2021-12-13 18:27:12.801476533 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strncmp/user_output_test09	2021-12-13 18:49:29.171006960 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strncmp/test09.output	2021-12-13 17:01:44.252190127 +0100$
 @@ -1 +1 @@$
 -1$
@@ -658,7 +658,7 @@ Diff KO :(
 = Test 10 ==================================================
 $> ./user_exe 10
 $> diff -U 3 user_output_test10 test10.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strncmp/user_output_test10	2021-12-13 18:27:12.845476848 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strncmp/user_output_test10	2021-12-13 18:49:29.211007245 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strncmp/test10.output	2021-12-13 17:01:44.256190156 +0100$
 @@ -1 +1 @@$
 -1$
@@ -670,7 +670,7 @@ Diff KO :(
 = Test 11 ==================================================
 $> ./user_exe 11
 $> diff -U 3 user_output_test11 test11.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strncmp/user_output_test11	2021-12-13 18:27:12.885477134 +0100$
+--- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strncmp/user_output_test11	2021-12-13 18:49:29.255007559 +0100$
 +++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strncmp/test11.output	2021-12-13 17:01:44.256190156 +0100$
 @@ -1 +1 @@$
 --1$
