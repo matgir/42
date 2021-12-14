@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:26:06 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/13 16:09:03 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/14 18:38:46 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ char	*ft_strchr(const char *s, int c);
 
 int	main(void)
 {
-	const char	s[] = "bonsoir bonsoir";
-	int		c = 115;
+	const char	s[] = "bonjour";
+	int		c = 0;
 
-	printf("%s\n", ft_strchr(s, c));
 	printf("%s\n", strchr(s, c));
+	printf("%s\n", ft_strchr(s, c));
 }

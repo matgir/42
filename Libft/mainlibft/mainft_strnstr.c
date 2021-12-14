@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 12:23:46 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/09 12:28:34 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:07:21 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ char	*strnstr(const char *s, const char *find, size_t slen)
 
 int	main(void)
 {
-	printf("%s\n", strnstr("bonsoir je suis moi", " ", 12));
-	printf("%s\n", ft_strnstr("bonsoir je suis moi", " ", 12));
+	char s1[] = "lorem ipsum dolor sit amet";
+	char s2[] = "lorem";
+	size_t len = 15;
+
+	printf("%s\n", strnstr(s1, s2, len));
+	printf("%s\n", ft_strnstr(s1, s2, len));
 	return (0);
 }
