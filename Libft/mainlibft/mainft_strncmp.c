@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 17:21:58 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/14 17:28:35 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/14 17:34:16 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int main(void)
 	unsigned int 	n;
 
 	n = 6;
+	printf("%ld\n", strlen(s2));
+	printf("%ld\n", strlen(s1));
 	printf("%d\n", ft_strncmp(s1, s2, n));
 	printf("%d", strncmp(s1, s2, n));
 	return (0);
