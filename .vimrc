@@ -22,7 +22,7 @@ inoremap while while ()<left>
 inoremap return return ()<left>
 
 "while on insert mode, wherever your are on the line when you press ; it will put it at the end and put the cursor to the next line
-inoremap ; <esc>$a;*/
+inoremap ; <esc>$a;
 
 "while on insert mode, first will save and put you back on insert mode, second will save and quit
 inoremap \\ <esc>:w<cr>a

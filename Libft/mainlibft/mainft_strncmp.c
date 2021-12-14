@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   mainft_strncmp.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 17:24:15 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/14 17:26:45 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/12/14 17:21:58 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/12/14 17:28:35 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <stdio.h>
+#include <string.h>
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+
+int main(void)
 {
-	size_t	i;
+	char	s1[] = "test\200";
+	char	s2[] = "test\0";
+	unsigned int 	n;
 
-	i = 0;
-	while (i < n)
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
+	n = 6;
+	printf("%d\n", ft_strncmp(s1, s2, n));
+	printf("%d", strncmp(s1, s2, n));
 	return (0);
 }
