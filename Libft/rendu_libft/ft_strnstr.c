@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 15:36:57 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/14 19:10:37 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:25:20 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static char	*verif(const char *big, const char *little, size_t i, size_t len)
 		if (big[i] == little[j])
 		{
 			l = i;
-			while (l <= (i + lenlittle) && (big[l] || little[j]))
+			while (l < (i + lenlittle) && (big[l] || little[j]))
 			{
 				if (big[l] == little[j])
 				{
-					if (j == lenlittle)
+					if (j == lenlittle - 1)
 						return ((char *)&big[l - j]);
 					l++;
 					j++;
