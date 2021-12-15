@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:59:11 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/14 18:53:36 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:09:22 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strrchr(const char *s, int c)
 	int	i;
 
 	i = ft_strlen(s);
-	if (s[0] == '\0')
+	if (s[0] == '\0' && c == '\0')
 		return ((char *)s);
 	else
 	{

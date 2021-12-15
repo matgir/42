@@ -1,9 +1,9 @@
 = Host-specific information ====================================================
 $> hostname; uname -msr
-e2r7p15.clusters.42paris.fr
+e2r3p20.clusters.42paris.fr
 Linux 5.4.0-90-generic x86_64
 $> date
-Tue 14 Dec 2021 07:26:01 PM CET
+Wed 15 Dec 2021 11:46:06 AM CET
 $> gcc --version
 gcc (Ubuntu 10.3.0-1ubuntu1~20.04) 10.3.0
 Copyright (C) 2020 Free Software Foundation, Inc.
@@ -69,7 +69,7 @@ $> make bonus
 make: *** No rule to make target 'bonus'.  Stop.
 
 $> ls -la libft.a
--rw-r--r-- 1 mgirardo 2021_paris 37240 Dec 14 19:26 /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/dirlibft/libft.a
+-rw-r--r-- 1 mgirardo 2021_paris 37280 Dec 15 11:46 /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/dirlibft/libft.a
 
 = Part1_functions ==============================================================
 
@@ -493,13 +493,8 @@ Diff OK :D
 = Test 5 ===================================================
 $> ./user_exe 05
 $> diff -U 3 user_output_test05 test05.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test05	2021-12-14 19:26:12.107415826 +0100$
-+++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/test05.output	2021-12-13 17:01:44.284190360 +0100$
-@@ -0,0 +1 @@$
-+NULL$
-\ No newline at end of file$
 
-Diff KO :(
+Diff OK :D
 = Test 6 ===================================================
 $> ./user_exe 06
 $> diff -U 3 user_output_test06 test06.output
@@ -508,13 +503,8 @@ Diff OK :D
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test07	2021-12-14 19:26:12.219416570 +0100$
-+++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/test07.output	2021-12-13 17:01:44.288190389 +0100$
-@@ -0,0 +1 @@$
-+NULL$
-\ No newline at end of file$
 
-Diff KO :(
+Diff OK :D
 = Test 8 ===================================================
 $> ./user_exe 08
 $> diff -U 3 user_output_test08 test08.output
@@ -523,15 +513,8 @@ Diff OK :D
 = Test 9 ===================================================
 $> ./user_exe 09
 $> diff -U 3 user_output_test09 test09.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/user_output_test09	2021-12-14 19:26:12.343417393 +0100$
-+++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/libft-war-machine/tests/Part1_functions/ft_strnstr/test09.output	2021-12-13 17:01:44.288190389 +0100$
-@@ -1 +1 @@$
--dolor sit amet$
-\ No newline at end of file$
-+NULL$
-\ No newline at end of file$
 
-Diff KO :(
+Diff OK :D
 = Test 10 ==================================================
 $> ./user_exe 10
 $> diff -U 3 user_output_test10 test10.output

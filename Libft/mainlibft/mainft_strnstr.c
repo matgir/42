@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 12:23:46 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/14 19:29:20 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:05:19 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,13 @@ char	*strnstr(const char *s, const char *find, size_t slen)
 int	main(void)
 {
 	char s1[] = "lorem ipsum dolor sit amet";
-	char s2[] = "ipsumm";
-	size_t len = 30;
+	char s2[] = "dolor";
+	size_t len = 23;
+	char haystack[30] = "aaabcabcd";
 
-	printf("%s\n", ft_strnstr(s1, s2, len));
 	printf("%s\n", strnstr(s1, s2, len));
+	printf("%s\n", ft_strnstr(s1, s2, len));
+	printf("%s\n", strnstr(haystack, "cd", 10));
+	printf("%s\n", ft_strnstr(haystack, "cd", 10));
 	return (0);
 }
