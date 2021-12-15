@@ -1,0 +1,110 @@
+= Host-specific information ====================================================
+$> hostname; uname -msr
+e2r3p20.clusters.42paris.fr
+Linux 5.4.0-90-generic x86_64
+$> date
+Wed 15 Dec 2021 06:09:52 PM CET
+$> gcc --version
+gcc (Ubuntu 10.3.0-1ubuntu1~20.04) 10.3.0
+Copyright (C) 2020 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+$> clang --version
+Ubuntu clang version 12.0.0-3ubuntu1~20.04.4
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+
+= libft.h=======================================================================
+$> norminette libft.h | grep -E '(Error|Warning)'
+/mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/dirlibft/libft.h: Error!
+Error: HEADER_PROT_ALL      (line:  15, col:   1):	Header protection must include all the instructions
+Error: MISALIGNED_FUNC_DECL (line:  19, col:  13):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  20, col:  14):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  26, col:  14):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  28, col:  14):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  29, col:  14):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  30, col:  14):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  31, col:  14):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  32, col:  14):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  33, col:  13):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  34, col:  13):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  35, col:  13):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  37, col:  14):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  38, col:  14):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  41, col:  14):	Misaligned function declaration
+Norme check failed
+
+= Compiling libft ==============================================================
+$> make re
+rm -f ft_substr.o ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_strchr.o ft_strdup.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_tolower.o ft_toupper.o
+rm -f libft.a
+gcc -Wall -Werror -Wextra -c ft_substr.c -o ft_substr.o
+gcc -Wall -Werror -Wextra -c ft_atoi.c -o ft_atoi.o
+gcc -Wall -Werror -Wextra -c ft_bzero.c -o ft_bzero.o
+gcc -Wall -Werror -Wextra -c ft_calloc.c -o ft_calloc.o
+gcc -Wall -Werror -Wextra -c ft_isalnum.c -o ft_isalnum.o
+gcc -Wall -Werror -Wextra -c ft_isalpha.c -o ft_isalpha.o
+gcc -Wall -Werror -Wextra -c ft_isascii.c -o ft_isascii.o
+gcc -Wall -Werror -Wextra -c ft_isdigit.c -o ft_isdigit.o
+gcc -Wall -Werror -Wextra -c ft_isprint.c -o ft_isprint.o
+gcc -Wall -Werror -Wextra -c ft_memchr.c -o ft_memchr.o
+gcc -Wall -Werror -Wextra -c ft_memcmp.c -o ft_memcmp.o
+gcc -Wall -Werror -Wextra -c ft_memcpy.c -o ft_memcpy.o
+gcc -Wall -Werror -Wextra -c ft_memmove.c -o ft_memmove.o
+gcc -Wall -Werror -Wextra -c ft_memset.c -o ft_memset.o
+gcc -Wall -Werror -Wextra -c ft_strchr.c -o ft_strchr.o
+gcc -Wall -Werror -Wextra -c ft_strdup.c -o ft_strdup.o
+gcc -Wall -Werror -Wextra -c ft_strlcat.c -o ft_strlcat.o
+gcc -Wall -Werror -Wextra -c ft_strlcpy.c -o ft_strlcpy.o
+gcc -Wall -Werror -Wextra -c ft_strlen.c -o ft_strlen.o
+gcc -Wall -Werror -Wextra -c ft_strncmp.c -o ft_strncmp.o
+gcc -Wall -Werror -Wextra -c ft_strnstr.c -o ft_strnstr.o
+gcc -Wall -Werror -Wextra -c ft_strrchr.c -o ft_strrchr.o
+gcc -Wall -Werror -Wextra -c ft_tolower.c -o ft_tolower.o
+gcc -Wall -Werror -Wextra -c ft_toupper.c -o ft_toupper.o
+ar rc libft.a ft_substr.o ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_strchr.o ft_strdup.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_tolower.o ft_toupper.o
+ranlib libft.a
+
+$> make bonus
+make: *** No rule to make target 'bonus'.  Stop.
+
+$> ls -la libft.a
+-rw-r--r-- 1 mgirardo 2021_paris 38946 Dec 15 18:09 /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/dirlibft/libft.a
+
+= Part2_functions ==============================================================
+
+= ft_substr.c ==================================================================
+$> norminette ft_substr.c | grep -E '(Error|Warning)'
+..//ft_substr.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  34, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  38, col:   5):	Comment is invalid in this scope
+Norme check failed
+$> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_substr.c main.c libft.a -o user_exe
+
+= Test 1 ===================================================
+$> ./user_exe 01
+$> diff -U 3 user_output_test01 test01.output
+
+Diff OK :D
+= Test 2 ===================================================
+$> ./user_exe 02
+$> diff -U 3 user_output_test02 test02.output
+
+Diff OK :D
+= Test 3 ===================================================
+$> ./user_exe 03
+$> diff -U 3 user_output_test03 test03.output
+
+Diff OK :D
+= Test 4 ===================================================
+$> ./user_exe 04
+$> diff -U 3 user_output_test04 test04.output
+
+Diff OK :D
+= Test 5 ===================================================
+$> ./user_exe 05
+$> diff -U 3 user_output_test05 test05.output
+
+Diff OK :D

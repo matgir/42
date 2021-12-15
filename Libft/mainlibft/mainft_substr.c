@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   mainft_substr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 16:27:47 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/15 17:28:09 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/12/15 15:10:05 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/12/15 17:50:27 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stddef.h>
-#include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+
+int	main(void)
 {
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = ft_strlen(s);
-	while (i <= j)
-	{
-		if (s[i] == (const char)c)
-			return ((char *)s + i);
-		i++;
-	}
-	return (NULL);
+	//printf("%s\n", ft_substr("tripuoille", 0, 42000));
+	printf("%s\n", ft_substr("lorem ipsum dolor sit amet", 0, 10));
+	printf("%s\n", ft_substr("lorem ipsum dolor sit amet", 7, 10));
+	printf("%s\n", ft_substr("lorem ipsum dolor sit amet", 400, 20));
+	return (0);
 }
