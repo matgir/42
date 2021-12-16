@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/15 14:53:53 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/16 12:34:15 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/12/16 12:28:30 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/12/16 12:35:02 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stddef.h>
-#include "libft.h"
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*substr;
-	size_t	lens;
+	char	*join;
 
-	lens = ft_strlen(s);
-	if (start > lens)
-		return (ft_strdup(""));
-	if (start + len > lens)
-		len = lens - start;
-	substr = malloc(sizeof(char) * (len + 1));
-	if (substr == NULL)
-		return (NULL);
-	ft_strlcpy(substr, s + start, len + 1);
-	return (substr);
+	join = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))
 }
