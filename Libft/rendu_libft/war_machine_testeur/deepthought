@@ -1,12 +1,12 @@
 = Host-specific information ====================================================
 $> hostname; uname -msr
-e3r6p19.clusters.42paris.fr
+e2r6p11.clusters.42paris.fr
 Linux 5.4.0-91-generic x86_64
 $> date
-Thu 16 Dec 2021 03:02:44 PM CET
+Thu 16 Dec 2021 05:23:31 PM CET
 $> gcc --version
-gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
-Copyright (C) 2019 Free Software Foundation, Inc.
+gcc (Ubuntu 10.3.0-1ubuntu1~20.04) 10.3.0
+Copyright (C) 2020 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -35,11 +35,12 @@ Error: MISALIGNED_FUNC_DECL (line:  36, col:  13):	Misaligned function declarati
 Error: MISALIGNED_FUNC_DECL (line:  38, col:  14):	Misaligned function declaration
 Error: MISALIGNED_FUNC_DECL (line:  39, col:  14):	Misaligned function declaration
 Error: MISALIGNED_FUNC_DECL (line:  40, col:  14):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  41, col:  14):	Misaligned function declaration
 Norme check failed
 
 = Compiling libft ==============================================================
 $> make re
-rm -f ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_strchr.o ft_strdup.o ft_strjoin.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_substr.o ft_tolower.o ft_toupper.o
+rm -f ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_strchr.o ft_strdup.o ft_strjoin.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o ft_toupper.o
 rm -f libft.a
 gcc -Wall -Werror -Wextra -c ft_atoi.c -o ft_atoi.o
 gcc -Wall -Werror -Wextra -c ft_bzero.c -o ft_bzero.o
@@ -63,23 +64,28 @@ gcc -Wall -Werror -Wextra -c ft_strlen.c -o ft_strlen.o
 gcc -Wall -Werror -Wextra -c ft_strncmp.c -o ft_strncmp.o
 gcc -Wall -Werror -Wextra -c ft_strnstr.c -o ft_strnstr.o
 gcc -Wall -Werror -Wextra -c ft_strrchr.c -o ft_strrchr.o
+gcc -Wall -Werror -Wextra -c ft_strtrim.c -o ft_strtrim.o
 gcc -Wall -Werror -Wextra -c ft_substr.c -o ft_substr.o
 gcc -Wall -Werror -Wextra -c ft_tolower.c -o ft_tolower.o
 gcc -Wall -Werror -Wextra -c ft_toupper.c -o ft_toupper.o
-ar rc libft.a ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_strchr.o ft_strdup.o ft_strjoin.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_substr.o ft_tolower.o ft_toupper.o
+ar rc libft.a ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_strchr.o ft_strdup.o ft_strjoin.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o ft_toupper.o
 ranlib libft.a
 
 $> make bonus
 make: *** No rule to make target 'bonus'.  Stop.
 
 $> ls -la libft.a
--rw-r--r-- 1 mgirardo 2021_paris 40902 Dec 16 15:02 /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/dirlibft/libft.a
+-rw-r--r-- 1 mgirardo 2021_paris 43144 Dec 16 17:23 /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/dirlibft/libft.a
 
 = Part2_functions ==============================================================
 
-= ft_strjoin.c =================================================================
-$> norminette ft_strjoin.c | grep -E '(Error|Warning)'
-$> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_strjoin.c main.c libft.a -o user_exe
+= ft_strtrim.c =================================================================
+$> norminette ft_strtrim.c | grep -E '(Error|Warning)'
+..//ft_strtrim.c: Error!
+Error: MISALIGNED_VAR_DECL  (line:  35, col:  21):	Misaligned variable declaration
+Error: MISALIGNED_VAR_DECL  (line:  36, col:  21):	Misaligned variable declaration
+Norme check failed
+$> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_strtrim.c main.c libft.a -o user_exe
 
 = Test 1 ===================================================
 $> ./user_exe 01
@@ -99,5 +105,10 @@ Diff OK :D
 = Test 4 ===================================================
 $> ./user_exe 04
 $> diff -U 3 user_output_test04 test04.output
+
+Diff OK :D
+= Test 5 ===================================================
+$> ./user_exe 05
+$> diff -U 3 user_output_test05 test05.output
 
 Diff OK :D
