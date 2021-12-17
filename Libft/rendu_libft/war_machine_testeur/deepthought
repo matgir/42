@@ -3,7 +3,7 @@ $> hostname; uname -msr
 e3r6p18.clusters.42paris.fr
 Linux 5.4.0-91-generic x86_64
 $> date
-Fri 17 Dec 2021 02:09:36 PM CET
+Fri 17 Dec 2021 05:04:48 PM CET
 $> gcc --version
 gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
 Copyright (C) 2019 Free Software Foundation, Inc.
@@ -77,117 +77,41 @@ $> make bonus
 make: *** No rule to make target 'bonus'.  Stop.
 
 $> ls -la libft.a
--rw-r--r-- 1 mgirardo 2021_paris 45722 Dec 17 14:09 /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/dirlibft/libft.a
+-rw-r--r-- 1 mgirardo 2021_paris 45878 Dec 17 17:04 /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/dirlibft/libft.a
 
 = Part2_functions ==============================================================
 
 = ft_split.c ===================================================================
 $> norminette ft_split.c | grep -E '(Error|Warning)'
-..//ft_split.c: Error!
-Error: TOO_MANY_LINES       (line:  71, col:   1):	Function has more than 25 lines
-Norme check failed
 $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_split.c main.c libft.a -o user_exe
 
 = Test 1 ===================================================
 $> ./user_exe 01
 $> diff -U 3 user_output_test01 test01.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/tests/Part2_functions/ft_split/user_output_test01	2021-12-17 14:09:38.095856565 +0100$
-+++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/tests/Part2_functions/ft_split/test01.output	1979-06-23 07:51:41.000000000 +0200$
-@@ -1 +0,0 @@$
--NULL$
-\ No newline at end of file$
 
-Diff KO :(
+Diff OK :D
 = Test 2 ===================================================
 $> ./user_exe 02
 $> diff -U 3 user_output_test02 test02.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/tests/Part2_functions/ft_split/user_output_test02	2021-12-17 14:09:38.227857587 +0100$
-+++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/tests/Part2_functions/ft_split/test02.output	2021-12-13 17:01:44.484191819 +0100$
-@@ -0,0 +1,12 @@$
-+lorem$
-+ipsum$
-+dolor$
-+sit$
-+amet,$
-+consectetur$
-+adipiscing$
-+elit.$
-+Sed$
-+non$
-+risus.$
-+Suspendisse$
 
-Diff KO :(
+Diff OK :D
 = Test 3 ===================================================
 $> ./user_exe 03
 $> diff -U 3 user_output_test03 test03.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/tests/Part2_functions/ft_split/user_output_test03	2021-12-17 14:09:38.299858144 +0100$
-+++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/tests/Part2_functions/ft_split/test03.output	2021-12-13 17:01:44.488191846 +0100$
-@@ -0,0 +1,12 @@$
-+lorem$
-+ipsum$
-+dolor$
-+sit$
-+amet,$
-+consectetur$
-+adipiscing$
-+elit.$
-+Sed$
-+non$
-+risus.$
-+Suspendisse$
 
-Diff KO :(
+Diff OK :D
 = Test 4 ===================================================
 $> ./user_exe 04
 $> diff -U 3 user_output_test04 test04.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/tests/Part2_functions/ft_split/user_output_test04	2021-12-17 14:09:38.367858671 +0100$
-+++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/tests/Part2_functions/ft_split/test04.output	2021-12-13 17:01:44.488191846 +0100$
-@@ -0,0 +1,25 @@$
-+lorem $
-+psum dolor s$
-+t amet, consectetur ad$
-+p$
-+sc$
-+ng el$
-+t. Sed non r$
-+sus. Suspend$
-+sse lectus tortor, d$
-+gn$
-+ss$
-+m s$
-+t amet, ad$
-+p$
-+sc$
-+ng nec, ultr$
-+c$
-+es sed, dolor. Cras elementum ultr$
-+c$
-+es d$
-+am. Maecenas l$
-+gula massa, var$
-+us a, semper congue, eu$
-+smod non, m$
-+.$
 
-Diff KO :(
+Diff OK :D
 = Test 5 ===================================================
 $> ./user_exe 05
 $> diff -U 3 user_output_test05 test05.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/tests/Part2_functions/ft_split/user_output_test05	2021-12-17 14:09:38.443859259 +0100$
-+++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/tests/Part2_functions/ft_split/test05.output	2021-12-13 17:01:44.492191875 +0100$
-@@ -0,0 +1 @@$
-+lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultricies diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.$
 
-Diff KO :(
+Diff OK :D
 = Test 6 ===================================================
 $> ./user_exe 06
 $> diff -U 3 user_output_test06 test06.output
---- /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/tests/Part2_functions/ft_split/user_output_test06	2021-12-17 14:09:38.523859878 +0100$
-+++ /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/tests/Part2_functions/ft_split/test06.output	2021-12-13 17:01:44.492191875 +0100$
-@@ -1 +1 @@$
--NULL$
-\ No newline at end of file$
-+ok$
 
-Diff KO :(
+Diff OK :D

@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 09:46:55 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/17 14:18:22 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/17 17:06:34 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(void)
 	//char str[] = " a b c d e f g h i j k l m n o p q r s t u v w x y z ";
 
 	//printf("%s\n", str);
-	tab = ft_split("          ", ' ');
+	tab = ft_split("", ' ');
 	i = 0;
 	//count = 0;
 	while (tab[i])
@@ -55,6 +55,8 @@ int	main(void)
 		write (1, "\n", 1);
 		i++;
 	}
+		write (1, "\n", 1);
+		write (1, "\n", 1);
 	tab = ft_split("   lorem   ipsum dolor     sit amet, consectetur   adipiscing elit. Sed non risus. Suspendisse   ", ' ');
 	i = 0;
 	while (tab[i])
@@ -69,6 +71,8 @@ int	main(void)
 		write (1, "\n", 1);
 		i++;
 	}
+		write (1, "\n", 1);
+		write (1, "\n", 1);
 	tab = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultricies diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.", 'i');
 	i = 0;
 	while (tab[i])
@@ -83,6 +87,8 @@ int	main(void)
 		write (1, "\n", 1);
 		i++;
 	}
+		write (1, "\n", 1);
+		write (1, "\n", 1);
 	tab = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultricies diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.", 'z');
 	i = 0;
 	while (tab[i])
@@ -97,6 +103,8 @@ int	main(void)
 		write (1, "\n", 1);
 		i++;
 	}
+		write (1, "\n", 1);
+		write (1, "\n", 1);
 	tab = ft_split("", 'z');
 	i = 0;
 	while (tab[i])

@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 09:47:53 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/17 14:09:21 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/17 17:04:36 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include <stddef.h>
 
-static size_t	dbt(char const *s, char c)
+static int	dbt(char const *s, char c)
 {
 	size_t	stop;
 
@@ -24,7 +24,7 @@ static size_t	dbt(char const *s, char c)
 	return (stop);
 }
 
-static size_t	nw(char const *s, char c, size_t stop)
+static int	nw(char const *s, char c, size_t stop)
 {
 	size_t	nbw;
 
@@ -40,32 +40,40 @@ static size_t	nw(char const *s, char c, size_t stop)
 	return (nbw);
 }
 
+char	**free_all(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i] != NULL)
+		free(tab[i++]);
+	free(tab);
+	return (NULL);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**tab;
-	size_t	i;
-	size_t	start;
-	size_t	stop;
-	size_t	nbw;
+	int		i;
+	int		start;
+	int		stop;
+	int		nbw;
 
-	tab = malloc(sizeof(*tab) * ((nbw = nw(s, c, (stop = dbt(s, c)))) + 1));
-	if (s == NULL || stop == ft_strlen(s) || tab == NULL)
-		return (tab = NULL);
+	tab = malloc(sizeof(char *) * ((nbw = nw(s, c, (stop = dbt(s, c)))) + 1));
+	if (!tab)
+		return (NULL);
 	i = 0;
-	while (s[stop] && i < nbw)
+	while (s[stop])
 	{
 		start = stop;
 		while (s[stop] != c && s[stop])
 			stop++;
 		tab[i] = ft_substr(s, start, stop - start);
 		if (tab[i++] == NULL)
-		{
-			free(tab);
-			return (NULL);
-		}
+			return (free_all(tab));
 		while (s[stop] == c && s[stop])
 			stop++;
 	}
-	tab[nbw + 1] = 0;
+	tab[i] = 0;
 	return (tab);
 }
