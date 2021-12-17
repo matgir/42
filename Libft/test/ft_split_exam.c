@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 15:39:33 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/09 12:49:59 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/17 12:52:48 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int char_is_sep(char c)
+int	char_is_sep(char c)
 {
 	if (c == ' ' || c == '	' || c == '\n')
 		return (1);
 	return (0);
 }
 
-unsigned int    get_first_word(char *str)
+unsigned int	get_first_word(char *str)
 {
-	unsigned int    fw;
+	unsigned int	fw;
 
 	fw = 0;
 	while (char_is_sep(str[fw]) == 1)
@@ -31,9 +31,9 @@ unsigned int    get_first_word(char *str)
 	return (fw);
 }
 
-unsigned int    count_word(char *str, unsigned int fw)
+unsigned int	count_word(char *str, unsigned int fw)
 {
-	unsigned int    nbword;
+	unsigned int	nbword;
 
 	nbword = 0;
 	while (str[fw] != '\0')
@@ -47,9 +47,9 @@ unsigned int    count_word(char *str, unsigned int fw)
 	return (nbword);
 }
 
-char    **ft_pick_word(char **tab, int pword, int stop, char *str, int start)
+char	**ft_pick_word(char **tab, int pword, int stop, char *str, int start)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	tab[pword] = malloc(sizeof(tab) * (stop - start));
@@ -63,13 +63,13 @@ char    **ft_pick_word(char **tab, int pword, int stop, char *str, int start)
 	return (tab);
 }
 
-char    **ft_split(char *str)
+char	**ft_split(char *str)
 {
-	unsigned int    nbword;
-	unsigned int    pword;
-	unsigned int    fw;
-	unsigned int    start;
-	char            **tab;
+	unsigned int	nbword;
+	unsigned int	pword;
+	unsigned int	fw;
+	unsigned int	start;
+	char			**tab;
 
 	if (str[0] == '\0')
 	{
@@ -86,6 +86,7 @@ char    **ft_split(char *str)
 	tab = malloc(sizeof(*tab) * (nbword + 1));
 	pword = 0;
 	start = fw;
+	printf("%d\n", nbword);
 	while (str[fw] && pword < nbword)
 	{
 		while (char_is_sep(str[fw]) == 0 && str[fw] != '\0')
@@ -100,13 +101,13 @@ char    **ft_split(char *str)
 	return (tab);
 }
 
-int main()
+int	main(void)
 {
-	char **tab;
-	unsigned int i;
-	unsigned int j;
-	unsigned int count;
-	char str[] = "	a b c d	e	f\ng h i j k	 l\nm\nn o	p	q r	s 	t\nu v	w 	\nx y	z\n";
+	char			**tab;
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	count;
+	char			str[] = "	a b c d	e	f\ng h i j k	 l\nm\nn o	p	q r	s 	t\nu v	w 	\nx y	z\n";
 
 	printf("%s\n", str);
 	tab = ft_split(str);

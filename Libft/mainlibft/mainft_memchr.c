@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 17:50:45 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/08 18:03:25 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/17 10:35:15 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <string.h>
 #include <stddef.h>
 
-void	*ft_memchr(const void *s, int o, size_t n);
+void	*ft_memchr(const void *s, int c, size_t n);
 
 int main()
 {
