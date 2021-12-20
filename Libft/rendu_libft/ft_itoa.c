@@ -6,17 +6,15 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:34:06 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/17 18:37:08 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/20 11:06:25 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
 
-//char	*ft_itoa(int n)
-int	main(void)
+char	*ft_itoa(int n)
 {
-	int n = 1568;
 	long int	ntmp;
 	int			i;
 	char		*str;
@@ -28,7 +26,6 @@ int	main(void)
 		n = n/10;
 		i++;
 	}
-	printf("%d\n", i);
 	if (ntmp < 0)
 	{
 		ntmp = ntmp * -1;
@@ -54,6 +51,5 @@ int	main(void)
 			i--;
 		}
 	}
-	printf("%s\n", str);
-	return (0);
+	return (str);
 }
