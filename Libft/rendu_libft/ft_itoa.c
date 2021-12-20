@@ -6,12 +6,13 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:34:06 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/20 11:06:25 by mgirardo         ###   ########.fr       */
+/*   Updated: 2021/12/20 11:26:22 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "libft.h"
 
 char	*ft_itoa(int n)
 {
@@ -26,30 +27,14 @@ char	*ft_itoa(int n)
 		n = n/10;
 		i++;
 	}
-	if (ntmp < 0)
+	str = malloc(sizeof(char) * (i + 1));
+	str[i] = '\0';
+	while (--i >= 0)
 	{
-		ntmp = ntmp * -1;
-		i++;
-		str = malloc(sizeof(char) * (i + 1));
-		str[0] = '-';
-		str[i + 1] = '\0';
-		while (i > 0)
-		{
-			str[i] = ntmp%10 + 48;
-			ntmp = ntmp/10 + 48;
-			i--;
-		}
+		str[i] = ntmp%10 + 48;
+		ntmp = ntmp/10;
 	}
-	else
-	{
-		str = malloc(sizeof(char) * (i + 1));
-		str[i + 1] = '\0';
-		while (i >= 0)
-		{
-			str[i] = ntmp%10 + 48;
-			ntmp = ntmp/10 + 48;;
-			i--;
-		}
-	}
+	if (n < 0)
+		str = ft_strjoin("-", str);
 	return (str);
 }
