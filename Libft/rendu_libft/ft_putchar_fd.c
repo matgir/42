@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mainft_strmapi.c                                   :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/20 15:34:40 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/20 16:24:55 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/12/20 16:43:11 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/12/20 16:50:21 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-
-char addOne(unsigned int i, char c) {return (i + c);}
-
-int	main(void)
+void	ft_putchar_fd(char c, int fd)
 {
-	printf("%s\n", ft_strmapi("1234", addOne));
-	return (0);
+	write(fd, &c, 1);
 }

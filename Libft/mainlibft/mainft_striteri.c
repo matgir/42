@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mainft_strmapi.c                                   :+:      :+:    :+:   */
+/*   mainft_striteri.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/20 15:34:40 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/20 16:24:55 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/12/20 16:24:22 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/12/20 16:32:47 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 
-char addOne(unsigned int i, char c) {return (i + c);}
+void	iter(unsigned int i, char * s) {*s += i	;}
 
 int	main(void)
 {
-	printf("%s\n", ft_strmapi("1234", addOne));
+	char	str[] = "0000000000";
+
+	ft_striteri(str, iter);
+	printf("%s\n", str);
 	return (0);
 }
