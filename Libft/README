@@ -22,6 +22,9 @@ int		ft_isdigit(int c))
 int		ft_isprint(int c))
 		indique si c est imprimable, retourne 0 si ce n'est pas le cas
 
+char	*ft_itoa(int n)
+		transforme l'int recu en chaine de caracteres dans une string qu'il vient d'allouer et retroune cette derniere
+
 void	*ft_memchr(const void *s, int c, size_t n))
 		recherche sur n bytes a partir du pointeur s la premier occurence de c interpreter comme un unsigned char et la retourne
 
@@ -37,11 +40,29 @@ void	*ft_memmove(void *dest, const void *src, size_t n))
 void	*ft_memset(void *s, int c, size_t n))
 		rempli n bytes a partir de s par c interpreter comme un unsigned char retourne un pointeur sur s
 
+void	ft_putchar_fd(char c, int fd)
+		ecrit c dans le file descriptor fd
+
+void	ft_putendl_fd(char *s, int fd)
+		ecrit s suivi d'un '\0' dans le file descriptor fd
+
+void	ft_putnbr_fd(int n, int fd)
+		ecrit n dans le file descriptor fd
+
+void	ft_putstr_fd(char *s, int fd)
+		ecrit s dans le file descriptor fd
+
+char	**ft_split(char const *s, char c)
+		allou et retourne un tableau de string obtenu en separant s par c, retour NULL si alloc non focntionnelle
+
 char	*ft_strchr(const char *s, int c))
 		trouve la premiere occurence de (unsigned char)c dans s et retourne un pointeur de s sur cette occurence
 
 char	*ft_strdup(const char *s))
 		creer une nouvelle string qui est le duplicata de s et retourne un pointeur sur la nouvelle string
+
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+		applique la focntion f a chaque caractere de s en lui donnant l'index de ce dernier
 
 char	*ft_strjoin(const char *s1, const char *s2)
 		creer une nouvelle string qui est le duplicata de s1 suivi de s2 avec un '\0' a la fin, retourne un pointeur sur la nouvelle string
@@ -54,6 +75,9 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size))
 
 size_t	ft_strlen(const char *s))
 		calcule la taille de s sans compte '\0', retourne cette taille
+
+char	*ft_strmapi(char const *s, char(*f)(unsigned int, char))
+		applique la fonction f a chaque caratceres de s en fournissant son index, allou et rempli une nouvelle string avec chacun des resultats obtenu
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n))
 		compare les s1 et s2 pendant n carateres, retourne la difference si il y en a 0 sinon
