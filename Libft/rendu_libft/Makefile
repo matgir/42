@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/07 14:53:41 by mgirardo          #+#    #+#              #
-#    Updated: 2021/12/20 18:37:31 by mgirardo         ###   ########.fr        #
+#    Updated: 2021/12/21 16:09:28 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,30 +23,69 @@
 
 #regles declarer avec ':'
 
-SRCS	= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c
+SRCS	=	ft_atoi.c \
+			ft_bzero.c \
+			ft_calloc.c \
+			ft_isalnum.c \
+			ft_isalpha.c \
+			ft_isascii.c \
+			ft_isdigit.c \
+			ft_isprint.c \
+			ft_itoa.c \
+			ft_memchr.c \
+			ft_memcmp.c \
+			ft_memcpy.c \
+			ft_memmove.c \
+			ft_memset.c \
+			ft_putchar_fd.c \
+			ft_putendl_fd.c \
+			ft_putnbr_fd.c \
+			ft_putstr_fd.c \
+			ft_split.c \
+			ft_strchr.c \
+			ft_strdup.c \
+			ft_striteri.c \
+			ft_strjoin.c \
+			ft_strlcat.c \
+			ft_strlcpy.c \
+			ft_strlen.c \
+			ft_strmapi.c \
+			ft_strncmp.c \
+			ft_strnstr.c \
+			ft_strrchr.c \
+			ft_strtrim.c \
+			ft_substr.c \
+			ft_tolower.c \
+			ft_toupper.c
 
-OBJS	= ${SRCS:.c=.o}
+SRCSB	= 	ft_lstnew.c
 
-NAME	= libft.a
+OBJS	= 	${SRCS:.c=.o}
+
+OBJSB	= 	${SRCSB:.c=.o}
+
+NAME	= 	libft.a
 
 #mettre gcc au lieu de cc
 
-CC	= gcc
+CC		= 	gcc
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= 	-Wall -Werror -Wextra
 
-RM	= rm -f
+RM		=	 rm -f
 
 .c.o:	
 		${CC} -g3 ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
-		ar rc ${NAME} ${OBJS}
+			ar rc ${NAME} ${OBJS}
+			ranlib ${NAME}
 
-index:
-		ranlib ${NAME}
+bonus:	${OBJS} ${OBJSB}
+			ar rc ${NAME} ${OBJS} ${OBJSB}
+			ranlib ${NAME}
 
-all:		${NAME} index
+all:		${NAME}
 
 clean:
 		${RM} ${OBJS}
@@ -54,7 +93,7 @@ clean:
 fclean:		clean
 		${RM} ${NAME}
 
-re:		fclean all
+re:		fclean all bonus
 
 #permet au programme dexecuter la regle meme si un fichier du meme nom existe
-.PHONY:		all clean fclean re index
+.PHONY:		all clean fclean re bonus

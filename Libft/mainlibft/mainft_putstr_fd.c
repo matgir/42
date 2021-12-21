@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mainft_putchar_fd.c                                :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/20 16:46:35 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/20 16:53:21 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/12/20 17:03:58 by mgirardo          #+#    #+#             */
+/*   Updated: 2021/12/20 17:05:32 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-void	ft_putchar_fd(char c, int i);
+void	ft_putstr_fd(char *s, int i);
 
 int	main(int ac, char **av)
 {
-	unsigned int	i = 0;
 	(void) ac;
 
-	while (av[1][i])
-	{
-		ft_putchar_fd(av[1][i], atoi(av[2]));
-		i++;
-	}
+	ft_putstr_fd(av[1], atoi(av[2]));
 	return (0);
 }
