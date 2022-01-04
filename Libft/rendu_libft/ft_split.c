@@ -6,13 +6,11 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 09:47:53 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/17 17:04:36 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:37:27 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
-#include <stddef.h>
 
 static int	dbt(char const *s, char c)
 {
@@ -23,6 +21,8 @@ static int	dbt(char const *s, char c)
 		stop++;
 	return (stop);
 }
+
+/*		permet de trouver ou se trouve le 1er mot		*/
 
 static int	nw(char const *s, char c, size_t stop)
 {
@@ -40,7 +40,9 @@ static int	nw(char const *s, char c, size_t stop)
 	return (nbw);
 }
 
-char	**free_all(char **tab)
+/*		permet de compter le nombre de mots		*/
+
+static char	**free_all(char **tab)
 {
 	int	i;
 
@@ -50,6 +52,9 @@ char	**free_all(char **tab)
 	free(tab);
 	return (NULL);
 }
+
+/*		permet de free la partie du tableau deja creer en cas d'echec
+ *		d'allocation pour un nouveau mot		*/
 
 char	**ft_split(char const *s, char c)
 {

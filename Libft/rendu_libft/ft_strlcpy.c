@@ -6,17 +6,14 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:32:49 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/14 18:32:17 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:39:52 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stddef.h>
 
-/*
-lors de lexecution si ldst < lsrc et size > ldst+1
-alors src va etre modifier et cela est normal
-*/
+/*		lors de lexecution si ldst < lsrc et size > ldst+1
+ *		alors src va etre modifier et cela est normal		*/
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {

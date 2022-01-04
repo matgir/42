@@ -6,11 +6,11 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:34:06 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/20 12:19:15 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:28:51 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 static char	*ft_sign(long int ntmp, int i)
 {

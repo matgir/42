@@ -6,13 +6,14 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:44:37 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/13 17:06:48 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:33:00 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stddef.h>
+#include "libft.h"
 
-/*void	*ft_memset(void *s, int c, size_t n)
+/*
+void	*ft_memset(void *s, int c, size_t n)
 {
 	unsigned int	i;
 	unsigned char	*dooble;
@@ -28,7 +29,6 @@
 	return (s);
 }
 
-
 void	*ft_memset(void *s, int c, size_t n)
 {
 	unsigned int	i;
@@ -39,9 +39,9 @@ void	*ft_memset(void *s, int c, size_t n)
 	while (++i <= n)
 		dooble[i] = (unsigned char) c;
 	return (s);
-}*/
+}
 
-/*void	*ft_memset(void *s, int c, size_t n)
+void	*ft_memset(void *s, int c, size_t n)
 {
 	unsigned char	*dooble;
 
@@ -49,7 +49,8 @@ void	*ft_memset(void *s, int c, size_t n)
 	while (n-- != 0)
 		*dooble++ = (unsigned char) c;
 	return (s);
-}*/
+}
+*/
 
 void	*ft_memset(void *s, int c, size_t n)
 {

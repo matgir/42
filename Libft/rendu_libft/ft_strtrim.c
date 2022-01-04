@@ -6,13 +6,11 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:21:07 by mgirardo          #+#    #+#             */
-/*   Updated: 2021/12/17 10:45:07 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:43:52 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include "libft.h"
-#include <stdlib.h>
 
 static int	ft_chr(char const *set, char c, size_t lenset)
 {
@@ -27,6 +25,9 @@ static int	ft_chr(char const *set, char c, size_t lenset)
 	}
 	return (1);
 }
+
+/*		permet de se deplacer tant que le caractere fait parti
+ *		du set aue l'on veut retirer en debut et en fin		*/
 
 char	*ft_strtrim(char const *s1, char const *set)
 {

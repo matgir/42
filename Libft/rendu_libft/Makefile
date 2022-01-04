@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/07 14:53:41 by mgirardo          #+#    #+#              #
-#    Updated: 2022/01/04 13:09:05 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/01/04 17:25:10 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,8 +60,11 @@ SRCS	=	ft_atoi.c \
 
 SRCSB	= 	ft_lstadd_back.c \
 			ft_lstadd_front.c \
+			ft_lstclear.c \
 			ft_lstdelone.c \
+			ft_lstiter.c \
 			ft_lstlast.c \
+			ft_lstmap.c \
 			ft_lstnew.c \
 			ft_lstsize.c
 
@@ -80,7 +83,7 @@ CFLAGS	= 	-Wall -Werror -Wextra
 RM		=	 rm -f
 
 .c.o:	
-		${CC} -g3 ${CFLAGS} -c $< -o ${<:.c=.o}
+		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
 			ar rc ${NAME} ${OBJS}
@@ -93,20 +96,12 @@ bonus:	${OBJS} ${OBJSB}
 all:		${NAME}
 
 clean:
-		${RM} ${OBJS}
+		${RM} ${OBJS} ${OBJSB}
 
 fclean:		clean
 		${RM} ${NAME}
 
 re:		fclean all
 
-cleanB:
-		${RM} ${OBJS} ${OBJSB}
-
-fcleanB:		cleanB
-		${RM} ${NAME}
-
-reB:		fcleanB bonus
-
 #permet au programme dexecuter la regle meme si un fichier du meme nom existe
-.PHONY:		all clean fclean re bonus cleanB fcleanB reB
+.PHONY:		all clean fclean re bonus
