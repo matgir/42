@@ -1,5 +1,5 @@
 #seulement pour linux
-#[[ $TERM != "screen" ]] && exec tmux
+[[ $TERM != "screen" ]] && exec tmux
 
 alias norm='norminette -R CheckForbiddenSourceHeader'
 alias gcc='gcc -Wall -Werror -Wextra'

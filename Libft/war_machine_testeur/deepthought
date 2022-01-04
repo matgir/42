@@ -1,23 +1,24 @@
 = Host-specific information ====================================================
 $> hostname; uname -msr
-e3r4p2.42.fr
-Darwin 18.7.0 x86_64
+e2r7p22.clusters.42paris.fr
+Linux 5.4.0-90-generic x86_64
 $> date
-Tue Jan  4 18:20:59 CET 2022
+Tue 04 Jan 2022 04:46:39 PM CET
 $> gcc --version
-Apple clang version 11.0.0 (clang-1100.0.33.17)
-Target: x86_64-apple-darwin18.7.0
-Thread model: posix
-InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+gcc (Ubuntu 10.3.0-1ubuntu1~20.04) 10.3.0
+Copyright (C) 2020 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
 $> clang --version
-Apple clang version 11.0.0 (clang-1100.0.33.17)
-Target: x86_64-apple-darwin18.7.0
+Ubuntu clang version 12.0.0-3ubuntu1~20.04.4
+Target: x86_64-pc-linux-gnu
 Thread model: posix
-InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+InstalledDir: /usr/bin
 
 = libft.h=======================================================================
 $> norminette libft.h | grep -E '(Error|Warning)'
-/Users/mgirardo/Desktop/42/Libft/rendu_libft/war_machine/dirlibft/libft.h: Error!
+/mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/dirlibft/libft.h: Error!
 Error: CONSECUTIVE_NEWLINES (line:  13, col:   1):	Consecutive newlines
 Error: PREPROC_BAD_INDENT   (line:  17, col:   1):	Bad preprocessor indentation
 Error: PREPROC_BAD_INDENT   (line:  18, col:   1):	Bad preprocessor indentation
@@ -31,94 +32,94 @@ Norme check failed
 
 = Compiling libft ==============================================================
 $> make re
-rm -f ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_itoa.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_putchar_fd.o ft_putendl_fd.o ft_putnbr_fd.o ft_putstr_fd.o ft_split.o ft_strchr.o ft_strdup.o ft_striteri.o ft_strjoin.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strmapi.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o ft_toupper.o ft_lstadd_back.o ft_lstadd_front.o ft_lstclear.o ft_lstdelone.o ft_lstiter.o ft_lstlast.o ft_lstmap.o ft_lstnew.o ft_lstsize.o
+rm -f ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_itoa.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_putchar_fd.o ft_putendl_fd.o ft_putnbr_fd.o ft_putstr_fd.o ft_split.o ft_strchr.o ft_strdup.o ft_striteri.o ft_strjoin.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strmapi.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o ft_toupper.o
 rm -f libft.a
-gcc -Wall -Werror -Wextra -c ft_atoi.c -o ft_atoi.o
-gcc -Wall -Werror -Wextra -c ft_bzero.c -o ft_bzero.o
-gcc -Wall -Werror -Wextra -c ft_calloc.c -o ft_calloc.o
-gcc -Wall -Werror -Wextra -c ft_isalnum.c -o ft_isalnum.o
-gcc -Wall -Werror -Wextra -c ft_isalpha.c -o ft_isalpha.o
-gcc -Wall -Werror -Wextra -c ft_isascii.c -o ft_isascii.o
-gcc -Wall -Werror -Wextra -c ft_isdigit.c -o ft_isdigit.o
-gcc -Wall -Werror -Wextra -c ft_isprint.c -o ft_isprint.o
-gcc -Wall -Werror -Wextra -c ft_itoa.c -o ft_itoa.o
-gcc -Wall -Werror -Wextra -c ft_memchr.c -o ft_memchr.o
-gcc -Wall -Werror -Wextra -c ft_memcmp.c -o ft_memcmp.o
-gcc -Wall -Werror -Wextra -c ft_memcpy.c -o ft_memcpy.o
-gcc -Wall -Werror -Wextra -c ft_memmove.c -o ft_memmove.o
-gcc -Wall -Werror -Wextra -c ft_memset.c -o ft_memset.o
-gcc -Wall -Werror -Wextra -c ft_putchar_fd.c -o ft_putchar_fd.o
-gcc -Wall -Werror -Wextra -c ft_putendl_fd.c -o ft_putendl_fd.o
-gcc -Wall -Werror -Wextra -c ft_putnbr_fd.c -o ft_putnbr_fd.o
-gcc -Wall -Werror -Wextra -c ft_putstr_fd.c -o ft_putstr_fd.o
-gcc -Wall -Werror -Wextra -c ft_split.c -o ft_split.o
-gcc -Wall -Werror -Wextra -c ft_strchr.c -o ft_strchr.o
-gcc -Wall -Werror -Wextra -c ft_strdup.c -o ft_strdup.o
-gcc -Wall -Werror -Wextra -c ft_striteri.c -o ft_striteri.o
-gcc -Wall -Werror -Wextra -c ft_strjoin.c -o ft_strjoin.o
-gcc -Wall -Werror -Wextra -c ft_strlcat.c -o ft_strlcat.o
-gcc -Wall -Werror -Wextra -c ft_strlcpy.c -o ft_strlcpy.o
-gcc -Wall -Werror -Wextra -c ft_strlen.c -o ft_strlen.o
-gcc -Wall -Werror -Wextra -c ft_strmapi.c -o ft_strmapi.o
-gcc -Wall -Werror -Wextra -c ft_strncmp.c -o ft_strncmp.o
-gcc -Wall -Werror -Wextra -c ft_strnstr.c -o ft_strnstr.o
-gcc -Wall -Werror -Wextra -c ft_strrchr.c -o ft_strrchr.o
-gcc -Wall -Werror -Wextra -c ft_strtrim.c -o ft_strtrim.o
-gcc -Wall -Werror -Wextra -c ft_substr.c -o ft_substr.o
-gcc -Wall -Werror -Wextra -c ft_tolower.c -o ft_tolower.o
-gcc -Wall -Werror -Wextra -c ft_toupper.c -o ft_toupper.o
+gcc -g3 -Wall -Werror -Wextra -c ft_atoi.c -o ft_atoi.o
+gcc -g3 -Wall -Werror -Wextra -c ft_bzero.c -o ft_bzero.o
+gcc -g3 -Wall -Werror -Wextra -c ft_calloc.c -o ft_calloc.o
+gcc -g3 -Wall -Werror -Wextra -c ft_isalnum.c -o ft_isalnum.o
+gcc -g3 -Wall -Werror -Wextra -c ft_isalpha.c -o ft_isalpha.o
+gcc -g3 -Wall -Werror -Wextra -c ft_isascii.c -o ft_isascii.o
+gcc -g3 -Wall -Werror -Wextra -c ft_isdigit.c -o ft_isdigit.o
+gcc -g3 -Wall -Werror -Wextra -c ft_isprint.c -o ft_isprint.o
+gcc -g3 -Wall -Werror -Wextra -c ft_itoa.c -o ft_itoa.o
+gcc -g3 -Wall -Werror -Wextra -c ft_memchr.c -o ft_memchr.o
+gcc -g3 -Wall -Werror -Wextra -c ft_memcmp.c -o ft_memcmp.o
+gcc -g3 -Wall -Werror -Wextra -c ft_memcpy.c -o ft_memcpy.o
+gcc -g3 -Wall -Werror -Wextra -c ft_memmove.c -o ft_memmove.o
+gcc -g3 -Wall -Werror -Wextra -c ft_memset.c -o ft_memset.o
+gcc -g3 -Wall -Werror -Wextra -c ft_putchar_fd.c -o ft_putchar_fd.o
+gcc -g3 -Wall -Werror -Wextra -c ft_putendl_fd.c -o ft_putendl_fd.o
+gcc -g3 -Wall -Werror -Wextra -c ft_putnbr_fd.c -o ft_putnbr_fd.o
+gcc -g3 -Wall -Werror -Wextra -c ft_putstr_fd.c -o ft_putstr_fd.o
+gcc -g3 -Wall -Werror -Wextra -c ft_split.c -o ft_split.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strchr.c -o ft_strchr.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strdup.c -o ft_strdup.o
+gcc -g3 -Wall -Werror -Wextra -c ft_striteri.c -o ft_striteri.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strjoin.c -o ft_strjoin.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strlcat.c -o ft_strlcat.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strlcpy.c -o ft_strlcpy.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strlen.c -o ft_strlen.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strmapi.c -o ft_strmapi.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strncmp.c -o ft_strncmp.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strnstr.c -o ft_strnstr.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strrchr.c -o ft_strrchr.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strtrim.c -o ft_strtrim.o
+gcc -g3 -Wall -Werror -Wextra -c ft_substr.c -o ft_substr.o
+gcc -g3 -Wall -Werror -Wextra -c ft_tolower.c -o ft_tolower.o
+gcc -g3 -Wall -Werror -Wextra -c ft_toupper.c -o ft_toupper.o
 ar rc libft.a ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_itoa.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_putchar_fd.o ft_putendl_fd.o ft_putnbr_fd.o ft_putstr_fd.o ft_split.o ft_strchr.o ft_strdup.o ft_striteri.o ft_strjoin.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strmapi.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o ft_toupper.o
 ranlib libft.a
 
 $> make bonus
-gcc -Wall -Werror -Wextra -c ft_atoi.c -o ft_atoi.o
-gcc -Wall -Werror -Wextra -c ft_bzero.c -o ft_bzero.o
-gcc -Wall -Werror -Wextra -c ft_calloc.c -o ft_calloc.o
-gcc -Wall -Werror -Wextra -c ft_isalnum.c -o ft_isalnum.o
-gcc -Wall -Werror -Wextra -c ft_isalpha.c -o ft_isalpha.o
-gcc -Wall -Werror -Wextra -c ft_isascii.c -o ft_isascii.o
-gcc -Wall -Werror -Wextra -c ft_isdigit.c -o ft_isdigit.o
-gcc -Wall -Werror -Wextra -c ft_isprint.c -o ft_isprint.o
-gcc -Wall -Werror -Wextra -c ft_itoa.c -o ft_itoa.o
-gcc -Wall -Werror -Wextra -c ft_memchr.c -o ft_memchr.o
-gcc -Wall -Werror -Wextra -c ft_memcmp.c -o ft_memcmp.o
-gcc -Wall -Werror -Wextra -c ft_memcpy.c -o ft_memcpy.o
-gcc -Wall -Werror -Wextra -c ft_memmove.c -o ft_memmove.o
-gcc -Wall -Werror -Wextra -c ft_memset.c -o ft_memset.o
-gcc -Wall -Werror -Wextra -c ft_putchar_fd.c -o ft_putchar_fd.o
-gcc -Wall -Werror -Wextra -c ft_putendl_fd.c -o ft_putendl_fd.o
-gcc -Wall -Werror -Wextra -c ft_putnbr_fd.c -o ft_putnbr_fd.o
-gcc -Wall -Werror -Wextra -c ft_putstr_fd.c -o ft_putstr_fd.o
-gcc -Wall -Werror -Wextra -c ft_split.c -o ft_split.o
-gcc -Wall -Werror -Wextra -c ft_strchr.c -o ft_strchr.o
-gcc -Wall -Werror -Wextra -c ft_strdup.c -o ft_strdup.o
-gcc -Wall -Werror -Wextra -c ft_striteri.c -o ft_striteri.o
-gcc -Wall -Werror -Wextra -c ft_strjoin.c -o ft_strjoin.o
-gcc -Wall -Werror -Wextra -c ft_strlcat.c -o ft_strlcat.o
-gcc -Wall -Werror -Wextra -c ft_strlcpy.c -o ft_strlcpy.o
-gcc -Wall -Werror -Wextra -c ft_strlen.c -o ft_strlen.o
-gcc -Wall -Werror -Wextra -c ft_strmapi.c -o ft_strmapi.o
-gcc -Wall -Werror -Wextra -c ft_strncmp.c -o ft_strncmp.o
-gcc -Wall -Werror -Wextra -c ft_strnstr.c -o ft_strnstr.o
-gcc -Wall -Werror -Wextra -c ft_strrchr.c -o ft_strrchr.o
-gcc -Wall -Werror -Wextra -c ft_strtrim.c -o ft_strtrim.o
-gcc -Wall -Werror -Wextra -c ft_substr.c -o ft_substr.o
-gcc -Wall -Werror -Wextra -c ft_tolower.c -o ft_tolower.o
-gcc -Wall -Werror -Wextra -c ft_toupper.c -o ft_toupper.o
-gcc -Wall -Werror -Wextra -c ft_lstadd_back.c -o ft_lstadd_back.o
-gcc -Wall -Werror -Wextra -c ft_lstadd_front.c -o ft_lstadd_front.o
-gcc -Wall -Werror -Wextra -c ft_lstclear.c -o ft_lstclear.o
-gcc -Wall -Werror -Wextra -c ft_lstdelone.c -o ft_lstdelone.o
-gcc -Wall -Werror -Wextra -c ft_lstiter.c -o ft_lstiter.o
-gcc -Wall -Werror -Wextra -c ft_lstlast.c -o ft_lstlast.o
-gcc -Wall -Werror -Wextra -c ft_lstmap.c -o ft_lstmap.o
-gcc -Wall -Werror -Wextra -c ft_lstnew.c -o ft_lstnew.o
-gcc -Wall -Werror -Wextra -c ft_lstsize.c -o ft_lstsize.o
+gcc -g3 -Wall -Werror -Wextra -c ft_atoi.c -o ft_atoi.o
+gcc -g3 -Wall -Werror -Wextra -c ft_bzero.c -o ft_bzero.o
+gcc -g3 -Wall -Werror -Wextra -c ft_calloc.c -o ft_calloc.o
+gcc -g3 -Wall -Werror -Wextra -c ft_isalnum.c -o ft_isalnum.o
+gcc -g3 -Wall -Werror -Wextra -c ft_isalpha.c -o ft_isalpha.o
+gcc -g3 -Wall -Werror -Wextra -c ft_isascii.c -o ft_isascii.o
+gcc -g3 -Wall -Werror -Wextra -c ft_isdigit.c -o ft_isdigit.o
+gcc -g3 -Wall -Werror -Wextra -c ft_isprint.c -o ft_isprint.o
+gcc -g3 -Wall -Werror -Wextra -c ft_itoa.c -o ft_itoa.o
+gcc -g3 -Wall -Werror -Wextra -c ft_memchr.c -o ft_memchr.o
+gcc -g3 -Wall -Werror -Wextra -c ft_memcmp.c -o ft_memcmp.o
+gcc -g3 -Wall -Werror -Wextra -c ft_memcpy.c -o ft_memcpy.o
+gcc -g3 -Wall -Werror -Wextra -c ft_memmove.c -o ft_memmove.o
+gcc -g3 -Wall -Werror -Wextra -c ft_memset.c -o ft_memset.o
+gcc -g3 -Wall -Werror -Wextra -c ft_putchar_fd.c -o ft_putchar_fd.o
+gcc -g3 -Wall -Werror -Wextra -c ft_putendl_fd.c -o ft_putendl_fd.o
+gcc -g3 -Wall -Werror -Wextra -c ft_putnbr_fd.c -o ft_putnbr_fd.o
+gcc -g3 -Wall -Werror -Wextra -c ft_putstr_fd.c -o ft_putstr_fd.o
+gcc -g3 -Wall -Werror -Wextra -c ft_split.c -o ft_split.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strchr.c -o ft_strchr.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strdup.c -o ft_strdup.o
+gcc -g3 -Wall -Werror -Wextra -c ft_striteri.c -o ft_striteri.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strjoin.c -o ft_strjoin.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strlcat.c -o ft_strlcat.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strlcpy.c -o ft_strlcpy.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strlen.c -o ft_strlen.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strmapi.c -o ft_strmapi.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strncmp.c -o ft_strncmp.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strnstr.c -o ft_strnstr.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strrchr.c -o ft_strrchr.o
+gcc -g3 -Wall -Werror -Wextra -c ft_strtrim.c -o ft_strtrim.o
+gcc -g3 -Wall -Werror -Wextra -c ft_substr.c -o ft_substr.o
+gcc -g3 -Wall -Werror -Wextra -c ft_tolower.c -o ft_tolower.o
+gcc -g3 -Wall -Werror -Wextra -c ft_toupper.c -o ft_toupper.o
+gcc -g3 -Wall -Werror -Wextra -c ft_lstadd_back.c -o ft_lstadd_back.o
+gcc -g3 -Wall -Werror -Wextra -c ft_lstadd_front.c -o ft_lstadd_front.o
+gcc -g3 -Wall -Werror -Wextra -c ft_lstclear.c -o ft_lstclear.o
+gcc -g3 -Wall -Werror -Wextra -c ft_lstdelone.c -o ft_lstdelone.o
+gcc -g3 -Wall -Werror -Wextra -c ft_lstiter.c -o ft_lstiter.o
+gcc -g3 -Wall -Werror -Wextra -c ft_lstlast.c -o ft_lstlast.o
+gcc -g3 -Wall -Werror -Wextra -c ft_lstmap.c -o ft_lstmap.o
+gcc -g3 -Wall -Werror -Wextra -c ft_lstnew.c -o ft_lstnew.o
+gcc -g3 -Wall -Werror -Wextra -c ft_lstsize.c -o ft_lstsize.o
 ar rc libft.a ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_itoa.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_putchar_fd.o ft_putendl_fd.o ft_putnbr_fd.o ft_putstr_fd.o ft_split.o ft_strchr.o ft_strdup.o ft_striteri.o ft_strjoin.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strmapi.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o ft_toupper.o ft_lstadd_back.o ft_lstadd_front.o ft_lstclear.o ft_lstdelone.o ft_lstiter.o ft_lstlast.o ft_lstmap.o ft_lstnew.o ft_lstsize.o
 ranlib libft.a
 
 $> ls -la libft.a
--rw-r--r--  1 mgirardo  2021_paris  39520 Jan  4 18:21 /Users/mgirardo/Desktop/42/Libft/rendu_libft/war_machine/dirlibft/libft.a
+-rw-r--r-- 1 mgirardo 2021_paris 3505078 Jan  4 16:46 /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/dirlibft/libft.a
 
 = Part1_functions ==============================================================
 

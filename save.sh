@@ -17,9 +17,9 @@ cp ~/.vimrc save
 #clear gits
 cd save
 	#mac os
-find . -name "*.git" -mindepth 2 -type d -exec rm -rf {} \;
+#find . -name "*.git" -mindepth 2 -type d -exec rm -rf {} \;
 	#linux
-#find . -mindepth 2 -name "*.git" -type d -exec rm -rf {} \;
+find . -mindepth 2 -name "*.git" -type d -exec rm -rf {} \;
 
 #git save
 git add .
