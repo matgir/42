@@ -3,7 +3,7 @@ $> hostname; uname -msr
 e2r7p22.clusters.42paris.fr
 Linux 5.4.0-90-generic x86_64
 $> date
-Tue 04 Jan 2022 12:11:46 PM CET
+Tue 04 Jan 2022 01:10:18 PM CET
 $> gcc --version
 gcc (Ubuntu 10.3.0-1ubuntu1~20.04) 10.3.0
 Copyright (C) 2020 Free Software Foundation, Inc.
@@ -25,7 +25,8 @@ Error: PREPROC_BAD_INDENT   (line:  18, col:   1):	Bad preprocessor indentation
 Error: PREPROC_BAD_INDENT   (line:  19, col:   1):	Bad preprocessor indentation
 Error: TAB_REPLACE_SPACE    (line:  21, col:   1):	Found tab when expecting space
 Error: TAB_REPLACE_SPACE    (line:  24, col:  11):	Found tab when expecting space
-Error: MISSING_IDENTIFIER   (line:  56, col:  39):	missing type qualifier or identifier in function arguments
+Error: MISSING_IDENTIFIER   (line:  38, col:  38):	missing type qualifier or identifier in function arguments
+Error: MISSING_IDENTIFIER   (line:  59, col:  39):	missing type qualifier or identifier in function arguments
 Norme check failed
 
 = Compiling libft ==============================================================
@@ -104,20 +105,23 @@ gcc -g3 -Wall -Werror -Wextra -c ft_strtrim.c -o ft_strtrim.o
 gcc -g3 -Wall -Werror -Wextra -c ft_substr.c -o ft_substr.o
 gcc -g3 -Wall -Werror -Wextra -c ft_tolower.c -o ft_tolower.o
 gcc -g3 -Wall -Werror -Wextra -c ft_toupper.c -o ft_toupper.o
+gcc -g3 -Wall -Werror -Wextra -c ft_lstadd_back.c -o ft_lstadd_back.o
 gcc -g3 -Wall -Werror -Wextra -c ft_lstadd_front.c -o ft_lstadd_front.o
+gcc -g3 -Wall -Werror -Wextra -c ft_lstdelone.c -o ft_lstdelone.o
+gcc -g3 -Wall -Werror -Wextra -c ft_lstlast.c -o ft_lstlast.o
 gcc -g3 -Wall -Werror -Wextra -c ft_lstnew.c -o ft_lstnew.o
 gcc -g3 -Wall -Werror -Wextra -c ft_lstsize.c -o ft_lstsize.o
-ar rc libft.a ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_itoa.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_putchar_fd.o ft_putendl_fd.o ft_putnbr_fd.o ft_putstr_fd.o ft_split.o ft_strchr.o ft_strdup.o ft_striteri.o ft_strjoin.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strmapi.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o ft_toupper.o ft_lstadd_front.o ft_lstnew.o ft_lstsize.o
+ar rc libft.a ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_itoa.o ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o ft_putchar_fd.o ft_putendl_fd.o ft_putnbr_fd.o ft_putstr_fd.o ft_split.o ft_strchr.o ft_strdup.o ft_striteri.o ft_strjoin.o ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strmapi.o ft_strncmp.o ft_strnstr.o ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o ft_toupper.o ft_lstadd_back.o ft_lstadd_front.o ft_lstdelone.o ft_lstlast.o ft_lstnew.o ft_lstsize.o
 ranlib libft.a
 
 $> ls -la libft.a
--rw-r--r-- 1 mgirardo 2021_paris 2332672 Jan  4 12:11 /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/dirlibft/libft.a
+-rw-r--r-- 1 mgirardo 2021_paris 2621690 Jan  4 13:10 /mnt/nfs/homes/mgirardo/Desktop/42/Libft/rendu_libft/war_machine_testeur/dirlibft/libft.a
 
 = Bonus_functions ==============================================================
 
-= ft_lstsize_bonus.c ===========================================================
-$> norminette ft_lstsize_bonus.c | grep -E '(Error|Warning)'
-$> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_lstsize.c main.c libft.a -o user_exe
+= ft_lstdelone_bonus.c =========================================================
+$> norminette ft_lstdelone_bonus.c | grep -E '(Error|Warning)'
+$> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_lstdelone.c main.c libft.a -o user_exe
 
 = Test 1 ===================================================
 $> ./user_exe 01

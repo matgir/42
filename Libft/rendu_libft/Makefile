@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/07 14:53:41 by mgirardo          #+#    #+#              #
-#    Updated: 2022/01/04 12:09:22 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/01/04 13:09:05 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,10 @@ SRCS	=	ft_atoi.c \
 			ft_tolower.c \
 			ft_toupper.c
 
-SRCSB	= 	ft_lstadd_front.c \
+SRCSB	= 	ft_lstadd_back.c \
+			ft_lstadd_front.c \
+			ft_lstdelone.c \
+			ft_lstlast.c \
 			ft_lstnew.c \
 			ft_lstsize.c
 

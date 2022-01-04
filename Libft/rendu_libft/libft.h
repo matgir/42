@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:10:17 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/04 12:09:04 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/04 13:08:45 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int			ft_isascii(int c);
 int			ft_isdigit(int c);
 int			ft_isprint(int c);
 char		*ft_itoa(int n);
+void		ft_lstadd_back(t_list **alst, t_list *new);
 void		ft_lstadd_front(t_list **alst, t_list *new);
+void		ft_lstdelone(t_list *lst, void(*del)(void*));
+t_list		*ft_lstlast(t_list *lst);
 t_list		*ft_lstnew(void *content);
 int			ft_lstsize(t_list *lst);
 void		*ft_memchr(const void *s, int o, size_t n);
