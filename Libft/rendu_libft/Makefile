@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/07 14:53:41 by mgirardo          #+#    #+#              #
-#    Updated: 2021/12/21 16:09:28 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/01/04 12:09:22 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,9 @@ SRCS	=	ft_atoi.c \
 			ft_tolower.c \
 			ft_toupper.c
 
-SRCSB	= 	ft_lstnew.c
+SRCSB	= 	ft_lstadd_front.c \
+			ft_lstnew.c \
+			ft_lstsize.c
 
 OBJS	= 	${SRCS:.c=.o}
 
@@ -93,7 +95,15 @@ clean:
 fclean:		clean
 		${RM} ${NAME}
 
-re:		fclean all bonus
+re:		fclean all
+
+cleanB:
+		${RM} ${OBJS} ${OBJSB}
+
+fcleanB:		cleanB
+		${RM} ${NAME}
+
+reB:		fcleanB bonus
 
 #permet au programme dexecuter la regle meme si un fichier du meme nom existe
-.PHONY:		all clean fclean re bonus
+.PHONY:		all clean fclean re bonus cleanB fcleanB reB
