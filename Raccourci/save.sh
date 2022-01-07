@@ -23,11 +23,11 @@ cd save
 #find . -name "*.git" -mindepth 2 -type d -exec rm -rf {} \;
 	#linux
 find . -mindepth 2 -name "*.git" -type d -exec rm -rf {} \;
-find . -mindepth 2 -name "*.a" -type d -exec rm -rf {} \;
-find . -mindepth 2 -name "*.o" -type d -exec rm -rf {} \;
-find . -mindepth 2 -name "*.swp" -type d -exec rm -rf {} \;
-find . -mindepth 2 -name ".DS.Store" -type d -exec rm -rf {} \;
-find . -mindepth 2 -name "a.out" -type d -exec rm -rf {} \;
+find . -mindepth 2 -name "*.a" -type f -exec rm -rf {} \;
+find . -mindepth 2 -name "*.o" -type f -exec rm -rf {} \;
+find . -mindepth 2 -name "*.swp" -type f -exec rm -rf {} \;
+find . -mindepth 2 -name ".DS.Store" -type f -exec rm -rf {} \;
+find . -mindepth 2 -name "a.out" -type f -exec rm -rf {} \;
 
 #git save
 git add .
