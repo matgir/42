@@ -4,16 +4,16 @@
 #fait que la suite du programme sera lu comme du bash
 #!/bin/bash
 
-#go to the place where the saving will happen
-cd ~/Sauvegarde 
+#go where to save
+cd ~/Sauvegarde
 
 #clear save folder
-rm -Rf save/*
+rm -rf save/*
 
 #copy all documents in save folder
-cp -R ~/Desktop/42/Libft save # -R veut dire que ca va copier le dossier en recursif ( donc jusqu a la derniere stratt inferieur
-cp -R ~/Desktop/42/Picsine save # -R veut dire que ca va copier le dossier en recursif ( donc jusqu a la derniere stratt inferieur
-cp ~/Sauvegarde/save.sh save
+cp -r ~/Desktop/42/Libft save # -R veut dire que ca va copier le dossier en recursif ( donc jusqu a la derniere stratt inferieur
+cp -r ~/Desktop/42/Picsine save # -R veut dire que ca va copier le dossier en recursif ( donc jusqu a la derniere stratt inferieur
+cp -r ~/Raccourci save
 cp ~/.zshrc save
 cp ~/.vimrc save
 
