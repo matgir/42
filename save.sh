@@ -4,6 +4,9 @@
 #fait que la suite du programme sera lu comme du bash
 #!/bin/bash
 
+#go to the place where the saving will happen
+cd ~/Sauvegarde 
+
 #clear save folder
 rm -Rf save/*
 

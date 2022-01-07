@@ -1,0 +1,6 @@
+Credentials cache: API:C39A9A1F-E1A0-4511-9B54-5A07FAB6843C
+        Principal: mgirardo@42.FR
+
+  Issued                Expires               Principal
+Aug  2 17:02:56 2021  Aug  9 17:02:56 2021  krbtgt/42.FR@42.FR
+Aug  2 17:02:56 2021  Aug  9 17:02:56 2021  HTTP/student-storage-2.42.fr@42.FR
