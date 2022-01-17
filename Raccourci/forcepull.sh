@@ -19,6 +19,6 @@ git pull
 cp -r Libft ~/Desktop/42
 cp -r Picsine ~/Desktop/42
 cp -r ft_printf ~/Desktop/42
-cp -r .zshrc ~/.zshrc
-cp -r .vimrc ~/.vimrc
-cp -r Raccourci ~/Raccourci
+cp .zshrc ~/.zshrc
+cp .vimrc ~/.vimrc
+cp -r Raccourci ~
