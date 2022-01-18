@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:00:28 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/17 18:15:39 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/18 11:10:10 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 int			ft_find_%(const char *str);
 size_t		ft_strlen(const char *str);
