@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_find_%.c                                        :+:      :+:    :+:   */
+/*   is_variable.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/17 18:08:06 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/17 18:09:47 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/01/18 15:43:45 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/01/18 16:13:18 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftptf.h"
 
-int	ft_find_%(const char *str)
+int	is_variable(char c)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '%')
-			return (0);
-		i++;
-	}
+	if (c == 'c' || c == 's' || c == 'p' || c == 'd')
+		return (0);
+	if (c == 'i' || c == 'u' || c == 'x' || c == 'X')
+		return (0);
 	return (1);
 }

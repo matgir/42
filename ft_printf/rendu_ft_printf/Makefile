@@ -6,15 +6,20 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 18:17:53 by mgirardo          #+#    #+#              #
-#    Updated: 2022/01/17 18:31:34 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/01/18 16:26:18 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	ft_find_%.c \
+SRCS	=	\
 			ft_printf.c \
+			ft_putpurcent.c \
 			ft_putchar.c \
 			ft_putstr.c \
 			ft_strlen.c \
+			is_variable.c \
+			print_c.c \
+			print_variable.c \
+			what_variable.c \
 
 OBJS	=	${SRCS:.c=.o}
 

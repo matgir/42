@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   what_variable.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/17 15:03:05 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/18 16:42:32 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/01/18 15:36:42 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/01/18 16:38:09 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftptf.h"
 
-int	ft_printf(const char *str, ...)
+int	what_variable(const char *str, int *i, va_list *ap)
 {
-	int		i;
-	va_list	ap;
-	int		puted;
+	int	puted;
 
-	i = -1;
-	va_start(ap, str);
-	puted = 0;
-	while (str[++i])
+	if (str[*i + 1] && is_variable(str[*i + 1]) == 0)
 	{
-		if (str[i] != '%')
-		{
-			ft_putchar(str[i]);
-			puted++;
-		}
-		else
-		{
-			if (str[i + 1] && str[i + 1] == '%')
-				ft_putpurcent(&puted, &i);
-			else
-				puted += what_variable(str, &i, &ap);
-		}
+		puted = print_variable(str[*i + 1], ap);
+		*i = *i + 1;
+		return (puted);
 	}
-	return (puted);
+	else
+	{
+		ft_putchar(str[*i + 1]);
+		return (1);
+	}
 }
