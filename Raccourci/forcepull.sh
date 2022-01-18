@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 12:12:45 by mgirardo          #+#    #+#              #
-#    Updated: 2022/01/07 14:52:47 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/01/18 10:59:09 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,3 +22,6 @@ cp -r ft_printf ~/Desktop/42
 cp .zshrc ~/.zshrc
 cp .vimrc ~/.vimrc
 cp -r Raccourci ~
+
+# A chaque pullgit sur une machine differentes changer save.sh et .zshrc
+# en focntion de linux ou mac os
