@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_s.c                                          :+:      :+:    :+:   */
+/*   print_i.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 17:25:16 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/19 16:09:42 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/01/19 14:27:47 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/01/19 16:11:05 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftptf.h"
 
-int	print_s(va_list *ap)
+int print_i(va_list *ap)
 {
-	char *str;
+	int i;
+	int puted;
 
-	str = va_arg(*ap, char *);
+	puted = 1;
+	i = va_arg(*ap, int);
 	va_end(*ap);
-	ft_putstr(str);
-	return (ft_strlen(str));
+	ft_putnbr(i);
+	if (i < 0)
+		puted += 1;
+	while (i / 10 != 0)
+		puted += 1;
+	return (puted);
 }

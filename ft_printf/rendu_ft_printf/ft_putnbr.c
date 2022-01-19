@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_s.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 17:25:16 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/19 16:09:42 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/01/19 15:59:18 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/01/19 16:06:15 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftptf.h"
 
-int	print_s(va_list *ap)
+void	ft_putnbr(int n)
 {
-	char *str;
+	long int	nbr;
 
-	str = va_arg(*ap, char *);
-	va_end(*ap);
-	ft_putstr(str);
-	return (ft_strlen(str));
+	nbr = n;
+	if (nbr < 0)
+	{
+		nbr *= -1;
+		ft_putchar('-');
+	}
+	if (nbr >= 10)
+		ft_putnbr(nbr / 10);
+	ft_putchar(nbr % 10 + 48);
 }

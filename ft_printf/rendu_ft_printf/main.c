@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:41:00 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/18 17:50:49 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/19 16:05:27 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	main(void)
 {
 	char	c = ' ';
 	char	str[] = "et bonjour";
-	int		i = -5147483750;
+	int		i = -51474;
 
-	printf("\n%i\n", ft_printf("%%bonsoir%c%s", c, str));
+	printf("\n%i\n", ft_printf("%%bonsoir%c%s %i", c, str, i));
 	printf("\n%i\n", printf("%%bonsoir%c%s %i", c, str, i));
 }
