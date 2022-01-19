@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 12:12:45 by mgirardo          #+#    #+#              #
-#    Updated: 2022/01/19 12:22:09 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/01/19 12:23:28 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ cp .zshrc ~/.zshrc
 cp .vimrc ~/.vimrc
 cp -r Raccourci ~
 
-echo modifi save.sh et .zshrc selon OS
+echo \nMODIFI SAVE.SH ET .ZSHRC SELON OS\n
 
 # A chaque pullgit sur une machine differentes changer save.sh et .zshrc
 # en focntion de linux ou mac os
