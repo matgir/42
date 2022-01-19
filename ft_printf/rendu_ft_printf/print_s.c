@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 17:25:16 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/19 16:09:42 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/19 16:42:00 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	print_s(va_list *ap)
 {
-	char *str;
+	char	*str;
 
 	str = va_arg(*ap, char *);
 	va_end(*ap);

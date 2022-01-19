@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 18:17:53 by mgirardo          #+#    #+#              #
-#    Updated: 2022/01/19 16:29:43 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/01/19 16:48:13 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,11 @@ SRCS	=	\
 			print_c.c \
 			print_s.c \
 			print_variable.c \
-			what_variable.c \
+			what_variable.c	\
 			print_i_or_d.c \
 			ft_putnbr.c \
+			ft_putunbr.c \
+			print_u.c \
 
 OBJS	=	${SRCS:.c=.o}
 

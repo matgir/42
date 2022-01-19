@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   what_variable.c                                    :+:      :+:    :+:   */
+/*   print_u.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 15:36:42 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/19 16:47:18 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/01/19 16:31:18 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/01/19 16:41:28 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftptf.h"
 
-int	what_variable(const char *str, int *i, va_list *ap)
+int	print_u(va_list *ap)
 {
-	int	puted;
+	unsigned int	i;
+	int				puted;
 
-	if (str[*i + 1] && is_variable(str[*i + 1]) == 0)
+	puted = 1;
+	i = va_arg(*ap, unsigned int);
+	va_end(*ap);
+	ft_putunbr(i);
+	while (i / 10 != 0)
 	{
-		puted = print_variable(str[*i + 1], ap);
-		*i = *i + 1;
-		return (puted);
+		puted += 1;
+		i = i / 10;
 	}
-	else
-	{
-		ft_putchar(str[*i + 1]);
-		*i = *i + 1;
-		return (1);
-	}
+	return (puted);
 }

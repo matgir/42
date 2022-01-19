@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:04:29 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/19 16:28:15 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/19 16:47:29 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,9 @@ int	print_variable(char c, va_list *ap)
 		return (print_s(ap));
 	if (c == 'i' || c == 'd')
 		return (print_i_or_d(ap));
-	return (1); /*		retirer cette ligne une fois printf fini		*/
+	if (c == 'u')
+		return (print_u(ap));
+	return (1);
 }
+
+/*		retirer cette return (1) une fois printf fini		*/

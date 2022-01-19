@@ -6,16 +6,16 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 14:27:47 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/19 16:29:46 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/19 16:42:38 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftptf.h"
 
-int print_i_or_d(va_list *ap)
+int	print_i_or_d(va_list *ap)
 {
-	int i;
-	int puted;
+	int	i;
+	int	puted;
 
 	puted = 1;
 	i = va_arg(*ap, int);
