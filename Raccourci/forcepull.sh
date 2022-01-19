@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 12:12:45 by mgirardo          #+#    #+#              #
-#    Updated: 2022/01/19 12:23:28 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/01/19 12:28:33 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,9 @@ cp -r ft_printf ~/Desktop/42
 cp .zshrc ~/.zshrc
 cp .vimrc ~/.vimrc
 cp -r Raccourci ~
+cp .gitignore ~/.gitignore
 
-echo \nMODIFI SAVE.SH ET .ZSHRC SELON OS\n
+echo MODIFI SAVE.SH ET .ZSHRC SELON OS
 
 # A chaque pullgit sur une machine differentes changer save.sh et .zshrc
 # en focntion de linux ou mac os

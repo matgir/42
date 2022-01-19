@@ -17,6 +17,7 @@ cp -r ~/Desktop/42/ft_printf save
 cp -r ~/Raccourci save
 cp ~/.zshrc save
 cp ~/.vimrc save
+cp ~/.gitignore save
 
 #clear gits
 cd save
