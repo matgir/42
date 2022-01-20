@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:00:28 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/20 11:56:11 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:12:45 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			print_i_or_d(va_list *ap);
 void		ft_putnbr(int n);
 int			print_u(va_list *ap);
 void		ft_putunbr(unsigned int n);
-int			print_x(va_list *ap);
-int			ft_puthex(unsigned int n);
+int			print_x_or_X(va_list *ap, char c);
+int			ft_puthex(unsigned int n, char *hexbase);
 
 #endif

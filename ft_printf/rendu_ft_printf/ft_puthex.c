@@ -6,18 +6,17 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:22:06 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/20 11:57:16 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:09:19 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftptf.h"
 
-int	ft_puthex(unsigned int n)
+int	ft_puthex(unsigned int n, char *hexbase)
 {
 	unsigned int	ntmp;
 	int				i;
 	char			*str;
-	char			*hexbase;
 
 	i = 1;
 	ntmp = n;
@@ -26,7 +25,6 @@ int	ft_puthex(unsigned int n)
 		n = n / 16;
 		i++;
 	}
-	hexbase = "0123456789abcdef";
 	str = malloc(sizeof(char) * (i + 1));
 	if (str == NULL)
 		return (0);
