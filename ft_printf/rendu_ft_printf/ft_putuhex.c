@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_variable.c                                   :+:      :+:    :+:   */
+/*   ft_putuhex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 16:04:29 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/20 14:45:30 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/01/20 14:29:01 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/01/20 14:48:06 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftptf.h"
 
-int	print_variable(char c, va_list *ap)
+int	ft_putuhex(unsigned long int uli, char *hexbase)
 {
-	if (c == 'c')
-		return (print_c(ap));
-	if (c == 's')
-		return (print_s(ap));
-	if (c == 'i' || c == 'd')
-		return (print_i_or_d(ap));
-	if (c == 'u')
-		return (print_u(ap));
-	if (c == 'x' || c == 'X')
-		return (print_x_or_X(ap, c));
-	if (c == 'p')
-		return (print_p(ap));
-	return (0);
+	unsigned long int	ntmp;
+	int					i;
+	char				*str;
+
+	i = 1;
+	ntmp = uli;
+	while (uli / 16 != 0)
+	{
+		uli = uli / 16;
+		i++;
+	}
+	str = malloc(sizeof(char *) * (i + 1));
+	if (str == NULL)
+		return (0);
+	str[i] = '\0';
+	while (--i >= 0)
+	{
+		str[i] = hexbase[ntmp % 16];
+		ntmp /= 16;
+	}
+	ft_putstr(str);
+	return (ft_strlen(str));
 }

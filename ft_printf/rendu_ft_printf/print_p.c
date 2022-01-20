@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_variable.c                                   :+:      :+:    :+:   */
+/*   print_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 16:04:29 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/20 14:45:30 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/01/20 14:03:06 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/01/20 14:40:07 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftptf.h"
 
-int	print_variable(char c, va_list *ap)
+int	print_p(va_list *ap)
 {
-	if (c == 'c')
-		return (print_c(ap));
-	if (c == 's')
-		return (print_s(ap));
-	if (c == 'i' || c == 'd')
-		return (print_i_or_d(ap));
-	if (c == 'u')
-		return (print_u(ap));
-	if (c == 'x' || c == 'X')
-		return (print_x_or_X(ap, c));
-	if (c == 'p')
-		return (print_p(ap));
-	return (0);
+	unsigned long int	uli;
+	char				*hexbase;
+
+	hexbase = "0123456789abcdef";
+	uli = va_arg(*ap, unsigned long int);
+	va_end(*ap);
+	if (uli)
+	{
+		ft_putstr("0x");
+		return (ft_putuhex(uli, hexbase) + 2);
+	}
+	else
+	{
+		ft_putstr("0x0");
+		return (3);
+	}
 }

@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 18:17:53 by mgirardo          #+#    #+#              #
-#    Updated: 2022/01/20 12:11:41 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/01/20 14:43:37 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ SRCS	=	\
 			print_u.c \
 			print_x_or_X.c \
 			ft_puthex.c \
+			ft_putuhex.c \
+			print_p.c
 
 OBJS	=	${SRCS:.c=.o}
 
