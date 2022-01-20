@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_variable.c                                   :+:      :+:    :+:   */
+/*   print_x_or_X.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 16:04:29 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/20 10:31:23 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/01/20 10:25:27 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/01/20 10:31:24 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftptf.h"
 
-int	print_variable(char c, va_list *ap)
+int	print_x_or_X(va_list *ap)
 {
-	if (c == 'c')
-		return (print_c(ap));
-	if (c == 's')
-		return (print_s(ap));
-	if (c == 'i' || c == 'd')
-		return (print_i_or_d(ap));
-	if (c == 'u')
-		return (print_u(ap));
-	if (c == 'x' || c == 'X')
-		return (print_x_or_X(ap));
-	return (1);
+	
 }
-
-/*		retirer cette return (1) une fois printf fini		*/
