@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 14:29:01 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/20 15:12:46 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:53:55 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ft_putuhex(unsigned long int uli, char *hexbase)
 	unsigned long int	ntmp;
 	int					i;
 	char				*str;
+	int					len;
 
 	i = 1;
 	ntmp = uli;
@@ -25,6 +26,7 @@ int	ft_putuhex(unsigned long int uli, char *hexbase)
 		uli = uli / 16;
 		i++;
 	}
+	len = i;
 	str = malloc(sizeof(char *) * (i + 1));
 	if (str == NULL)
 		return (0);
@@ -35,5 +37,6 @@ int	ft_putuhex(unsigned long int uli, char *hexbase)
 		ntmp /= 16;
 	}
 	ft_putstr(str);
-	return (ft_strlen(str));
+	free(str);
+	return (len);
 }
