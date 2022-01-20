@@ -6,11 +6,11 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:43:45 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/20 12:25:52 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:13:37 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftptf.h"
+#include "libftprintf.h"
 
 int	is_variable(char c)
 {

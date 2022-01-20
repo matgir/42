@@ -6,11 +6,11 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 15:21:31 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/18 16:30:38 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:12:13 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftptf.h"
+#include "libftprintf.h"
 
 void	ft_putpurcent(int *puted, int *i)
 {

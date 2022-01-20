@@ -6,11 +6,11 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:22:06 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/20 12:09:19 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:11:38 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftptf.h"
+#include "libftprintf.h"
 
 int	ft_puthex(unsigned int n, char *hexbase)
 {

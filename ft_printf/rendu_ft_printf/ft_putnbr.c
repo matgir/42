@@ -6,11 +6,11 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:59:18 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/19 16:06:15 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:12:03 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftptf.h"
+#include "libftprintf.h"
 
 void	ft_putnbr(int n)
 {

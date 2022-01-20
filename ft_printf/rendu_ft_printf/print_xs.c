@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_x_or_X.c                                     :+:      :+:    :+:   */
+/*   print_xs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 10:25:27 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/20 12:11:56 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:16:35 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftptf.h"
+#include "libftprintf.h"
 
-int	print_x_or_X(va_list *ap, char c)
+int	print_xs(va_list *ap, char c)
 {
 	unsigned int	i;
 	char			*hexbase;
