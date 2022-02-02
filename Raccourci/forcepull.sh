@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 12:12:45 by mgirardo          #+#    #+#              #
-#    Updated: 2022/01/19 12:28:33 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/02/02 17:13:15 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ cp .zshrc ~/.zshrc
 cp .vimrc ~/.vimrc
 cp -r Raccourci ~
 cp .gitignore ~/.gitignore
+cd -r Piscine_AI ~/Desktop/42
 
 echo MODIFI SAVE.SH ET .ZSHRC SELON OS
 
