@@ -19,6 +19,7 @@ cp ~/.zshrc save
 cp ~/.vimrc save
 cp ~/.gitignore save
 cp -r ~/Desktop/42/Piscine_AI save
+cp -r ~/Desktop/42/get_next_line save
 
 #clear gits
 cd save
