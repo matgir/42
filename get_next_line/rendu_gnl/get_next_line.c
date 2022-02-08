@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_test.c                                        :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/03 16:58:00 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/02/07 18:38:27 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/02/08 10:56:36 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/02/08 11:26:45 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-
-
-//		char	*get_net_line(int fd)
-
-
-/*size_t	ft_strlcpy(char *dest, static char *str, size_t lenstr)
-  {
-  size_t	i;
-  size_t	l;
-
-  l = ft_strlen(src);
-  if (size > 0)
-  {
-  i = 0;
-  while (str[i] && i < lenstr - 1)
-  {
-  dest[i] = str[i];
-  i++;
-  }
-  dest[i] = '\0'
-  }
-  return (l)
-  }*/
 
 size_t	ft_strlcpy(char *ligne, char buffer[10], size_t size)
 {
@@ -138,40 +115,29 @@ int	ft_strchr(char *buffer)
 	return (-1);
 }
 
-int	main()
+char	*get_next_line(int fd)
 {
-	int			fd;
 	char		*ligne;
-	static char		buffer[10];
-
-	fd = open("numbers.dict.txt", O_RDONLY);
-//	read(fd, buffer, 10);
-
-	//		DEBUT GNL
+	static char	buffer[BUFFER_SIZE];
 
 	ligne = malloc(sizeof(char) * 0);
+	if (ligne == NULL)
+		return (NULL);
 	if (buffer[0] == '\0')
 	{
-		read(fd, buffer, 10);
+		read(fd, buffer, BUFFER_SIZE);
 		while (ft_strchr(buffer) == -1)
 		{
 			ligne = ft_strjoin(ligne, buffer);
-			read(fd, buffer, 10);
+			read(fd, buffer, BUFFER_SIZE);
 		}
 		ligne = ft_strjoin(ligne, buffer);
-// faire fonction qui trime a partir de \n + 1 puis put str
+		// faire fonction qui trime a partir de \n + 1
 	}
-/*	else
+	/*else
 	{
-		ligne = ft_strjoin(ligne, ft_substr(buffer, ))
-	
-		
+		ligne = ft_strjoin(ligne, buffer);
+		//faire fonction qui trime le depart a partir de \n + 1
 	}*/
-
-	// 		FIN GNL
-
-	printf("%s\n", ligne);
-	printf("%s\n", buffer);
-	close(fd);
-	return (0);
+	return (ligne);
 }
