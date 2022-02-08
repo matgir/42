@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 16:58:00 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/02/08 16:54:49 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:45:13 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int	main()
 	int				fd;
 
 	fd = open("numbers.dict.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
+//	fd = 1;
+	int i = 0;
+	while (i++ < 41)
+		printf("%s", get_next_line(fd));
 	close(fd);
 	return (0);
 }

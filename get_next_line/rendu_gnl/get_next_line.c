@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 10:56:36 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/02/08 17:11:33 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:56:15 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ size_t	ft_strlcpy(char *line, char *buffer, size_t size)
 	size_t	i;
 	size_t	j;
 
-	j = 0;
-	while (buffer[j])
-		j++;
+	j = ft_strlen(buffer);
 	if (size > 0)
 	{
 		i = 0;
@@ -47,23 +45,7 @@ size_t	ft_strlcpy(char *line, char *buffer, size_t size)
 	return (j);
 }
 
-
-char	*ft_strduppimped(char *buffer)
-{
-	char	*strdup;
-	size_t	lenstr;
-
-	lenstr = 0;
-	while (buffer[lenstr] && buffer[lenstr] != '\n')
-		lenstr++;
-	strdup = malloc(sizeof(char) * (lenstr + 1));
-	if (strdup == NULL)
-		return (NULL);
-	ft_strlcpy(strdup, buffer, lenstr + 1);
-	return (strdup);
-}
-
-void	*ft_memmove(void *dest, const void *src, size_t n)
+/*void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	char	*tmp;
 	size_t	i;
@@ -84,6 +66,21 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		}
 	}
 	return (dest);
+}*/
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+
+	size_t	i	;
+
+	i = 0;
+	while (n != 0)
+	{
+		((unsigned char *) dest)[i] = ((unsigned const char *) src)[i];
+		i++;
+		n--;
+	}
+	return (dest);
 }
 
 
@@ -93,16 +90,12 @@ char	*ft_strjoin(char *line, char *buffer)
 	size_t	i;
 	size_t	j;
 
-	i = 0;
-	j = 0;
-	while (line[i])
-		i++;
-	while (buffer[j])
-		j++;
+	i = ft_strlen(line);
+	j = ft_strlen(buffer);
 	join = malloc(sizeof(char) * (i + j + 1));
 	if (join == NULL)
 		return (NULL);
-	ft_strlcpy((ft_memmove(join, line, i) + i), buffer, (j + 1));
+	ft_strlcpy((ft_memcpy(join, line, i) + i), buffer, (j + 1));
 	free(line);
 	return (join);
 }
@@ -113,9 +106,7 @@ int	ft_strchr(char *buffer, char c)
 	size_t	j;
 
 	i = 0;
-	j = 0;
-	while (buffer[j])
-		j++;
+	j = ft_strlen(buffer);
 	while (i < j)
 	{
 		if (buffer[i] == c)
@@ -144,18 +135,21 @@ char	*ft_strtrim(char *line)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	buffer[BUFFER_SIZE];
+	static char	buffer[BUFFER_SIZE + 1];
 
-	line = malloc(sizeof(char) * 0);
+	line = malloc(sizeof(char) * 1);
 	if (line == NULL)
 		return (NULL);
-	if (buffer[0] == '\0')
-		read(fd, buffer, BUFFER_SIZE);
+	line[0] = '\0';
+//	if (buffer[0] == '\0')
+//		buffer[read(fd, buffer, BUFFER_SIZE)] = '\0';
 	while (ft_strchr(buffer, '\n') == -1)
 	{
+	//	printf("line = %s.", line);
+		buffer[read(fd, buffer, BUFFER_SIZE)] = '\0';
 		line = ft_strjoin(line, buffer);
-		read(fd, buffer, BUFFER_SIZE);
 	}
+//	printf("buffer = %s.", buffer);
 	line = ft_strjoin(line, buffer);
 	line = ft_strtrim(line);
 	ft_strlcpy(buffer, buffer + ft_strchr(buffer, '\n') + 1, BUFFER_SIZE);
