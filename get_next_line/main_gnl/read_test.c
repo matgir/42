@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   read_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/08 10:56:36 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/02/08 17:11:33 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/02/08 15:35:48 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/02/08 15:44:03 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-int	ft_strlen(char *str)
+size_t	ft_strlcpy(char *ligne, char buffer[10], size_t size)
 {
-	int	i;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-size_t	ft_strlcpy(char *line, char *buffer, size_t size)
-{
-	size_t	i;
+	size_t	i	;
 	size_t	j;
 
 	j = 0;
@@ -36,13 +27,15 @@ size_t	ft_strlcpy(char *line, char *buffer, size_t size)
 		j++;
 	if (size > 0)
 	{
+
 		i = 0;
 		while (buffer[i] && i < size - 1)
 		{
-			line[i] = buffer[i];
+
+			ligne[i] = buffer[i];
 			i++;
 		}
-		line[i] = '\0';
+		ligne[i] = '\0';
 	}
 	return (j);
 }
@@ -50,6 +43,7 @@ size_t	ft_strlcpy(char *line, char *buffer, size_t size)
 
 char	*ft_strduppimped(char *buffer)
 {
+
 	char	*strdup;
 	size_t	lenstr;
 
@@ -65,7 +59,8 @@ char	*ft_strduppimped(char *buffer)
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char	*tmp;
+
+	char	*tmp	;
 	size_t	i;
 
 	tmp = (char *)src;
@@ -87,29 +82,31 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 }
 
 
-char	*ft_strjoin(char *line, char *buffer)
+char	*ft_strjoin(char *ligne, char *buffer)
 {
-	char	*join;
+
+	char	*join	;
 	size_t	i;
 	size_t	j;
 
 	i = 0;
 	j = 0;
-	while (line[i])
+	while (ligne[i])
 		i++;
 	while (buffer[j])
 		j++;
 	join = malloc(sizeof(char) * (i + j + 1));
 	if (join == NULL)
 		return (NULL);
-	ft_strlcpy((ft_memmove(join, line, i) + i), buffer, (j + 1));
-	free(line);
+	ft_strlcpy((ft_memmove(join, ligne, i) + i), buffer, (j + 1));
+	free(ligne);
 	return (join);
 }
 
-int	ft_strchr(char *buffer, char c)
+int	ft_strchr(char *buffer)
 {
-	size_t	i;
+
+	size_t	i	;
 	size_t	j;
 
 	i = 0;
@@ -118,46 +115,49 @@ int	ft_strchr(char *buffer, char c)
 		j++;
 	while (i < j)
 	{
-		if (buffer[i] == c)
+
+		if (buffer[i] == '\n')
 			return (i);
 		i++;
 	}
 	return (-1);
 }
 
-char	*ft_strtrim(char *line)
+int	main()
 {
-	int		size;
-	char	*strtrim;
+	int			fd	;
+	char		*ligne;
+	static char		buffer[10];
 
-	size = 0;
-	while (line[size] && line[size] != '\n')
-		size++;
-	strtrim = malloc(sizeof(char) * size + 2);
-	if (strtrim == NULL)
-		return (NULL);
-	ft_strlcpy(strtrim, line, size + 2);
-	free(line);
-	return (strtrim);
-}
+	fd = open("numbers.dict.txt", O_RDONLY);
+	//read(fd, buffer, 10);
 
-char	*get_next_line(int fd)
-{
-	char		*line;
-	static char	buffer[BUFFER_SIZE];
+	//		DEBUT GNL
 
-	line = malloc(sizeof(char) * 0);
-	if (line == NULL)
-		return (NULL);
+	ligne = malloc(sizeof(char) * 0);
 	if (buffer[0] == '\0')
-		read(fd, buffer, BUFFER_SIZE);
-	while (ft_strchr(buffer, '\n') == -1)
 	{
-		line = ft_strjoin(line, buffer);
-		read(fd, buffer, BUFFER_SIZE);
+		read(fd, buffer, 10);
+		while (ft_strchr(buffer) == -1)
+		{
+			ligne = ft_strjoin(ligne, buffer);
+			read(fd, buffer, 10);
+		}
+		ligne = ft_strjoin(ligne, buffer);
+		// faire fonction qui trime a partir de \n + 1 puis put str
 	}
-	line = ft_strjoin(line, buffer);
-	line = ft_strtrim(line);
-	ft_strlcpy(buffer, buffer + ft_strchr(buffer, '\n') + 1, BUFFER_SIZE);
-	return (line);
+	/*	else
+		{
+
+		ligne = ft_strjoin(ligne, ft_substr(buffer, ))
+
+
+		}*/
+
+	// 		FIN GNL
+
+	printf("%s\n", ligne);
+	printf("%s\n", buffer);
+	close(fd);
+	return (0);
 }
