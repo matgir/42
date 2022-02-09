@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 10:56:36 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/02/09 16:16:38 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:21:45 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"get_next_line.h"
+#include"get_next_line_bonus.h"
 
 int	ft_strlen(char *str)
 {
@@ -38,7 +38,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 char	*final_line(char *line, char *buf)
 {
-	line = ft_strjoin(line, buf);
+	line = ft_strjoin (line, buf);
 	line = ft_strtrim(line);
 	ft_strlcpy(buf, buf + ft_strchr(buf, '\n') + 1, BUFFER_SIZE);
 	return (line);
