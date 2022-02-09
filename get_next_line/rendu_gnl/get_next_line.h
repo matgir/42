@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_gnl.c                                         :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/03 16:58:00 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/02/09 10:30:39 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/02/09 10:15:08 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/02/09 10:28:54 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include "get_next_line.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int	main()
-{
-	int		fd;
-	char	*line;
+# include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-	fd = open("numbers.dict.txt", O_RDONLY);
-//	fd = 1;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break;
-		printf("%s", line);
-	}
-	close(fd);
-	return (0);
-}
+size_t	ft_strlcpy(char *line, char *buffer, size_t size);
+char	*ft_strjoin(char *line, char *buffer);
+int		ft_strchr(char *buffer, char c);
+char	*ft_strtrim(char *line);
+char	*get_next_line(int fd);
+int		ft_strlen(char *str);
+void	*ft_memcpy(void	*dest, const void *src, size_t n);
+
+#endif

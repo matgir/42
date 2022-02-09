@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_gnl.c                                         :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/03 16:58:00 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/02/09 10:30:39 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/02/08 10:56:36 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/02/09 10:22:47 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include "get_next_line.h"
+#include"get_next_line.h"
 
-int	main()
+int	ft_strlen(char *str)
 {
-	int		fd;
-	char	*line;
+	int	i;
 
-	fd = open("numbers.dict.txt", O_RDONLY);
-//	fd = 1;
-	while (1)
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+
+	size_t	i	;
+
+	i = 0;
+	while (n != 0)
 	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break;
-		printf("%s", line);
+		((unsigned char *) dest)[i] = ((unsigned const char *) src)[i];
+		i++;
+		n--;
 	}
-	close(fd);
-	return (0);
+	return (dest);
 }
