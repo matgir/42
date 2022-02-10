@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 10:56:36 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/02/09 16:19:02 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/02/10 16:37:40 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*get_next_line(int fd)
 	static char	buf[1024][BUFFER_SIZE + 1];
 	int			end;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, NULL, 0) == -1)
+	if (BUFFER_SIZE < 1 || read(fd, NULL, 0) == -1)
 		return (NULL);
 	line = malloc(sizeof(char) * 1);
 	if (line == NULL)
