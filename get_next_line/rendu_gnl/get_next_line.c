@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 10:56:36 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/02/09 16:17:54 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/02/10 15:51:14 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*ft_strtrim(char *line)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	buf[1024][BUFFER_SIZE + 1];
+	static char	buf[BUFFER_SIZE + 1];
 	int			end;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, NULL, 0) == -1)
@@ -91,11 +91,11 @@ char	*get_next_line(int fd)
 	if (line == NULL)
 		return (NULL);
 	line[0] = '\0';
-	while (ft_strchr(buf[fd], '\n') == -1)
+	while (ft_strchr(buf, '\n') == -1)
 	{
-		line = ft_strjoin(line, buf[fd]);
-		end = read(fd, buf[fd], BUFFER_SIZE);
-		buf[fd][end] = '\0';
+		line = ft_strjoin(line, buf);
+		end = read(fd, buf, BUFFER_SIZE);
+		buf[end] = '\0';
 		if (end == 0 && line[0] == '\0')
 		{
 			free(line);
@@ -104,5 +104,5 @@ char	*get_next_line(int fd)
 		else if (end == 0)
 			return (line);
 	}
-	return (final_line(line, buf[fd]));
+	return (final_line(line, buf));
 }

@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 10:56:36 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/02/09 16:35:41 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/02/10 15:51:26 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strlen(char *str)
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	size_t	i	;
+	size_t	i;
 
 	i = 0;
 	while (n != 0)
