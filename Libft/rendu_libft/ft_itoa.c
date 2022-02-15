@@ -12,14 +12,11 @@
 
 #include "libft.h"
 
-static char	*ft_sign(long int ntmp, int i)
+static char	*ft_sign(long int ntmp, int i, char *str)
 {
-	char	*str;
-
 	if (ntmp < 0)
 	{
 		ntmp *= -1;
-		str = malloc(sizeof(char) * (++i + 1));
 		str[0] = '-';
 		str[i] = '\0';
 		while (--i > 0)
@@ -30,7 +27,6 @@ static char	*ft_sign(long int ntmp, int i)
 	}
 	else
 	{
-		str = malloc(sizeof(char) * (i + 1));
 		str[i] = '\0';
 		while (--i >= 0)
 		{
@@ -45,6 +41,7 @@ char	*ft_itoa(int n)
 {
 	long int	ntmp;
 	int			i;
+	char		*str;
 
 	i = 1;
 	ntmp = n;
@@ -53,5 +50,11 @@ char	*ft_itoa(int n)
 		n = n / 10;
 		i++;
 	}
-	return (ft_sign(ntmp, i));
+	if (ntmp < 0)
+		str = malloc(sizeof(char) * (++i + 1));
+	else
+		str = malloc(sizeof(char) * (i + 1));
+	if (str == NULL)
+		return (NULL);
+	return (ft_sign(ntmp, i, str));
 }

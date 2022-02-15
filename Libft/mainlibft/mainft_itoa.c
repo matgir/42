@@ -18,7 +18,9 @@ char	*ft_itoa(int n);
 int	main(int ac, char **av)
 {
 	(void) ac;
-
-	printf("%s\n", ft_itoa(atoi(av[1])));
+	char	*itoa;
+	
+	itoa = ft_itoa(atoi(av[1]));
+	printf("%s", itoa);
 	return (0);
 }
