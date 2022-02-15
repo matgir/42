@@ -1,5 +1,5 @@
 #seulement pour linux
-[[ $TERM != "screen" ]] && exec tmux
+#[[ $TERM != "screen" ]] && exec tmux
 
 set -g mouse on
 
