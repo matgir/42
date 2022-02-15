@@ -16,8 +16,12 @@ int	ft_strlen(char *str)
 {
 	int	i;
 
+	if (str == NULL)
+		return (0);
 	i = 0;
-	while (str[i])
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (str[i] == '\n')
 		i++;
 	return (i);
 }
@@ -34,12 +38,4 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		n--;
 	}
 	return (dest);
-}
-
-char	*final_line(char *line, char *buf)
-{
-	line = ft_strjoin (line, buf);
-	line = ft_strtrim(line);
-	ft_strlcpy(buf, buf + ft_strchr(buf, '\n') + 1, BUFFER_SIZE);
-	return (line);
 }

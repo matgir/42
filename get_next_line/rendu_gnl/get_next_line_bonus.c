@@ -63,22 +63,6 @@ int	ft_strchr(char *buffer, char c)
 	return (-1);
 }
 
-char	*ft_strtrim(char *line)
-{
-	int		size;
-	char	*strtrim;
-
-	size = 0;
-	while (line[size] && line[size] != '\n')
-		size++;
-	strtrim = malloc(sizeof(char) * size + 2);
-	if (strtrim == NULL)
-		return (NULL);
-	ft_strlcpy(strtrim, line, size + 2);
-	free(line);
-	return (strtrim);
-}
-
 char	*get_next_line(int fd)
 {
 	char		*line;
@@ -87,13 +71,12 @@ char	*get_next_line(int fd)
 
 	if (BUFFER_SIZE < 1 || read(fd, NULL, 0) == -1)
 		return (NULL);
-	line = malloc(sizeof(char) * 1);
-	if (line == NULL)
-		return (NULL);
-	line[0] = '\0';
+	line = NULL;
 	while (ft_strchr(buf[fd], '\n') == -1)
 	{
 		line = ft_strjoin(line, buf[fd]);
+		if (line == NULL)
+			return (NULL);
 		end = read(fd, buf[fd], BUFFER_SIZE);
 		buf[fd][end] = '\0';
 		if (end == 0 && line[0] == '\0')
@@ -104,5 +87,7 @@ char	*get_next_line(int fd)
 		else if (end == 0)
 			return (line);
 	}
-	return (final_line(line, buf[fd]));
+	line = ft_strjoin(line, buf[fd]);
+	ft_strlcpy(buf[fd], buf[fd] + ft_strchr(buf[fd], '\n') + 1, BUFFER_SIZE);
+	return (line);
 }

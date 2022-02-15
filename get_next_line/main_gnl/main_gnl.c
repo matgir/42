@@ -24,20 +24,20 @@ int	main()
 	fd = open("numbers.dict.txt", O_RDONLY);
 //	fd = -7;
 	
-	int		fd1;
+	/*int		fd1;
 	int		fd2;
 	char	*line1;
 	char	*line2;
 	fd1 = open("numbers.dict.txt", O_RDONLY);
-	fd2 = open("test.txt", O_RDONLY);
+	fd2 = open("test.txt", O_RDONLY);*/
 	while (1)
 	{
 		line = get_next_line(fd);
+		printf("%s", line);
 		if (line == NULL)
 			break;
-		printf("%s", line);
 		free(line);
-		line1 = get_next_line(fd1);
+		/*line1 = get_next_line(fd1);
 		if (line1 == NULL)
 			break;
 		printf("%s", line1);
@@ -46,7 +46,7 @@ int	main()
 		if (line2 == NULL)
 			break;
 		printf("%s", line2);
-		free(line2);
+		free(line2);*/
 	}
 	close(fd);
 	return (0);
