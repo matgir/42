@@ -19,7 +19,7 @@
 # include <stdarg.h>
 
 int			ft_printf(const char *str, ...);
-void		ft_putchar(char c);
+void		ft_putchar_fd(char c, int fd);
 int			ft_puthex(unsigned int n, char *hexbase);
 void		ft_putnbr(int n);
 void		ft_putpurcent(int *puted, int *i);

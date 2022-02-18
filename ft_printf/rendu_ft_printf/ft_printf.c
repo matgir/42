@@ -25,7 +25,7 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] != '%')
 		{
-			ft_putchar(str[i]);
+			ft_putchar_fd(str[i], 1);
 			puted++;
 		}
 		else

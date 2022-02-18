@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 SRCS	=	ft_printf.c \
-			ft_putchar.c \
+			ft_putchar_fd.c \
 			ft_puthex.c \
 			ft_putnbr.c \
 			ft_putpurcent.c \

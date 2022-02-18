@@ -20,9 +20,9 @@ void	ft_putnbr(int n)
 	if (nbr < 0)
 	{
 		nbr *= -1;
-		ft_putchar('-');
+		ft_putchar_fd('-', 1);
 	}
 	if (nbr >= 10)
 		ft_putnbr(nbr / 10);
-	ft_putchar(nbr % 10 + 48);
+	ft_putchar_fd(nbr % 10 + 48, 1);
 }

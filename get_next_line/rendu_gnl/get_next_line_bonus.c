@@ -12,51 +12,51 @@
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlcpy(char *line, char *buffer, size_t size)
+size_t	ft_gnl_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
-	size_t	j;
+	size_t	l;
 
-	j = ft_strlen(buffer);
+	l = ft_gnl_strlen(src);
 	if (size > 0)
 	{
 		i = 0;
-		while (buffer[i] && i < size - 1)
+		while (src[i] && i < size - 1)
 		{
-			line[i] = buffer[i];
+			dst[i] = src[i];
 			i++;
 		}
-		line[i] = '\0';
+		dst[i] = '\0';
 	}
-	return (j);
+	return (l);
 }
 
-char	*ft_strjoin(char *line, char *buffer)
+char	*ft_gnl_strjoin(char *line, char *buffer)
 {
 	char	*join;
 	size_t	i;
 	size_t	j;
 
-	i = ft_strlen(line);
-	j = ft_strlen(buffer);
+	i = ft_gnl_strlen(line);
+	j = ft_gnl_strlen(buffer);
 	join = malloc(sizeof(char) * (i + j + 1));
 	if (join == NULL)
 		return (NULL);
-	ft_strlcpy((ft_memcpy(join, line, i) + i), buffer, (j + 1));
+	ft_gnl_strlcpy((ft_memcpy(join, line, i) + i), buffer, (j + 1));
 	free(line);
 	return (join);
 }
 
-int	ft_strchr(char *buffer, char c)
+int	ft_gnl_strchr(const char *buffer)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
-	j = ft_strlen(buffer);
+	j = ft_gnl_strlen(buffer);
 	while (i < j)
 	{
-		if (buffer[i] == c)
+		if (buffer[i] == '\n')
 			return (i);
 		i++;
 	}
@@ -72,9 +72,9 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE < 1 || read(fd, NULL, 0) == -1)
 		return (NULL);
 	line = NULL;
-	while (ft_strchr(buf[fd], '\n') == -1)
+	while (ft_gnl_strchr(buf[fd]) == -1)
 	{
-		line = ft_strjoin(line, buf[fd]);
+		line = ft_gnl_strjoin(line, buf[fd]);
 		if (line == NULL)
 			return (NULL);
 		end = read(fd, buf[fd], BUFFER_SIZE);
@@ -87,7 +87,7 @@ char	*get_next_line(int fd)
 		else if (end == 0)
 			return (line);
 	}
-	line = ft_strjoin(line, buf[fd]);
-	ft_strlcpy(buf[fd], buf[fd] + ft_strchr(buf[fd], '\n') + 1, BUFFER_SIZE);
+	line = ft_gnl_strjoin(line, buf[fd]);
+	ft_gnl_strlcpy(buf[fd], buf[fd] + ft_gnl_strlen(buf[fd]), BUFFER_SIZE);
 	return (line);
 }

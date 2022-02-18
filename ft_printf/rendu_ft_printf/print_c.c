@@ -14,7 +14,7 @@
 
 int	print_c(va_list *ap)
 {
-	ft_putchar(va_arg(*ap, int));
+	ft_putchar_fd(va_arg(*ap, int), 1);
 	va_end(*ap);
 	return (1);
 }

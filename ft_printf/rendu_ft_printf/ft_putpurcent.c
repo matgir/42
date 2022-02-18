@@ -14,7 +14,7 @@
 
 void	ft_putpurcent(int *puted, int *i)
 {
-	ft_putchar('%');
+	ft_putchar_fd('%', 1);
 	*puted = *puted + 1;
 	*i = *i + 1;
 }

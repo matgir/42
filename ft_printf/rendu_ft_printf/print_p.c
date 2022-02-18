@@ -27,7 +27,7 @@ int	print_p(va_list *ap)
 	}
 	else
 	{
-		ft_putstr("0x0");
-		return (3);
+		ft_putstr("(nil)");
+		return (5);
 	}
 }

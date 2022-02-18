@@ -24,7 +24,7 @@ int	what_variable(const char *str, int *i, va_list *ap)
 	}
 	else
 	{
-		ft_putchar(str[*i + 1]);
+		ft_putchar_fd(str[*i + 1], 1);
 		*i = *i + 1;
 		return (1);
 	}
