@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_s.c                                          :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 17:25:16 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/20 16:51:40 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/01/17 18:12:06 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/01/20 15:12:33 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	print_s(va_list *ap)
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	*str;
-
-	str = va_arg(*ap, char *);
-	va_end(*ap);
-	if (str == NULL)
-	{
-		ft_putstr_fd("(null)", 1);
-		return (6);
-	}
-	ft_putstr_fd(str, 1);
-	return (ft_strlen(str));
+	if (s == NULL)
+		return ;
+	write(fd, s, ft_strlen(s));
 }

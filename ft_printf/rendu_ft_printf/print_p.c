@@ -22,12 +22,12 @@ int	print_p(va_list *ap)
 	va_end(*ap);
 	if (uli)
 	{
-		ft_putstr("0x");
+		ft_putstr_fd("0x", 1);
 		return (ft_putuhex(uli, hexbase) + 2);
 	}
 	else
 	{
-		ft_putstr("(nil)");
+		ft_putstr_fd("(nil)", 1);
 		return (5);
 	}
 }

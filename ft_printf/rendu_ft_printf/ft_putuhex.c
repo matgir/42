@@ -27,7 +27,7 @@ int	ft_putuhex(unsigned long int uli, char *hexbase)
 		i++;
 	}
 	len = i;
-	str = malloc(sizeof(char *) * (i + 1));
+	str = malloc(sizeof(char) * (i + 1));
 	if (str == NULL)
 		return (0);
 	str[i] = '\0';
@@ -36,7 +36,7 @@ int	ft_putuhex(unsigned long int uli, char *hexbase)
 		str[i] = hexbase[ntmp % 16];
 		ntmp /= 16;
 	}
-	ft_putstr(str);
+	ft_putstr_fd(str, 1);
 	free(str);
 	return (len);
 }

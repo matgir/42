@@ -20,7 +20,7 @@ int	print_i_or_d(va_list *ap)
 	puted = 1;
 	i = va_arg(*ap, int);
 	va_end(*ap);
-	ft_putnbr(i);
+	ft_putnbr_fd(i, 1);
 	if (i < 0)
 		puted += 1;
 	while (i / 10 != 0)

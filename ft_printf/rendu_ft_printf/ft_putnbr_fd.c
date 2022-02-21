@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_s.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 17:25:16 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/20 16:51:40 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/01/19 15:59:18 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/01/20 15:12:03 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	print_s(va_list *ap)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char	*str;
+	long int	nbr;
 
-	str = va_arg(*ap, char *);
-	va_end(*ap);
-	if (str == NULL)
+	nbr = n;
+	if (nbr < 0)
 	{
-		ft_putstr_fd("(null)", 1);
-		return (6);
+		nbr *= -1;
+		ft_putchar_fd('-', fd);
 	}
-	ft_putstr_fd(str, 1);
-	return (ft_strlen(str));
+	if (nbr >= 10)
+		ft_putnbr_fd(nbr / 10, fd);
+	ft_putchar_fd(nbr % 10 + 48, fd);
 }

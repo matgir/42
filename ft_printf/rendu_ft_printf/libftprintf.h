@@ -21,12 +21,12 @@
 int			ft_printf(const char *str, ...);
 void		ft_putchar_fd(char c, int fd);
 int			ft_puthex(unsigned int n, char *hexbase);
-void		ft_putnbr(int n);
+void		ft_putnbr_fd(int n, int fd);
 void		ft_putpurcent(int *puted, int *i);
-void		ft_putstr(char *str);
+void		ft_putstr_fd(char *s, int fd);
 int			ft_putuhex(unsigned long int uli, char *hexbase);
 void		ft_putunbr(unsigned int n);
-int			ft_strlen(const char *str);
+size_t		ft_strlen(const char *str);
 int			is_variable(char c);
 int			print_c(va_list *ap);
 int			print_i_or_d(va_list *ap);

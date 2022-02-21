@@ -36,7 +36,7 @@ int	ft_puthex(unsigned int n, char *hexbase)
 		str[i] = hexbase[ntmp % 16];
 		ntmp /= 16;
 	}
-	ft_putstr(str);
+	ft_putstr_fd(str, 1);
 	free(str);
 	return (len);
 }
