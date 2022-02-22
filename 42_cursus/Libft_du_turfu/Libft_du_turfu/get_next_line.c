@@ -24,7 +24,7 @@
 		# define BUFFER_SIZE 42
 						(to be changed as wanted, 1 will take longer to
 						execute, in betwen 50 and 100 should be good, may be
-						needeed to declare its value in the fnction itself)
+						needeed to declare its value in the function itself)
 
 		void	ft_gnl_strlcpy(char *dst, const char *src, size_t size);
 		char	*ft_gnl_strjoin(char *line, char *buffer);
@@ -76,8 +76,8 @@ void	ft_gnl_strlcpy(char *dst, const char *src, size_t size)
 }
 
 /*
-		The only difference with de classical strlcpy is the fact does not sent
-		back the len of src
+		The only difference with de classical strlcpy is the fact that it does
+		not send back the len of src
 */
 
 char	*ft_gnl_strjoin(char *line, char *buffer)
@@ -98,7 +98,11 @@ char	*ft_gnl_strjoin(char *line, char *buffer)
 
 /*
 		This strjoin uses ft_gnl_strlen and also frees line that was previously
-		malloced in the main function, so that there isn't any leaks
+		malloced in the main function, so that there isn't any leaks, even with
+		the first call where line = NULL it ain't a problem because you can free
+		a NULL str
+		The ft_memcpy + the ft_gnl_strlcpy allows you to use NULL str at the
+		very beginning of each call of he function
 */
 
 char	*get_next_line(int fd)
@@ -129,3 +133,35 @@ char	*get_next_line(int fd)
 	ft_gnl_strlcpy(buf, buf + ft_gnl_strlen(buf), BUFFER_SIZE);
 	return (line);
 }
+
+/*
+		-	The first if allows you to check the size of BUFFER_SIZE, because if
+			it is under 1 then you won't read anything.
+			It also check if the fd is right because if read return -1 then it
+			means that fd hasn't opened anything so there is nothing to read
+		-	You can set line at NULL thanks to the customised ft_gnl_strlen that
+			wont segfault in the strjoin
+		-	In the while conditions you can check whether there is a '\n' in buf
+			once again thanks to the customized ft_gnl_strlen that returns where
+			the '\n' is + 1, hence the '-1'
+		-	If ther isn't a '\n' in buf then NULL line and my NULL buf are
+			joined that giving an empty line with only a '\0' in it
+			When buf already has something in it as it is a static then NULL
+			line and buf are joined to obtain the beginning of the newline
+		-	The line == NULL check if the malloc in the join just before worked
+			because if it doesn't then the program would segfault later when
+			the program compare NULL line with a '\0'
+		-	The result of read goes in end (how many character did it read)
+			because it will be needed for :
+			-	putting the '\0' at the end of buf alowing the program to
+				manipulate it as a classical string
+			-	knowing if it has finished reading the file if it is equal to 0,
+				then it will just return the line, but if it's combined with an
+				empty line it means that it has finished reading and that there
+				isn't anything left to send back, so it frees the earlier
+				maloced line and return NULL
+		-	If there is a '\n' in buf then it join line and buf until the '\n'
+			in buf thanks to the customised ft_gnl_strlen
+		-	With strlcpy it copys buf after the '\n' in buf so that i can use
+			buf properly for the next call of the function as buf is static
+*/
