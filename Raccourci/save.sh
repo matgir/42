@@ -28,6 +28,7 @@ cd save
 #find . -name "a.out" -mindepth 2 -type f -exec rm -rf {} \;
 	#linux
 find . -mindepth 2 -name "*.git" -type d -exec rm -rf {} \;
+find . -mindepth 2 -name "*.vscode" -type d -exec rm -rf {} \;
 find . -mindepth 2 -name "*.a" -type f -exec rm -rf {} \;
 find . -mindepth 2 -name "*.o" -type f -exec rm -rf {} \;
 find . -mindepth 2 -name "*.swp" -type f -exec rm -rf {} \;
