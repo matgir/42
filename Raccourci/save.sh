@@ -11,7 +11,7 @@ cd ~/Sauvegarde
 rm -rf save/*
 
 #copy all documents in save folder
-cp -r ~/Desktop/42 save # -R veut dire que ca va copier le dossier en recursif ( donc jusqu a la derniere stratt inferieur
+cp -r ~/Desktop/42_cursus save # -R veut dire que ca va copier le dossier en recursif ( donc jusqu a la derniere stratt inferieur
 cp -r ~/Raccourci save
 cp ~/.zshrc save
 cp ~/.vimrc save
