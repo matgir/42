@@ -11,15 +11,11 @@ cd ~/Sauvegarde
 rm -rf save/*
 
 #copy all documents in save folder
-cp -r ~/Desktop/42/Libft save # -R veut dire que ca va copier le dossier en recursif ( donc jusqu a la derniere stratt inferieur
-cp -r ~/Desktop/42/Picsine save # -R veut dire que ca va copier le dossier en recursif ( donc jusqu a la derniere stratt inferieur
-cp -r ~/Desktop/42/ft_printf save
+cp -r ~/Desktop/42 save # -R veut dire que ca va copier le dossier en recursif ( donc jusqu a la derniere stratt inferieur
 cp -r ~/Raccourci save
 cp ~/.zshrc save
 cp ~/.vimrc save
 cp ~/.gitignore save
-cp -r ~/Desktop/42/Piscine_AI save
-cp -r ~/Desktop/42/get_next_line save
 
 #clear gits
 cd save
