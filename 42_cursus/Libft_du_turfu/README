@@ -2,25 +2,25 @@ int		ft_atoi(const char *nptr))
 		prend un char et le transforme en int selon certaine conditions, retourne cet int
 
 void	ft_bzero(void *s, size_t n))
-		remplace n bytes par '\0' a partir du pointeur s, n'a pas de valeur de retour
+		remplace n bytes par '\0' a partir du pointeur s, na pas de valeur de retour
 
 void	*ft_calloc(size_t nmemb, size_t size))
 		allou nmemb de taille size et les rempli par '\0', retourne un pointeur sur cette zone allouer ou NULL si : size == 0, nmemb == 0, ou l'allocation a echouer'
 
 int		ft_isalnum(int c))
-		indique si c est alphanumeric, retourne 0 si ce n'est pas le cas
+		indique si c est alphanumeric, retourne 0 si ce nest pas le cas
 
 int		ft_isalpha(int c))
-		indique si c est alphabetic maj ou min, retourne 0 si ce n'est pas le cas
+		indique si c est alphabetic maj ou min, retourne 0 si ce nest pas le cas
 
 int		ft_isascii(int c))
-		indique si c fait parti de la table ascii, retourne 0 si ce n'est pas le cas
+		indique si c fait parti de la table ascii, retourne 0 si ce nest pas le cas
 
 int		ft_isdigit(int c))
-		indique si c est un chiffre, retourne 0 si ce n'est pas le cas
+		indique si c est un chiffre, retourne 0 si ce nest pas le cas
 
 int		ft_isprint(int c))
-		indique si c est imprimable, retourne 0 si ce n'est pas le cas
+		indique si c est imprimable, retourne 0 si ce nest pas le cas
 
 char	*ft_itoa(int n)
 		transforme l'int recu en chaine de caracteres dans une string qu'il vient d'allouer et retroune cette derniere

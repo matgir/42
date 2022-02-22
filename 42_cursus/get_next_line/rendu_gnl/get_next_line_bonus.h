@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-size_t	ft_gnl_strlcpy(char *dst, const char *src, size_t size);
+void	ft_gnl_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_gnl_strjoin(char *line, char *buffer);
 int		ft_gnl_strchr(const char *buffer);
 char	*get_next_line(int fd);

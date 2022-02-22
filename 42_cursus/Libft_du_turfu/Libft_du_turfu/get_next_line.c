@@ -21,11 +21,12 @@
 		# include <stdlib.h>
 		# include <unistd.h>
 
-		extern int BUFFER_SIZE = 42;
+		# define BUFFER_SIZE 42
 						(to be changed as wanted, 1 will take longer to
-						execute, in betwen 50 and 100 should be good)
+						execute, in betwen 50 and 100 should be good, may be
+						needeed to declare its value in the fnction itself)
 
-		size_t	ft_gnl_strlcpy(char *dst, const char *src, size_t size);
+		void	ft_gnl_strlcpy(char *dst, const char *src, size_t size);
 		char	*ft_gnl_strjoin(char *line, char *buffer);
 		int		ft_gnl_strchr(const char *buffer);
 		char	*get_next_line(int fd);
@@ -58,12 +59,10 @@ int	ft_gnl_strlen(const char *str)
 			need to trim your line afterwards
 */
 
-size_t	ft_gnl_strlcpy(char *dst, const char *src, size_t size)
+void	ft_gnl_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
-	size_t	l;
 
-	l = ft_gnl_strlen(src);
 	if (size > 0)
 	{
 		i = 0;
@@ -74,12 +73,11 @@ size_t	ft_gnl_strlcpy(char *dst, const char *src, size_t size)
 		}
 		dst[i] = '\0';
 	}
-	return (l);
 }
 
 /*
-		The only difference with de classical strlcpy is the fact it uses the
-		ft_gnl_strlen insted
+		The only difference with de classical strlcpy is the fact does not sent
+		back the len of src
 */
 
 char	*ft_gnl_strjoin(char *line, char *buffer)
@@ -98,21 +96,10 @@ char	*ft_gnl_strjoin(char *line, char *buffer)
 	return (join);
 }
 
-int	ft_gnl_strchr(const char *buffer)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = ft_gnl_strlen(buffer);
-	while (i < j)
-	{
-		if (buffer[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
-}
+/*
+		This strjoin uses ft_gnl_strlen and also frees line that was previously
+		malloced in the main function, so that there isn't any leaks
+*/
 
 char	*get_next_line(int fd)
 {
@@ -123,7 +110,7 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE < 1 || read(fd, NULL, 0) == -1)
 		return (NULL);
 	line = NULL;
-	while (ft_gnl_strchr(buf) == -1)
+	while (buf[ft_gnl_strlen(buf) - 1] != '\n' )
 	{
 		line = ft_gnl_strjoin(line, buf);
 		if (line == NULL)

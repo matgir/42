@@ -12,12 +12,10 @@
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_gnl_strlcpy(char *dst, const char *src, size_t size)
+void	ft_gnl_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
-	size_t	l;
 
-	l = ft_gnl_strlen(src);
 	if (size > 0)
 	{
 		i = 0;
@@ -28,7 +26,6 @@ size_t	ft_gnl_strlcpy(char *dst, const char *src, size_t size)
 		}
 		dst[i] = '\0';
 	}
-	return (l);
 }
 
 char	*ft_gnl_strjoin(char *line, char *buffer)

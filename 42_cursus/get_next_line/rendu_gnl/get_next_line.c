@@ -12,12 +12,10 @@
 
 #include "get_next_line.h"
 
-size_t	ft_gnl_strlcpy(char *dst, const char *src, size_t size)
+void	ft_gnl_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
-	size_t	l;
 
-	l = ft_gnl_strlen(src);
 	if (size > 0)
 	{
 		i = 0;
@@ -28,7 +26,6 @@ size_t	ft_gnl_strlcpy(char *dst, const char *src, size_t size)
 		}
 		dst[i] = '\0';
 	}
-	return (l);
 }
 
 char	*ft_gnl_strjoin(char *line, char *buffer)
@@ -47,22 +44,6 @@ char	*ft_gnl_strjoin(char *line, char *buffer)
 	return (join);
 }
 
-int	ft_gnl_strchr(const char *buffer)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = ft_gnl_strlen(buffer);
-	while (i < j)
-	{
-		if (buffer[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
 char	*get_next_line(int fd)
 {
 	char		*line;
@@ -72,7 +53,7 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE < 1 || read(fd, NULL, 0) == -1)
 		return (NULL);
 	line = NULL;
-	while (ft_gnl_strchr(buf) == -1)
+	while (buf[ft_gnl_strlen(buf) - 1] != '\n' )
 	{
 		line = ft_gnl_strjoin(line, buf);
 		if (line == NULL)
