@@ -11,23 +11,12 @@
 # **************************************************************************** #
 
 SRCS	=	ft_printf.c \
+			ft_ptf_put.c \
+			ft_ptf_start_to_put.c \
 			ft_putchar_fd.c \
-			ft_puthex.c \
 			ft_putnbr_fd.c \
-			ft_putpurcent.c \
 			ft_putstr_fd.c \
-			ft_putuhex.c \
-			ft_putunbr.c \
-			ft_strlen.c \
-			is_variable.c \
-			print_c.c \
-			print_i_or_d.c \
-			print_p.c \
-			print_s.c \
-			print_u.c \
-			print_variable.c \
-			print_xs.c \
-			what_variable.c
+			ft_strlen.c
 
 OBJS	=	${SRCS:.c=.o}
 

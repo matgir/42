@@ -27,14 +27,13 @@ void		ft_putstr_fd(char *s, int fd);
 int			ft_putuhex(unsigned long int uli, char *hexbase);
 void		ft_putunbr(unsigned int n);
 size_t		ft_strlen(const char *str);
-int			is_variable(char c);
-int			print_c(va_list *ap);
-int			print_i_or_d(va_list *ap);
-int			print_p(va_list *ap);
-int			print_s(va_list *ap);
-int			print_u(va_list *ap);
-int			print_variable(char c, va_list *ap);
-int			print_xs(va_list *ap, char c);
-int			what_variable(const char *str, int *i, va_list *ap);
+int			ft_is_variable(char c);
+int			ft_print_i_or_d(va_list *ap);
+int			ft_print_p(va_list *ap);
+int			ft_print_s(va_list *ap);
+int			ft_print_u(va_list *ap);
+int			ft_print_variable(char c, va_list *ap);
+int			ft_print_xs(va_list *ap, char c);
+int			ft_what_variable(const char *str, int *i, va_list *ap);
 
 #endif
