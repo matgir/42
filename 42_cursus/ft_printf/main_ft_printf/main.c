@@ -25,4 +25,6 @@ int	main(void)
 	printf(" NULL %s NULL ", NULL);
 	printf("\n%i\n", printf(" %p %p ", 0, 0));
 	printf("\n%i\n", ft_printf(" %p %p ", test, test));
+	printf("\n%i\n", printf("%%%%%%%%%%%%&%%%%%%%%%%"));
+	printf("\n%i\n", ft_printf("%%%%%%%%%%%%&%%%%%%%%%%"));
 }
