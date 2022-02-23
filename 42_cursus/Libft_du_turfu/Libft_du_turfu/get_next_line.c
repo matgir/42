@@ -24,15 +24,13 @@
 		# define BUFFER_SIZE 42
 						(to be changed as wanted, 1 will take longer to
 						execute, in betwen 50 and 100 should be good, may be
-						needeed to declare its value in the function itself)
+						needeed to declare its value in the function itself, or
+						compile with "-D BUFFER_SIZE=42")
 
 		void	ft_gnl_strlcpy(char *dst, const char *src, size_t size);
 		char	*ft_gnl_strjoin(char *line, char *buffer);
-		int		ft_gnl_strchr(const char *buffer);
 		char	*get_next_line(int fd);
 		int		ft_gnl_strlen(const char *str);
-		void	*ft_memcpy(void	*dest, const void *src, size_t n);
-						(don't forget to use it with the .c of memcpy)
 
 		#endif
 */
@@ -85,13 +83,23 @@ char	*ft_gnl_strjoin(char *line, char *buffer)
 	char	*join;
 	size_t	i;
 	size_t	j;
+	size_t	u;
 
 	i = ft_gnl_strlen(line);
 	j = ft_gnl_strlen(buffer);
 	join = malloc(sizeof(char) * (i + j + 1));
 	if (join == NULL)
 		return (NULL);
-	ft_gnl_strlcpy((ft_memcpy(join, line, i) + i), buffer, (j + 1));
+	u = 0;
+	while (i != 0)
+	{
+		join[u] = line[u];
+		u++;
+		i--;
+	}
+	while (j-- != 0)
+		join[u++] = buffer[i++];
+	join[u] = '\0';
 	free(line);
 	return (join);
 }
@@ -101,8 +109,7 @@ char	*ft_gnl_strjoin(char *line, char *buffer)
 		malloced in the main function, so that there isn't any leaks, even with
 		the first call where line = NULL it ain't a problem because you can free
 		a NULL str
-		The ft_memcpy + the ft_gnl_strlcpy allows you to use NULL str at the
-		very beginning of each call of he function
+		The way to join line and buffer is the same as in memcpy
 */
 
 char	*get_next_line(int fd)
@@ -135,6 +142,8 @@ char	*get_next_line(int fd)
 }
 
 /*
+		-	In this get next line you can deal with multiple fdwithout intertwin
+			the with eatchother hence the [1024] create a char **buf
 		-	The first if allows you to check the size of BUFFER_SIZE, because if
 			it is under 1 then you won't read anything.
 			It also check if the fd is right because if read return -1 then it
