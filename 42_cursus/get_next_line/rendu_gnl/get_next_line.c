@@ -12,20 +12,6 @@
 
 #include "get_next_line.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (n != 0)
-	{
-		((unsigned char *) dest)[i] = ((unsigned const char *) src)[i];
-		i++;
-		n--;
-	}
-	return (dest);
-}
-
 int	ft_gnl_strlen(const char *str)
 {
 	int	i;
@@ -61,13 +47,23 @@ char	*ft_gnl_strjoin(char *line, char *buffer)
 	char	*join;
 	size_t	i;
 	size_t	j;
+	size_t	u;
 
 	i = ft_gnl_strlen(line);
 	j = ft_gnl_strlen(buffer);
 	join = malloc(sizeof(char) * (i + j + 1));
 	if (join == NULL)
 		return (NULL);
-	ft_gnl_strlcpy((ft_memcpy(join, line, i) + i), buffer, (j + 1));
+	u = 0;
+	while (i != 0)
+	{
+		join[u] = line[u];
+		u++;
+		i--;
+	}
+	while (j-- != 0)
+		join[u++] = buffer[i++];
+	join[u] = '\0';
 	free(line);
 	return (join);
 }
