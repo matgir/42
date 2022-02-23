@@ -1,4 +1,4 @@
-TIMEOUT_US				= 1000000
+TIMEOUT_US				= 100000
 
 .DEFAULT_GOAL			= a
 UTILS					= utils/sigsegv.cpp utils/color.cpp utils/check.cpp utils/gnl.cpp utils/leaks.cpp
@@ -55,8 +55,8 @@ $(42BONUS): 42%:
 	@gcc -D BUFFER_SIZE=42 $(CFLAGS) -c $(BONUS_FILES)
 	@clang++ -D BUFFER_SIZE=42 -D TIMEOUT_US=$(TIMEOUT_US) $(CPPFLAGS) $(UTILS) $(TESTS_PATH)$*.cpp $(BONUS_OBJS) -o gnlTest && $(VALGRIND) ./gnlTest < files/alternate_line_nl_with_nl && rm -f gnlTest
 $(10MBONUS): 10M%:
-	@gcc -D BUFFER_SIZE=10000000 $(CFLAGS) -c $(BONUS_FILES)
-	@clang++ -D BUFFER_SIZE=10000000 -D TIMEOUT_US=$(TIMEOUT_US) $(CPPFLAGS) $(UTILS) $(TESTS_PATH)$*.cpp $(BONUS_OBJS) -o gnlTest && $(VALGRIND) ./gnlTest < files/alternate_line_nl_with_nl && rm -f gnlTest
+	@gcc -D BUFFER_SIZE=1000000 $(CFLAGS) -c $(BONUS_FILES)
+	@clang++ -D BUFFER_SIZE=1000000 -D TIMEOUT_US=$(TIMEOUT_US) $(CPPFLAGS) $(UTILS) $(TESTS_PATH)$*.cpp $(BONUS_OBJS) -o gnlTest && $(VALGRIND) ./gnlTest < files/alternate_line_nl_with_nl && rm -f gnlTest
 
 $(1MBONUS): m1%:
 	@gcc -D BUFFER_SIZE=1 $(CFLAGS) -c $(BONUS_FILES)
@@ -65,8 +65,8 @@ $(42MBONUS): m42%:
 	@gcc -D BUFFER_SIZE=42 $(CFLAGS) -c $(BONUS_FILES)
 	@clang++ -D BUFFER_SIZE=42 -D TIMEOUT_US=$(TIMEOUT_US) $(CPPFLAGS) $(UTILS) $(TESTS_PATH)$(MANDATORY).cpp $(BONUS_OBJS) -o gnlTest && $(VALGRIND) ./gnlTest < files/alternate_line_nl_with_nl && rm -f gnlTest
 $(10MMBONUS): m10M%:
-	@gcc -D BUFFER_SIZE=10000000 $(CFLAGS) -c $(BONUS_FILES)
-	@clang++ -D BUFFER_SIZE=10000000 -D TIMEOUT_US=$(TIMEOUT_US) $(CPPFLAGS) $(UTILS) $(TESTS_PATH)$(MANDATORY).cpp $(BONUS_OBJS) -o gnlTest && $(VALGRIND) ./gnlTest < files/alternate_line_nl_with_nl && rm -f gnlTest
+	@gcc -D BUFFER_SIZE=1000000 $(CFLAGS) -c $(BONUS_FILES)
+	@clang++ -D BUFFER_SIZE=1000000 -D TIMEOUT_US=$(TIMEOUT_US) $(CPPFLAGS) $(UTILS) $(TESTS_PATH)$(MANDATORY).cpp $(BONUS_OBJS) -o gnlTest && $(VALGRIND) ./gnlTest < files/alternate_line_nl_with_nl && rm -f gnlTest
 
 mandatory_start: update
 	@tput setaf 4 && echo [Mandatory]

@@ -12,6 +12,20 @@
 
 #include "get_next_line_bonus.h"
 
+int	ft_gnl_strlen(const char *str)
+{
+	int	i;
+
+	if (str == NULL)
+		return (0);
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (str[i] == '\n')
+		i++;
+	return (i);
+}
+
 void	ft_gnl_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
@@ -33,31 +47,25 @@ char	*ft_gnl_strjoin(char *line, char *buffer)
 	char	*join;
 	size_t	i;
 	size_t	j;
+	size_t	u;
 
 	i = ft_gnl_strlen(line);
 	j = ft_gnl_strlen(buffer);
 	join = malloc(sizeof(char) * (i + j + 1));
 	if (join == NULL)
 		return (NULL);
-	ft_gnl_strlcpy((ft_memcpy(join, line, i) + i), buffer, (j + 1));
+	u = 0;
+	while (i != 0)
+	{
+		join[u] = line[u];
+		u++;
+		i--;
+	}
+	while (j-- != 0)
+		join[u++] = buffer[i++];
+	join[u] = '\0';
 	free(line);
 	return (join);
-}
-
-int	ft_gnl_strchr(const char *buffer)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = ft_gnl_strlen(buffer);
-	while (i < j)
-	{
-		if (buffer[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
 }
 
 char	*get_next_line(int fd)
@@ -69,7 +77,7 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE < 1 || read(fd, NULL, 0) == -1)
 		return (NULL);
 	line = NULL;
-	while (ft_gnl_strchr(buf[fd]) == -1)
+	while (buf[fd][ft_gnl_strlen(buf[fd]) - 1] != '\n' )
 	{
 		line = ft_gnl_strjoin(line, buf[fd]);
 		if (line == NULL)
