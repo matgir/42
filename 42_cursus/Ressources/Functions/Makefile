@@ -34,7 +34,7 @@ CFLAGS	= 	-Wall -Werror -Wextra
 
 RM		=	 rm -f
 
-#	demander ce aui est mieux, 'rm -f' ou 'rm -rf'
+#	demander ce qui est mieux, 'rm -f' ou 'rm -rf'
 
 .c.o:	
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}

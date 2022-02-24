@@ -71,6 +71,11 @@ int	ft_print_variable(char c, va_list *ap)
 	return (0);
 }
 
+/*
+		This function receive a character that is printable as a variable and is
+		gonna start the process of printing it as the output
+*/
+
 int	ft_is_variable(char c)
 {
 	if (c == 'c' || c == 's' || c == 'p' || c == 'd')
@@ -79,6 +84,11 @@ int	ft_is_variable(char c)
 		return (0);
 	return (1);
 }
+
+/*
+		This function check if the character after the '%' is printable as a
+		variable
+*/
 
 int	ft_what_variable(const char *str, int *i, va_list *ap)
 {
@@ -97,6 +107,12 @@ int	ft_what_variable(const char *str, int *i, va_list *ap)
 		return (1);
 	}
 }
+
+/*
+		this functions receives the character after the '%' and is gonna check
+		if it is printable as a variable, then will print it otherwise it will
+		simply print the character itself
+*/
 
 int	ft_printf(const char *str, ...)
 {
@@ -124,3 +140,12 @@ int	ft_printf(const char *str, ...)
 	}
 	return (puted);
 }
+
+/*
+	This is the main functions of printf, it will initiate the va_list 'ap' and
+	and send it into the other functions if needed
+	va_start allow to read the variable of a multivariadique functions, printf
+	is one because the other variabe are representated as '...' after the first
+	argument str
+	puted is the numbers of character printed on the output
+*/

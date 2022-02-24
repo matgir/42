@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ptf_put.c                                       :+:      :+:    :+:   */
+/*   ft_ptf_start_to_put.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/19 14:27:47 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/20 15:15:20 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/01/20 11:22:06 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/01/20 17:00:12 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,87 +50,74 @@
 		#endif
 */
 
-int	ft_print_i_or_d(va_list *ap)
+int	ft_puthex(unsigned int n, char *hexbase)
 {
-	int	i;
-	int	puted;
+	unsigned int	ntmp;
+	int				i;
+	char			*str;
+	int				len;
 
-	puted = 1;
-	i = va_arg(*ap, int);
-	va_end(*ap);
-	ft_putnbr_fd(i, 1);
-	if (i < 0)
-		puted += 1;
-	while (i / 10 != 0)
+	i = 1;
+	ntmp = n;
+	while (n / 16 != 0)
 	{
-		puted += 1;
-		i = i / 10;
+		n = n / 16;
+		i++;
 	}
-	return (puted);
-}
-
-int	ft_print_p(va_list *ap)
-{
-	unsigned long int	uli;
-	char				*hexbase;
-
-	hexbase = "0123456789abcdef";
-	uli = va_arg(*ap, unsigned long int);
-	va_end(*ap);
-	if (uli)
-	{
-		ft_putstr_fd("0x", 1);
-		return (ft_putuhex(uli, hexbase) + 2);
-	}
-	else
-	{
-		ft_putstr_fd("(nil)", 1);
-		return (5);
-	}
-}
-
-int	ft_print_s(va_list *ap)
-{
-	char	*str;
-
-	str = va_arg(*ap, char *);
-	va_end(*ap);
+	len = i;
+	str = malloc(sizeof(char) * (i + 1));
 	if (str == NULL)
+		return (0);
+	str[i] = '\0';
+	while (--i >= 0)
 	{
-		ft_putstr_fd("(null)", 1);
-		return (6);
+		str[i] = hexbase[ntmp % 16];
+		ntmp /= 16;
 	}
 	ft_putstr_fd(str, 1);
-	return (ft_strlen(str));
+	free(str);
+	return (len);
 }
 
-int	ft_print_u(va_list *ap)
+int	ft_putuhex(unsigned long int uli, char *hexbase)
 {
-	unsigned int	i;
-	int				puted;
+	unsigned long int	ntmp;
+	int					i;
+	char				*str;
+	int					len;
 
-	puted = 1;
-	i = va_arg(*ap, unsigned int);
-	va_end(*ap);
-	ft_putunbr(i);
-	while (i / 10 != 0)
+	i = 1;
+	ntmp = uli;
+	while (uli / 16 != 0)
 	{
-		puted += 1;
-		i = i / 10;
+		uli = uli / 16;
+		i++;
 	}
-	return (puted);
+	len = i;
+	str = malloc(sizeof(char) * (i + 1));
+	if (str == NULL)
+		return (0);
+	str[i] = '\0';
+	while (--i >= 0)
+	{
+		str[i] = hexbase[ntmp % 16];
+		ntmp /= 16;
+	}
+	ft_putstr_fd(str, 1);
+	free(str);
+	return (len);
 }
 
-int	ft_print_xs(va_list *ap, char c)
+void	ft_putunbr(unsigned int n)
 {
-	unsigned int	i;
-	char			*hexbase;
+	if (n >= 10)
+		ft_putunbr(n / 10);
+	ft_putchar_fd(n % 10 + 48, 1);
+}
 
-	if (c == 'x')
-		hexbase = "0123456789abcdef";
-	else
-		hexbase = "0123456789ABCDEF";
-	i = va_arg(*ap, unsigned int);
-	va_end(*ap);
-	return (ft_puthex(i, hexbase));
+void	ft_putpurcent(int *puted, int *i)
+{
+	ft_putchar_fd('%', 1);
+	*puted = *puted + 1;
+	*i = *i + 1;
 }
