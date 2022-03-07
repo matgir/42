@@ -1,0 +1,88 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    README                                             :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/03/07 15:59:28 by mgirardo          #+#    #+#              #
+#    Updated: 2022/03/07 16:40:34 by mgirardo         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+	FILE PLACE
+- parameters for ssh in /etc/ssh/sshd_config
+- parameters for password policy in /etc/login.defs (days)
+- parameters for password policiy in /etc/pam.d/common-password (strengh)
+- parameters for sudo in /etc/sudoers.d/sudoconfig
+- parameters for sudo in /etc/sudoers
+- numbers of sudo command in /var/log/sudo/seq in weird counting
+- logfile for sudo in /var/log/sudo/00/...
+- hostname change in /etc/hosts and with the command
+- script in /usr/local/bin/monitoring.sh
+
+	HELP
+- If a command doesnt work put sudo in front of it
+- 'libpam-pwquality' must be installed in order to create the strong password policy
+- password shouldnt contains the user name in any form
+- UFW : uncomplicated firewall
+- message derreur sudo des la 1ere erreur
+
+	USEFUL
+- <service name> : ssh, ufw, apparmor
+- <user name> : mgirardo
+- <port name> : 4242
+
+	COMMANDS
+- lsblk
+	: show the partition of the disk
+- su -
+	: to connect as root
+- su <user name>
+	: to connect as <user name>
+- apt install <pack name>
+	: to install <pack name>
+- dpkg -l
+	: show the pack installed
+- dpkg -l | grep <pack name>
+	: to check if <pack name> is installed
+- adduser <user name> <group name>
+	: add <user name> in <group name>
+- getent group <group name>
+	: show the members of <group name>
+- sudo <command>
+	: execute the command as sudo
+- getent group
+	: show all groups and the members
+- id <user name>
+	: show the groupsp of <user name>
+- service <service name> status
+	: check <service name> status
+- ufw enable
+	: enable the firewall ufw, it is now active
+- ufw allow <port name>
+	: allow connection with firewall from this port
+- ufw status
+	: show ufw status and its port
+- systemctl status <service name>
+	: check <service name> status
+- exit
+	: logs you out
+- logout
+	: logs you out
+- ip a
+	: gives you your ip adress
+- clear
+	: clears the screen
+- passwd
+	: to change the password of the current user
+- sudo EDITOR=/usr/bin/vim visudo
+	: to open visudo with vim
+- which <command>
+	: to know the absolut path of the <command>
+- whereis
+	: to know the absolut path of the <command>
+- hostnamectl
+	: to check surrent hostname
+- hostnamectl set-hostname <new hostname>
+	: to set a new hostname
