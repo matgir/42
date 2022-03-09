@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 15:59:28 by mgirardo          #+#    #+#              #
-#    Updated: 2022/03/08 16:50:54 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/03/09 11:29:22 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,17 @@
 - hostname change in /etc/hosts and with the command
 - script in /usr/local/bin/monitoring.sh
 
-	HELP
+	INFORMATIONS
 - If a command doesnt work put sudo in front of it
 - 'libpam-pwquality' must be installed in order to create the strong password policy
 - password shouldnt contains the user name in any form
 - UFW : uncomplicated firewall
 - message derreur sudo des la 1ere erreur
+- CentOS isnt supported anymore
+- apt : advanced package tool, lower level installer, only installed the minumum to be functionnal
+- aptitude : higher level installe, propose a lot of service around what it instaled, more functionnalities for the package
+- apparmor : application armor, allow the administrator to associate each service with security profile that can restrain the acces to the exploitation system
+- LVM : logical volume manager, 
 
 	USEFUL
 - <service name> : ssh, ufw, apparmor
@@ -55,7 +60,7 @@
 - getent group
 	: show all groups and the members
 - id <user name>
-	: show the groupsp of <user name>
+	: show the groups of <user name>
 - service <service name> status
 	: check <service name> status
 - ufw enable
@@ -83,7 +88,7 @@
 - whereis
 	: to know the absolut path of the <command>
 - hostnamectl
-	: to check surrent hostname
+	: to check current hostname and information about the machine
 - hostnamectl set-hostname <new hostname>
 	: to set a new hostname
 - ssh <user name>@localhost -p <port number>
@@ -96,3 +101,7 @@
 	: check if the password policy applied on the user
 - userdel <user name>
 	: to delete a user
+- ss -tunlp
+	: show all open port
+- fdisk -l
+	: show all the installd disk and their capacity
