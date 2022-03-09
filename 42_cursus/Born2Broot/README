@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 15:59:28 by mgirardo          #+#    #+#              #
-#    Updated: 2022/03/09 11:29:22 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/03/09 18:38:01 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,19 +20,20 @@
 - logfile for sudo in /var/log/sudo/00/...
 - hostname change in /etc/hosts and with the command
 - script in /usr/local/bin/monitoring.sh
+- parameters for ufw in /etc/default/ufw
 
 	INFORMATIONS
 - If a command doesnt work put sudo in front of it
 - 'libpam-pwquality' must be installed in order to create the strong password policy
 - password shouldnt contains the user name in any form
-- UFW : uncomplicated firewall
+- UFW : uncomplicated firewall, allow to check the traffic incoming and outgoing to chek if everything is in order and there isnt any malicious program tring to sneak in
 - message derreur sudo des la 1ere erreur
 - CentOS isnt supported anymore
 - apt : advanced package tool, lower level installer, only installed the minumum to be functionnal
 - aptitude : higher level installe, propose a lot of service around what it instaled, more functionnalities for the package
 - apparmor : application armor, allow the administrator to associate each service with security profile that can restrain the acces to the exploitation system
-- LVM : logical volume manager, 
-
+- LVM : logical volume manager, pseudo partitions inside the phyical volume, how to virtualy manipulate the memory place of a laptop
+-SSH : secure shell allow to connect securely to a vm from any terminal
 	USEFUL
 - <service name> : ssh, ufw, apparmor
 - <user name> : mgirardo
@@ -105,3 +106,5 @@
 	: show all open port
 - fdisk -l
 	: show all the installd disk and their capacity
+- tty
+	: show the filename of the currently connected terminal
