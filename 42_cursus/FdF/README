@@ -1,0 +1,2 @@
+- To compile in FdF
+	gcc *.c -L. -lmlx_Linux -lXext -lX11 -Lmath
