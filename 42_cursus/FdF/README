@@ -1,2 +1,6 @@
 - To compile in FdF
 	gcc *.c -L. -lmlx_Linux -lXext -lX11 -Lmath
+	clang maintest.c -L. -lmlx_Linux -lXext -lX11 -Lmath && ./a.out
+- mlx_init
+	create the link between the program and and the display by returning a void *
+	used in other functions after
