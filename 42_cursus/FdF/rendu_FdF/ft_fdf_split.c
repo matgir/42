@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libfdf.h"
 
-static int	dbt(char const *s, char c)
+int	dbt(char const *s, char c)
 {
 	size_t	stop;
 
@@ -24,7 +24,7 @@ static int	dbt(char const *s, char c)
 
 /*		permet de trouver ou se trouve le 1er mot		*/
 
-static int	nw(char const *s, char c, size_t stop)
+int	nw(char const *s, char c, size_t stop)
 {
 	size_t	nbw;
 
@@ -42,7 +42,7 @@ static int	nw(char const *s, char c, size_t stop)
 
 /*		permet de compter le nombre de mots		*/
 
-static char	**free_all(char **tab)
+char	**free_all(char **tab)
 {
 	int	i;
 
@@ -56,15 +56,14 @@ static char	**free_all(char **tab)
 /*		permet de free la partie du tableau deja creer en cas d'echec
  *		d'allocation pour un nouveau mot		*/
 
-char	**ft_split(char const *s, char c)
+char	**ft_fdf_split(char const *s, char c, int *x)
 {
 	char	**tab;
 	int		i;
 	int		start;
 	int		stop;
-	int		nbw;
 
-	tab = malloc(sizeof(char *) * ((nbw = nw(s, c, (stop = dbt(s, c)))) + 1));
+	tab = malloc(sizeof(char *) * ((*x = nw(s, c, (stop = dbt(s, c)))) + 1));
 	if (!tab)
 		return (NULL);
 	i = 0;

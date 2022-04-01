@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <fcntl.h>
 
 # define BUFFER_SIZE 42
 
@@ -41,6 +42,13 @@ void		ft_gnl_strlcpy(char *dst, const char *src, size_t size);
 char		*ft_gnl_strjoin(char *line, char *buffer);
 char		*get_next_line(int fd);
 int			ft_gnl_strlen(const char *str);
+char	    **ft_fdf_split(char const *s, char c, int *x);
+char	    **free_all(char **tab);
+int 	nw(char const *s, char c, size_t stop);
+int	    dbt(char const *s, char c);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_strdup(const char *s);
+size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 /*(don't forget to compile with :	ft_printf.c
  ft_ptf_put.c
  ft_ptf_start_to_put.c

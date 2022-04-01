@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/20 16:43:11 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/04 16:33:15 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/12/15 14:53:53 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/01/04 16:44:19 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h"
 
-void	ft_putchar_fd(char c, int fd)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	write(fd, &c, 1);
+	char	*substr;
+	size_t	lens;
+
+	lens = ft_strlen(s);
+	if (start > lens)
+		return (ft_strdup(""));
+	if (start + len > lens)
+		len = lens - start;
+	substr = malloc(sizeof(char) * (len + 1));
+	if (substr == NULL)
+		return (NULL);
+	ft_strlcpy(substr, s + start, len + 1);
+	return (substr);
 }
