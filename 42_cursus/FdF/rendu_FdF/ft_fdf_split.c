@@ -33,7 +33,8 @@ int	nw(char const *s, char c, size_t stop)
 	{
 		while (s[stop] && s[stop] != c)
 			stop++;
-		nbw++;
+		if (s[stop] != '\0')
+			nbw++;
 		while (s[stop] && s[stop] == c)
 			stop++;
 	}

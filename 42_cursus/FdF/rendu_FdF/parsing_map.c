@@ -75,5 +75,6 @@ int	main(int ac, char **av)
 		if (z_coordinates == NULL)
 			return(ft_printf("bad map")); // faire meilleur message
 	}
+	ft_printf("x = %i\ny = %i", x, y);
 	return(0);
 }
