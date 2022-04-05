@@ -12,31 +12,28 @@
 
 #include "libfdf.h"
 
-int	dbt(char const *s, char c)
+int	dbt(char *s)
 {
 	size_t	stop;
 
 	stop = 0;
-	while (s[stop] && s[stop] == c)
+	while (s[stop] && s[stop] == 32)
 		stop++;
 	return (stop);
 }
 
 /*		permet de trouver ou se trouve le 1er mot		*/
 
-int	nw(char const *s, char c, size_t stop)
+int	nw(char *s, size_t stop)
 {
 	size_t	nbw;
 
 	nbw = 0;
 	while (s[stop])
 	{
-		while (s[stop] && s[stop] != c)
-			stop++;
-		if (s[stop] != '\0')
-			nbw++;
-		while (s[stop] && s[stop] == c)
-			stop++;
+		if (s[stop] != 32 && (s[stop + 1] == 32 || s[stop + 1] == '\0'))
+			nbw += 1;
+		stop++;
 	}
 	return (nbw);
 }
@@ -57,26 +54,33 @@ char	**free_all(char **tab)
 /*		permet de free la partie du tableau deja creer en cas d'echec
  *		d'allocation pour un nouveau mot		*/
 
-char	**ft_fdf_split(char const *s, char c, int *x)
+char	**ft_fdf_split(char *s, int *x)
 {
 	char	**tab;
 	int		i;
 	int		start;
 	int		stop;
 
-	tab = malloc(sizeof(char *) * ((*x = nw(s, c, (stop = dbt(s, c)))) + 1));
+	if (s[0] != '\n')
+		s[ft_strlen(s) - 1] = '\0';
+	else
+	{
+		*x = 0;
+		return (NULL);
+	}
+	tab = malloc(sizeof(char *) * ((*x = nw(s, (stop = dbt(s))))));
 	if (!tab)
 		return (NULL);
 	i = 0;
 	while (s[stop])
 	{
 		start = stop;
-		while (s[stop] != c && s[stop])
+		while (s[stop] != 32 && s[stop])
 			stop++;
 		tab[i] = ft_substr(s, start, stop - start);
 		if (tab[i++] == NULL)
 			return (free_all(tab));
-		while (s[stop] == c && s[stop])
+		while (s[stop] == 32 && s[stop])
 			stop++;
 	}
 	tab[i] = 0;

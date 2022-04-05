@@ -12,7 +12,6 @@
 
 #include "libfdf.h"
 
-
 /*
 		In order to use it everywhere :
 		include your own .h as follow

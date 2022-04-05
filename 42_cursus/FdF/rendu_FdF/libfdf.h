@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIB_FDF_H
-# define LIB_FDF_H
+#ifndef LIBFDF_H
+# define LIBFDF_H
 
 # include <stddef.h>
 # include <stdlib.h>
@@ -42,13 +42,15 @@ void		ft_gnl_strlcpy(char *dst, const char *src, size_t size);
 char		*ft_gnl_strjoin(char *line, char *buffer);
 char		*get_next_line(int fd);
 int			ft_gnl_strlen(const char *str);
-char	    **ft_fdf_split(char const *s, char c, int *x);
-char	    **free_all(char **tab);
-int 	nw(char const *s, char c, size_t stop);
-int	    dbt(char const *s, char c);
+char		**ft_fdf_split(char *s, int *x);
+char		**free_all(char **tab);
+int			nw(char *s, size_t stop);
+int			dbt(char *s);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strdup(const char *s);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
+char		***ft_store_z(char ***z_coordinates, int fd, int *x);
+char		***ft_parsing(char *map_b_parsing, int *y, int *x);
 /*(don't forget to compile with :	ft_printf.c
  ft_ptf_put.c
  ft_ptf_start_to_put.c
