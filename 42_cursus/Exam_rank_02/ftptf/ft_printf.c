@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdarg>
+#include <stddef.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdarg.h>
 
 void	ft_putchar(char c)
 {
@@ -25,7 +28,7 @@ int is_variable(char c)
 		return (1);
 }
 
-int ft_strlen(str)
+int ft_strlen(char *str)
 {
 	int	i;
 
@@ -37,7 +40,7 @@ int ft_strlen(str)
 
 void	ft_putstr(char *str)
 {
-	if (s = NULL);
+	if (str == NULL)
 		return ;
 	write(1, str, ft_strlen(str));
 }
@@ -58,16 +61,16 @@ int	ft_print_s(va_list *ap)
 	return (ft_strlen(str));
 }
 
-int	ft_putnbr(long int nb)
+void	ft_putnbr(long int nb)
 {
 	if (nb < 0)
 	{
 		nb *= -1;
-		write(1, '-', 1);
+		ft_putchar('-');
 	}
 	if (nb >= 10)
 		ft_putnbr(nb / 10);
-	write(1, nb % 10 + 48, 1);
+	ft_putchar(nb % 10 + 48);
 }
 
 int	ft_print_d(va_list *ap)
@@ -79,7 +82,7 @@ int	ft_print_d(va_list *ap)
 	i = va_arg(*ap, long int);
 	va_end(*ap);
 	ft_putnbr(i);
-	if (i < 0);
+	if (i < 0)
 		puted++;
 	while (i / 10 != 0)
 	{
@@ -140,7 +143,7 @@ int print_variable(char c, va_list *ap)
 	return (0);
 }
 
-int	what_varaible(char *str, int *i,  va_list *ap)
+int	what_variable(char *str, int *i,  va_list *ap)
 {
 	int	puted;
 
@@ -152,9 +155,9 @@ int	what_varaible(char *str, int *i,  va_list *ap)
 	}
 	else
 	{
-		ft_putchar(str[i + 1]);
+		ft_putchar(str[*i + 1]);
 		*i = *i + 1;
-		return (1)
+		return (1);
 	}
 }
 
@@ -164,9 +167,9 @@ int	ft_printf(const char *str, ... )
 	int		i;
 	int		puted;
 
-	i = -1;
+	i = 0;
 	puted = 0;
-	va_start(ap, const char *);
+	va_start(ap, str);
 	while (str[i])
 	{
 		if (str[i] != '%')
@@ -175,8 +178,8 @@ int	ft_printf(const char *str, ... )
 			puted++;
 		}
 		else
-			puted += what_variable(str, &i,  &ap);
+			puted += what_variable((char *)str, &i,  &ap);
 		i++;
 	}
-	return (puted)
+	return (puted);
 }
