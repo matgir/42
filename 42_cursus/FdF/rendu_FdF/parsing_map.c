@@ -56,17 +56,17 @@ char	***ft_store_z(char ***z_coordinates, int fd, int *x)
 	x_tmp = -1;
 	while (1)
 	{
-		line = get_next_line(fd);
+		line = fdf_get_next_line(fd);
 		if (line == NULL)
 			return (z_coordinates);
 		z_coordinates[i] = ft_fdf_split(line, x);
-		ft_printf("%s\n", line);
-		if (z_coordinates[i++] == NULL || (x_tmp != -1 && x_tmp != *x))
+		if (z_coordinates[i] == NULL || (x_tmp != -1 && x_tmp != *x))
 		{
 			free_z(z_coordinates);
 			return (NULL);
 		}
 		x_tmp = *x;
+		i++;
 	}
 }
 

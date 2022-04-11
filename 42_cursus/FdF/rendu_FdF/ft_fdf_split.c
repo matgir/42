@@ -31,9 +31,11 @@ int	nw(char *s, size_t stop)
 	nbw = 0;
 	while (s[stop])
 	{
-		if (s[stop] != 32 && (s[stop + 1] == 32 || s[stop + 1] == '\0'))
-			nbw += 1;
-		stop++;
+		while (s[stop] && s[stop] != 32)
+			stop++;
+		nbw++;
+		while (s[stop] && s[stop] == 32)
+			stop++;
 	}
 	return (nbw);
 }
@@ -61,14 +63,7 @@ char	**ft_fdf_split(char *s, int *x)
 	int		start;
 	int		stop;
 
-	if (s[0] != '\n')
-		s[ft_strlen(s) - 1] = '\0';
-	else
-	{
-		*x = 0;
-		return (NULL);
-	}
-	tab = malloc(sizeof(char *) * ((*x = nw(s, (stop = dbt(s))))));
+	tab = malloc(sizeof(char *) * ((*x = nw(s, (stop = dbt(s)))) + 1));
 	if (!tab)
 		return (NULL);
 	i = 0;

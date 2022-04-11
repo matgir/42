@@ -63,12 +63,15 @@ char	*ft_gnl_strjoin(char *line, char *buffer)
 	}
 	while (j-- != 0)
 		join[u++] = buffer[i++];
-	join[u] = '\0';
+	if (join[u - 1] == '\n')
+		join[u - 1] = '\0';
+	else
+		join[u] = '\0';
 	free(line);
 	return (join);
 }
 
-char	*get_next_line(int fd)
+char	*fdf_get_next_line(int fd)
 {
 	char		*line;
 	static char	buf[BUFFER_SIZE + 1];

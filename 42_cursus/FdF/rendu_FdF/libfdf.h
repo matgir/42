@@ -40,7 +40,7 @@ int			ft_print_xs(va_list *ap, char c);
 int			ft_what_variable(const char *str, int *i, va_list *ap);
 void		ft_gnl_strlcpy(char *dst, const char *src, size_t size);
 char		*ft_gnl_strjoin(char *line, char *buffer);
-char		*get_next_line(int fd);
+char		*fdf_get_next_line(int fd);
 int			ft_gnl_strlen(const char *str);
 char		**ft_fdf_split(char *s, int *x);
 char		**free_all(char **tab);
@@ -51,12 +51,5 @@ char		*ft_strdup(const char *s);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 char		***ft_store_z(char ***z_coordinates, int fd, int *x);
 char		***ft_parsing(char *map_b_parsing, int *y, int *x);
-/*(don't forget to compile with :	ft_printf.c
- ft_ptf_put.c
- ft_ptf_start_to_put.c
- ft_putchar_fd.c
- ft_putnbr_fd.c
- ft_putstr_fd.c
- ft_strlen.c)*/
 
 #endif
