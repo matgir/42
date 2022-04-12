@@ -18,6 +18,8 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <fcntl.h>
+# include <math.h>
+# include <stdio.h>
 
 # define BUFFER_SIZE 42
 

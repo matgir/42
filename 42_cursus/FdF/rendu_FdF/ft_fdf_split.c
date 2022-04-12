@@ -22,8 +22,6 @@ int	dbt(char *s)
 	return (stop);
 }
 
-/*		permet de trouver ou se trouve le 1er mot		*/
-
 int	nw(char *s, size_t stop)
 {
 	size_t	nbw;
@@ -40,8 +38,6 @@ int	nw(char *s, size_t stop)
 	return (nbw);
 }
 
-/*		permet de compter le nombre de mots		*/
-
 char	**free_all(char **tab)
 {
 	int	i;
@@ -52,9 +48,6 @@ char	**free_all(char **tab)
 	free(tab);
 	return (NULL);
 }
-
-/*		permet de free la partie du tableau deja creer en cas d'echec
- *		d'allocation pour un nouveau mot		*/
 
 char	**ft_fdf_split(char *s, int *x)
 {

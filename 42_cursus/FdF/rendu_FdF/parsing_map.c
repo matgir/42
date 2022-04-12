@@ -19,7 +19,7 @@ int	find_y(char *map)
 
 	fd = open(map, O_RDONLY);
 	y = 0;
-	while (get_next_line(fd) != NULL)
+	while (fdf_get_next_line(fd) != NULL)
 		y++;
 	return (y);
 }
@@ -58,7 +58,7 @@ char	***ft_store_z(char ***z_coordinates, int fd, int *x)
 	{
 		line = fdf_get_next_line(fd);
 		if (line == NULL)
-			return (z_coordinates);
+			return (z_coordinates); //je dois faire quoi si mon malloc echou ?
 		z_coordinates[i] = ft_fdf_split(line, x);
 		if (z_coordinates[i] == NULL || (x_tmp != -1 && x_tmp != *x))
 		{
@@ -80,7 +80,9 @@ char	***ft_parsing(char *map_b_parsing, int *y, int *x)
 	if (z_coordinates == NULL)
 		return (NULL);
 	fd = open(map_b_parsing, O_RDONLY);
-	return (ft_store_z(z_coordinates, fd, x));
+	z_coordinates = ft_store_z(z_coordinates, fd, x);
+	close(fd);
+	return (z_coordinates);
 }
 
 int	main(int ac, char **av)
@@ -90,16 +92,11 @@ int	main(int ac, char **av)
 	int		x;
 
 	if (ac != 2)
-	{
-		ft_printf("Please choose a map to render");
-		return (1);
-	}
-	else
-	{
-		z_coordinates = ft_parsing(av[1], &y, &x);
-		if (z_coordinates == NULL)
-			return (ft_printf("The map is invalide"));
-	}
+		return (ft_printf("Please select one map to render"));
+	z_coordinates = ft_parsing(av[1], &y, &x);
+	if (z_coordinates == NULL)
+		return (ft_printf("The map is invalide, choose another"));
+	printf("height = %f\n", sqrt((pow(y, 2)/(hypot(x, y))) * (pow(x, 2)/(hypot(x, y)))));
 	ft_printf("x = %i\ny = %i", x, y);
 	return (0);
 }
