@@ -6,11 +6,12 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:38:59 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/03/31 16:39:02 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/04/13 18:26:36 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfdf.h"
+//#include "mlx.h"
 
 int	find_y(char *map)
 {
@@ -85,6 +86,12 @@ char	***ft_parsing(char *map_b_parsing, int *y, int *x)
 	return (z_coordinates);
 }
 
+typedef struct	c_data
+{
+	float	x_axe;
+	float	y_axe;
+}				coord;
+
 int	main(int ac, char **av)
 {
 	char	***z_coordinates;
@@ -104,6 +111,38 @@ int	main(int ac, char **av)
 	printf("nbs_w = %f\nnbs_y = %f\n", nbs_w, nbs_h);
 	printf("w_diag = %f\nh_diag = %f\n", w_diag, h_diag);
 	ft_printf("x = %i\ny = %i\n", x, y);
-	printf("coord first point = (%f;%d)", (96 + (w_diag * ((y - 1) / 2))), 192);
+	printf("coord first point = (%f;%d)\n", (96 + (w_diag * ((y - 1) / 2))), 192);
+	ft_printf("%s\n", z_coordinates[2][0]);
+
+
+	coord	**coo;
+
+	coo = malloc(sizeof(*coo) * x);
+	if (coo == NULL)
+		return (ft_printf("Malloc error"));
+	int	i = 0;
+	while (i < x)
+	{
+		coo[i] = malloc(sizeof(coo) * y);
+		if (coo[i] == NULL)
+			return (ft_printf("Malloc error"));
+		i++;
+	}
+	i = 0;
+	int j = 0;
+	coo[i][j].x_axe = (96 + (w_diag * (y - 1) / 2 ));
+	coo[i][j].y_axe = 192;
+	while (j < x)
+	{
+		i = 0;
+		while (++i < y)
+			{
+				coo[i][j].x_axe = coo[i - 1][j].x_axe - w_diag / 2;
+				coo[i][j].y_axe = coo[i - 1][j].y_axe + h_diag / 2;
+			}
+		j++;
+	}
+	printf("coord first pt = (%f;%f)\n", coo[0][0].x_axe, coo[0][0].y_axe);
+	printf("coord second pt = (%f;%f)\n", coo[1][0].x_axe, coo[1][0].y_axe);
 	return (0);
 }

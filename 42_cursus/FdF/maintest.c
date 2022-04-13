@@ -13,7 +13,7 @@
 
 
 
-/*#include <stdlib.h>
+#include <stdlib.h>
 #include <stdio.h>
 
 #include <X11/X.h>
@@ -74,7 +74,7 @@ int	main(void)
 //	we will exit the loop if there's no window left, and execute this code
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
-}*/
+}
 
 
 
@@ -82,7 +82,7 @@ int	main(void)
 
 
 
-/*#include <X11/X.h>
+#include <X11/X.h>
 #include <X11/keysym.h>
 #include "mlx.h"
 #include <stdio.h>
@@ -109,14 +109,16 @@ int	main(void)
 	while (data.x++ < 1920)
 		mlx_pixel_put(data.mlx, data.mlx_wind, data.x, data.y, data.color);
 	mlx_loop(data.mlx);
-}*/
+}
 
 
 
 
 
 
-/*#include <stdlib.h>
+
+
+#include <stdlib.h>
 #include "mlx.h"
 
 int	main(void)
@@ -126,7 +128,7 @@ int	main(void)
 	mlx = mlx_init();
 	mlx_destroy_display(mlx);
 	free(mlx);
-}*/
+}
 
 
 
@@ -136,7 +138,9 @@ int	main(void)
 
 
 
-/*#include "mlx.h"
+
+
+#include "mlx.h"
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -190,9 +194,16 @@ int	main()
 	mlx_loop(data.mlx_ptr);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
-}*/
+}
 
-/*#include "mlx.h"
+
+
+
+
+
+
+
+#include "mlx.h"
 #include <stddef.h>
 
 typedef struct	s_data
@@ -248,21 +259,23 @@ int	main()
 	return(0);
 }
 //	permet d'afficher un rectangle de point de longueur x et hauteur y
-*/
+
 
 
 //	objectif creer un un tableau de tableau avec dans chque case une struct ou un str de coordonnees du point
 //	pour une representation comme voulu dans le rendu final
 
-/*typedef struct	c_data
+typedef struct	c_data
 {
 	int	x_axe;
 	int	y_axe;
-}				x_n_y;
+}				coord;
 
 #include "mlx.h"
 
 int	main()
 {
-	x_n_y
-}*/
+	coord	**coo;
+
+	coo = malloc
+}
