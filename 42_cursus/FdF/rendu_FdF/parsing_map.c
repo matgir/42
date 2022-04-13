@@ -103,7 +103,6 @@ int	main(int ac, char **av)
 	z_coordinates = ft_parsing(av[1], &y, &x);
 	if (z_coordinates == NULL)
 		return (ft_printf("The map is invalide, choose another"));
-//	printf("height = %f\n", sqrt((pow(y, 2)/(hypot(x, y))) * (pow(x, 2)/(hypot(x, y)))));
 	float	nbs_w = ((float)x - 1 + (float)y - 1)/2;
 	float	nbs_h = (((float)x - 1 + (float)y - 1)/4);
 	float	w_diag = 1536/nbs_w;
@@ -130,7 +129,7 @@ int	main(int ac, char **av)
 	}
 	i = 0;
 	int j = 0;
-	coo[i][j].x_axe = (96 + (w_diag * (y - 1) / 2 ));
+	coo[i][j].x_axe = (96 + (w_diag * ((y - 1) / 2 )));
 	coo[i][j].y_axe = 192;
 	while (j < x)
 	{
@@ -142,7 +141,9 @@ int	main(int ac, char **av)
 			}
 		j++;
 	}
+	// fonctionne pas car fait colonne par colone alors que je devrais faire une colone puis ligne par ligne ou linverse
+	// donc utiliser la formule sur mes notes !!
 	printf("coord first pt = (%f;%f)\n", coo[0][0].x_axe, coo[0][0].y_axe);
-	printf("coord second pt = (%f;%f)\n", coo[1][0].x_axe, coo[1][0].y_axe);
+	printf("coord second pt = (%f;%f)\n", coo[0][1].x_axe, coo[1][0].y_axe);
 	return (0);
 }
