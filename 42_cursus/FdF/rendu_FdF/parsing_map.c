@@ -96,7 +96,14 @@ int	main(int ac, char **av)
 	z_coordinates = ft_parsing(av[1], &y, &x);
 	if (z_coordinates == NULL)
 		return (ft_printf("The map is invalide, choose another"));
-	printf("height = %f\n", sqrt((pow(y, 2)/(hypot(x, y))) * (pow(x, 2)/(hypot(x, y)))));
-	ft_printf("x = %i\ny = %i", x, y);
+//	printf("height = %f\n", sqrt((pow(y, 2)/(hypot(x, y))) * (pow(x, 2)/(hypot(x, y)))));
+	float	nbs_w = ((float)x - 1 + (float)y - 1)/2;
+	float	nbs_h = (((float)x - 1 + (float)y - 1)/4);
+	float	w_diag = 1536/nbs_w;
+	float	h_diag= 768/nbs_w;
+	printf("nbs_w = %f\nnbs_y = %f\n", nbs_w, nbs_h);
+	printf("w_diag = %f\nh_diag = %f\n", w_diag, h_diag);
+	ft_printf("x = %i\ny = %i\n", x, y);
+	printf("coord first point = (%f;%d)", (96 + (w_diag * ((y - 1) / 2))), 192);
 	return (0);
 }
