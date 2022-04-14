@@ -110,8 +110,8 @@ int	main(int ac, char **av)
 	printf("nbs_w = %f\nnbs_y = %f\n", nbs_w, nbs_h);
 	printf("w_diag = %f\nh_diag = %f\n", w_diag, h_diag);
 	ft_printf("x = %i\ny = %i\n", x, y);
-	printf("coord first point = (%f;%d)\n", (96 + (w_diag * ((y - 1) / 2))), 192);
-	ft_printf("%s\n", z_coordinates[2][0]);
+	printf("coord first point = (%f;%d)\n", (192 + (w_diag * (((float)y - 1) / 2))), 96);
+	ft_printf("%s\n", z_coordinates[1][1]);
 
 
 	coord	**coo;
@@ -129,21 +129,31 @@ int	main(int ac, char **av)
 	}
 	i = 0;
 	int j = 0;
-	coo[i][j].x_axe = (96 + (w_diag * ((y - 1) / 2 )));
-	coo[i][j].y_axe = 192;
-	while (j < x)
+	coo[i][j].x_axe = (192 + (w_diag * (((float)y - 1) / 2 )));
+	coo[i][j].y_axe = 96;
+	printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+
+	printf("w_diag = %f\nh_diag = %f\n", w_diag, h_diag);
+	while (++i < y)
 	{
-		i = 0;
-		while (++i < y)
-			{
-				coo[i][j].x_axe = coo[i - 1][j].x_axe - w_diag / 2;
-				coo[i][j].y_axe = coo[i - 1][j].y_axe + h_diag / 2;
-			}
-		j++;
+		j = 0;
+		coo[i][j].x_axe = coo[i - 1][j].x_axe - w_diag / 2;
+		coo[i][j].y_axe = coo[i - 1][j].y_axe + h_diag / 2;
+		printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+		while (++j < x)
+		{
+			coo[i][j].x_axe = coo[i][j - 1].x_axe + (w_diag / 2);
+			coo[i][j].y_axe = coo[i][j - 1].y_axe + (h_diag / 2);
+			printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+		}
 	}
-	// fonctionne pas car fait colonne par colone alors que je devrais faire une colone puis ligne par ligne ou linverse
-	// donc utiliser la formule sur mes notes !!
-	printf("coord first pt = (%f;%f)\n", coo[0][0].x_axe, coo[0][0].y_axe);
-	printf("coord second pt = (%f;%f)\n", coo[0][1].x_axe, coo[1][0].y_axe);
+	i = 0;
+	j = 0;
+	while (++j < x)
+	{
+		coo[i][j].x_axe = coo[i][j - 1].x_axe + (w_diag / 2);
+		coo[i][j].y_axe = coo[i][j - 1].y_axe + (h_diag / 2);
+		printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+	}
 	return (0);
 }
