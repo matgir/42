@@ -23,6 +23,18 @@
 
 # define BUFFER_SIZE 42
 
+typedef struct	c_data
+{
+	float	x_axe;
+	float	y_axe;
+}				coord;
+
+typedef struct	s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+}				t_data;
+
 int			ft_printf(const char *str, ...);
 void		ft_putchar_fd(char c, int fd);
 int			ft_puthex(unsigned int n, char *hexbase);
@@ -53,5 +65,6 @@ char		*ft_strdup(const char *s);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 char		***ft_store_z(char ***z_coordinates, int fd, int *x);
 char		***ft_parsing(char *map_b_parsing, int *y, int *x);
+void		window(int x, int y, coord **coo);
 
 #endif

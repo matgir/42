@@ -86,12 +86,6 @@ char	***ft_parsing(char *map_b_parsing, int *y, int *x)
 	return (z_coordinates);
 }
 
-typedef struct	c_data
-{
-	float	x_axe;
-	float	y_axe;
-}				coord;
-
 int	main(int ac, char **av)
 {
 	char	***z_coordinates;
@@ -155,5 +149,6 @@ int	main(int ac, char **av)
 		coo[i][j].y_axe = coo[i][j - 1].y_axe + (h_diag / 2);
 		printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 	}
+	window(x, y, coo);
 	return (0);
 }

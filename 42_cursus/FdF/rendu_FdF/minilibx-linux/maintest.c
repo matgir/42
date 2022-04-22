@@ -11,7 +11,9 @@
 /* ************************************************************************** */
 
 
+/*
 
+// print a red pixel in the middle of the window and kill the program with esckey
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -79,8 +81,8 @@ int	main(void)
 
 
 
-/*
 
+// print a violet line in the window
 
 #include <X11/X.h>
 #include <X11/keysym.h>
@@ -115,8 +117,7 @@ int	main(void)
 
 
 
-
-
+//	do nothing
 
 #include <stdlib.h>
 #include "mlx.h"
@@ -137,7 +138,7 @@ int	main(void)
 
 
 
-
+// put a white dot in the middle of the window
 
 
 #include "mlx.h"
@@ -200,63 +201,36 @@ int	main()
 
 
 
+*/
 
-
+// print the coordinate in white in the window
 
 #include "mlx.h"
-#include <stddef.h>
+#include "../libfdf.h"
 
-typedef struct	s_data
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-}				t_data;
 
-typedef struct	p_data
-{
-	int	start_point_x;
-	int	start_point_y;
-}				p_data;
 
-int	main()
+void	window(int x, int y, coord **coo)
 {
-	int		x = 10;
-	int		y = 10;
 	t_data	data;
-	p_data	start;
-	int		win_height;
-	int		win_width;
-	int		go_down;
-	int		go_right;
-	int		tmp_x;
+	int		i;
+	int		j;
 
 	data.mlx_ptr = mlx_init();
 	if (data.mlx_ptr == NULL)
-		return(1);
-	win_height = 1000;
-	win_width = 1000;
-	data.win_ptr = mlx_new_window(data.mlx_ptr, win_width, win_height, "Test");
+		return;
+	data.win_ptr = mlx_new_window(data.mlx_ptr, 1920, 960, "Test");
 	if (data.win_ptr == NULL)
-		return(1);
-	start.start_point_x = 50;
-	start.start_point_y = 50;
-	tmp_x = start.start_point_x;
-	go_down = 0;
-	while(go_down <= y)
+		return ;
+	i = -1;
+	while(++i <= y)
 	{
-		go_right = 0;
-		while(go_right <= x)
-		{
-			mlx_pixel_put(data.mlx_ptr, data.win_ptr, start.start_point_x, start.start_point_y, 0xFFFFFF);
-			start.start_point_x += 10;
-			go_right++;
-		}
-		start.start_point_x = tmp_x;
-		start.start_point_y += 10;
-		go_down++;
+		j = -1;
+		while(++j <= x)
+			mlx_pixel_put(data.mlx_ptr, data.win_ptr, coo[i][j].x_axe, coo[i][j].y_axe, 0xFFFFFF);
 	}
 	mlx_loop(data.mlx_ptr);
-	return(0);
+	return ;
 }
 //	permet d'afficher un rectangle de point de longueur x et hauteur y
-*/
+ 
