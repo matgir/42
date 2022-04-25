@@ -4,3 +4,6 @@
 - mlx_init
 	create the link between the program and and the display by returning a void *
 	used in other functions after
+
+to compile in minilibx as of 25/04/2022
+	gcc print_window.c ../*.c -L. -lmlx_Linux -lXext -lX11 -Lmath && ./a.out ../../maps/test_maps/mars_copy.fdf

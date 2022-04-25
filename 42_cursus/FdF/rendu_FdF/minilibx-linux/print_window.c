@@ -219,16 +219,20 @@ void	window(int x, int y, coord **coo)
 	data.mlx_ptr = mlx_init();
 	if (data.mlx_ptr == NULL)
 		return;
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 1920, 960, "Test");
+	data.win_ptr = mlx_new_window(data.mlx_ptr, 1920, 960, "Bonjour bonsoir");
 	if (data.win_ptr == NULL)
 		return ;
 	i = -1;
-	while(++i <= y)
+	while(++i < y)
 	{
 		j = -1;
-		while(++j <= x)
-			mlx_pixel_put(data.mlx_ptr, data.win_ptr, coo[i][j].x_axe, coo[i][j].y_axe, 0xFFFFFF);
+		while(++j < x)
+		{
+			mlx_pixel_put(data.mlx_ptr, data.win_ptr, coo[i][j].x_axe, coo[i][j].y_axe, 0x0000FF);
+			printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+		}
 	}
+	mlx_pixel_put(data.mlx_ptr, data.win_ptr, coo[1][1].x_axe, coo[1][1].y_axe, 0xFFFFFF);
 	mlx_loop(data.mlx_ptr);
 	return ;
 }
