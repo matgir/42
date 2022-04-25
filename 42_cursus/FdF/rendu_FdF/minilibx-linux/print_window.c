@@ -228,7 +228,7 @@ void	window(int x, int y, coord **coo)
 		j = -1;
 		while(++j < x)
 		{
-			mlx_pixel_put(data.mlx_ptr, data.win_ptr, coo[i][j].x_axe, coo[i][j].y_axe, 0x0000FF);
+			mlx_pixel_put(data.mlx_ptr, data.win_ptr, coo[i][j].x_axe, coo[i][j].y_axe, 0xFFFFFF);
 			printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 		}
 	}

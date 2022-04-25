@@ -105,7 +105,7 @@ int	main(int ac, char **av)
 	printf("w_diag = %f\nh_diag = %f\n", w_diag, h_diag);
 	ft_printf("x = %i\ny = %i\n", x, y);
 	printf("coord first point = (%f;%d)\n", (192 + (w_diag * (((float)y - 1) / 2))), 96);
-	ft_printf("%s\n", z_coordinates[1][1]);
+	ft_printf("%s\n", z_coordinates[2][1]);
 
 
 	coord	**coo;
@@ -116,7 +116,7 @@ int	main(int ac, char **av)
 	int	i = 0;
 	while (i < x)
 	{
-		coo[i] = malloc(sizeof(coo) * y);
+		coo[i] = malloc(sizeof(coo) * (y + 1));
 		if (coo[i] == NULL)
 			return (ft_printf("Malloc error"));
 		i++;
@@ -133,12 +133,12 @@ int	main(int ac, char **av)
 		j = 0;
 		coo[i][j].x_axe = coo[i - 1][j].x_axe - w_diag / 2;
 		coo[i][j].y_axe = coo[i - 1][j].y_axe + h_diag / 2;
-		printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+		printf("jour coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 		while (++j < x)
 		{
 			coo[i][j].x_axe = coo[i][j - 1].x_axe + (w_diag / 2);
 			coo[i][j].y_axe = coo[i][j - 1].y_axe + (h_diag / 2);
-			printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+			printf("rouj coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 		}
 	}
 	i = 0;
