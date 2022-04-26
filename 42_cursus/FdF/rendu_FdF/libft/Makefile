@@ -23,7 +23,8 @@
 
 #regles declarer avec ':'
 
-SRCS	=	ft_atoi.c \
+SRCS	=	fdf_get_next_line.c \
+			ft_atoi.c \
 			ft_bzero.c \
 			ft_calloc.c \
 			ft_isalnum.c \
@@ -32,11 +33,23 @@ SRCS	=	ft_atoi.c \
 			ft_isdigit.c \
 			ft_isprint.c \
 			ft_itoa.c \
+			ft_lstadd_back.c \
+			ft_lstadd_front.c \
+			ft_lstclear.c \
+			ft_lstdelone.c \
+			ft_lstiter.c \
+			ft_lstlast.c \
+			ft_lstmap.c \
+			ft_lstnew.c \
+			ft_lstsize.c
 			ft_memchr.c \
 			ft_memcmp.c \
 			ft_memcpy.c \
 			ft_memmove.c \
 			ft_memset.c \
+			ft_printf.c \
+			ft_ptf_put.c \
+			ft_ptf_start_to_put.c \
 			ft_putchar_fd.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c \
@@ -58,16 +71,6 @@ SRCS	=	ft_atoi.c \
 			ft_tolower.c \
 			ft_toupper.c
 
-SRCSB	= 	ft_lstadd_back.c \
-			ft_lstadd_front.c \
-			ft_lstclear.c \
-			ft_lstdelone.c \
-			ft_lstiter.c \
-			ft_lstlast.c \
-			ft_lstmap.c \
-			ft_lstnew.c \
-			ft_lstsize.c
-
 OBJS	= 	${SRCS:.c=.o}
 
 OBJSB	= 	${SRCSB:.c=.o}
@@ -83,25 +86,22 @@ CFLAGS	= 	-Wall -Werror -Wextra
 RM		=	 rm -f
 
 .c.o:	
-		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
 			ar rc ${NAME} ${OBJS}
 			ranlib ${NAME}
 
-bonus:	${OBJS} ${OBJSB}
-			ar rc ${NAME} ${OBJS} ${OBJSB}
-			ranlib ${NAME}
-
 all:		${NAME}
 
 clean:
-		${RM} ${OBJS} ${OBJSB}
+			${RM} ${OBJS} ${OBJSB}
 
 fclean:		clean
-		${RM} ${NAME}
+			${RM} ${NAME}
 
-re:		fclean all
+re:			fclean all
 
 #permet au programme dexecuter la regle meme si un fichier du meme nom existe
+
 .PHONY:		all clean fclean re bonus

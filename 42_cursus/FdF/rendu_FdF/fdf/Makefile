@@ -5,44 +5,48 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/01/17 18:17:53 by mgirardo          #+#    #+#              #
-#    Updated: 2022/01/20 16:25:45 by mgirardo         ###   ########.fr        #
+#    Created: 2022/04/26 18:27:40 by mgirardo          #+#    #+#              #
+#    Updated: 2022/04/26 18:27:42 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	ft_printf.c \
-			ft_ptf_put.c \
-			ft_ptf_start_to_put.c \
-			ft_putchar_fd.c \
-			ft_putnbr_fd.c \
-			ft_putstr_fd.c \
-			ft_strlen.c
+SRCS	=	ft_fdf_split.c \
+			parsing_map.c \
+			print_map.c \
+			print_window.c \
+			tuto_minillibx.c
 
-OBJS	=	${SRCS:.c=.o}
+OBJS	= 	${SRCS:.c=.o}
 
-NAME	=	libftprintf.a
+OBJSB	= 	${SRCSB:.c=.o}
 
-CC		=	gcc
+NAME	= 	libft.a
 
-CFLAGS	=	-Wall -Werror -Wextra
+#mettre gcc au lieu de cc
 
-RM		=	rm -rf
+CC		= 	gcc
 
-.c.o:
-				${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+CFLAGS	= 	-Wall -Werror -Wextra
 
-${NAME}:		${OBJS}
-				ar rc ${NAME} ${OBJS}
-				ranlib ${NAME}
+RM		=	 rm -f
 
-all:			${NAME}
+.c.o:	
+			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+
+${NAME}:	${OBJS}
+			ar rc ${NAME} ${OBJS}
+			ranlib ${NAME}
+
+all:		${NAME}
 
 clean:
-				${RM} ${OBJS}
+			${RM} ${OBJS} ${OBJSB}
 
-fclean:			clean
-				${RM} ${NAME}
+fclean:		clean
+			${RM} ${NAME}
 
-re:				fclean all
+re:			fclean all
 
-.PHONY:			all clean fclean re
+#permet au programme dexecuter la regle meme si un fichier du meme nom existe
+
+.PHONY:		all clean fclean re bonus

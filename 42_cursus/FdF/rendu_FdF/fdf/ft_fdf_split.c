@@ -12,7 +12,7 @@
 
 #include "libfdf.h"
 
-int	dbt(char *s)
+int	fdf_dbt(char *s)
 {
 	size_t	stop;
 
@@ -22,7 +22,7 @@ int	dbt(char *s)
 	return (stop);
 }
 
-int	nw(char *s, size_t stop)
+int	fdf_nw(char *s, size_t stop)
 {
 	size_t	nbw;
 
@@ -38,7 +38,7 @@ int	nw(char *s, size_t stop)
 	return (nbw);
 }
 
-char	**free_all(char **tab)
+char	**fdf_free_all(char **tab)
 {
 	int	i;
 

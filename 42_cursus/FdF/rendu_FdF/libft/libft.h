@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -23,6 +24,27 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+char		*fdf_get_next_line(int fd);
+void		ft_gnl_strlcpy(char *dst, const char *src, size_t size);
+char		*ft_gnl_strjoin(char *line, char *buffer);
+int			ft_gnl_strlen(const char *str);
+int			ft_printf(const char *str, ...);
+void		ft_putchar_fd(char c, int fd);
+int			ft_puthex(unsigned int n, char *hexbase);
+void		ft_putnbr_fd(int n, int fd);
+void		ft_putpurcent(int *puted, int *i);
+void		ft_putstr_fd(char *s, int fd);
+int			ft_putuhex(unsigned long int uli, char *hexbase);
+void		ft_putunbr(unsigned int n);
+size_t		ft_strlen(const char *str);
+int			ft_is_variable(char c);
+int			ft_print_i_or_d(va_list *ap);
+int			ft_print_p(va_list *ap);
+int			ft_print_s(va_list *ap);
+int			ft_print_u(va_list *ap);
+int			ft_print_variable(char c, va_list *ap);
+int			ft_print_xs(va_list *ap, char c);
+int			ft_what_variable(const char *str, int *i, va_list *ap);
 int			ft_atoi(const char *nptr);
 void		ft_bzero(void *s, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
