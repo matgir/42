@@ -35,7 +35,16 @@ typedef struct	s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-}				t_data;
+}				mlx;
+
+typedef struct	v_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				i_data;
 
 int		fdf_dbt(char *s);
 int		fdf_nw(char *s, size_t stop);
@@ -47,7 +56,6 @@ char	***ft_store_z(char ***z_coordinates, int fd, int *x);
 char	***ft_parsing(char *map_b_parsing, int *y, int *x);
 int		main(int ac, char **av);
 void	window(int x, int y, coord **coo);
-int		main(void);
 
 
 #endif

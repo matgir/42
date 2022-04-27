@@ -56,7 +56,7 @@ char	**ft_fdf_split(char *s, int *x)
 	int		start;
 	int		stop;
 
-	tab = malloc(sizeof(char *) * ((*x = nw(s, (stop = dbt(s)))) + 1));
+	tab = malloc(sizeof(char *) * ((*x = fdf_nw(s, (stop = fdf_dbt(s)))) + 1));
 	if (!tab)
 		return (NULL);
 	i = 0;
@@ -67,7 +67,7 @@ char	**ft_fdf_split(char *s, int *x)
 			stop++;
 		tab[i] = ft_substr(s, start, stop - start);
 		if (tab[i++] == NULL)
-			return (free_all(tab));
+			return (fdf_free_all(tab));
 		while (s[stop] == 32 && s[stop])
 			stop++;
 	}

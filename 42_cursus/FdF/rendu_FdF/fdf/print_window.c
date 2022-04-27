@@ -14,30 +14,41 @@
 
 #include "libfdf.h"
 
+void	my_mlx_pixel_put(i_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel  / 8));
+	*(unsigned int*)dst = color;
+}
+
 void	window(int x, int y, coord **coo)
 {
-	t_data	data;
+	mlx		mlx;
 	int		i;
 	int		j;
+	i_data	img;
 
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == NULL)
+	mlx.mlx_ptr = mlx_init();
+	if (mlx.mlx_ptr == NULL)
 		return;
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 1920, 960, "Bonjour bonsoir");
-	if (data.win_ptr == NULL)
+	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 1920, 960, "Bonjour bonsoir");
+	if (mlx.win_ptr == NULL)
 		return ;
+	img.img = mlx_new_image(mlx.mlx_ptr, 1920, 1080);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+																&img.endian);
 	i = -1;
 	while(++i < y)
 	{
 		j = -1;
 		while(++j < x)
 		{
-			mlx_pixel_put(data.mlx_ptr, data.win_ptr, coo[i][j].x_axe, coo[i][j].y_axe, 0xFFFFFF);
+			my_mlx_pixel_put(&img, coo[i][j].x_axe, coo[i][j].y_axe, 0xFFFFFF);
 			printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 		}
 	}
-	mlx_pixel_put(data.mlx_ptr, data.win_ptr, coo[1][1].x_axe, coo[1][1].y_axe, 0xFFFFFF);
-	mlx_loop(data.mlx_ptr);
+	mlx_loop(mlx.mlx_ptr);
 	return ;
 }
 //	permet d'afficher un rectangle de point de longueur x et hauteur y

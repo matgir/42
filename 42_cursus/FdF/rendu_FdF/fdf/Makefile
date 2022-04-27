@@ -12,15 +12,12 @@
 
 SRCS	=	ft_fdf_split.c \
 			parsing_map.c \
-			print_map.c \
-			print_window.c \
-			tuto_minillibx.c
+			print_window.c
 
 OBJS	= 	${SRCS:.c=.o}
 
-OBJSB	= 	${SRCSB:.c=.o}
 
-NAME	= 	libft.a
+NAME	= 	fdf
 
 #mettre gcc au lieu de cc
 
@@ -34,13 +31,12 @@ RM		=	 rm -f
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
-			ar rc ${NAME} ${OBJS}
-			ranlib ${NAME}
+			${CC} ${CFLAGS} -o ${NAME} ${OBJS}
 
 all:		${NAME}
 
 clean:
-			${RM} ${OBJS} ${OBJSB}
+			${RM} ${OBJS}
 
 fclean:		clean
 			${RM} ${NAME}
