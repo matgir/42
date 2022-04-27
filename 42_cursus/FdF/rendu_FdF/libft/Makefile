@@ -41,7 +41,7 @@ SRCS	=	fdf_get_next_line.c \
 			ft_lstlast.c \
 			ft_lstmap.c \
 			ft_lstnew.c \
-			ft_lstsize.c
+			ft_lstsize.c \
 			ft_memchr.c \
 			ft_memcmp.c \
 			ft_memcpy.c \

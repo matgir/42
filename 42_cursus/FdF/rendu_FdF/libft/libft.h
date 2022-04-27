@@ -18,6 +18,8 @@
 # include <unistd.h>
 # include <stdarg.h>
 
+# define BUFFER_SIZE 42
+
 typedef struct s_list
 {
 	void			*content;

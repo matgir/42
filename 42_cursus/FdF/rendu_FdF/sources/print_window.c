@@ -18,7 +18,7 @@ void	my_mlx_pixel_put(i_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel  / 8));
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -35,7 +35,7 @@ void	window(int x, int y, coord **coo)
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 1920, 960, "Bonjour bonsoir");
 	if (mlx.win_ptr == NULL)
 		return ;
-	img.img = mlx_new_image(mlx.mlx_ptr, 1920, 1080);
+	img.img = mlx_new_image(mlx.mlx_ptr, 1920, 960);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 																&img.endian);
 	i = -1;
@@ -44,7 +44,7 @@ void	window(int x, int y, coord **coo)
 		j = -1;
 		while(++j < x)
 		{
-			my_mlx_pixel_put(&img, coo[i][j].x_axe, coo[i][j].y_axe, 0xFFFFFF);
+			my_mlx_pixel_put(&img, coo[i][j].x_axe, coo[i][j].y_axe, 0x00FF00);
 			printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 		}
 	}
