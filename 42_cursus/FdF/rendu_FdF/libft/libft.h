@@ -18,15 +18,12 @@
 # include <unistd.h>
 # include <stdarg.h>
 
-# define BUFFER_SIZE 42
-
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
 
-char		*fdf_get_next_line(int fd);
 void		ft_gnl_strlcpy(char *dst, const char *src, size_t size);
 char		*ft_gnl_strjoin(char *line, char *buffer);
 int			ft_gnl_strlen(const char *str);

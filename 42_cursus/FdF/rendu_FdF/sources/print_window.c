@@ -14,7 +14,7 @@
 
 #include "libfdf.h"
 
-void	my_mlx_pixel_put(i_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -22,12 +22,12 @@ void	my_mlx_pixel_put(i_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	window(int x, int y, coord **coo)
+void	window(int x, int y, t_coord **coo)
 {
-	mlx		mlx;
+	t_mlx		mlx;
 	int		i;
 	int		j;
-	i_data	img;
+	t_img	img;
 
 	mlx.mlx_ptr = mlx_init();
 	if (mlx.mlx_ptr == NULL)
@@ -44,12 +44,12 @@ void	window(int x, int y, coord **coo)
 		j = -1;
 		while(++j < x)
 		{
-			my_mlx_pixel_put(&img, coo[i][j].x_axe, coo[i][j].y_axe, 0x00FF00);
+			my_mlx_pixel_put(&img, coo[i][j].x_axe, coo[i][j].y_axe, 0x0000FF00);
 			printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 		}
 	}
+	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, img.img, 0, 0);
 	mlx_loop(mlx.mlx_ptr);
 	return ;
 }
-//	permet d'afficher un rectangle de point de longueur x et hauteur y
  

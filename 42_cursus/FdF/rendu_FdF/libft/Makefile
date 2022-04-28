@@ -23,8 +23,7 @@
 
 #regles declarer avec ':'
 
-SRCS	=	fdf_get_next_line.c \
-			ft_atoi.c \
+SRCS	=	ft_atoi.c \
 			ft_bzero.c \
 			ft_calloc.c \
 			ft_isalnum.c \

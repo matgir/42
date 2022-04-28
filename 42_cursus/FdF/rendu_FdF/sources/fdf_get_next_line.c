@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libfdf.h"
 
 int	ft_gnl_strlen(const char *str)
 {
@@ -65,10 +65,7 @@ char	*ft_gnl_strjoin(char *line, char *buffer)
 	}
 	while (j-- != 0)
 		join[u++] = buffer[i++];
-	if (join[u - 1] == '\n')
-		join[u - 1] = '\0';
-	else
-		join[u] = '\0';
+	join[u] = '\0';
 	free(line);
 	return (join);
 }

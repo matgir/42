@@ -107,7 +107,7 @@ int	main(int ac, char **av)
 	ft_printf("%s\n", z_coordinates[2][1]);
 
 
-	coord	**coo;
+	t_coord	**coo;
 
 	coo = malloc(sizeof(*coo) * x);
 	if (coo == NULL)

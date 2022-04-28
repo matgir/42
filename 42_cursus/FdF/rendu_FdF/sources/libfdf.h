@@ -23,27 +23,30 @@
 # include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 
-typedef struct	c_data
+# define BUFFER_SIZE 42
+
+typedef struct c_data
 {
 	float	x_axe;
 	float	y_axe;
-}				coord;
+}				t_coord;
 
-typedef struct	s_data
+typedef struct m_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-}				mlx;
+}				t_mlx;
 
-typedef struct	v_data
+typedef struct i_data
 {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				i_data;
+}				t_img;
 
+char	*fdf_get_next_line(int fd);
 int		fdf_dbt(char *s);
 int		fdf_nw(char *s, size_t stop);
 char	**fdf_free_all(char **tab);
@@ -53,7 +56,7 @@ char	***free_z(char ***z);
 char	***ft_store_z(char ***z_coordinates, int fd, int *x);
 char	***ft_parsing(char *map_b_parsing, int *y, int *x);
 int		main(int ac, char **av);
-void	window(int x, int y, coord **coo);
-void	my_mlx_pixel_put(i_data *data, int x, int y, int color);
+void	window(int x, int y, t_coord **coo);
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 #endif

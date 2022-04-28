@@ -27,7 +27,8 @@
 
 SRCS	=	sources/ft_fdf_split.c \
 			sources/parsing_map.c \
-			sources/print_window.c
+			sources/print_window.c \
+			sources/fdf_get_next_line.c
 
 OBJS	=	${SRCS:.c=.o}
 
