@@ -104,7 +104,7 @@ int	main(int ac, char **av)
 	printf("w_diag = %f\nh_diag = %f\n", w_diag, h_diag);
 	ft_printf("x = %i\ny = %i\n", x, y);
 	printf("coord first point = (%f;%d)\n", (192 + (w_diag * (((float)y - 1) / 2))), 96);
-	ft_printf("%s\n", z_coordinates[10][0]);
+	ft_printf("%s\n", z_coordinates[0][0]);
 
 
 	t_coord	**coo;
@@ -125,7 +125,6 @@ int	main(int ac, char **av)
 	coo[i][j].x_axe = (192 + (w_diag * (((float)y - 1) / 2 )));
 	coo[i][j].y_axe = 96;
 	printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
-	//printf("coord %i,%i = (%f;%f)\n", 10, 0, coo[10][0].x_axe, coo[10][0].y_axe);
 
 	printf("w_diag = %f\nh_diag = %f\n", w_diag, h_diag);
 	while (++j < x)
