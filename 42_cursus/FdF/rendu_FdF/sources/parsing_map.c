@@ -100,7 +100,7 @@ int	main(int ac, char **av)
 	float	nbs_h = (((float)x - 1 + (float)y - 1)/4);
 	float	w_diag = 1536/nbs_w;
 	float	h_diag= 768/nbs_w;
-	printf("nbs_w = %f\nnbs_y = %f\n", nbs_w, nbs_h);
+	printf("nbs_w = %f\nnbs_h = %f\n", nbs_w, nbs_h);
 	printf("w_diag = %f\nh_diag = %f\n", w_diag, h_diag);
 	ft_printf("x = %i\ny = %i\n", x, y);
 	printf("coord first point = (%f;%d)\n", (192 + (w_diag * (((float)y - 1) / 2))), 96);
@@ -109,13 +109,13 @@ int	main(int ac, char **av)
 
 	t_coord	**coo;
 
-	coo = malloc(sizeof(t_coord *) * (x + 1));
+	coo = malloc(sizeof(t_coord *) * (y));
 	if (coo == NULL)
 		return (ft_printf("Malloc error"));
 	int	i = 0;
-	while (i < x)
+	while (i < y)
 	{
-		coo[i] = malloc(sizeof(t_coord *) * (y + 2));
+		coo[i] = malloc(sizeof(t_coord *) * (x));
 		if (coo[i] == NULL)
 			return (ft_printf("Malloc error"));
 		i++;
@@ -133,8 +133,6 @@ int	main(int ac, char **av)
 		coo[i][j].y_axe = coo[i][j - 1].y_axe + (h_diag / 2);
 		printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 	}
-	i = 0;
-	j = 0;
 	while (++i < y)
 	{
 		j = 0;
