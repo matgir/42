@@ -58,5 +58,6 @@ char	***ft_parsing(char *map_b_parsing, int *y, int *x);
 int		main(int ac, char **av);
 void	window(int x, int y, t_coord **coo);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+t_coord	**incorporate_z(t_coord **coo, char ***z_coordinates, int x, int y);
 
 #endif

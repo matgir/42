@@ -71,6 +71,6 @@ char	**ft_fdf_split(char *s, int *x)
 		while (s[stop] == 32 && s[stop])
 			stop++;
 	}
-	tab[i] = 0;
+	tab[i] = '\0';
 	return (tab);
 }
