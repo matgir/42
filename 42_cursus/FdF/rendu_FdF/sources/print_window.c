@@ -31,11 +31,13 @@ void	window(int x, int y, t_coord **coo)
 
 	mlx.mlx_ptr = mlx_init();
 	if (mlx.mlx_ptr == NULL)
-		return;
+		return ; // voir pour faire comprendre que erreur
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 1920, 960, "Bonjour bonsoir");
 	if (mlx.win_ptr == NULL)
-		return ;
+		return ; // voir pour faire comprendre que erreur
 	img.img = mlx_new_image(mlx.mlx_ptr, 1920, 960);
+	if (img.img == NULL)
+		return ; // voir pour faire comprendre que erreur et free tout le bazar
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 																&img.endian);
 	i = -1;
@@ -48,6 +50,7 @@ void	window(int x, int y, t_coord **coo)
 			printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 		}
 	}
+	draw_line(coo, &img, x, y);
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, img.img, 0, 0);
 	mlx_loop(mlx.mlx_ptr);
 	return ;

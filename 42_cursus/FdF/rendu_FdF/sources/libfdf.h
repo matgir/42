@@ -59,5 +59,7 @@ int		main(int ac, char **av);
 void	window(int x, int y, t_coord **coo);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 t_coord	**incorporate_z(t_coord **coo, char ***z_coordinates, int x, int y);
+void	draw_line(t_coord **coo, t_img *img, int x, int y);
+void	ft_to_trace(t_coord coo0, t_coord coo1, t_img *img);
 
 #endif
