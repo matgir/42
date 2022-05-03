@@ -47,7 +47,7 @@ void	window(int x, int y, t_coord **coo)
 		while(++j < x)
 		{
 			my_mlx_pixel_put(&img, coo[i][j].x_axe, coo[i][j].y_axe, 0x0000FF00);
-			printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+			//printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 		}
 	}
 	draw_line(coo, &img, x, y);

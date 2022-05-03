@@ -131,22 +131,22 @@ int	main(int ac, char **av)
 	{
 		coo[i][j].x_axe = coo[i][j - 1].x_axe + (w_diag / 2);
 		coo[i][j].y_axe = coo[i][j - 1].y_axe + (h_diag / 2);
-		printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
-		printf("coord %i,%i = (%s)\n", i, j, z_coordinates[i][j]);
+		//printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+		//printf("coord %i,%i = (%s)\n", i, j, z_coordinates[i][j]);
 	}
 	while (++i < y)
 	{
 		j = 0;
 		coo[i][j].x_axe = coo[i - 1][j].x_axe - w_diag / 2;
 		coo[i][j].y_axe = coo[i - 1][j].y_axe + h_diag / 2;
-		printf("jour coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
-		printf("coord %i,%i = (%s)\n", i, j, z_coordinates[i][j]);
+		//printf("jour coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+		//printf("coord %i,%i = (%s)\n", i, j, z_coordinates[i][j]);
 		while (++j < x)
 		{
 			coo[i][j].x_axe = coo[i][j - 1].x_axe + (w_diag / 2);
 			coo[i][j].y_axe = coo[i][j - 1].y_axe + (h_diag / 2);
-			printf("rouj coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
-			printf("coord %i,%i = (%s)\n", i, j, z_coordinates[i][j]);
+			//printf("rouj coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+			//printf("coord %i,%i = (%s)\n", i, j, z_coordinates[i][j]);
 		}
 	}
 	coo = incorporate_z(coo, z_coordinates, x, y);
