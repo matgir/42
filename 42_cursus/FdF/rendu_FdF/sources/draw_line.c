@@ -73,13 +73,13 @@ void	ft_to_trace(t_coord coo0, t_coord coo1, t_img *img)
 	{
 		if (p >= 0)
 		{
-			my_mlx_pixel_put(img, x, y, 0x0000FF00);
+			my_mlx_pixel_put(img, x, y, 0x00FFFFFF);
 			y++;
 			p = p + 2 * dy - 2 * dx;
 		}
 		else
 		{
-			my_mlx_pixel_put(img, x, y, 0x0000FF00);
+			my_mlx_pixel_put(img, x, y, 0x00FFFFFF);
 			p = p + 2 * dy;
 		}
 		x++;
