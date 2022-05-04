@@ -27,8 +27,8 @@
 
 typedef struct c_data
 {
-	float	x_axe;
-	float	y_axe;
+	int	x_axe;
+	int	y_axe;
 }				t_coord;
 
 typedef struct m_data

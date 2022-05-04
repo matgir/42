@@ -107,17 +107,17 @@ void	ft_to_trace(t_coord coo0, t_coord coo1, t_img *img)
 	t_coord	sign;
 	int		error[2];
 
-	delta.x_axe = abs((int)coo1.x_axe - (int)coo0.x_axe);
-	delta.y_axe = abs((int)coo1.y_axe - (int)coo0.y_axe);
+	delta.x_axe = abs(coo1.x_axe - coo0.x_axe);
+	delta.y_axe = abs(coo1.y_axe - coo0.y_axe);
 	sign = set_sign(coo0, coo1);
 	
 	if (delta.x_axe > delta.y_axe)
-		error[0] = delta.x_axe;
+		error[0] = delta.x_axe/2;
 	else
-		error[0] = -delta.y_axe;
+		error[0] = -delta.y_axe/2;
 	while (1)
 	{
-		if (coo0.x_axe >= 1 && coo0.y_axe >= 1)
+		if ((coo0.x_axe >= 1 || coo0.x_axe <= 1920) && (coo0.y_axe >= 1 || coo0.y_axe <= 960))
 			my_mlx_pixel_put(img, coo0.x_axe, coo0.y_axe, 0x00FF00);
 		if (coo0.x_axe == coo1.x_axe && coo0.y_axe == coo1.y_axe)
 			break;
