@@ -54,7 +54,7 @@ void	ft_to_trace(t_coord coo0, t_coord coo1, t_img *img)
 			end.y_axe += sign.y_axe;
 		}
 	}
-}*/
+}
 
 void	ft_to_trace(t_coord coo0, t_coord coo1, t_img *img)
 {
@@ -83,6 +83,55 @@ void	ft_to_trace(t_coord coo0, t_coord coo1, t_img *img)
 			p = p + 2 * dy;
 		}
 		x++;
+	}
+}*/
+
+t_coord	set_sign(t_coord coo0, t_coord coo1)
+{
+	t_coord	sign;
+
+	if (coo0.x_axe < coo1.x_axe)
+		sign.x_axe = 1;
+	else
+		sign.x_axe = -1;
+	if (coo0.y_axe < coo1.y_axe)
+		sign.y_axe = 1;
+	else
+		sign.y_axe = -1;
+	return (sign);
+}
+
+void	ft_to_trace(t_coord coo0, t_coord coo1, t_img *img)
+{
+	t_coord	delta;
+	t_coord	sign;
+	int		error[2];
+
+	delta.x_axe = abs((int)coo1.x_axe - (int)coo0.x_axe);
+	delta.y_axe = abs((int)coo1.y_axe - (int)coo0.y_axe);
+	sign = set_sign(coo0, coo1);
+	
+	if (delta.x_axe > delta.y_axe)
+		error[0] = delta.x_axe;
+	else
+		error[0] = -delta.y_axe;
+	while (1)
+	{
+		if (coo0.x_axe >= 1 && coo0.y_axe >= 1)
+			my_mlx_pixel_put(img, coo0.x_axe, coo0.y_axe, 0x00FF00);
+		if (coo0.x_axe == coo1.x_axe && coo0.y_axe == coo1.y_axe)
+			break;
+		error[1] = error[0];
+		if (error[1] > -delta.x_axe)
+		{
+			error[0] -= delta.y_axe;
+			coo0.x_axe += sign.x_axe;
+		}
+		if (error[1] < delta.y_axe)
+		{
+			error[0] += delta.x_axe;
+			coo0.y_axe += sign.y_axe;
+		}
 	}
 }
 
