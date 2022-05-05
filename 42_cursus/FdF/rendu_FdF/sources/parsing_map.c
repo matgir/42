@@ -96,15 +96,15 @@ int	main(int ac, char **av)
 	z_coordinates = ft_parsing(av[1], &y, &x);
 	if (z_coordinates == NULL)
 		return (ft_printf("The map is invalide, choose another"));
-	int	nbs_w = (x - 1 + y - 1)/2;
-	//float	nbs_h = (((float)x - 1 + (float)y - 1)/4);
-	int	w_diag = 1536/nbs_w;
-	int	h_diag= 768/nbs_w;
-	//printf("nbs_w = %f\nnbs_h = %f\n", nbs_w, nbs_h);
-	//printf("w_diag = %f\nh_diag = %f\n", w_diag, h_diag);
-	//ft_printf("x = %i\ny = %i\n", x, y);
-	//printf("coord first point = (%f;%d)\n", (192 + (w_diag * (((float)y - 1) / 2))), 96);
-	//ft_printf("%s\n", z_coordinates[0][0]);
+	float	nbs_w = (x - 1 + y - 1)/2;
+	float	nbs_h = (((float)x - 1 + (float)y - 1)/4);
+	float	w_diag = 1536/nbs_w;
+	float	h_diag= 768/nbs_w;
+	printf("nbs_w = %f\nnbs_h = %f\n", nbs_w, nbs_h);
+	printf("w_diag = %f\nh_diag = %f\n", w_diag, h_diag);
+	ft_printf("x = %i\ny = %i\n", x, y);
+	printf("coord first point = (%f;%d)\n", (192 + (w_diag * (((float)y - 1) / 2))), 96);
+	ft_printf("%s\n", z_coordinates[0][0]);
 
 
 	t_coord	**coo;
@@ -122,16 +122,16 @@ int	main(int ac, char **av)
 	}
 	i = 0;
 	int j = 0;
-	coo[i][j].x_axe = (192 + (w_diag * ((y - 1) / 2 )));
+	coo[i][j].x_axe = (192 + (w_diag * (((float)y - 1) / 2 )));
 	coo[i][j].y_axe = 96;
-	//printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+	printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 
 	//printf("w_diag = %f\nh_diag = %f\n", w_diag, h_diag);
 	while (++j < x)
 	{
 		coo[i][j].x_axe = coo[i][j - 1].x_axe + (w_diag / 2);
 		coo[i][j].y_axe = coo[i][j - 1].y_axe + (h_diag / 2);
-		//printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+		//printf("coord %i,%i = (%d;%d)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 		//printf("coord %i,%i = (%s)\n", i, j, z_coordinates[i][j]);
 	}
 	while (++i < y)
@@ -139,17 +139,17 @@ int	main(int ac, char **av)
 		j = 0;
 		coo[i][j].x_axe = coo[i - 1][j].x_axe - w_diag / 2;
 		coo[i][j].y_axe = coo[i - 1][j].y_axe + h_diag / 2;
-		//printf("jour coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+		//printf("jour coord %i,%i = (%d;%d)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 		//printf("coord %i,%i = (%s)\n", i, j, z_coordinates[i][j]);
 		while (++j < x)
 		{
 			coo[i][j].x_axe = coo[i][j - 1].x_axe + (w_diag / 2);
 			coo[i][j].y_axe = coo[i][j - 1].y_axe + (h_diag / 2);
-			//printf("rouj coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
+			//printf("rouj coord %i,%i = (%d;%d)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 			//printf("coord %i,%i = (%s)\n", i, j, z_coordinates[i][j]);
 		}
 	}
-	//coo = incorporate_z(coo, z_coordinates, x, y);
+	coo = incorporate_z(coo, z_coordinates, x, y);
 	window(x, y, coo);
 	return (0);
 }
