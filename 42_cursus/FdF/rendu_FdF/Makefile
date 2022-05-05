@@ -54,8 +54,10 @@ CMPMLX	=	-lXext -lX11 -lm -lz -lbsd -Lmath
 
 #	demander ce qui est mieux, 'rm -f' ou 'rm -rf'
 
+#	REMETRE LES FLAG POUR DE VRAI #############################################
+
 .c.o:	
-			${CC} ${CFLAGS} ${INCL} -c $< -o ${<:.c=.o}
+			${CC} ${INCL} -c $< -o ${<:.c=.o}
 
 all:		${NAME}
 

@@ -101,7 +101,7 @@ t_coord	set_sign(t_coord coo0, t_coord coo1)
 	return (sign);
 }
 
-void	ft_to_trace(t_coord coo0, t_coord coo1, t_img *img)
+void	ft_to_trace(t_mlx *mlx, t_coord coo0, t_coord coo1, t_img *img)
 {
 	t_coord	delta;
 	t_coord	sign;
@@ -132,10 +132,11 @@ void	ft_to_trace(t_coord coo0, t_coord coo1, t_img *img)
 			error[0] += delta.x_axe;
 			coo0.y_axe += sign.y_axe;
 		}
+		//mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img, 0, 0);
 	}
 }
 
-void	draw_line(t_coord **coo, t_img *img, int x, int y)
+void	draw_line(t_mlx *mlx, t_coord **coo, t_img *img, int x, int y)
 {
 	int	i;
 	int	j;
@@ -147,9 +148,9 @@ void	draw_line(t_coord **coo, t_img *img, int x, int y)
 		while(++j < x)
 		{
 			if (j != x - 1)
-				ft_to_trace(coo[i][j], coo[i][j + 1], img);
+				ft_to_trace(mlx, coo[i][j], coo[i][j + 1], img);
 			if (i != 0)
-				ft_to_trace(coo[i][j], coo[i - 1][j], img);
+				ft_to_trace(mlx, coo[i][j], coo[i - 1][j], img);
 		}
 	}
 }

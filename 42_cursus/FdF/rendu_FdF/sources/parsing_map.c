@@ -149,7 +149,7 @@ int	main(int ac, char **av)
 			//printf("coord %i,%i = (%s)\n", i, j, z_coordinates[i][j]);
 		}
 	}
-	coo = incorporate_z(coo, z_coordinates, x, y);
+	//coo = incorporate_z(coo, z_coordinates, x, y);
 	window(x, y, coo);
 	return (0);
 }

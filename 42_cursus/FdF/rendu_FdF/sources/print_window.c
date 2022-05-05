@@ -50,7 +50,7 @@ void	window(int x, int y, t_coord **coo)
 			//printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 		}
 	}*/
-	draw_line(coo, &img, x, y);
+	draw_line(&mlx, coo, &img, x, y);
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, img.img, 0, 0);
 	mlx_loop(mlx.mlx_ptr);
 	return ;
