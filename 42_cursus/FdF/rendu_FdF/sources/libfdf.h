@@ -20,6 +20,8 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 
