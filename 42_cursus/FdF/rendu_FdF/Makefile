@@ -89,4 +89,4 @@ re:			fclean all
 
 #	permet au programme dexecuter la regle meme si un fichier du meme nom existe
 
-.PHONY:		all clean fclean re 
+.PHONY:		all clean fclean re libftc libftfc liblmlxc
