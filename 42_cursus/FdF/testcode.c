@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "library.h"
+
 int	count_table_lines(int **table)
 {
 	int	i;
@@ -188,6 +190,30 @@ t_mlx	*quit_before_start(t_mlx *mlx)
 	return (NULL);
 }
 
+void	quit(t_mlx *mlx)
+{
+	int	i;
+
+	i = -1;
+	while (++i < mlx->map->line_count)
+	{
+		free((mlx->map->map)[i]);
+	}
+	free(mlx->map->map);
+	free(mlx->map);
+	mlx_loop_end(mlx->mlx_ptr);
+	mlx_destroy_window(mlx->mlx_ptr, mlx->window_ptr);
+	mlx_destroy_display(mlx->mlx_ptr);
+	free(mlx->mlx_ptr);
+	free(mlx);
+	exit(0);
+}
+
+void	press_escape(t_mlx *mlx)
+{
+	quit(mlx);
+}
+
 void	press_up(t_mlx *mlx)
 {
 	mlx->map->camera.alpha += 0.05;
@@ -303,12 +329,6 @@ void	press_p(t_mlx *mlx)
 	display(mlx);
 }
 
-
-void	press_escape(t_mlx *mlx)
-{
-	quit(mlx);
-}
-
 int	handle_key2(int key, void *ptr)
 {
 	if (key == W)
@@ -349,67 +369,113 @@ int	handle_key(int key, void *ptr)
 	return (handle_key2(key, ptr));
 }
 
-t_mlx	*init_window(char *name, t_map *map)
+void	up(t_mlx *mlx)
 {
-	t_mlx	*mlx;
-
-	mlx = malloc(sizeof(t_mlx));
-	if (!mlx)
-		return (NULL);
-	mlx->mlx_ptr = NULL;
-	mlx->window_ptr = NULL;
-	mlx->map = map;
-	mlx->map->z_range = -10;
+	mlx->map->camera.zoom += 1;
 	mlx->map->colors = FALSE;
-	mlx->mlx_ptr = mlx_init();
-	if (!mlx->mlx_ptr)
-		return (quit_before_start(mlx));
-	mlx->window_ptr = mlx_new_window(mlx->mlx_ptr, WIDTH, HEIGHT, name);
-	if (!mlx->window_ptr)
-		return (quit_before_start(mlx));
-	mlx_key_hook(mlx->window_ptr, handle_key, mlx);
-	mlx_mouse_hook(mlx->window_ptr, handle_mouse, mlx);
 	display(mlx);
-	mlx_loop(mlx->mlx_ptr);
-	return (mlx);
 }
 
-int	main(int argc, char **argv)
+void	down(t_mlx *mlx)
 {
-	t_map	*map;
+	if (mlx->map->camera.zoom > 0)
+		mlx->map->camera.zoom -= 1;
+	mlx->map->colors = FALSE;
+	display(mlx);
+}
 
-	if (argc != 2)
-	{
-		ft_putendl_fd("Please specify one map", 1);
-		return (1);
-	}
-	map = parse_map(argv[1]);
-	if (!map)
-		return (1);
-	init_window("Fdf", map);
+int	handle_mouse(int button, int x, int y, void *ptr)
+{
+	(void) x;
+	(void) y;
+	if (button == WHEEL_UP)
+		up((t_mlx *) ptr);
+	if (button == WHEEL_DOWN)
+		down((t_mlx *) ptr);
 	return (0);
 }
 
-void	quit(t_mlx *mlx)
+void	display_background(t_mlx *mlx, int color)
 {
-	int	i;
+	int		x;
+	int		y;
+	void	*img_ptr;
+	int		*data;
+	int		useless;
 
-	i = -1;
-	while (++i < mlx->map->line_count)
+	img_ptr = mlx_new_image(mlx->mlx_ptr, WIDTH, HEIGHT);
+	data = (int *)mlx_get_data_addr(img_ptr, &useless, &useless, &useless);
+	x = -1;
+	while (++x < WIDTH)
 	{
-		free((mlx->map->map)[i]);
+		y = -1;
+		while (++y < HEIGHT)
+		{
+			data[y * WIDTH + x] = color;
+		}
 	}
-	free(mlx->map->map);
-	free(mlx->map);
-	mlx_loop_end(mlx->mlx_ptr);
-	mlx_destroy_window(mlx->mlx_ptr, mlx->window_ptr);
-	mlx_destroy_display(mlx->mlx_ptr);
-	free(mlx->mlx_ptr);
-	free(mlx);
-	exit(0);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->window_ptr, img_ptr, 0, 0);
+	mlx_destroy_image(mlx->mlx_ptr, img_ptr);
 }
 
+int	encode_rgb(int red, int green, int blue)
+{
+	return (red << 16 | green << 8 | blue);
+}
 
+int	min(int i1, int i2)
+{
+	if (i1 < i2)
+		return (i1);
+	return (i2);
+}
+
+t_map	setup_camera(t_map map)
+{
+	map.camera.zoom = min(WIDTH / map.line_size / 2,
+			HEIGHT / map.line_count / 2);
+	map.camera.alpha = 0;
+	map.camera.beta = 0;
+	map.camera.gamma = 0;
+	map.camera.z_scale = 7;
+	map.camera.x_offset = MENU_WIDTH;
+	map.camera.y_offset = -250;
+	map.camera.proj = ISO;
+	return (map);
+}
+
+t_map	init_map(t_map map)
+{
+	int	i;
+	int	j;
+
+	map.z_max = map.map[0][0];
+	map.z_min = map.map[0][0];
+	i = -1;
+	while (++i < map.line_count)
+	{
+		j = -1;
+		while (++j < map.line_size)
+		{
+			if (map.map[i][j] > map.z_max)
+				map.z_max = map.map[i][j];
+			if (map.map[i][j] < map.z_min)
+				map.z_min = map.map[i][j];
+		}
+	}
+	map.z_range = map.z_max - map.z_min;
+	return (setup_camera(map));
+}
+
+t_3d_point	init_3d_point(int x, int y, int z)
+{
+	t_3d_point	point;
+
+	point.x = x;
+	point.y = y;
+	point.z = z;
+	return (point);
+}
 
 int	get_color(t_3d_point point, int z_min, int z_max)
 {
@@ -473,127 +539,6 @@ int	get_green(t_3d_point point, int z_min, int z_max)
 		return (255 - (255 - ((510 * current_z) / step)));
 	else
 		return (255 - ((255 * current_z) / step));
-}
-
-void	display_points(t_mlx *mlx)
-{
-	int			i;
-	int			j;
-	t_3d_point	p;
-
-	if (mlx->map->z_range == -10)
-		*(mlx->map) = init_map(*(mlx->map));
-	i = -1;
-	while (++i < mlx->map->line_count)
-	{
-		j = -1;
-		while (++j < mlx->map->line_size)
-		{
-			p = init_3d_point(j, i, mlx->map->map[i][j]);
-			if (j > 0)
-				trace_line(project(p, mlx->map), project(init_3d_point(j - 1,
-							i, mlx->map->map[i][j - 1]), mlx->map), mlx);
-			if (i > 0)
-				trace_line(project(p, mlx->map), project(init_3d_point(j,
-							i - 1, mlx->map->map[i - 1][j]), mlx->map), mlx);
-		}
-	}
-}
-
-void	display_background(t_mlx *mlx, int color)
-{
-	int		x;
-	int		y;
-	void	*img_ptr;
-	int		*data;
-	int		useless;
-
-	img_ptr = mlx_new_image(mlx->mlx_ptr, WIDTH, HEIGHT);
-	data = (int *)mlx_get_data_addr(img_ptr, &useless, &useless, &useless);
-	x = -1;
-	while (++x < WIDTH)
-	{
-		y = -1;
-		while (++y < HEIGHT)
-		{
-			data[y * WIDTH + x] = color;
-		}
-	}
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->window_ptr, img_ptr, 0, 0);
-	mlx_destroy_image(mlx->mlx_ptr, img_ptr);
-}
-
-void	display_menu_2(t_mlx *mlx, int text_color)
-{
-	if (mlx->map->camera.proj == ISO)
-		mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 330, text_color,
-			"Current projection: Isometric");
-	if (mlx->map->camera.proj == PARALLEL)
-		mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 330, text_color,
-			"Current projection: Parallel");
-}
-
-void	display_menu_string(t_mlx *mlx, int text_color)
-{
-	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 50, text_color,
-		"Arrows UP / DOWN | Rotate X axis");
-	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 70, text_color,
-		"Arrows RIGHT / LEFT | Rotate Z axis");
-	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 90, text_color,
-		"CTRL right / OPT right | Rotate Y axis");
-	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 130, text_color,
-		"Wheel UP / DOWN | Zoom in/out");
-	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 170, text_color,
-		"Keypad + / - | Change Z scale");
-	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 210, text_color,
-		"W / A / S / D | Move projection");
-	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 250, text_color,
-		"C | Toggle color mod");
-	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 265, text_color,
-		"(All projection movements disable");
-	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 280, text_color,
-		" colors to reduce lag)");
-	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 310, text_color,
-		"P | Toggle projection (Iso, Parallel)");
-	display_menu_2(mlx, text_color);
-}
-
-void	display_menu(t_mlx *mlx, int background_color, int text_color)
-{
-	int		x;
-	int		y;
-	void	*img_ptr;
-	int		*data;
-	int		useless;
-
-	img_ptr = mlx_new_image(mlx->mlx_ptr, MENU_WIDTH, HEIGHT);
-	data = (int *)mlx_get_data_addr(img_ptr, &useless, &useless, &useless);
-	x = -1;
-	while (++x < MENU_WIDTH)
-	{
-		y = -1;
-		while (++y < HEIGHT)
-		{
-			data[y * MENU_WIDTH + x] = background_color;
-		}
-	}
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->window_ptr, img_ptr, 0, 0);
-	mlx_destroy_image(mlx->mlx_ptr, img_ptr);
-	display_menu_string(mlx, text_color);
-}
-
-
-
-void	display(t_mlx *mlx)
-{
-	display_background(mlx, encode_rgb(0, 0, 0));
-	display_points(mlx);
-	display_menu(mlx, encode_rgb(0, 0, 0), encode_rgb(255, 255, 255));
-}
-
-int	encode_rgb(int red, int green, int blue)
-{
-	return (red << 16 | green << 8 | blue);
 }
 
 int	get_gradient(int c1, int c2, float d1, float d2)
@@ -679,16 +624,6 @@ void	trace_line(t_point point1, t_point point2, t_mlx *mlx)
 	}
 }
 
-t_3d_point	init_3d_point(int x, int y, int z)
-{
-	t_3d_point	point;
-
-	point.x = x;
-	point.y = y;
-	point.z = z;
-	return (point);
-}
-
 void	rotate_x(int *y, int *z, double alpha)
 {
 	int	previous_y;
@@ -752,93 +687,134 @@ t_point	project(t_3d_point point, t_map *map)
 	return (projected_point);
 }
 
-int	min(int i1, int i2)
+void	display_points(t_mlx *mlx)
 {
-	if (i1 < i2)
-		return (i1);
-	return (i2);
-}
+	int			i;
+	int			j;
+	t_3d_point	p;
 
-t_map	setup_camera(t_map map)
-{
-	map.camera.zoom = min(WIDTH / map.line_size / 2,
-			HEIGHT / map.line_count / 2);
-	map.camera.alpha = 0;
-	map.camera.beta = 0;
-	map.camera.gamma = 0;
-	map.camera.z_scale = 7;
-	map.camera.x_offset = MENU_WIDTH;
-	map.camera.y_offset = -250;
-	map.camera.proj = ISO;
-	return (map);
-}
-
-t_map	init_map(t_map map)
-{
-	int	i;
-	int	j;
-
-	map.z_max = map.map[0][0];
-	map.z_min = map.map[0][0];
+	if (mlx->map->z_range == -10)
+		*(mlx->map) = init_map(*(mlx->map));
 	i = -1;
-	while (++i < map.line_count)
+	while (++i < mlx->map->line_count)
 	{
 		j = -1;
-		while (++j < map.line_size)
+		while (++j < mlx->map->line_size)
 		{
-			if (map.map[i][j] > map.z_max)
-				map.z_max = map.map[i][j];
-			if (map.map[i][j] < map.z_min)
-				map.z_min = map.map[i][j];
+			p = init_3d_point(j, i, mlx->map->map[i][j]);
+			if (j > 0)
+				trace_line(project(p, mlx->map), project(init_3d_point(j - 1,
+							i, mlx->map->map[i][j - 1]), mlx->map), mlx);
+			if (i > 0)
+				trace_line(project(p, mlx->map), project(init_3d_point(j,
+							i - 1, mlx->map->map[i - 1][j]), mlx->map), mlx);
 		}
 	}
-	map.z_range = map.z_max - map.z_min;
-	return (setup_camera(map));
 }
 
-
-
-
-
-void	up(t_mlx *mlx)
+void	display_menu_2(t_mlx *mlx, int text_color)
 {
-	mlx->map->camera.zoom += 1;
+	if (mlx->map->camera.proj == ISO)
+		mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 330, text_color,
+			"Current projection: Isometric");
+	if (mlx->map->camera.proj == PARALLEL)
+		mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 330, text_color,
+			"Current projection: Parallel");
+}
+
+void	display_menu_string(t_mlx *mlx, int text_color)
+{
+	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 50, text_color,
+		"Arrows UP / DOWN | Rotate X axis");
+	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 70, text_color,
+		"Arrows RIGHT / LEFT | Rotate Z axis");
+	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 90, text_color,
+		"CTRL right / OPT right | Rotate Y axis");
+	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 130, text_color,
+		"Wheel UP / DOWN | Zoom in/out");
+	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 170, text_color,
+		"Keypad + / - | Change Z scale");
+	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 210, text_color,
+		"W / A / S / D | Move projection");
+	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 250, text_color,
+		"C | Toggle color mod");
+	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 265, text_color,
+		"(All projection movements disable");
+	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 280, text_color,
+		" colors to reduce lag)");
+	mlx_string_put(mlx->mlx_ptr, mlx->window_ptr, 30, 310, text_color,
+		"P | Toggle projection (Iso, Parallel)");
+	display_menu_2(mlx, text_color);
+}
+
+void	display_menu(t_mlx *mlx, int background_color, int text_color)
+{
+	int		x;
+	int		y;
+	void	*img_ptr;
+	int		*data;
+	int		useless;
+
+	img_ptr = mlx_new_image(mlx->mlx_ptr, MENU_WIDTH, HEIGHT);
+	data = (int *)mlx_get_data_addr(img_ptr, &useless, &useless, &useless);
+	x = -1;
+	while (++x < MENU_WIDTH)
+	{
+		y = -1;
+		while (++y < HEIGHT)
+		{
+			data[y * MENU_WIDTH + x] = background_color;
+		}
+	}
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->window_ptr, img_ptr, 0, 0);
+	mlx_destroy_image(mlx->mlx_ptr, img_ptr);
+	display_menu_string(mlx, text_color);
+}
+
+void	display(t_mlx *mlx)
+{
+	display_background(mlx, encode_rgb(0, 0, 0));
+	display_points(mlx);
+	display_menu(mlx, encode_rgb(0, 0, 0), encode_rgb(255, 255, 255));
+}
+
+t_mlx	*init_window(char *name, t_map *map)
+{
+	t_mlx	*mlx;
+
+	mlx = malloc(sizeof(t_mlx));
+	if (!mlx)
+		return (NULL);
+	mlx->mlx_ptr = NULL;
+	mlx->window_ptr = NULL;
+	mlx->map = map;
+	mlx->map->z_range = -10;
 	mlx->map->colors = FALSE;
+	mlx->mlx_ptr = mlx_init();
+	if (!mlx->mlx_ptr)
+		return (quit_before_start(mlx));
+	mlx->window_ptr = mlx_new_window(mlx->mlx_ptr, WIDTH, HEIGHT, name);
+	if (!mlx->window_ptr)
+		return (quit_before_start(mlx));
+	mlx_key_hook(mlx->window_ptr, handle_key, mlx);
+	mlx_mouse_hook(mlx->window_ptr, handle_mouse, mlx);
 	display(mlx);
+	mlx_loop(mlx->mlx_ptr);
+	return (mlx);
 }
 
-void	down(t_mlx *mlx)
+int	main(int argc, char **argv)
 {
-	if (mlx->map->camera.zoom > 0)
-		mlx->map->camera.zoom -= 1;
-	mlx->map->colors = FALSE;
-	display(mlx);
-}
+	t_map	*map;
 
-int	handle_mouse(int button, int x, int y, void *ptr)
-{
-	(void) x;
-	(void) y;
-	if (button == WHEEL_UP)
-		up((t_mlx *) ptr);
-	if (button == WHEEL_DOWN)
-		down((t_mlx *) ptr);
+	if (argc != 2)
+	{
+		ft_putendl_fd("Please specify one map", 1);
+		return (1);
+	}
+	map = parse_map(argv[1]);
+	if (!map)
+		return (1);
+	init_window("Fdf", map);
 	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
