@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBRARY.H
-# define LIBRARY.H
+#ifndef LIBRARY_H
+# define LIBRARY_H
 
 # define LEFT_CLICK 1
 # define RIGHT_CLICK 3
@@ -40,8 +40,8 @@
 
 //###############################################################################
 
-# include "libft.h"
-# include "mlx.h"
+# include "rendu_FdF/libft/libft.h"
+# include "rendu_FdF/minilibx-linux/mlx.h"
 
 # include <fcntl.h>
 # include <stdio.h>
