@@ -70,7 +70,7 @@ char	***ft_store_z(char ***z_coordinates, int fd, int *x)
 	}
 }
 
-int	**specified_error(int **coord, int gnl_error)
+int	**specifie_error(int **coord, int gnl_error)
 {
 	int	i;
 
@@ -86,8 +86,13 @@ int	**specified_error(int **coord, int gnl_error)
 	if (gnl_error == -2)
 		ft_putendl_fd("There was an error during the allocation of the memory, please try again", 1);
 	if (gnl_error == -3)
-		ft_putendl_fd("Cannot parse file, please select another",);
+		ft_putendl_fd("Cannot parse file, please select another",1);
 	return(NULL);
+}
+
+int add_line(char *line, int **coord, int *column_count)
+{
+
 }
 
 char	**ft_parsing(int fd, int *column_count, int *line_count)
@@ -96,19 +101,19 @@ char	**ft_parsing(int fd, int *column_count, int *line_count)
 	int		gnl_error;
 	int		**coord;
 
-	table = NULL;
+	coord = NULL;
 	gnl_error = 0;
 	while (TRUE) // voir pour mettre autre condition
 	{
-		line = fdf_gnl(fd, *gnl_error);
+		line = fdf_gnl(fd, &gnl_error);
 		if (line == NULL)
 		{
 			if (gnl_error < 0)
-				return (specified_error(coord, gnl_error));
-
-//###############################################################################
-
+				return (specifie_error(coord, gnl_error));
+			break;
 		}
+		*line_count = *line_count + 1;
+		coord = add_line(line, coord, column_count);
 	}
 
 	/*int		fd;

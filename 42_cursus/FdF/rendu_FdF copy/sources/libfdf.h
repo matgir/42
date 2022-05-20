@@ -60,6 +60,8 @@ char	*fdf_gnl(int fd, int *gnl_error);
 char	*ft_gnl_strjoin(char *line, char *buffer);
 void	ft_gnl_strlcpy(char *dst, const char *src, size_t size);
 int	ft_gnl_strlen(const char *str);
+int	**specifie_error(int **coord, int gnl_error);
+
 
 
 /*char	*fdf_get_next_line(int fd);
