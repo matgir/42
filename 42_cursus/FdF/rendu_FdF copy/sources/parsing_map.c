@@ -90,9 +90,75 @@ int	**specifie_error(int **coord, int gnl_error)
 	return(NULL);
 }
 
+int	coord_current_lines(int **coord)
+{
+	int	i;
+
+	i = 0;
+	while (coord[i] != NULL)
+		i++;
+	return (i);
+}
+
+int	**add_coord(int **coord)
+{
+	int	**new_coord;
+	int	i;
+
+	if (coord == NULL)
+	{
+		coord = malloc(sizeof(*coord));
+		if (coord == NULL)
+			return (NULL);
+		coord[0] = NULL;
+	}
+	new_coord = malloc(sizeof(*coord) * (coord_current_lines(coord) + 2));
+	if (new_coord = NULL)
+		return (NULL);
+	i = -1;
+	while (++i < coord_current_lines(coord))
+		new_coord[i] = coord[i];
+	new_coord[i++] = NULL;
+	new_coord[i] = NULL;
+	free(coord);
+	return (new_coord);
+}
+
+int	*get_int(char *line, int *column_count)
+{
+	char	**split;
+	int		*get_int;
+	int		column;
+	int		i;
+
+	split = ft_fdf_split(line, ' ');
+	if (split == NULL)
+		return (NULL);
+	column = 0;
+	while (split[column] != NULL); //maybe !='\0'
+		column++;
+	get_int = malloc(sizeof(int) * column);
+	if (get_int)
+	{
+		i = -1;
+		while (++i < column)
+			get_int[i] = ft_atoi(split[i]);
+		*column_count = i;
+	}
+	while (column >= 0)
+		free(split[column]);
+	free(split);
+	return (get_int);
+}
+
 int add_line(char *line, int **coord, int *column_count)
 {
+	int	*pre_line;
 
+	coord = add_coord(coord);
+	if (coord = NULL)
+		return (NULL);
+	pre_line = get_int(line, column_count);
 }
 
 char	**ft_parsing(int fd, int *column_count, int *line_count)
