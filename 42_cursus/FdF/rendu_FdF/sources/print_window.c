@@ -18,8 +18,6 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || x > 1920 || y < 0 || y > 960)
-		return;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
@@ -27,8 +25,8 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 void	window(int x, int y, t_coord **coo)
 {
 	t_mlx		mlx;
-	//int		i;
-	//int		j;
+	int		i;
+	int		j;
 	t_img	img;
 
 	mlx.mlx_ptr = mlx_init();
@@ -42,7 +40,7 @@ void	window(int x, int y, t_coord **coo)
 		return ; // voir pour faire comprendre que erreur et free tout le bazar
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 																&img.endian);
-	/*i = -1;
+	i = -1;
 	while(++i < y)
 	{
 		j = -1;
@@ -51,7 +49,7 @@ void	window(int x, int y, t_coord **coo)
 			my_mlx_pixel_put(&img, coo[i][j].x_axe, coo[i][j].y_axe, 0x0000FF00);
 			//printf("coord %i,%i = (%f;%f)\n", i, j, coo[i][j].x_axe, coo[i][j].y_axe);
 		}
-	}*/
+	}
 	draw_line(&mlx, coo, &img, x, y);
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, img.img, 0, 0);
 	mlx_loop(mlx.mlx_ptr);

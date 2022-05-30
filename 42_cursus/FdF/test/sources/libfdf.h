@@ -27,40 +27,83 @@
 
 # define BUFFER_SIZE 42
 
+# define WHIDTH 1920
+# define HEIGHT 960
+
+# define ESC 65307
+# define PLUS 65451
+# define MINUS 65453
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+
+# define LEFT_CLICK 1
+# define RIGHT_CLICK 3
+# define WHEEL_DOWN 4
+# define WHEEL_UP 5
+
+# define TRUE 1
+
+typedef struct s_iso
+{
+	int	x;
+	int	y;
+	int	z;
+}				t_iso;
+
+typedef struct s_point
+{
+	int		x;
+	int		y;
+	t_iso	r_point;
+}				t_point;
+
+typedef struct s_camera
+{
+	int		zoom;
+	float	z_scale;
+	int		x_offset;
+	int		y_offset;
+}				t_camera;
+
 typedef struct s_coord
 {
-	int	**coord;
+	int			**coord;
+	int			line_count;
+	int			column_count;
+	int			z_range;
+	int			z_max;
+	int			z_min;
+	t_camera	camera;
 }				t_coord;
 
-typedef struct c_data
-{
-	float	x_axe;
-	float	y_axe;
-}				t_coord;
-
-typedef struct m_data
+typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_coord	*coord;
+
 }				t_mlx;
 
-typedef struct i_data
+/*typedef struct i_data
 {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_img;
+}				t_img;*/
 
-int	main(int ac, char **av);
+int		main(int ac, char **av);
 t_coord	*parse_map(char *z_map);
-char	**ft_parsing(int fd, int *column_count, int *line_count);
+int	**ft_parsing(int fd, int *column_count, int *line_count);
 char	*fdf_gnl(int fd, int *gnl_error);
 char	*ft_gnl_strjoin(char *line, char *buffer);
 void	ft_gnl_strlcpy(char *dst, const char *src, size_t size);
-int	ft_gnl_strlen(const char *str);
-int	**specifie_error(int **coord, int gnl_error);
+int		ft_gnl_strlen(const char *str);
+int		**specifie_error(int **coord, int gnl_error);
+
 
 
 

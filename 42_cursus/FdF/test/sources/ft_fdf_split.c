@@ -49,7 +49,7 @@ char	**fdf_free_all(char **tab)
 	return (NULL);
 }
 
-char	**ft_fdf_split(char *s, int *x)
+char	**ft_fdf_split(char *s, char *x)
 {
 	char	**tab;
 	int		i;

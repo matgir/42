@@ -105,12 +105,30 @@ void	ft_to_trace(t_mlx *mlx, t_coord coo0, t_coord coo1, t_img *img)
 {
 	t_coord	delta;
 	t_coord	sign;
+	t_coord	cur;
 	int		error[2];
 
-	delta.x_axe = abs(coo1.x_axe - coo0.x_axe);
-	delta.y_axe = abs(coo1.y_axe - coo0.y_axe);
+	delta.x_axe = abs(coo0.x_axe - coo1.x_axe);
+	delta.y_axe = abs(coo0.y_axe - coo1.y_axe);
 	sign = set_sign(coo0, coo1);
-	
+	error[0] = delta.x_axe - delta.y_axe;
+	cur = coo1;
+	while(cur.x_axe != coo0.x_axe || cur.y_axe != coo0.y_axe)
+	{
+		my_mlx_pixel_put(img, cur.x_axe, cur.y_axe, 0x00FF00);
+		error[1] = error[0] * 2;
+		if (error[1] > -delta.y_axe)
+		{
+			error[0] -= delta.y_axe;
+			cur.x_axe += sign.x_axe;
+		}
+		if (error[1] < delta.x_axe)
+		{
+			error[0] += delta.x_axe;
+			cur.y_axe += sign.y_axe;
+		}
+	}
+	/*
 	//printf("Print from %g;%g to %g;%g\n", coo0.x_axe, coo0.y_axe, coo1.x_axe, coo1.y_axe);
 	if (delta.x_axe > delta.y_axe)
 		error[0] = delta.x_axe/2;
@@ -146,7 +164,7 @@ void	ft_to_trace(t_mlx *mlx, t_coord coo0, t_coord coo1, t_img *img)
 		}
 		//mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img, 0, 0);
 	}
-	//printf("----------------\n");
+	//printf("----------------\n");*/
 }
 
 void	draw_line(t_mlx *mlx, t_coord **coo, t_img *img, int x, int y)

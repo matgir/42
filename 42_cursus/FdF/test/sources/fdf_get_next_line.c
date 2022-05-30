@@ -78,7 +78,7 @@ char	*fdf_gnl(int fd, int *gnl_error)
 
 	if (BUFFER_SIZE < 1 || read(fd, NULL, 0) == -1)
 	{
-		gnl_error = -1;
+		*gnl_error = -1;
 		return (NULL);
 	}
 	line = NULL;
@@ -87,7 +87,7 @@ char	*fdf_gnl(int fd, int *gnl_error)
 		line = ft_gnl_strjoin(line, buf);
 		if (line == NULL)
 		{
-			gnl_error = -2;
+			*gnl_error = -2;
 			return (NULL);
 		}
 		end = read(fd, buf, BUFFER_SIZE);
@@ -95,7 +95,7 @@ char	*fdf_gnl(int fd, int *gnl_error)
 		if (end == 0 && line[0] == '\0')
 		{
 			free(line);
-			gnl_error = -3;
+			*gnl_error = -3;
 			return (NULL);
 		}
 		else if (end == 0)

@@ -27,10 +27,7 @@
 
 SRCS	=	sources/ft_fdf_split.c \
 			sources/parsing_map.c \
-			sources/print_window.c \
 			sources/fdf_get_next_line.c \
-			sources/incorporates_z.c \
-			sources/draw_line.c
 
 OBJS	=	${SRCS:.c=.o}
 
@@ -54,10 +51,8 @@ CMPMLX	=	-lXext -lX11 -lm -lz -lbsd -Lmath
 
 #	demander ce qui est mieux, 'rm -f' ou 'rm -rf'
 
-#	REMETRE LES FLAG POUR DE VRAI #############################################
-
 .c.o:	
-			${CC} ${INCL} -c $< -o ${<:.c=.o}
+			${CC} ${CFLAGS} ${INCL} -c $< -o ${<:.c=.o}
 
 all:		${NAME}
 
