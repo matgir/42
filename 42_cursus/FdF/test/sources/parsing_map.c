@@ -87,8 +87,11 @@ int	*get_int(char *line, int *column_count)
 			get_int[i] = ft_atoi(split[i]);
 		*column_count = i;
 	}
-	while (column >= 0)
+	column = -1;
+	while (split[++column] != NULL)
+	{
 		free(split[column]);
+	}
 	free(split);
 	return (get_int);
 }
@@ -123,8 +126,8 @@ int	**ft_parsing(int fd, int *column_count, int *line_count)
 		line = fdf_gnl(fd, &gnl_error);
 		if (line == NULL)
 		{
-			if (gnl_error < 0)
-				return (specifie_error(coord, gnl_error));
+			//if (gnl_error < 0)
+			//	return (specifie_error(coord, gnl_error));
 			break;
 		}
 		*line_count = *line_count + 1;
@@ -132,7 +135,8 @@ int	**ft_parsing(int fd, int *column_count, int *line_count)
 		if (coord == NULL)
 		{
 			free(line);
-			return(specifie_error(coord, -3));
+			// return(specifie_error(coord, -3));
+			break;
 		}
 		free(line);
 	}
@@ -155,6 +159,8 @@ t_coord	*parse_map(char *z_map)
 		return (NULL);
 	}
 	z_coord = ft_parsing(fd, &column_count, &line_count);
+	/*if (z_coord == NULL)
+		return (NULL);*/
 	coord = malloc(sizeof(t_coord));
 	if (coord == NULL)
 		return (NULL);
@@ -196,9 +202,9 @@ t_coord	setup_camera(t_coord coord)
 {
 	coord.camera.zoom = def_min(WHIDTH / coord.column_count / 2,
 			HEIGHT / coord.line_count / 2);
-	coord.camera.z_scale = 7;
-	coord.camera.x_offset = 96; // a verif
-	coord.camera.y_offset = 192; // avreif
+	coord.camera.z_scale = 10;
+	coord.camera.x_offset = -50; // a verif
+	coord.camera.y_offset = -200; // avreif
 	return (coord);
 }
 
@@ -309,12 +315,34 @@ void	trace_line(t_point p1, t_point p2, t_mlx *mlx)
 	}
 }
 
+void	renew_image(t_mlx *mlx, int color)
+{
+	int	x;
+	int	y;
+	void	*img_ptr;
+	int		*data;
+	int		random;
+
+	img_ptr = mlx_new_image(mlx->mlx_ptr, WHIDTH, HEIGHT); // mettre protection retour NULL
+	data = (int *)mlx_get_data_addr(img_ptr, &random, &random, &random);
+	x = -1;
+	while (++x < WHIDTH)
+	{
+		y = -1;
+		while (++y < HEIGHT)
+			data[y * WHIDTH + x] = color;
+	}
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img_ptr, 0, 0);
+	mlx_destroy_image(mlx->mlx_ptr, img_ptr);
+}
+
 void	display(t_mlx *mlx)
 {
 	int		i;
 	int		j;
 	t_iso	p;
 
+	renew_image(mlx, 0x000000);
 	if (mlx->coord->z_range == -10)
 		*(mlx->coord) = init_map(*(mlx->coord));
 	i = -1;
@@ -332,9 +360,26 @@ void	display(t_mlx *mlx)
 	}
 }
 
+void	quit(t_mlx *mlx)
+{
+	int	i;
+
+	i = -1;
+	while (++i < mlx->coord->line_count)
+		free((mlx->coord->coord)[i]);
+	free(mlx->coord->coord);
+	free(mlx->coord);
+	mlx_loop_end(mlx->mlx_ptr);
+	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+	mlx_destroy_display(mlx->mlx_ptr);
+	free(mlx->mlx_ptr);
+	free(mlx);
+	exit(0);
+}
+
 void	press_esc(t_mlx *mlx)
 {
-	free_and_quit(mlx);
+	quit(mlx);
 }
 
 void	press_plus(t_mlx *mlx)
