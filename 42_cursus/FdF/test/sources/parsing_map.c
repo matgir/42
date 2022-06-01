@@ -200,11 +200,11 @@ int	def_min(int w, int h)
 
 t_coord	setup_camera(t_coord coord)
 {
-	coord.camera.zoom = def_min(WHIDTH / coord.column_count / 2,
-			HEIGHT / coord.line_count / 2);
+	coord.camera.zoom = def_min((WHIDTH - 384) / coord.column_count /*/ 2*/,
+			(HEIGHT - 192) / coord.line_count /*/ 2*/);
 	coord.camera.z_scale = 10;
-	coord.camera.x_offset = -50; // a verif
-	coord.camera.y_offset = -200; // avreif
+	coord.camera.x_offset = 0; // a verif
+	coord.camera.y_offset = 0; // avreif
 	return (coord);
 }
 
@@ -246,10 +246,11 @@ void	project_iso(int *x, int *y, int z)
 	int	x_tmp;
 	int	y_tmp;
 
+	(void)z;
 	x_tmp = *x;
 	y_tmp = *y;
-	*x = (x_tmp - y_tmp) * cos(0.523599);
-	*y = -z + (x_tmp + y_tmp) * sin(0.523599);
+	*x = (x_tmp - y_tmp) * cos(0.55);
+	*y = /*-z*/ + (x_tmp + y_tmp) * sin(0.55);
 }
 
 t_point	project(t_iso point, t_coord *coord)
@@ -264,7 +265,7 @@ t_point	project(t_iso point, t_coord *coord)
 	point.y -= (coord->line_count * coord->camera.zoom) / 2;
 	project_iso(&point.x, &point.y, point.z);
 	point.x += WHIDTH / 2 + coord->camera.x_offset;
-	point.y += (HEIGHT + coord->line_count * coord->camera.zoom) / 2
+	point.y += (HEIGHT  /*+ coord->line_count * coord->camera.zoom*/) / 2
 		+ coord->camera.y_offset;
 	displayed_point.x = point.x;
 	displayed_point.y = point.y;
