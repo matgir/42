@@ -52,7 +52,7 @@ char	*ft_gnl_strjoin(char *line, char *buffer)
 	i = ft_gnl_strlen(line);
 	j = ft_gnl_strlen(buffer);
 	if (buffer[j - 1] == '\n')
-		j--;
+		j--;	
 	join = malloc(sizeof(char) * (i + j + 1));
 	if (join == NULL)
 		return (NULL);
