@@ -250,7 +250,7 @@ void	project_iso(int *x, int *y, int z)
 	x_tmp = *x;
 	y_tmp = *y;
 	*x = (x_tmp - y_tmp) * cos(0.55);
-	*y = /*-z*/ + (x_tmp + y_tmp) * sin(0.55);
+	*y = -z + (x_tmp + y_tmp) * sin(0.55);
 }
 
 t_point	project(t_iso point, t_coord *coord)
