@@ -86,6 +86,15 @@ typedef struct s_mlx
 
 }				t_mlx;
 
+typedef struct i_data
+{
+	void	*img_ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_lenght;
+	int		endian;
+}				t_img;
+
 /*typedef struct i_data
 {
 	void	*img;

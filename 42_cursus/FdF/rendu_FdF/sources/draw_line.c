@@ -103,7 +103,7 @@ t_coord	set_sign(t_coord coo0, t_coord coo1)
 
 void	ft_to_trace(t_mlx *mlx, t_coord coo0, t_coord coo1, t_img *img)
 {
-	t_coord	delta;
+	/*t_coord	delta;
 	t_coord	sign;
 	t_coord	cur;
 	int		error[2];
@@ -128,7 +128,7 @@ void	ft_to_trace(t_mlx *mlx, t_coord coo0, t_coord coo1, t_img *img)
 			cur.y_axe += sign.y_axe;
 		}
 	}
-	/*
+	*/
 	//printf("Print from %g;%g to %g;%g\n", coo0.x_axe, coo0.y_axe, coo1.x_axe, coo1.y_axe);
 	if (delta.x_axe > delta.y_axe)
 		error[0] = delta.x_axe/2;
@@ -164,7 +164,7 @@ void	ft_to_trace(t_mlx *mlx, t_coord coo0, t_coord coo1, t_img *img)
 		}
 		//mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img, 0, 0);
 	}
-	//printf("----------------\n");*/
+	//printf("----------------\n");
 }
 
 void	draw_line(t_mlx *mlx, t_coord **coo, t_img *img, int x, int y)
