@@ -142,12 +142,9 @@ int	**ft_parsing(int fd, int *column_count, int *line_count)
 
 	coord = NULL;
 	gnl_error = 0;
-	//*line_count = count_lines(fd);
-	ft_printf("line_count = %i\n", *line_count);
 	i = -1;
-	while (++i < *line_count) // voir pour mettre autre condition
+	while (++i < *line_count)
 	{
-		printf("on l'on en est %i\n", i);
 		line = fdf_gnl(fd, &gnl_error);
 		if (line == NULL)
 		{
@@ -155,7 +152,6 @@ int	**ft_parsing(int fd, int *column_count, int *line_count)
 				return (specifie_error(coord, gnl_error));
 			break;
 		}
-		//*line_count = *line_count + 1;
 		coord = add_line(line, coord, column_count);
 		if (coord == NULL)
 		{
