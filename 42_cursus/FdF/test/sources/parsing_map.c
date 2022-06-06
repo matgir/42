@@ -173,6 +173,11 @@ t_coord	*parse_map(char *z_map)
 	t_coord	*coord;
 
 	line_count = count_lines(z_map);
+	if (line_count == 0)
+	{
+		perror("Nothing to render, please select another map");
+		return (NULL);
+	}
 	fd = open(z_map, __O_DIRECTORY);
 	if (fd > 0)
 	{
@@ -337,7 +342,7 @@ void	trace_line(t_point p1, t_point p2, t_mlx *mlx, t_img *img)
 	cur = p2;
 	while (cur.x != p1.x || cur.y != p1.y)
 	{
-		if ((cur.x >= 1 && cur.x <= 1920) && (cur.y >= 1 && cur.y <= 960))
+		if ((cur.x >= 1 && cur.x < 1920) && (cur.y >= 1 && cur.y < 960))
 			my_mlx_pixel_put(img, cur.x, cur.y, 0x00FF00);
 		error[1] = error[0] * 2;
 		if (error[1] > -delta.y)
