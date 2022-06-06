@@ -17,7 +17,7 @@ int	**specifie_error(int **coord, int gnl_error)
 	int	i;
 
 	i = -1;
-	if (coord == NULL)
+	if (coord != NULL)
 	{
 		while (coord[++i] != NULL)
 			free(coord[i]);
@@ -113,29 +113,54 @@ int **add_line(char *line, int **coord, int *column_count)
 	return (coord);
 }
 
+int	count_lines(char *z_map)
+{
+	int	line_count;
+	int	fd;
+	int	useless;
+	char	*line;
+
+	fd = open(z_map, O_RDONLY);
+	line_count = 0;
+	line = fdf_gnl(fd, &useless);
+	while (line != NULL)
+	{
+		line_count++;
+		free(line);
+		line = fdf_gnl(fd, &useless);
+	}
+	close(fd);
+	return (line_count);
+}
+
 int	**ft_parsing(int fd, int *column_count, int *line_count)
 {
 	char	*line;
 	int		gnl_error;
-	int		**coord;
+	int		**coord;\
+	int		i;
 
 	coord = NULL;
 	gnl_error = 0;
-	while (TRUE) // voir pour mettre autre condition
+	//*line_count = count_lines(fd);
+	ft_printf("line_count = %i\n", *line_count);
+	i = -1;
+	while (++i < *line_count) // voir pour mettre autre condition
 	{
+		printf("on l'on en est %i\n", i);
 		line = fdf_gnl(fd, &gnl_error);
 		if (line == NULL)
 		{
-			//if (gnl_error < 0)
-			//	return (specifie_error(coord, gnl_error));
+			if (gnl_error < 0)
+				return (specifie_error(coord, gnl_error));
 			break;
 		}
-		*line_count = *line_count + 1;
+		//*line_count = *line_count + 1;
 		coord = add_line(line, coord, column_count);
 		if (coord == NULL)
 		{
 			free(line);
-			// return(specifie_error(coord, -3));
+			return(specifie_error(coord, -3));
 			break;
 		}
 		free(line);
@@ -151,7 +176,13 @@ t_coord	*parse_map(char *z_map)
 	int		line_count;
 	t_coord	*coord;
 
-	line_count = 0;
+	line_count = count_lines(z_map);
+	fd = open(z_map, __O_DIRECTORY);
+	if (fd > 0)
+	{
+		perror("This is a directory, please select a valid map");
+		return (NULL);
+	}
 	fd = open(z_map, O_RDONLY);
 	if (fd == -1)
 	{
@@ -159,8 +190,8 @@ t_coord	*parse_map(char *z_map)
 		return (NULL);
 	}
 	z_coord = ft_parsing(fd, &column_count, &line_count);
-	/*if (z_coord == NULL)
-		return (NULL);*/
+	if (z_coord == NULL)
+		return (NULL);
 	coord = malloc(sizeof(t_coord));
 	if (coord == NULL)
 		return (NULL);
@@ -287,13 +318,22 @@ t_point	set_sign(t_point p1, t_point p2)
 	return (sign);
 }
 
-void	trace_line(t_point p1, t_point p2, t_mlx *mlx)
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+void	trace_line(t_point p1, t_point p2, t_mlx *mlx, t_img *img)
 {
 	t_point	delta;
 	t_point	sign;
 	t_point	cur;
 	int		error[2];
 
+	(void)mlx;
 	delta.x = abs(p1.x - p2.x);
 	delta.y = abs(p1.y - p2.y);
 	sign = set_sign(p1, p2);
@@ -301,7 +341,8 @@ void	trace_line(t_point p1, t_point p2, t_mlx *mlx)
 	cur = p2;
 	while (cur.x != p1.x || cur.y != p1.y)
 	{
-		mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, cur.x, cur.y, 0x00FF00);
+		if ((cur.x >= 1 && cur.x <= 1920) && (cur.y >= 1 && cur.y <= 960))
+			my_mlx_pixel_put(img, cur.x, cur.y, 0x00FF00);
 		error[1] = error[0] * 2;
 		if (error[1] > -delta.y)
 		{
@@ -316,34 +357,15 @@ void	trace_line(t_point p1, t_point p2, t_mlx *mlx)
 	}
 }
 
-void	renew_image(t_mlx *mlx, int color)
-{
-	int	x;
-	int	y;
-	void	*img_ptr;
-	int		*data;
-	int		random;
-
-	img_ptr = mlx_new_image(mlx->mlx_ptr, WHIDTH, HEIGHT); // mettre protection retour NULL
-	data = (int *)mlx_get_data_addr(img_ptr, &random, &random, &random);
-	x = -1;
-	while (++x < WHIDTH)
-	{
-		y = -1;
-		while (++y < HEIGHT)
-			data[y * WHIDTH + x] = color;
-	}
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img_ptr, 0, 0);
-	mlx_destroy_image(mlx->mlx_ptr, img_ptr);
-}
-
 void	display(t_mlx *mlx)
 {
 	int		i;
 	int		j;
 	t_iso	p;
+	t_img	img;
 
-	renew_image(mlx, 0x000000);
+	img.img_ptr = mlx_new_image(mlx->mlx_ptr, WHIDTH, HEIGHT); //prtoec si NULL
+	img.addr = mlx_get_data_addr(img.img_ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
 	if (mlx->coord->z_range == -10)
 		*(mlx->coord) = init_map(*(mlx->coord));
 	i = -1;
@@ -352,13 +374,15 @@ void	display(t_mlx *mlx)
 		j = -1;
 		while (++j < mlx->coord->column_count)
 		{
-			p = init_iso(j, i, mlx->coord->coord[i][j]); // peut etre inverser i et j;
+			p = init_iso(j, i, mlx->coord->coord[i][j]);
 			if (j > 0)
-				trace_line(project(p, mlx->coord), project(init_iso(j - 1, i, mlx->coord->coord[i][j - 1]), mlx->coord), mlx);
+				trace_line(project(p, mlx->coord), project(init_iso(j - 1, i, mlx->coord->coord[i][j - 1]), mlx->coord), mlx, &img);
 			if (i > 0)
-				trace_line(project(p, mlx->coord), project(init_iso(j, i - 1, mlx->coord->coord[i - 1][j]), mlx->coord), mlx);
+				trace_line(project(p, mlx->coord), project(init_iso(j, i - 1, mlx->coord->coord[i - 1][j]), mlx->coord), mlx, &img);
 		}
 	}
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img.img_ptr, 0, 0);
+	mlx_destroy_image(mlx->mlx_ptr, img.img_ptr);
 }
 
 void	quit(t_mlx *mlx)

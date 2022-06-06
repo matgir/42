@@ -91,6 +91,7 @@ char	*fdf_gnl(int fd, int *gnl_error)
 			return (NULL);
 		}
 		end = read(fd, buf, BUFFER_SIZE);
+		ft_printf("end = %i\n", end);
 		buf[end] = '\0';
 		if (end == 0 && line[0] == '\0')
 		{
@@ -102,6 +103,7 @@ char	*fdf_gnl(int fd, int *gnl_error)
 			return (line);
 	}
 	line = ft_gnl_strjoin(line, buf);
+	ft_printf("line in gnl = %s\n", line);
 	ft_gnl_strlcpy(buf, buf + ft_gnl_strlen(buf), BUFFER_SIZE);
 	return (line);
 }

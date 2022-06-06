@@ -91,18 +91,9 @@ typedef struct i_data
 	void	*img_ptr;
 	char	*addr;
 	int		bits_per_pixel;
-	int		line_lenght;
-	int		endian;
-}				t_img;
-
-/*typedef struct i_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_img;*/
+}				t_img;
 
 int		main(int ac, char **av);
 t_coord	*parse_map(char *z_map);
