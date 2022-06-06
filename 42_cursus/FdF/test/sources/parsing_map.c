@@ -386,6 +386,23 @@ void	display(t_mlx *mlx)
 	mlx_destroy_image(mlx->mlx_ptr, img.img_ptr);
 }
 
+int	quit_bis(t_mlx *mlx)
+{
+	int	i;
+
+	i = -1;
+	while (++i < mlx->coord->line_count)
+		free((mlx->coord->coord)[i]);
+	free(mlx->coord->coord);
+	free(mlx->coord);
+	mlx_loop_end(mlx->mlx_ptr);
+	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+	mlx_destroy_display(mlx->mlx_ptr);
+	free(mlx->mlx_ptr);
+	free(mlx);
+	return (0);
+}
+
 void	quit(t_mlx *mlx)
 {
 	int	i;
@@ -505,6 +522,7 @@ t_mlx	*display_fdf(char *win_name, t_coord *coord)
 		return (free_and_quit(mlx));
 	mlx_key_hook(mlx->win_ptr, key_press, mlx);
 	mlx_mouse_hook(mlx->win_ptr, mouse_press, mlx);
+	mlx_hook(mlx->win_ptr, 17, 0, quit_bis, &mlx);
 	display(mlx);
 	mlx_loop(mlx->mlx_ptr);
 	return (mlx);
