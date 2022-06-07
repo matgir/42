@@ -137,7 +137,7 @@ int	**ft_parsing(int fd, int *column_count, int *line_count)
 {
 	char	*line;
 	int		gnl_error;
-	int		**coord;\
+	int		**coord;
 	int		i;
 
 	coord = NULL;
@@ -187,7 +187,7 @@ t_coord	*parse_map(char *z_map)
 	fd = open(z_map, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("The map you choose cannot be read, please select another");
+		perror("The map you choose cannot be read, please select another one");
 		return (NULL);
 	}
 	z_coord = ft_parsing(fd, &column_count, &line_count);
@@ -232,11 +232,11 @@ int	def_min(int w, int h)
 
 t_coord	setup_camera(t_coord coord)
 {
-	coord.camera.zoom = def_min((WHIDTH - 384) / coord.column_count /*/ 2*/,
-			(HEIGHT - 192) / coord.line_count /*/ 2*/);
+	coord.camera.zoom = def_min((WHIDTH - 384) / coord.column_count,
+			(HEIGHT - 192) / coord.line_count);
 	coord.camera.z_scale = 10;
-	coord.camera.x_offset = 0; // a verif
-	coord.camera.y_offset = 0; // avreif
+	coord.camera.x_offset = 0;
+	coord.camera.y_offset = 0;
 	return (coord);
 }
 
@@ -297,7 +297,7 @@ t_point	project(t_iso point, t_coord *coord)
 	point.y -= (coord->line_count * coord->camera.zoom) / 2;
 	project_iso(&point.x, &point.y, point.z);
 	point.x += WHIDTH / 2 + coord->camera.x_offset;
-	point.y += (HEIGHT  /*+ coord->line_count * coord->camera.zoom*/) / 2
+	point.y += (HEIGHT + /*coord->line_count **/ coord->camera.zoom) / 2
 		+ coord->camera.y_offset;
 	displayed_point.x = point.x;
 	displayed_point.y = point.y;
@@ -386,24 +386,7 @@ void	display(t_mlx *mlx)
 	mlx_destroy_image(mlx->mlx_ptr, img.img_ptr);
 }
 
-int	quit_bis(t_mlx *mlx)
-{
-	int	i;
-
-	i = -1;
-	while (++i < mlx->coord->line_count)
-		free((mlx->coord->coord)[i]);
-	free(mlx->coord->coord);
-	free(mlx->coord);
-	mlx_loop_end(mlx->mlx_ptr);
-	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-	mlx_destroy_display(mlx->mlx_ptr);
-	free(mlx->mlx_ptr);
-	free(mlx);
-	return (0);
-}
-
-void	quit(t_mlx *mlx)
+int	quit(t_mlx *mlx)
 {
 	int	i;
 
@@ -522,7 +505,7 @@ t_mlx	*display_fdf(char *win_name, t_coord *coord)
 		return (free_and_quit(mlx));
 	mlx_key_hook(mlx->win_ptr, key_press, mlx);
 	mlx_mouse_hook(mlx->win_ptr, mouse_press, mlx);
-	mlx_hook(mlx->win_ptr, 17, 0, quit_bis, &mlx);
+	mlx_hook(mlx->win_ptr, 17, 0, quit, mlx);
 	display(mlx);
 	mlx_loop(mlx->mlx_ptr);
 	return (mlx);
