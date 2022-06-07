@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FdF.h                                              :+:      :+:    :+:   */
+/*   libfdf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:45:24 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/03/31 16:45:27 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/06/07 17:21:24 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ typedef struct s_mlx
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_coord	*coord;
-
 }				t_mlx;
 
 typedef struct i_data
@@ -96,31 +95,45 @@ typedef struct i_data
 }				t_img;
 
 int		main(int ac, char **av);
+t_mlx	*display_fdf(char *win_name, t_coord *coord);
+int		mouse_press(int click, int x, int y, t_mlx *mlx);
+int		key_press(int key, void *ptr);
+void	press_d(t_mlx *mlx);
+void	press_s(t_mlx *mlx);
+void	press_a(t_mlx *mlx);
+void	press_w(t_mlx *mlx);
+void	press_minus(t_mlx *mlx);
+void	press_plus(t_mlx *mlx);
+void	press_esc(t_mlx *mlx);
+int		quit(t_mlx *mlx);
+t_mlx	*display(t_mlx *mlx);
+void	trace_line(t_point p1, t_point p2, t_img *img);
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+t_point	set_sign(t_point p1, t_point p2);
+t_point	project(t_iso point, t_coord *coord);
+void	project_iso(int *x, int *y, int z);
+t_iso	init_iso(int x, int y, int z);
+t_coord	init_map(t_coord coord);
+t_coord	setup_camera(t_coord coord);
+int		def_min(int w, int h);
+t_mlx	*free_and_quit(t_mlx *mlx);
+t_mlx	*free_and_quit_img(t_mlx *mlx, t_img *img);
 t_coord	*parse_map(char *z_map);
-int	**ft_parsing(int fd, int *column_count, int *line_count);
+int		**ft_parsing(int fd, int *column_count, int *line_count);
+int		count_lines(char *z_map);
+int 	**add_line(char *line, int **coord, int *column_count);
+int		*get_int(char *line, int *column_count);
+int		**add_coord(int **coord);
+int		coord_current_lines(int **coord);
+int		**specifie_error(int **coord, int gnl_error);
+char	**ft_fdf_split(char *s, char *x);
+char	**fdf_free_all(char **tab);
+int		fdf_nw(char *s, size_t stop);
+int		fdf_dbt(char *s);
 char	*fdf_gnl(int fd, int *gnl_error);
 char	*ft_gnl_strjoin(char *line, char *buffer);
 void	ft_gnl_strlcpy(char *dst, const char *src, size_t size);
 int		ft_gnl_strlen(const char *str);
-int		**specifie_error(int **coord, int gnl_error);
 
-
-
-
-/*char	*fdf_get_next_line(int fd);
-int		fdf_dbt(char *s);
-int		fdf_nw(char *s, size_t stop);
-char	**fdf_free_all(char **tab);
-char	**ft_fdf_split(char *s, int *x);
-int		find_y(char *map);
-char	***free_z(char ***z);
-char	***ft_store_z(char ***z_coordinates, int fd, int *x);
-char	***ft_parsing(char *map_b_parsing, int *y, int *x);
-int		main(int ac, char **av);
-void	window(int x, int y, t_coord **coo);
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-t_coord	**incorporate_z(t_coord **coo, char ***z_coordinates, int x, int y);
-void	draw_line(t_mlx *mlx, t_coord **coo, t_img *img, int x, int y);
-void	ft_to_trace(t_mlx *mlx, t_coord coo0, t_coord coo1, t_img *img);*/
 
 #endif

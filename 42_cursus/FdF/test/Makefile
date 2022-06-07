@@ -25,9 +25,16 @@
 
 #	regles declarer avec ':'
 
-SRCS	=	sources/ft_fdf_split.c \
-			sources/parsing_map.c \
-			sources/fdf_get_next_line.c \
+SRCS	=	sources/fdf_display.c \
+			sources/fdf_gnl.c \
+			sources/fdf_hooks_1.c \
+			sources/fdf_hooks_2.c \
+			sources/fdf_init.c \
+			sources/fdf_parsing_utils.c \
+			sources/fdf_parsing.c \
+			sources/fdf_split.c \
+			sources/fdf_trace_line.c \
+			sources/main.c
 
 OBJS	=	${SRCS:.c=.o}
 
