@@ -34,20 +34,12 @@ t_mlx	*free_and_quit_img(t_mlx *mlx, t_img *img)
 	return (NULL);
 }
 
-t_mlx	*display(t_mlx *mlx)
+void	put_to_img(t_mlx *mlx, t_img *img)
 {
 	int		i;
 	int		j;
 	t_iso	p;
-	t_img	img;
 
-	img.img_ptr = mlx_new_image(mlx->mlx_ptr, WHIDTH, HEIGHT);
-	if (img.img_ptr == NULL)
-		return (free_and_quit_img(mlx, &img));
-	img.addr = mlx_get_data_addr(img.img_ptr, &img.bits_per_pixel,
-			&img.line_length, &img.endian);
-	if (mlx->coord->z_range == -10)
-		*(mlx->coord) = init_map(*(mlx->coord));
 	i = -1;
 	while (++i < mlx->coord->line_count)
 	{
@@ -57,12 +49,26 @@ t_mlx	*display(t_mlx *mlx)
 			p = init_iso(j, i, mlx->coord->coord[i][j]);
 			if (j > 0)
 				trace_line(project(p, mlx->coord), project(init_iso(j - 1, i,
-							mlx->coord->coord[i][j - 1]), mlx->coord), &img);
+							mlx->coord->coord[i][j - 1]), mlx->coord), img);
 			if (i > 0)
 				trace_line(project(p, mlx->coord), project(init_iso(j, i - 1,
-							mlx->coord->coord[i - 1][j]), mlx->coord), &img);
+							mlx->coord->coord[i - 1][j]), mlx->coord), img);
 		}
 	}
+}
+
+t_mlx	*display(t_mlx *mlx)
+{
+	t_img	img;
+
+	img.img_ptr = mlx_new_image(mlx->mlx_ptr, WHIDTH, HEIGHT);
+	if (img.img_ptr == NULL)
+		return (free_and_quit_img(mlx, &img));
+	img.addr = mlx_get_data_addr(img.img_ptr, &img.bits_per_pixel,
+			&img.line_length, &img.endian);
+	if (mlx->coord->z_range == -10)
+		*(mlx->coord) = init_map(*(mlx->coord));
+	put_to_img(mlx, &img);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img.img_ptr, 0, 0);
 	mlx_destroy_image(mlx->mlx_ptr, img.img_ptr);
 	return (0);

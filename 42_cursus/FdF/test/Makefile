@@ -34,7 +34,8 @@ SRCS	=	sources/fdf_display.c \
 			sources/fdf_parsing.c \
 			sources/fdf_split.c \
 			sources/fdf_trace_line.c \
-			sources/main.c
+			sources/main.c \
+			sources/fdf_gnl_utils.c
 
 OBJS	=	${SRCS:.c=.o}
 

@@ -121,7 +121,7 @@ t_mlx	*free_and_quit_img(t_mlx *mlx, t_img *img);
 t_coord	*parse_map(char *z_map);
 int		**ft_parsing(int fd, int *column_count, int *line_count);
 int		count_lines(char *z_map);
-int 	**add_line(char *line, int **coord, int *column_count);
+int		**add_line(char *line, int **coord, int *column_count);
 int		*get_int(char *line, int *column_count);
 int		**add_coord(int **coord);
 int		coord_current_lines(int **coord);
@@ -134,6 +134,11 @@ char	*fdf_gnl(int fd, int *gnl_error);
 char	*ft_gnl_strjoin(char *line, char *buffer);
 void	ft_gnl_strlcpy(char *dst, const char *src, size_t size);
 int		ft_gnl_strlen(const char *str);
-
+void	fill_img(t_point delta, t_point cur, t_point p1, t_img *img);
+int		first_check(int *line_count, char *z_map, int *fd);
+int		check_buf_n_fd(int fd, int *gnl_error);
+int		check_line(char *line, int *gnl_error);
+int		check_end(int end, char *line, int *gnl_error);
+int		malloc_check(char *line, int **coord, int *gnl_error);
 
 #endif

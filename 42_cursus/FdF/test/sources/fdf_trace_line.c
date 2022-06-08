@@ -63,21 +63,16 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
-void	trace_line(t_point p1, t_point p2, t_img *img)
+void	fill_img(t_point delta, t_point cur, t_point p1, t_img *img)
 {
-	t_point	delta;
 	t_point	sign;
-	t_point	cur;
 	int		error[2];
 
-	delta.x = abs(p1.x - p2.x);
-	delta.y = abs(p1.y - p2.y);
-	sign = set_sign(p1, p2);
 	error[0] = delta.x - delta.y;
-	cur = p2;
+	sign = set_sign(p1, cur);
 	while (cur.x != p1.x || cur.y != p1.y)
 	{
 		if ((cur.x >= 1 && cur.x < 1920) && (cur.y >= 1 && cur.y < 960))

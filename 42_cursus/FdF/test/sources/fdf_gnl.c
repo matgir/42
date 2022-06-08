@@ -52,7 +52,7 @@ char	*ft_gnl_strjoin(char *line, char *buffer)
 	i = ft_gnl_strlen(line);
 	j = ft_gnl_strlen(buffer);
 	if (buffer[j - 1] == '\n')
-		j--;	
+		j--;
 	join = malloc(sizeof(char) * (i + j + 1));
 	if (join == NULL)
 		return (NULL);
@@ -76,28 +76,18 @@ char	*fdf_gnl(int fd, int *gnl_error)
 	static char	buf[BUFFER_SIZE + 1];
 	int			end;
 
-	if (BUFFER_SIZE < 1 || read(fd, NULL, 0) == -1)
-	{
-		*gnl_error = -1;
+	if (check_buf_n_fd(fd, gnl_error) == -1)
 		return (NULL);
-	}
 	line = NULL;
 	while (buf[ft_gnl_strlen(buf) - 1] != '\n' )
 	{
 		line = ft_gnl_strjoin(line, buf);
-		if (line == NULL)
-		{
-			*gnl_error = -2;
+		if (check_line(line, gnl_error) == -1)
 			return (NULL);
-		}
 		end = read(fd, buf, BUFFER_SIZE);
 		buf[end] = '\0';
-		if (end == 0 && line[0] == '\0')
-		{
-			free(line);
-			*gnl_error = -3;
+		if (check_end(end, line, gnl_error) == -1)
 			return (NULL);
-		}
 		else if (end == 0)
 			return (line);
 	}

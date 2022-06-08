@@ -61,3 +61,14 @@ t_iso	init_iso(int x, int y, int z)
 	iso_point.z = z;
 	return (iso_point);
 }
+
+void	trace_line(t_point p1, t_point p2, t_img *img)
+{
+	t_point	delta;
+	t_point	cur;
+
+	delta.x = abs(p1.x - p2.x);
+	delta.y = abs(p1.y - p2.y);
+	cur = p2;
+	fill_img(delta, cur, p1, img);
+}

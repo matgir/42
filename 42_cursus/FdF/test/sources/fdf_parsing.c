@@ -59,14 +59,12 @@ int	*get_int(char *line, int *column_count)
 	}
 	column = -1;
 	while (split[++column] != NULL)
-	{
 		free(split[column]);
-	}
 	free(split);
 	return (get_int);
 }
 
-int **add_line(char *line, int **coord, int *column_count)
+int	**add_line(char *line, int **coord, int *column_count)
 {
 	int	*pre_line;
 
@@ -98,18 +96,13 @@ int	**ft_parsing(int fd, int *column_count, int *line_count)
 	while (++i < *line_count)
 	{
 		line = fdf_gnl(fd, &gnl_error);
-		if (line == NULL)
-		{
-			if (gnl_error < 0)
-				return (specifie_error(coord, gnl_error));
-			break;
-		}
+		if (malloc_check(line, coord, &gnl_error))
+			return (NULL);
 		coord = add_line(line, coord, column_count);
 		if (coord == NULL || (col_tmp != -1 && col_tmp != *column_count))
 		{
 			free(line);
-			return(specifie_error(coord, -3));
-			break;
+			return (specifie_error(coord, -3));
 		}
 		col_tmp = *column_count;
 		free(line);
@@ -125,24 +118,8 @@ t_coord	*parse_map(char *z_map)
 	int		line_count;
 	t_coord	*coord;
 
-	line_count = count_lines(z_map);
-	if (line_count == 0)
-	{
-		perror("Nothing to render, please select another map");
+	if (first_check(&line_count, z_map, &fd) == -1)
 		return (NULL);
-	}
-	fd = open(z_map, __O_DIRECTORY);
-	if (fd > 0)
-	{
-		perror("This is a directory, please select a valid map");
-		return (NULL);
-	}
-	fd = open(z_map, O_RDONLY);
-	if (fd == -1)
-	{
-		perror("The map you choose cannot be read, please select another one");
-		return (NULL);
-	}
 	z_coord = ft_parsing(fd, &column_count, &line_count);
 	if (z_coord == NULL)
 		return (NULL);
@@ -153,5 +130,5 @@ t_coord	*parse_map(char *z_map)
 	coord->line_count = line_count;
 	coord->column_count = column_count;
 	close(fd);
-	return(coord);
+	return (coord);
 }
