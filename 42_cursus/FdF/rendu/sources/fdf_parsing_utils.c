@@ -44,7 +44,7 @@ int	**specifie_error(int **coord, int gnl_error)
 		free(coord);
 	}
 	if (gnl_error == -1)
-		perror("The map you choose cannot be read, please select another");
+		ft_putendl_fd("The chosen map can't be read, please select another", 1);
 	if (gnl_error == -2)
 		ft_putendl_fd("Allocation failure, please try again", 1);
 	if (gnl_error == -3)
@@ -67,19 +67,19 @@ int	first_check(int *line_count, char *z_map, int *fd)
 	*fd = open(z_map, __O_DIRECTORY);
 	if (*fd > 0)
 	{
-		perror("This is a directory, please select a valid map");
+		ft_putendl_fd("This is a directory, please select a valid map", 1);
 		return (-1);
 	}
 	*fd = open(z_map, O_RDONLY);
 	if (*fd == -1)
 	{
-		perror("The map you choose cannot be read, please select another one");
+		ft_putendl_fd("The chosen map can't be read, please select another", 1);
 		return (-1);
 	}
 	*line_count = count_lines(z_map);
 	if (*line_count == 0)
 	{
-		perror("Nothing to render, please select another map");
+		ft_putendl_fd("Nothing to render, please select another map", 1);
 		return (-1);
 	}
 	return (0);

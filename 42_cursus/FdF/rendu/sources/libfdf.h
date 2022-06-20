@@ -117,6 +117,7 @@ t_coord	init_map(t_coord coord);
 t_coord	setup_camera(t_coord coord);
 int		def_min(int w, int h);
 t_mlx	*free_and_quit(t_mlx *mlx);
+t_mlx	*free_and_quit_win(t_mlx *mlx);
 int		free_and_quit_img(t_mlx *mlx);
 t_coord	*parse_map(char *z_map);
 int		**ft_parsing(int fd, int *column_count, int *line_count);

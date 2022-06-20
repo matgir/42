@@ -12,26 +12,6 @@
 
 #include "libfdf.h"
 
-int	free_and_quit_img(t_mlx *mlx)
-{
-	int	i;
-
-	if (mlx->mlx_ptr && mlx->win_ptr)
-		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-	if (mlx->mlx_ptr)
-	{
-		mlx_destroy_display(mlx->mlx_ptr);
-		free(mlx->mlx_ptr);
-	}
-	i = -1;
-	while (++i < mlx->coord->line_count)
-		free((mlx->coord->coord)[i]);
-	free(mlx->coord->coord);
-	free(mlx->coord);
-	free(mlx);
-	return (0);
-}
-
 void	put_to_img(t_mlx *mlx, t_img *img)
 {
 	int		i;
@@ -70,38 +50,6 @@ int	display(t_mlx *mlx)
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img.img_ptr, 0, 0);
 	mlx_destroy_image(mlx->mlx_ptr, img.img_ptr);
 	return (1);
-}
-
-t_mlx	*free_and_quit(t_mlx *mlx)
-{
-	int	i;
-
-	i = -1;
-	while (++i < mlx->coord->line_count)
-		free((mlx->coord->coord)[i]);
-	free(mlx->coord->coord);
-	free(mlx->coord);
-	free(mlx);
-	return (NULL);
-}
-
-t_mlx	*free_and_quit_win(t_mlx *mlx)
-{
-	int	i;
-
-	
-	i = -1;
-	while (++i < mlx->coord->line_count)
-		free((mlx->coord->coord)[i]);
-	free(mlx->coord->coord);
-	free(mlx->coord);
-	if (mlx->mlx_ptr)
-	{
-		mlx_destroy_display(mlx->mlx_ptr);
-		free(mlx->mlx_ptr);
-	}
-	free(mlx);
-	return (NULL);
 }
 
 t_mlx	*display_fdf(char *win_name, t_coord *coord)

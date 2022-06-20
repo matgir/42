@@ -96,7 +96,7 @@ int	**ft_parsing(int fd, int *column_count, int *line_count)
 	while (++i < *line_count)
 	{
 		line = fdf_gnl(fd, &gnl_error);
-		if (malloc_check(line, coord, &gnl_error))
+		if (malloc_check(line, coord, &gnl_error) == -1)
 			return (NULL);
 		coord = add_line(line, coord, column_count);
 		if (coord == NULL || (col_tmp != -1 && col_tmp != *column_count))
