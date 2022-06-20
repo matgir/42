@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/07 14:53:41 by mgirardo          #+#    #+#              #
-#    Updated: 2022/01/04 17:25:10 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/06/20 19:35:11 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,9 +89,9 @@ ${NAME}:	${OBJS}
 			ar rc ${NAME} ${OBJS}
 			ranlib ${NAME}
 
-bonus:	${OBJS} ${OBJSB}
-			ar rc ${NAME} ${OBJS} ${OBJSB}
-			ranlib ${NAME}
+bonus:	$(OBJSB)
+	ar rc ${NAME} ${OBJSB}
+	ranlib ${NAME}
 
 all:		${NAME}
 
