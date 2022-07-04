@@ -15,13 +15,14 @@
 #include<stddef.h>
 #include<stdlib.h>
 
-int	ft_atoi(const char *nptr);
+int	ft_ps_atoi(char *nptr, int *error);
 
 int	main(int ac, char** av)
 {
+	int error = 0;
 	(void)ac;
 	printf("%d\n", atoi(av[1]));
-	printf("%d\n", ft_atoi(av[1]));
+	printf("%d\n%d\n", ft_ps_atoi(av[1], &error), error);
 	return (0);
 }
 

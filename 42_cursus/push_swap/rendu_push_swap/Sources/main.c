@@ -1,29 +1,30 @@
-#include <stddef.h>
+#include "libpushswap.h"
 
 int	ft_ps_parsing(int ac, char** av)
 {
 	int i;
 	int j;
+	int error;
 
 	if (ac < 3)
 		return (1);
 	i = -1;
 	while (av[++i])
 	{
-		if (ft_ps_atoi(av[i]) == NULL)
+		error = 0;
+		ft_ps_atoi(av[i], &error);
+		if (error != 1)
 		{
-			fd_putendl_fd("Error", 2);
+			ft_putendl_fd("Error 1", 2);
 			return(0);
 		}
-
-// check if not integer here, before the duplicate check
-
 		j = i - 1;
 		while (av[++j])
 		{
-			if (ft_ps_atoi(av[i]) == ft_ps_atoi(av[j]))
+			if (ft_ps_atoi(av[i], &error) == ft_ps_atoi(av[j], &error) && error == 1)
 			{
-				fd_putendl_fd("Error", 2);
+
+				ft_putendl_fd("Error 2", 2);
 				return(0);
 			}
 		}
@@ -31,8 +32,8 @@ int	ft_ps_parsing(int ac, char** av)
 	return (1);
 }
 
-void	main(int ac, char** av)
+int	main(int ac, char** av)
 {
-	if (ft_ps_parsint(ac, av) == 0)
-		return (1);
+	if (ft_ps_parsing(ac, av) == 0)
+		return (0);
 }

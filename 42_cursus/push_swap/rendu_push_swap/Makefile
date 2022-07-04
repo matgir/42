@@ -25,7 +25,8 @@
 
 #	regles declarer avec ':'
 
-SRCS	=	 
+SRCS	=	Sources/ft_ps_atoi.c \
+			Sources/main.c
 
 OBJS	=	${SRCS:.c=.o}
 
