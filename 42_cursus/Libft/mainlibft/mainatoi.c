@@ -17,13 +17,11 @@
 
 int	ft_atoi(const char *nptr);
 
-int	main(void)
+int	main(int ac, char** av)
 {
-	const char	*nptr;
-
-	nptr = "    \f  \t  \v  \n  \r    +-2458rb22reg";
-	printf("%d\n", atoi(nptr));
-	printf("%d\n", ft_atoi(nptr));
+	(void)ac;
+	printf("%d\n", atoi(av[1]));
+	printf("%d\n", ft_atoi(av[1]));
 	return (0);
 }
 
