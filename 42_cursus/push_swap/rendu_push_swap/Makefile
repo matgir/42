@@ -26,7 +26,9 @@
 #	regles declarer avec ':'
 
 SRCS	=	Sources/parsing_ps.c \
-			Sources/main.c
+			Sources/main.c \
+			Sources/swaping.c \
+			Sources/fill_stack_a
 
 OBJS	=	${SRCS:.c=.o}
 
