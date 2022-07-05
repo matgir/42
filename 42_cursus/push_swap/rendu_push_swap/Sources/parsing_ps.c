@@ -91,5 +91,10 @@ int	ft_ps_parsing(int ac, char **av)
 		return (0);
 	if (ft_ps_duplicatecheck(av) == 0)
 		return (0);
+	if (ac == 2)
+	{
+		ft_putendl_fd("only one lad", 2);
+		return (0);
+	}
 	return (1);
 }

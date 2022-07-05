@@ -16,4 +16,5 @@ int	main(int ac, char **av)
 {
 	if (ft_ps_parsing(ac, av) == 0)
 		return (0);
+	ft_printf("ready for the real shit");
 }
