@@ -10,15 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <string.h>
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
-#include "../libft/libft.h"
+#ifndef LIBPUSHSWAP_H
+# define LIBPUSHSWAP_H
 
-int	main(int ac, char** av);
-int	ft_ps_parsing(int ac, char** av);
+# include <stddef.h>
+# include <string.h>
+# include <stdio.h>
+# include <stddef.h>
+# include <stdlib.h>
+# include "../libft/libft.h"
+
+int	main(int ac, char **av);
+int	ft_ps_parsing(int ac, char **av);
 int	ft_ps_atoi(char *nptr, int *error);
 int	ft_ps_intcheck(char **av);
 int	ft_ps_duplicatecheck(char **av);
+
+#endif

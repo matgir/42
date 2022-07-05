@@ -20,7 +20,6 @@
 
 # define BUFFER_SIZE 42
 
-
 /*#################### STRUCT ####################*/
 
 typedef struct s_list
@@ -28,7 +27,6 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
-
 
 /*#################### FT_IS... ####################*/
 
@@ -39,7 +37,6 @@ int			ft_isdigit(int c);
 int			ft_isprint(int c);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
-
 
 /*#################### FT_LST... ####################*/
 
@@ -53,7 +50,6 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list		*ft_lstnew(void *content);
 int			ft_lstsize(t_list *lst);
 
-
 /*#################### FT_PUT... ####################*/
 
 void		ft_putchar_fd(char c, int fd);
@@ -61,14 +57,12 @@ void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
 void		ft_putstr_fd(char *s, int fd);
 
-
 /*#################### FT_GNL ####################*/
 
 void		ft_gnl_strlcpy(char *dst, const char *src, size_t size);
 char		*ft_gnl_strjoin(char *line, char *buffer);
 int			ft_gnl_strlen(const char *str);
 char		*get_next_line(int fd);
-
 
 /*#################### FT_PRINTF ####################*/
 
@@ -90,7 +84,6 @@ int			ft_print_variable(char c, va_list *ap);
 int			ft_print_xs(va_list *ap, char c);
 int			ft_what_variable(const char *str, int *i, va_list *ap);
 
-
 /*#################### FT_MEM... ####################*/
 
 void		*ft_memchr(const void *s, int o, size_t n);
@@ -99,7 +92,6 @@ void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		*ft_memmove(void *dest, const void *src, size_t n);
 void		*ft_memset(void *s, int c, size_t n);
 void		ft_bzero(void *s, size_t n);
-
 
 /*#################### FT_STR ####################*/
 
@@ -120,6 +112,5 @@ char		*ft_strnstr(const char *big, const char *little, size_t len);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
-
 
 #endif
