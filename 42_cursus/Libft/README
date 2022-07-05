@@ -1,3 +1,4 @@
+/*
 int		ft_atoi(const char *nptr))
 		prend un char et le transforme en int selon certaine conditions, retourne cet int
 
@@ -126,3 +127,4 @@ int		ft_tolower(int c))
 
 int		ft_toupper(int c))
 		transforme c en son uppercase si possible, retourne le nouveau c ou pas
+*/
