@@ -12,7 +12,59 @@
 
 #include "libpushswap.h"
 
-int	swaping(t_ps_list *stack_a)
+int	stack_size(t_ps_list *stack)
+{
+	int	count;
+
+	count = 0;
+	while (stack != NULL)
+	{
+		count++;
+		stack = stack->next;
+	}
+	return (count);
+}
+
+void	sort_three(t_ps_list **stack)
+{
+	int	first;
+	int	second;
+	int	third;
+
+	first = (*stack)->content;
+	second = (*stack)->next->content;
+	third = (*stack)->next->next->content;
+	if (first < second && first < third)
+	{
+		reverse_a(stack);
+		swap_a(stack);
+	}
+	if (first > second && first < third)
+		swap_a(stack);
+	if (first < second && first > third)
+		reverse_a(stack);
+	if (first > second && second > third && first > third)
+	{
+		rotate_a(stack);
+		swap_a(stack);
+	}
+	if (first > second && first > third && second < third)
+		rotate_a(stack);
+}
+
+void	start_sort(t_ps_list **stack_a, t_ps_list **stack_b)
+{
+	int	stack_count;
+
+	stack_count = stack_size(*stack_b);
+	stack_count = stack_size(*stack_a);
+	if (stack_count == 2)
+		swap_a(stack_a);
+	else if (stack_count == 3)
+		sort_three(stack_a);
+}
+
+int	swaping(t_ps_list **stack_a)
 {
 	t_ps_list	*stack_b;
 
@@ -21,12 +73,7 @@ int	swaping(t_ps_list *stack_a)
 	{
 		if (stack_b == NULL && is_it_good(stack_a) == 0)
 			return (0);
-		reverse_a(&stack_a);
-		push_b(&stack_a, &stack_b);
-		reverse_a(&stack_a);
-		push_a(&stack_a, &stack_b);
-		rotate_a(&stack_a);
-		rotate_a(&stack_a);
+		start_sort(stack_a, &stack_b);
 	}
 	return (1);
 }

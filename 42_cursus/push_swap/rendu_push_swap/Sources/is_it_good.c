@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_it_good.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 11:26:46 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/07/05 11:26:58 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/07/06 18:20:39 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/07/06 18:20:43 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libpushswap.h"
 
-int	main(int ac, char **av)
+int	is_it_good(t_ps_list **stack)
 {
-	t_ps_list	*stack_a;
+	t_ps_list	*tmp;
 
-	if (ft_ps_parsing(ac, av) == 0)
-		return (0);
-	stack_a = fill_stack_a(av);
-	if (stack_a == NULL)
-		return (0);
-	if (swaping(&stack_a) == 0)
+	tmp = *stack;
+	while (tmp->next != NULL)
 	{
-		print_stack(stack_a, "stack_sorted");
-		ft_ps_lstclear(&stack_a);
+		if (tmp->content > tmp->next->content)
+			return (1);
+		tmp = tmp->next;
 	}
-	return (1);
+	return (0);
 }
