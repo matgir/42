@@ -35,7 +35,7 @@ t_ps_list	*fill_stack_a(char **av);
 t_ps_list	*ft_ps_lstnew(int content);
 void		ft_ps_lstadd_back(t_ps_list **alst, t_ps_list *new);
 void		ft_ps_lstclear(t_ps_list **lst);
-void		swaping(t_ps_list *stack_a);
+int			swaping(t_ps_list *stack_a);
 void		push_b(t_ps_list **stack_a, t_ps_list **stack_b);
 void		push_a(t_ps_list **stack_a, t_ps_list **stack_b);
 int			push(t_ps_list **from, t_ps_list **to);
@@ -52,5 +52,6 @@ int			reverse_rotate(t_ps_list **stack);
 void		reverse_a(t_ps_list **stack_a);
 void		reverse_b(t_ps_list **stack_b);
 void		double_reverse_rotate(t_ps_list **stack_a, t_ps_list **stack_b);
+int			is_it_good(t_ps_list *stack);
 
 #endif

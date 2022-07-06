@@ -12,6 +12,18 @@
 
 #include "libpushswap.h"
 
+int	is_it_good(t_ps_list *stack)
+{
+	//print_stack(stack, "\nstack_a");
+	while (stack->next != NULL)
+	{
+		if (stack->content > stack->next->content)
+			return (1);
+		stack = stack->next;
+	}
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_ps_list	*stack_a;
@@ -21,13 +33,6 @@ int	main(int ac, char **av)
 	stack_a = fill_stack_a(av);
 	if (stack_a == NULL)
 		return (0);
-	swaping(stack_a);
+	if (swaping(stack_a) == 0)
+		ft_ps_lstclear(&stack_a);
 }
-
-/*
-while (stack_a != NULL)
-{
-	ft_printf("%i\n", stack_a->content);
-	stack_a = stack_a->next;
-}
-*/

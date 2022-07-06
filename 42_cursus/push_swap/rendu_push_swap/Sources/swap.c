@@ -41,14 +41,17 @@ void	swap_b(t_ps_list **stack_b)
 
 void	double_swap(t_ps_list **stack_a, t_ps_list **stack_b)
 {
-	if ((*stack_a)->next == NULL || (*stack_b)->next == NULL)
+	if (*stack_a != NULL && *stack_b != NULL)
 	{
-		if (swap(stack_b) == 0 || swap(stack_a) == 0)
-			ft_putendl_fd("ss", 1);
-	}
-	else
-	{
-		if (swap(stack_b) == 0 && swap(stack_a) == 0)
-			ft_putendl_fd("ss", 1);
+		if ((*stack_a)->next == NULL || (*stack_b)->next == NULL)
+		{
+			if (swap(stack_b) == 0 || swap(stack_a) == 0)
+				ft_putendl_fd("ss", 1);
+		}
+		else
+		{
+			if (swap(stack_b) == 0 && swap(stack_a) == 0)
+				ft_putendl_fd("ss", 1);
+		}
 	}
 }

@@ -12,31 +12,21 @@
 
 #include "libpushswap.h"
 
-void	swaping(t_ps_list *stack_a)
+int	swaping(t_ps_list *stack_a)
 {
 	t_ps_list	*stack_b;
 
 	stack_b = NULL;
-	push_b(&stack_a, &stack_b);
-	push_b(&stack_a, &stack_b);
-	push_b(&stack_a, &stack_b);
-	
-	print_stack(stack_a, "\nstack_a");
-	print_stack(stack_b, "\nstack_b");
-
-	double_swap(&stack_a, &stack_b);
-
-	print_stack(stack_a, "\nstack_a");
-	print_stack(stack_b, "\nstack_b");
-
-	double_rotate(&stack_a, &stack_b);
-
-	print_stack(stack_a, "\nstack_a");
-	print_stack(stack_b, "\nstack_b");
-
-	double_reverse_rotate(&stack_a, &stack_b);
-
-	print_stack(stack_a, "\nstack_a");
-	print_stack(stack_b, "\nstack_b");
-
+	while (1)
+	{
+		if (stack_b == NULL && is_it_good(stack_a) == 0)
+			return (0);
+		reverse_a(&stack_a);
+		push_b(&stack_a, &stack_b);
+		reverse_a(&stack_a);
+		push_a(&stack_a, &stack_b);
+		rotate_a(&stack_a);
+		rotate_a(&stack_a);
+	}
+	return (1);
 }
