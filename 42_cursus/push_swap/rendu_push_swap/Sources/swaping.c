@@ -12,109 +12,74 @@
 
 #include "libpushswap.h"
 
-int	swap(t_ps_list **stack)
+int	reverse_rotate(t_ps_list **stack)
 {
 	t_ps_list	*tmp;
-	t_ps_list	*third;
+	t_ps_list	*last;
 
 	tmp = *stack;
 	if (tmp == NULL || tmp->next == NULL)
 		return (1);
-	third = tmp->next->next;
-	*stack = tmp->next;
-	tmp->next = third;
-	(*stack)->next = tmp;
+	while (tmp->next->next != NULL)
+		tmp = tmp->next;
+	last = tmp->next;
+	tmp->next = NULL;
+	last->next = *stack;
+	*stack = last;
 	return (0);
 }
 
-void	swap_a(t_ps_list **stack_a)
+void	reverse_a(t_ps_list **stack_a)
 {
-	if (swap(stack_a) == 0)
-		ft_putendl_fd("sa", 1);
+	if (reverse_rotate(stack_a) == 0)
+		ft_putendl_fd("rra", 1);
 }
 
-void	swap_b(t_ps_list **stack_b)
+void	reverse_b(t_ps_list **stack_b)
 {
-	if (swap(stack_b) == 0)
-		ft_putendl_fd("sb", 1);
+	if (reverse_rotate(stack_b) == 0)
+		ft_putendl_fd("rrb", 1);
 }
 
-void	double_swap(t_ps_list **stack_a, t_ps_list **stack_b)
+void	double_reverse_rotate(t_ps_list **stack_a, t_ps_list **stack_b)
 {
-	if (swap(stack_a) == 0 || swap(stack_b) == 0) //verif si && ou ||
-		ft_putendl_fd("ss", 1);
-}
-
-int	push(t_ps_list **from, t_ps_list **to)
-{
-	t_ps_list	*tmp;
-
-	if (*from == NULL)
-		return (1);
-	if (*to == NULL)
+	if ((*stack_a)->next == NULL || (*stack_b)->next == NULL)
 	{
-		tmp = *from;
-		*from = tmp->next;
-		tmp->next = NULL;
-		*to = tmp;
+		if (reverse_rotate(stack_b) == 0 || reverse_rotate(stack_a) == 0)
+			ft_putendl_fd("rr", 1);
 	}
 	else
 	{
-		tmp = *from;
-		*from = tmp->next;
-		tmp->next = *to;
-		*to = tmp;
+		if (reverse_rotate(stack_b) == 0 && reverse_rotate(stack_a) == 0)
+			ft_putendl_fd("rr", 1);
 	}
-	return (0);
-}
-
-void	push_a(t_ps_list **stack_a, t_ps_list **stack_b)
-{
-	if (push(stack_a, stack_b) == 0)
-		ft_putendl_fd("pa", 1);
-}
-
-void	push_b(t_ps_list **stack_a, t_ps_list **stack_b)
-{
-	if (push(stack_b, stack_a) == 0)
-		ft_putendl_fd("pb", 1);
 }
 
 void	swaping(t_ps_list *stack_a)
 {
 	t_ps_list	*stack_b;
-	t_ps_list	*tmp_a;
-	t_ps_list	*tmp_b;
 
 	stack_b = NULL;
-	push_a(&stack_a, &stack_b);
-	ft_printf("stack_a\n");
-	tmp_a = stack_a;
-	while (tmp_a != NULL)
-	{
-		ft_printf("%i\n", tmp_a->content);
-		tmp_a = tmp_a->next;
-	}
-	ft_printf("stack_b\n");
-	tmp_b = stack_b;
-	while (tmp_b != NULL)
-	{
-		ft_printf("%i\n", tmp_b->content);
-		tmp_b = tmp_b->next;
-	}
+	push_b(&stack_a, &stack_b);
+	push_b(&stack_a, &stack_b);
+	push_b(&stack_a, &stack_b);
+	
+	print_stack(stack_a, "\nstack_a");
+	print_stack(stack_b, "\nstack_b");
+
 	double_swap(&stack_a, &stack_b);
-	ft_printf("stack_a\n");
-	tmp_a = stack_a;
-	while (tmp_a != NULL)
-	{
-		ft_printf("%i\n", tmp_a->content);
-		tmp_a = tmp_a->next;
-	}
-	ft_printf("stack_b\n");
-	tmp_b = stack_b;
-	while (tmp_b != NULL)
-	{
-		ft_printf("%i\n", tmp_b->content);
-		tmp_b = tmp_b->next;
-	}
+
+	print_stack(stack_a, "\nstack_a");
+	print_stack(stack_b, "\nstack_b");
+
+	double_rotate(&stack_a, &stack_b);
+
+	print_stack(stack_a, "\nstack_a");
+	print_stack(stack_b, "\nstack_b");
+
+	double_reverse_rotate(&stack_a, &stack_b);
+
+	print_stack(stack_a, "\nstack_a");
+	print_stack(stack_b, "\nstack_b");
+
 }

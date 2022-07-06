@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_stack.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 11:26:46 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/07/05 11:26:58 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/07/06 15:41:19 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/07/06 15:41:22 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libpushswap.h"
 
-int	main(int ac, char **av)
+void	print_stack(t_ps_list	*stack, char *name)
 {
-	t_ps_list	*stack_a;
-
-	if (ft_ps_parsing(ac, av) == 0)
-		return (0);
-	stack_a = fill_stack_a(av);
-	if (stack_a == NULL)
-		return (0);
-	swaping(stack_a);
+	ft_printf("%s\n", name);
+	while (stack != NULL)
+	{
+		ft_printf("%i\n", stack->content);
+		stack = stack->next;
+	}
 }
-
-/*
-while (stack_a != NULL)
-{
-	ft_printf("%i\n", stack_a->content);
-	stack_a = stack_a->next;
-}
-*/

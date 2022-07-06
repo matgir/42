@@ -58,8 +58,8 @@ t_ps_list	*fill_stack_a(char **av)
 {
 	t_ps_list	*stack_a;
 	t_ps_list	*tmp_lst;
-	int		i;
-	int		tmp;
+	int			i;
+	int			tmp;
 
 	i = 0;
 	stack_a = NULL;
