@@ -48,5 +48,9 @@ void		double_rotate(t_ps_list **stack_a, t_ps_list **stack_b);
 void		rotate_b(t_ps_list **stack_b);
 void		rotate_a(t_ps_list **stack_a);
 int			rotate(t_ps_list **stack);
+int			reverse_rotate(t_ps_list **stack);
+void		reverse_a(t_ps_list **stack_a);
+void		reverse_b(t_ps_list **stack_b);
+void		double_reverse_rotate(t_ps_list **stack_a, t_ps_list **stack_b);
 
 #endif
