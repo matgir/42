@@ -34,7 +34,7 @@ int			ft_ps_duplicatecheck(char **av);
 t_ps_list	*fill_stack_a(char **av);
 t_ps_list	*ft_ps_lstnew(int content);
 void		ft_ps_lstadd_back(t_ps_list **alst, t_ps_list *new);
-void	ft_ps_lstclear(t_ps_list **lst);
-void	swaping(t_ps_list **stack_a);
+void		ft_ps_lstclear(t_ps_list **lst);
+void		swaping(t_ps_list *stack_a);
 
 #endif

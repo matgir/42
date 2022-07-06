@@ -21,5 +21,13 @@ int	main(int ac, char **av)
 	stack_a = fill_stack_a(av);
 	if (stack_a == NULL)
 		return (0);
-	swaping(&stack_a);
+	swaping(stack_a);
 }
+
+/*
+while (stack_a != NULL)
+{
+	ft_printf("%i\n", stack_a->content);
+	stack_a = stack_a->next;
+}
+*/

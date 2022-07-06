@@ -27,8 +27,8 @@
 
 SRCS	=	Sources/parsing_ps.c \
 			Sources/main.c \
-			Sources/swaping.c \
-			Sources/fill_stack_a
+			Sources/fill_stack_a.c \
+			Sources/swaping.c
 
 OBJS	=	${SRCS:.c=.o}
 
