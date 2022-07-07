@@ -23,7 +23,9 @@ int	main(int ac, char **av)
 		return (0);
 	if (swaping(&stack_a) == 0)
 	{
+//
 		print_stack(stack_a, "stack_sorted");
+//
 		ft_ps_lstclear(&stack_a);
 	}
 	return (1);
