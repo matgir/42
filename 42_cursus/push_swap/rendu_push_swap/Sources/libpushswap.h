@@ -26,6 +26,15 @@ typedef struct v_list
 	struct v_list		*next;
 }				t_ps_list;
 
+typedef struct v_pair
+{
+	int				content_a;
+	int				content_b;
+	int				nb_moves_a;
+	int				nb_moves_b;
+	struct v_pair	*next;
+}				t_pair;
+
 int			main(int ac, char **av);
 int			ft_ps_parsing(int ac, char **av);
 int			ft_ps_atoi(char *nptr, int *error);
@@ -35,6 +44,7 @@ t_ps_list	*fill_stack_a(char **av);
 t_ps_list	*ft_ps_lstnew(int content);
 void		ft_ps_lstadd_back(t_ps_list **alst, t_ps_list *new);
 void		ft_ps_lstclear(t_ps_list **lst);
+t_ps_list	*ft_ps_lstlast(t_ps_list *stack);
 int			swaping(t_ps_list **stack_a);
 void		push_b(t_ps_list **stack_a, t_ps_list **stack_b);
 void		push_a(t_ps_list **stack_a, t_ps_list **stack_b);
@@ -62,6 +72,16 @@ void		sort_four(t_ps_list **stack_a, t_ps_list **stack_b);
 void		sort_five(t_ps_list **stack_a, t_ps_list **stack_b);
 int			place(t_ps_list *stack, int value);
 int			smallest(t_ps_list *stack);
+int			smallest_bis(t_ps_list *stack, int value);
 int			stack_size(t_ps_list *stack);
+int			biggest(t_ps_list *stack);
+int			biggest_bis(t_ps_list *stack, int value);
+t_ps_list	*sort_stack(t_ps_list *stack);
+int			median_value(t_ps_list *stack, int place);
+int			find_median(t_ps_list *stack);
+void		first_triage(t_ps_list **stack_a, t_ps_list **stack_b, int median);
+t_pair		*pair(t_ps_list *stack_a, t_ps_list *stack_b);
+void		to_move_a_pair(t_ps_list **stack_a, t_ps_list **stack_b);
+void		sort(t_ps_list **stack_a, t_ps_list **stack_b);
 
 #endif

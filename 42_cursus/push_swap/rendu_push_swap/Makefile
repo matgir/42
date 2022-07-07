@@ -27,12 +27,15 @@
 
 SRCS	=	Sources/fill_stack_a.c \
 			Sources/is_it_good.c \
+			Sources/lst_utils.c \
 			Sources/main.c \
+			Sources/median.c \
 			Sources/parsing_ps.c \
 			Sources/print_stack.c \
 			Sources/push.c \
 			Sources/reverse_rotate.c \
 			Sources/rotate.c \
+			Sources/small_big.c \
 			Sources/sort_small_stack.c \
 			Sources/swap.c \
 			Sources/swaping.c \

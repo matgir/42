@@ -12,181 +12,74 @@
 
 #include "libpushswap.h"
 
-int	stack_size(t_ps_list *stack)
+t_pair	*ft_pair_lstnew(int c_a, int c_b, int m_a, int m_b)
 {
-	int	count;
+	t_pair	*new;
 
-	count = 0;
-	while (stack != NULL)
-	{
-		count++;
-		stack = stack->next;
-	}
-	return (count);
+	new = malloc(sizeof(t_pair));
+	if (new == NULL)
+		return (NULL);
+	new->content_a = c_a;
+	new->content_b = c_b;
+	new->nb_moves_a = m_a;
+	new->nb_moves_b = m_b;
+	return (new);
 }
 
-int	smallest(t_ps_list *stack)
+int	nb_move(t_ps_list *stack, int value)
 {
-	int	smallest;
-
-	smallest = stack->content;
-	while (stack != NULL)
-	{
-		if (stack->content < smallest)
-			smallest = stack->content;
-		stack = stack->next;
-	}
-	return (smallest);
+	if (place(stack, value) <= stack_size(stack) / 2)
+		return (place(stack, value)); // et donc RA
+	else
+		return (-(stack_size(stack) - place(stack, value))); // et donc RRa
 }
 
-int	biggest(t_ps_list *stack)
-{
-	int biggest;
+void	ft_pair_lstadd_back() // a coder
 
-	biggest = stack->content;
-	while (stack != NULL)
+t_pair	*pair(t_ps_list *stack_a, t_ps_list *stack_b)
+{
+	t_pair	*pair;
+	t_pair	*tmp_pair;
+	int		c_a;
+
+	pair = NULL;
+	while (stack_b != NULL)
 	{
-		if (stack->content > biggest)
-			biggest = stack->content;
-		stack = stack->next;
-	}
-	return (biggest);
-}
-
-int	smallest_bis(t_ps_list *stack, int value)
-{
-	int	smallest_bis;
-
-	smallest_bis = 2147483647;
-	while (stack != NULL)
-	{
-		if (stack->content < smallest_bis && stack->content > value)
-			smallest_bis = stack->content;
-		stack = stack->next;
-	}
-	return (smallest_bis);
-}
-
-int	biggest_bis(t_ps_list *stack, int value)
-{
-	int	biggest_bis;
-
-	biggest_bis = -2147483648;
-	while (stack != NULL)
-	{
-		if (stack->content > biggest_bis && stack->content < value)
-			biggest_bis = stack->content;
-		stack = stack->next;
-	}
-	return (biggest_bis);
-}
-
-int	place(t_ps_list *stack, int value)
-{
-	int index;
-
-	index = 0;
-	while (stack != NULL)
-	{
-		if (stack->content == value)
-			return (index);
-		index++;
-		stack = stack->next;
-	}
-	return (-1);
-}
-
-t_ps_list	*ft_ps_lstlast(t_ps_list *stack)
-{
-	while (stack != NULL && stack->next != NULL)
-		stack = stack->next;
-	return (stack);
-}
-
-t_ps_list	*sort_stack(t_ps_list *stack)
-{
-	t_ps_list	*sorted_stack;
-	t_ps_list	*tmp_lst;
-	int			i;
-	int			stack_count;
-
-	i = smallest(stack);
-	sorted_stack = NULL;
-	stack_count = stack_size(stack);
-	while (stack_count != stack_size(sorted_stack))
-	{
-		tmp_lst = ft_ps_lstnew(i);
-		if (tmp_lst == NULL)
+		c_a = smallest_bis(stack_a, stack_b->content);
+		tmp_pair = ft_pair_lstnew(c_a, stack_b->content, nb_move(stack_a, c_a), 0);
+		if (tmp_pair == NULL)
 		{
-			ft_ps_lstclear(&sorted_stack); //check if it really works
-			ft_putendl_fd("Error alloc", 2);
+			ft_pair_lstclear(*tmp_pair); // a coder
 			return (NULL);
 		}
-		ft_ps_lstadd_back(&sorted_stack, tmp_lst);
-		i = smallest_bis(stack, i);
+		ft_pair_lstadd_back(&pair, tmp_pair);
+		stack_b = stack_b->next;
 	}
-	return (sorted_stack);
 }
 
-int	median_value(t_ps_list *stack, int value)
+void	to_move_a_pair(t_ps_list **stack_a, t_ps_list **stack_b)
 {
-	int	i;
+	t_pair	*the_pair;
 
-	i = -1;
-	while (++i < value)
-	{
-		stack = stack->next;
-	}
-	return (stack->content);
-}
+	the_pair = pair(*stack_a, *stack_b);
+	//list chainer des pair, remplir nb move b et choisir meilleur pour executer
 
-int	find_median(t_ps_list *stack)
-{
-	t_ps_list	*sorted_stack;
-	int			median;
-	int			median_place;
-
-	sorted_stack = sort_stack(stack);
-	median_place = stack_size(stack) / 2;
-	median = median_value(sorted_stack, median_place);
-//
-	print_stack(sorted_stack, "sorted_stack");
-	ft_printf("median is %i\n", median);
-//
-	ft_ps_lstclear(&sorted_stack);
-	return (median);
-}
-
-void	first_triage(t_ps_list **stack_a, t_ps_list **stack_b, int median)
-{
-	int		big;
-	int		big_bis;
-
-	big = biggest(*stack_a);
-	big_bis = biggest_bis(*stack_a, big);
-	while (stack_size(*stack_a) != 2)
-	{
-		if ((*stack_a)->content < median)
-			push_b(stack_a, stack_b);
-		else if ((*stack_a)->content != big && (*stack_a)->content != big_bis)
-		{
-			push_b(stack_a, stack_b);
-			double_rotate(stack_a, stack_b);
-		}
-		else
-			rotate_a(stack_a);
-	}
-	print_stack(*stack_a, "stack_a");
-	print_stack(*stack_b, "stack_b");
 }
 
 void	sort(t_ps_list **stack_a, t_ps_list **stack_b)
 {
 	int	median;
 
+//
+	to_the_top(stack_a, smallest(*stack_a), 'a');
+//
 	median = find_median(*stack_a); //maybe put it directly under
 	first_triage(stack_a, stack_b, median);
-
+	while ((*stack_b) != NULL)
+	{
+		to_move_a_pair(stack_a, stack_b);
+		push_a(stack_a, stack_b);
+	}
 }
 
 void	start_sort(t_ps_list **stack_a, t_ps_list **stack_b)
