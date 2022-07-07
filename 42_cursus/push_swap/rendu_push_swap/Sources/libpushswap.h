@@ -54,5 +54,6 @@ void		reverse_b(t_ps_list **stack_b);
 void		double_reverse_rotate(t_ps_list **stack_a, t_ps_list **stack_b);
 int			is_it_good(t_ps_list **stack);
 void		start_sort(t_ps_list **stack_a, t_ps_list **stack_b);
+void		sort_three(t_ps_list **stack);
 
 #endif

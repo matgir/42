@@ -34,6 +34,7 @@ SRCS	=	Sources/parsing_ps.c \
 			Sources/rotate.c \
 			Sources/reverse_rotate.c \
 			Sources/is_it_good.c \
+			Sources/sort_three.c \
 			Sources/print_stack.c
 
 OBJS	=	${SRCS:.c=.o}

@@ -25,43 +25,92 @@ int	stack_size(t_ps_list *stack)
 	return (count);
 }
 
-void	sort_three(t_ps_list **stack)
+int	smallest(t_ps_list *stack)
 {
-	int	first;
-	int	second;
-	int	third;
+	int	smallest;
 
-	first = (*stack)->content;
-	second = (*stack)->next->content;
-	third = (*stack)->next->next->content;
-	if (first < second && first < third)
+	smallest = stack->content;
+	while (stack != NULL)
 	{
-		reverse_a(stack);
-		swap_a(stack);
+		if (stack->content < smallest)
+			smallest = stack->content;
+		stack = stack->next;
 	}
-	if (first > second && first < third)
-		swap_a(stack);
-	if (first < second && first > third)
-		reverse_a(stack);
-	if (first > second && second > third && first > third)
+	return (smallest);
+}
+
+int	place(t_ps_list *stack, int value)
+{
+	int index;
+
+	index = 0;
+	while (stack != NULL)
 	{
-		rotate_a(stack);
-		swap_a(stack);
+		if (stack->content == value)
+			return (index);
+		index++;
+		stack = stack->next;
 	}
-	if (first > second && first > third && second < third)
-		rotate_a(stack);
+	return (-1);
+}
+
+void	to_the_top_b(t_ps_list **stack, int value)
+{
+	if (place(*stack, value) + 1 <= stack_size(*stack) / 2)
+	{
+		while ((*stack)->content != value)
+			rotate_b(stack);
+	}
+	else
+	{
+		while ((*stack)->content != value)
+			reverse_b(stack);
+	}
+}
+
+void	to_the_top_a(t_ps_list **stack, int value)
+{
+	if (place(*stack, value) + 1 <= stack_size(*stack) / 2)
+	{
+		while ((*stack)->content != value)
+			rotate_a(stack);
+	}
+	else
+	{
+		while ((*stack)->content != value)
+			reverse_a(stack);
+	}
+}
+
+void	to_the_top(t_ps_list **stack, int value, char which)
+{
+	if (which == 'a')
+		to_the_top_a(stack, value);
+	if (which == 'b')
+		to_the_top_b(stack, value);
+}
+
+void	sort_four(t_ps_list **stack_a, t_ps_list **stack_b)
+{
+	to_the_top(stack_a, smallest(*stack_a), 'a');
+	push_b(stack_a, stack_b);
+	sort_three(stack_a);
+	push_a(stack_a, stack_b);
 }
 
 void	start_sort(t_ps_list **stack_a, t_ps_list **stack_b)
 {
 	int	stack_count;
 
-	stack_count = stack_size(*stack_b);
+				stack_count = stack_size(*stack_b);
+
 	stack_count = stack_size(*stack_a);
 	if (stack_count == 2)
 		swap_a(stack_a);
 	else if (stack_count == 3)
 		sort_three(stack_a);
+	else if (stack_count == 4)
+		sort_four(stack_a, stack_b);
 }
 
 int	swaping(t_ps_list **stack_a)
