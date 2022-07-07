@@ -54,55 +54,9 @@ int	place(t_ps_list *stack, int value)
 	return (-1);
 }
 
-void	to_the_top_b(t_ps_list **stack, int value)
-{
-	if (place(*stack, value) + 1 <= stack_size(*stack) / 2)
-	{
-		while ((*stack)->content != value)
-			rotate_b(stack);
-	}
-	else
-	{
-		while ((*stack)->content != value)
-			reverse_b(stack);
-	}
-}
-
-void	to_the_top_a(t_ps_list **stack, int value)
-{
-	if (place(*stack, value) + 1 <= stack_size(*stack) / 2)
-	{
-		while ((*stack)->content != value)
-			rotate_a(stack);
-	}
-	else
-	{
-		while ((*stack)->content != value)
-			reverse_a(stack);
-	}
-}
-
-void	to_the_top(t_ps_list **stack, int value, char which)
-{
-	if (which == 'a')
-		to_the_top_a(stack, value);
-	if (which == 'b')
-		to_the_top_b(stack, value);
-}
-
-void	sort_four(t_ps_list **stack_a, t_ps_list **stack_b)
-{
-	to_the_top(stack_a, smallest(*stack_a), 'a');
-	push_b(stack_a, stack_b);
-	sort_three(stack_a);
-	push_a(stack_a, stack_b);
-}
-
 void	start_sort(t_ps_list **stack_a, t_ps_list **stack_b)
 {
 	int	stack_count;
-
-				stack_count = stack_size(*stack_b);
 
 	stack_count = stack_size(*stack_a);
 	if (stack_count == 2)
@@ -111,6 +65,10 @@ void	start_sort(t_ps_list **stack_a, t_ps_list **stack_b)
 		sort_three(stack_a);
 	else if (stack_count == 4)
 		sort_four(stack_a, stack_b);
+	else if (stack_count == 5)
+		sort_five(stack_a, stack_b);
+	/*else
+		sort(stack_a, stack_b);*/
 }
 
 int	swaping(t_ps_list **stack_a)

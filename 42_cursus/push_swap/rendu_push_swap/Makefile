@@ -25,17 +25,18 @@
 
 #	regles declarer avec ':'
 
-SRCS	=	Sources/parsing_ps.c \
-			Sources/main.c \
-			Sources/fill_stack_a.c \
-			Sources/swaping.c \
-			Sources/push.c \
-			Sources/swap.c \
-			Sources/rotate.c \
-			Sources/reverse_rotate.c \
+SRCS	=	Sources/fill_stack_a.c \
 			Sources/is_it_good.c \
-			Sources/sort_three.c \
-			Sources/print_stack.c
+			Sources/main.c \
+			Sources/parsing_ps.c \
+			Sources/print_stack.c \
+			Sources/push.c \
+			Sources/reverse_rotate.c \
+			Sources/rotate.c \
+			Sources/sort_small_stack.c \
+			Sources/swap.c \
+			Sources/swaping.c \
+			Sources/to_the_top.c
 
 OBJS	=	${SRCS:.c=.o}
 

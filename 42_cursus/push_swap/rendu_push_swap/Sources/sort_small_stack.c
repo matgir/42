@@ -38,3 +38,21 @@ void	sort_three(t_ps_list **stack)
 	if (first > second && first > third && second < third)
 		rotate_a(stack);
 }
+
+void	sort_four(t_ps_list **stack_a, t_ps_list **stack_b)
+{
+	to_the_top(stack_a, smallest(*stack_a), 'a');
+	push_b(stack_a, stack_b);
+	if (is_it_good(stack_a) != 0)
+		sort_three(stack_a);
+	push_a(stack_a, stack_b);
+}
+
+void	sort_five(t_ps_list **stack_a, t_ps_list **stack_b)
+{
+	to_the_top(stack_a, smallest(*stack_a), 'a');
+	push_b(stack_a, stack_b);
+	if (is_it_good(stack_a) != 0)
+		sort_four(stack_a, stack_b);
+	push_a(stack_a, stack_b);
+}
