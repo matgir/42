@@ -28,7 +28,7 @@ int	smallest(t_ps_list *stack)
 
 int	biggest(t_ps_list *stack)
 {
-	int biggest;
+	int	biggest;
 
 	biggest = stack->content;
 	while (stack != NULL)

@@ -12,27 +12,28 @@
 
 #include "libpushswap.h"
 
-t_ps_list	*sort_stack(t_ps_list *stack)
+t_ps_list	*sort_stack(t_ps_list **stack)
 {
 	t_ps_list	*sorted_stack;
 	t_ps_list	*tmp_lst;
 	int			i;
 	int			stack_count;
 
-	i = smallest(stack);
+	i = smallest(*stack);
 	sorted_stack = NULL;
-	stack_count = stack_size(stack);
+	stack_count = stack_size(*stack);
 	while (stack_count != stack_size(sorted_stack))
 	{
 		tmp_lst = ft_ps_lstnew(i);
 		if (tmp_lst == NULL)
 		{
-			ft_ps_lstclear(&sorted_stack); //check if it really works
-			ft_putendl_fd("Error alloc", 2);
-			return (NULL);
+			ft_ps_lstclear(&sorted_stack);
+			ft_ps_lstclear(stack);
+			ft_putendl_fd("Error", 2);
+			exit (-1);
 		}
 		ft_ps_lstadd_back(&sorted_stack, tmp_lst);
-		i = smallest_bis(stack, i);
+		i = smallest_bis(*stack, i);
 	}
 	return (sorted_stack);
 }
@@ -50,14 +51,14 @@ int	median_value(t_ps_list *stack, int place)
 	return (stack->content);
 }
 
-int	find_median(t_ps_list *stack)
+int	find_median(t_ps_list **stack)
 {
 	t_ps_list	*sorted_stack;
 	int			median;
 	int			median_place;
 
 	sorted_stack = sort_stack(stack);
-	median_place = stack_size(stack) / 2;
+	median_place = stack_size(*stack) / 2;
 	median = median_value(sorted_stack, median_place);
 	ft_ps_lstclear(&sorted_stack);
 	return (median);

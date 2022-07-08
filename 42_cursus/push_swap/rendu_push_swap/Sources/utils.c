@@ -27,7 +27,7 @@ int	stack_size(t_ps_list *stack)
 
 int	place(t_ps_list *stack, int value)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	while (stack != NULL)
@@ -38,4 +38,18 @@ int	place(t_ps_list *stack, int value)
 		stack = stack->next;
 	}
 	return (-1);
+}
+
+int	is_it_good(t_ps_list **stack)
+{
+	t_ps_list	*tmp;
+
+	tmp = *stack;
+	while (tmp->next != NULL)
+	{
+		if (tmp->content > tmp->next->content)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }

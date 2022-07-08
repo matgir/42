@@ -16,16 +16,13 @@ int	ft_ps_atoi(char *nptr, int *error)
 {
 	unsigned long	i;
 	int				sign;
-	long long int		nbr;
+	long int		nbr;
 
 	i = 0;
 	sign = 1;
 	nbr = 0;
 	if (ft_strlen(nptr) > 11)
-	{
 		*error = 2;
-		return (nbr);
-	}
 	while ((nptr[i] >= '\t' && nptr[i] <= '\r') || nptr[i] == ' ')
 		i++;
 	if (nptr[i] == '+' || nptr[i] == '-')
@@ -55,7 +52,7 @@ int	ft_ps_intcheck(char **av)
 		ft_ps_atoi(av[i], &error);
 		if (error != 1)
 		{
-			ft_putendl_fd("Error not int", 2);
+			ft_putendl_fd("Error", 2);
 			return (0);
 		}
 	}
@@ -75,7 +72,7 @@ int	ft_ps_duplicatecheck(char **av)
 		{
 			if (ft_atoi(av[i]) == ft_atoi(av[j]))
 			{
-				ft_putendl_fd("Error duplicate", 2);
+				ft_putendl_fd("Error", 2);
 				return (0);
 			}
 		}
@@ -86,18 +83,12 @@ int	ft_ps_duplicatecheck(char **av)
 int	ft_ps_parsing(int ac, char **av)
 {
 	if (ac < 2)
-	{
-		ft_putendl_fd("Error param", 2);
 		return (0);
-	}
 	if (ft_ps_intcheck(av) == 0)
 		return (0);
 	if (ft_ps_duplicatecheck(av) == 0)
 		return (0);
 	if (ac == 2)
-	{
-		ft_putendl_fd("only one lad", 2);
 		return (0);
-	}
 	return (1);
 }

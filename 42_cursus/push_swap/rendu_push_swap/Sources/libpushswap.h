@@ -83,11 +83,11 @@ int			smallest_bis(t_ps_list *stack, int value);
 int			stack_size(t_ps_list *stack);
 int			biggest(t_ps_list *stack);
 int			biggest_bis(t_ps_list *stack, int value);
-t_ps_list	*sort_stack(t_ps_list *stack);
+t_ps_list	*sort_stack(t_ps_list **stack);
 int			median_value(t_ps_list *stack, int place);
-int			find_median(t_ps_list *stack);
+int			find_median(t_ps_list **stack);
 void		first_triage(t_ps_list **stack_a, t_ps_list **stack_b, int median);
-t_pair		*pair(t_ps_list *stack_a, t_ps_list *stack_b);
+t_pair		pairs(t_ps_list **stack_a, t_ps_list **stack_b);
 void		to_move_a_pair(t_ps_list **stack_a, t_ps_list **stack_b);
 void		sort(t_ps_list **stack_a, t_ps_list **stack_b);
 

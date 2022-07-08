@@ -27,8 +27,8 @@ t_ps_list	*fill_stack_a(char **av)
 		tmp_lst = ft_ps_lstnew(tmp);
 		if (tmp_lst == NULL)
 		{
-			ft_ps_lstclear(&stack_a); //check if it really works
-			ft_putendl_fd("Error alloc", 2);
+			ft_ps_lstclear(&stack_a);
+			ft_putendl_fd("Error", 2);
 			return (NULL);
 		}
 		ft_ps_lstadd_back(&stack_a, tmp_lst);

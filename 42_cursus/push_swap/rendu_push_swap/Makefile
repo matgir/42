@@ -26,7 +26,6 @@
 #	regles declarer avec ':'
 
 SRCS	=	Sources/fill_stack_a.c \
-			Sources/is_it_good.c \
 			Sources/lst_utils.c \
 			Sources/main.c \
 			Sources/median.c \

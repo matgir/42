@@ -37,9 +37,9 @@ t_pair	*ft_pair_lstnew(int c_a, int c_b, int m_a, int m_b)
 int	nb_move(t_ps_list *stack, int value)
 {
 	if (place(stack, value) <= stack_size(stack) / 2)
-		return (place(stack, value)); // et donc RA
+		return (place(stack, value));
 	else
-		return (-(stack_size(stack) - place(stack, value))); // et donc RRa
+		return (-(stack_size(stack) - place(stack, value)));
 }
 
 void	ft_pair_lstadd_back(t_pair **alst, t_pair *new)
@@ -157,19 +157,7 @@ t_pair	costless_pair(t_pair *pairs)
 	return (costless_pair);
 }
 
-/*t_pair	*put_to_zero(t_pair *pair)
-{
-	pair->tt_nb_moves = 0;
-	pair->nb_rb = 0;
-	pair->nb_ra = 0;
-	pair->nb_rr = 0;
-	pair->nb_rra = 0;
-	pair->nb_rrb = 0;
-	pair->nb_rrr = 0;
-	return (pair);
-}*/
-
-t_pair	pairs(t_ps_list *stack_a, t_ps_list *stack_b)
+t_pair	pairs(t_ps_list **stack_a, t_ps_list **stack_b)
 {
 	t_pair		*pairs;
 	t_pair		*tmp_pair;
@@ -177,18 +165,21 @@ t_pair	pairs(t_ps_list *stack_a, t_ps_list *stack_b)
 	t_ps_list	*tmp_sb;
 	t_pair		the_pair;
 
-	tmp_sb = stack_b;
+	tmp_sb = *stack_b;
 	pairs = NULL;
 	while (tmp_sb != NULL)
 	{
-		c_a = smallest_bis(stack_a, tmp_sb->content);
-		tmp_pair = ft_pair_lstnew(c_a, tmp_sb->content, nb_move(stack_a, c_a), nb_move(stack_b, tmp_sb->content));
+		c_a = smallest_bis(*stack_a, tmp_sb->content);
+		tmp_pair = ft_pair_lstnew(c_a, tmp_sb->content, nb_move(*stack_a, c_a),
+				nb_move(*stack_b, tmp_sb->content));
 		if (tmp_pair == NULL)
 		{
-			ft_pair_lstclear(&tmp_pair);
-			exit(0); //a modifier
+			ft_pair_lstclear(&pairs);
+			ft_ps_lstclear(stack_a);
+			ft_ps_lstclear(stack_b);
+			ft_putendl_fd("Error", 2);
+			exit(-1);
 		}
-//		tmp_pair = put_to_zero(tmp_pair);
 		ft_pair_lstadd_back(&pairs, tmp_pair);
 		tmp_sb = tmp_sb->next;
 	}
@@ -201,7 +192,7 @@ void	to_move_a_pair(t_ps_list **stack_a, t_ps_list **stack_b)
 {
 	t_pair	the_pair;
 
-	the_pair = pairs(*stack_a, *stack_b);
+	the_pair = pairs(stack_a, stack_b);
 	while (the_pair.nb_ra != 0)
 	{
 		rotate_a(stack_a);
@@ -238,9 +229,9 @@ void	sort(t_ps_list **stack_a, t_ps_list **stack_b)
 {
 	int	median;
 
-	median = find_median(*stack_a); //maybe put it directly under
+	median = find_median(stack_a);
 	first_triage(stack_a, stack_b, median);
-	while ((*stack_b) != NULL) // || stack_size(stack_b) != 0
+	while ((*stack_b) != NULL)
 	{
 		to_move_a_pair(stack_a, stack_b);
 		push_a(stack_a, stack_b);
