@@ -16,11 +16,16 @@ int	ft_ps_atoi(char *nptr, int *error)
 {
 	unsigned long	i;
 	int				sign;
-	long int		nbr;
+	long long int		nbr;
 
 	i = 0;
 	sign = 1;
 	nbr = 0;
+	if (ft_strlen(nptr) > 11)
+	{
+		*error = 2;
+		return (nbr);
+	}
 	while ((nptr[i] >= '\t' && nptr[i] <= '\r') || nptr[i] == ' ')
 		i++;
 	if (nptr[i] == '+' || nptr[i] == '-')
@@ -35,8 +40,6 @@ int	ft_ps_atoi(char *nptr, int *error)
 		i++;
 		*error = 1;
 	}
-	if (nbr * sign > 2147483647 || nbr * sign < -2147483648)
-		*error = 2;
 	return (nbr * sign);
 }
 

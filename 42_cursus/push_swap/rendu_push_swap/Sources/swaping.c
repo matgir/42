@@ -23,6 +23,14 @@ t_pair	*ft_pair_lstnew(int c_a, int c_b, int m_a, int m_b)
 	new->content_b = c_b;
 	new->nb_moves_a = m_a;
 	new->nb_moves_b = m_b;
+	new->tt_nb_moves = 0;
+	new->nb_rb = 0;
+	new->nb_ra = 0;
+	new->nb_rr = 0;
+	new->nb_rra = 0;
+	new->nb_rrb = 0;
+	new->nb_rrr = 0;
+	new->next = NULL;
 	return (new);
 }
 
@@ -129,9 +137,9 @@ void	moves(t_pair **info)
 	}
 }
 
-t_pair	*costless_pair(t_pair *pairs)
+t_pair	costless_pair(t_pair *pairs)
 {
-	t_pair	*costless_pair;
+	t_pair	costless_pair;
 	int		least_move;
 
 	least_move = 2147483647;
@@ -141,15 +149,15 @@ t_pair	*costless_pair(t_pair *pairs)
 		if (pairs->tt_nb_moves < least_move)
 		{
 			least_move = pairs->tt_nb_moves;
-			costless_pair = pairs;
+			costless_pair = *pairs;
 		}
 		pairs = pairs->next;
 	}
-	costless_pair->next = NULL;
+	costless_pair.next = NULL;
 	return (costless_pair);
 }
 
-t_pair	*put_to_zero(t_pair *pair)
+/*t_pair	*put_to_zero(t_pair *pair)
 {
 	pair->tt_nb_moves = 0;
 	pair->nb_rb = 0;
@@ -159,14 +167,15 @@ t_pair	*put_to_zero(t_pair *pair)
 	pair->nb_rrb = 0;
 	pair->nb_rrr = 0;
 	return (pair);
-}
+}*/
 
-t_pair	*pairs(t_ps_list *stack_a, t_ps_list *stack_b)
+t_pair	pairs(t_ps_list *stack_a, t_ps_list *stack_b)
 {
 	t_pair		*pairs;
 	t_pair		*tmp_pair;
 	int			c_a;
 	t_ps_list	*tmp_sb;
+	t_pair		the_pair;
 
 	tmp_sb = stack_b;
 	pairs = NULL;
@@ -177,49 +186,51 @@ t_pair	*pairs(t_ps_list *stack_a, t_ps_list *stack_b)
 		if (tmp_pair == NULL)
 		{
 			ft_pair_lstclear(&tmp_pair);
-			return (NULL);
+			exit(0); //a modifier
 		}
-		tmp_pair = put_to_zero(tmp_pair);
+//		tmp_pair = put_to_zero(tmp_pair);
 		ft_pair_lstadd_back(&pairs, tmp_pair);
 		tmp_sb = tmp_sb->next;
 	}
-	return (costless_pair(pairs));
+	the_pair = costless_pair(pairs);
+	ft_pair_lstclear(&pairs);
+	return (the_pair);
 }
 
 void	to_move_a_pair(t_ps_list **stack_a, t_ps_list **stack_b)
 {
-	t_pair	*the_pair;
+	t_pair	the_pair;
 
 	the_pair = pairs(*stack_a, *stack_b);
-	while (the_pair->nb_ra != 0)
+	while (the_pair.nb_ra != 0)
 	{
 		rotate_a(stack_a);
-		the_pair->nb_ra--;
+		the_pair.nb_ra--;
 	}
-	while (the_pair->nb_rb != 0)
+	while (the_pair.nb_rb != 0)
 	{
 		rotate_b(stack_b);
-		the_pair->nb_rb--;
+		the_pair.nb_rb--;
 	}
-	while (the_pair->nb_rr != 0)
+	while (the_pair.nb_rr != 0)
 	{
 		double_rotate(stack_a, stack_b);
-		the_pair->nb_rr--;
+		the_pair.nb_rr--;
 	}
-	while (the_pair->nb_rra != 0)
+	while (the_pair.nb_rra != 0)
 	{
 		reverse_a(stack_a);
-		the_pair->nb_rra--;
+		the_pair.nb_rra--;
 	}
-	while (the_pair->nb_rrb != 0)
+	while (the_pair.nb_rrb != 0)
 	{
 		reverse_b(stack_b);
-		the_pair->nb_rrb--;
+		the_pair.nb_rrb--;
 	}
-	while (the_pair->nb_rrr != 0)
+	while (the_pair.nb_rrr != 0)
 	{
 		double_reverse_rotate(stack_a, stack_b);
-		the_pair->nb_rrr--;
+		the_pair.nb_rrr--;
 	}
 }
 

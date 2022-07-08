@@ -23,7 +23,7 @@ t_ps_list	*fill_stack_a(char **av)
 	stack_a = NULL;
 	while (av[++i])
 	{
-		tmp = atoi(av[i]);
+		tmp = ft_atoi(av[i]);
 		tmp_lst = ft_ps_lstnew(tmp);
 		if (tmp_lst == NULL)
 		{
