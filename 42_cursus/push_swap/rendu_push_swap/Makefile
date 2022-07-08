@@ -26,7 +26,8 @@
 #	regles declarer avec ':'
 
 SRCS	=	Sources/fill_stack_a.c \
-			Sources/lst_utils.c \
+			Sources/lst_pair_utils.c \
+			Sources/lst_ps_utils.c \
 			Sources/main.c \
 			Sources/median.c \
 			Sources/parsing_ps.c \
@@ -39,7 +40,8 @@ SRCS	=	Sources/fill_stack_a.c \
 			Sources/swap.c \
 			Sources/swaping.c \
 			Sources/to_the_top.c \
-			Sources/utils.c
+			Sources/utils.c \
+			Sources/utils2.c
 
 OBJS	=	${SRCS:.c=.o}
 

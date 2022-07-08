@@ -90,5 +90,13 @@ void		first_triage(t_ps_list **stack_a, t_ps_list **stack_b, int median);
 t_pair		pairs(t_ps_list **stack_a, t_ps_list **stack_b);
 void		to_move_a_pair(t_ps_list **stack_a, t_ps_list **stack_b);
 void		sort(t_ps_list **stack_a, t_ps_list **stack_b);
+t_pair		*ft_pair_lstnew(int c_a, int c_b, int m_a, int m_b);
+void		ft_pair_lstadd_back(t_pair **alst, t_pair *new);
+void		ft_pair_lstclear(t_pair **lst);
+t_pair		costless_pair(t_pair *pairs);
+void		moves(t_pair **info);
+int			tiniest(int i1, int i2);
+int			taller(int i1, int i2);
+int			nb_move(t_ps_list *stack, int value);
 
 #endif

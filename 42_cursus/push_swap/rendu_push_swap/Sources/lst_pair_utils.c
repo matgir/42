@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_utils.c                                        :+:      :+:    :+:   */
+/*   lst_pair_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 18:21:46 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/07/07 18:21:49 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/07/08 15:07:09 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/07/08 15:07:11 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libpushswap.h"
 
-t_ps_list	*ft_ps_lstlast(t_ps_list *stack)
+t_pair	*ft_pair_lstnew(int c_a, int c_b, int m_a, int m_b)
 {
-	while (stack != NULL && stack->next != NULL)
-		stack = stack->next;
-	return (stack);
+	t_pair	*new;
+
+	new = malloc(sizeof(t_pair));
+	if (new == NULL)
+		return (NULL);
+	new->content_a = c_a;
+	new->content_b = c_b;
+	new->nb_moves_a = m_a;
+	new->nb_moves_b = m_b;
+	new->tt_nb_moves = 0;
+	new->nb_rb = 0;
+	new->nb_ra = 0;
+	new->nb_rr = 0;
+	new->nb_rra = 0;
+	new->nb_rrb = 0;
+	new->nb_rrr = 0;
+	new->next = NULL;
+	return (new);
 }
 
-void	ft_ps_lstadd_back(t_ps_list **alst, t_ps_list *new)
+void	ft_pair_lstadd_back(t_pair **alst, t_pair *new)
 {
-	t_ps_list	*ptr;
+	t_pair	*ptr;
 
 	if (*alst == NULL)
 		*alst = new;
@@ -34,22 +49,10 @@ void	ft_ps_lstadd_back(t_ps_list **alst, t_ps_list *new)
 	}
 }
 
-t_ps_list	*ft_ps_lstnew(int content)
+void	ft_pair_lstclear(t_pair **lst)
 {
-	t_ps_list	*new;
-
-	new = malloc(sizeof(t_ps_list));
-	if (new == NULL)
-		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
-}
-
-void	ft_ps_lstclear(t_ps_list **lst)
-{
-	t_ps_list	*ptr;
-	t_ps_list	*next;
+	t_pair	*ptr;
+	t_pair	*next;
 
 	ptr = *lst;
 	while (ptr != NULL)
