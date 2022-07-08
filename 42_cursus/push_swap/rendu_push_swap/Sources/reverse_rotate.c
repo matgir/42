@@ -48,12 +48,12 @@ void	double_reverse_rotate(t_ps_list **stack_a, t_ps_list **stack_b)
 		if ((*stack_a)->next != NULL || (*stack_b)->next != NULL)
 		{
 			if (reverse_rotate(stack_b) == 0 && reverse_rotate(stack_a) == 0)
-				ft_putendl_fd("rr", 1);
+				ft_putendl_fd("rrr", 1);
 		}
 		else
 		{
 			if (reverse_rotate(stack_b) == 0 || reverse_rotate(stack_a) == 0)
-				ft_putendl_fd("rr", 1);
+				ft_putendl_fd("rrr", 1);
 		}
 	}
 }
