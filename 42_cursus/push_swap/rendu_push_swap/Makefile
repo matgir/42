@@ -39,7 +39,8 @@ SRCS	=	Sources/fill_stack_a.c \
 			Sources/sort_small_stack.c \
 			Sources/swap.c \
 			Sources/swaping.c \
-			Sources/to_the_top.c
+			Sources/to_the_top.c \
+			Sources/utils.c
 
 OBJS	=	${SRCS:.c=.o}
 

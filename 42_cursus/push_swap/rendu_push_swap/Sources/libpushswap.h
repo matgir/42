@@ -32,6 +32,13 @@ typedef struct v_pair
 	int				content_b;
 	int				nb_moves_a;
 	int				nb_moves_b;
+	int				tt_nb_moves;
+	int				nb_rb;
+	int				nb_ra;
+	int				nb_rr;
+	int				nb_rra;
+	int				nb_rrb;
+	int				nb_rrr;
 	struct v_pair	*next;
 }				t_pair;
 

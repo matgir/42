@@ -59,10 +59,6 @@ int	find_median(t_ps_list *stack)
 	sorted_stack = sort_stack(stack);
 	median_place = stack_size(stack) / 2;
 	median = median_value(sorted_stack, median_place);
-//
-	print_stack(sorted_stack, "sorted_stack");
-	ft_printf("median is %i\n", median);
-//
 	ft_ps_lstclear(&sorted_stack);
 	return (median);
 }
@@ -86,8 +82,4 @@ void	first_triage(t_ps_list **stack_a, t_ps_list **stack_b, int median)
 		else
 			rotate_a(stack_a);
 	}
-//
-	print_stack(*stack_a, "stack_a");
-	print_stack(*stack_b, "stack_b");
-//
 }
