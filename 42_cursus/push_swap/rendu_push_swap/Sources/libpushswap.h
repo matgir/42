@@ -42,7 +42,6 @@ typedef struct v_pair
 	struct v_pair	*next;
 }				t_pair;
 
-int			main(int ac, char **av);
 int			ft_ps_parsing(int ac, char **av);
 int			ft_ps_atoi(char *nptr, int *error);
 int			ft_ps_intcheck(char **av);
@@ -98,5 +97,13 @@ void		moves(t_pair **info);
 int			tiniest(int i1, int i2);
 int			taller(int i1, int i2);
 int			nb_move(t_ps_list *stack, int value);
+void		fill_pos(t_pair **pair);
+void		fill_neg(t_pair **pair);
+void		super_rotate(t_pair	the_pair, t_ps_list **stack_a,
+				t_ps_list **stack_b);
+void		super_rev_rot(t_pair the_pair, t_ps_list **stack_a,
+				t_ps_list **stack_b);
+void		to_clear(t_pair **pairs, t_ps_list **stack_a, t_ps_list **stack_b);
+void	fill_tab(char **tab);
 
 #endif

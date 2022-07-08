@@ -41,9 +41,32 @@ SRCS	=	Sources/fill_stack_a.c \
 			Sources/swaping.c \
 			Sources/to_the_top.c \
 			Sources/utils.c \
-			Sources/utils2.c
+			Sources/utils2.c \
+			Sources/utils3.c
+
+SRCSB	=	Sources/checker_utils.c \
+			Sources/checker.c \
+			Sources/fill_stack_a.c \
+			Sources/lst_pair_utils.c \
+			Sources/lst_ps_utils.c \
+			Sources/median.c \
+			Sources/parsing_ps.c \
+			Sources/print_stack.c \
+			Sources/push.c \
+			Sources/reverse_rotate.c \
+			Sources/rotate.c \
+			Sources/small_big.c \
+			Sources/sort_small_stack.c \
+			Sources/swap.c \
+			Sources/swaping.c \
+			Sources/to_the_top.c \
+			Sources/utils.c \
+			Sources/utils2.c \
+			Sources/utils3.c
 
 OBJS	=	${SRCS:.c=.o}
+
+OBJSB	=	${SRCSB:.c=.o}
 
 INCL	=	-I./libft
 
@@ -54,6 +77,8 @@ CC		=	cc
 CFLAGS	=	-Wall -Werror -Wextra -g3
 
 RM		=	rm -f
+
+BONUS	=	checker
 
 #	demander ce qui est mieux, 'rm -f' ou 'rm -rf'
 
@@ -73,14 +98,17 @@ libftc:
 libftfc:
 			${MAKE} -C libft fclean
 
-${NAME}:	${OBJS} ${LIBFT}
+${BONUS}:	${LIBFT} ${OBJSB}
+			${CC} -o ${BONUS} ${OBJSB} ${LIBFT}
+
+${NAME}:	${OBJS} ${LIBFT} ${BONUS}
 			${CC} -o ${NAME} ${OBJS} ${LIBFT}
 
 clean:		libftc
-			${RM} ${OBJS}
+			${RM} ${OBJS} ${OBJSB}
 
 fclean:		clean libftfc
-			${RM} ${NAME}
+			${RM} ${NAME} ${BONUS} ${OBJSB}
 
 re:			fclean all
 

@@ -29,10 +29,7 @@ t_pair	pairs(t_ps_list **stack_a, t_ps_list **stack_b)
 				nb_move(*stack_b, tmp_sb->content));
 		if (tmp_pair == NULL)
 		{
-			ft_pair_lstclear(&pairs);
-			ft_ps_lstclear(stack_a);
-			ft_ps_lstclear(stack_b);
-			ft_putendl_fd("Error", 2);
+			to_clear(&pairs, stack_a, stack_b);
 			exit(-1);
 		}
 		ft_pair_lstadd_back(&pairs, tmp_pair);
@@ -48,36 +45,8 @@ void	to_move_a_pair(t_ps_list **stack_a, t_ps_list **stack_b)
 	t_pair	the_pair;
 
 	the_pair = pairs(stack_a, stack_b);
-	while (the_pair.nb_ra != 0)
-	{
-		rotate_a(stack_a);
-		the_pair.nb_ra--;
-	}
-	while (the_pair.nb_rb != 0)
-	{
-		rotate_b(stack_b);
-		the_pair.nb_rb--;
-	}
-	while (the_pair.nb_rr != 0)
-	{
-		double_rotate(stack_a, stack_b);
-		the_pair.nb_rr--;
-	}
-	while (the_pair.nb_rra != 0)
-	{
-		reverse_a(stack_a);
-		the_pair.nb_rra--;
-	}
-	while (the_pair.nb_rrb != 0)
-	{
-		reverse_b(stack_b);
-		the_pair.nb_rrb--;
-	}
-	while (the_pair.nb_rrr != 0)
-	{
-		double_reverse_rotate(stack_a, stack_b);
-		the_pair.nb_rrr--;
-	}
+	super_rotate(the_pair, stack_a, stack_b);
+	super_rev_rot(the_pair, stack_a, stack_b);
 }
 
 void	sort(t_ps_list **stack_a, t_ps_list **stack_b)

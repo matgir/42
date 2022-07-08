@@ -53,3 +53,23 @@ int	is_it_good(t_ps_list **stack)
 	}
 	return (0);
 }
+
+void	fill_pos(t_pair **pair)
+{
+	(*pair)->tt_nb_moves = taller((*pair)->nb_moves_a, (*pair)->nb_moves_b);
+	(*pair)->nb_rr = tiniest((*pair)->nb_moves_a, (*pair)->nb_moves_b);
+	if ((*pair)->nb_rr == (*pair)->nb_moves_a)
+		(*pair)->nb_rb = (*pair)->tt_nb_moves - (*pair)->nb_rr;
+	else
+		(*pair)->nb_ra = (*pair)->tt_nb_moves - (*pair)->nb_rr;
+}
+
+void	fill_neg(t_pair **pair)
+{
+	(*pair)->tt_nb_moves = taller((*pair)->nb_moves_a, (*pair)->nb_moves_b);
+	(*pair)->nb_rrr = tiniest((*pair)->nb_moves_a, (*pair)->nb_moves_b);
+	if ((*pair)->nb_rrr == -(*pair)->nb_moves_a)
+		(*pair)->nb_rrb = (*pair)->tt_nb_moves - (*pair)->nb_rrr;
+	else
+		(*pair)->nb_rra = (*pair)->tt_nb_moves - (*pair)->nb_rrr;
+}
