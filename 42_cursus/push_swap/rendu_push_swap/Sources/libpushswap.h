@@ -104,6 +104,6 @@ void		super_rotate(t_pair	the_pair, t_ps_list **stack_a,
 void		super_rev_rot(t_pair the_pair, t_ps_list **stack_a,
 				t_ps_list **stack_b);
 void		to_clear(t_pair **pairs, t_ps_list **stack_a, t_ps_list **stack_b);
-void	fill_tab(char **tab);
+void		fill_tab(char **tab);
 
 #endif

@@ -103,8 +103,15 @@ int	checker(t_ps_list **stack_a)
 	{
 		if (stack_b == NULL && is_it_good(stack_a) == 0)
 			return (0);
-		execute_order_66(stack_a, &stack_b);
+		if (execute_order_66(stack_a, &stack_b) == 1)
+		{
+			if (is_it_good(stack_a) != 0)
+				return (1);
+			else
+				return (0);
+		}
 	}
+	return (1);
 }
 
 int	main(int ac, char **av)
