@@ -40,6 +40,22 @@ int	ft_ps_atoi(char *nptr, int *error)
 	return (nbr * sign);
 }
 
+int	digit_check(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] != '-' && str[i] != '+')
+		{
+			if (ft_isdigit((int)str[i]) == 0)
+			return (0);
+		}
+	}
+	return (1);
+}
+
 int	ft_ps_intcheck(char **av)
 {
 	int	i;
@@ -50,11 +66,16 @@ int	ft_ps_intcheck(char **av)
 	{
 		error = 0;
 		if (ft_strlen(av[i]) > 11)
-			error = 2;
+			error = 3;
 		ft_ps_atoi(av[i], &error);
+		if (digit_check(av[i]) == 0)
+			error = 4;
 		if (error != 1)
 		{
-			ft_putendl_fd("Error", 2);
+			ft_putendl_fd("Error not int", 2);
+
+ft_printf("error is %i\n", error);
+
 			return (0);
 		}
 	}
@@ -74,7 +95,7 @@ int	ft_ps_duplicatecheck(char **av)
 		{
 			if (ft_atoi(av[i]) == ft_atoi(av[j]))
 			{
-				ft_putendl_fd("Error", 2);
+				ft_putendl_fd("Error dup", 2);
 				return (0);
 			}
 		}

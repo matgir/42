@@ -17,11 +17,11 @@ int	main(int ac, char **av)
 	t_ps_list	*stack_a;
 
 	if (ft_ps_parsing(ac, av) == 0)
-		return (0);
+		return (1);
 	stack_a = fill_stack_a(av);
 	if (stack_a == NULL)
-		return (0);
+		return (1);
 	if (swaping(&stack_a) == 0)
 		ft_ps_lstclear(&stack_a);
-	return (1);
+	return (0);
 }
