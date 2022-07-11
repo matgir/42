@@ -50,7 +50,7 @@ int	digit_check(char *str)
 		if (str[i] != '-' && str[i] != '+')
 		{
 			if (ft_isdigit((int)str[i]) == 0)
-			return (0);
+				return (0);
 		}
 	}
 	return (1);
@@ -72,10 +72,7 @@ int	ft_ps_intcheck(char **av)
 			error = 4;
 		if (error != 1)
 		{
-			ft_putendl_fd("Error not int", 2);
-
-ft_printf("error is %i\n", error);
-
+			ft_putendl_fd("Error", 2);
 			return (0);
 		}
 	}
@@ -95,7 +92,7 @@ int	ft_ps_duplicatecheck(char **av)
 		{
 			if (ft_atoi(av[i]) == ft_atoi(av[j]))
 			{
-				ft_putendl_fd("Error dup", 2);
+				ft_putendl_fd("Error", 2);
 				return (0);
 			}
 		}

@@ -1,5 +1,5 @@
 
 for i in [1..50]
 do
-	ARG=`generator 500 -500 500` && valgrind ./push_swap $ARG | ../checker_linux $ARG && ./push_swap $ARG | wc -l
+	ARG=`generator 500 -500 500` && ./push_swap $ARG | ./checker $ARG && ./push_swap $ARG | wc -l && ./push_swap $ARG | ../checker_linux $ARG
 done
