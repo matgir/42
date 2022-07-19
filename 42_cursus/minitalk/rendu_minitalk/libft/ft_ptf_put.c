@@ -123,3 +123,22 @@ void	ft_putpurcent(int *puted, int *i)
 	*puted = *puted + 1;
 	*i = *i + 1;
 }
+
+int	ft_print_l(va_list *ap)
+{
+	long int	i;
+	int			puted;
+
+	puted = 1;
+	i = va_arg(*ap, long int);
+	va_end(*ap);
+	ft_putlnbr_fd(i, 1);
+	if (i < 0)
+		puted += 1;
+	while (i / 10 != 0)
+	{
+		puted += 1;
+		i = i / 10;
+	}
+	return (puted);
+}

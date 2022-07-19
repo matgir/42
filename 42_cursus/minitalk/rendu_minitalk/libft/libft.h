@@ -56,6 +56,7 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
 void		ft_putstr_fd(char *s, int fd);
+void		ft_putlnbr_fd(long int n, int fd);
 
 /*#################### FT_GNL ####################*/
 
@@ -77,6 +78,7 @@ void		ft_putunbr(unsigned int n);
 size_t		ft_strlen(const char *str);
 int			ft_is_variable(char c);
 int			ft_print_i_or_d(va_list *ap);
+int			ft_print_l(va_list *ap);
 int			ft_print_p(va_list *ap);
 int			ft_print_s(va_list *ap);
 int			ft_print_u(va_list *ap);
@@ -95,7 +97,7 @@ void		ft_bzero(void *s, size_t n);
 
 /*#################### FT_STR ####################*/
 
-int			ft_atoi(const char *nptr);
+long int	ft_atoi(const char *nptr);
 void		*ft_calloc(size_t nmemb, size_t size);
 char		*ft_itoa(int n);
 char		**ft_split(char const *s, char c);

@@ -25,15 +25,17 @@
 
 #	regles declarer avec ':'
 
-SRCS	=	
+SRCS	=	Sources/server.c
+
+SRCSC	=	Sources/client.c
 
 OBJS	=	${SRCS:.c=.o}
 
-OBJSB	=	${SRCSB:.c=.o}
+OBJSC	=	${SRCSC:.c=.o}
 
 INCL	=	-I./libft
 
-NAME	=	client
+NAME	=	server
 
 CC		=	cc
 
@@ -41,7 +43,7 @@ CFLAGS	=	-Wall -Werror -Wextra -g3
 
 RM		=	rm -f
 
-OTHER	=	server
+OTHER	=	client
 
 #	demander ce qui est mieux, 'rm -f' ou 'rm -rf'
 
@@ -61,14 +63,14 @@ libftc:
 libftfc:
 			${MAKE} -C libft fclean
 
-${OTHER}:	${LIBFT}
-			${CC} -o ${OTHER} ${LIBFT}
+${OTHER}:	${LIBFT} ${OBJSC}
+			${CC} -o ${OTHER} ${OBJSC} ${LIBFT}
 
 ${NAME}:	${OBJS} ${LIBFT} ${OTHER}
 			${CC} -o ${NAME} ${OBJS} ${LIBFT}
 
 clean:		libftc
-			${RM} ${OBJS}
+			${RM} ${OBJS} ${OBJSC}
 
 fclean:		clean libftfc
 			${RM} ${NAME} ${OTHER}

@@ -70,6 +70,8 @@ int	ft_print_variable(char c, va_list *ap)
 		return (ft_print_xs(ap, c));
 	if (c == 'p')
 		return (ft_print_p(ap));
+	if (c == 'l')
+		return (ft_print_l(ap));
 	return (0);
 }
 
@@ -83,6 +85,8 @@ int	ft_is_variable(char c)
 	if (c == 'c' || c == 's' || c == 'p' || c == 'd')
 		return (0);
 	if (c == 'i' || c == 'u' || c == 'x' || c == 'X')
+		return (0);
+	if (c == 'l')
 		return (0);
 	return (1);
 }
