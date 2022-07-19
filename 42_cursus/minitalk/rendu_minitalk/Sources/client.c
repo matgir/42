@@ -18,8 +18,8 @@ int	main(int ac, char **av)
 		return (ft_printf
 			("Please use this format : ./client SERVER_PID \"MESSAGE\"\n"));
 
-	int i = -1;
-	while (av[2][++i] != 0)
+	int i = 0;
+	while (av[2][i] != 0)
 	{
 		ft_printf("%c\n", av[2][i]);
 		av[2][i] >>= 1;
