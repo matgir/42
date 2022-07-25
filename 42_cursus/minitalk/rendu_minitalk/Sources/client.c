@@ -51,6 +51,12 @@ int	send_char(unsigned char c, pid_t pid, int slp_time)
 	return (0);
 }
 
+int	print_err(char *s)
+{
+	ft_putstr_fd(s, 2);
+	return (1);
+}
+
 void	send_str(unsigned char *str, pid_t pid, int status)
 {
 	int	i;
@@ -74,12 +80,6 @@ void	send_str(unsigned char *str, pid_t pid, int status)
 		send_char(0, pid, 30);
 	else
 		kill(pid, SIGUSR1);
-}
-
-int	print_err(char *s)
-{
-	ft_putstr_fd(s, 2);
-	return (1);
 }
 
 void	error_pid_client(pid_t pid)
@@ -128,7 +128,6 @@ unsigned char	*build_tab_empty(void)
 
 int	main(int argc, char **argv)
 {
-	unsigned char		c;
 	unsigned char		*tab;
 	int					pid;
 
@@ -138,10 +137,10 @@ int	main(int argc, char **argv)
 		tab = build_tab(argv);
 	else
 		tab = build_tab_empty();
-	if (ft_strlen(argv[1]) >= 6)
+	/*if (ft_strlen(argv[1]) >= 6)
 		exit (print_err("Invalid PID\n"));
-	pid = ft_atoi(argv[1]);
-	error_pid_client(pid);
+	*/pid = ft_atoi(argv[1]);
+	//error_pid_client(pid);
 	if (ft_strlen(argv[2]) != 0)
 		send_str(tab, pid, NO_EMPTY);
 	else

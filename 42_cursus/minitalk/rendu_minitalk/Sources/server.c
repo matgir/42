@@ -23,7 +23,6 @@ int	sig_to_char(int sig)
 	static unsigned char	c;
 	static int				count;
 	unsigned char			tmp;
-	static int				i;
 
 	tmp = 0;
 	if (count < 8 && (sig == SIGUSR1 || sig == SIGUSR2))
@@ -105,13 +104,30 @@ void	final_step(int *len, int *status, int *pid, char *final_string)
 	*len = -1;
 }
 
+int	print_err(char *s)
+{
+	ft_putstr_fd(s, 2);
+	return (1);
+}
+
+int	error_pid(pid_t pid)
+{
+	if (pid == -1)
+		return (1);
+	if (pid <= 100 || pid >= 99998)
+		exit (print_err("Invalid PID\n"));
+	return (2);
+}
+
 void	get_sig(int sig, siginfo_t *truc, void *context)
 {
 	static int		status;
-	char			*final_string;
+	char			*final_string = NULL;
 	static pid_t	pid;
 	static int		len;
 
+	(void)truc;
+	(void)context;
 	if (status == 0)
 	{
 		len = get_pre_signal(sig);
@@ -132,21 +148,6 @@ void	get_sig(int sig, siginfo_t *truc, void *context)
 	if (final_string == NULL)
 		return ;
 	final_step(&len, &status, &pid, final_string);
-}
-
-int	print_err(char *s)
-{
-	ft_putstr_fd(s, 2);
-	return (1);
-}
-
-int	error_pid(pid_t pid)
-{
-	if (pid == -1)
-		return (1);
-	if (pid <= 100 || pid >= 99998)
-		exit (print_err("Invalid PID\n"));
-	return (2);
 }
 
 int	main(void)
