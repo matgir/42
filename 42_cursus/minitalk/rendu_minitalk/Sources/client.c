@@ -16,7 +16,7 @@ int	main(int ac, char **av)
 {
 	if (ac != 3)
 		return (ft_printf
-			("Please use this format : ./client SERVER_PID \"MESSAGE\"\n"));
+			("Please use this format : \"./client SERVER_PID MESSAGE\"\n"));
 
 	int i = 0;
 	while (av[2][i] != 0)
