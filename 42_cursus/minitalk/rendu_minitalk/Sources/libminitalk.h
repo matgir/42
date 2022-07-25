@@ -17,5 +17,11 @@
 
 # include <signal.h>
 # include "../libft/libft.h"
+# include <sys/types.h>
+
+
+# define EMPTY		1
+# define NO_EMPTY	0
+
 
 #endif
