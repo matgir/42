@@ -15,6 +15,8 @@
 void	server_action(int sig, siginfo_t *info, void *context)
 {
 	(void)context;
+	//for sending back information
+	pid_t	client_pid = info->si_pid;
 }
 
 int	main(void)

@@ -29,5 +29,6 @@ void	parsing_minitalk(int ac, char **av)
 int	main(int ac, char **av)
 {
 	parsing_minitalk(ac, av);
+	pid_t	server_pid = ft_atoi(av[1]);
 	return (0);
 }
