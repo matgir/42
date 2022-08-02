@@ -32,3 +32,204 @@ int	main(void)
 	//maybe find a way to stop the server if needed
 
 }
+
+
+
+
+
+
+#include "libminitalk.h"
+
+t_read	g_read;
+
+void	reset_char_read(void)
+{
+	g_read.char_read[0] = -1;
+	g_read.char_read[1] = -1;
+	g_read.char_read[2] = -1;
+	g_read.char_read[3] = -1;
+	g_read.char_read[4] = -1;
+	g_read.char_read[5] = -1;
+	g_read.char_read[6] = -1;
+	g_read.char_read[7] = -1;
+}
+
+void	append_char_received(char c, int pid)
+{
+	g_read.buffer = append(g_read.buffer, c);
+	if (!(g_read.buffer.buffer))
+	{
+		ft_printf("An error occurred while decoding\n");
+		if (kill(pid, SIGUSR1) == -1)
+			ft_printf("Unable to send error to client\n");
+		exit(1);
+	}
+}
+
+void	make_read(int signum, int current, int pid)
+{
+	char	c;
+
+	if (signum == SIGUSR1)
+		g_read.char_read[current] = 0;
+	if (signum == SIGUSR2)
+		g_read.char_read[current] = 1;
+	if (current == 7)
+	{
+		c = get_char_from_byte(g_read);
+		if (c == '\0')
+		{
+			ft_printf("     ===== Received a message from %i =====     \n\n",
+				pid);
+			g_read.buffer = print_content_and_reset(g_read.buffer, pid);
+			ft_putchar_fd('\n', 1);
+			ft_putchar_fd('\n', 1);
+		}
+		else
+			append_char_received(c, pid);
+		reset_char_read();
+	}
+}
+
+void	init_on_signal(int pid)
+{
+	if (!(g_read.buffer.buffer))
+	{
+		g_read.buffer = init_buffer();
+		if (!(g_read.buffer.buffer))
+		{
+			ft_printf("An error occurred while reading\n");
+			if (kill(pid, SIGUSR1) == -1)
+				ft_printf("Unable to send error to client\n");
+			exit(1);
+		}
+	}
+}
+
+void	signal_handler(int signum, siginfo_t *siginfo, void *ucontext)
+{
+	int		current;
+	int		i;
+	int		pid;
+
+	(void) ucontext;
+	pid = siginfo->si_pid;
+	init_on_signal(pid);
+	i = -1;
+	while (++i < 8)
+	{
+		if (g_read.char_read[i] == -1)
+		{
+			current = i;
+			break ;
+		}
+	}
+	make_read(signum, current, pid);
+	if (kill(pid, SIGUSR2) == -1)
+		ft_printf("Unable to send confirmation to client\n");
+}
+
+
+t_dynamic_buffer	init_buffer(void)
+{
+	t_dynamic_buffer	buffer;
+
+	buffer.buffer = malloc(sizeof(char) * 50);
+	buffer.i = 0;
+	buffer.size = 50;
+	return (buffer);
+}
+
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
+{
+	unsigned int	i;
+
+	i = -1;
+	while (++i < n && src[i])
+		dest[i] = src[i];
+	i--;
+	while (++i < n)
+		dest[i] = 0;
+	return (dest);
+}
+
+t_dynamic_buffer	append(t_dynamic_buffer buffer, char c)
+{
+	char	*tmp;
+
+	if (buffer.i == buffer.size)
+	{
+		tmp = malloc(sizeof(char) * (buffer.size * 2));
+		if (!tmp)
+		{
+			free(buffer.buffer);
+			buffer.buffer = NULL;
+			return (buffer);
+		}
+		ft_strncpy(tmp, buffer.buffer, buffer.size);
+		free(buffer.buffer);
+		buffer.buffer = tmp;
+		buffer.size = buffer.size * 2;
+	}
+	buffer.buffer[buffer.i++] = c;
+	return (buffer);
+}
+
+t_dynamic_buffer	print_content_and_reset(t_dynamic_buffer buffer, int pid)
+{
+	int	i;
+
+	i = -1;
+	if (buffer.i == 0)
+	{
+		ft_printf("                 (Quit signal)\n\n");
+		if (kill(pid, SIGUSR2) == -1)
+			ft_printf("Unable to send confirmation to client\n");
+		free(buffer.buffer);
+		ft_printf("See you next !\n");
+		exit(0);
+	}
+	while (++i < buffer.i)
+		ft_putchar_fd(buffer.buffer[i], 1);
+	free(buffer.buffer);
+	buffer.buffer = NULL;
+	return (buffer);
+}
+
+char	get_char_from_byte(t_read read)
+{
+	char	character;
+	int		binary;
+	int		i;
+
+	character = 0;
+	i = 0;
+	binary = 128;
+	while (binary)
+	{
+		character += read.char_read[i] * binary;
+		i++;
+		binary >>= 1;
+	}
+	return (character);
+}
+
+int	main(void)
+{
+	int			pid;
+	t_sigation	sa;
+
+	ft_printf("Welcome to the Minitalk's server ! Starting ...\n");
+	reset_char_read();
+	sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&sa.sa_mask);
+	sigaddset(&sa.sa_mask, SIGINT);
+	sa.sa_sigaction = signal_handler;
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
+	pid = getpid();
+	ft_printf("Server started ! You can send me a message with the PID %i !\n\n",
+		pid);
+	while (TRUE)
+		;
+}
