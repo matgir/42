@@ -18,54 +18,38 @@
 # include <signal.h>
 # include "../libft/libft.h"
 # include <sys/types.h>
-/*
+
+/*########## STRUCT' ##########*/
+
 typedef struct s_to_send
 {
 	char	*message;
 	int		cursor;
-	pit_t	server_pid;
-	int		binary;
+	int		server_pid;
+	int		shift;
 }	t_to_send;
 
-#endif
-
-
-
-
-#ifndef MINITALK_CLIENT_H
-# define MINITALK_CLIENT_H
-*/
-typedef struct s_send
-{
-	char	*str;
-	int		current;
-	int		pid;
-	int		binary;
-}	t_send;
-
-//#endif
-
-typedef enum e_bool {
-	TRUE = 1,
-	FALSE = 0
-}	t_bool;
-
-/*
-#ifndef MINITALK_SERVER_H
-# define MINITALK_SERVER_H
-*/
 typedef struct sigaction	t_sigation;
 
-typedef struct s_read
+typedef struct s_to_print
 {
-	int					char_read[8];
-}	t_read;
+	int		bits[8];
+	char	*to_print;
+	int		client_pid;
+}	t_to_print;
 
-void				reset_char_read(void);
-void				make_read(int signum, int current, int pid);
-void				init_on_signal(int pid);
-void				signal_handler(int signum, siginfo_t *siginfo,
-						void *ucontext);
-char				get_char_from_byte(t_read read);
+/*########## FUNCTIONS ##########*/
+
+char	*ft_mntlk_strjoin(char *str, char c);
+void	reset_bits(void);
+void	join_char(char c);
+char	bits_to_char(t_to_print infos);
+void	get_bits(int sig, int cursor);
+void	server_signal(int sig, siginfo_t *siginfo, void *ucontext);
+
+void	client_signal(int sig);
+void	send_char(void);
+void	send_byte(char c);
+void	parsing_minitalk(int ac, char **av);
 
 #endif

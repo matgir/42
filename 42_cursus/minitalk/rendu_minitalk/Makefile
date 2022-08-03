@@ -25,7 +25,8 @@
 
 #	regles declarer avec ':'
 
-SRCS	=	Sources/server.c
+SRCS	=	Sources/server.c \
+			Sources/server_utils.c
 
 SRCSC	=	Sources/client.c
 
