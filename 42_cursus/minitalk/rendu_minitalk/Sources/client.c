@@ -12,7 +12,7 @@
 
 #include "libminitalk.h"
 
-t_to_send	infos;
+//t_to_send	infos;
 
 void	parsing_minitalk(int ac, char **av)
 {
@@ -27,7 +27,7 @@ void	parsing_minitalk(int ac, char **av)
 		exit(-1);
 	}
 }
-
+/*
 int	main(int ac, char **av)
 {
 	parsing_minitalk(ac, av);
@@ -36,12 +36,12 @@ int	main(int ac, char **av)
 	return (0);
 }
 
+*/
 
 
 
 
-
-#include "libminitalk.h"
+//#include "libminitalk.h"
 
 t_send	g_send_infos;
 
@@ -102,18 +102,13 @@ void	signal_handler_c(int signum)
 	}
 }
 
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
-	if (argc != 3)
-	{
-		ft_printf("Please use client with this format: ");
-		ft_printf("./client SERVER_PID \"MESSAGE\"\n");
-		return (1);
-	}
+	parsing_minitalk(ac, av);
 	signal(SIGUSR1, signal_handler_c);
 	signal(SIGUSR2, signal_handler_c);
-	g_send_infos.pid = ft_atoi(argv[1]);
-	g_send_infos.str = argv[2];
+	g_send_infos.pid = ft_atoi(av[1]);
+	g_send_infos.str = av[2];
 	g_send_infos.current = 0;
 	if (g_send_infos.str[0])
 		ft_printf("Sending message to PID %i ...\n", g_send_infos.pid);
