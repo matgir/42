@@ -88,6 +88,7 @@ void	server_signal(int sig, siginfo_t *siginfo, void *ucontext)
 	(void) ucontext;
 	g_infos.client_pid = siginfo->si_pid;
 	i = -1;
+	cursor = 0;
 	while (++i < 8)
 	{
 		if (g_infos.bits[i] == -1)
