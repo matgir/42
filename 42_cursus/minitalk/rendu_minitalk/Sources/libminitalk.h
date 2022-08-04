@@ -51,5 +51,8 @@ void	client_signal(int sig);
 void	send_char(void);
 void	send_byte(char c);
 void	parsing_minitalk(int ac, char **av);
+int		ft_mntlk_intcheck(char *av);
+int		digit_check(char *str);
+int		ft_mntlk_atoi(char *nptr, int *error);
 
 #endif

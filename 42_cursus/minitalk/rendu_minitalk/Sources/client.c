@@ -84,9 +84,10 @@ void	client_signal(int sig)
 int	main(int ac, char **av)
 {
 	parsing_minitalk(ac, av);
-	g_infos.server_pid = ft_atoi(av[1]);
-	if (g_infos.server_pid <= 0)
+	if (ft_mntlk_intcheck(av[1]) == 0)
 		parsing_minitalk(-1, NULL);
+	else
+		g_infos.server_pid = ft_atoi(av[1]);
 	g_infos.message = av[2];
 	signal(SIGUSR1, client_signal);
 	signal(SIGUSR2, client_signal);

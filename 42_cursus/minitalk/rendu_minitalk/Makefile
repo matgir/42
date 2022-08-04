@@ -28,7 +28,8 @@
 SRCS	=	Sources/server.c \
 			Sources/server_utils.c
 
-SRCSC	=	Sources/client.c
+SRCSC	=	Sources/client.c \
+			Sources/client_utils.c
 
 OBJS	=	${SRCS:.c=.o}
 
