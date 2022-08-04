@@ -18,7 +18,7 @@ char	*ft_mntlk_strjoin(char *str, char c)
 	size_t	i;
 	size_t	u;
 
-	i = ft_gnl_strlen(str);
+	i = ft_strlen(str);
 	join = malloc(sizeof(char) * (i + 2));
 	if (join == NULL)
 		return (NULL);

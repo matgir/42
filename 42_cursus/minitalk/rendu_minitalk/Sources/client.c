@@ -63,7 +63,7 @@ void	client_signal(int sig)
 {
 	if (sig == SIGUSR1)
 	{
-		ft_printf("Program terminated due to server error");
+		ft_printf("Program terminated due to server error\n");
 		exit (-1);
 	}
 	if (sig == SIGUSR2)
@@ -85,6 +85,8 @@ int	main(int ac, char **av)
 {
 	parsing_minitalk(ac, av);
 	g_infos.server_pid = ft_atoi(av[1]);
+	if (g_infos.server_pid <= 0)
+		parsing_minitalk(-1, NULL);
 	g_infos.message = av[2];
 	signal(SIGUSR1, client_signal);
 	signal(SIGUSR2, client_signal);
