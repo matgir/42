@@ -99,5 +99,9 @@ void	server_signal(int sig, siginfo_t *siginfo, void *ucontext)
 	}
 	get_bits(sig, cursor);
 	if (kill(g_infos.client_pid, SIGUSR2) == -1)
-		ft_printf("Confirmation could not be sent to client\n");
+	{
+		free(g_infos.to_print);
+		g_infos.to_print = NULL;
+		ft_printf("\n\nConfirmation could not be sent to client\n");
+	}
 }

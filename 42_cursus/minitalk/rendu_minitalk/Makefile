@@ -10,21 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-#	gcc -c *.c				transforme les *.c en *.o
-#	ar rc lib***.a *.o		va integrer les *.o a notre libft.a, attention a 
-#							toujours utiliser le prefixe lib...
-#	ranlib lib***.a			permet de creer un index dans la bibliotheque pour
-#							optimiser le temps dexecution du programme
-#	nm -s ${NAME}			permet de lister lindex que lon vient de creer avec
-#							ranlib
-#	gcc main.c -L. -l***	permet de faire appelle a une bibliotheque lors de
-#							la compilation, -lft represente le nom du *.a que
-#							lon veut utiliser
-
-#	variables declarer avec '='
-
-#	regles declarer avec ':'
-
 SRCS	=	Sources/server.c \
 			Sources/server_utils.c
 
@@ -46,8 +31,6 @@ CFLAGS	=	-Wall -Werror -Wextra -g3
 RM		=	rm -f
 
 OTHER	=	client
-
-#	demander ce qui est mieux, 'rm -f' ou 'rm -rf'
 
 LIBFT	=	libft/libft.a
 
@@ -78,7 +61,5 @@ fclean:		clean libftfc
 			${RM} ${NAME} ${OTHER}
 
 re:			fclean all
-
-#	permet au programme dexecuter la regle meme si un fichier du meme nom existe
 
 .PHONY:		all clean fclean re libftc libftfc

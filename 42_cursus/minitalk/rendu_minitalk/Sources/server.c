@@ -35,10 +35,16 @@ char	*ft_mntlk_strjoin(char *str, char c)
 	return (join);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_sigation	sa;
 
+	(void)av;
+	if (ac != 1)
+	{
+		ft_printf("Use this format : ./server\n");
+		exit(-1);
+	}
 	reset_bits();
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = server_signal;

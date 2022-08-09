@@ -14,25 +14,6 @@
 
 t_to_send	g_infos;
 
-void	parsing_minitalk(int ac, char **av)
-{
-	if (ac == -1 && av == NULL)
-	{
-		ft_printf("Program terminated due to PID error\n");
-		exit(-1);
-	}
-	if (ac != 3)
-	{
-		ft_printf("Use this format : ./client SERVER_PID \"MESSAGE\"\n");
-		exit(-1);
-	}
-	if (ft_strlen(av[2]) == 0)
-	{
-		ft_printf("The message to send is empty, nothing was done\n");
-		exit(-1);
-	}
-}
-
 void	send_byte(char c)
 {
 	if (c & g_infos.shift)
