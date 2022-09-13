@@ -61,5 +61,5 @@ fclean:		clean libftfc
 			${RM} ${NAME} ${OTHER}
 
 re:			fclean all
-
+	
 .PHONY:		all clean fclean re libftc libftfc
