@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=
+SRCS	=	
 
 OBJS	=	${SRCS:.c=.o}
 
@@ -20,7 +20,7 @@ CC		=	cc
 
 CFLAGS	=	-Wall -Werror -Wextra -g3 -pthread
 
-RM		= rm -f
+RM		=	rm -f
 
 all:		${NAME}
 
