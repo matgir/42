@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	
+SRCS	=	Sources/test_philo.c
 
 OBJS	=	${SRCS:.c=.o}
 
@@ -18,7 +18,7 @@ NAME	=	philo
 
 CC		=	cc
 
-CFLAGS	=	-Wall -Werror -Wextra -g3 -pthread
+CFLAGS	=	-Wall -Werror -Wextra -g3 -lpthread
 
 RM		=	rm -f
 
