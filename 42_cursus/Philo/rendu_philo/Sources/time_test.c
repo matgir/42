@@ -23,7 +23,7 @@ time_t	get_time_in_ms(void)
 }
 
 int	main(void)
-{
+{	
 	time_t	start_time;
 	time_t	end_time;
 	time_t	time;

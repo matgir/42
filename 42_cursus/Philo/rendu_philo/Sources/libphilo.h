@@ -13,7 +13,7 @@
 #ifndef LIBPHILO_H
 # define LIBPHILO_H
 
-#include <pthread.h>
+# include <pthread.h>
 
 /* ########## STRUCT ########## */
 
@@ -22,14 +22,25 @@ typedef struct s_philo
 	int			nb_of_time_eaten; /* maybe to compare with the required amount each
 	they eat, or not because not always needeed to check, do it if needeed
 	with the omniscent thread */
-	int			dead; /* set to 0 at the beginning and to 1 if philo is dead */
-	int			die_ms;
-	int			eat_ms;
-	int			sleep_ms;
-	int			holding_forks;
-	pthread_t	tid;
-	int			number;
+	int				dead; /* set to 0 at the beginning and to 1 if philo is dead */
+	time_t			die_ms;
+	int				eat_ms;
+	int				sleep_ms;
+	// int				holding_forks; /* quand = 2 alors lancer le manger */
+	pthread_t		tid;
+	int				number;
+	pthread_mutex_t	fork_0;
+	// pthread_t		tid_fork_0;
+	pthread_mutex_t	fork_1;
+	// pthread_t		tid_fork_1;
 }		t_philo;
+
+typedef struct s_omniscient
+{
+	pthread_mutex_t	is_dead_mutex;
+	unsigned int	is_dead;
+	unsigned int	times_eaten;
+}					t_omniscient;
 
 /* ########## USEFULL ########## */
 
@@ -44,5 +55,9 @@ typedef struct s_philo
 # define ICYAN		"\e[0;96m"
 # define GREEN		"\e[32m"
 # define UGREEN		"\e[4;32m"
+
+/* ########## FUNCTIONS ########## */
+
+long int	ft_atoi(const char *nptr);
 
 #endif

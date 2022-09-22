@@ -10,7 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	Sources/time_test.c
+SRCS	=	Sources/philo.c \
+			Sources/ft_atoi.c
 
 OBJS	=	${SRCS:.c=.o}
 
