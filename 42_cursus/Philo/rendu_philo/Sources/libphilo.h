@@ -13,18 +13,23 @@
 #ifndef LIBPHILO_H
 # define LIBPHILO_H
 
+#include <pthread.h>
+
 /* ########## STRUCT ########## */
 
-typedef struct philo
+typedef struct s_philo
 {
-	int	nb_of_time_eaten; /* maybe to compare with the required amount each
+	int			nb_of_time_eaten; /* maybe to compare with the required amount each
 	they eat, or not because not always needeed to check, do it if needeed
 	with the omniscent thread */
-	int	dead; /* set to 0 at the beginning and to 1 if philo is dead */
-	int	time_to_die;
-	int	time_to_eat;
-	int	holding_forks;
-};
+	int			dead; /* set to 0 at the beginning and to 1 if philo is dead */
+	int			die_ms;
+	int			eat_ms;
+	int			sleep_ms;
+	int			holding_forks;
+	pthread_t	tid;
+	int			number;
+}		t_philo;
 
 /* ########## USEFULL ########## */
 
