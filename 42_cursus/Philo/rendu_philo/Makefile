@@ -11,15 +11,15 @@
 # **************************************************************************** #
 
 SRCS	=	Sources/philo.c \
-			Sources/ft_atoi.c
+			Sources/ft_atoi.c \
 
 OBJS	=	${SRCS:.c=.o}
 
 NAME	=	philo
 
-CC		=	gcc -fsanitize=thread -g
+CC		=	gcc -fsanitize=thread -g -lpthread -pthread -g3
 
-CFLAGS	=	-Wall -Werror -Wextra -g3 -lpthread -pthread
+CFLAGS	=	-Wall -Werror -Wextra
 
 RM		=	rm -f
 
@@ -39,4 +39,7 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all .c.o clean fclean re	
+.PHONY:		all .c.o clean fclean re
+
+# CC		=	gcc -fsanitize=thread -g -lpthread -pthread -g3
+

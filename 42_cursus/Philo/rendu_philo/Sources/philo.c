@@ -28,35 +28,30 @@ time_t	get_time_in_ms(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-void	*philo_routine_odd(void *philoso)
+void	*take_fork_0(void *philoso)
 {
 	t_philo	*philo;
-	time_t	now_dead;
 
 	philo = (t_philo *)philoso;
-	now_dead = get_time_in_ms() + philo->die_ms;
-	while (get_time_in_ms() < now_dead)
-	{
-		pthread_mutex_lock(&philo->fork_0);
-		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number);
-		pthread_mutex_lock(&philo->fork_1);
-		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number);
-		now_dead = get_time_in_ms() + philo->die_ms;
-		usleep(philo->eat_ms);
-		printf("%ld %i is eating\n", get_time_in_ms(), philo->number);
-		pthread_mutex_unlock(&philo->fork_0);
-		pthread_mutex_unlock(&philo->fork_1);
-		usleep(philo->sleep_ms);
-		printf("%ld %i is sleeping\n", get_time_in_ms(), philo->number);
-		printf("%ld %i is thinking\n", get_time_in_ms(), philo->number);
-	}
-	printf("%ld %i died\n", get_time_in_ms(), philo->number);
-// choper fork 0 puis 1
-	// mager pendant tel temps
-	// poser fork
-	// dormir pendant tel temps
-	// maybe think
-	// repeat
+	if (philo->number == 0)
+		pthread_mutex_lock(&philo->forks[philo->nb_philo]);
+	else
+		pthread_mutex_lock(&philo->forks[philo->number - 1]);
+	printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number);
+	philo->holding_forks++;
+	return (NULL);
+}
+
+void	*take_fork_1(void *philoso)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)philoso;
+	pthread_mutex_lock(&philo->forks[philo->number]);
+	printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number);
+	philo->holding_forks++;
+	while (philo->holding_forks != 2)
+		usleep(1);
 	return (NULL);
 }
 
@@ -69,20 +64,90 @@ void	*philo_routine_even(void *philoso)
 	now_dead = get_time_in_ms() + philo->die_ms;
 	while (get_time_in_ms() < now_dead)
 	{
-		pthread_mutex_lock(&philo->fork_1);
-		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number);
-		pthread_mutex_lock(&philo->fork_0);
-		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number);
+		/* if (philo->number == 0)
+			pthread_mutex_lock(&philo->forks[philo->nb_philo]);
+		else
+			pthread_mutex_lock(&philo->forks[philo->number - 1]);
+		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number); */
+		pthread_create(&philo->tid_fork_0, NULL, take_fork_0, &philo);
+		if (get_time_in_ms() > now_dead)
+			break;
+		/* pthread_mutex_lock(&philo->forks[philo->number]);
+		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number); */
+		pthread_create(&philo->tid_fork_1, NULL, take_fork_1, &philo);
+		if (get_time_in_ms() > now_dead)
+			break;
 		now_dead = get_time_in_ms() + philo->die_ms;
 		usleep(philo->eat_ms);
+		if (get_time_in_ms() > now_dead)
+			break;
 		printf("%ld %i is eating\n", get_time_in_ms(), philo->number);
-		pthread_mutex_unlock(&philo->fork_1);
-		pthread_mutex_unlock(&philo->fork_0);
+		if (philo->number == 0)
+			pthread_mutex_unlock(&philo->forks[philo->nb_philo]);
+		else
+			pthread_mutex_unlock(&philo->forks[philo->number - 1]);
+		if (get_time_in_ms() > now_dead)
+			break;
+		pthread_mutex_unlock(&philo->forks[philo->number]);
+		if (get_time_in_ms() > now_dead)
+			break;
 		usleep(philo->sleep_ms);
+		if (get_time_in_ms() > now_dead)
+			break;
 		printf("%ld %i is sleeping\n", get_time_in_ms(), philo->number);
+		if (get_time_in_ms() > now_dead)
+			break;
 		printf("%ld %i is thinking\n", get_time_in_ms(), philo->number);
 	}
-	printf("%ld %i died\n", get_time_in_ms(), philo->number);
+	philo->dead = 1;
+// choper fork 0 puis 1
+	// mager pendant tel temps
+	// poser fork
+	// dormir pendant tel temps
+	// maybe think
+	// repeat
+	return (NULL);
+}
+
+void	*philo_routine_odd(void *philoso)
+{
+	t_philo	*philo;
+	time_t	now_dead;
+
+	philo = (t_philo *)philoso;
+	now_dead = get_time_in_ms() + philo->die_ms;
+	while (get_time_in_ms() < now_dead)
+	{
+		/* pthread_mutex_lock(&philo->forks[philo->number]);
+		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number); */
+		pthread_create(&philo->tid_fork_1, NULL, take_fork_1, &philo);
+		if (get_time_in_ms() > now_dead)
+			break;
+		/* pthread_mutex_lock(&philo->forks[philo->number - 1]);
+		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number); */
+		pthread_create(&philo->tid_fork_0, NULL, take_fork_0, &philo);
+		if (get_time_in_ms() > now_dead)
+			break;
+		now_dead = get_time_in_ms() + philo->die_ms;
+		usleep(philo->eat_ms);
+		if (get_time_in_ms() > now_dead)
+			break;
+		printf("%ld %i is eating\n", get_time_in_ms(), philo->number);
+		pthread_mutex_unlock(&philo->forks[philo->number]);
+		if (get_time_in_ms() > now_dead)
+			break;
+		pthread_mutex_unlock(&philo->forks[philo->number - 1]);
+		if (get_time_in_ms() > now_dead)
+			break;
+		usleep(philo->sleep_ms);
+		if (get_time_in_ms() > now_dead)
+			break;
+		printf("%ld %i is sleeping\n", get_time_in_ms(), philo->number);
+		if (get_time_in_ms() > now_dead)
+			break;
+		printf("%ld %i is thinking\n", get_time_in_ms(), philo->number);
+	}
+	philo->dead = 1;
 // choper fork 1 puis 0
 	// mager pendant tel temps
 	// poser fork
@@ -105,31 +170,42 @@ int	main(int ac, char **av)
 	// join tout les threads
 
 	t_philo			*philo;
+	pthread_mutex_t	*forks;
 	int i;
 	int j;
 
 	if (ac < 4)
 		return (printf("ERROR"));
 	i = ft_atoi(av[1]);
-	philo = malloc(sizeof(philo) * i);
+	forks = malloc(sizeof(pthread_mutex_t) * i + 1);
+	philo = malloc(sizeof(t_philo) * i + 1);
+
+	j = -1;
+	while (++j < i)
+		pthread_mutex_init(&forks[j], NULL);
 
 	j = -1;
 	while (++j < i)
 	{
 		philo[j].nb_of_time_eaten = 0;
-		philo[j].dead = 0;
 		philo[j].die_ms = ft_atoi(av[2]) * 1000;
 		philo[j].eat_ms = ft_atoi(av[3]) * 1000;
 		philo[j].sleep_ms = ft_atoi(av[4]) * 1000;
-		// philo[j].holding_forks = 0;
 		philo[j].number = j;
-		pthread_mutex_init(&philo[j].fork_0, NULL);
+		philo[j].forks = forks;
+		philo[j].nb_philo = i - 1;
+		philo[j].dead = 0;
+		philo[j].holding_forks = 0;
+		// pthread_mutex_init(&philo[j].fork_0, NULL);
 	}
 
-	j = -1;
+
+
+
+/* 	j = -1;
 	while (++j < i - 1)
 		philo[j].fork_1 = philo[j + 1].fork_0;
-	philo[j].fork_1 = philo[0]. fork_0;
+	philo[j].fork_1 = philo[0]. fork_0; */
 
 	j = -1;
 	while (++j < i)

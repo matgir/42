@@ -19,20 +19,22 @@
 
 typedef struct s_philo
 {
-	int			nb_of_time_eaten; /* maybe to compare with the required amount each
+	int				nb_of_time_eaten; /* maybe to compare with the required amount each
 	they eat, or not because not always needeed to check, do it if needeed
 	with the omniscent thread */
-	int				dead; /* set to 0 at the beginning and to 1 if philo is dead */
+	int				dead;
 	time_t			die_ms;
 	int				eat_ms;
 	int				sleep_ms;
-	// int				holding_forks; /* quand = 2 alors lancer le manger */
 	pthread_t		tid;
 	int				number;
-	pthread_mutex_t	fork_0;
-	// pthread_t		tid_fork_0;
-	pthread_mutex_t	fork_1;
-	// pthread_t		tid_fork_1;
+	pthread_mutex_t	*forks;
+	int				nb_philo;
+	// pthread_mutex_t	fork_0;
+	pthread_t		tid_fork_0;
+	// pthread_mutex_t	fork_1;
+	pthread_t		tid_fork_1;
+	int				holding_forks; /* quand = 2 alors lancer le manger */
 }		t_philo;
 
 typedef struct s_omniscient

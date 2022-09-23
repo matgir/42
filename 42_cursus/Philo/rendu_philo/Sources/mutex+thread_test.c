@@ -76,7 +76,7 @@ void	*thread_routine2(void *data)
 	pthread_mutex_unlock(&counter->count_mutex);
 	return (NULL);
 }
-
+	
 int	main(void)
 {
 	pthread_t		t_id_1;
