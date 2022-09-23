@@ -28,7 +28,7 @@ time_t	get_time_in_ms(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-void	*take_fork_0(void *philoso)
+/* void	*take_fork_0(void *philoso)
 {
 	t_philo	*philo;
 
@@ -53,7 +53,7 @@ void	*take_fork_1(void *philoso)
 	while (philo->holding_forks != 2)
 		usleep(1);
 	return (NULL);
-}
+} */
 
 void	*philo_routine_even(void *philoso)
 {
@@ -64,24 +64,24 @@ void	*philo_routine_even(void *philoso)
 	now_dead = get_time_in_ms() + philo->die_ms;
 	while (get_time_in_ms() < now_dead)
 	{
-		/* if (philo->number == 0)
+		if (philo->number == 0)
 			pthread_mutex_lock(&philo->forks[philo->nb_philo]);
 		else
 			pthread_mutex_lock(&philo->forks[philo->number - 1]);
-		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number); */
-		pthread_create(&philo->tid_fork_0, NULL, take_fork_0, &philo);
+		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number);
+		// pthread_create(&philo->tid_fork_0, NULL, take_fork_0, &philo);
 		if (get_time_in_ms() > now_dead)
 			break;
-		/* pthread_mutex_lock(&philo->forks[philo->number]);
-		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number); */
-		pthread_create(&philo->tid_fork_1, NULL, take_fork_1, &philo);
+		pthread_mutex_lock(&philo->forks[philo->number]);
+		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number);
+		// pthread_create(&philo->tid_fork_1, NULL, take_fork_1, &philo);
 		if (get_time_in_ms() > now_dead)
 			break;
 		now_dead = get_time_in_ms() + philo->die_ms;
-		usleep(philo->eat_ms);
+		printf("%ld %i is eating\n", get_time_in_ms(), philo->number);
 		if (get_time_in_ms() > now_dead)
 			break;
-		printf("%ld %i is eating\n", get_time_in_ms(), philo->number);
+		usleep(philo->eat_ms);
 		if (philo->number == 0)
 			pthread_mutex_unlock(&philo->forks[philo->nb_philo]);
 		else
@@ -91,10 +91,10 @@ void	*philo_routine_even(void *philoso)
 		pthread_mutex_unlock(&philo->forks[philo->number]);
 		if (get_time_in_ms() > now_dead)
 			break;
-		usleep(philo->sleep_ms);
+		printf("%ld %i is sleeping\n", get_time_in_ms(), philo->number);
 		if (get_time_in_ms() > now_dead)
 			break;
-		printf("%ld %i is sleeping\n", get_time_in_ms(), philo->number);
+		usleep(philo->sleep_ms);
 		if (get_time_in_ms() > now_dead)
 			break;
 		printf("%ld %i is thinking\n", get_time_in_ms(), philo->number);
@@ -118,31 +118,31 @@ void	*philo_routine_odd(void *philoso)
 	now_dead = get_time_in_ms() + philo->die_ms;
 	while (get_time_in_ms() < now_dead)
 	{
-		/* pthread_mutex_lock(&philo->forks[philo->number]);
-		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number); */
-		pthread_create(&philo->tid_fork_1, NULL, take_fork_1, &philo);
+		pthread_mutex_lock(&philo->forks[philo->number]);
+		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number);
+		// pthread_create(&philo->tid_fork_1, NULL, take_fork_1, &philo);
 		if (get_time_in_ms() > now_dead)
 			break;
-		/* pthread_mutex_lock(&philo->forks[philo->number - 1]);
-		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number); */
-		pthread_create(&philo->tid_fork_0, NULL, take_fork_0, &philo);
+		pthread_mutex_lock(&philo->forks[philo->number - 1]);
+		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number);
+		// pthread_create(&philo->tid_fork_0, NULL, take_fork_0, &philo);
 		if (get_time_in_ms() > now_dead)
 			break;
 		now_dead = get_time_in_ms() + philo->die_ms;
-		usleep(philo->eat_ms);
+		printf("%ld %i is eating\n", get_time_in_ms(), philo->number);
 		if (get_time_in_ms() > now_dead)
 			break;
-		printf("%ld %i is eating\n", get_time_in_ms(), philo->number);
+		usleep(philo->eat_ms);
 		pthread_mutex_unlock(&philo->forks[philo->number]);
 		if (get_time_in_ms() > now_dead)
 			break;
 		pthread_mutex_unlock(&philo->forks[philo->number - 1]);
 		if (get_time_in_ms() > now_dead)
 			break;
-		usleep(philo->sleep_ms);
+		printf("%ld %i is sleeping\n", get_time_in_ms(), philo->number);
 		if (get_time_in_ms() > now_dead)
 			break;
-		printf("%ld %i is sleeping\n", get_time_in_ms(), philo->number);
+		usleep(philo->sleep_ms);
 		if (get_time_in_ms() > now_dead)
 			break;
 		printf("%ld %i is thinking\n", get_time_in_ms(), philo->number);
@@ -177,13 +177,16 @@ int	main(int ac, char **av)
 	if (ac < 4)
 		return (printf("ERROR"));
 	i = ft_atoi(av[1]);
+	// printf("beginning malloc, i = %i\n", i);
 	forks = malloc(sizeof(pthread_mutex_t) * i + 1);
 	philo = malloc(sizeof(t_philo) * i + 1);
 
 	j = -1;
 	while (++j < i)
+	{
+		// printf("beginning mutexes, j = %i\n", j);
 		pthread_mutex_init(&forks[j], NULL);
-
+	}
 	j = -1;
 	while (++j < i)
 	{
@@ -210,6 +213,7 @@ int	main(int ac, char **av)
 	j = -1;
 	while (++j < i)
 	{
+		// printf("beginning thread, j = %i\n", j);
 		if ((j % 2) != 0)
 			pthread_create(&philo[j].tid, NULL, philo_routine_odd, &philo[j]);
 		else
