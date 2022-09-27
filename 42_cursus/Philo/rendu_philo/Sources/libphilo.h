@@ -14,8 +14,26 @@
 # define LIBPHILO_H
 
 # include <pthread.h>
+# include "libphilo.h"
 
 /* ########## STRUCT ########## */
+
+typedef struct s_is_dead
+{
+	pthread_mutex_t	is_dead_mutex;
+	int				is_dead;
+}					t_is_dead;
+
+typedef struct s_omniscient
+{
+	t_is_dead		is_dead;
+	unsigned int	nb_to_eat;
+	time_t			start_time;
+	int				nb_philo;
+	int				has_eaten;
+	pthread_t		tid;
+	t_philo			philos;
+}					t_omniscient;
 
 typedef struct s_holding_forks
 {
@@ -30,8 +48,8 @@ typedef struct s_philo
 	with the omniscent thread */
 	int				dead;
 	time_t			die_ms;
-	int				eat_ms;
-	int				sleep_ms;
+	time_t			eat_ms;
+	time_t			sleep_ms;
 	pthread_t		tid;
 	int				number;
 	pthread_mutex_t	*forks;
@@ -41,19 +59,8 @@ typedef struct s_philo
 	// pthread_mutex_t	fork_1;
 	pthread_t		tid_fork_1;
 	t_holding_forks	hf; /* quand = 2 alors lancer le manger */
+	t_omniscient	*god;
 }					t_philo;
-
-typedef struct s_is_dead
-{
-	pthread_mutex_t	is_dead_mutex;
-	int				is_dead;
-}					t_is_dead;
-
-typedef struct s_omniscient
-{
-	t_is_dead		is_dead;
-	unsigned int	times_eaten;
-}					t_omniscient;
 
 /* ########## USEFULL ########## */
 
