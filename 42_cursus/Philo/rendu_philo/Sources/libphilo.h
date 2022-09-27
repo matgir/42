@@ -18,6 +18,9 @@
 
 /* ########## STRUCT ########## */
 
+typedef struct s_philo t_philo;
+
+
 typedef struct s_is_dead
 {
 	pthread_mutex_t	is_dead_mutex;
@@ -32,7 +35,7 @@ typedef struct s_omniscient
 	int				nb_philo;
 	int				has_eaten;
 	pthread_t		tid;
-	t_philo			philos;
+	t_philo			**philos;
 }					t_omniscient;
 
 typedef struct s_holding_forks
@@ -60,6 +63,7 @@ typedef struct s_philo
 	pthread_t		tid_fork_1;
 	t_holding_forks	hf; /* quand = 2 alors lancer le manger */
 	t_omniscient	*god;
+	int				last_time_eaten;
 }					t_philo;
 
 /* ########## USEFULL ########## */

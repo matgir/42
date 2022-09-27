@@ -21,3 +21,7 @@ To do list :
 - philo checking if a philo is dead while sleeping and thinking
 - mettre pointeurs de omniscient dans chaque philo comme les forks
 - faire timestamp
+
+
+
+- deal with the data race and the deadlock and destrcution of locked mutex
