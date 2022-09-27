@@ -79,8 +79,6 @@ void	*take_fork_1(void *philoso)
 			}
 		pthread_mutex_unlock(&philo->hf.h_forks_mutex);
 	}
-/* 	while (philo->holding_forks != 2)
-		usleep(1); */
 	return (NULL);
 }
 
@@ -115,21 +113,21 @@ void	*philo_routine_even(void *philoso)
 					now_dead = get_time_in_ms() + philo->die_ms;
 					printf("%ld %i is eating\n", get_time_in_ms(), philo->number);
 					usleep(philo->eat_ms);
+					pthread_mutex_lock(&philo->hf.h_forks_mutex);
+					philo->hf.holding_forks = 0;
+					pthread_mutex_unlock(&philo->hf.h_forks_mutex);
 					break;
 				}
 			pthread_mutex_unlock(&philo->hf.h_forks_mutex);
 		}
 /* 		while (philo->hf.holding_forks != 2)
 			usleep(1); */
-		if (get_time_in_ms() > now_dead)
-			break;
+/* 		if (get_time_in_ms() > now_dead)
+			break; */
 /* 		if (philo->number == 0)
 			pthread_mutex_unlock(&philo->forks[philo->nb_philo]);
 		else
 			pthread_mutex_unlock(&philo->forks[philo->number - 1]); */
-		pthread_mutex_lock(&philo->hf.h_forks_mutex);
-		philo->hf.holding_forks = 0;
-		pthread_mutex_unlock(&philo->hf.h_forks_mutex);
 		if (get_time_in_ms() > now_dead)
 			break;
 		// pthread_mutex_unlock(&philo->forks[philo->number]);
@@ -158,19 +156,19 @@ void	*philo_routine_odd(void *philoso)
 	t_philo	*philo;
 	time_t	now_dead;
 
-	usleep(100);
+	// usleep(100);
 	philo = (t_philo *)philoso;
 	now_dead = get_time_in_ms() + philo->die_ms;
 	while (get_time_in_ms() < now_dead)
 	{
 /* 		pthread_mutex_lock(&philo->forks[philo->number]);
 		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number); */
-		pthread_create(&philo->tid_fork_1, NULL, take_fork_1, philo);
+		pthread_create(&philo->tid_fork_1, NULL, take_fork_0, philo);
 		if (get_time_in_ms() > now_dead)
 			break;
 /* 		pthread_mutex_lock(&philo->forks[philo->number - 1]);
 		printf("%ld %i has taken a fork\n", get_time_in_ms(), philo->number); */
-		pthread_create(&philo->tid_fork_0, NULL, take_fork_0, philo);
+		pthread_create(&philo->tid_fork_0, NULL, take_fork_1, philo);
 		if (get_time_in_ms() > now_dead)
 			break;
 		while (1)
@@ -182,18 +180,18 @@ void	*philo_routine_odd(void *philoso)
 					now_dead = get_time_in_ms() + philo->die_ms;
 					printf("%ld %i is eating\n", get_time_in_ms(), philo->number);
 					usleep(philo->eat_ms);
+					pthread_mutex_lock(&philo->hf.h_forks_mutex);
+					philo->hf.holding_forks = 0;
+					pthread_mutex_unlock(&philo->hf.h_forks_mutex);
 					break;
 				}
 			pthread_mutex_unlock(&philo->hf.h_forks_mutex);
 		}
 /* 		while (philo->hf.holding_forks != 2)
 			usleep(1); */
-		if (get_time_in_ms() > now_dead)
-			break;
+/* 		if (get_time_in_ms() > now_dead)
+			break; */
 		// pthread_mutex_unlock(&philo->forks[philo->number]);
-		pthread_mutex_lock(&philo->hf.h_forks_mutex);
-		philo->hf.holding_forks = 0;
-		pthread_mutex_unlock(&philo->hf.h_forks_mutex);
 		if (get_time_in_ms() > now_dead)
 			break;
 		// pthread_mutex_unlock(&philo->forks[philo->number - 1]);
@@ -281,6 +279,7 @@ int	main(int ac, char **av)
 	}
 /* 	j = -1;
 	while (++j < i) */
+	
 	j = -1;
 	while (++j < i)
 	{
