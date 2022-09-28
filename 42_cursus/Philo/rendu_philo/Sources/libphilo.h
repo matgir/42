@@ -23,24 +23,28 @@ typedef struct s_philo t_philo;
 typedef struct s_is_dead
 {
 	pthread_mutex_t	is_dead_mutex;
-	int				is_dead;
+	unsigned int	is_dead;
 }					t_is_dead;
 
 typedef struct s_omniscient
 {
-	t_is_dead		is_dead;
-	unsigned int	nb_to_eat;
 	time_t			start_time;
-	int				nb_philo;
-	int				has_eaten;
+	unsigned int	nb_philo;
 	pthread_t		tid;
+	time_t			die_ms;
+	time_t			eat_ms;
+	time_t			sleep_ms;
+	int	nb_to_eat;
+	t_is_dead		is_dead;
+	pthread_mutex_t	*forks;
+	unsigned int	has_eaten;
 	t_philo			**philos;
 }					t_omniscient;
 
 typedef struct s_holding_forks
 {
 	pthread_mutex_t	h_forks_mutex;
-	int				holding_forks;
+	unsigned int	holding_forks;
 }					t_holding_forks;
 
 typedef struct s_time_eaten
@@ -51,17 +55,13 @@ typedef struct s_time_eaten
 
 typedef struct s_philo
 {
-	int				nb_of_time_eaten; /* maybe to compare with the required amount each
+	unsigned int	nb_of_time_eaten; /* maybe to compare with the required amount each
 	they eat, or not because not always needeed to check, do it if needeed
 	with the omniscent thread */
-	int				dead;
-	time_t			die_ms;
-	time_t			eat_ms;
-	time_t			sleep_ms;
+	unsigned int	dead;
 	pthread_t		tid;
-	int				number;
-	pthread_mutex_t	*forks;
-	int				nb_philo;
+	unsigned int	number;
+	unsigned int	nb_philo;
 	// pthread_mutex_t	fork_0;
 	pthread_t		tid_fork_0;
 	// pthread_mutex_t	fork_1;
