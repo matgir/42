@@ -25,3 +25,4 @@ To do list :
 
 
 - deal with the data race and the deadlock and destrcution of locked mutex
+    venant d'omniscient
