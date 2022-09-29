@@ -6,17 +6,12 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:20:22 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/09/29 15:20:24 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:35:43 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libphilo.h"
 #include <stdio.h>
-
-t_omniscient	*init(int argc, char **argv, int i)
-{
-	
-}
 
 int	main(int argc, char **argv)
 {
@@ -25,6 +20,9 @@ int	main(int argc, char **argv)
 	god = NULL;
 	if (!parsing_philo(argc, argv))
 		return (printf("Wrong arguments\n"));
-	god = init(argc, argv, 1);
-	return (0);
+	god = init(argc, argv, 0);
+	if (god == NULL)
+		return (0);
+	/* start simulation */
+	return (1);
 }
