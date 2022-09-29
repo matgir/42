@@ -63,6 +63,10 @@ typedef struct s_philo
 
 /* ########## FUNCTIONS ########## */
 
-long int	ft_atoi(const char *nptr);
+int	parsing_philo(int argc, char **argv);
+size_t	ft_strlen(char *str);
+int	atoi_philo(char	*str);
+int	digit_check(char *str);
+int	ft_isdigit(int c);
 
 #endif

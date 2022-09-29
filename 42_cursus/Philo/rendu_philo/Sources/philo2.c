@@ -11,24 +11,11 @@
 /* ************************************************************************** */
 
 #include "libphilo.h"
+#include <stdio.h>
 
-int	digit_check(char *str)
+t_omniscient	*init(int argc, char **argv, int i)
 {
 	
-}
-
-int	parsing_philo(int argc, char **argv)
-{
-	unsigned int	i;
-
-	if (argc < 5 || argc > 6)
-		return (1);
-	i = 0;
-	while (++i < argc)
-	{
-		if (!digit_check(argv[i]))
-			return (/* to be determine */);
-	}
 }
 
 int	main(int argc, char **argv)
@@ -36,6 +23,8 @@ int	main(int argc, char **argv)
 	t_omniscient	*god;
 
 	god = NULL;
-	if (!parsing_philo(argc, argv));
-		return (/* to be determine */);
+	if (!parsing_philo(argc, argv))
+		return (printf("Wrong arguments\n"));
+	god = init(argc, argv, 1);
+	return (0);
 }
