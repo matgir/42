@@ -23,11 +23,13 @@ int	main(int argc, char **argv)
 	god = init(argc, argv, 1);
 	if (god == NULL)
 		return (0);
-
+/* 
 	int i = -1;
-	while (++i < argc)
-		printf("philo number %i will hold forks number %i and %i\n", god->philos[i]->number, god->philos[i]->fork[0], god->philos[i]->fork[1]);
-	
+	while (++i < atoi_philo(argv[1]))
+		printf("philo number %i will hold forks number %i and %i\n",
+			god->philos[i]->number, god->philos[i]->fork[0],
+			god->philos[i]->fork[1]);
+ */
 	/* start simulation */
 	return (1);
 }

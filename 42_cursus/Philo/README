@@ -10,23 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-<!-- To do list :
-- make a structures for all the fork, maybe a struct of struct;
-- us the forks with a mutex;
+To do list :
 - make omniscient structure that tcheck :
 	- death
 	- update if a philo dies
 	- struct for is dead
-	- *has_eaten to fill and loop that tchecks that *has_eaten and when filled then stopped the simulation by the is_dead value
+	- *has_eaten to fill and loop that tchecks that *has_eaten and when filled
+		then stopped the simulation by the is_dead value
 - philo checking if a philo is dead while sleeping and thinking
-- mettre pointeurs de omniscient dans chaque philo comme les forks
 - faire timestamp
-
-
-
-- deal with the data race and the deadlock and destrcution of locked mutex
-	venant d'omniscient -->
-
-- parsing
-	- nb of argc, 5 or 6 no less no more
-	- from argv[1] to argc[5] must be unsigned int so >= to 0
