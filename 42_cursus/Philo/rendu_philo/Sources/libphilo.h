@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:04:25 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/09/21 13:04:30 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/10/03 16:56:29 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_philo
 							//	philo number*/
 	pthread_mutex_t	last_ate_mutex;//
 	time_t			last_ate;
-	t_omniscient	*god;//
+	t_omniscient	*god;
 
 }					t_philo;
 
@@ -77,8 +77,8 @@ int				free_almost_god(t_omniscient *god, int j);
 void			*free_god_almighty(t_omniscient *god, int j);
 void			assign_forks(t_philo *philo);
 t_philo			**init_philos(t_omniscient *god ,unsigned int i);
-pthread_mutex_t	*init_forks(t_omniscient *god, int i);
-int				*init_mutex(t_omniscient *god);
+pthread_mutex_t	*init_forks(t_omniscient *god, unsigned int i);
+int				init_mutex(t_omniscient *god);
 t_omniscient	*init(int argc, char **argv, int i);
 
 #endif

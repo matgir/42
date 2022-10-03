@@ -6,11 +6,12 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:37:41 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/09/29 18:37:44 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/10/03 16:57:19 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libphilo.h"
+#include <stdlib.h>
 
 void	assign_forks(t_philo *philo)
 {
@@ -28,13 +29,14 @@ t_philo	**init_philos(t_omniscient *god ,unsigned int i)
 	t_philo	**philos;
 
 	philos = malloc(sizeof(t_philo) * god->nb_philo);
-	if (!philos)
+	if (philos == NULL)
 		return (free_god(god));
 	while (i < god->nb_philo)
 	{
 		philos[i] = malloc(sizeof(t_philo) * 1);
 		if (!philos[i])
 			return (free_god_n_philos(god, philos, i));
+		philos[i]->god = god;
 		philos[i]->number = i;
 		philos[i]->nb_ate = 0;
 		assign_forks(philos[i]);
@@ -45,7 +47,7 @@ t_philo	**init_philos(t_omniscient *god ,unsigned int i)
 	return (philos);
 }
 
-pthread_mutex_t	*init_forks(t_omniscient *god, int i)
+pthread_mutex_t	*init_forks(t_omniscient *god, unsigned int i)
 {
 	pthread_mutex_t	*forks;
 
@@ -61,12 +63,12 @@ pthread_mutex_t	*init_forks(t_omniscient *god, int i)
 	return (forks);
 }
 
-int	*init_mutex(t_omniscient *god)
+int	init_mutex(t_omniscient *god)
 {
 	god->forks = init_forks(god, 0);
 	if (!god->forks)
 		return (0);
-	if (phtread_mutex_init(&god->stop_mutex, NULL) != 0)
+	if (pthread_mutex_init(&god->stop_mutex, NULL) != 0)
 		return (free_almost_god(god, god->nb_philo));
 	return(1);
 }
@@ -75,7 +77,7 @@ t_omniscient	*init(int argc, char **argv, int i)
 {
 	t_omniscient	*god;
 
-	god = malloc(sizeof(t_omniscient) * 1);
+	god = malloc(sizeof(t_omniscient) * 2);
 	if (!god)
 		return (NULL);
 	god->nb_philo = atoi_philo(argv[i++]);
@@ -91,4 +93,5 @@ t_omniscient	*init(int argc, char **argv, int i)
 		return (NULL);
 	if (!init_mutex(god))
 		return (NULL);
+	return (god);
 }

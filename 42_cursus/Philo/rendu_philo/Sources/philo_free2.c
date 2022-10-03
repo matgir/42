@@ -6,11 +6,12 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:35:26 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/09/29 19:35:27 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/10/03 16:57:07 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libphilo.h"
+#include <stdlib.h>
 
 int	free_almost_god(t_omniscient *god, int j)
 {
