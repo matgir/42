@@ -197,28 +197,22 @@ void	*omniscient(void *data)
 int	start_meal(t_omniscient *god, unsigned int i)
 {
 	god->beginning = get_time_in_ms();
-
-	printf("%li beginning\n", god->beginning);
-
 	while (i < god->nb_philo)
 	{
-
-		printf("%li since beginning\n", get_time_in_ms() - god->beginning);
-
-		if (pthread_create(&god->philos[i]->philo_id, NULL, life, &god->philos[i]) != 0)
+		if (pthread_create(&god->philos[i]->philo_id, NULL, life, god->philos[i]) != 0)
 			return (free_god_almighty(god, god->nb_philo));
 		i += 2;
 	}
 	i = 1;
 	while (i < god->nb_philo)
 	{
-		if (pthread_create(&god->philos[i]->philo_id, NULL, life, &god->philos[i]) != 0)
+		if (pthread_create(&god->philos[i]->philo_id, NULL, life, god->philos[i]) != 0)
 			return (free_god_almighty(god, god->nb_philo));
 		i += 2;
 	}
 	if (god->nb_philo > 1)
 	{
-		if (pthread_create(&god->god_id, NULL, omniscient, &god) != 0)
+		if (pthread_create(&god->god_id, NULL, omniscient, god) != 0)
 			return (free_god_almighty(god, god->nb_philo));
 	}
 	return (1);
