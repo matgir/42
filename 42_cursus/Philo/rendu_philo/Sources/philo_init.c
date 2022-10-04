@@ -42,6 +42,8 @@ t_philo	**init_philos(t_omniscient *god, unsigned int i)
 		assign_forks(philos[i]);
 		if (pthread_mutex_init(&philos[i]->last_ate_mutex, NULL) != 0)
 			return (free_god_n_philos_n_mutex(god, philos, i));
+		if (pthread_mutex_init(&philos[i]->nb_ate_mutex, NULL) != 0)
+			return (free_god_n_philos_n_mutexes(god, philos, i));
 		i++;
 	}
 	return (philos);

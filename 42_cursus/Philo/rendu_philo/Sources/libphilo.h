@@ -39,6 +39,7 @@ typedef struct s_philo
 {
 	pthread_t		philo_id;//
 	unsigned int	number;//
+	pthread_mutex_t	nb_ate_mutex;
 	unsigned int	nb_ate;//
 	unsigned int	fork[2];// /* put fork number lefty or righty occording to
 							//	philo number*/
@@ -75,7 +76,7 @@ void			*free_god_n_philos_n_mutex(t_omniscient *god, t_philo **philos, int i);
 void			*free_god_wh_forks(t_omniscient *god, int j);
 void			*free_god_n_fork(t_omniscient *god, pthread_mutex_t *fork, int j, int i);
 int				free_almost_god(t_omniscient *god, int j);
-int			free_god_almighty(t_omniscient *god, int j);
+int				free_god_almighty(t_omniscient *god, int j);
 void			assign_forks(t_philo *philo);
 t_philo			**init_philos(t_omniscient *god ,unsigned int i);
 pthread_mutex_t	*init_forks(t_omniscient *god, unsigned int i);
