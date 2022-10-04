@@ -17,14 +17,14 @@ void	assign_forks(t_philo *philo)
 {
 	philo->fork[0] = philo->number;
 	philo->fork[1] = (philo->number + 1) % philo->god->nb_philo;
-	if(philo->number % 2)
+	if (philo->number % 2)
 	{
 		philo->fork[0] = (philo->number + 1) % philo->god->nb_philo;
 		philo->fork[1] = philo->number;
 	}
 }
 
-t_philo	**init_philos(t_omniscient *god ,unsigned int i)
+t_philo	**init_philos(t_omniscient *god, unsigned int i)
 {
 	t_philo	**philos;
 
@@ -70,7 +70,7 @@ int	init_mutex(t_omniscient *god)
 		return (0);
 	if (pthread_mutex_init(&god->stop_mutex, NULL) != 0)
 		return (free_almost_god(god, god->nb_philo));
-	return(1);
+	return (1);
 }
 
 t_omniscient	*init(int argc, char **argv, int i)
@@ -85,7 +85,7 @@ t_omniscient	*init(int argc, char **argv, int i)
 	god->eat_ms = atoi_philo(argv[i++]);
 	god->sleep_ms = atoi_philo(argv[i++]);
 	god->nb_to_eat = -1;
-	if (argc== 6)
+	if (argc == 6)
 		god->nb_to_eat = atoi_philo(argv[i++]);
 	god->stop = 'N';
 	god->philos = init_philos(god, 0);

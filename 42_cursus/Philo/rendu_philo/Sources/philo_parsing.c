@@ -77,8 +77,6 @@ int	parsing_philo(int argc, char **argv)
 			return (0);
 		if (atoi_philo(argv[i]) == -1)
 			return (0);
-/* 		if (i == 1 && atoi_philo(argv[i]) > 200)
-			return (1); */
 	}
 	return (1);
 }

@@ -20,6 +20,7 @@ void	*free_god(t_omniscient *god)
 	return (NULL);
 }
 
+/* Here int i = number of philo already malloced that need to be freed */
 void	*free_god_n_philos(t_omniscient *god, t_philo **philos, int i)
 {
 	while (--i >= 0)
@@ -34,6 +35,7 @@ void	*free_god_n_philos(t_omniscient *god, t_philo **philos, int i)
 	return (NULL);
 }
 
+/* Here int i = number of philo already malloced that need to be freed */
 void	*free_god_n_philos_n_mutex(t_omniscient *god, t_philo **philos, int i)
 {
 	while (--i >= 0)
@@ -49,6 +51,7 @@ void	*free_god_n_philos_n_mutex(t_omniscient *god, t_philo **philos, int i)
 	return (NULL);
 }
 
+/* Here int j = nb_philo malloced that need to be freed */
 void	*free_god_wh_forks(t_omniscient *god, int j)
 {
 	while (j >= 0)
@@ -65,6 +68,8 @@ void	*free_god_wh_forks(t_omniscient *god, int j)
 	return (NULL);
 }
 
+/* Here int i = number forks_mutex already init that need to be destroyed,
+int j = nb_philo malloced that need to be freed */
 void	*free_god_n_fork(t_omniscient *god, pthread_mutex_t *fork, int j, int i)
 {
 	while (--i >= 0)

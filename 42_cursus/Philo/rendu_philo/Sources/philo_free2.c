@@ -13,6 +13,7 @@
 #include "libphilo.h"
 #include <stdlib.h>
 
+/* Here int j = nb_philo/forks/mutex malloced that need to be freed/destroy */
 int	free_almost_god(t_omniscient *god, int j)
 {
 	while (j >= 0)
@@ -32,7 +33,8 @@ int	free_almost_god(t_omniscient *god, int j)
 	return (0);
 }
 
-void	*free_god_almighty(t_omniscient *god, int j)
+/* Here int j = nb_philo/forks/mutex malloced that need to be freed/destroy */
+int	free_god_almighty(t_omniscient *god, int j)
 {
 	while (j >= 0)
 	{
