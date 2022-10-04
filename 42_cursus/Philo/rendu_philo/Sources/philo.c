@@ -22,11 +22,49 @@ time_t	get_time_in_ms(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec * 1000));
 }
 
+void	write_state(t_philo *philo, char *str)
+{
+	printf("%li %i%s", get_time_in_ms() - philo->god->beginning, philo->number + 1, str);
+}
+
+int	meals_over(t_omniscient *god)
+
+void	temps_calme(t_omniscient *god, time_t die_ms)
+{
+	time_t	no_no_jose;
+
+	no_no_jose = get_time_in_ms() + die_ms;
+	while (get_time_in_ms() < no_no_jose)
+	{
+		if (meals_over(god))
+			break;
+		usleep(100);
+	}
+}
+
+void	*solo_philo(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->god->forks[philo->fork[0]]);
+	write_state(philo, " has taken a fork\n");
+	temps_calme(philo->god, philo->god->die_ms);
+	write_state(philo, " died\n");
+	pthread_mutex_unlock(&philo->god->forks[philo->fork[0]]);
+}
+
 void	*life(void *data)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
+	if (philo->god->nb_to_eat == 0)
+		return (NULL);
+	pthread_mutex_lock(&philo->last_ate_mutex);
+	philo->last_ate = get_time_in_ms() - philo->god->beginning;
+	pthread_mutex_unlock(&philo->last_ate_mutex);
+	if (philo->god->die_ms == 0)
+		return (NULL);
+	if (philo->god->nb_philo == 1)
+		return (solo_philo(philo));
 }
 
 void	*omniscient(void *data)
@@ -53,7 +91,7 @@ int	start_meal(t_omniscient *god, unsigned int i)
 	if (god->nb_philo > 1)
 	{
 		if (pthread_create(&god->god_id, NULL, omniscient, &god) != 0)
-			retrun (free_god_almighty(god, god->nb_philo));
+			return (free_god_almighty(god, god->nb_philo));
 	}
 	return (1);
 }
