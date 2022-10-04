@@ -20,7 +20,7 @@ OBJS	=	${SRCS:.c=.o}
 
 NAME	=	philo
 
-CC		=	gcc -fsanitize=thread -g -lpthread -pthread -g3
+CC		=	gcc -lpthread -pthread -g3
 
 CFLAGS	=	-Wall -Werror -Wextra
 

@@ -13,6 +13,7 @@
 #include "libphilo.h"
 #include <stdio.h>
 #include <sys/time.h>
+#include <unistd.h>
 
 time_t	get_time_in_ms(void)
 {
@@ -76,7 +77,7 @@ void	eat_n_sleep(t_philo *philo)
 	philo->last_ate = get_time_in_ms();
 	pthread_mutex_unlock(&philo->last_ate_mutex);
 	temps_calme(philo->god, philo->god->eat_ms);
-	if (!meal_over(philo->god))
+	if (!meals_over(philo->god))
 	{
 		pthread_mutex_lock(&philo->nb_ate_mutex);
 		philo->nb_ate++;
@@ -125,7 +126,7 @@ void	*life(void *data)
 	return (NULL);
 }
 
-int	kill_philo(t_philo *philo)
+int	dead_philo(t_philo *philo)
 {
 	time_t	time_to_die;
 
