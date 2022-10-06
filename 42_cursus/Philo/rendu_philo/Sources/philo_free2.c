@@ -21,13 +21,12 @@ void	*free_god_n_fork(t_omniscient *god, pthread_mutex_t *fork, int j, int i)
 		pthread_mutex_destroy(&fork[i]);
 	if (fork != NULL)
 		free(fork);
-	while (j >= 0)
+	while (--j >= 0)
 	{
 		if (god->philos[j] != NULL)
 			free(god->philos[j]);
 		pthread_mutex_destroy(&god->philos[j]->last_ate_mutex);
 		pthread_mutex_destroy(&god->philos[j]->nb_ate_mutex);
-		j--;
 	}
 	if (god->philos != NULL)
 		free(god->philos);
@@ -39,14 +38,13 @@ void	*free_god_n_fork(t_omniscient *god, pthread_mutex_t *fork, int j, int i)
 /* Here int j = nb_philo/forks/mutex malloced that need to be freed/destroy */
 int	free_almost_god(t_omniscient *god, int j)
 {
-	while (j >= 0)
+	while (--j >= 0)
 	{
 		if (god->philos[j] != NULL)
 			free(god->philos[j]);
 		pthread_mutex_destroy(&god->philos[j]->last_ate_mutex);
 		pthread_mutex_destroy(&god->philos[j]->nb_ate_mutex);
 		pthread_mutex_destroy(&god->forks[j]);
-		j--;
 	}
 	if (god->forks != NULL)
 		free(god->forks);
@@ -58,16 +56,37 @@ int	free_almost_god(t_omniscient *god, int j)
 }
 
 /* Here int j = nb_philo/forks/mutex malloced that need to be freed/destroy */
-int	free_god_almighty(t_omniscient *god, int j)
+int	free_almost_god_n_mutex(t_omniscient *god, int j)
 {
-	while (j >= 0)
+	while (--j >= 0)
 	{
 		if (god->philos[j] != NULL)
 			free(god->philos[j]);
 		pthread_mutex_destroy(&god->philos[j]->last_ate_mutex);
 		pthread_mutex_destroy(&god->philos[j]->nb_ate_mutex);
 		pthread_mutex_destroy(&god->forks[j]);
-		j--;
+	}
+	pthread_mutex_destroy(&god->stop_mutex);
+	if (god->forks != NULL)
+		free(god->forks);
+	if (god->philos != NULL)
+		free(god->philos);
+	if (god != NULL)
+		free(god);
+	return (0);
+}
+
+
+/* Here int j = nb_philo/forks/mutex malloced that need to be freed/destroy */
+int	free_god_almighty(t_omniscient *god, int j)
+{
+	while (--j >= 0)
+	{
+		if (god->philos[j] != NULL)
+			free(god->philos[j]);
+		pthread_mutex_destroy(&god->philos[j]->last_ate_mutex);
+		pthread_mutex_destroy(&god->philos[j]->nb_ate_mutex);
+		pthread_mutex_destroy(&god->forks[j]);
 	}
 	pthread_mutex_destroy(&god->stop_mutex);
 	if (god->forks != NULL)

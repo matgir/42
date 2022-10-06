@@ -71,13 +71,12 @@ void	*free_god_n_philos_n_mutexes(t_omniscient *god, t_philo **philos, int i)
 /* Here int j = nb_philo malloced that need to be freed */
 void	*free_god_wh_forks(t_omniscient *god, int j)
 {
-	while (j >= 0)
+	while (--j >= 0)
 	{
 		if (god->philos[j] != NULL)
 			free(god->philos[j]);
 		pthread_mutex_destroy(&god->philos[j]->last_ate_mutex);
 		pthread_mutex_destroy(&god->philos[j]->nb_ate_mutex);
-		j--;
 	}
 	if (god->philos != NULL)
 		free(god->philos);

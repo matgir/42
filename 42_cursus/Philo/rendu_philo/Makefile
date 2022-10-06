@@ -12,8 +12,11 @@
 
 SRCS	=	Sources/philo_free1.c \
 			Sources/philo_free2.c \
+			Sources/philo_god.c \
 			Sources/philo_init.c \
 			Sources/philo_parsing.c \
+			Sources/philo_philo.c \
+			Sources/philo_utils.c \
 			Sources/philo.c
 
 OBJS	=	${SRCS:.c=.o}
