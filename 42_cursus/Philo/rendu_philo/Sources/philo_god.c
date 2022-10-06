@@ -71,7 +71,7 @@ void	*omniscient(void *data)
 	{
 		if (!good_to_stop(god))
 			return (NULL);
-		usleep(500);
+		usleep(100);
 	}
 	return (NULL);
 }
