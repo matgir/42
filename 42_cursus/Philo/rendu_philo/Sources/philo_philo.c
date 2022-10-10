@@ -67,7 +67,7 @@ void	think(t_philo *philo)
 	time_t	think_ms;
 
 	pthread_mutex_lock(&philo->last_ate_mutex);
-	think_ms = (philo->god->die_ms - (get_time_in_ms() - philo->last_ate) - philo->god->eat_ms) / 2;
+	think_ms = ((philo->god->die_ms - (get_time_in_ms() - philo->last_ate) - philo->god->eat_ms) / 3);
 	pthread_mutex_unlock(&philo->last_ate_mutex);
 	if (think_ms < 0)
 		think_ms = 0;
