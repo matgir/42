@@ -99,3 +99,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+set -g mouse on
+
+alias norm='norminette -R CheckForbiddenSourceHeader'
+alias gccflag='gcc -Wall -Werror -Wextra'
+alias pwls='pwd && ls -la'
+alias forcesave='cd ~/Raccourci && ./save.sh'
+alias pullgit='cd ~/Raccourci && ./forcepull.sh'

@@ -77,7 +77,7 @@ void	finish_meal(t_omniscient *god, unsigned int i)
 	{
 		pthread_join(god->philos[i]->philo_id, NULL);
 		i++;
-		usleep(200);//
+		usleep(200);
 	}
 	if (god->nb_philo > 1)
 		pthread_join(god->god_id, NULL);

@@ -79,14 +79,14 @@ void	*omniscient(void *data)
 	t_omniscient	*god;
 
 	god = (t_omniscient *)data;
-	usleep(5000);
+	usleep(2000);
 	if (god->nb_to_eat == 0)
 		return (NULL);
 	while (1)
 	{
 		if (!good_to_stop(god))
 			return (NULL);
-		usleep(100);//
+		usleep(100);
 	}
 	return (NULL);
 }
