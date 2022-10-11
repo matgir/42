@@ -74,8 +74,8 @@ int	free_almost_god_n_mutex(t_omniscient *god, int j)
 	if (god != NULL)
 		free(god);
 	return (0);
+	// return (0);
 }
-
 
 /* Here int j = nb_philo/forks/mutex malloced that need to be freed/destroy */
 int	free_god_almighty(t_omniscient *god, int j)

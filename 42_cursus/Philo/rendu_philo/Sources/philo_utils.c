@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/11 16:05:57 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/10/11 16:05:58 by mgirardo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libphilo.h"
 #include <sys/time.h>
 #include <unistd.h>
@@ -6,7 +18,8 @@
 void	print_state(t_philo *philo, char *str)
 {
 	// pthread_mutex_lock(&philo->god->write_mutex);
-	printf("%li %i%s", get_time_in_ms() - philo->god->beginning, philo->number + 1, str);
+	printf("%li %i%s",
+		get_time_in_ms() - philo->god->beginning, philo->number + 1, str);
 	// pthread_mutex_unlock(&philo->god->write_mutex);
 }
 
@@ -26,7 +39,7 @@ void	quiet_time(t_omniscient *god, time_t quiet_time)
 	while (get_time_in_ms() < no_no_jose)
 	{
 		if (meals_over(god))
-			break;
+			break ;
 		usleep(100);
 	}
 }
@@ -36,14 +49,16 @@ int	start_meal(t_omniscient *god, unsigned int i)
 	god->beginning = get_time_in_ms();
 	while (i < god->nb_philo)
 	{
-		if (pthread_create(&god->philos[i]->philo_id, NULL, life, god->philos[i]) != 0)
+		if (pthread_create(&god->philos[i]->philo_id,
+				NULL, life, god->philos[i]) != 0)
 			return (free_god_almighty(god, god->nb_philo));
 		i += 2;
 	}
 	i = 1;
 	while (i < god->nb_philo)
 	{
-		if (pthread_create(&god->philos[i]->philo_id, NULL, life, god->philos[i]) != 0)
+		if (pthread_create(&god->philos[i]->philo_id,
+				NULL, life, god->philos[i]) != 0)
 			return (free_god_almighty(god, god->nb_philo));
 		i += 2;
 	}

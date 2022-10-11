@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_philo1.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/11 16:09:07 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/10/11 16:28:02 by mgirardo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libphilo.h"
 
 int	meals_over(t_omniscient *god)
@@ -43,22 +55,11 @@ void	*eat_n_sleep(t_philo *philo)
 	}
 	print_state(philo, " has taken a fork\n");
 	print_state(philo, " is eating\n");
-	pthread_mutex_lock(&philo->last_ate_mutex);
-	philo->last_ate = get_time_in_ms();
-	pthread_mutex_unlock(&philo->last_ate_mutex);
+	last_ate_update(philo);
 	quiet_time(philo->god, philo->god->eat_ms);
 	pthread_mutex_unlock(&philo->god->forks[philo->fork[1]]);
 	pthread_mutex_unlock(&philo->god->forks[philo->fork[0]]);
-	if (!meals_over(philo->god))
-	{
-		pthread_mutex_lock(&philo->nb_ate_mutex);
-		philo->nb_ate++;
-		pthread_mutex_unlock(&philo->nb_ate_mutex);
-	}
-	else
-		return (NULL);
-	print_state(philo, " is sleeping\n");
-	quiet_time(philo->god, philo->god->sleep_ms);
+	nb_ate_update(philo);
 	return (NULL);
 }
 
@@ -67,7 +68,8 @@ void	think(t_philo *philo)
 	time_t	think_ms;
 
 	pthread_mutex_lock(&philo->last_ate_mutex);
-	think_ms = ((philo->god->die_ms - (get_time_in_ms() - philo->last_ate) - philo->god->eat_ms) / 3);
+	think_ms = ((philo->god->die_ms - (get_time_in_ms()
+					- philo->last_ate) - philo->god->eat_ms) / 3);
 	pthread_mutex_unlock(&philo->last_ate_mutex);
 	if (think_ms < 0)
 		think_ms = 0;
@@ -97,6 +99,10 @@ void	*life(void *data)
 	while (!meals_over(philo->god))
 	{
 		eat_n_sleep(philo);
+		if (meals_over(philo->god))
+			break ;
+		print_state(philo, " is sleeping\n");
+		quiet_time(philo->god, philo->god->sleep_ms);
 		think(philo);
 	}
 	return (NULL);

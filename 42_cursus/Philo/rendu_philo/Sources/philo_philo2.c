@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   philo_philo2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 15:20:22 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/10/03 16:56:50 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/10/11 16:28:06 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/10/11 16:28:09 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libphilo.h"
-#include <stdio.h>
 
-int	main(int argc, char **argv)
+void	nb_ate_update(t_philo *philo)
 {
-	t_omniscient	*god;
+	if (!meals_over(philo->god))
+	{
+		pthread_mutex_lock(&philo->nb_ate_mutex);
+		philo->nb_ate++;
+		pthread_mutex_unlock(&philo->nb_ate_mutex);
+	}
+}
 
-	god = NULL;
-	if (!parsing_philo(argc, argv))
-		return (printf("Wrong arguments\n"));
-	god = init(argc, argv, 1);
-	if (god == NULL)
-		return (0);
-	if (!start_meal(god, 0))
-		return (free_god_almighty(god, god->nb_philo));
-	finish_meal(god, 0);
-	free_god_almighty(god, god->nb_philo);
-	return (1);
+void	last_ate_update(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->last_ate_mutex);
+	philo->last_ate = get_time_in_ms();
+	pthread_mutex_unlock(&philo->last_ate_mutex);
 }
