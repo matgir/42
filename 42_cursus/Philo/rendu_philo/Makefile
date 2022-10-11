@@ -24,7 +24,9 @@ OBJS	=	${SRCS:.c=.o}
 
 NAME	=	philo
 
-CC		=	gcc -fsanitize=thread -lpthread -pthread -g3
+INCL	=	-I./Includes
+
+CC		=	gcc -lpthread -pthread -g3
 
 CFLAGS	=	-Wall -Werror -Wextra
 
@@ -33,7 +35,7 @@ RM		=	rm -f
 all:		${NAME}
 
 .c.o:	
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+			${CC} ${CFLAGS} ${INCL} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
 			${CC} -o ${NAME} ${OBJS}
