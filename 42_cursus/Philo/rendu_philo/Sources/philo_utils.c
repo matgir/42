@@ -17,10 +17,10 @@
 
 void	print_state(t_philo *philo, char *str)
 {
-	// pthread_mutex_lock(&philo->god->write_mutex);
+	pthread_mutex_lock(&philo->god->write_mutex);
 	printf("%li %i%s",
 		get_time_in_ms() - philo->god->beginning, philo->number + 1, str);
-	// pthread_mutex_unlock(&philo->god->write_mutex);
+	pthread_mutex_unlock(&philo->god->write_mutex);
 }
 
 time_t	get_time_in_ms(void)
@@ -55,6 +55,7 @@ int	start_meal(t_omniscient *god, unsigned int i)
 		i += 2;
 	}
 	i = 1;
+	usleep(2000);
 	while (i < god->nb_philo)
 	{
 		if (pthread_create(&god->philos[i]->philo_id,
@@ -76,6 +77,7 @@ void	finish_meal(t_omniscient *god, unsigned int i)
 	{
 		pthread_join(god->philos[i]->philo_id, NULL);
 		i++;
+		usleep(200);//
 	}
 	if (god->nb_philo > 1)
 		pthread_join(god->god_id, NULL);

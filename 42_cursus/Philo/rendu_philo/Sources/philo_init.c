@@ -72,8 +72,8 @@ int	init_mutex(t_omniscient *god)
 		return (0);
 	if (pthread_mutex_init(&god->stop_mutex, NULL) != 0)
 		return (free_almost_god(god, god->nb_philo));
-	// if (pthread_mutex_init(&god->write_mutex, NULL) != 0)
-		// return (free_almost_god_n_mutex(god, god->nb_philo));
+	if (pthread_mutex_init(&god->write_mutex, NULL) != 0)
+		return (free_almost_god_n_mutex(god, god->nb_philo));
 	return (1);
 }
 

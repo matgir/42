@@ -34,7 +34,7 @@ typedef struct s_omniscient
 	pthread_mutex_t	*forks;
 	t_philo			**philos;
 	time_t			beginning;
-	// pthread_mutex_t	write_mutex;
+	pthread_mutex_t	write_mutex;
 }					t_omniscient;
 
 typedef struct s_philo

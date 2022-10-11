@@ -6,7 +6,7 @@
 #    By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/13 15:49:18 by mgirardo          #+#    #+#              #
-#    Updated: 2022/09/13 15:49:30 by mgirardo         ###   ########.fr        #
+#    Updated: 2022/10/11 17:16:00 by mgirardo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJS	=	${SRCS:.c=.o}
 
 NAME	=	philo
 
-CC		=	gcc -fsanitize=thread -g -lpthread -pthread -g3
+CC		=	gcc -fsanitize=thread -lpthread -pthread -g3
 
 CFLAGS	=	-Wall -Werror -Wextra
 

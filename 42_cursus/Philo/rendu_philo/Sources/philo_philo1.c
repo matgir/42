@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libphilo.h"
+#include <unistd.h>
 
 int	meals_over(t_omniscient *god)
 {
@@ -98,6 +99,7 @@ void	*life(void *data)
 		return (solo_philo(philo));
 	while (!meals_over(philo->god))
 	{
+		 usleep(200);//
 		eat_n_sleep(philo);
 		if (meals_over(philo->god))
 			break ;
