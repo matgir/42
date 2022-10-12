@@ -17,10 +17,20 @@
 
 void	print_state(t_philo *philo, char *str)
 {
-	pthread_mutex_lock(&philo->god->write_mutex);
-	printf("%li %i%s",
-		get_time_in_ms() - philo->god->beginning, philo->number + 1, str);
-	pthread_mutex_unlock(&philo->god->write_mutex);
+	if (!meals_over(philo->god))
+	{
+		pthread_mutex_lock(&philo->god->write_mutex);
+		printf("%li %i%s",
+			get_time_in_ms() - philo->god->beginning, philo->number + 1, str);
+		pthread_mutex_unlock(&philo->god->write_mutex);
+	}
+	if (meals_over(philo->god) && str[1] == 'd')
+	{
+		pthread_mutex_lock(&philo->god->write_mutex);
+		printf("%li %i%s",
+			get_time_in_ms() - philo->god->beginning, philo->number + 1, str);
+		pthread_mutex_unlock(&philo->god->write_mutex);
+	}
 }
 
 time_t	get_time_in_ms(void)

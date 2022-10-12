@@ -22,18 +22,21 @@ SRCS	=	Sources/philo_free1.c \
 
 OBJS	=	${SRCS:.c=.o}
 
+DOBJS	=	${SRCS:.c=.d}
+
 NAME	=	philo
 
 INCL	=	-I./Includes
 
-CC		=	gcc -lpthread -pthread -g3
+CC		=	gcc
 
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Wextra -lpthread -pthread -MMD
 
 RM		=	rm -f
 
 all:		${NAME}
 
+-include $(DOBJS)
 .c.o:	
 			${CC} ${CFLAGS} ${INCL} -c $< -o ${<:.c=.o}
 
@@ -41,7 +44,7 @@ ${NAME}:	${OBJS}
 			${CC} -o ${NAME} ${OBJS}
 
 clean:
-			${RM} ${OBJS}
+			${RM} ${OBJS} ${DOBJS}
 
 fclean:		clean
 			${RM} ${NAME}
@@ -49,6 +52,3 @@ fclean:		clean
 re:			fclean all
 
 .PHONY:		all .c.o clean fclean re
-
-# CC		=	gcc -fsanitize=thread -g -lpthread -pthread -g3
-

@@ -79,7 +79,8 @@ void	think(t_philo *philo)
 	if (!meals_over(philo->god))
 	{
 		print_state(philo, " is thinking\n");
-		quiet_time(philo->god, think_ms);
+		if (think_ms > 0)
+			quiet_time(philo->god, think_ms);
 	}
 }
 
