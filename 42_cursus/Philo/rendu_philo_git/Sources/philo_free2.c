@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libphilo.h"
+#include "../Includes/libphilo.h"
 #include <stdlib.h>
 
 /* Here int i = number forks_mutex already init that need to be destroyed,

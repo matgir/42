@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libphilo.h"
+#include "../Includes/libphilo.h"
 
 void	nb_ate_update(t_philo *philo)
 {

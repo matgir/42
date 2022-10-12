@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libphilo.h"
+#include "../Includes/libphilo.h"
 #include <unistd.h>
 
 int	meals_over(t_omniscient *god)

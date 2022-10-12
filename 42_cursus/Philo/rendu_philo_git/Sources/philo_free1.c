@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libphilo.h"
+#include "../Includes/libphilo.h"
 #include <stdlib.h>
 
 void	*free_god(t_omniscient *god)

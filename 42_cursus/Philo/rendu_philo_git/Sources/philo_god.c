@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libphilo.h"
+#include "../Includes/libphilo.h"
 #include <unistd.h>
 
 void	setting_state(t_omniscient *god)

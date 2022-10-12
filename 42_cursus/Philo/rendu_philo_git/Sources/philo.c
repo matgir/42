@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libphilo.h"
-#include <stdio.h>
+#include "../Includes/libphilo.h"
+	#include <stdio.h>
 
 int	main(int argc, char **argv)
 {

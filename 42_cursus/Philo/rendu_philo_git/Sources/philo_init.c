@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libphilo.h"
+#include "../Includes/libphilo.h"
 #include <stdlib.h>
 
 void	assign_forks(t_philo *philo)
