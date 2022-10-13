@@ -40,7 +40,8 @@ enum e_type
 	SPACES,
 	WORD,
 	DOUBLECOTE,
-	SINGLECOTE
+	SINGLECOTE,
+	PARENTHESIS
 };
 
 typedef struct s_list
@@ -102,6 +103,6 @@ int		ft_isalnum(int c);
 /* minishell */
 char	*readline(const char *prompt);
 void	ft_tokencreate(t_minishell *minishell, char *str);
-// void	ft_error(t_minishell *minishell, char *str);
+void	ft_error(t_minishell *minishell, char *str);
 
 #endif
