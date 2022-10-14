@@ -16,9 +16,7 @@
 
 void	ft_createleaf(t_minishell *minishell)
 {
-	//	pour <, >, |, & compter nb repetition pour savoir si oui ou non il y en
-	//	a le bon nombre et donc continuer ou non
-	//	ensuite renomer les token si on peut continuer
+	
 }
 
 void	ft_parseleaf(t_minishell *minishell)

@@ -43,10 +43,13 @@ enum e_type
 	SINGLECOTE,
 	PARENTHESIS,
 	DASH,
-	LEFTANGLEBRAKET,
-	RIGHTANGLEBRAKET,
 	PIPE,
-	AND
+	AND,
+	OR,
+	HEREDOC,
+	WRITE,
+	APPEND,
+	IN
 };
 
 typedef struct s_list
