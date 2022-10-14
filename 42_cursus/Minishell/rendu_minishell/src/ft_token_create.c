@@ -178,7 +178,7 @@ int	ft_tokenranglebraket(t_minishell *minishell, char *str)
 	token->tokentype = RIGHTANGLEBRAKET;
 }
 
-int	ft_tokenand(t_minishell *minishell, char *str)
+int	ft_tokepipe(t_minishell *minishell, char *str)
 {
 	int		i;
 	t_token	*token;
@@ -190,7 +190,10 @@ int	ft_tokenand(t_minishell *minishell, char *str)
 	ft_lstnew(token, minishell->tokenlist, minishell->garbagecmd);
 	if (!minishell->tokenlist->start->back == 0)
 		ft_exit(minishell, "malloc error\n");
-	while ()
+	while (str[i] && str[i] == '|')
+		i++;
+	token->tokenstr = ft_substr(str, 0, i, minishell->garbagecmd);
+	token->tokentype = PIPE;
 }
 
 void	ft_char(t_minishell *minishell, char *str)
@@ -217,8 +220,9 @@ void	ft_char(t_minishell *minishell, char *str)
 		else if (*str == '>')
 			str = str + ft_tokenranglebraket(minishell, str);
 		else if (*str == '|')
+			str = str + ft_tokenpipe(minishell, str);
+		else if (*str == '&')
 			str = str + ft_tokenand(minishell, str);
-		// else if (*str == '&')
 		else
 			str = str + ft_tokenword(minishell, str);
 		/* 	tokentiret
@@ -242,5 +246,6 @@ void	ft_char(t_minishell *minishell, char *str)
 
 void	ft_tokencreate(t_minishell *minishell, char *str)
 {
+	ft_
 	ft_char(minishell, str);
 }

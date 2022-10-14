@@ -44,7 +44,9 @@ enum e_type
 	PARENTHESIS,
 	DASH,
 	LEFTANGLEBRAKET,
-	RIGHTANGLEBRAKET
+	RIGHTANGLEBRAKET,
+	PIPE,
+	AND
 };
 
 typedef struct s_list
