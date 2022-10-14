@@ -122,6 +122,25 @@ int	ft_tokenparenthesis(t_minishell *minishell, char *str)
 	return (++i);
 }
 
+int	ft_tokendash(t_minishell *minishell, char *str)
+{
+	int		i;
+	t_token	*token;
+
+	i = 0;
+	token = ft_malloc(sizeof(*token), minishell->garbagecmd);
+	if (!token)
+		ft_exit(minishell, "malloc error\n");
+	ft_lstnew(token, minishell->tokenlist, minishell->garbagecmd);
+	if (minishell->tokenlist->start->back == 0)
+		ft_exit(minishell, "malloc error\n");
+	while (str[i] && str[i] != ' ')
+		i++;
+	token->tokenstr = ft_substr(str, 0, i, minishell->garbagecmd);
+	token->tokentype = DASH;
+	return (i);
+}
+
 void	ft_char(t_minishell *minishell, char *str)
 {
 	while (*str)
@@ -139,6 +158,8 @@ void	ft_char(t_minishell *minishell, char *str)
 			ft_error(minishell, "synthax error\n");
 			break;
 		}
+		else if (*str == '-')
+			str = str + ft_tokendash(minishell, str);
 		else
 			str = str + ft_tokenword(minishell, str);
 		/* 	tokentiret

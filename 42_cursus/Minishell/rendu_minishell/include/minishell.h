@@ -41,7 +41,8 @@ enum e_type
 	WORD,
 	DOUBLECOTE,
 	SINGLECOTE,
-	PARENTHESIS
+	PARENTHESIS,
+	DASH
 };
 
 typedef struct s_list
