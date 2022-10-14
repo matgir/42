@@ -6,7 +6,7 @@
 /*   By: audreyer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:53:25 by audreyer          #+#    #+#             */
-/*   Updated: 2022/10/13 20:00:38 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:11:51 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,58 @@ int	ft_tokendash(t_minishell *minishell, char *str)
 	return (i);
 }
 
+int	ft_tokenlanglebraket(t_minishell *minishell, char *str)
+{
+	int		i;
+	t_token	*token;
+
+	i = 0;
+	token = ft_malloc(sizeof(*token), minishell->garbagecmd);
+	if (!token)
+		ft_exit(minishell, "malloc error\n");
+	ft_lstnew(token, minishell->tokenlist, minishell->garbagecmd);
+	if (minishell->tokenlist->start->back == 0)
+		ft_exit(minishell, "malloc error\n");
+	while (str[i] && str[i] == '<')
+		i++;
+	token->tokenstr = ft_substr(str, 0, i, minishell->garbagecmd);
+	token->tokentype = LEFTANGLEBRAKET;
+	return(i);
+}
+
+int	ft_tokenranglebraket(t_minishell *minishell, char *str)
+{
+	int		i;
+	t_token	*token;
+
+	i = 0;
+	token = ft_malloc(sizeof(*token), minishell->garbagecmd);
+	if (!token)
+		ft_exit(minishell, "malloc error\n");
+	ft_lstnew(token, minishell->tokenlist, minishell->garbagecmd);
+	if (minishell->tokenlist->start->back == 0)
+		ft_exit(minishell, "malloc error\n");
+	while (str[i] && str[i] == '>')
+		i++;
+	token->tokenstr = ft_substr(str, 0, i, minishell->garbagecmd);
+	token->tokentype = RIGHTANGLEBRAKET;
+}
+
+int	ft_tokenand(t_minishell *minishell, char *str)
+{
+	int		i;
+	t_token	*token;
+
+	i = 0;
+	token = ft_malloc(sizeof(*token), minishell->garbagecmd);
+	if (!token)
+		ft_exit(minishell, "malloc error\n");
+	ft_lstnew(token, minishell->tokenlist, minishell->garbagecmd);
+	if (!minishell->tokenlist->start->back == 0)
+		ft_exit(minishell, "malloc error\n");
+	while ()
+}
+
 void	ft_char(t_minishell *minishell, char *str)
 {
 	while (*str)
@@ -160,6 +212,13 @@ void	ft_char(t_minishell *minishell, char *str)
 		}
 		else if (*str == '-')
 			str = str + ft_tokendash(minishell, str);
+		else if (*str == '<')
+			str = str + ft_tokenlanglebraket(minishell, str);
+		else if (*str == '>')
+			str = str + ft_tokenranglebraket(minishell, str);
+		else if (*str == '|')
+			str = str + ft_tokenand(minishell, str);
+		// else if (*str == '&')
 		else
 			str = str + ft_tokenword(minishell, str);
 		/* 	tokentiret

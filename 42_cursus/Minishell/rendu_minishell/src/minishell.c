@@ -6,7 +6,7 @@
 /*   By: audreyer <audreyer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:27:29 by audreyer          #+#    #+#             */
-/*   Updated: 2022/10/13 16:26:37 by audreyer         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:12:03 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		str = ft_readline(minishell);
 		ft_tokencreate(minishell, str);
+		// ft_leaf(minishell);
 	}
 	ft_exit(minishell, minishell->error);
 }
