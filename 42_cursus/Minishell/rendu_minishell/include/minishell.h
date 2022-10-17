@@ -86,7 +86,7 @@ typedef struct s_token
 typedef struct s_command
 {
 	int		fdin;
-	int		fdout;
+	int		ofdout;
 	char	*error;
 	char	**cmd;
 }	t_command;

@@ -12,34 +12,51 @@
 
 #include "rendu_minishell/include/minishell.h"
 
+int	ft_nonewline(char *str)
+{
+	unsigned int	i;
+
+	i = 0;
+	if (str[i] == '-')
+		i++;
+	while (str[i] == 'n')
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	else
+		return (1);
+}
+
+void	ft_fillofdout(t_command *command, unsigned int i)
+{
+	while (command->cmd[i])
+	{
+		write(command->ofdout, command->cmd[i], ft_strlen(command->cmd[i]));
+		if (command->cmd[i + 1])
+			write(command->ofdout, " ", 1);
+		i++;
+	}
+}
+
 void	ft_echo(t_command *command)
 {
 	unsigned int	i;
 
 	i = 1;
-	if (!ft_strcmp(command->cmd[i], "-n"))
+	if (command->cmd[i][0] == '-' && ft_nonewline(command->cmd[i]))
 	{
-		i++;
-		while (command->cmd[i])
-		{
-			write(command->fdout, command->cmd[i], ft_strlen(command->cmd[i]));
-			if (command->cmd[i + 1])
-				write(command->fdout, " ", 1);
-			i++;
-		}
+		ft_fillofdout(command, 1);
+		write(command->ofdout, "\n", 1);
 	}
 	else
 	{
-		while (command->cmd[i])
-		{
-			write(command->fdout, command->cmd[i], ft_strlen(command->cmd[i]));
-			if (command->cmd[i + 1])
-				write(command->fdout, " ", 1);
+		while (!ft_nonewline(command->cmd[i]))
 			i++;
-		}
-		write(command->fdout, "\n", 1);
+		ft_fillofdout(command, i);
 	}
 }
+
+
 
 /* void	ft_builtin(t_minishell *minishell, t_command *command)
 {

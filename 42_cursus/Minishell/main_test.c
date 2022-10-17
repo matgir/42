@@ -25,7 +25,7 @@ int	main(int argc, char **argv, char **env)
 	(void)env;
 	command = malloc(sizeof(*command) * 1);
 	command->cmd = argv;
-	command->fdout = 1;
+	command->ofdout = 1;
 	ft_echo(command);
 	return (0);
 }
