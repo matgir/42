@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "rendu_minishell/include/minishell.h"
 
 void	ft_echo(t_command *command);
 

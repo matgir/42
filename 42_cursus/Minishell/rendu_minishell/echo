@@ -1,0 +1,7 @@
+echo
+include
+leakreadline.txt
+Makefile
+src
+tester
+valgrind_readline_leaks_ignore.txt
