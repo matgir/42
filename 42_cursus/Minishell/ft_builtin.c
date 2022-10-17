@@ -15,13 +15,23 @@
 int	ft_nonewline(char *str)
 {
 	unsigned int	i;
+	unsigned int	j;
+	unsigned int	z;
 
 	i = 0;
+	j = 0;
+	z = 0;
 	if (str[i] == '-')
+	{
+		j = 1;
 		i++;
+	}
 	while (str[i] == 'n')
+	{
+		z = 1;
 		i++;
-	if (str[i] == '\0')
+	}
+	if (str[i] == '\0' && z == 1 && j == 1)
 		return (0);
 	else
 		return (1);
@@ -38,21 +48,34 @@ void	ft_fillofdout(t_command *command, unsigned int i)
 	}
 }
 
+unsigned int	ft_strlencmd(t_command *command)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (command->cmd[i])
+		i++;
+	return (i);
+}
+
 void	ft_echo(t_command *command)
 {
 	unsigned int	i;
 
 	i = 1;
-	if (command->cmd[i][0] == '-' && ft_nonewline(command->cmd[i]))
+	while (i <= ft_strlencmd(command))
 	{
-		ft_fillofdout(command, 1);
-		write(command->ofdout, "\n", 1);
-	}
-	else
-	{
-		while (!ft_nonewline(command->cmd[i]))
-			i++;
-		ft_fillofdout(command, i);
+		if (command->cmd[i][0] != '-' && ft_nonewline(command->cmd[i]))
+		{
+			ft_fillofdout(command, 1);
+			write(command->ofdout, "\n", 1);
+		}
+		else
+		{
+			while (i <= ft_strlencmd(command) && !ft_nonewline(command->cmd[i]))
+				i++;
+			ft_fillofdout(command, i);
+		}
 	}
 }
 
