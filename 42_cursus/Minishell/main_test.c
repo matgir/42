@@ -11,21 +11,15 @@
 /* ************************************************************************** */
 
 #include "rendu_minishell/include/minishell.h"
-
-void	ft_echo(t_command *command);
+#include <linux/limits.h>
 
 int	main(int argc, char **argv, char **env)
 {
-	// t_minishell	*minishell;
-	t_command	*command;
-
-	// minishell = ft_minishellinit(argc, argv, env);
-	// (void)minishell;
-	(void)argc;
-	(void)env;
-	command = malloc(sizeof(*command) * 1);
-	command->cmd = argv;
-	command->ofdout = 1;
-	ft_echo(command);
+	char	buff[PATH_MAX];
+	
+	if (chdir(argv[1]) != 0)
+		printf("chdir error\nErrno = %d\n", errno);
+	getcwd(buff, PATH_MAX);
+	printf("curent directory = %s\n", buff);
 	return (0);
 }
