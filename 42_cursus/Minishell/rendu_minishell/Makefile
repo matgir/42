@@ -38,8 +38,6 @@ SRC=	src/minishell.c	\
 		src/ft_isalpha.c \
 		src/ft_strdup.c	\
 		src/ft_isalnum.c \
-		src/ft_commandexec.c \
-		src/ft_commandcreate.c \
 		src/ft_error.c \
 		src/ft_split.c \
 		src/ft_echo.c
