@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_closevaria.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: audreyer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/25 16:30:34 by audreyer          #+#    #+#             */
-/*   Updated: 2022/10/14 14:11:12 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/10/17 23:52:12 by audreyer          #+#    #+#             */
+/*   Updated: 2022/10/18 01:13:18 by audreyer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*ft_strjoin(char *s1, char *s2, t_pos *garb)
+int	ft_closevaria(int i, ...)
 {
-	char	*str;
-	int		i;
-	int		j;
+	va_list	param;
+	int		fd;
 
-	i = -1;
-	j = 0;
-	str = ft_malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1), garb);
-	if (!(str))
-		return (0);
-	while (s1[++i])
-		str[i] = s1[i];
-	while (s2[j])
-		str[i++] = s2[j++];
-	str[i] = 0;
-	return (str);
+	va_start(param, i);
+	while (i > 0)
+	{
+		fd = va_arg(param, int);
+		if (fd != 0 && fd != 2 && fd != 1)
+		fd = close(fd);
+		if (fd == -1)
+			write(2, "n2p", 3);
+		i--;
+	}
+	return (0);
 }
