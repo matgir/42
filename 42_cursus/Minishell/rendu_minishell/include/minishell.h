@@ -6,7 +6,7 @@
 /*   By: audreyer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:37:40 by audreyer          #+#    #+#             */
-/*   Updated: 2022/10/18 01:24:10 by audreyer         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:35:10 by audreyer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <linux/limits.h>
 # include <limits.h>
 
 typedef struct s_pos
@@ -85,6 +86,7 @@ typedef struct s_minishell
 {
 	t_pos		*garbage;
 	t_pos		*garbagecmd;
+	int			heredoc;
 	char		**env;
 	t_pos		*actenv;
 	char		**argv;
@@ -108,8 +110,8 @@ typedef struct s_command
 	int		ofdout;
 	int		ofdin;
 	char	*error;
-	char	*heredoc;
 	char	**cmd;
+	char	*file;
 	int		type;
 }	t_command;
 
@@ -128,18 +130,23 @@ void		ft_putnbrfd(int n, int fd);
 void		ft_printtoken(t_minishell *minishell, void *ptr);
 void		ft_posprint(t_minishell *minishell, t_pos *pos, void (*fct)(t_minishell *, void *));
 char		*ft_strdup(const char *s, t_pos *garbage);
-char		*ft_substr(char const *s, unsigned int start, size_t len, t_pos *garb);
+char		*ft_substr(char const *s, int start, int len, t_pos *garb);
 int			ft_strcmp(const char *str1, const char *str2);
 void		*ft_malloc(int size, t_pos *free);
 int			ft_exit(t_minishell *minishell, char *str);
-size_t		ft_strlen(const char *s);
+int			ft_strlen(const char *s);
 int			ft_isalpha(int c);
 int			ft_isalnum(int c);
 char		*ft_unsplit(char **tab, char *charset, t_pos *garbage);
+char		**ft_split(char const *s, char c, t_pos *free);
+char		*ft_itoa(int n, t_pos *garbage);
+int			ft_doublstrlen(char **s);
 
 /* minishell */
 
-char		**ft_split(char const *s, char c, t_pos *free);
+char		*ft_searchinenv(t_minishell *minishell, char *str);
+void		ft_heredocclean(t_minishell *minishell);
+int			ft_isbuiltin(t_command *command);
 void		ft_child(t_minishell *minishell, t_list *tokenlist);
 char		*ft_getcmdfile(t_minishell *minishell, t_command *command);
 int			ft_type(t_list *tokenlist);
@@ -154,14 +161,21 @@ void		ft_createleaf(t_minishell *minishell);
 void		ft_parseleaf(t_minishell *minishell);
 char		*ft_readline(char *str, t_pos *garbage);
 t_minishell	*ft_minishellinit(int argc, char **argv, char **env);
-void		ft_expanddoublequote(t_token *token);
-void		ft_expanddollar(t_token *token);
-void	ft_printenv(t_minishell	*minishell, void *ptr);
+char		*ft_expanddoublequote(t_minishell *minishell, char *str);
+char		*ft_expanddollar(t_minishell *minishell, char *str);
+void		ft_printenv(t_minishell	*minishell, void *ptr);
 
 /* builtin */
 
+void		ft_builtin(t_minishell *minishell, t_command *command);
 void		ft_echo(t_command *command);
 void		ft_fillofdout(t_command *command, unsigned int i);
 int			ft_nonewline(char *str);
+int			ft_homechdir(t_env *varenv);
+void		ft_addvarenv(t_minishell *minishell, char *name, char *value);
+void		ft_updateenv(t_minishell *minishell, char *buff);
+void		ft_preaddvarenv(t_minishell *minishell, char *name, t_env *varenv);
+t_list		*ft_envvarexist(t_pos *envact, char *str);
+int			ft_ispartenv(t_env	*varenv, char *str);
 
 #endif

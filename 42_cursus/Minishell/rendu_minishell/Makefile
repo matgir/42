@@ -6,7 +6,7 @@
 #    By: audreyer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 22:50:22 by audreyer          #+#    #+#              #
-#    Updated: 2022/10/18 00:13:42 by audreyer         ###   ########.fr        #
+#    Updated: 2022/10/20 13:33:47 by audreyer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,15 @@ TESTER = tester
 
 CC = gcc
 
-FLAG = -g -fsanitize=address -Wall -Werror -Wextra 
+FLAG = -g -Wall -Werror -Wextra 
 
 SRC=	src/minishell.c	\
+		src/ft_builtin.c	\
+		src/ft_commandexec.c	\
+		src/ft_commandcreate.c	\
 		src/ft_tokenredirclean.c	\
+		src/ft_heredoc.c	\
+		src/ft_itoa.c	\
 		src/ft_tokencmdclean.c	\
 		src/ft_closevaria.c	\
 		src/ft_strjoin.c	\

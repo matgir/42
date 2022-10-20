@@ -6,7 +6,7 @@
 /*   By: audreyer <audreyer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:27:29 by audreyer          #+#    #+#             */
-/*   Updated: 2022/10/18 01:26:32 by audreyer         ###   ########.fr       */
+/*   Updated: 2022/10/18 19:42:23 by audreyer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_minishell	*ft_minishellinit(int argc, char **argv, char **env)
 	if (minishell->garbagecmd == 0)
 		ft_exit(minishell, "malloc error\n");
 	minishell->env = env;
+	minishell->heredoc = 0;
 	minishell->actenv = ft_envinit(minishell);
 	if (!minishell->actenv)
 		ft_exit(minishell, "malloc error\n");
