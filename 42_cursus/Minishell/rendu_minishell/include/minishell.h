@@ -37,6 +37,9 @@
 # include <errno.h>
 # include <linux/limits.h>
 # include <limits.h>
+# include <signal.h>
+
+typedef struct sigaction	t_sigaction;
 
 typedef struct s_pos
 {
@@ -166,6 +169,7 @@ t_minishell	*ft_minishellinit(int argc, char **argv, char **env);
 char		*ft_expanddoublequote(t_minishell *minishell, char *str);
 char		*ft_expanddollar(t_minishell *minishell, char *str);
 void		ft_printenv(t_minishell	*minishell, void *ptr);
+void		ft_signal(int sig, siginfo_t *siginfo, void *ucontext);
 
 /* builtin */
 
