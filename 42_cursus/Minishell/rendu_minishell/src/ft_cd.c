@@ -108,9 +108,6 @@ void	ft_cd(t_minishell *minishell, t_command *command)
 	char	*str;
 
 	buff = ft_malloc(PATH_MAX, minishell->garbage);
-	/*
-		peut etre definir PATH_MAX dans le *.h
-		*/
 	if (!buff)
 		ft_exit(minishell, "malloc error\n");
 	if (ft_doublstrlen(command->cmd) > 2)
