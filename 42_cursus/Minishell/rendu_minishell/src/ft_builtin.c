@@ -6,24 +6,31 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:25:54 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/10/26 16:10:29 by audreyer         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:04:11 by audreyer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(t_minishell *minishell)
+void	ft_env(t_minishell *minishell, t_command *command)
 {
-	ft_posprint(minishell, minishell->actenv, &ft_printenv);	
+	ft_posprint(minishell, minishell->actenv, &ft_printenv, command->ofdout);	
+	minishell->laststatus = 0;
 }
 
-void	ft_pwd(t_minishell *minishell)
+void	ft_pwd(t_minishell *minishell, t_command *command)
 {
 	char	*str;
 
 	str = ft_searchinenv(minishell, "PWD");
-	write(1, str, ft_strlen(str));
-	write(1, "\n", 1);
+	if (access(str, F_OK))
+	{
+		ft_error(minishell, "pwd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+		return ;
+	}
+	write(command->ofdout, str, ft_strlen(str));
+	write(command->ofdout, "\n", 1);
+	minishell->laststatus = 0;
 }
 
 void	ft_preexit(t_minishell *minishell, t_command *command)
@@ -83,6 +90,16 @@ void	ft_export(t_minishell *minishell, t_command *command)
 	t_env	*line;
 
 	i = 1;
+	if (command->cmd[1] == 0)
+	{
+		ft_error(minishell, "minishell: export: `': not a valid identifier\n");
+		return ;
+	}
+	if (command->cmd[1][0] == 0 || command->cmd[1][0] == '=' || (command->cmd[1][0] <= '9' && command->cmd[1][0] >= '0'))
+	{
+		ft_error(minishell, "minishell: export: `': not a valid identifier\n");
+		return ;
+	}
 	while (command->cmd[i])
 	{
 		if (ft_strhaveegal(command->cmd[i]) == 1)
@@ -109,6 +126,7 @@ void	ft_export(t_minishell *minishell, t_command *command)
 		}
 		i++;
 	}
+	minishell->laststatus = 0;
 }
 
 void	ft_unset(t_minishell *minishell, t_command *command)
@@ -118,51 +136,23 @@ void	ft_unset(t_minishell *minishell, t_command *command)
 	envlist = ft_envlist(minishell, command->cmd[1]);
 	if (envlist != 0)
 		ft_lstdelone(envlist, 0);
+	minishell->laststatus = 0;
 }
-
-// void	ft_export(t_minishell *minishell, t_command *command)
-// {
-// 	/*	only accept alphanum and underscore to define env variables name
-// 		if no '=' in cmd[1 et +] do nothing
-// 		if '=' and nothing behind put value at '\0'
-// 		for each arg make the check and conversion*/
-// 	/*	prend un env au debut de l'exec, fait ses operations a partir de cet env
-// 		qu'ils sauvegarde dans le nouveau qui sera renvoyer a la fin*/
-// 	/*	may need to remake the parsing for export*/
-// 	if (ft_envvarexist(minishell, "str"))
-// 	{
-// 		/* replace envact value by new one */
-// 	}
-// 	else
-// 	{
-// 		/* lstnew with command */
-// 	}
-// }
 
 void	ft_builtin(t_minishell *minishell, t_command *command)
 {
 	if (!ft_strcmp(command->cmd[0], "echo"))
-	{
-		printf("ECHO_MAISON\n"); //
 		ft_echo(command);
-	}
 	else if (!ft_strcmp(command->cmd[0], "cd"))
-	{
-		// ft_cd(minishell, command);
-		printf("CD_MAISON\n"); //
-		printf("ft_cd = %i\n", ft_cd(minishell, command));//
-		char buff[PATH_MAX];//
-		if (getcwd(buff, PATH_MAX))//
-			printf("curent directory = %s\n", buff);//
-	}
+		ft_cd(minishell, command);
 	else if (!ft_strcmp(command->cmd[0], "pwd"))
-		ft_pwd(minishell);
+		ft_pwd(minishell, command);
 	else if (!ft_strcmp(command->cmd[0], "env"))
-		ft_env(minishell);
+		ft_env(minishell, command);
 	else if (!ft_strcmp(command->cmd[0], "exit"))
 		ft_preexit(minishell, command);
 	else if (!ft_strcmp(command->cmd[0], "export"))
-			ft_export(minishell, command);
+		ft_export(minishell, command);
 	else if (!ft_strcmp(command->cmd[0], "unset"))
 		ft_unset(minishell, command);
 }

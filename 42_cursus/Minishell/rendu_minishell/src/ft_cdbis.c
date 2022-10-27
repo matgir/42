@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   ft_cdbis.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 18:14:02 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/10/26 18:14:30 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/10/27 16:03:33 by mgirardo          #+#    #+#             */
+/*   Updated: 2022/10/27 16:03:34 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_addvarenv(t_minishell *minishell, char *name, char *value)
 	line->lname = ft_strlen(line->name);
 	line->value = value;
 	line->lvalue = ft_strlen(line->value);
-}
+	}
 
 int	ft_homechdir(t_env *varenv)
 {
@@ -122,13 +122,8 @@ void	ft_cd(t_minishell *minishell, t_command *command)
 		if (chdir(command->cmd[1]) == 0)
 		{
 			if (getcwd(buff, PATH_MAX))
-			{
-				if (!ft_strcmp(command->cmd[1], "//"))
-					ft_updateenv(minishell, "//");
-				else
-					ft_updateenv(minishell, buff);
-				minishell->laststatus = 0;
-			}
+				ft_updateenv(minishell, buff);
+			minishell->laststatus = 0;
 		}
 		else
 		{
@@ -138,7 +133,6 @@ void	ft_cd(t_minishell *minishell, t_command *command)
 			if (!str)
 				ft_exit(minishell, "malloc error\n");
 			ft_error(minishell, str);
-			return ;
 		}
 	}
 	else if (ft_doublstrlen(command->cmd) == 1)
@@ -153,10 +147,6 @@ void	ft_cd(t_minishell *minishell, t_command *command)
 			minishell->laststatus = 0;
 		}
 		else
-		{
 			ft_error(minishell, "minishell: cd: no home defined\n");
-			return ;
-		}
 	}
-	return ;
 }
