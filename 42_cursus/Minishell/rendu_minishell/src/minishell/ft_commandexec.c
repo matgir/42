@@ -6,55 +6,13 @@
 /*   By: audreyer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 13:35:21 by audreyer          #+#    #+#             */
-/*   Updated: 2022/10/27 01:10:55 by audreyer         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:24:35 by audreyer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_fdout(t_list *tokenlist)
-{
-	t_token		*token;
-	t_command	*command;
 
-	token = (t_token *)tokenlist->content;
-	command = (t_command *)token->str;
-	if (command->fdout == 0)
-		return (0);
-	return (1);
-}
-
-int	ft_fdin(t_list *tokenlist)
-{
-	t_token		*token;
-	t_command	*command;
-
-	token = (t_token *)tokenlist->content;
-	command = (t_command *)token->str;
-	if (command->fdin == 0)
-		return (0);
-	return (1);
-}
-
-int	ft_ofdout(t_list *tokenlist)
-{
-	t_token		*token;
-	t_command	*command;
-
-	token = (t_token *)tokenlist->content;
-	command = (t_command *)token->str;
-	return (command->ofdout);
-}
-
-int	ft_ofdin(t_list *tokenlist)
-{
-	t_token		*token;
-	t_command	*command;
-
-	token = (t_token *)tokenlist->content;
-	command = (t_command *)token->str;
-	return (command->ofdin);
-}
 
 void	ft_changefdin(t_list *tokenlist, int fd)
 {
@@ -78,24 +36,14 @@ void	ft_changefdout(t_list *tokenlist, int fd)
 		command->ofdout = fd;
 }
 
-t_command *ft_commandget(t_list *tokenlist)
+void	ft_openend(t_command *cmd)
 {
-	t_token		*token;
-	t_command	*command;
-
-	token = (t_token *)tokenlist->content;
-	command = (t_command *)token->str;
-	return (command);
-}
-
-void	ft_openend(t_command *command)
-{
-	if (command->fdin != 0)
-		command->ofdin = open(command->fdin, O_RDONLY, 0777);
-	if (command->fdout != 0 && command->type == 'T')
-		command->ofdout = open(command->fdout, O_WRONLY | O_CREAT | O_TRUNC , 0777);
-	if (command->fdout != 0 && command->type == 'A')
-		command->ofdout = open(command->fdout, O_WRONLY | O_CREAT | O_APPEND , 0777);
+	if (cmd->fdin != 0)
+		cmd->ofdin = open(cmd->fdin, O_RDONLY, 0777);
+	if (cmd->fdout != 0 && cmd->type == 'T')
+		cmd->ofdout = open(cmd->fdout, O_WRONLY | O_CREAT | O_TRUNC , 0777);
+	if (cmd->fdout != 0 && cmd->type == 'A')
+		cmd->ofdout = open(cmd->fdout, O_WRONLY | O_CREAT | O_APPEND , 0777);
 }
 
 void	ft_arg(t_minishell *minishell, t_list *tokenlist)
@@ -150,24 +98,18 @@ void	ft_executecmd(t_minishell *minishell, t_command *command)
 		ft_exit(minishell, 0);
 	}
 	if (command->ofdin != 0)
-	{
-//		printf("in = %i\n", command->ofdin);
 		dup2(command->ofdin, 0);
-	}
 	if (command->ofdout != 1)
 	{
-//		printf("out = %i\n", command->ofdout);
 		dup2(command->ofdout, 1);
 		if (command->ofdin != minishell->pipe[0])
 			ft_closevaria(1, minishell->pipe[0]);
 	}
 	ft_closevaria(2, command->ofdin, command->ofdout);
 	if (command->error == 0)
-	{
-//		dprintf(2,"1 = %s\n", command->file);
-		execve(command->file, command->cmd, ft_reenv(minishell)); //env a changer en act env
-//		printf("%s \n", strerror(errno));
-	}
+		execve(command->file, command->cmd, ft_reenv(minishell));
+	if (command->error == 0)
+		command->error = ft_strjoin(strerror(errno), "\n", minishell->garbagecmd);
 	ft_exit(minishell, command->error);
 }
 
@@ -195,6 +137,7 @@ void	ft_child(t_minishell *minishell, t_list *tokenlist)
 
 	if (ft_type(tokenlist) == NL)
 		return ;
+//	ft_posprint(minishell, minishell->tokenlist, &ft_printtoken, 2);
 	command = ft_commandget(tokenlist);
 	if (ft_type(tokenlist->next) == NL && ft_isbuiltin(command) == 1)
 	{

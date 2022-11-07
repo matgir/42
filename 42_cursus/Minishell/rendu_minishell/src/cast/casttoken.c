@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   casttoken.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: audreyer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 12:08:13 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/10/14 14:09:01 by mgirardo         ###   ########.fr       */
+/*   Created: 2022/11/02 12:44:06 by audreyer          #+#    #+#             */
+/*   Updated: 2022/11/02 12:44:43 by audreyer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalpha(int c)
+#include "minishell.h"
+
+int	ft_type(t_list *list)
 {
-	if (c < 'A' || (c > 'Z' && c < 'a') || c > 'z')
-		return (0);
-	else
-		return (1024);
+	t_token	*token;
+
+	token = (t_token *)list->content;
+	return (token->type);
+}
+
+char	*ft_str(t_list *list)
+{
+	t_token	*token;
+
+	token = (t_token *)list->content;
+	return (token->str);
 }

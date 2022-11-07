@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_closevaria.c                                    :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: audreyer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 23:52:12 by audreyer          #+#    #+#             */
-/*   Updated: 2022/10/25 14:33:03 by audreyer         ###   ########.fr       */
+/*   Created: 2022/10/01 22:29:22 by audreyer          #+#    #+#             */
+/*   Updated: 2022/10/27 18:30:50 by audreyer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_closevaria(int i, ...)
+int	ft_strcmp(const char *str1, const char *str2)
 {
-	va_list	param;
-	int		fd;
+	int	i;
 
-	va_start(param, i);
-	while (i > 0)
+	i = 0;
+	if (str1 == 0 || str2 == 0)
+		return (-1);
+	if (ft_strlen(str1) < ft_strlen(str2))
+		return (-1);
+	if (ft_strlen(str1) > ft_strlen(str2))
+		return (1);
+	while (str1[i])
 	{
-		fd = va_arg(param, int);
-//			printf("%i\n", fd);
-		if (fd != 0 && fd != 2 && fd != 1)
-		{
-			fd = close(fd);
-			if (fd == -1)
-				write(2, "n2p", 3);
-		}
-		i--;
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		i++;
 	}
 	return (0);
 }

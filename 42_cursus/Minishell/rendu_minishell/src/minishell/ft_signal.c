@@ -12,19 +12,18 @@
 
 #include "minishell.h"
 
-void	ft_signal(int sig, siginfo_t *siginfo, void *ucontext)
+void	ft_signal_main(int sig, siginfo_t *siginfo, void *ucontext)
 {
 	(void)siginfo;
 	(void)ucontext;
-	if (sig == SIGINT)
+	if (sig == SIGINT) //ctrl + c
 	{
-		// write(1, "ctrl-C\n", 7);
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	else if (sig == SIGQUIT)
+	else if (sig == SIGQUIT) //ctrl + /
 	{
 		write(1, "\33[2K\r", 5);
 		rl_on_new_line();
@@ -36,20 +35,26 @@ void	ft_signalhd(int sig, siginfo_t *siginfo, void *ucontext)
 {
 	(void)siginfo;
 	(void)ucontext;
-	if (sig == SIGINT)
+	if (sig == SIGINT) // ctrl + c
 	{
-/*
-	minishell: warning: here-document at line <where we are at> delimited by end-of-file
-	(wanted `<heredoc delimiter>')
-*/
+/* 		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay(); */
 	}
-	else if (sig == SIGQUIT)
+	else if (sig == SIGQUIT) //ctrl + /
 	{
 		write(1, "\33[2K\r", 5);
 		rl_on_new_line();
 		rl_redisplay();
 	}
 }
+
+/*
+	when ctrl + d, EOF
+	minishell: warning: here-document at line <where we are at> delimited by end-of-file
+	(wanted `<heredoc delimiter>')
+*/
 
 /*
 	rl_clear_history

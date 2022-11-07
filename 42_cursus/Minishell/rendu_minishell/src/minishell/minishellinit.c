@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: audreyer <audreyer@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/02 19:27:29 by audreyer          #+#    #+#             */
-/*   Updated: 2022/10/26 19:52:07 by audreyer         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -52,7 +41,18 @@ t_pos	*ft_envinit(t_minishell *minishell)
 	return(newenv);
 }
 
-t_minishell	*ft_minishellinit(int argc, char **argv, char **env)
+void	ft_minishellinit2(t_minishell *minishell)
+{
+	minishell->heredoc = 0;
+	minishell->laststatus = 0;
+	minishell->error = 0;
+	minishell->garbagecmd = ft_setpos(0);
+	if (minishell->garbagecmd == 0)
+		ft_exit(minishell, "malloc error\n");
+	minishell->pipe = ft_pipeinit(minishell);
+}
+
+t_minishell	*ft_minishellinit(char **env)
 {
 	t_minishell	*minishell;
 	t_pos		*garbage;
@@ -62,19 +62,11 @@ t_minishell	*ft_minishellinit(int argc, char **argv, char **env)
 	if (minishell == 0)
 		ft_exit(minishell, "malloc error\n");
 	minishell->garbage = garbage;
-	minishell->laststatus = 0;
-	minishell->argc = argc;
-	minishell->argv = argv;
-	minishell->garbagecmd = ft_setpos(0);
-	if (minishell->garbagecmd == 0)
-		ft_exit(minishell, "malloc error\n");
+	ft_minishellinit2(minishell);
 	minishell->env = env;
-	minishell->heredoc = 0;
 	minishell->actenv = ft_envinit(minishell);
 	if (!minishell->actenv)
 		ft_exit(minishell, "malloc error\n");
-	minishell->pipe = ft_pipeinit(minishell);
-	minishell->error = 0;
 	minishell->prompt = ft_strjoin(ft_strjoin(
 				ft_strdup("\x1b[32m", garbage), ft_strdup("Minishell$", garbage),
 				garbage), ft_strdup("\x1b[0m ", garbage), garbage);
@@ -84,27 +76,4 @@ t_minishell	*ft_minishellinit(int argc, char **argv, char **env)
 	if (!minishell->tokenlist)
 		ft_exit(minishell, "malloc error\n");
 	return (minishell);
-}
-
-void	ft_setcolor(char *color)
-{
-	write(1, color, ft_strlen(color));
-}
-
-void	ft_resetcolor(void)
-{
-	const char	*color = RESET;
-
-	write(1, color, ft_strlen(color));
-}
-
-char	*ft_readline(char *prompt, t_pos *garbage)
-{
-	char	*str;
-
-	str = readline(prompt);
-	ft_lstnew(str, garbage, 0);
-	if (garbage->start->back == 0)
-		return (0);
-	return (str);
 }

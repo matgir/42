@@ -6,27 +6,11 @@
 /*   By: audreyer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 22:50:21 by audreyer          #+#    #+#             */
-/*   Updated: 2022/10/27 13:23:05 by audreyer         ###   ########.fr       */
+/*   Updated: 2022/10/28 18:45:06 by audreyer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_type(t_list *list)
-{
-	t_token	*token;
-
-    token = (t_token *)list->content;
-	return (token->type);
-}
-
-char	*ft_str(t_list *list)
-{
-	t_token	*token;
-
-    token = (t_token *)list->content;
-	return (token->str);
-}
 
 void	ft_errorcmd(t_list *tokenlist)
 {
@@ -43,22 +27,6 @@ void	ft_errorcmd(t_list *tokenlist)
 			tokenlist = tokenlist->back;
 		ft_lstdelone(tokenlist->back, 0);
 	}
-}
-
-char	*ft_name(t_env *env)
-{
-	char	*str;
-
-	str = (char *)env->name;
-	return (str);
-}
-
-char	*ft_value(t_env *env)
-{
-	char	*str;
-
-	str = (char *)env->value;
-	return (str);
 }
 
 char	*ft_searchinenv(t_minishell *minishell, char *str)
@@ -212,6 +180,11 @@ void	ft_tokenredirclean(t_minishell *minishell)
 				ft_lstdelone(tokenlist->next, 0);
 			if (ft_type(tokenlist->next) <= 4)
 				ft_expandforfd(minishell, tokenlist);
+			else
+			{
+				ft_error(minishell, "minishell: syntax error near unexpected token\n");
+				return ;
+			}
 		}
 		tokenlist = tokenlist->next;
 	}

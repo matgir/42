@@ -6,7 +6,7 @@
 /*   By: audreyer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:53:25 by audreyer          #+#    #+#             */
-/*   Updated: 2022/10/27 13:29:18 by audreyer         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:37:04 by audreyer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_tokenspace(t_minishell *minishell, char *str)
 
 int	ft_isendword(char c)
 {
-	if (c == ' ' || c == '|' || c == '&' || c == '<' || c == '>')
+	if (c == ' ' || c == '|' || c == '<' || c == '>')
 		return (1);
 	if (c == '\'' || c == '"' || c == '$')
 		return (1);
@@ -74,10 +74,7 @@ int	ft_tokendoublecote(t_minishell *minishell, char *str)
 	while (str[i] && str[i] != '"')
 		i++;
 	if (str[i] == '\0')
-	{
-		ft_error(minishell, "syntax error\n");
 		return (-1);
-	}
 	else
 	{
 		token->str = ft_substr(str, 1, i - 1, minishell->garbagecmd);
@@ -101,11 +98,8 @@ int	ft_tokensinglecote(t_minishell *minishell, char *str)
 	while (str[i] && str[i] != '\'')
 		i++;
 	if (str[i] == '\0')
-	{
-		ft_error(minishell, "synthax error\n");
 		return (-1);
-	}
-		else
+	else
 	{
 		token->str = ft_substr(str, 1, i - 1, minishell->garbagecmd);
 		token->type = SINGLEQUOTE;
@@ -128,10 +122,7 @@ int	ft_tokenparenthesis(t_minishell *minishell, char *str)
 		while (str[i] && str[i] != ')')
 			i++;
 		if (str[i] == '\0')
-		{
-			ft_error(minishell, "synthax error\n");
 			return (-1);
-		}
 		else
 		{
 			token->str = ft_substr(str, 1, i - 1, minishell->garbagecmd);
@@ -210,7 +201,7 @@ int	ft_tokenpipe(t_minishell *minishell, char *str)
 	if (i == 1)
 		token->type = PIPE;
 	else
-		token->type = OR;
+		return (-1);
 	return (i);
 }
 
@@ -292,16 +283,16 @@ int	ft_char(t_minishell *minishell, char *str)
 			i = ft_tokendoublecote(minishell, str);
 		else if (*str == '\'')
 			i = ft_tokensinglecote(minishell, str);
-		else if (*str == '(')
-			i = ft_tokenparenthesis(minishell, str);
+//		else if (*str == '(')
+//			i = ft_tokenparenthesis(minishell, str);
 		else if (*str == '<')
 			i = ft_tokeninbraket(minishell, str);
 		else if (*str == '>')
 			i = ft_tokenoutbraket(minishell, str);
 		else if (*str == '|')
 			i = ft_tokenpipe(minishell, str);
-		else if (*str == '&')
-			i = ft_tokenand(minishell, str);
+//		else if (*str == '&')
+//			i = ft_tokenand(minishell, str);
 		else if (*str == '$')
 			i = ft_tokendollar(minishell, str);
 		else
@@ -385,8 +376,8 @@ int	ft_numbercheck(char *str)
 		return (0);
 	if (!ft_checkuptwo(str, '>'))
 		return (0);
-	if (!ft_checktwo(str, '&'))
-		return (0);
+//	if (!ft_checktwo(str, '&'))
+//		return (0);
 	while (*str)
 	{
 		if (*str == '(')
@@ -401,18 +392,26 @@ int	ft_numbercheck(char *str)
 
 int	ft_tokencreate(t_minishell *minishell, char *str)
 {
-	if (ft_numbercheck(str))
+	if (ft_strlen(str) == 0)
+		return (-1);
+	if (!ft_numbercheck(str))
 	{
-		if (ft_char(minishell, str) == -1)
-			return (-1);
-		if (ft_type(minishell->tokenlist->start->back) == SPACES)
-			ft_lstdelone(minishell->tokenlist->start->back, 0);
-		if (ft_type(minishell->tokenlist->start->back) == PIPE)
-			return (-1);
-		ft_tokennl(minishell);	
+		ft_error(minishell, "syntax error\n");
+		return (-1);
 	}
-	else
-		ft_error(minishell, "synthax error\n");
+	if (ft_char(minishell, str) == -1)
+	{
+		ft_error(minishell, "syntax error\n");
+		return (-1);
+	}
+	if (ft_type(minishell->tokenlist->start->back) == SPACES)
+		ft_lstdelone(minishell->tokenlist->start->back, 0);
+	if (ft_type(minishell->tokenlist->start->back) == PIPE)
+	{
+		ft_error(minishell, "syntax error\n");
+		return (-1);
+	}
+	ft_tokennl(minishell);	
 		// message d'erreur a paufiner pour preciser quelle erreur de synthax
 	return (0);
 }

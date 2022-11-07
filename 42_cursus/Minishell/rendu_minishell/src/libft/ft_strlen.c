@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aurele <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 13:22:34 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/10/14 14:08:50 by mgirardo         ###   ########.fr       */
+/*   Created: 2021/10/15 18:03:37 by aurele            #+#    #+#             */
+/*   Updated: 2022/11/02 12:47:10 by audreyer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(int c)
+#include "minishell.h"
+
+int	ft_strlen(const char *s)
 {
-	if (c < '0' || (c > '9' && c < 'A') || (c > 'Z' && c < 'a') || c > 'z')
-		return (0);
-	else
-		return (8);
+	int	i;
+
+	i = 0;
+	if (s == 0)
+		return (-1);
+	while (s[i])
+		i++;
+	return (i);
 }

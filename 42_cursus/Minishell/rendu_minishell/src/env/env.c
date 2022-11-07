@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: audreyer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/01 22:29:22 by audreyer          #+#    #+#             */
-/*   Updated: 2022/10/14 19:05:47 by audreyer         ###   ########.fr       */
+/*   Created: 2022/11/02 12:47:48 by audreyer          #+#    #+#             */
+/*   Updated: 2022/11/02 12:48:04 by audreyer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_strcmp(const char *str1, const char *str2)
+t_list	*ft_envlist(t_minishell *minishell, char *str)
 {
-	int	i;
+	int		lol;
+	t_list	*line;
 
-	i = 0;
-	if (str1 == 0 || str2 == 0)
-		return (-1);
-	if (ft_strlen(str1) < ft_strlen(str2))
-		return (-1);
-	if (ft_strlen(str1) > ft_strlen(str2))
-		return (1);
-	while (str1[i])
+	lol = 0;
+	line = minishell->actenv->start;
+	while (line != minishell->actenv->start || lol++ == 0)
 	{
-		if (str1[i] != str2[i])
-			return (str1[i] - str2[i]);
-		i++;
+		if (ft_strcmp(ft_name(line->content), str) == 0)
+			return (line);
+		line = line->next;
 	}
 	return (0);
 }
