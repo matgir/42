@@ -37,10 +37,7 @@ void	ft_signalhd(int sig, siginfo_t *siginfo, void *ucontext)
 	(void)ucontext;
 	if (sig == SIGINT) // ctrl + c
 	{
-/* 		write(1, "\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay(); */
+		close (0); //not good enough
 	}
 	else if (sig == SIGQUIT) //ctrl + /
 	{

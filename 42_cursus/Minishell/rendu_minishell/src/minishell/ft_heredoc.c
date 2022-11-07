@@ -32,7 +32,7 @@ void	ft_heredoc(t_minishell *minishell, t_token *token)
 	{
 		read = ft_readline("> ", minishell->garbagecmd);
 		if (!read)
-			ft_exit(minishell, "minishell: warning: here-document at line <where we are line(all of them)> delimited by end-of-file (wanted '<heredoc delimiter>')\n");
+			ft_exit(minishell, "exit\n");
 		if (ft_strcmp(str, read) != 0)
 		{
 			if (token->type == HEREDOC)

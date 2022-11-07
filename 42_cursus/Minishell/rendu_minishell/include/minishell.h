@@ -168,7 +168,7 @@ char		*ft_expanddollar(t_minishell *minishell, char *str);
 void		ft_printenv(t_minishell	*minishell, void *ptr, int fd);
 int			ft_errorstr(char *str);
 void		ft_signal_main(int sig, siginfo_t *siginfo, void *ucontext);
-
+void		ft_signalhd(int sig, siginfo_t *siginfo, void *ucontext);
 
 /*env*/
 
