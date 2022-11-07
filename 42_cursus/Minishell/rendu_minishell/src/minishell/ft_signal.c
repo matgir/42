@@ -51,12 +51,6 @@ void	ft_signalhd(int sig, siginfo_t *siginfo, void *ucontext)
 }
 
 /*
-	when ctrl + d, EOF
-	minishell: warning: here-document at line <where we are at> delimited by end-of-file
-	(wanted `<heredoc delimiter>')
-*/
-
-/*
 	rl_clear_history
 		Clear the history list by deleting all of the entries, in the same manner
 		as the History library’s clear_history() function. This differs from

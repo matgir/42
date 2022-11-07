@@ -77,6 +77,5 @@ int	ft_exit(t_minishell *minishell, char *str)
 		ft_posclear(minishell->garbagecmd, 2);
 	if (minishell->garbage != 0)
 		ft_posclear(minishell->garbage, 2);
-	printf("exit\n");
 	exit(i);
 }

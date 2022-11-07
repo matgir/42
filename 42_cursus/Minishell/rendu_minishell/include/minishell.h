@@ -141,6 +141,7 @@ int			ft_strlen(const char *s);
 char		**ft_split(char const *s, char c, t_pos *garbage);
 char		*ft_itoa(int n, t_pos *garbage);
 int			ft_atoi(char *str);
+int			ft_doublstrlen(char **str);
 
 /* minishell */
 
@@ -185,6 +186,8 @@ void		ft_export(t_minishell *minishell, t_command *command);
 void		ft_builtin(t_minishell *minishell, t_command *command);
 void		ft_echo(t_command *command);
 void		ft_cd(t_minishell *minishell, t_command *command);
+t_list		*ft_envvarexist(t_pos *envact, char *str);
+int			ft_ispartenv(t_env	*varenv, char *str);
 
 /*cast*/
 
