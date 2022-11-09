@@ -111,3 +111,10 @@ alias gccflag='gcc -Wall -Werror -Wextra'
 alias pwls='pwd && ls -la'
 alias forcesave='cd ~/Raccourci && ./save.sh'
 alias pullgit='cd ~/Raccourci && ./forcepull.sh'
+# pour lockscreen avec une animation
+# nb 1 = demarage image pixel vers la droite
+# nb 2 = demarage image pixel vers le bas = 0.5625*nb1
+# nb 3 = hauteur animation = 1.125*nb1
+# nb 4 = largeur animation = 2*nb1
+# nb1, 
+alias lock='/sgoinfre/goinfre/Perso/jmaia/Public/pimp_my_lock/pimp_my_lock.sh ~/Downloads/join_us_o.mp4 0 0 1440 2560'
