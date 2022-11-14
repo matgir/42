@@ -192,14 +192,18 @@
 
 
 
-// void	ft_soloexport(t_minishell *minishell)
-// {
-// 	/*
-// 		imprimer env avec "declare -x " devamt chaque ligne
-// 	*/
-// 	// (void)minishell;//
-// 	printf("solo export\n");//
-// }
+
+
+void	ft_soloexport(t_command *command)
+{
+	write(command->ofdout, "You choose to use", ft_strlen("You choose to use"));
+	write(command->ofdout, " export on its", ft_strlen(" export on its"));
+	write(command->ofdout, " own, and as an", ft_strlen(" own, and as an"));
+	write(command->ofdout, " undefine behavior", ft_strlen(" undefine behavior"));
+	write(command->ofdout, ", it will not do", ft_strlen(", it will not do"));
+	write(command->ofdout, " anything but this", ft_strlen(" anything but this"));
+	write(command->ofdout, ".\n", ft_strlen(".\n"));
+}
 
 // int	ft_cmdexportvalid(char *cmd)
 // {
@@ -220,14 +224,26 @@ void	ft_export(t_minishell *minishell, t_command *command)
 		printf("cmd = %s\n", command->cmd[v]);//
 	}//
 
-	// if (ft_doublstrlen(command->cmd) == 1)
-	// 	ft_soloexport(minishell);
+	if (ft_doublstrlen(command->cmd) == 1)
+	{
+		ft_soloexport(command);
+		return ;
+	}
 
-	// int	i = 1;
-	// while (command->cmd[i])
-	// {
-	// 	if (ft_cmdexportvalid(command->cmd[i]))
-
-	// }
+	int	i = 1;
+	while (command->cmd[i])
+	{
+		if (ft_cmdexportvalid(command->cmd[i]))
+		{
+			cmdexport = ft_cmdexport(command->cmd[i])
+			ft_updateenv(cmdexport);/*	remasteriser celle de cd pour que ca soit
+										adapter a export */
+		}
+		else
+		{
+			ft_error(/* recup message d'erreur sur bash */);
+			return ;
+		}
+	}
 	minishell->laststatus = 0;
 }
