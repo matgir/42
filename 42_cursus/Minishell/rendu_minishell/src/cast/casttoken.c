@@ -25,6 +25,5 @@ char	*ft_str(t_list *list)
 	t_token	*token;
 
 	token = (t_token *)list->content;
-	printf("in ft_str\ntoken->str = %s\n", token->str);//
 	return (token->str);
 }

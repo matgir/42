@@ -25,6 +25,5 @@ char	*ft_value(t_env *env)
 	char	*str;
 
 	str = (char *)env->value;
-	printf("in ft_value\nstr = %s\n", str);//
 	return (str);
 }
