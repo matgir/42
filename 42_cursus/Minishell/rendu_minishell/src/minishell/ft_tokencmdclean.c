@@ -162,7 +162,13 @@ t_list	*ft_commandcreate(t_minishell *minishell, t_list *tokenlist)
 			}
 		}
 		else if (ft_type(tokenlist) == WORD)
-			command->cmd[i++] = ft_str(tokenlist);
+		{//
+			// command->cmd[i++] = ft_str(tokenlist);
+			command->cmd[i] = ft_str(tokenlist);//
+			printf("cmd[%i] = %s\n", i, command->cmd[i]);//
+			i++;//
+		}//
+		// printf("cmd[%i] = %s\n", i, command->cmd[i]);//
 		tokenlist = tokenlist->next;
 	}
 	tokenlist->back->content = cmdtoken;
@@ -233,6 +239,7 @@ void	ft_tokencmdclean(t_minishell *minishell)
 		{
 			token->str = ft_expanddollar(minishell, token->str + 1);
 			ft_multipletoken(minishell, tokenlist);
+			printf("in ft_tokencmdclean : expend $ = %s\n", token->str);//
 		}
 		tokenlist = tokenlist->next;	
 	}
