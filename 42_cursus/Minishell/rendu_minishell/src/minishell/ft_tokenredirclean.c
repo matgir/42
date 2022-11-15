@@ -35,6 +35,7 @@ char	*ft_searchinenv(t_minishell *minishell, char *str)
 	char	*new;
 	int		lol;
 
+	printf("In search in env\n");//
 	lol = 0;
 	if (!str[0])
 	{
@@ -68,7 +69,7 @@ char	*ft_expanddollar(t_minishell *minishell, char *str)
 		new = ft_searchinenv(minishell, str);
 	if (!new)
 		ft_exit(minishell, "malloc error\n");
-	printf("in ft_expanddollar : expend $ = %s\n", new);//
+	printf("in ft_expanddollar\nnew = %s\n", new);//
 	return (new);
 }
 
@@ -115,9 +116,9 @@ char	*ft_expanddoublequote(t_minishell *minishell, char *str)
 				if (i == 0 && str[i] == '?')
 					i++;
 				temp = ft_expanddollar(minishell, ft_substr(str, 0, i, minishell->garbagecmd));	
-				printf("in ft_expanddoublecote : expend $ = %s\n", temp);//
+				printf("in ft_expanddoublecote\ntmp = %s\n", temp);//
 				new = ft_strjoin(new, temp, minishell->garbagecmd);
-				printf("in ft_expanddoublecote : new $ = %s\n", new);//
+				printf("new = %s\n", new);//
 				str = str + i;
 			}
 		}
@@ -150,7 +151,7 @@ void	ft_tokenjoin(t_minishell *minishell, t_list *tokenlist1, t_list	*tokenlist2
 	if (token1->type != HEREDOC && token1->type != HEREDOCEXT && token2->type == DOLLAR)
 	{
 		token2->str = ft_expanddollar(minishell, &token2->str[1]);
-	printf("in ft_tokenjoin : expend $ = %s\n", token2->str);//
+		printf("in ft_tokenjoin\ntoken2->str = %s\n", token2->str);//
 		if (ft_strhavespace(token2->str) == 1)
 		{
 			ft_error(minishell, "ambigus redirection\n");

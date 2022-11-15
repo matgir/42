@@ -88,8 +88,45 @@ char	**ft_reenv(t_minishell *minishell)
 	return (str);
 }
 
+int	ft_spacehere(char *str)
+{
+	int	i;
+	int	nbspaces;
+
+	i = -1;
+	nbspaces = 0;
+	while (str[++i])
+		if (str[i] == ' ')
+		{
+			printf("in spacehere\nnbspaces = '%i'\nin spacehre : str[i] = '%c'", nbspaces, str[i]);//
+			nbspaces++;
+		}
+	return (nbspaces);
+}
+
+char	**ft_cmdcheckbfexecve(t_minishell *minishell, char **cmd)
+{
+	int		i;
+	// char	**newcmd;
+	int		nbcmdtoadd;
+
+	printf("in cmdcheckbfexecve\n");
+	(void)minishell;//
+	i = -1;
+	// newcmd = cmd;
+	nbcmdtoadd = 0;
+	while (cmd[++i])
+		nbcmdtoadd += ft_spacehere(cmd[i]);
+	if (nbcmdtoadd == 0)
+		return (cmd);
+	else
+		printf("Need to split some cmd\n");
+	return (cmd);//
+}
+
 void	ft_executecmd(t_minishell *minishell, t_command *command)
 {
+	printf("in ft_executecmd\n");
 	if (ft_isbuiltin(command) == 1)
 	{
 		ft_builtin(minishell, command);
@@ -105,7 +142,15 @@ void	ft_executecmd(t_minishell *minishell, t_command *command)
 	}
 	ft_closevaria(2, command->ofdin, command->ofdout);
 	if (command->error == 0)
+	{//
+		int v = -1;//
+		while (command->cmd[++v])//
+		{//
+			printf("cmd = %s\n", command->cmd[v]);//
+		}//
+		command->cmd = ft_cmdcheckbfexecve(minishell, command->cmd);// to be moved in ft_child
 		execve(command->file, command->cmd, ft_reenv(minishell));
+	}//
 	if (command->error == 0)
 		command->error = ft_strjoin(strerror(errno), "\n", minishell->garbagecmd);
 	ft_exit(minishell, command->error);
@@ -133,30 +178,46 @@ void	ft_child(t_minishell *minishell, t_list *tokenlist)
 	int			*childid;
 	t_command	*command;
 
+	printf("In ft_child\n");//
 	if (ft_type(tokenlist) == NL)
 		return ;
 //	ft_posprint(minishell, minishell->tokenlist, &ft_printtoken, 2);
 	command = ft_commandget(tokenlist);
+			printf("command->error = '%s'\n", command->error);//
+	printf("here1\n");//
 	if (ft_type(tokenlist->next) == NL && ft_isbuiltin(command) == 1)
 	{
+	printf("here2\n");//
 		ft_openend(ft_commandget(tokenlist));
 		ft_builtin(minishell, command);
 	}
 	else
 	{
+	printf("here3\n");//
+			printf("command->error = '%s'\n", command->error);//
+			/*
+				need to do the spaces check here and not in executecmd
+			*/
 		if (command->cmd && command->cmd[0] != 0)
 			command->file = ft_getcmdfile(minishell, command);
+		printf("command->error = '%s'\n", command->error);//
 		i = 0;
 		childid = ft_malloc(sizeof(int) *ft_cmdnbr(tokenlist), minishell->garbagecmd);
 		while (ft_type(tokenlist->back) != NL || i == 0)
 		{
+			printf("command->error = '%s'\n", command->error);//
 			if (command->error == 0)
 				ft_arg(minishell, tokenlist);
+	printf("here4\n");//
 			childid[i] = fork();
 			if (childid[i] == 0)
 			{
+	printf("here5\n");//
 				if (command->error == 0)
-					ft_executecmd(minishell, command);
+					{//
+						printf("here6\n");//
+				ft_executecmd(minishell, command);
+					}//
 				else
 					ft_exit(minishell, command->error);
 			}
