@@ -6,7 +6,7 @@
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:33:53 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/11/16 15:35:52 by audreyer         ###   ########.fr       */
+/*   Updated: 2022/11/17 18:45:53 by audreyer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_preexit(t_minishell *minishell, t_command *command)
 	i = 1;
 	if (ft_doublstrlen(command->cmd) == 1)
 		ft_exit(minishell, "exit\n");
-	else if (ft_doublstrlen(command->cmd) > 1 && !ft_isnum(command->cmd[i]))
+	else if (ft_strlen(*command->cmd) > 1 && !ft_isnum(command->cmd[i]))
 		{
 			error = ft_strdup(command->cmd[i], minishell->garbage);
 			ft_error(minishell, "exit\n");
