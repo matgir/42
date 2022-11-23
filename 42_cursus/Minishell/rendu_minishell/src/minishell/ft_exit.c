@@ -66,6 +66,8 @@ int	ft_errorstr(char *str)
 		return (2);
 	if (ft_demistrcmp("minishell: export: ", str) == 0)
 		return (1);
+	if (ft_demistrcmp("minishell: cd: ", str) == 0)
+		return (1);
 	return (0);
 }
 
