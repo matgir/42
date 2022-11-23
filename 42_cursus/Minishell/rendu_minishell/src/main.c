@@ -46,7 +46,8 @@ void	ft_minishell(t_minishell *minishell)
 				ft_tokencmdclean(minishell);
 				ft_child(minishell, minishell->tokenlist->start);
 			}
-			ft_error(minishell, ft_itoa(minishell->laststatus, minishell->garbage));
+			ft_error(minishell, ft_itoa(minishell->laststatus,
+					minishell->garbage));
 		}
 	}
 }
@@ -54,11 +55,7 @@ void	ft_minishell(t_minishell *minishell)
 int	main(int argc, char **argv, char **env)
 {
 	t_minishell		*minishell;
-	// t_sigaction		sa;
 
-	// sa.sa_flags = SA_SIGINFO;
-	// sa.sa_sigaction = ft_signal_main;
-	// sigemptyset(&sa.sa_mask);
 	signal(SIGINT, &ft_signal_main);
 	signal(SIGQUIT, &ft_signal_main);
 	rl_outstream = stderr;

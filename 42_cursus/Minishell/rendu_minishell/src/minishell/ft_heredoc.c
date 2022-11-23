@@ -41,29 +41,18 @@ void	ft_heredoc(t_minishell *minishell, t_token *token)
 	char	*heredocnbr;
 	char	*read;
 
-	/*
-		Pour les signaux qudn EOF message derreur recup str sans \n et
-		minishell->heredocprompt
-	*/
-
-	printf("in ft_heredoc\n");//
 	str = token->str;
-	printf("str = '%s'\n", str);//
 	read = 0;
 	token->str = ft_strdup("./tmp/heredoc", minishell->garbagecmd);
 	str = ft_strjoin(str, "\n", minishell->garbagecmd);
 	heredocnbr = ft_itoa(minishell->heredoc, minishell->garbagecmd);
-	printf("heredocnbr = '%s'\n", heredocnbr);//
 	token->str = ft_strjoin(token->str, heredocnbr, minishell->garbagecmd);
 	fd = open(token->str, O_CREAT | O_TRUNC | O_RDWR, 0777);
 	if (fd == -1)
 		write(2, "Could not open file descriptor\n", 8);
 	while (ft_strcmp(str, read) != 0)
 		read = ft_whileheredoc(minishell, str, token, fd);
-	printf("str = %s\n", str);//
 	minishell->heredoc++;
-	printf("heredoc in total since open = '%i'\n", minishell->heredoc);//
-	printf("heredocprompt in total since open = '%i'\n", minishell->heredocprompt);//
 	token->type = IN;
 	ft_closevaria(1, fd);
 }
@@ -80,3 +69,8 @@ void	ft_heredocclean(t_minishell *minishell)
 		tokenlist = tokenlist->next;
 	}
 }
+
+	/*
+		Pour les signaux qudn EOF message derreur recup str sans \n et
+		minishell->heredocprompt
+	*/
