@@ -6,7 +6,7 @@
 /*   By: audreyer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:37:40 by audreyer          #+#    #+#             */
-/*   Updated: 2022/11/18 18:11:53 by mgirardo         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:45:07 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_minishell
 	t_pos		*garbage;
 	t_pos		*garbagecmd;
 	int			heredoc;
+	int			heredocprompt;
 	char		**env;
 	t_pos		*actenv;
 	char		**argv;
@@ -220,8 +221,8 @@ char		*ft_expanddoublequote(t_minishell *minishell, char *str);
 char		*ft_expanddollar(t_minishell *minishell, char *str);
 void		ft_printenv(t_minishell	*minishell, void *ptr, int fd);
 int			ft_errorstr(char *str);
-void		ft_signal_main(int sig, siginfo_t *siginfo, void *ucontext);
-void		ft_signalhd(int sig, siginfo_t *siginfo, void *ucontext);
+void		ft_signal_main(int sig);
+void		ft_signalhd(int sig);
 
 /*env*/
 
