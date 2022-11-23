@@ -209,6 +209,8 @@ int			ft_elsedouble(t_minishell *minishell, char **str, char **temp,
 				char **new);
 void		ft_expandsimplequote(t_token *token);
 void		ft_closepipe(t_minishell *minishell);
+void		ft_signal_main(int sig);
+void		ft_signalhd(int sig);
 
 /*bazar*/
 

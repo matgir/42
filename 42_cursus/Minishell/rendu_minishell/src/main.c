@@ -33,7 +33,10 @@ void	ft_minishell(t_minishell *minishell)
 	{
 		str = ft_readline("Minishell> ", minishell->garbagecmd);
 		if (!str)
+		// {//
+			// printf("EOF in ft_minishell\n");//
 			ft_exit(minishell, "exit\n");
+		// }//
 		if (str[0] != '\0')
 			add_history(str);
 		if (ft_tokencreate(minishell, str) == 0
@@ -56,8 +59,8 @@ int	main(int argc, char **argv, char **env)
 {
 	t_minishell		*minishell;
 
-	signal(SIGINT, &ft_signal_main);
-	signal(SIGQUIT, &ft_signal_main);
+	signal(SIGINT, ft_signal_main);
+	signal(SIGQUIT, ft_signal_main);
 	rl_outstream = stderr;
 	if (!env || !env[0])
 	{

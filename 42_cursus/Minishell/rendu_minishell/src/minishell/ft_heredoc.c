@@ -16,13 +16,43 @@
 //	minishell: warning: here-document at line <where we are at> delimited by
 //	end-of-file (wanted `<heredoc delimiter>')
 
+/* int	g_heredoc = 42;
+
+void	ft_signalhd(int sig)
+{
+	// g_heredoc = 42;
+	if (sig == SIGINT)
+	{
+		g_heredoc = 130;
+		close(0);
+	}
+	else if (sig == SIGQUIT)
+	{
+		write(1, "\33[2K\r", 5);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+} */
+
 char	*ft_whileheredoc(t_minishell *minishell, char *str, t_token *t, int fd)
 {
 	char	*read;
 
+/* 	if (g_heredoc == 130)
+	{
+		// printf("Had SIGINT in ft_heredoc\n");//
+		minishell->laststatus = g_heredoc;
+		// ft_error(minishell, ft_itoa(g_heredoc, minishell->garbage));
+		signal(SIGINT, ft_signal_main);
+		signal(SIGQUIT, ft_signal_main);
+		return ("no no jose, no se bueno");
+	} */
 	read = ft_readline("> ", minishell->garbagecmd);
 	if (!read)
+	// {//
+		// printf("EOF in ft_whileheredoc\n");//
 		ft_exit(minishell, "exit\n");
+	// }//
 	minishell->heredocprompt++;
 	read = ft_strjoin(read, "\n", minishell->garbagecmd);
 	if (ft_strcmp(str, read) != 0)
@@ -50,6 +80,9 @@ void	ft_heredoc(t_minishell *minishell, t_token *token)
 	fd = open(token->str, O_CREAT | O_TRUNC | O_RDWR, 0777);
 	if (fd == -1)
 		write(2, "Could not open file descriptor\n", 8);
+	// signal(SIGINT, ft_signalhd);
+	// signal(SIGQUIT, ft_signalhd);
+	// while (ft_strcmp(str, read) != 0 || ft_strcmp(read, "no no jose, no se bueno") != 0)//
 	while (ft_strcmp(str, read) != 0)
 		read = ft_whileheredoc(minishell, str, token, fd);
 	minishell->heredoc++;
