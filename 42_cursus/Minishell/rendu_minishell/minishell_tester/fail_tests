@@ -1,0 +1,2 @@
+cat | <Makefile cat ; hello
+ls >tmp1 >> tmp1 >>tmp1 | cat ; rm tmp1
