@@ -16,43 +16,14 @@ char	*ft_readline(char *prompt, t_pos *garbage)
 {
 	char	*str;
 
+	printf("In ft_readline\n");//
 	rl_outstream = stderr;
 	str = readline(prompt);
+	printf("waiting for command\n");
 	ft_lstnew(str, garbage, 0);
 	if (garbage->start->back == 0)
 		return (0);
 	return (str);
-}
-
-void	ft_minishell(t_minishell *minishell)
-{
-	char			*str;
-
-	str = 0;
-	while (1)
-	{
-		str = ft_readline("Minishell> ", minishell->garbagecmd);
-		if (!str)
-		// {//
-			// printf("EOF in ft_minishell\n");//
-			ft_exit(minishell, "exit\n");
-		// }//
-		if (str[0] != '\0')
-			add_history(str);
-		if (ft_tokencreate(minishell, str) == 0
-			|| *minishell->tokenlist->size != 0)
-		{
-			ft_tokenredirclean(minishell);
-			if (*minishell->tokenlist->size != 0)
-			{
-				ft_heredocclean(minishell);
-				ft_tokencmdclean(minishell);
-				ft_child(minishell, minishell->tokenlist->start);
-			}
-			ft_error(minishell, ft_itoa(minishell->laststatus,
-					minishell->garbage));
-		}
-	}
 }
 
 int	main(int argc, char **argv, char **env)

@@ -42,6 +42,8 @@
 
 typedef struct sigaction	t_sigaction;
 
+// int	g_heredoc = 42;
+
 typedef struct s_pos
 {
 	struct s_list	*start;
@@ -211,6 +213,7 @@ void		ft_expandsimplequote(t_token *token);
 void		ft_closepipe(t_minishell *minishell);
 void		ft_signal_main(int sig);
 void		ft_signalhd(int sig);
+void		ft_minishell(t_minishell *minishell);
 
 /*bazar*/
 
