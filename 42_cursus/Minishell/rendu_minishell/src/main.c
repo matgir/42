@@ -12,14 +12,14 @@
 
 #include "minishell.h"
 
+int	g_heredoc = 42;
+
 char	*ft_readline(char *prompt, t_pos *garbage)
 {
 	char	*str;
 
-	printf("In ft_readline\n");//
 	rl_outstream = stderr;
 	str = readline(prompt);
-	printf("waiting for command\n");
 	ft_lstnew(str, garbage, 0);
 	if (garbage->start->back == 0)
 		return (0);

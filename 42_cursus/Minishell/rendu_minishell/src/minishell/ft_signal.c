@@ -39,15 +39,32 @@
 //		close (0); //not good enough
 //	else if (sig == SIGQUIT) //ctrl + /
 
-void		ft_signal_main(int sig)
+void	ft_signal_main(int sig)
 {
-	// printf("in ft_signal_main\n");//
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+	}
+	else if (sig == SIGQUIT)
+	{
+		write(1, "\33[2K\r", 5);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+}
+
+void	ft_signalhd(int sig)
+{
+	if (sig == SIGINT)
+	{
+		g_heredoc = 130;
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		close(0);
 	}
 	else if (sig == SIGQUIT)
 	{

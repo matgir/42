@@ -42,7 +42,7 @@
 
 typedef struct sigaction	t_sigaction;
 
-// int	g_heredoc = 42;
+extern int					g_heredoc;
 
 typedef struct s_pos
 {
@@ -214,6 +214,7 @@ void		ft_closepipe(t_minishell *minishell);
 void		ft_signal_main(int sig);
 void		ft_signalhd(int sig);
 void		ft_minishell(t_minishell *minishell);
+int			*ft_pipeinit(t_minishell *minishell);
 
 /*bazar*/
 
