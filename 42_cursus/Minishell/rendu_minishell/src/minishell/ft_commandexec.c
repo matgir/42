@@ -18,6 +18,7 @@ int	ft_whil(t_minishell *minishell, t_command **command, t_list **tokenlist)
 
 	if ((*command)->error == 0)
 		ft_arg(minishell, *tokenlist);
+	ft_setsignalparent();
 	c = fork();
 	if (c == 0)
 	{
@@ -55,6 +56,9 @@ void	ft_else(t_minishell *minishell, t_command *command, t_list *tokenlist)
 		waitpid(childid[b++], &wstatus, 0);
 	if (WIFEXITED(wstatus) == 1)
 		minishell->laststatus = WEXITSTATUS(wstatus);
+	else if (WIFEXITED(wstatus) == 0)
+		if (WIFSIGNALED(wstatus))
+			minishell->laststatus = WTERMSIG(wstatus) + 128;
 }
 
 void	ft_child(t_minishell *minishell, t_list *tokenlist)
@@ -71,4 +75,5 @@ void	ft_child(t_minishell *minishell, t_list *tokenlist)
 	}
 	else
 		ft_else(minishell, command, tokenlist);
+	ft_setsignalmain();
 }

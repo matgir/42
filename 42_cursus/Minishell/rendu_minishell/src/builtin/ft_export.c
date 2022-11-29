@@ -24,7 +24,7 @@ char	*ft_searchvalue(t_minishell *minishell, char *str)
 		i++;
 	if (str[i] == '+' || str[i] == '=')
 		i++;
-	str = str + i;
+	str = str + i - 1;
 	i = 0;
 	while (str[i])
 		i++;
@@ -86,7 +86,10 @@ int	ft_checkcmd1(t_minishell *minishell, char *cmd1, t_command *command)
 	}
 	if (cmd1[0] == 0 || cmd1[0] == '=' || (cmd1[0] <= '9' && cmd1[0] >= '0'))
 	{
-		ft_error(minishell, "minishell: export: `': not a valid identifier\n");
+		cmd1 = ft_strjoin("minishell: export: `", cmd1, minishell->garbage);
+		cmd1 = ft_strjoin(cmd1, "': not a valid identifier\n",
+				minishell->garbage);
+		ft_error(minishell, cmd1);
 		return (1);
 	}
 	return (0);
