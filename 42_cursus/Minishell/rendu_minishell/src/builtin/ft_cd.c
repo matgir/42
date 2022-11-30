@@ -52,10 +52,10 @@ void	ft_elseif(t_minishell *minishell, t_command *command, char *buff)
 	}
 	else
 	{
-		str = ft_strdup("minishell: cd: ", minishell->garbagecmd);
-		str = ft_strjoin(str, command->cmd[1], minishell->garbagecmd);
+		str = ft_strdup("minishell: cd: ", minishell->garbage);
+		str = ft_strjoin(str, command->cmd[1], minishell->garbage);
 		str = ft_strjoin(str, ft_strdup(": No such file or directory\n",
-					minishell->garbagecmd), minishell->garbagecmd);
+					minishell->garbage), minishell->garbage);
 		if (!str)
 			ft_exit(minishell, "malloc error\n");
 		ft_error(minishell, str);

@@ -67,10 +67,6 @@ SRC=	src/minishell/minishellinit.c	\
 
 SRC_MAIN=	src/main.c
 
-# TESTER = tester
-
-# SRC_MAIN_TEST=	src/main_test.c
-
 OBJ			=	$(SRC:.c=.o)
 
 OBJ_MAIN	=	$(SRC_MAIN:.c=.o)
@@ -79,16 +75,13 @@ DOBJ		=	${SRC:.c=.d}
 
 DOBJ_MAIN	=	${SRC_MAIN:.c=.d}
 
-# OBJ_MAIN_TEST = $(SRC_MAIN_TEST:.c=.o)
-
 NAME		=	minishell
 
 INC			=	include/minishell.h
 
 CC			=	cc
 
-FLAG		=	-fsanitize=address -g -Wall -Werror -Wextra -MMD
-# FLAG		=	-g -Wall -Werror -Wextra -MMD
+FLAG		=	-g -Wall -Werror -Wextra -MMD
 
 RM			=	rm -f
 
@@ -97,13 +90,6 @@ all:		$(NAME)
 -include ${DOBJ} ${DOBJ_MAIN}
 .c.o:
 			$(CC) $(FLAG) -I include -c $< -o $(<:.c=.o)
-# $(CC) $(FLAG) -I include -lreadline -c $< -o $(<:.c=.o)
-
-# $(TESTER):	$(OBJ) $(OBJ_MAIN_TEST) $(INC)
-# 	$(CC) $(FLAG) $(OBJ) $(OBJ_MAIN_TEST) -lreadline -o $(TESTER)
-# 	rm -f ./tester/tester
-# 	mv $(TESTER) ./tester/$(TESTER)
-# 	@make -C ./tester
 
 $(NAME):	$(OBJ_MAIN) $(OBJ) $(INC)
 			$(CC) $(FLAG) $(OBJ) $(OBJ_MAIN) -lreadline -o $(NAME)
