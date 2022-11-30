@@ -76,6 +76,7 @@ void	ft_else(t_minishell *minishell, t_command *command, t_list *tokenlist)
 	else if (WIFEXITED(wstatus) == 0)
 		if (WIFSIGNALED(wstatus))
 			ft_execveerror(minishell, WTERMSIG(wstatus) + 128, strerror(errno));
+	// ft_closevaria(2, command->ofdout, command->ofdin);
 }
 
 void	ft_child(t_minishell *minishell, t_list *tokenlist)

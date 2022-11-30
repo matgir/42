@@ -44,6 +44,7 @@ char	*ft_whileheredoc(t_minishell *minishell, char *str, t_token *t, int fd)
 		minishell->heredocprompt++;
 		minishell->laststatus = g_heredoc;
 		dup2(minishell->fdutil, 0);
+		g_heredoc = 42;
 		return (str);
 	}
 	minishell->heredocprompt++;
@@ -64,6 +65,7 @@ void	ft_heredoc(t_minishell *minishell, t_token *token)
 	char	*heredocnbr;
 	char	*read;
 
+	// printf("entering ft_heredoc\n");//
 	str = token->str;
 	read = 0;
 	token->str = ft_strdup("./tmp/heredoc", minishell->garbagecmd);
@@ -71,15 +73,21 @@ void	ft_heredoc(t_minishell *minishell, t_token *token)
 	heredocnbr = ft_itoa(minishell->heredoc, minishell->garbagecmd);
 	token->str = ft_strjoin(token->str, heredocnbr, minishell->garbagecmd);
 	fd = open(token->str, O_CREAT | O_TRUNC | O_RDWR, 0644);
+	printf("fd = '%i'\n", fd);//
 	if (fd == -1)
 		write(2, "Could not open file descriptor\n", 8);
+	minishell->fdutil = dup(0);
 	signal(SIGINT, ft_signalhd);
 	signal(SIGQUIT, ft_signalhd);
 	while (ft_strcmp(str, read) != 0)
 		read = ft_whileheredoc(minishell, str, token, fd);
+	// printf("fd = '%i'\n", fd);//
 	minishell->heredoc++;
 	token->type = IN;
+	ft_closevaria(1, minishell->fdutil);
+	minishell->fdutil = fd;
 	ft_closevaria(1, fd);
+	// printf("leaving ft_heredoc\n");//
 }
 
 int	ft_heredocclean(t_minishell *minishell)

@@ -77,7 +77,7 @@ t_minishell	*ft_minishellinit(char **env)
 		ft_exit(minishell, "malloc error\n");
 	minishell->garbage = garbage;
 	ft_minishellinit2(minishell);
-	minishell->fdutil = dup(0);
+	minishell->fdutil = 0;
 	minishell->env = env;
 	minishell->actenv = ft_envinit(minishell);
 	if (!minishell->actenv)
@@ -94,8 +94,10 @@ void	ft_minishell(t_minishell *minishell)
 
 	while (1)
 	{
+	// str = ft_readline("Minishell> ", minishell->garbagecmd);
 		str = ft_minishell2(minishell);
 		if (!str)
+			// ft_exit(minishell, "exit\n");
 			continue ;
 		add_history(str);
 		if (ft_tokencreate(minishell, str) == 0

@@ -14,6 +14,9 @@
 
 void	ft_error(t_minishell *minishell, char *str)
 {
+	ft_closevaria(1, minishell->fdutil);
+	ft_closevaria(2, minishell->pipe[0], minishell->pipe[1]);//
+	minishell->fdutil = 0;
 	minishell->laststatus = ft_errorstr(str);
 	if (str && !ft_isnum(str))
 		write(2, str, ft_strlen(str));

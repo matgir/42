@@ -21,11 +21,13 @@ int	ft_closevaria(int i, ...)
 	while (i > 0)
 	{
 		fd = va_arg(param, int);
+		// printf("in ft_closevaria WITH FD = '%i'\n", fd);//
 		if (fd != 0 && fd != 2 && fd != 1)
 		{
+			// printf("closing FD = '%i'\n", fd);//
 			fd = close(fd);
-			if (fd == -1)
-				write(2, "Couldn't close fd\n", ft_strlen("Couldn't close fd"));
+			/* if (fd == -1)
+				write(2, "Couldn't close fd\n", ft_strlen("Couldn't close fd")); */
 		}
 		i--;
 	}

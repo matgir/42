@@ -75,6 +75,9 @@ int	ft_exit(t_minishell *minishell, char *str)
 {
 	int		i;
 
+	ft_closevaria(1, minishell->fdutil);
+	ft_closevaria(2, minishell->pipe[0], minishell->pipe[1]);//
+	minishell->fdutil = 0;
 	if (str == 0)
 			i = minishell->laststatus;
 	else
