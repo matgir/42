@@ -74,7 +74,7 @@ char	*get_next_line(int fd)
 	static char	buf[BUFFER_SIZE + 1];
 	int			end;
 
-	if (BUFFER_SIZE < 1 || read(fd, NULL, 0) == -1)
+	if (BUFFER_SIZE < 1/*  || read(fd, NULL, 0) == -1 */)
 		return (NULL);
 	line = NULL;
 	while (buf[ft_gnl_strlen(buf) - 1] != '\n' )
@@ -83,6 +83,11 @@ char	*get_next_line(int fd)
 		if (line == NULL)
 			return (NULL);
 		end = read(fd, buf, BUFFER_SIZE);
+		if (end == -1)
+		{
+			free (line);
+			return (NULL);
+		}
 		buf[end] = '\0';
 		if (end == 0 && line[0] == '\0')
 		{
