@@ -13,6 +13,7 @@
 #include "get_next_line.h"
 
 int	ft_gnl_strlen(const char *str)
+// int	ft_gnl_strlen(char *str)
 {
 	int	i;
 
@@ -26,8 +27,11 @@ int	ft_gnl_strlen(const char *str)
 	return (i);
 }
 
+// char	*ft_gnl_strcpy(char *dest, const char *src, size_t size)
+// void	ft_gnl_strcpy(char *dest, const char *src, size_t size)
 void	ft_gnl_strcpy(char *dest, const char *src, size_t size)
 {
+	// int	i;
 	size_t	i;
 
 	if (size > 0)
@@ -40,27 +44,36 @@ void	ft_gnl_strcpy(char *dest, const char *src, size_t size)
 		}
 		dest[i] = '\0';
 	}
+	// return (dest);
 }
 
 char	*ft_gnl_strjoin(char *line, char *buf)
 {
 	char	*newline;
 	size_t	i;
+	// int	i;
 	size_t	j;
+	// int	j;
 	size_t	k;
+	// int	k;
 
 	i = ft_gnl_strlen(line);
 	j = ft_gnl_strlen(buf);
 	newline = malloc(sizeof(char) * (i + j + 1));
-	if (!newline)
+	if (newline == NULL)
+	// if (!newline)
 		return (NULL);
 	k = 0;
+	// while (i > 0)
 	while (i != 0)
 	{
 		newline[k] = line[k];
-		i--;
+		// i--;
+		// k++;
 		k++;
+		i--;
 	}
+	// while (j-- > 0)
 	while (j-- != 0)
 		newline[k++] = buf[i++];
 	newline[k] = '\0';
@@ -74,13 +87,15 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			end;
 
+	// if (BUFFER_SIZE < 1 || read(fd, NULL, 0) == -1)
 	if (BUFFER_SIZE < 1)
 		return (NULL);
 	line = NULL;
 	while (buf[ft_gnl_strlen(buf) - 1] != '\n')
 	{
 		line = ft_gnl_strjoin(line, buf);
-		if (!line)
+		if (line  == NULL)
+		// if (!line)
 			return (NULL);
 		end = read(fd, buf, BUFFER_SIZE);
 		if (end == -1)
@@ -98,7 +113,8 @@ char	*get_next_line(int fd)
 			return (NULL);
 	}
 	line = ft_gnl_strjoin(line, buf);
-	if (!line) /* peut etre free la line qui est rentrer dans le join precedent */
+	if (line == NULL) /* peut etre free la line qui est rentrer dans le join precedent */
+	// if (!line) /* peut etre free la line qui est rentrer dans le join precedent */
 		return (NULL);
 	ft_gnl_strcpy(buf, buf + ft_gnl_strlen(buf), BUFFER_SIZE);
 	return (line);
