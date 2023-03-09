@@ -75,7 +75,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			end;
 
-	if (BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	line = NULL;
 	while (buf[ft_gnl_strlen(buf) - 1] != '\n')
