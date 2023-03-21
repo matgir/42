@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   namespace.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/08 15:34:55 by mgirardo          #+#    #+#             */
-/*   Updated: 2022/01/04 16:30:14 by mgirardo         ###   ########.fr       */
+/*   Created: 2023/03/20 18:05:58 by mgirardo          #+#    #+#             */
+/*   Updated: 2023/03/20 18:06:00 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+int	gl_var = 1;
+int	f(void){return 2;}
+
+namespace	Foo
 {
-	size_t	i;
+	int	gl_var = 3;
+	int f(void){return 4;}
+}
 
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (i < n)
-	{
-		if (((unsigned char *) s1)[i] != ((unsigned char *) s2)[i])
-			return (((unsigned char *) s1)[i] - ((unsigned char *) s2)[i]);
-		i++;
-	}
-	return (0);
+namespace	Bar
+{
+	int	gl_var = 5;
+	int	f(void){return 6;}
+}
+
+namespace	Muf = Bar;
+
+int	main(void)
+{
+
 }
