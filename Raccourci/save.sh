@@ -20,20 +20,20 @@ cp ~/.gitignore save
 #clear gits
 cd save
 	#mac os
-#find . -name "*.git" -mindepth 2 -type d -exec rm -rf {} \;
-#find . -name "*.a" -mindepth 2 -type f -exec rm -rf {} \;
-#find . -name "*.o" -mindepth 2 -type f -exec rm -rf {} \;
-#find . -name "*.swp" -mindepth 2 -type f -exec rm -rf {} \;
-#find . -name ".DS.Store" -mindepth 2 -type f -exec rm -rf {} \;
-#find . -name "a.out" -mindepth 2 -type f -exec rm -rf {} \;
+find . -name "*.git" -mindepth 2 -type d -exec rm -rf {} \;
+find . -name "*.a" -mindepth 2 -type f -exec rm -rf {} \;
+find . -name "*.o" -mindepth 2 -type f -exec rm -rf {} \;
+find . -name "*.swp" -mindepth 2 -type f -exec rm -rf {} \;
+find . -name ".DS.Store" -mindepth 2 -type f -exec rm -rf {} \;
+find . -name "a.out" -mindepth 2 -type f -exec rm -rf {} \;
 	#linux
-find . -mindepth 2 -name "*.git" -type d -exec rm -rf {} \;
-find . -mindepth 2 -name "*.vscode" -type d -exec rm -rf {} \;
-find . -mindepth 2 -name "*.a" -type f -exec rm -rf {} \;
-find . -mindepth 2 -name "*.o" -type f -exec rm -rf {} \;
-find . -mindepth 2 -name "*.swp" -type f -exec rm -rf {} \;
-find . -mindepth 2 -name ".DS.Store" -type f -exec rm -rf {} \;
-find . -mindepth 2 -name "a.out" -type f -exec rm -rf {} \;
+#find . -mindepth 2 -name "*.git" -type d -exec rm -rf {} \;
+#find . -mindepth 2 -name "*.vscode" -type d -exec rm -rf {} \;
+#find . -mindepth 2 -name "*.a" -type f -exec rm -rf {} \;
+#find . -mindepth 2 -name "*.o" -type f -exec rm -rf {} \;
+#find . -mindepth 2 -name "*.swp" -type f -exec rm -rf {} \;
+#find . -mindepth 2 -name ".DS.Store" -type f -exec rm -rf {} \;
+#find . -mindepth 2 -name "a.out" -type f -exec rm -rf {} \;
 
 #git save
 git add .

@@ -111,7 +111,7 @@ alias gccflag='gcc -Wall -Werror -Wextra'
 alias pwls='pwd && ls -la'
 alias forcesave='cd ~/Raccourci && ./save.sh'
 alias pullgit='cd ~/Raccourci && ./forcepull.sh'
-alias gppflag='g++ -Werror -Wall -Wextra -Wno-used'
+alias gppflag='g++ -Werror -Wall -Wextra -Wno-unused'
 # pour lockscreen avec une animation
 # nb 1 = demarage image pixel vers la droite
 # nb 2 = demarage image pixel vers le bas = 0.5625*nb1
