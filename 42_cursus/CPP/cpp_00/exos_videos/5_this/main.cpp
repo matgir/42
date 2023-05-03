@@ -12,5 +12,7 @@ int	main(void)
 	std::cin >> instance.foo;
 	std::cout << "The new value of instance.foo = " << instance.foo << std::endl;
 
+	instance.bar();
+
 	return 0;
 }

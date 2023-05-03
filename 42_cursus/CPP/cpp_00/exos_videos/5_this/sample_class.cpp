@@ -25,5 +25,7 @@ Sample::~Sample(void)
 void Sample::bar(void)
 {
 	std::cout << "Member function 'bar' called" << std::endl;
+	this->foo++;
+	std::cout << "this->foo = " << this->foo << std::endl;
 	return;
 }

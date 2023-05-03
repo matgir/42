@@ -1,7 +1,7 @@
 #ifndef SAMPLE1_CLASS_HPP
 # define SAMPLE1_CLASS_HPP
 
-class	Sample
+class	Sample1
 {
 	public:
 
@@ -10,8 +10,8 @@ class	Sample
 		float	a3;
 
 		Sample1(char p1, int p2, float p3);
-		~Sample(void):
+		~Sample1(void);
 
-}:
+};
 
 #endif

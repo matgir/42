@@ -9,5 +9,9 @@ int	main()
 	std::cout << "instance.foo = " << instance.foo << std::endl;
 
 	instance.bar();
+	
+	instance.foo++;
+	std::cout << "instance.foo = " << instance.foo << std::endl;
+	
 	return 0;
 }
