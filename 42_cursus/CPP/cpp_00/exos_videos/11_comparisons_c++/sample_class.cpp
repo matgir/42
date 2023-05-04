@@ -18,7 +18,7 @@ int	Sample::getfoo(void)const
 	return (this->_foo);
 }
 
-int	Sample::compare(Sample * other)const
+int	Sample::compare(Sample *other)const
 {
 	if (this->_foo < other->getfoo())
 		return (-1);

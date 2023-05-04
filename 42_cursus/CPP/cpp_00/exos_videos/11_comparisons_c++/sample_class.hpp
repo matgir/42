@@ -9,7 +9,7 @@ class	Sample
 		~Sample(void);
 
 		int	getfoo(void)const;
-		int	compare(Sample * other)const;
+		int	compare(Sample *other)const;
 
 	private:
 
