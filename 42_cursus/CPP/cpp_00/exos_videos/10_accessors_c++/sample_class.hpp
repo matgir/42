@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stdio_stream.cpp                                   :+:      :+:    :+:   */
+/*   sample_class.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 17:13:19 by mgirardo          #+#    #+#             */
-/*   Updated: 2023/05/04 16:52:11 by mgirardo         ###   ########.fr       */
+/*   Created: 2023/05/04 16:56:31 by mgirardo          #+#    #+#             */
+/*   Updated: 2023/05/04 16:56:35 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef SAMPLE_CLASS_HPP
+# define SAMPLE_CLASS_HPP
 
-int	main(void)
+class	Sample
 {
-	char	buf[512];
-	std::cout << "Hello World !" << std::endl;
+	public:
 
-	std::cout << "Input a word : ";
-	std::cin >> buf;
-	std::cout << "You entered : [ " << buf << " ]" << std::endl;
+		Sample(void);
+		~Sample(void);
 
-	return (0);
-}
+		int		getfoo(void)const;
+		void	setfoo(int v);
+
+	private:
+
+		int		_foo;
+
+};
+
+#endif

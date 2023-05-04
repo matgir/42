@@ -5,17 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 16:54:36 by mgirardo          #+#    #+#             */
-/*   Updated: 2023/05/04 16:54:37 by mgirardo         ###   ########.fr       */
+/*   Created: 2023/05/04 16:56:15 by mgirardo          #+#    #+#             */
+/*   Updated: 2023/05/04 16:56:19 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "sample_class.hpp"
 
-Sample::Sample(float const f) : pi(f), qd(42)
+Sample::Sample(void)
 {
-	std::cout << "Constructor called" << std::endl;
+	std::cout << "Constructeur called" << std::endl;
+
+	this->setfoo(0);
+	std::cout << "this->getfoo(): " << this->getfoo() << std::endl;
+
 	return;
 }
 
@@ -25,13 +29,17 @@ Sample::~Sample(void)
 	return;
 }
 
-void	Sample::bar(void)const
+int	Sample::getfoo(void)const
 {
-	std::cout << "this->pi = " << this->pi << std::endl;
-	std::cout << "this->qd = " << this->qd << std::endl;
+	return (this->_foo);
+}
 
-	// this->qd = 0;
-	// this->pi = 3.1;
+void	Sample::setfoo(int v)
+{
+	if (v >= 0)
+		this->_foo = v;
+	else
+		std::cout << "Could not set _foo because " << v << " is below 0" << std::endl;
 
 	return;
 }

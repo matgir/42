@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stdio_stream.cpp                                   :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 17:13:19 by mgirardo          #+#    #+#             */
-/*   Updated: 2023/05/04 16:52:11 by mgirardo         ###   ########.fr       */
+/*   Created: 2023/05/04 16:56:04 by mgirardo          #+#    #+#             */
+/*   Updated: 2023/05/04 16:56:05 by mgirardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include "sample_class.hpp"
 
 int	main(void)
 {
-	char	buf[512];
-	std::cout << "Hello World !" << std::endl;
+	Sample	instance;
 
-	std::cout << "Input a word : ";
-	std::cin >> buf;
-	std::cout << "You entered : [ " << buf << " ]" << std::endl;
+	instance.setfoo(42);
+	std::cout << "instance.getfoo(): " << instance.getfoo() << std::endl;
+	instance.setfoo(-42);
+	std::cout << "instance.getfoo(): " << instance.getfoo() << std::endl;
 
-	return (0);
+	return(0);
 }
