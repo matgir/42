@@ -25,8 +25,8 @@ Sample::~Sample(void)
 	return;
 }
 
-/* void	Sample::exemple(void)
+void	Sample::exemple(void)
 {
-	std::cout << "instance de la class Sample instancié" << std::endl;
+	std::cout << "Sample.exemple called" << std::endl;
 	return;
-} */
+}

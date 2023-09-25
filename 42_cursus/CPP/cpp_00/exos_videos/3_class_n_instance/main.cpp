@@ -17,7 +17,7 @@ int	main()
 {
 	Sample instance;
 
-	// instance.exemple();
+	instance.exemple();
 	std::cout << "instance de la class Sample instancié" << std::endl;
 
 	return 0;
