@@ -10,11 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC		=	megaphone.cpp
+SRC		=	testmegaphone.cpp
 
-OBJ		=	${SRC:.c=.o}
+OBJ		=	${SRC:.cpp=.o}
 
-# DOBJ	=	${SRC:.c=.d}
+# DOBJ	=	${OBJ:.o=.d}
 
 NAME	=	megaphone
 
@@ -22,21 +22,18 @@ NAME	=	megaphone
 
 PP		=	g++
 
-FLAG	=	-g -Werror -Wall -Wextra -Wno-unused
+FLAG	=	-g -Werror -Wall -Wextra -Wno-unused -MMD -std=c++98
 # FLAG	=	-g -Werror -Wall -Wextra -Wno-unused -MMD
 
 RM		=	rm -rf
 
 all:		${NAME}
 
-
-# -include ${DOBJ}
-
 .c.o:
-				${PP} ${FLAG} -c $< -o $(<:.c=.o)
-#				${PP} ${FLAG} -I -include -c $< -o $(<:.c=.o)
+#				 ${PP} ${FLAG} -cpp $< -o $(<:.c=.o)
+				${PP} ${FLAG} -I -include -c $< -o $(<:.cpp=.o)
 
-${NAME}:	${OBJ} ${INC}
+${NAME}:	${OBJ} ${INCL}
 				${PP} ${FLAG} ${OBJ} -o ${NAME}
 
 norm:
@@ -50,5 +47,7 @@ fclean:		clean
 				${RM} ${NAME}
 
 re:			fclean all
+
+# -include ${DOBJ}
 
 .PHONY:		all .c.o norm clean fclean re
