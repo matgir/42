@@ -11,12 +11,12 @@ class	Contact
 		Contact(void);
 		~Contact(void);
 
-		void	displaycontact();
-		int		set_fname(std::string fname);
-		int		set_lname(std::string lname);
-		int		set_nickname(std::string nickname);
-		int		set_phnumber(std::string phnumber);
-		int		set_dkst_secret(std::string dkst_secret);
+		void		displaycontact();
+		int			set_fname();
+		bool		set_lname();
+		int			set_nickname();
+		int			set_phnumber();
+		int			set_dkst_secret();
 		std::string	short_fname();
 		std::string	short_lname();
 		std::string	short_nickname();

@@ -14,13 +14,19 @@ Phonebook::~Phonebook(void)
 int	Phonebook::setcontact()
 {
 	Contact		contact;
-	// std::string	first_name;
-	// std::string	last_name;
-	// std::string	nickname;
-	// std::string	phone_number;
-	// std::string	darkst_secret;
 
 	std::cout << "Please fill informations for new contact" << std::endl;
-	std::cout << "First name : ";
-	std::cin >> contact.first_name;
+	while (!contact.set_fname())
+		std::cout << "Please enter valid first name (letters, space or -)" << std::endl;
+	while (!contact.set_lname())
+		std::cout << "Please enter valid last name (letters, space or -)" << std::endl;
+	while (!contact.set_nickname())
+		std::cout << "Please enter a nickname" << std::endl;
+	while (!contact.set_phnumber())
+		std::cout << "Please enter a valid phone number (digit)" << std::endl;
+	while (!contact.set_dkst_secret())
+		std::cout << "Please enter a darkest secret" << std::endl;
+
+/* gerer quand nb contact superieur a 8 */
+
 }
