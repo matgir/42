@@ -118,4 +118,5 @@ alias gppflag='g++ -Werror -Wall -Wextra -Wno-unused'
 # nb 3 = hauteur animation = 1.125*nb1
 # nb 4 = largeur animation = 2*nb1
 # nb1, 
-alias lock='/sgoinfre/goinfre/Perso/jmaia/Public/pimp_my_lock/pimp_my_lock.sh ~/Desktop/42_cursus/join_us_o.mp4 0 0 1440 2560'
+alias lockmac='/sgoinfre/goinfre/Perso/jmaia/Public/pimp_my_lock/pimp_my_lock.sh ~/Desktop/42_cursus/join_us_o.mp4 0 0 1440 2560'
+alias lockdell='/sgoinfre/goinfre/Perso/jmaia/Public/pimp_my_lock/pimp_my_lock.sh ~/Desktop/42_cursus/join_us_o.mp4 0 0 1080 1920'

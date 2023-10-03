@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   phonebook_class.hpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgirardo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 16:05:47 by mgirardo          #+#    #+#             */
+/*   Updated: 2023/10/03 16:05:53 by mgirardo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHONEBOOK_CLASS_HPP
 # define PHONEBOOK_CLASS_HPP
 
@@ -10,13 +22,14 @@ class	Phonebook
 		Phonebook(void);
 		~Phonebook(void);
 
-		int	setcontact();
-		int	displaycontacts();
-		int	getcontact(int index);
+		void	setcontact(Phonebook phonebook);
+		void	displaycontacts();
+		// int		getcontact(int index);
+		void	updatephonebook(Contact newcontact);
 
 	private:
 
-		Contact	constacts[8];
+		Contact	contacts[8];
 		int		nbcontact;
 };
 
