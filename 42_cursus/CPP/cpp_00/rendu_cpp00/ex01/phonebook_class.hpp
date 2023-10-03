@@ -24,7 +24,6 @@ class	Phonebook
 
 		void	setcontact(Phonebook phonebook);
 		void	displaycontacts();
-		// int		getcontact(int index);
 		void	updatephonebook(Contact newcontact);
 
 	private:

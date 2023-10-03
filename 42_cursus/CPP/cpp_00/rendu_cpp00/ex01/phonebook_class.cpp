@@ -57,13 +57,9 @@ void	Phonebook::updatephonebook(Contact newcontact)
 	return;
 }
 
-/*	how to display contactS
-	1         |albertine |dela-roch.|nickname  
-	*/
-
 void	Phonebook::displaycontacts()
 {
-	int	j;
+	std::string	j;
 
 	for (int i = 0; i < this->nbcontact; i++)
 	{
@@ -75,12 +71,12 @@ void	Phonebook::displaycontacts()
 	while(1)
 	{
 		std::cout << "Choose contact index : ";
-		std::cin >> j;
-		if (j < 1 || j > this->nbcontact - 1)
+		std::getline(std::cin, j);
+		if (j.size() > 1 || (j[0] < 49 || j[0] > 56) || j[0] - 48 > this->nbcontact)
 			std::cout << "Wrong index" << std::endl;
 		else
 		{
-			this->contacts[j - 1].displaycontact();
+			this->contacts[(int)j[0] - 49].displaycontact();
 			break;
 		}
 	}

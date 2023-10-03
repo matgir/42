@@ -29,13 +29,7 @@ class	Contact
 		int			set_nickname();
 		int			set_phnumber();
 		int			set_dkst_secret();
-		std::string	short_name(int i);
-		// std::string	short_lname();
-		// std::string	short_nickname();
-
-/*	the short* functions will return either a truncated word or a word
-	with the right amount of ' ' at the end of it
-*/
+		std::string	short_name(int i);       
 
 	private:
 
