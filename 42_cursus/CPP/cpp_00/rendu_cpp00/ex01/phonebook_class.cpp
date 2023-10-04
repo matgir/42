@@ -61,6 +61,11 @@ void	Phonebook::displaycontacts()
 {
 	std::string	j;
 
+	if (this->nbcontact == 0)
+	{
+		std::cout << "No contact yet, use ADD first." << std::endl;
+		return;
+	}
 	for (int i = 0; i < this->nbcontact; i++)
 	{
 		std::cout << i + 1 << "         |";
@@ -72,7 +77,7 @@ void	Phonebook::displaycontacts()
 	{
 		std::cout << "Choose contact index : ";
 		std::getline(std::cin, j);
-		if (j.size() > 1 || (j[0] < 49 || j[0] > 56) || j[0] - 48 > this->nbcontact)
+		if (j.size() != 1 || (j[0] < 49 || j[0] > 56) || j[0] - 48 > this->nbcontact)
 			std::cout << "Wrong index" << std::endl;
 		else
 		{

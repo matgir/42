@@ -38,24 +38,23 @@ void	Contact::displaycontact()
 }
 
 /*
-   in set* functions, pay attention if there is a new line when
-   retrun (0)/false
-   in set* functions, check difference between bool and int
+   in set* functions, new line when retrun false, because the user press
+   enter in order for the program to receive std::cin
    */
 
-int	Contact::set_fname()
+bool	Contact::set_fname()
 {
 	std::string	fname;
 
 	std::cout << "First name		: ";
 	std::getline(std::cin, fname);
 	if (fname.empty())
-		return (0);
+		return false;
 	for (int i = 0; fname[i]; i++)
 		if (!std::isalpha(fname[i]) && fname[i] != '-' && fname[i] != ' ')
-			return (0);
+			return false;
 	this->first_name = fname;
-	return (1);
+	return true;
 }
 
 bool	Contact::set_lname()
@@ -73,43 +72,43 @@ bool	Contact::set_lname()
 	return true;
 }
 
-int	Contact::set_nickname()
+bool	Contact::set_nickname()
 {
 	std::string	nkname;
 
 	std::cout << "Nickname		: ";
 	std::getline(std::cin, nkname);
 	if (nkname.empty())
-		return (0);
+		return false;
 	this->nickname = nkname;
-	return (1);
+	return true;
 }
 
-int	Contact::set_phnumber()
+bool	Contact::set_phnumber()
 {
 	std::string	phnumber;
 
 	std::cout << "Phone number		: ";
 	std::getline(std::cin, phnumber);
 	if (phnumber.empty())
-		return (0);
+		return false;
 	for (int i = 0; phnumber[i]; i++)
 		if (!std::isdigit(phnumber[i]))
-			return (0);
+			return false;
 	this->phone_number = phnumber;
-	return (1);
+	return true;
 }
 
-int	Contact::set_dkst_secret()
+bool	Contact::set_dkst_secret()
 {
 	std::string dkst;
 
 	std::cout << "Darkest secret		: ";
 	std::getline(std::cin, dkst);
 	if (dkst.empty())
-		return (0);
+		return false;
 	this->darkst_secret = dkst;
-	return (1);
+	return true;
 }
 
 std::string	Contact::short_name(int i)
