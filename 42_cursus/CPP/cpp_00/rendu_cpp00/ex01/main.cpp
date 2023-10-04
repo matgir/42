@@ -20,9 +20,9 @@ int	main(void)
 	while (1)
 	{
 		std::cout << "Enter a command (ADD, SEARCH or EXIT) : ";
-		std::getline(std::cin, command);
-
-		if (command == "ADD")
+		if (!std::getline(std::cin, command))
+			break;
+		else if (command == "ADD")
 			phonebook.setcontact(phonebook);
 		else if (command == "SEARCH")
 			phonebook.displaycontacts();
