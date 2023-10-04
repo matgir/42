@@ -17,7 +17,8 @@ void	f0(void)
 {
 	Sample	instance;
 
-	std::cout << "Number of instances = " << Sample::getnbinst() << std::endl;
+	std::cout << "Number of instances = " << instance.getnbinst() << std::endl;
+	// std::cout << "Number of instances = " << Sample::getnbinst() << std::endl;
 
 	return;
 }

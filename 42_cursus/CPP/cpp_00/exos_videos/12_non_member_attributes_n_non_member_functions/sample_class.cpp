@@ -32,6 +32,7 @@ Sample::~Sample(void)
 int	Sample::getnbinst(void)
 {
 	return (Sample::_nbinst);
+	// return (this->_nbinst);
 }
 
 int	Sample::_nbinst = 0;

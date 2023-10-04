@@ -16,18 +16,25 @@
 int	main(void)
 {
 	Sample	instance;
+	// Sample	instance2;
 	Sample	*instancep = &instance;
 
 	int		Sample::*p = NULL;
+	// ici declaration d'un pointeur *p (initialise a NULL)
+	// 	sur un int de la classe Sample
 	void	(Sample::*f)(void)const;
 
 	p = &Sample::foo;
+	// assignation de ladresse du membre foo au pointeur *p
 
-	std::cout << "Value of member foo = " << instance.foo << std::endl;
+	std::cout << "Value of member foo in instance = " << instance.foo << std::endl;
+	// std::cout << "Value of member foo in instance2 = " << instance2.foo << std::endl;
 	instance.*p = 21;
-	std::cout << "Value of member foo = " << instance.foo << std::endl;
-	instance.*p = 42;
-	std::cout << "Value of member foo = " << instance.foo << std::endl;
+	std::cout << "Value of member foo in instance = " << instance.foo << std::endl;
+	instancep->*p = 42;
+	// instance2.*p = 42;
+	std::cout << "Value of member foo in instance = " << instance.foo << std::endl;
+	// std::cout << "Value of member foo in instance2 = " << instance2.foo << std::endl;
 
 	f = &Sample::bar;
 
