@@ -47,7 +47,8 @@ bool	Contact::set_fname()
 	std::string	fname;
 
 	std::cout << "First name		: ";
-	std::getline(std::cin, fname);
+	if (!std::getline(std::cin, fname))
+		exit(1);
 	if (fname.empty())
 		return false;
 	for (int i = 0; fname[i]; i++)
@@ -62,7 +63,8 @@ bool	Contact::set_lname()
 	std::string	lname;
 
 	std::cout << "Last name		: ";
-	std::getline(std::cin, lname);
+	if (!std::getline(std::cin, lname))
+		exit(1);
 	if (lname.empty())
 		return false;
 	for (int i = 0; lname[i]; i++)
@@ -77,7 +79,8 @@ bool	Contact::set_nickname()
 	std::string	nkname;
 
 	std::cout << "Nickname		: ";
-	std::getline(std::cin, nkname);
+	if (!std::getline(std::cin, nkname))
+		exit(1);
 	if (nkname.empty())
 		return false;
 	this->nickname = nkname;
@@ -89,7 +92,8 @@ bool	Contact::set_phnumber()
 	std::string	phnumber;
 
 	std::cout << "Phone number		: ";
-	std::getline(std::cin, phnumber);
+	if (!std::getline(std::cin, phnumber))
+		exit(1);
 	if (phnumber.empty())
 		return false;
 	for (int i = 0; phnumber[i]; i++)
@@ -104,7 +108,8 @@ bool	Contact::set_dkst_secret()
 	std::string dkst;
 
 	std::cout << "Darkest secret		: ";
-	std::getline(std::cin, dkst);
+	if (!std::getline(std::cin, dkst))
+		exit(1);
 	if (dkst.empty())
 		return false;
 	this->darkst_secret = dkst;

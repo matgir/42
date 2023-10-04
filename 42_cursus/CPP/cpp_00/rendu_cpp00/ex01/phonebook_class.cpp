@@ -76,7 +76,9 @@ void	Phonebook::displaycontacts()
 	while(1)
 	{
 		std::cout << "Choose contact index : ";
-		std::getline(std::cin, j);
+		if (!std::getline(std::cin, j))
+			exit(1);
+			// break;
 		if (j.size() != 1 || (j[0] < 49 || j[0] > 56) || j[0] - 48 > this->nbcontact)
 			std::cout << "Wrong index" << std::endl;
 		else
