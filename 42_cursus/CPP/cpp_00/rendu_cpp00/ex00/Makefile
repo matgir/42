@@ -14,40 +14,34 @@ SRC		=	megaphone.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
-# DOBJ	=	${OBJ:.o=.d}
+DOBJ	=	${SRC:.cpp=.d}
 
 NAME	=	megaphone
 
-#INCL	=	
+INCL	=	Makefile
 
 PP		=	g++
 
 FLAG	=	-g -Werror -Wall -Wextra -Wno-unused -MMD -std=c++98
-# FLAG	=	-g -Werror -Wall -Wextra -Wno-unused -MMD
 
 RM		=	rm -rf
 
 all:		${NAME}
 
-.c.o:
-#				 ${PP} ${FLAG} -cpp $< -o $(<:.c=.o)
-				${PP} ${FLAG} -I -include -c $< -o $(<:.cpp=.o)
+-include ${DOBJ}
+
+.cpp.o:
+				${PP} ${FLAG} -I -include -c $< -o ${<:.cpp=.o}
 
 ${NAME}:	${OBJ} ${INCL}
 				${PP} ${FLAG} ${OBJ} -o ${NAME}
 
-norm:
-			norminette
-
 clean:
-				${RM} ${OBJ}
-#				${RM} ${OBJ} ${DOBJ}
+				${RM} ${OBJ} ${DOBJ}
 
 fclean:		clean
 				${RM} ${NAME}
 
 re:			fclean all
 
-# -include ${DOBJ}
-
-.PHONY:		all .c.o norm clean fclean re
+.PHONY:		all .cpp.o clean fclean re

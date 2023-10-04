@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "phonebook_class.hpp"
+#include "PhoneBookClass.hpp"
 
 Phonebook::Phonebook(void)
 {
