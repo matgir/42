@@ -14,11 +14,11 @@
 
 Contact::Contact(void)
 {
-	Contact::first_name = "";
-	Contact::last_name = "";
-	Contact::nickname = "";
-	Contact::phone_number = "";
-	Contact::darkst_secret = "";
+	this->first_name = "";
+	this->last_name = "";
+	this->nickname = "";
+	this->phone_number = "";
+	this->darkst_secret = "";
 	return;
 }
 
@@ -42,7 +42,7 @@ void	Contact::displaycontact()
    enter in order for the program to receive std::cin
    */
 
-bool	Contact::set_fname()
+bool	Contact::set_first_name()
 {
 	std::string	fname;
 
@@ -58,7 +58,7 @@ bool	Contact::set_fname()
 	return true;
 }
 
-bool	Contact::set_lname()
+bool	Contact::set_last_name()
 {
 	std::string	lname;
 
@@ -87,7 +87,7 @@ bool	Contact::set_nickname()
 	return true;
 }
 
-bool	Contact::set_phnumber()
+bool	Contact::set_phone_number()
 {
 	std::string	phnumber;
 
@@ -103,7 +103,7 @@ bool	Contact::set_phnumber()
 	return true;
 }
 
-bool	Contact::set_dkst_secret()
+bool	Contact::set_darkst_secret()
 {
 	std::string dkst;
 

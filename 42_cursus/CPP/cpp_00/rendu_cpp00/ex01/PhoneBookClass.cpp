@@ -28,15 +28,15 @@ void	Phonebook::setcontact(Phonebook phonebook)
 	Contact		contact;
 
 	std::cout << "Please fill informations for new contact" << std::endl;
-	while (!contact.set_fname())
+	while (!contact.set_first_name())
 		std::cout << "Please enter valid first name (letters, space or -)" << std::endl;
-	while (!contact.set_lname())
+	while (!contact.set_last_name())
 		std::cout << "Please enter valid last name (letters, space or -)" << std::endl;
 	while (!contact.set_nickname())
 		std::cout << "Please enter a nickname" << std::endl;
-	while (!contact.set_phnumber())
+	while (!contact.set_phone_number())
 		std::cout << "Please enter a valid phone number (digit)" << std::endl;
-	while (!contact.set_dkst_secret())
+	while (!contact.set_darkst_secret())
 		std::cout << "Please enter a darkest secret" << std::endl;
 	this->updatephonebook(contact);
 	return;
@@ -78,12 +78,11 @@ void	Phonebook::displaycontacts()
 		std::cout << "Choose contact index : ";
 		if (!std::getline(std::cin, j))
 			exit(1);
-			// break;
-		if (j.size() != 1 || (j[0] < 49 || j[0] > 56) || j[0] - 48 > this->nbcontact)
+		if (j.size() != 1 || j[0] - 48 > this->nbcontact || (j[0] < 49 || j[0] > 56))
 			std::cout << "Wrong index" << std::endl;
 		else
 		{
-			this->contacts[(int)j[0] - 49].displaycontact();
+			this->contacts[/* (int) */j[0] - 49].displaycontact();
 			break;
 		}
 	}

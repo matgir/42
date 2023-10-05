@@ -25,11 +25,11 @@ class	Contact
 		~Contact(void);
 
 		void		displaycontact();
-		bool		set_fname();
-		bool		set_lname();
+		bool		set_first_name();
+		bool		set_last_name();
 		bool		set_nickname();
-		bool		set_phnumber();
-		bool		set_dkst_secret();
+		bool		set_phone_number();
+		bool		set_darkst_secret();
 		std::string	short_name(int i);
 
 	private:

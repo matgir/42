@@ -20,7 +20,7 @@ DOBJ	=	${SRC:.cpp=.d}
 
 NAME	=	MyAwesomePhoneBook
 
-INCL	=	ContactClass.hpp PhoneBookClass.hpp Makefile
+INCL	=	ContactClass.hpp PhoneBookClass.hpp
 
 PP		=	g++
 

@@ -18,8 +18,6 @@ DOBJ	=	${SRC:.cpp=.d}
 
 NAME	=	megaphone
 
-INCL	=	Makefile
-
 PP		=	g++
 
 FLAG	=	-g -Werror -Wall -Wextra -Wno-unused -MMD -std=c++98
