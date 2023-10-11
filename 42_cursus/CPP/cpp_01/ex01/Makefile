@@ -6,7 +6,7 @@ OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	MyZombie
+NAME	=	MyZombieHorde
 
 #INCL	=	Zombie.h Zombie.hpp
 INCL	=	Zombie.h Zombie.hpp Makefile

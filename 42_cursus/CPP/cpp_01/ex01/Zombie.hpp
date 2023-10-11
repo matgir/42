@@ -9,14 +9,16 @@ class Zombie
 private:
 
 	std::string	_name;
+	static int	_nbinst;//
 
 public:
 
 	Zombie();
 	~Zombie();
 
-	void	announce(void);
-	void	setname(std::string name);
+	void		announce();
+	void		setname(std::string name);
+	static void	getnbinst();//
 
 };
 
