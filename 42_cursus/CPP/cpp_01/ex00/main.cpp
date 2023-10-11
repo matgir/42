@@ -1,4 +1,4 @@
-#include "zombie.h"
+#include "Zombie.h"
 
 int	main(void)
 {
@@ -11,5 +11,5 @@ int	main(void)
 
 	randomChump("Franklin");
 
-	return;
+	return (1);
 }
