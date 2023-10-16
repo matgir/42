@@ -1,7 +1,8 @@
 #include "Zombie.h"
 
-int	main(int ac, char **av)
+int	main(/*int ac, char **av*/void)
 {
+/*	
 	if (ac != 4 || strlen(av[1]) > 10 || strlen(av[3]) > 10)
 	{
 		std::cout << "Please start program like this\nMyZombieHorde <number_of_zombies> <zombie_name> <zombie index>" << std::endl;
@@ -35,9 +36,14 @@ int	main(int ac, char **av)
 		std::cout << "Please choose a valid index" << std::endl;
 		return (1);
 	}
-	Zombie* thehorde = zombieHorde(j , av[2]);
-	thehorde[i].announce();
-	Zombie::getnbinst();
+*/
+	int	i = 42;
+	Zombie* thehorde = zombieHorde(i , "Brendon");
+	for (int j = 0; j < i; j++)
+		thehorde[j].announce();
+	thehorde[-1].announce();
+	thehorde[42].announce();
+//	Zombie::getnbinst();
 	delete [] thehorde;
 
 	return (1);

@@ -28,12 +28,19 @@ class	Student
 		{
 			std::cout << "Student " << this->_login << " died" << std::endl;
 		}
+
+		void	announce()
+		{
+			std::cout << "I " << this->_login << " announce" << std::endl;
+		}
 };
 
 int	main()
 {
 	Student*	students = new Student[42];
 
+	students[0].announce();
+	//students[-45].announce();
 	// Do some stuff here
 
 	delete [] students;

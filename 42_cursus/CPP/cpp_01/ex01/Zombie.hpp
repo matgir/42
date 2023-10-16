@@ -9,7 +9,7 @@ class Zombie
 private:
 
 	std::string	_name;
-	static int	_nbinst;//
+//	static int	_nbinst;//
 
 public:
 
@@ -18,7 +18,7 @@ public:
 
 	void		announce();
 	void		setname(std::string name);
-	static void	getnbinst();//
+//	static void	getnbinst();//
 
 };
 
