@@ -18,6 +18,7 @@ int	main()
 
 	int*	ballsPtr = &numberOfBalls;
 	int&	ballsRef = numberOfBalls;
+	// int&	ballsRef2; //FAUX car on ne peux pas non initialiser une reference
 
 	std::cout << numberOfBalls << " " << *ballsPtr <<  " " << ballsRef<< std::endl;
 

@@ -41,7 +41,7 @@ int	main(/*int ac, char **av*/void)
 	Zombie* thehorde = zombieHorde(i , "Brendon");
 	for (int j = 0; j < i; j++)
 		thehorde[j].announce();
-	thehorde[-1].announce();
+	thehorde[-42].announce();
 	thehorde[42].announce();
 //	Zombie::getnbinst();
 	delete [] thehorde;
