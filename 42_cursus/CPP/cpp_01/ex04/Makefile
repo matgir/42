@@ -4,7 +4,7 @@ OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	ToTransform
+NAME	=	TheNewSed
 
 # INCL	=	
 INCL	=	Makefile

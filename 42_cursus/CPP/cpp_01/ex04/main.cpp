@@ -1,6 +1,8 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <filesystem>
+#include <vector>
 
 int	main(int ac, char **av)
 {
@@ -11,33 +13,41 @@ int	main(int ac, char **av)
 	}
 
 	std::string		filename = av[1];
-	// std::ifstream	ifs;
 	std::string		newfile = filename + ".replace";
-	std::ifstream	ifs(filename.c_str());
-	std::ofstream	ofs(newfile.c_str(), std::fstream::app);
+	std::ifstream	ifs;
+	std::ofstream	ofs;
 	std::string		s1 = av[2];
 	std::string		s2 = av[3];
 	std::string 	extracted;
-	// std::string 	to_add;
 	size_t			found;
 
-	// ifs.open(filename.c_str());
-	// if (!ifs/*  || !ifs.gcount() */) // find a way to check if file is empty
-	if (!ifs.is_open())
+	ifs.open(newfile.c_str());
+	if (ifs)
+	{
+		ifs.close();
+		extracted = "bis_" + newfile;
+		std::rename(newfile.c_str(), extracted.c_str());
+	}
+	ifs.open(filename.c_str());
+	if (!ifs)
 	{
 		std::cout << filename << " : Could not be open, try again" << std::endl;
 		return (1);
 	}
-	else if (s1.empty()/*  || s2.empty() */)
+	else if (s1.empty())
 	{
-		std::cout << "Please enter valid <string1> and/or <string2>" << std::endl;
+		std::cout << "Please enter valid <string1>" << std::endl;
 		ifs.close();
 		return (1);
 	}
-	// else
-	// std::cout << extract << std::endl;
-	// peut etre utiliser read, comme gnl pour voir les '\n'
-	while (std::getline(ifs, extracted))
+	ofs.open(newfile.c_str(), std::fstream::app);
+	if (!ofs)
+	{
+		std::cout << newfile << " : Could not be open, try again" << std::endl;
+		ifs.close();
+		return (1);
+	}
+	while (std::getline(ifs, extracted, '\n'))
 	{
 			found = extracted.find(s1);
 			while (found != std::string::npos)
@@ -46,8 +56,10 @@ int	main(int ac, char **av)
 				extracted.insert(found, s2);
 				found = extracted.find(s1, found + s2.length());
 			}
-			std::cout << extracted.find('\t') << std::endl;//
-			ofs << extracted << std::endl;
+			if (ifs.eof())
+				ofs << extracted;
+			else
+				ofs << extracted << std::endl;
 	}
 	ifs.close();
 	ofs.close();
