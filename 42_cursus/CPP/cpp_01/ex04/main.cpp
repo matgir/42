@@ -14,22 +14,16 @@ int	main(int ac, char **av)
 
 	std::string		filename = av[1];
 	std::string		newfile = filename + ".replace";
-	std::ifstream	ifs;
-	std::ofstream	ofs;
+	std::ifstream	input;
+	std::ifstream	check_existance;
+	std::ofstream	output;
 	std::string		s1 = av[2];
 	std::string		s2 = av[3];
 	std::string 	extracted;
 	size_t			found;
 
-	ifs.open(newfile.c_str());
-	if (ifs)
-	{
-		ifs.close();
-		extracted = "bis_" + newfile;
-		std::rename(newfile.c_str(), extracted.c_str());
-	}
-	ifs.open(filename.c_str());
-	if (!ifs)
+	input.open(filename.c_str());
+	if (!input)
 	{
 		std::cout << filename << " : Could not be open, try again" << std::endl;
 		return (1);
@@ -37,17 +31,24 @@ int	main(int ac, char **av)
 	else if (s1.empty())
 	{
 		std::cout << "Please enter valid <string1>" << std::endl;
-		ifs.close();
+		input.close();
 		return (1);
 	}
-	ofs.open(newfile.c_str(), std::fstream::app);
-	if (!ofs)
+	check_existance.open(newfile.c_str());
+	if (check_existance)
+	{
+		check_existance.close();
+		extracted = "bis_" + newfile;
+		std::rename(newfile.c_str(), extracted.c_str());
+	}
+	output.open(newfile.c_str(), std::fstream::app);
+	if (!output)
 	{
 		std::cout << newfile << " : Could not be open, try again" << std::endl;
-		ifs.close();
+		input.close();
 		return (1);
 	}
-	while (std::getline(ifs, extracted, '\n'))
+	while (std::getline(input, extracted, '\n'))
 	{
 			found = extracted.find(s1);
 			while (found != std::string::npos)
@@ -56,11 +57,11 @@ int	main(int ac, char **av)
 				extracted.insert(found, s2);
 				found = extracted.find(s1, found + s2.length());
 			}
-			if (ifs.eof())
-				ofs << extracted;
+			if (input.eof())
+				output << extracted;
 			else
-				ofs << extracted << std::endl;
+				output << extracted << std::endl;
 	}
-	ifs.close();
-	ofs.close();
+	input.close();
+	output.close();
 }

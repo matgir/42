@@ -6,8 +6,8 @@ DOBJ	=	${SRC:.cpp=.d}
 
 NAME	=	TheNewSed
 
-# INCL	=	
-INCL	=	Makefile
+INCL	=	
+# INCL	=	Makefile
 
 PP		=	g++
 
@@ -30,6 +30,7 @@ clean:
 
 fclean:		clean
 				${RM} ${NAME}
+#				${RM} ${NAME} *.replace
 
 re:			fclean all
 
