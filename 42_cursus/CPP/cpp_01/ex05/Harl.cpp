@@ -33,3 +33,8 @@ void	Harl::error(void)
 	std::cout << "I was not even able to warn you, it is now KAPUT so dif in and fix it !" << std::endl;
 	return;
 }
+
+void	Harl::complain(std::string level)
+{
+	return;
+}
