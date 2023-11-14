@@ -59,9 +59,11 @@ int	main()
 	std::cout << bob.getLoginRefConst() << " " << jim.getLoginRefConst() << std::endl;
 	std::cout << *(bob.getLoginPtrConst()) << " " << *(jim.getLoginPtrConst()) << std::endl;
 
+	// jim.getLoginRef() = "paspossible"; //ps possible car jim const
 	bob.getLoginRef() = "bobfubar";
 	std::cout << bob.getLoginRefConst() << std::endl;
 
+	// *(jim.getLoginPtr()) = "toujours pas possible"; //ps possible car jim const
 	*(bob.getLoginPtr()) = "bobbyfubar";
 	std::cout << bob.getLoginRefConst() << std::endl;
 }
