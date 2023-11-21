@@ -2,6 +2,7 @@
 
 class	Quadruped
 {
+	//can acces name, run() and legs
 	private:
 
 		std::string	name; //Only accessible by a Quadruped object
