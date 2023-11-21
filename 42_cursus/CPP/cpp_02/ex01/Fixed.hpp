@@ -14,15 +14,15 @@ class Fixed
 	public:
 
 		Fixed(void); //put _raw_bits to 0
-		Fixed(Fixed const & src);
-		Fixed(const int src);//
-		Fixed(const float src);//
+		Fixed(Fixed const & copy);
+		Fixed(const int i);//
+		Fixed(const float f);//
 		~Fixed(void);
 
-		Fixed	&operator=(Fixed const & rhs);
+		Fixed	&operator=(Fixed const & copie);
 
 		int		getRawBits(void)const;
-		void	setRawBits(int const raw);
+		void	setRawBits(int const copie);
 		float	toFloat(void)const;//
 		int		toInt(void)const;//
 

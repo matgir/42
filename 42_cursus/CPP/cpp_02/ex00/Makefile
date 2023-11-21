@@ -5,7 +5,7 @@ OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	FixedPointNumber
+NAME	=	FixedPointNumberAlpha
 
 #INCL	=	Fixed.hpp
 INCL	=	Fixed.hpp Makefile

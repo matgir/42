@@ -26,6 +26,7 @@ Fixed::Fixed(const float f)
 {
 	std::cout << "Float constructor called" << std::endl;
 	this->_raw_bits = roundf(f * (1 << _binary_point));
+	// std::cout << (_raw_bits << _binary_point) << std::endl;//
 	return;
 }
 
