@@ -15,19 +15,19 @@ class Fixed
 
 		Fixed(void); //put _raw_bits to 0
 		Fixed(Fixed const & copy);
-		Fixed(const int i);//
-		Fixed(const float f);//
+		Fixed(const int i);
+		Fixed(const float f);
 		~Fixed(void);
 
 		Fixed	&operator=(Fixed const & copie);
 
 		int		getRawBits(void)const;
 		void	setRawBits(int const copie);
-		float	toFloat(void)const;//
-		int		toInt(void)const;//
+		float	toFloat(void)const;
+		int		toInt(void)const;
 
 };
 
-std::ostream &operator<<(std::ostream & o, Fixed const & i);//
+std::ostream &operator<<(std::ostream & o, Fixed const & i);
 
 #endif

@@ -9,7 +9,7 @@ class Fixed
 	private:
 
 		int					_raw_bits; //the raw bits in the int
-		static const int	_binary_point = 8;//place of the coma (starting right) in the raw bits to get the decimal
+		static const int	_binary_point;//place of the coma (starting right) in the raw bits to get the decimal
 
 	public:
 

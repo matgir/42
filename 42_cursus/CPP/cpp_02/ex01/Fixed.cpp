@@ -26,7 +26,6 @@ Fixed::Fixed(const float f)
 {
 	std::cout << "Float constructor called" << std::endl;
 	this->_raw_bits = roundf(f * (1 << _binary_point));
-	// std::cout << (_raw_bits << _binary_point) << std::endl;//
 	return;
 }
 
@@ -47,17 +46,17 @@ Fixed	&Fixed::operator=(Fixed const & copie)
 	return *this;
 }
 
+//return the raw value of the fixed point number value
 int		Fixed::getRawBits(void)const
 {
 	return this->_raw_bits;
-//return the raw value of the fixed point number value
 }
 
+//sets the raw value of the fixed point number
 void	Fixed::setRawBits(int const copie)
 {
 	this->_raw_bits = copie;
 	return;
-//sets the raw value of the fixed point number
 }
 
 int		Fixed::toInt(void)const

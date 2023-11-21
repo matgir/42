@@ -32,18 +32,18 @@ Fixed	&Fixed::operator=(Fixed const & rhs)
 	return *this;
 }
 
+//return the raw value of the fixed point number value
 int		Fixed::getRawBits(void)const
 {
 	std::cout << "getRawBits member function called" << std::endl;
 
 	return this->_raw_bits;
-//return the raw value of the fixed point number value
 }
 
+//sets the raw value of the fixed point number
 void	Fixed::setRawBits(int const raw)
 {
 	std::cout << "setRawBits member function called" << std::endl;
 	this->_raw_bits = raw;
 	return;
-//sets the raw value of the fixed point number
 }
