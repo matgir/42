@@ -3,7 +3,7 @@
 int	main(void)
 {
 	{
-		// Energy limit test
+//********** Energy limit test **********//
 		ClapTrap	bob("bob");
 
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
@@ -33,7 +33,7 @@ int	main(void)
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
 	}
 	{
-		// Hit points limit test
+//********** Hit points limit test **********//
 		ClapTrap	bob("bob");
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
 		bob.takeDamage(10);
@@ -44,7 +44,7 @@ int	main(void)
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
 	}
 	{
-		// Take damage test
+//********** Take damage test **********//
 		ClapTrap	bob("bob");
 		bob.takeDamage(1);
 		bob.takeDamage(2);
@@ -54,7 +54,7 @@ int	main(void)
 		bob.takeDamage(5);
 	}
 	{
-		// Repair test
+//********** Repair test **********//
 		ClapTrap	bob("bob");
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
 		bob.beRepaired(1);

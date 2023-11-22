@@ -4,7 +4,7 @@
 int	main(void)
 {
 	{
-		// Energy limit test
+//********** Energy limit test **********//
 		ScavTrap	bob("bob");
 
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
@@ -36,7 +36,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		// Hit points limit test
+//********** Hit points limit test **********//
 		ScavTrap	bob("bob");
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
 		bob.takeDamage(100);
@@ -49,7 +49,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		// Take damage test
+//********** Take damage test **********//
 		ScavTrap	bob("bob");
 		bob.takeDamage(1);
 		bob.takeDamage(2);
@@ -61,7 +61,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		// Repair test
+//********** Repair test **********//
 		ScavTrap	bob("bob");
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
 		bob.beRepaired(1);
@@ -82,7 +82,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		//Gate keeper mode test
+//********** Gate keeper mode test **********//
 		ScavTrap	bob("bob");
 		ClapTrap	yves("yves");
 
@@ -92,7 +92,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		//copy assignment test
+//********** copy assignment test **********//
 		ScavTrap	bob("bob");
 		ScavTrap	hughe("hughe");
 		ClapTrap	yves("yves");
