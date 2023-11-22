@@ -1,8 +1,8 @@
 // replace canonical by your class name
 // replace variable by your variable name
 
-#ifndef CLAPTRAPCLASS_HPP
-# define CLAPTRAPCLASS_HPP
+#ifndef CLAPTRAP_HPP
+# define CLAPTRAP_HPP
 
 # include <iostream>
 # include <string>
@@ -22,7 +22,7 @@ class ClapTrap
 		std::string		getName(void)const;
 		unsigned int	getHitPoints(void)const;
 		unsigned int	getEnergyPoints(void)const;
-		unsigned int	getAttackPoints(void)const;
+		unsigned int	getAttackDamage(void)const;
 		void			attack(const std::string & target);
 		void			takeDamage(unsigned int amount);
 		void			beRepaired(unsigned int amount);
@@ -32,7 +32,7 @@ class ClapTrap
 		std::string		_name;
 		unsigned int	_hitPoints; //health of the ClapTrap
 		unsigned int	_energyPoints;
-		unsigned int	_attackPoints;//attack power on _hitpoints
+		unsigned int	_attackDamage;//attack power on _hitpoints
 };
 
 #endif

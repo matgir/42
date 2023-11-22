@@ -1,13 +1,15 @@
 SRC		=	main.cpp \
-			ClapTrap.cpp
+			ClapTrap.cpp \
+			ScavTrap.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	ClapTrap
+NAME	=	ScavTrap
 
-INCL	=	ClapTrap.hpp
+INCL	=	ClapTrap.hpp \
+			ScavTrap.hpp
 
 PP		=	g++
 

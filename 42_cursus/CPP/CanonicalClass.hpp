@@ -51,7 +51,7 @@ int	Canonical::getvariable(void)const
 
 Canonical	&Canonical::operator=(Canonical const & rhs)
 {
-	std::cout << "Assigment operator called" << std::endl;
+	std::cout << "assignment operator called" << std::endl;
 
 	if (this != &rhs)
 		this->_variable = rhs.getvariable();
