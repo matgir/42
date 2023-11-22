@@ -2,7 +2,8 @@ SRC		=	main.cpp \
 			Animal.cpp \
 			Cat.cpp \
 			Dog.cpp \
-			####
+			WrongAnimal.cpp \
+			WrongCat.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
@@ -13,7 +14,8 @@ NAME	=	AnimalClass
 INCL	=	Animal.hpp \
 			Cat.hpp \
 			Dog.hpp \
-			####
+			WrongAnimal.hpp \
+			WrongCat.hpp
 
 PP		=	g++
 
