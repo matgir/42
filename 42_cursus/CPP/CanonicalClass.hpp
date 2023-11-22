@@ -12,15 +12,15 @@ class Canonical
 
 		Canonical(void);
 		Canonical(Canonical const & src);
-		~Canonical(void);
+		virtual ~Canonical(void);
 
 		Canonical	&operator=(Canonical const & rhs);
 
-		int		getvariable(void)const;
+		int		getvariable(void)const;//
 
 	private:
 
-		int		_variable;
+		int		_variable;//
 };
 
 #endif
