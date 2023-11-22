@@ -8,29 +8,11 @@ int	main(void)
 		ScavTrap	bob("bob");
 
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
-		bob.attack("sylvie");
-		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
-		bob.beRepaired(0);
-		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
-		bob.attack("sylvie");
-		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
-		bob.beRepaired(0);
-		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
-		bob.attack("sylvie");
-		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
-		bob.beRepaired(0);
-		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
-		bob.attack("sylvie");
-		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
-		bob.beRepaired(0);
-		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
-		bob.attack("sylvie");
-		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
-		bob.beRepaired(0);
-		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
-		bob.attack("sylvie");
-		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
-		bob.beRepaired(0);
+		for (int i = 26; i >= 0; i--)
+		{
+			bob.attack("sylvie");
+			bob.beRepaired(0);
+		}
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
 	}
 	std::cout << std::endl;
@@ -55,8 +37,8 @@ int	main(void)
 		bob.takeDamage(2);
 		bob.takeDamage(3);
 		bob.takeDamage(4);
-		bob.takeDamage(5);
-		bob.takeDamage(5);
+		bob.takeDamage(100);
+		bob.takeDamage(200);
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
@@ -106,7 +88,7 @@ int	main(void)
 		std::cout << "my new name is now " << bertrand.getName() << std::endl;
 		yves = bob;	//possible but you lose some information from the child derived class
 					//yves wont be able to use guardGate() but the base information will be transmited
-		// yves.guardGate()
+		// yves.guardGate();
 		std::cout << "my new name is now " << yves.getName() << " and I have " << yves.getHitPoints() << " Hit points" << std::endl; 
 	}
 }
