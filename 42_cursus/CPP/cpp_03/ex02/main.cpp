@@ -13,6 +13,8 @@ int	main(void)
 		{
 			bob.attack("sylvie");
 			bob.beRepaired(0);
+			if (i == 24)
+				std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
 		}
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
 	}
