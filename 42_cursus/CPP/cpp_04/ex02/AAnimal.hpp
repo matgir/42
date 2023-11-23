@@ -10,12 +10,12 @@ class AAnimal
 
 		AAnimal(void);
 		AAnimal(AAnimal const & copy);
-		virtual ~AAnimal(void) = 0;
+		virtual ~AAnimal(void);
 
 		AAnimal	&operator=(AAnimal const & assign);
 
 		std::string		getType(void)const;
-		virtual void	makeSound(void);
+		virtual void	makeSound(void) = 0;
 
 	protected:
 

@@ -11,6 +11,9 @@ int main()
 		const AAnimal	*i = new Cat();
 		// const AAnimal	*meta = new AAnimal();
 
+		std::cout << j->getType() << std::endl;
+		std::cout << i->getType() << std::endl;
+
 		delete j;
 		delete i;
 		// delete meta;

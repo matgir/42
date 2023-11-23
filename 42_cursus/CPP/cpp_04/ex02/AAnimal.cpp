@@ -34,9 +34,3 @@ std::string	AAnimal::getType(void)const
 {
 	return this->_type;
 }
-
-void	AAnimal::makeSound(void)
-{
-	std::cout << "*animal sound*" << std::endl;
-	return;
-}
