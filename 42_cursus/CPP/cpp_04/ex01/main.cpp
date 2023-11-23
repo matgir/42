@@ -7,6 +7,14 @@
 int main()
 {
 	{
+		const Animal	*j = new Dog();
+		const Animal	*i = new Cat();
+
+		delete j;
+		delete i;
+	}
+	std::cout << std::endl << std::endl;
+	{
 		Animal	*animals[10];
 		
 		for(int i = 0; i < 10; i++)
@@ -23,8 +31,7 @@ int main()
 		for (int i = 0; i < 10; i++)
 			delete animals[i];
 	}
-	std::cout << std::endl;
-	std::cout << std::endl;
+	std::cout << std::endl << std::endl;
 	{
 		Dog	dog1 = Dog();
 		dog1.getBrain()->setIdeas("dog1 idea 1", 0);
