@@ -73,5 +73,5 @@ int	main(void)
 	std::cout << "the biggest between " << f << " and " << g << " is " << a.max(f, g) << std::endl;
 	std::cout << "the biggest between " << d << " and " << c << " is " << a.max(d, c) << std::endl;
 
-	return 1;
+	return 0;
 }

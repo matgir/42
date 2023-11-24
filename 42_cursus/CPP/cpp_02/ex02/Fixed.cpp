@@ -157,34 +157,34 @@ void	Fixed::setRawBits(int const copie)
 
 int		Fixed::toInt(void)const
 {
-	return (this->_raw_bits >> this->_binary_point);
+	return this->_raw_bits >> this->_binary_point;
 }
 
 float	Fixed::toFloat(void)const
 {
-	return (this->_raw_bits / (float)(1 << _binary_point));
+	return this->_raw_bits / (float)(1 << _binary_point);
 }
 
 Fixed	&Fixed::min(Fixed & a, Fixed & b)
 {
-	return (a < b ? a : b);
+	return a < b ? a : b;
 }
 
 const Fixed	&Fixed::min(Fixed const & a, Fixed const & b)
 {
 	// std::cout << "(in const min)";
-	return (a < b ? a : b);
+	return a < b ? a : b;
 }
 
 Fixed	&Fixed::max(Fixed & a, Fixed & b)
 {
-	return (a > b ? a : b);
+	return a > b ? a : b;
 }
 
 const Fixed	&Fixed::max(Fixed const & a, Fixed const & b)
 {
 	// std::cout << "(in const max)";
-	return (a > b ? a : b);
+	return a > b ? a : b;
 }
 
 

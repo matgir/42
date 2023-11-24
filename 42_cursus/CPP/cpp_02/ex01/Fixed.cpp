@@ -61,12 +61,12 @@ void	Fixed::setRawBits(int const copie)
 
 int		Fixed::toInt(void)const
 {
-	return (this->_raw_bits >> this->_binary_point);
+	return this->_raw_bits >> this->_binary_point;
 }
 
 float	Fixed::toFloat(void)const
 {
-	return (this->_raw_bits / (float)(1 << _binary_point));
+	return this->_raw_bits / (float)(1 << _binary_point);
 }
 
 std::ostream	&operator<<(std::ostream & stream, Fixed const & fixed)

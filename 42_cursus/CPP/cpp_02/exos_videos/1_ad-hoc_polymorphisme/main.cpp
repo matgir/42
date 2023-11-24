@@ -10,5 +10,5 @@ int	main(void)
 	test.bar(1.89f);
 	test.bar(test);
 
-	return (1);
+	return 0;
 }

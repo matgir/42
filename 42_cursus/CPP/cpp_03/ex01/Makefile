@@ -11,7 +11,7 @@ NAME	=	ScavTrap
 INCL	=	ClapTrap.hpp \
 			ScavTrap.hpp
 
-PP		=	g++
+PP		=	c++
 
 FLAG	=	-g -Werror -Wall -Wextra -Wno-unused -MMD -std=c++98
 

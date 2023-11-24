@@ -17,6 +17,7 @@
 # include <iostream>
 # include <string>
 # include <stdlib.h>
+# include <iomanip>
 
 class	Phonebook
 {
@@ -25,7 +26,7 @@ class	Phonebook
 		Phonebook(void);
 		~Phonebook(void);
 
-		void	setcontact(Phonebook phonebook);
+		void	setcontact();
 		void	displaycontacts();
 		void	updatephonebook(Contact newcontact);
 

@@ -12,7 +12,7 @@ NAME	=	Fight
 # INCL	=	HumanA.h HumanA.hpp HumanB.h HumanB.hpp Weapon.h Weapon.hpp
 INCL	=	HumanA.h HumanA.hpp HumanB.h HumanB.hpp Weapon.h Weapon.hpp Makefile
 
-PP		=	g++
+PP		=	c++
 
 FLAG	=	-g -Werror -Wall -Wextra -Wno-unused -MMD -std=c++98
 

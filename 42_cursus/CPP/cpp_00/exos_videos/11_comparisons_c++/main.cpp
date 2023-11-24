@@ -40,5 +40,5 @@ int	main(void)
 	else
 		std::cout << "instance1 and instance2 are not structuraly equal" << std::endl;
 
-	return (0);
+	return 0;
 }

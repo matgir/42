@@ -36,5 +36,5 @@ int main()
 		delete meta;
 		delete i;
 	}
-	return 1;
+	return 0;
 }

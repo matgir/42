@@ -32,5 +32,5 @@ int	main(void)
 	std::cout << "instance2.a2 = " << instance2.a2 << std::endl;
 	std::cout << "instance2.a3 = " << instance2.a3 << std::endl;
 
-	return (0);
+	return 0;
 }

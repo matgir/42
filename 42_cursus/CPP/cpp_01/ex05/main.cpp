@@ -13,5 +13,5 @@ int	main(void)
 	theultimateHarl.complain("ERROR");
 	std::cout << std::endl;
 	theultimateHarl.complain("HELLO");
-	return (1);
+	return 0;
 }

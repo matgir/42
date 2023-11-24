@@ -18,5 +18,5 @@ int main()
 		delete i;
 		// delete meta;
 	}
-	return 1;
+	return 0;
 }

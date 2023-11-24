@@ -41,5 +41,5 @@ int main()
 		std::cout << dog1.getBrain()->getIdeas(0) << std::endl;
 		std::cout << dog2.getBrain()->getIdeas(0) << std::endl;
 	}
-	return 1;
+	return 0;
 }

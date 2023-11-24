@@ -31,7 +31,7 @@ Sample::~Sample(void)
 
 int	Sample::getfoo(void)const
 {
-	return (this->_foo);
+	return this->_foo;
 }
 
 void	Sample::setfoo(int v)

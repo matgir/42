@@ -40,5 +40,5 @@ int	main()
 		std::cout << "Weapon type : " << riffle.getType() << std::endl;
 		jim.attack();
 	}
-	return (0);
+	return 0;
 }

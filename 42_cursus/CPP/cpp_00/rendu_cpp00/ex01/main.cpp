@@ -23,7 +23,7 @@ int	main(void)
 		if (!std::getline(std::cin, command))
 			break;
 		else if (command == "ADD")
-			phonebook.setcontact(phonebook);
+			phonebook.setcontact();
 		else if (command == "SEARCH")
 			phonebook.displaycontacts();
 		else if (command == "EXIT")
@@ -31,5 +31,5 @@ int	main(void)
 		else
 			std::cout << "Not a valid command." << std::endl;
 	}
-	return (1);
+	return 0;
 }

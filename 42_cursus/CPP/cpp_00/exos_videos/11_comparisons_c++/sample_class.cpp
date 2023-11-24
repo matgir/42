@@ -27,15 +27,15 @@ Sample::~Sample(void)
 
 int	Sample::getfoo(void)const
 {
-	return (this->_foo);
+	return this->_foo;
 }
 
 int	Sample::compare(Sample *other)const
 {
 	if (this->_foo < other->getfoo())
-		return (-1);
+		return -1;
 	else if (this->_foo > other->getfoo())
-		return (1);
+		return 1;
 
-	return (0);
+	return 0;
 }

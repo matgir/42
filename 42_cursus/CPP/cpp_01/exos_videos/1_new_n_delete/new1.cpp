@@ -39,5 +39,5 @@ int	main()
 
 	delete jim; //jim is destroyed
 
-	return (0); //bob is destroyed
+	return 0; //bob is destroyed
 }

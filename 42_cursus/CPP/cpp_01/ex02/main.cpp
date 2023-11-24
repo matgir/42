@@ -37,5 +37,5 @@ int	main()
 	std::cout << "Value reffed by stringREF variable	= " << stringREF << std::endl;
 	std::cout << "Value pointed by refPTR			= " << *refPTR << std::endl;
 
-	return (1);
+	return 0;
 }

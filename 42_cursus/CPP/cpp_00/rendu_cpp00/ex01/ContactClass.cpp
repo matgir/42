@@ -126,12 +126,10 @@ std::string	Contact::short_name(int i)
 		toresize = this->last_name;
 	else if (i == 3)
 		toresize = this->nickname;
-	if (toresize.size() <= 10)
-		toresize.resize(10, ' ');
-	else
+	if (toresize.size() > 10)
 	{
 		toresize.resize(10);
 		toresize[9] = '.';
 	}
-	return (toresize);
+	return toresize;
 }

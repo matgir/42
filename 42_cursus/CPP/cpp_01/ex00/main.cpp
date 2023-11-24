@@ -11,5 +11,5 @@ int	main(void)
 
 	randomChump("Franklin");
 
-	return (1);
+	return 0;
 }

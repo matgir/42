@@ -9,7 +9,7 @@ int	main(int ac, char **av)
 	if (ac != 4)
 	{
 		std::cout << "Please start program as follow : ./Sed <filename> <string1> <string2>" << std::endl;
-		return (1);
+		return 1;
 	}
 
 	std::string		filename = av[1];
@@ -26,13 +26,13 @@ int	main(int ac, char **av)
 	if (!input)
 	{
 		std::cout << filename << " : Could not be open, try again" << std::endl;
-		return (1);
+		return 1;
 	}
 	else if (s1.empty())
 	{
 		std::cout << "Please enter valid <string1>" << std::endl;
 		input.close();
-		return (1);
+		return 1;
 	}
 	check_existance.open(newfile.c_str());
 	if (check_existance)
@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 	{
 		std::cout << newfile << " : Could not be open, try again" << std::endl;
 		input.close();
-		return (1);
+		return 1;
 	}
 	while (std::getline(input, extracted, '\n'))
 	{
@@ -64,4 +64,5 @@ int	main(int ac, char **av)
 	}
 	input.close();
 	output.close();
+	return 0;
 }

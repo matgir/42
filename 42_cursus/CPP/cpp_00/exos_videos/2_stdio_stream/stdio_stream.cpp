@@ -21,5 +21,5 @@ int	main(void)
 	std::cin >> buf;
 	std::cout << "You entered : [ " << buf << " ]" << std::endl;
 
-	return (0);
+	return 0;
 }

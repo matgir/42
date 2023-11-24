@@ -23,7 +23,7 @@ Phonebook::~Phonebook(void)
 	return;
 }
 
-void	Phonebook::setcontact(Phonebook phonebook)
+void	Phonebook::setcontact(void)
 {
 	Contact		contact;
 
@@ -68,10 +68,10 @@ void	Phonebook::displaycontacts()
 	}
 	for (int i = 0; i < this->nbcontact; i++)
 	{
-		std::cout << i + 1 << "         |";
-		std::cout << this->contacts[i].short_name(1) << "|";
-		std::cout << this->contacts[i].short_name(2) << "|";
-		std::cout << this->contacts[i].short_name(3) << std::endl;
+		std::cout << "         " << i + 1 << "|";
+		std::cout << std::setfill(' ') << std::setw(10) << this->contacts[i].short_name(1) << "|";
+		std::cout << std::setfill(' ') << std::setw(10) << this->contacts[i].short_name(2) << "|";
+		std::cout << std::setfill(' ') << std::setw(10) << this->contacts[i].short_name(3) << std::endl;
 	}
 	while(1)
 	{
@@ -82,7 +82,7 @@ void	Phonebook::displaycontacts()
 			std::cout << "Wrong index" << std::endl;
 		else
 		{
-			this->contacts[/* (int) */j[0] - 49].displaycontact();
+			this->contacts[j[0] - 49].displaycontact();
 			break;
 		}
 	}

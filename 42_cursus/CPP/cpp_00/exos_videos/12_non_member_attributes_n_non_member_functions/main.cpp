@@ -39,5 +39,5 @@ int		main(void)
 	f1();
 	std::cout << "Number of instances = " << Sample::getnbinst() << std::endl;
 
-	return (0);
+	return 0;
 }

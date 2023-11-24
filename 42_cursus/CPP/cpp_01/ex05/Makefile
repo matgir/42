@@ -10,7 +10,7 @@ NAME	=	Harl
 INCL	=	Harl.hpp
 # INCL	=	Harl.hpp Makefile
 
-PP		=	g++
+PP		=	c++
 
 FLAG	=	-g -Werror -Wall -Wextra -Wno-unused -MMD -std=c++98
 

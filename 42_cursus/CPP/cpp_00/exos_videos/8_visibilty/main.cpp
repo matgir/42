@@ -25,5 +25,5 @@ int	main(void)
 	instance.publicbar();
 	// instance._privatebar();
 
-	return (0);
+	return 0;
 }

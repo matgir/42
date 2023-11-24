@@ -41,5 +41,5 @@ int	main(void)
 	(instance.*f)();
 	(instancep->*f)();
 
-	return (0);
+	return 0;
 }
