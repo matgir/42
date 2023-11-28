@@ -9,6 +9,12 @@ class	Harl
 
 	private:
 
+		typedef void	(Harl::*complainptr)(void); //empty pointer on a function in Harl receiving void argument
+		typedef struct s_Harl
+		{
+			std::string	level;
+			complainptr	complain;
+		} complainlist;
 		void	debug(void);
 		void	info(void);
 		void	warning(void);
@@ -18,12 +24,6 @@ class	Harl
 
 		Harl();
 		~Harl();
-		typedef void	(Harl::*complainptr)(void); //empty pointer on a function in Harl receiving void argument
-		typedef struct s_Harl
-		{
-			std::string	level;
-			complainptr	complain;
-		} complainlist;
 		void	complain(std::string level);
 };
 

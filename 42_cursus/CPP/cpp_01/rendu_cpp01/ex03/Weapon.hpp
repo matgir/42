@@ -3,7 +3,6 @@
 
 # include <string>
 # include <iostream>
-# include "Weapon.h"
 
 class Weapon
 {

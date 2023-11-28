@@ -10,12 +10,6 @@ HumanA::~HumanA()
 	return;
 }
 
-// void	HumanA::setWeapon(Weapon& newWeapon)
-// {
-// 	this->_weapon = newWeapon;
-// 	return;
-// }
-
 void	HumanA::attack()
 {
 	std::cout << this->_name << " attacks with their " << this->_weapon.getType() << std::endl;

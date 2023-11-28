@@ -1,13 +1,14 @@
-SRC		=	main.cpp
+SRC		=	main.cpp \
+			Zombie.cpp \
+			zombieHorde.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	TheNewSed
+NAME	=	MyZombieHorde
 
-INCL	=	
-# INCL	=	Makefile
+INCL	=	Zombie.h Zombie.hpp
 
 PP		=	c++
 
@@ -30,7 +31,6 @@ clean:
 
 fclean:		clean
 				${RM} ${NAME}
-#				${RM} ${NAME} *.replace
 
 re:			fclean all
 

@@ -2,8 +2,6 @@
 
 Zombie::Zombie() : _name("")
 {
-//	this->_name = "";
-//	Zombie::_nbinst += 1;//
 	return;
 }
 
@@ -24,12 +22,3 @@ void	Zombie::setname(std::string name)
 	this->_name = name;
 	return;
 }
-/*
-	void	Zombie::getnbinst()//
-	{//
-		std::cout << Zombie::_nbinst << std::endl;//
-		return;//
-	}//
-
-	int		Zombie::_nbinst = 0;//
-	*/

@@ -1,14 +1,15 @@
 SRC		=	main.cpp \
-			Harl.cpp
+			HumanA.cpp \
+			HumanB.cpp \
+			Weapon.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	Harl
+NAME	=	Fight
 
-INCL	=	Harl.hpp
-# INCL	=	Harl.hpp Makefile
+INCL	=	HumanA.hpp HumanB.hpp Weapon.hpp
 
 PP		=	c++
 
