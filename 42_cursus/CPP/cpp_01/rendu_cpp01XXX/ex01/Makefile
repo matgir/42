@@ -1,12 +1,14 @@
-SRC		=	main.cpp
+SRC		=	main.cpp \
+			Zombie.cpp \
+			zombieHorde.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	BrainHere
+NAME	=	MyZombieHorde
 
-INCL	=	Makefile
+INCL	=	Zombie.h Zombie.hpp
 
 PP		=	c++
 

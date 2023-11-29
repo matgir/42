@@ -4,9 +4,9 @@ OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	BrainHere
+NAME	=	TheNewSed
 
-INCL	=	Makefile
+INCL	=	
 
 PP		=	c++
 

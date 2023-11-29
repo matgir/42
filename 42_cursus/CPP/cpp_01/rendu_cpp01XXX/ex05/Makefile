@@ -1,12 +1,13 @@
-SRC		=	main.cpp
+SRC		=	main.cpp \
+			Harl.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	BrainHere
+NAME	=	Harl
 
-INCL	=	Makefile
+INCL	=	Harl.hpp
 
 PP		=	c++
 

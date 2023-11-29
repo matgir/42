@@ -9,8 +9,7 @@ DOBJ	=	${SRC:.cpp=.d}
 
 NAME	=	MyZombie
 
-#INCL	=	Zombie.h Zombie.hpp
-INCL	=	Zombie.h Zombie.hpp Makefile
+INCL	=	Zombie.h Zombie.hpp
 
 PP		=	c++
 

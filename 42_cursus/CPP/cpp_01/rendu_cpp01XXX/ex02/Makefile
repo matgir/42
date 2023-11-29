@@ -6,6 +6,7 @@ DOBJ	=	${SRC:.cpp=.d}
 
 NAME	=	BrainHere
 
+# INCL	=	
 INCL	=	Makefile
 
 PP		=	c++
