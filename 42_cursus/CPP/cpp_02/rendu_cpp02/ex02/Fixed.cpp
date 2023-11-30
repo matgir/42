@@ -172,7 +172,6 @@ Fixed	&Fixed::min(Fixed & a, Fixed & b)
 
 const Fixed	&Fixed::min(Fixed const & a, Fixed const & b)
 {
-	// std::cout << "(in const min)";
 	return a < b ? a : b;
 }
 
@@ -183,7 +182,6 @@ Fixed	&Fixed::max(Fixed & a, Fixed & b)
 
 const Fixed	&Fixed::max(Fixed const & a, Fixed const & b)
 {
-	// std::cout << "(in const max)";
 	return a > b ? a : b;
 }
 
