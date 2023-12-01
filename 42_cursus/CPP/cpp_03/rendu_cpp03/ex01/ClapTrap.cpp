@@ -24,7 +24,10 @@ ClapTrap::ClapTrap(std::string name)
 ClapTrap::ClapTrap(ClapTrap const & copy)
 {
 	std::cout << "ClapTrap copy constructor called" << std::endl;
-	*this = copy;
+	this->_name = copy.getName();
+	this->_hitPoints = copy.getHitPoints();
+	this->_energyPoints = copy.getEnergyPoints();
+	this->_attackDamage = copy.getAttackDamage();
 	return;
 }
 
