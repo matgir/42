@@ -12,9 +12,9 @@ class WrongCat : public WrongAnimal
 		WrongCat(WrongCat const & copy);
 		~WrongCat(void);
 
-		WrongCat	&operator=(WrongCat const & copy);
+		WrongCat	&operator=(WrongCat const & assign);
 
-		void	makeSound(void)const;
+		void		makeSound(void)const;
 };
 
 #endif

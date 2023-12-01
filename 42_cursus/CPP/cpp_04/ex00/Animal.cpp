@@ -10,7 +10,7 @@ Animal::Animal(void)
 Animal::Animal(Animal const & copy)
 {
 	std::cout << "Copy Animal constructor called" << std::endl;
-	*this = copy;
+	this->_type = copy.getType();
 	return;
 }
 
@@ -20,12 +20,12 @@ Animal::~Animal(void)
 	return;
 }
 
-Animal	&Animal::operator=(Animal const & copy)
+Animal	&Animal::operator=(Animal const & assign)
 {
 	std::cout << "Animal assignment operator called" << std::endl;
 
-	if (this != &copy)
-		this->_type = copy.getType();
+	if (this != &assign)
+		this->_type = assign.getType();
 
 	return *this;
 }

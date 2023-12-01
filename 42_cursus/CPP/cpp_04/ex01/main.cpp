@@ -15,9 +15,10 @@ int main()
 	}
 	std::cout << std::endl << std::endl;
 	{
-		Animal	*animals[10];
+		int		j = 6;
+		Animal	*animals[j];
 		
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < j; i++)
 		{
 			if (i % 2 == 0)
 				animals[i] = new Dog();
@@ -27,19 +28,23 @@ int main()
 
 		animals[0]->makeSound(); //makes dog sound
 		animals[3]->makeSound(); //makes cat sound
+		// &animals[0]->getBrain()->setIdeas("* EAT MEOW *", 0);
+		// std::cout << &animals[0]->getBrain()->getIdeas() << std::endl;
 
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < j; i++)
 			delete animals[i];
 	}
 	std::cout << std::endl << std::endl;
 	{
-		Dog	dog1 = Dog();
-		dog1.getBrain()->setIdeas("dog1 idea 1", 0);
-		dog1.getBrain()->setIdeas("dog1 idea 2", 1);
-		Dog	dog2 = Dog(dog1);
-		dog2.getBrain()->setIdeas("dog2 idea 1", 0);
-		std::cout << dog1.getBrain()->getIdeas(0) << std::endl;
-		std::cout << dog2.getBrain()->getIdeas(0) << std::endl;
+		const Dog	*dog1 = new Dog();
+		dog1->getBrain()->setIdeas("dog1 idea 1", 0);
+		dog1->getBrain()->setIdeas("dog1 idea 2", 1);
+		const Dog	*dog2 = new Dog(*dog1);
+		dog2->getBrain()->setIdeas("dog2 idea 1", 0);
+		std::cout << dog1->getBrain()->getIdeas(0) << std::endl;
+		std::cout << dog2->getBrain()->getIdeas(0) << std::endl;
+		delete dog1;
+		delete dog2;
 	}
 	return 0;
 }

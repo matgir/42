@@ -10,7 +10,7 @@ Cat::Cat(void) : Animal()
 Cat::Cat(Cat const & copy) : Animal(copy)
 {
 	std::cout << "Copy Cat constructor called" << std::endl;
-	*this = copy;
+	this->_type = copy.getType();
 	return;
 }
 
@@ -20,12 +20,12 @@ Cat::~Cat(void)
 	return;
 }
 
-Cat	&Cat::operator=(Cat const & copy)
+Cat	&Cat::operator=(Cat const & assign)
 {
 	std::cout << "Cat assignment operator called" << std::endl;
 
-	if (this != &copy)
-		this->_type = copy.getType();
+	if (this != &assign)
+		this->_type = assign.getType();
 
 	return *this;
 }

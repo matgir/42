@@ -4,7 +4,7 @@
 int	main(void)
 {
 	{
-		std::cout << "//********** Energy limit test **********//" << std::endl;
+		std::cout << "\e[0;32m//********** Energy limit test **********//\e[0;37m" << std::endl;
 		ScavTrap	bob("bob");
 
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
@@ -18,7 +18,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		std::cout << "//********** Hit points limit test **********//" << std::endl;
+		std::cout << "\e[0;32m//********** Hit points limit test **********//\e[0;37m" << std::endl;
 		ScavTrap	bob("bob");
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
 		bob.takeDamage(100);
@@ -31,7 +31,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		std::cout << "//********** Take damage test **********//" << std::endl;
+		std::cout << "\e[0;32m//********** Take damage test **********//\e[0;37m" << std::endl;
 		ScavTrap	bob("bob");
 		bob.takeDamage(1);
 		bob.takeDamage(2);
@@ -43,7 +43,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		std::cout << "//********** Repair test **********//" << std::endl;
+		std::cout << "\e[0;32m//********** Repair test **********//\e[0;37m" << std::endl;
 		ScavTrap	bob("bob");
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
 		bob.beRepaired(1);
@@ -64,17 +64,17 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		std::cout << "//********** Gate keeper mode test **********//" << std::endl;
+		std::cout << "\e[0;32m//********** Gate keeper mode test **********//\e[0;37m" << std::endl;
 		ScavTrap	bob("bob");
 		ClapTrap	yves("yves");
 
 		bob.guardGate();
-		// yves.guardGate();
+		// yves.guardGate(); //not possible because yves is only a claptrap
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		std::cout << "//********** copy assignment test **********//" << std::endl;
+		std::cout << "\e[0;32m//********** copy assignment test **********//\e[0;37m" << std::endl;
 		ScavTrap	bob("bob");
 		ScavTrap	hughe("hughe");
 		ClapTrap	yves("yves");
@@ -89,6 +89,16 @@ int	main(void)
 		yves = bob;	//possible but you lose some information from the child derived class
 					//yves wont be able to use guardGate() but the base information will be transmited
 		// yves.guardGate();
+		yves.attack("someone");
+		bob.attack("anoter someone");
 		std::cout << "my new name is now " << yves.getName() << " and I have " << yves.getHitPoints() << " Hit points" << std::endl; 
+	}
+	std::cout << std::endl;
+	std::cout << std::endl;
+	{
+		std::cout << "\e[0;32m//********** constructor test **********//\e[0;37m" << std::endl;
+		ScavTrap	bob;
+		ScavTrap	henri("Henri");
+		ScavTrap	notHenri(henri);
 	}
 }

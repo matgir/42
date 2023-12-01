@@ -5,7 +5,7 @@
 int	main(void)
 {
 	{
-		std::cout << "//********** Energy limit test **********//" << std::endl;
+		std::cout << "\e[0;32m//********** Energy limit test **********//\e[0;37m" << std::endl;
 		FragTrap	bob("bob");
 
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
@@ -21,7 +21,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		std::cout << "//********** Hit points limit test **********//" << std::endl;
+		std::cout << "\e[0;32m//********** Hit points limit test **********//\e[0;37m" << std::endl;
 		FragTrap	bob("bob");
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
 		bob.takeDamage(100);
@@ -34,7 +34,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		std::cout << "//********** Take damage test **********//" << std::endl;
+		std::cout << "\e[0;32m//********** Take damage test **********//\e[0;37m" << std::endl;
 		FragTrap	bob("bob");
 		bob.takeDamage(1);
 		bob.takeDamage(2);
@@ -46,7 +46,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		std::cout << "//********** Repair test **********//" << std::endl;
+		std::cout << "\e[0;32m//********** Repair test **********//\e[0;37m" << std::endl;
 		FragTrap	bob("bob");
 		std::cout << "bob has " << bob.getEnergyPoints() << " Energy points" << std::endl;
 		bob.beRepaired(1);
@@ -67,7 +67,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		std::cout << "//********** Gate keeper mode/high five test **********//" << std::endl;
+		std::cout << "\e[0;32m//********** Gate keeper mode/high five test **********//\e[0;37m" << std::endl;
 		ScavTrap	bob("bob");
 		ClapTrap	yves("yves");
 		FragTrap	jean("jean");
@@ -83,7 +83,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		std::cout << "//********** copy assignment test **********//" << std::endl;
+		std::cout << "\e[0;32m//********** copy assignment test **********//\e[0;37m" << std::endl;
 		ScavTrap	bob("bob");
 		ScavTrap	hughe("hughe");
 		ClapTrap	yves("yves");
@@ -116,5 +116,13 @@ int	main(void)
 							//bertrand wont be able to use guardGate() but the base information will be transmited
 		// bertrand.guardGate();
 		std::cout << "my new name is now " << bertrand.getName() << " and I have " << bertrand.getEnergyPoints() << " Energy points" << std::endl; 
+	}
+	std::cout << std::endl;
+	std::cout << std::endl;
+	{
+		std::cout << "\e[0;32m//********** constructor test **********//\e[0;37m" << std::endl;
+		FragTrap	bob;
+		FragTrap	henri("Henri");
+		FragTrap	notHenri(henri);
 	}
 }

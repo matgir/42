@@ -20,7 +20,7 @@ class Dog : public Animal
 
 	private:
 
-		Brain	*_dogBrain;
+		Brain	*_brain;
 };
 
 #endif

@@ -15,10 +15,10 @@ class Brain
 		Brain(Brain const & copy);
 		~Brain(void);
 
-		Brain	&operator=(Brain const & assign);
+		Brain			&operator=(Brain const & assign);
 
-		std::string		getIdeas(int i)const;
-		void			setIdeas(std::string idea, int i);
+		std::string		getIdeas(const int & i)const;
+		void			setIdeas(const std::string & idea, const int & i);
 
 	private:
 
