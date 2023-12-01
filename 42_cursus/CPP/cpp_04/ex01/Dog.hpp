@@ -16,7 +16,7 @@ class Dog : public Animal
 		Dog	&operator=(Dog const & copy);
 
 		void	makeSound(void);
-		Brain	*getBrain(void)const;
+		virtual Brain	*getBrain(void)const;
 
 	private:
 

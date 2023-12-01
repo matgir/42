@@ -7,7 +7,7 @@
 int main()
 {
 	{
-		const Animal	*j = new Dog();
+		Animal	*j = new Dog();
 		const Animal	*i = new Cat();
 
 		delete j;
@@ -28,8 +28,8 @@ int main()
 
 		animals[0]->makeSound(); //makes dog sound
 		animals[3]->makeSound(); //makes cat sound
-		// &animals[0]->getBrain()->setIdeas("* EAT MEOW *", 0);
-		// std::cout << &animals[0]->getBrain()->getIdeas() << std::endl;
+		dynamic_cast<Dog*>(animals[0])->getBrain()->setIdeas("* EAT MEOW *", 0);
+		std::cout << dynamic_cast<Dog*>(animals[0])->getBrain()->getIdeas(0) << std::endl;
 
 		for (int i = 0; i < j; i++)
 			delete animals[i];
