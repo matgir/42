@@ -15,7 +15,7 @@ int main()
 		std::cout << i->getType() << std::endl;
 		dynamic_cast<Dog*>(j)->getBrain()->setIdeas("* EAT MEOW *", 0);
 		std::cout << dynamic_cast<Dog*>(j)->getBrain()->getIdeas(0) << std::endl;
-		dynamic_cast<Dog*>(j)->makeSound();
+		j->makeSound();
 
 		delete j;
 		delete i;

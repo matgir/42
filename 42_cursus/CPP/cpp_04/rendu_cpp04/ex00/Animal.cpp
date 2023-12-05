@@ -3,7 +3,7 @@
 Animal::Animal(void)
 {
 	std::cout <<"Default Animal constructor called" << std::endl;
-	_type = "animal";
+	_type = "default_animal";
 	return;
 }
 
@@ -37,6 +37,6 @@ std::string	Animal::getType(void)const
 
 void	Animal::makeSound(void)const
 {
-	std::cout << "*animal sound*" << std::endl;
+	std::cout << "* ANIMAL SOUND *" << std::endl;
 	return;
 }

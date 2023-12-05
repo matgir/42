@@ -20,12 +20,12 @@ WrongAnimal::~WrongAnimal(void)
 	return;
 }
 
-WrongAnimal	&WrongAnimal::operator=(WrongAnimal const & assign)
+WrongAnimal	&WrongAnimal::operator=(WrongAnimal const & copy)
 {
 	std::cout << "WrongAnimal assignment operator called" << std::endl;
 
-	if (this != &assign)
-		this->_type = assign.getType();
+	if (this != &copy)
+		this->_type = copy.getType();
 
 	return *this;
 }
@@ -37,6 +37,6 @@ std::string	WrongAnimal::getType(void)const
 
 void	WrongAnimal::makeSound(void)const
 {
-	std::cout << "*Wrong Animal sound*" << std::endl;
+	std::cout << "* WRONG ANIMAL SOUND *" << std::endl;
 	return;
 }

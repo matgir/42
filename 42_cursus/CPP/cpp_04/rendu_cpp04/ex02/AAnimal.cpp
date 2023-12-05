@@ -3,7 +3,7 @@
 AAnimal::AAnimal(void)
 {
 	std::cout <<"Default AAnimal constructor called" << std::endl;
-	_type = "animal";
+	_type = "default_animal";
 	return;
 }
 

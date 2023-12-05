@@ -46,5 +46,16 @@ int main()
 		delete dog1;
 		delete dog2;
 	}
+	std::cout << std::endl << std::endl;
+	{
+		Dog	dog1;
+		dog1.getBrain()->setIdeas("I AM DOG NUMERO UNO", 0);
+		std::cout << dog1.getBrain()->getIdeas(0) << std::endl;
+		Dog	dog2(dog1);
+		std::cout << dog2.getBrain()->getIdeas(0) << std::endl;
+		dog2.getBrain()->setIdeas("2", 0);
+		std::cout << dog1.getBrain()->getIdeas(0) << std::endl;
+		std::cout << dog2.getBrain()->getIdeas(0) << std::endl;
+	}
 	return 0;
 }
