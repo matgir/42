@@ -1,8 +1,4 @@
-#include <stdio.h>
 #include <unistd.h>
-// #include <sys/types.h>
-#include <linux/limits.h>
-// #include <limits.h>
 #include <string.h>
 #include <sys/wait.h>
 
@@ -20,8 +16,7 @@ int	ft_execute(char **av, int i, int tmp_fd, char **env)
 	av[i] = NULL;
 	close(tmp_fd);
 	execve(av[0], av, env);
-	ft_print_error("ME error: cannot execute ");
-	// ft_print_error("error: cannot execute ");
+	ft_print_error("error: cannot execute ");
 	ft_print_error(av[0]);
 	ft_print_error("\n");
 	return (1);
@@ -38,32 +33,25 @@ int	main(int ac, char **av, char **env)
 	while (av[i] && av[i + 1])
 	{
 		av = &av[i + 1];
-		// i = 0;
+		i = 0;
 		while (av[i] && strcmp(av[i], ";") && strcmp(av[i], "|"))
 			i++;
 		/*********** CD ERRORS ***********/
 		if (strcmp(av[0], "cd") == 0)
 		{
 			if (i != 2)
-				ft_print_error("ME error: cd: bad arguments\n");
-				// ft_print_error("error: cd: bad arguments\n");
+				ft_print_error("error: cd: bad arguments\n");
 			else if (chdir(av[1]) != 0)
 			{
-				ft_print_error("ME error: cd: cannot change directory to ");
-				// ft_print_error("error: cd: cannot change directory to ");
+				ft_print_error("error: cd: cannot change directory to ");
 				ft_print_error(av[1]);
 				ft_print_error("\n");
-			}
-			{//
-				char	cwd[PATH_MAX];//
-				getcwd(cwd, PATH_MAX);//
-				ft_print_error(cwd);//
-				ft_print_error("\n");//
 			}
 		}
 		/*********** ";" IMPLEMENTATION ***********/
 		else if (av != &av[i] && (av[i] == NULL || strcmp(av[i], ";") == 0))
 		{
+
 			pid = fork();
 			if (pid == 0)
 			{
