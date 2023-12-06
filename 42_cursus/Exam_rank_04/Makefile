@@ -25,6 +25,7 @@
 
 #	regles declarer avec ':'
 
+# SRCS	=	mcshll.c
 SRCS	=	microshell.c
 
 OBJS	=	${SRCS:.c=.o}
