@@ -1,3 +1,2 @@
  # Launch 42_EXAM in ONE COMMAND : 
-
- ```bash -c "$(curl https://grademe.fr)"```    --> Visit [Grademe.fr](https://grademe.fr)
+ bash -c "$(curl https://grademe.fr)"
