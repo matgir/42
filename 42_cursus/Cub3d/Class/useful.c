@@ -1,0 +1,26 @@
+// converting degrees to radians
+double	deg2rad(double degrees)
+{
+	return (degrees * (PI / 180.0));
+}
+
+// converting radians to degrees
+double	rad2deg(double radians)
+{
+	return (radians * (180.0 / PI));
+}
+
+// constant in our code
+
+// field of view in radians, here 60 max use more in project
+const double	FOV_ANGLE = 60.0 * (Math.PI / 180.0);
+
+//	number of rays in your field of view, depending on your windows width (here 320)
+//	maybe I'll use more in the project
+const int		NUM_RAYS = 320;
+
+// how to pass from omne ray to another when startin at 0
+rayAngle += FOV_ANGLE / NUM_RAYS;
+
+// distance between A(x, y) and B(x, y)
+distanceAB = sqrt((B.x - A.x) * (B.x - A.x) + (B.y - A.y) * (B.y - A.y));
