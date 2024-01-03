@@ -24,3 +24,25 @@ rayAngle += FOV_ANGLE / NUM_RAYS;
 
 // distance between A(x, y) and B(x, y)
 distanceAB = sqrt((B.x - A.x) * (B.x - A.x) + (B.y - A.y) * (B.y - A.y));
+
+// cast rays
+function	catAllRays()
+{
+	var	columnId = 0;
+
+	// start first ray substracting half of FOV
+	var	rayAngle = player.rotationAngle - (FOV_ANGLE / 2);
+
+	// loop all columns casting rays
+	for (var i = 0; i < NUM_RAYS; i++)
+	{
+		// call function to cast a single ray
+		var	ray = new Ray(rayAngle);
+		ray.cast(columnId);
+
+		// next ray is last ray incremented by FOV_ANGLE / NUM_RAY
+		rayAngle += FOV_ANGLE / NUM_RAYS;
+
+		columnId++;
+	}
+}
