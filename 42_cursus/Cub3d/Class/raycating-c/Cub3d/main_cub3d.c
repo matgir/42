@@ -31,15 +31,15 @@ int	main()
 
 	mlx = malloc(sizeof(t_mlx));
 	if (!mlx)
-		return ft_exit("specific error message\n");
+		return ft_exit("specific error message 1\n");
 
 	mlx->graph_ptr = mlx_init();
 	if (!mlx->graph_ptr)
-		return ft_exit("specific error message\n");
+		return ft_exit("specific error message 2\n");
 	
 	mlx->win_ptr = mlx_new_window(mlx->graph_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, GAME_NAME);
 	if (mlx->win_ptr)
-		return ft_exit("specific error message\n");
+		return ft_exit("specific error message 3\n");
 
 	mlx_loop(mlx->graph_ptr);
 
