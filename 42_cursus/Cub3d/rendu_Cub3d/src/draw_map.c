@@ -121,7 +121,7 @@ void	composer_map(t_vars *var)
 				draw_square(var, x, y, 0x00FFFFFF);
 			else if (var->map[x][y] == '1')
 				draw_square(var, x, y, 0x363636);
-			draw_grid(var, x, y, 0x363636);
+			// draw_grid(var, x, y, 0x363636); // voir si on fait la minimap sans la grille
 		}
 	}
 }

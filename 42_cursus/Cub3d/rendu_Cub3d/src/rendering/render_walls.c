@@ -36,19 +36,19 @@ void	compose_wall_strip(t_vars *var, t_render *render, int i, t_data *text)
 	int	limit_x;
 
 	// (void)text; //SUPPRIMER
-	x = i * render->wallStripWidth;
-	limit_x = x + render->wallStripWidth;
-	y = render->wallTopPxl;
-	while (y <= render->wallBottomPxl)
+	x = i * render->wallstripwidth;
+	limit_x = x + render->wallstripwidth;
+	y = render->walltoppxl;
+	while (y <= render->wallbottompxl)
 	{
-		render->distFromTop = y + (render->wallStripHeight / 2)
+		render->distfromtop = y + (render->wallstripheight / 2)
 			- (WINDOW_HEIGHT / 2);
-		render->offset_y = render->distFromTop * ((float)TEXT_SIZE
-				/ render->wallStripHeight);
+		render->offset_y = render->distfromtop * ((float)TEXT_SIZE
+				/ render->wallstripheight);
 		render->pxl = *(int *)(text->addr + (render->offset_y
 					* text->line_length + render->offset_x
 					* (text->bits_per_pixel / 8)));
-		x = i * render->wallStripWidth;
+		x = i * render->wallstripwidth;
 		while (x < limit_x)
 		{
 			if ((x < WINDOW_WIDTH && y < WINDOW_HEIGHT)
@@ -74,19 +74,19 @@ void	render_walls(t_vars *var)
 		ray = var->rays[i];
 		text_offset_x(&ray, &render);
 		render.dist_proj_plane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
-		render.wallStripHeight = (TILE_SIZE / ray.distance)
+		render.wallstripheight = (TILE_SIZE / ray.distance)
 			* render.dist_proj_plane;
-		render.wallStripWidth = WALL_STRIP_WIDTH;
-		render.wallTopPxl = (WINDOW_HEIGHT / 2) - (render.wallStripHeight / 2);
-		if (render.wallTopPxl < 0)
-			render.wallTopPxl = 0;
-		render.wallBottomPxl = (WINDOW_HEIGHT / 2)
-			+ (render.wallStripHeight / 2);
-		if (render.wallBottomPxl > WINDOW_HEIGHT)
-			render.wallBottomPxl = WINDOW_HEIGHT;
+		render.wallstripwidth = WALL_STRIP_WIDTH;
+		render.walltoppxl = (WINDOW_HEIGHT / 2) - (render.wallstripheight / 2);
+		if (render.walltoppxl < 0)
+			render.walltoppxl = 0;
+		render.wallbottompxl = (WINDOW_HEIGHT / 2)
+			+ (render.wallstripheight / 2);
+		if (render.wallbottompxl > WINDOW_HEIGHT)
+			render.wallbottompxl = WINDOW_HEIGHT;
 		text = get_texture(&ray, var);
 		compose_wall_strip(var, &render, i, text);
 		i++;
 	}
-	// printf("orientation du joueur == %f\n", var->player.rotationAngle);
+	// printf("orientation du joueur == %f\n", var->player.rotationangle);
 }

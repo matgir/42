@@ -20,7 +20,6 @@
 # include <fcntl.h>
 # include "./Libft/libft.h"
 # include <math.h>
-
 # include <limits.h> // SUPPRIMER
 # include <unistd.h>
 
@@ -31,11 +30,10 @@
 # define LEFT 97 // A
 # define RIGHT 100 // D
 # define ESC 65307
-# define WINDOW_WIDTH 1500 // ajouter une securite par rapport a resolution max de l'ecran
+# define WINDOW_WIDTH 1500 // add secur par rapport a resolution max de l'ecran
 # define WINDOW_HEIGHT 900
 # define WALL_STRIP_WIDTH 1
 
-// # define NUM_RAYS 10
 # define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP_WIDTH)
 # define FOV_ANGLE (60 * (M_PI / 180))
 # define TWO_PI M_PI * 2
@@ -44,8 +42,9 @@
 # define S 2
 # define E 3
 # define W 4
+// # define NUM_RAYS 10
 
-typedef struct	s_data {
+typedef struct s_data {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -55,13 +54,13 @@ typedef struct	s_data {
 
 
 // AJOUT de la branche elise-freshstart
-typedef	struct	s_config {			//
+typedef struct s_config {			//
 	char	**tab;					//
 	char	*north;					//
 	char	*south;					//
 	char	*west;					//
 	char	*east;					//
-	int 	floor;					//
+	int		floor;					//
 	int		ceiling;				//
 }			t_config;				//
 // AJOUT de la branche elise-freshstart
@@ -70,47 +69,49 @@ typedef struct s_player {
 	float	x; //middle of the map, window width/2
 	float	y; //window height/2
 	int		radius; //3pxl
-	float	turnDirection; //-1 if left and +1 if right
-	float	walDirection; //-1 if back and +1 if forward
-	float	rotationAngle; //Math.PI/2 (90 degrees)
+	float	turndirection; //-1 if left and +1 if right
+	float	waldirection; //-1 if back and +1 if forward
+	float	rotationangle; //Math.PI/2 (90 degrees)
+	float	sidedirection;
 	float	step;
-	float	moveSpeed; // 2.0
-	float	rotationSpeed; // 2 * (MAth.PI / 180)
+	float	movespeed; // 2.0
+	float	rotationspeed; // 2 * (MAth.PI / 180)
 }				t_player;
 
 typedef struct s_window {
 	void	*win;
 	int		width; //y //en pixel
 	int		height; //x // en pixel
-	
 }				t_window;
 
-typedef	struct	s_ray {
+typedef struct s_ray {
 	float	ray_angle;
 	float	wall_hit_x;
 	float	wall_hit_y;
 	float	distance;
-	int		ray_facingDown;
-	int		ray_facingUp;
-	int		ray_facingRight;
-	int		ray_facingLeft;
-	int		wall_hitContent; // what is in the tile	that was hit by the ray (1 ? 0 ?...?). Useful for the textures
-	int		was_hitVertical;
+	float	minimap_dist;
+	int		ray_facingdown;
+	int		ray_facingup;
+	int		ray_facingright;
+	int		ray_facingleft;
+	int		wall_hitcontent; /* what is in the tile	that was hit by the ray
+								(1 ? 0 ?...?). Useful for the textures*/
+	int		was_hitvertical;
 }				t_ray;
 
-typedef	struct s_cast {
-	int		ray_facingDown;
-	int		ray_facingUp;
-	int		ray_facingRight;
-	int		ray_facingLeft;
-	float next_vertical_x;
-	float next_vertical_y;
-	float next_horizontal_x;
-	float next_horizontal_y;
-	float x_inter;
-	float y_inter;
-	float x_step;
-	float y_step;
+typedef struct s_cast {
+	int		ray_facingdown;
+	int		ray_facingup;
+	int		ray_facingright;
+	int		ray_facingleft;
+	float	next_vertical_x;
+	float	next_vertical_y;
+	float	next_horizontal_x;
+	float	next_horizontal_y;
+	float	x_inter;
+	float	y_inter;
+	float	x_step;
+	float	y_step;
 	int		horizontal_hit;
 	float	horizontal_hit_x;
 	float	horizontal_hit_y;
@@ -125,7 +126,7 @@ typedef	struct s_cast {
 	int		wall_hit_horizontal;
 	float	current_x;
 	float	current_y;
-	float 	vertical_hit_distance;
+	float	vertical_hit_distance;
 	float	horizontal_hit_distance;
 }				t_cast;
 
@@ -133,19 +134,18 @@ typedef struct s_vars {
 	t_data		img;
 	t_player	player;
 	void		*mlx;
-	int			mapWidth;
-	int			mapHeight;
+	int			mapwidth;
+	int			mapheight;
 	t_window	win;
 	char		**infile;
 	char		**map;
 	t_config	config; // struct for elements parsing
-	t_ray 		rays[NUM_RAYS];
+	t_ray		rays[NUM_RAYS];
 	t_data		text[4];
 	float		tmp_distance; //SUPPRIMER
 }				t_vars;
 
-
-typedef struct	s_color {
+typedef struct s_color {
 	char	*rgb;
 	char	*r;
 	char	*g;
@@ -159,11 +159,11 @@ typedef struct	s_color {
 typedef struct s_render
 {
 	float	dist_proj_plane;
-	float	wallStripHeight;
-	float	wallStripWidth;
-	int		wallTopPxl;
-	int		wallBottomPxl;
-	int		distFromTop;
+	float	wallstripheight;
+	float	wallstripwidth;
+	int		walltoppxl;
+	int		wallbottompxl;
+	int		distfromtop;
 	int		offset_x;
 	int		offset_y;
 	int		pxl;
@@ -234,11 +234,10 @@ int		hexa_char_to_int(char c);
 void	ft_strjoin_hexa(char *res, t_color *color);
 void	get_color(char *rgb, char *color, int *i);
 
-
 // Player SetUp
 
 void	start_position(t_vars *var, t_player *player);
-void    stop_wall(t_player *player, t_vars *var, int keycode);
+void	stop_wall(t_player *player, t_vars *var, int keycode);
 void	init_player(t_player *player, t_vars *var);
 void	vision_line(t_data *img, t_player *player, int color); // à supprimer
 
@@ -258,6 +257,7 @@ void	update_img(t_vars *var);
 
 // Raycasting
 
+void	init_rays(t_vars *cub);
 void	cast_all_rays(t_vars *cub);
 float	normalize_angle(float angle);
 void	get_ray_orientation(t_cast *cast, float ray_angle);
@@ -286,6 +286,5 @@ void	render_floor(t_vars *var, int y, int color);
 void	render_ceiling(t_vars *var, int y, int color);
 void	text_offset_x(t_ray *ray, t_render *render);
 void	init_textures(t_vars *var);
-
 
 #endif

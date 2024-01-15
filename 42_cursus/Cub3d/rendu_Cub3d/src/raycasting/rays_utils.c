@@ -26,18 +26,18 @@ float	normalize_angle(float angle)
 
 void	get_ray_orientation(t_cast *cast, float ray_angle)
 {
-	cast->ray_facingDown = 0;
-	cast->ray_facingUp = 0;
-	cast->ray_facingLeft = 0;
-	cast->ray_facingRight = 0;
+	cast->ray_facingdown = 0;
+	cast->ray_facingup = 0;
+	cast->ray_facingleft = 0;
+	cast->ray_facingright = 0;
 	if (ray_angle > 0 && ray_angle < M_PI)
-		cast->ray_facingDown = 1;
+		cast->ray_facingdown = 1;
 	else
-		cast->ray_facingUp = !cast->ray_facingDown;
+		cast->ray_facingup = !cast->ray_facingdown;
 	if (ray_angle < 0.5 * M_PI || ray_angle > 1.5 * M_PI)
-		cast->ray_facingRight = 1;
+		cast->ray_facingright = 1;
 	else
-		cast->ray_facingLeft = !cast->ray_facingRight;
+		cast->ray_facingleft = !cast->ray_facingright;
 }
 
 int	mapped_region(t_vars *var, int x, int y)
@@ -65,9 +65,9 @@ int	is_wall(t_vars *cub, float x, float y)
 		return (1);
 	map_x = y / TILE_SIZE;
 	map_y = x / TILE_SIZE;
-	// if (x > cub->mapWidth - 1)
+	// if (x > cub->mapwidth - 1)
 	// 	return (1);
-	// if (y > cub->mapHeight - 1)
+	// if (y > cub->mapheight - 1)
 	// 	return (1);
 	if (mapped_region(cub, map_x, map_y) == 1)
 		return (2);
@@ -86,17 +86,17 @@ void	horizontal_step(t_vars *cub, float ray_angle, t_cast *cast)
 	cast->horizontal_hit_x = 0;
 	cast->horizontal_hit_y = 0;
 	cast->y_inter = floor(cub->player.y / TILE_SIZE) * TILE_SIZE;
-	if (cast->ray_facingDown)
+	if (cast->ray_facingdown)
 		cast->y_inter += TILE_SIZE;
 	cast->x_inter = cub->player.x
 		+ (cast->y_inter - cub->player.y) / tan(ray_angle);
 	cast->y_step = TILE_SIZE;
-	if (cast->ray_facingUp)
+	if (cast->ray_facingup)
 		cast->y_step *= -1;
 	cast->x_step = TILE_SIZE / tan(ray_angle);
-	if (cast->ray_facingLeft && cast->x_step > 0)
+	if (cast->ray_facingleft && cast->x_step > 0)
 		cast->x_step *= -1;
-	if (cast->ray_facingRight && cast->x_step < 0)
+	if (cast->ray_facingright && cast->x_step < 0)
 		cast->x_step *= -1;
 }
 
@@ -113,7 +113,7 @@ void	horizontal_hit(t_vars *cub, t_cast *cast)
 	{
 		cast->current_x = cast->next_horizontal_x;
 		cast->current_y = cast->next_horizontal_y;
-		if (cast->ray_facingUp)
+		if (cast->ray_facingup)
 			cast->current_y --;
 		else
 			cast->current_y = cast->next_horizontal_y;
@@ -143,17 +143,17 @@ void	vertical_step(t_vars *cub, float ray_angle, t_cast *cast)
 	cast->vertical_hit_x = 0;
 	cast->vertical_hit_y = 0;
 	cast->x_inter = floor(cub->player.x / TILE_SIZE) * TILE_SIZE;
-	if (cast->ray_facingRight)
+	if (cast->ray_facingright)
 		cast->x_inter += TILE_SIZE;
 	cast->y_inter = cub->player.y
 		+ (cast->x_inter - cub->player.x) * tan(ray_angle);
 	cast->x_step = TILE_SIZE;
-	if (cast->ray_facingLeft)
+	if (cast->ray_facingleft)
 		cast->x_step *= -1;
 	cast->y_step = TILE_SIZE * tan(ray_angle);
-	if (cast->ray_facingUp && cast->y_step > 0)
+	if (cast->ray_facingup && cast->y_step > 0)
 		cast->y_step *= -1;
-	if (cast->ray_facingDown && cast->y_step < 0)
+	if (cast->ray_facingdown && cast->y_step < 0)
 		cast->y_step *= -1;
 }
 
@@ -170,7 +170,7 @@ void	vertical_hit(t_vars *cub, t_cast *cast)
 	{
 		cast->current_x = cast->next_vertical_x;
 		cast->current_y = cast->next_vertical_y;
-		if (cast->ray_facingLeft)
+		if (cast->ray_facingleft)
 			cast->current_x --;
 		cast->current_y = cast->next_vertical_y;
 /*  */	if ((wall = is_wall(cub, cast->current_x, cast->current_y)))
@@ -230,25 +230,26 @@ void	compare_distance(t_cast *cast, t_ray *ray, float ray_angle)
 		ray->distance = cast->vertical_hit_distance;
 		ray->wall_hit_x = cast->vertical_hit_x;
 		ray->wall_hit_y = cast->vertical_hit_y;
-		ray->wall_hitContent = cast->vertical_content;
-		ray->was_hitVertical = 1;
+		ray->wall_hitcontent = cast->vertical_content;
+		ray->was_hitvertical = 1;
 	}
 	else
 	{
 		ray->distance = cast->horizontal_hit_distance;
 		ray->wall_hit_x = cast->horizontal_hit_x;
 		ray->wall_hit_y = cast->horizontal_hit_y;
-		ray->was_hitVertical = 0;
-		ray->wall_hitContent = cast->horizontal_content;
+		ray->was_hitvertical = 0;
+		ray->wall_hitcontent = cast->horizontal_content;
 	}
 	ray->ray_angle = ray_angle;
-	ray->ray_facingDown = cast->ray_facingDown;
-	ray->ray_facingUp = cast->ray_facingUp;
-	ray->ray_facingLeft = cast->ray_facingLeft;
-	ray->ray_facingRight = cast->ray_facingRight;
+	ray->ray_facingdown = cast->ray_facingdown;
+	ray->ray_facingup = cast->ray_facingup;
+	ray->ray_facingleft = cast->ray_facingleft;
+	ray->ray_facingright = cast->ray_facingright;
 }
 
 void	adjust_distance(t_player *player, t_ray *ray)
 {
-	ray->distance *= cos(ray->ray_angle - player->rotationAngle);
+	ray->minimap_dist = ray->distance;
+	ray->distance *= cos(ray->ray_angle - player->rotationangle);
 }

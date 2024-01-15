@@ -117,5 +117,6 @@ int	parsing_elements(t_vars *var, char **file)
 			return (free_tab(var->config.tab), 1);
 		i++;
 	}
-	return (i); //return l'index de la ligne a partir de laquelle on a fini de parser les elements, pour commencer a parser la map
+	return (i); /*	return l'index de la ligne a partir de laquelle on a fini de
+					parser les elements, pour commencer a parser la map */
 }

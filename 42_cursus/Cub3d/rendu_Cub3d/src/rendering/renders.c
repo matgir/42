@@ -16,9 +16,9 @@
 void	render_minimap(t_vars *var)
 {
 	composer_map(var);
-	show_player_on_minimap(&var->player, var);
-	vision_line(&var->img, &var->player, 0xda0722);
+	// vision_line(&var->img, &var->player, 0xda0722); //SUPRIMER
 	render_fov(var, &var->player, 0x00FF00);
+	show_player_on_minimap(&var->player, var);
 }
 
 /*------ render map 3d -------*/

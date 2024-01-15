@@ -28,9 +28,9 @@ void	vision_line(t_data *img, t_player *player, int color)
 
 	x0 = player->x;
 	y0 = player->y;
-	x1 = x0 + (cos(player->rotationAngle) * 30);
-	y1 = y0 + (sin(player->rotationAngle) * 30);
-	// printf("rotation angle == %f     |      ", player->rotationAngle);
+	x1 = x0 + (cos(player->rotationangle) * 30);
+	y1 = y0 + (sin(player->rotationangle) * 30);
+	// printf("rotation angle == %f     |      ", player->rotationangle);
 	// printf("x1 == %f y1 == %f\n", x1, y1);
 	dx = fabs((float)x1 - (float)x0);
 	dy = fabs((float)y1 - (float)y0);
@@ -77,14 +77,14 @@ void	render_fov(t_vars *cub, t_player *player, int color)
 	i = 0;
 	while (i < NUM_RAYS) // remettre NUM_RAYS
 	{
-		if (i == NUM_RAYS / 2) //SUPPRIMER
-			color = 0xFF0000;//SUPPRIMER
-		else
-			color = 0x00FF00;
+		// if (i == NUM_RAYS / 2) //SUPPRIMER
+		// 	color = 0xFF0000;//SUPPRIMER
+		// else
+		// 	color = 0x00FF00;
 		x0 = player->x;
 		y0 = player->y;
-		x1 = x0 + (cos(cub->rays[i].ray_angle) * cub->rays[i].distance);
-		y1 = y0 + (sin(cub->rays[i].ray_angle) * cub->rays[i].distance);
+		x1 = x0 + (cos(cub->rays[i].ray_angle) * cub->rays[i].minimap_dist);
+		y1 = y0 + (sin(cub->rays[i].ray_angle) * cub->rays[i].minimap_dist);
 		// x1 = x0 + (cos(cub->rays[i].ray_angle) * cub->rays[i].distance);
 		// y1 = y0 + (sin(cub->rays[i].ray_angle) * cub->rays[i].distance);
 		// printf("DISTANCE==== %f\n", cub->rays[i].distance);

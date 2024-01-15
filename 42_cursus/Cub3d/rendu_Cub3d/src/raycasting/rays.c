@@ -35,10 +35,10 @@ void	cast_all_rays(t_vars *cub)
 	int		ray_id;
 
 	ray_id = 0;
-	// ray_angle = cub->player.rotationAngle - (FOV_ANGLE / 2);
+	// ray_angle = cub->player.rotationangle - (FOV_ANGLE / 2);
 	while (ray_id < NUM_RAYS)
 	{
-		ray_angle = cub->player.rotationAngle
+		ray_angle = cub->player.rotationangle
 			+ atan((ray_id - NUM_RAYS / 2) / ((WINDOW_WIDTH / 2)
 					/ tan(FOV_ANGLE / 2)));
 		// printf("angle == %f\n", ray_angle);

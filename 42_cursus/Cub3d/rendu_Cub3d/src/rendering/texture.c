@@ -61,21 +61,21 @@ t_data	*get_texture(t_ray *ray, t_vars *var)
 {
 	t_data	*texture;
 
-	if (ray->ray_facingDown && !ray->was_hitVertical)
+	if (ray->ray_facingdown && !ray->was_hitvertical)
 		texture = &var->text[0];
-	else if (ray->ray_facingUp && !ray->was_hitVertical)
+	else if (ray->ray_facingup && !ray->was_hitvertical)
 		texture = &var->text[1];
-	else if (ray->ray_facingLeft && ray->was_hitVertical)
+	else if (ray->ray_facingleft && ray->was_hitvertical)
 		texture = &var->text[2];
 	else
 		texture = &var->text[3];
 	return (texture);
-	// else if (ray->ray_facingRight)
+	// else if (ray->ray_facingright)
 }
 
 void	text_offset_x(t_ray *ray, t_render *render)
 {
-	if (ray->was_hitVertical)
+	if (ray->was_hitvertical)
 		render->offset_x = (int)ray->wall_hit_y % TILE_SIZE;
 	else
 		render->offset_x = (int)ray->wall_hit_x % TILE_SIZE;

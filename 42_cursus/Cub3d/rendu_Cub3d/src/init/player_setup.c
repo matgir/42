@@ -45,24 +45,25 @@ void	start_orientation(t_vars *var, t_player *player)
 	y = (player->x - (TILE_SIZE / 2)) / TILE_SIZE;
 	orientation = var->map[x][y];
 	if (orientation == 'N')
-		player->rotationAngle = (3 * M_PI) / 2;
+		player->rotationangle = (3 * M_PI) / 2;
 	else if (orientation == 'S')
-		player->rotationAngle = M_PI_2;
+		player->rotationangle = M_PI_2;
 	else if (orientation == 'E')
-		player->rotationAngle = M_PI * 2;
+		player->rotationangle = M_PI * 2;
 	else if (orientation == 'W')
-		player->rotationAngle = M_PI;
+		player->rotationangle = M_PI;
 }
 
 /*------ joueur part du milieu de map et regarde vers le sud -------*/
 void	init_player(t_player *player, t_vars *var)
 {
-	player->radius = 4;
+	player->radius = 10;
 	start_position(var, player);
 	start_orientation(var, player);
-	player->turnDirection = 0;
-	player->walDirection = 0;
+	player->turndirection = 0;
+	player->waldirection = 0;
+	player->sidedirection = 0;
 	player->step = 0;
-	player->moveSpeed = 8.0;
-	player->rotationSpeed = 2 * (M_PI / 180);
+	player->movespeed = 8.0;
+	player->rotationspeed = 2 * (M_PI / 180);
 }

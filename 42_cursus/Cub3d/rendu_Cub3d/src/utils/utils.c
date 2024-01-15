@@ -14,7 +14,7 @@
 
 void	print_error(char *err)
 {
-	char *msg;
+	char	*msg;
 
 	msg = ft_strjoin("Error: ", err);
 	ft_putstr_fd(msg, 2);

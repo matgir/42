@@ -20,32 +20,34 @@ RAYCASTING = ./src/raycasting/
 
 RENDERING = ./src/rendering/
 
-SRCS =	main.c							\
-		${PARSING}parsing.c				\
-		${PARSING}wall_parsing.c		\
-		${PARSING}check_error.c			\
-		${PARSING}map_content.c			\
-		${PARSING}elem_parsing.c		\
-		${PARSING}elem_parsing_utils.c	\
-		${PARSING}extensions.c			\
-		${PARSING}walkable_path.c		\
-		${INIT}init_map.c				\
-		${INIT}init_render.c			\
-		${INIT}init_render_utils.c		\
+SRCS =	main.c								\
+		${PARSING}parsing.c					\
+		${PARSING}wall_parsing.c			\
+		${PARSING}check_error.c				\
+		${PARSING}map_content.c				\
+		${PARSING}elem_parsing.c			\
+		${PARSING}elem_parsing_utils.c		\
+		${PARSING}extensions.c				\
+		${PARSING}walkable_path.c			\
+		${INIT}init_map.c					\
+		${INIT}init_render.c				\
+		${INIT}init_render_utils.c			\
 		${INIT}init_render_utils_2.c		\
-		${INIT}player_setup.c			\
-		${UTILS}free.c					\
-		${UTILS}utils.c					\
-		${UTILS}split.c					\
-		${UTILS}bresenham.c				\
-		${RAYCASTING}rays.c				\
-		${RAYCASTING}rays_utils.c		\
-		${RENDERING}render_walls.c		\
-		${RENDERING}renders.c			\
+		${INIT}player_setup.c				\
+		${UTILS}free.c						\
+		${UTILS}free_utils.c				\
+		${UTILS}utils.c						\
+		${UTILS}split.c						\
+		${UTILS}bresenham.c					\
+		${RAYCASTING}rays.c					\
+		${RAYCASTING}rays_init.c			\
+		${RAYCASTING}rays_utils.c			\
+		${RENDERING}render_walls.c			\
+		${RENDERING}renders.c				\
 		${RENDERING}render_floor_ceiling.c	\
-		${RENDERING}texture.c			\
-		./src/key_hook.c				\
-		./src/draw_map.c				\
+		${RENDERING}texture.c				\
+		./src/key_hook.c					\
+		./src/draw_map.c					\
 
 SRCSB = 
 

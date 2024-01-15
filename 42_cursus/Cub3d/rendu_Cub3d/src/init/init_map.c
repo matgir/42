@@ -29,8 +29,8 @@ void	get_win_size(t_vars *var)
 	}
 	var->win.width *= TILE_SIZE;
 	var->win.height *= TILE_SIZE;
-	var->mapWidth = var->win.width;
-	var->mapHeight = var->win.height;
+	var->mapwidth = var->win.width;
+	var->mapheight = var->win.height;
 }
 
 /*------ définition window, img à composer et à afficher -------*/
@@ -45,6 +45,7 @@ void	def_var(t_vars *var)
 	init_config(&var->config);
 	init_textures(var);
 	init_player(&var->player, var);
+	init_rays(var);
 	cast_all_rays(var);
 	render_3d_map(var);
 	render_minimap(var);

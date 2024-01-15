@@ -91,18 +91,3 @@ int	free_for_parser(t_vars *var)
 	}
 	exit(1);
 }
-
-/*------ free tableau -------*/
-void	*free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	return (NULL);
-}
