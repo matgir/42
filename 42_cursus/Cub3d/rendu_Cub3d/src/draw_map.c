@@ -18,8 +18,8 @@ void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
 {
 	char	*dst;
 
-	x = x * 0.2;
-	y = y * 0.2;
+	x = x * 0.08;
+	y = y * 0.08;
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
@@ -61,12 +61,20 @@ void	draw_grid(t_vars *var, int x, int y, int color)
 	{
 		j = TILE_SIZE * y;
 		limit_j = j + TILE_SIZE;
+		// printf("this is the value at %i\n", j % TILE_SIZE);//
+
 		while (j < limit_j)
 		{
+			// printf(" TEST\n");
+			// if ((i % TILE_SIZE == 0 || j % TILE_SIZE == 0) && (var->map[j % TILE_SIZE][i % TILE_SIZE] != ' '))//
+			// {//
+				// printf("map[%i][%i] = %c\n", j / TILE_SIZE, i / TILE_SIZE, var->map[j % TILE_SIZE][i % TILE_SIZE]);//
 			if (i % TILE_SIZE == 0 || j % TILE_SIZE == 0)
 				my_mlx_pixel_put(&var->img, j, i, color);
+			// }//
 			j++;
 		}
+		// printf("i++ and i = %i\n", i);//
 		i++;
 	}
 }

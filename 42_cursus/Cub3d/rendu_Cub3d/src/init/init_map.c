@@ -36,7 +36,7 @@ void	get_win_size(t_vars *var)
 /*------ définition window, img à composer et à afficher -------*/
 void	def_var(t_vars *var)
 {
-	get_win_size(var);
+	get_win_size(var); //SUPPRIMER
 	var->win.win = mlx_new_window(var->mlx, WINDOW_WIDTH, \
 		WINDOW_HEIGHT, "Minimap - itahani & mgirardo");
 	var->img.img = mlx_new_image(var->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);

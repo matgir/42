@@ -32,6 +32,7 @@ SRCS =	main.c							\
 		${INIT}init_map.c				\
 		${INIT}init_render.c			\
 		${INIT}init_render_utils.c		\
+		${INIT}init_render_utils_2.c		\
 		${INIT}player_setup.c			\
 		${UTILS}free.c					\
 		${UTILS}utils.c					\

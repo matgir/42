@@ -12,7 +12,6 @@
 
 #include "../../cub3d.h"
 
-
 // afficher une texture unique pour commencer sur tous les murs.
 
 // void	text_to_wall(t_vars *var, int x, int y)
@@ -21,7 +20,8 @@
 // 	int	j;
 // 	i = ;
 // 	j = ;
-// 	int pxl = *(int *)(text.addr + (i * text.line_length + j * (text.bits_per_pixel / 8)));
+/* 	int pxl = *(int *)(text.addr + (i * text.line_length + j
+	* (text.bits_per_pixel / 8))); */
 // 	put_pix(&var->img, x, y, pxl);
 // }
 
@@ -37,26 +37,30 @@ void	init_textures(t_vars *var)
 {
 	var->text[0].img = mlx_xpm_file_to_image(var->mlx, var->config.north, \
 			&var->text[0].bits_per_pixel, &var->text[0].line_length);
-	var->text[0].addr = mlx_get_data_addr(var->text[0].img, &var->text[0].bits_per_pixel,
-		&var->text[0].line_length, &var->text[0].endian);
+	var->text[0].addr = mlx_get_data_addr(var->text[0].img,
+			&var->text[0].bits_per_pixel, &var->text[0].line_length,
+			&var->text[0].endian);
 	var->text[1].img = mlx_xpm_file_to_image(var->mlx, var->config.south, \
 			&var->text[1].bits_per_pixel, &var->text[1].line_length);
-	var->text[1].addr = mlx_get_data_addr(var->text[1].img, &var->text[1].bits_per_pixel,
-		&var->text[1].line_length, &var->text[1].endian);
+	var->text[1].addr = mlx_get_data_addr(var->text[1].img,
+			&var->text[1].bits_per_pixel, &var->text[1].line_length,
+			&var->text[1].endian);
 	var->text[2].img = mlx_xpm_file_to_image(var->mlx, var->config.west, \
 			&var->text[2].bits_per_pixel, &var->text[2].line_length);
-	var->text[2].addr = mlx_get_data_addr(var->text[2].img, &var->text[2].bits_per_pixel,
-		&var->text[2].line_length, &var->text[2].endian);
+	var->text[2].addr = mlx_get_data_addr(var->text[2].img,
+			&var->text[2].bits_per_pixel, &var->text[2].line_length,
+			&var->text[2].endian);
 	var->text[3].img = mlx_xpm_file_to_image(var->mlx, var->config.east, \
 			&var->text[3].bits_per_pixel, &var->text[3].line_length);
-	var->text[3].addr = mlx_get_data_addr(var->text[3].img, &var->text[3].bits_per_pixel,
-		&var->text[3].line_length, &var->text[3].endian);
+	var->text[3].addr = mlx_get_data_addr(var->text[3].img,
+			&var->text[3].bits_per_pixel, &var->text[3].line_length,
+			&var->text[3].endian);
 }
 
 t_data	*get_texture(t_ray *ray, t_vars *var)
 {
 	t_data	*texture;
-	
+
 	if (ray->ray_facingDown && !ray->was_hitVertical)
 		texture = &var->text[0];
 	else if (ray->ray_facingUp && !ray->was_hitVertical)
@@ -74,8 +78,5 @@ void	text_offset_x(t_ray *ray, t_render *render)
 	if (ray->was_hitVertical)
 		render->offset_x = (int)ray->wall_hit_y % TILE_SIZE;
 	else
-		render->offset_x = (int)ray->wall_hit_x % TILE_SIZE;		
+		render->offset_x = (int)ray->wall_hit_x % TILE_SIZE;
 }
-
-
-

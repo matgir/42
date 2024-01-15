@@ -24,8 +24,8 @@
 # include <limits.h> // SUPPRIMER
 # include <unistd.h>
 
-# define TILE_SIZE 32
-# define TEXT_SIZE 32
+# define TILE_SIZE 128
+# define TEXT_SIZE 128
 # define FORWARD 119 // W
 # define BACKWARD 115 // S
 # define LEFT 97 // A
@@ -269,7 +269,7 @@ void	vertical_hit(t_vars *cub, t_cast *cast);
 float	distance_calculus(float p_x, float p_y, float hit_x, float hit_y);
 void	set_distance(t_vars *cub, t_cast *cast);
 void	compare_distance(t_cast *cast, t_ray *ray, float ray_angle);
-void	render_FOV(t_vars *cub, t_player *player, int color);
+void	render_fov(t_vars *cub, t_player *player, int color);
 void	adjust_distance(t_player *player, t_ray *ray);
 
 // Rendering
