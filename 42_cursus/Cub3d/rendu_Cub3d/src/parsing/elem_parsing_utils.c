@@ -64,7 +64,7 @@ int	valid_rgb_index(char *element, int *i)
 	color = ft_atoi(nb);
 	if (ft_strlen(nb) > 3 || ft_strlen(nb) == 0
 		|| color < 0 || color > 255)
-		return (printf("(1)erreur color\n"), free(nb), 1);
+		return (/* printf("(1)erreur color\n"),  */free(nb), 1);
 	return (free(nb), 0);
 }
 

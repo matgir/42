@@ -38,9 +38,9 @@ int	one_player(char **map)
 		}
 	}
 	if (p == 0)
-		return (ft_putstr_fd("Error: needing a player\n", 2), 1);
+		return (/* ft_putstr_fd("Error: Needing a player\n", 2),  */1);
 	if (p > 1)
-		return (ft_putstr_fd("Error: only one player required\n", 2), 1);
+		return (/* ft_putstr_fd("Error: Only one player required\n", 2),  */2);
 	return (0);
 }
 

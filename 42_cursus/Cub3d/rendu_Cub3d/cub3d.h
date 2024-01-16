@@ -177,13 +177,14 @@ int		nb_lignes(const char *str);
 int		tab_len(char **tab);
 void	print_error(char *err);
 char	**ft_trim_tab(char **tab);
+int		ft_exit(char *str);
 
 // Parsing
 
 int		check_extension(char *filename);
 int		check_xpm(char *path);
 
-int		parsing(t_vars *var);
+int		parsing(t_vars *var, int fd);
 int		one_player(char **map);
 int		is_player(char c);
 int		wall_surrounded(char **map);

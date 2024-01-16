@@ -61,18 +61,20 @@ int	free_mlx(t_vars *var)
 		mlx_destroy_display(var->mlx);
 		free(var->mlx);
 	}
-	exit(1);
+	return (1);
+	// exit(1);
 }
 
 /*------ free mlx only et fermer programme -------*/
 int	free_mlxptr(t_vars *var)
 {
+	
 	if (var->mlx)
 	{
 		mlx_destroy_display(var->mlx);
 		free(var->mlx);
-	}
-	exit(1);
+	}	return (1);
+	// exit(1);
 }
 
 /*------ free mlx et map et fermer programme -------*/
@@ -88,6 +90,6 @@ int	free_for_parser(t_vars *var)
 	{
 		mlx_destroy_display(var->mlx);
 		free(var->mlx);
-	}
-	exit(1);
+	}	return (1);
+	// exit(1);
 }

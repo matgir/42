@@ -12,13 +12,20 @@
 
 #include "../../cub3d.h"
 
-int	parsing(t_vars *var)
+int	parsing(t_vars *var, int fd)
 {
+	int	i;
+
 	if (wall_surrounded(var->map) == 1)
-		return (ft_putstr_fd("Error: Invalid file content\n", 2), 1);
-	if (one_player(var->map) == 1)
-		return (1);
+		return (close(fd), free_for_parser(var), ft_exit("Invalid file content\n"));
+		// return (ft_putstr_fd("Error: Invalid file content\n", 2), 1);
+	i = one_player(var->map);
+	if (i == 1)
+		return (close(fd), free_for_parser(var), ft_exit("Needing a player\n"));
+	else if (i == 2)
+		return (close(fd), free_for_parser(var), ft_exit("Only one player required\n"));
 	if (allowed_char(var->map) == 1)
-		return (ft_putstr_fd("Error: character non allowed in map\n", 2), 1);
+		return (close(fd), free_for_parser(var), ft_exit("Unauthorized charater\n"));
+		// return (ft_putstr_fd("Error: Invalid character in map\n", 2), 1);
 	return (0);
 }

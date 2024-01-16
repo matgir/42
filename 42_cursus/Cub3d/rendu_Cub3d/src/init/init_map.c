@@ -87,7 +87,7 @@ char	**get_map(t_vars *var, char **file)
 
 	i = parsing_elements(var, file);
 	if (i == 1)
-		return (ft_putstr_fd("Error: Invalid input\n", 2), NULL);
+		return (/* ft_putstr_fd("Error: Invalid input\n", 2) , */NULL);
 	valeur = ft_strdup("");
 	i += 1;
 	while (file[i] != NULL)

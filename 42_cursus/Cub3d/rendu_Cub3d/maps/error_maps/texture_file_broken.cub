@@ -1,7 +1,7 @@
-NO resources/textures/lololol.xpm
-SO resources/textures/brickov.xpm
-WE resources/textures/brickov.xpm
-EA resources/textures/brickov.xpm
+NO ./mursxpm/yoyoyo.xpm
+SO ./mursxpm/128_2.xpm
+WE ./mursxpm/128_3.xpm
+EA ./mursxpm/128_4.xpm
 
  F       150,150,150
 C 70,70,70
