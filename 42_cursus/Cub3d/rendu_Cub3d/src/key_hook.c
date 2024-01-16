@@ -6,7 +6,7 @@
 /*   By: itahani <itahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:10:30 by itahani           #+#    #+#             */
-/*   Updated: 2024/01/14 20:37:48 by itahani          ###   ########.fr       */
+/*   Updated: 2024/01/15 23:47:03 by itahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,72 +30,23 @@ void	update_img(t_vars *var)
 	// printf("new fr[%i]\n", i++); //SUPPRIMER
 
 /*------ action d'une touche pressée -------*/
-int	key_hook(int keycode, t_vars *var)
-{
-	var->player.waldirection = 0;
-	var->player.turndirection = 0;
-	if (keycode == FORWARD)
-		var->player.waldirection = 1;
-	if (keycode == BACKWARD)
-		var->player.waldirection = -1;
-	if (keycode == LEFT || keycode == 65361)
-		var->player.turndirection = -0.1;
-	if (keycode == RIGHT || keycode == 65363)
-		var->player.turndirection = 0.1;
-	var->player.rotationangle += var->player.turndirection;
-	var->player.rotationangle = normalize_angle(var->player.rotationangle);
-	var->player.step = var->player.waldirection * var->player.movespeed;
-	var->player.x += cos(var->player.rotationangle) * var->player.step;
-	var->player.y += sin(var->player.rotationangle) * var->player.step;
-	stop_wall(&var->player, var, keycode);
-	if (keycode == ESC)
-		free_mlx(var);
-	if (keycode == FORWARD || keycode == BACKWARD
-		|| keycode == LEFT || keycode == RIGHT
-		|| keycode == 65361 || keycode == 65363)
-		update_img(var);
-	return (0);
-}
-
 // int	key_hook(int keycode, t_vars *var)
 // {
 // 	var->player.waldirection = 0;
 // 	var->player.turndirection = 0;
-// 	if (keycode == 65361)
+// 	if (keycode == FORWARD)
+// 		var->player.waldirection = 1;
+// 	if (keycode == BACKWARD)
+// 		var->player.waldirection = -1;
+// 	if (keycode == LEFT || keycode == 65361)
 // 		var->player.turndirection = -0.1;
-// 	if (keycode == 65363)
+// 	if (keycode == RIGHT || keycode == 65363)
 // 		var->player.turndirection = 0.1;
 // 	var->player.rotationangle += var->player.turndirection;
 // 	var->player.rotationangle = normalize_angle(var->player.rotationangle);
-// 	if (keycode == FORWARD)
-// 	{
-// 		var->player.waldirection = 1;
-// 		var->player.step = var->player.waldirection * var->player.movespeed;
-// 		var->player.x += cos(var->player.rotationangle) * var->player.step;
-// 		var->player.y += sin(var->player.rotationangle) * var->player.step;
-// 	}
-// 	if (keycode == BACKWARD)
-// 	{
-// 		var->player.waldirection = -1;
-// 		var->player.step = var->player.waldirection * var->player.movespeed;
-// 		var->player.x += cos(var->player.rotationangle) * var->player.step;
-// 		var->player.y += sin(var->player.rotationangle) * var->player.step;
-// 	}
-// 	if (keycode == RIGHT)
-// 	{
-// 		var->player.sidedirection = 1;
-// 		var->player.step = var->player.sidedirection * var->player.movespeed;
-// 		var->player.x += cos(var->player.rotationangle * 2) * var->player.step;
-// 		var->player.y += sin(var->player.rotationangle * 2) * var->player.step;
-// 	}
-// 	if (keycode == LEFT)
-// 	{
-// 		var->player.sidedirection = -1;
-// 		var->player.step = var->player.sidedirection * var->player.movespeed;
-// 		var->player.x += cos(var->player.rotationangle * 2) * var->player.step;
-// 		var->player.y += sin(var->player.rotationangle * 2) * var->player.step;
-// 	}
-// 	printf("rotationAngle = %f\n", var->player.rotationangle);
+// 	var->player.step = var->player.waldirection * var->player.movespeed;
+// 	var->player.x += cos(var->player.rotationangle) * var->player.step;
+// 	var->player.y += sin(var->player.rotationangle) * var->player.step;
 // 	stop_wall(&var->player, var, keycode);
 // 	if (keycode == ESC)
 // 		free_mlx(var);
@@ -105,6 +56,55 @@ int	key_hook(int keycode, t_vars *var)
 // 		update_img(var);
 // 	return (0);
 // }
+
+int	key_hook(int keycode, t_vars *var)
+{
+	var->player.waldirection = 0;
+	var->player.turndirection = 0;
+	if (keycode == 65361)
+		var->player.turndirection = -0.1;
+	if (keycode == 65363)
+		var->player.turndirection = 0.1;
+	var->player.rotationangle += var->player.turndirection;
+	var->player.rotationangle = normalize_angle(var->player.rotationangle);
+	if (keycode == FORWARD)
+	{
+		var->player.waldirection = 1;
+		var->player.step = var->player.waldirection * var->player.movespeed;
+		var->player.x += cos(var->player.rotationangle) * var->player.step;
+		var->player.y += sin(var->player.rotationangle) * var->player.step;
+	}
+	if (keycode == BACKWARD)
+	{
+		var->player.waldirection = -1;
+		var->player.step = var->player.waldirection * var->player.movespeed;
+		var->player.x += cos(var->player.rotationangle) * var->player.step;
+		var->player.y += sin(var->player.rotationangle) * var->player.step;
+	}
+	if (keycode == RIGHT)
+	{
+		var->player.sidedirection = 1;
+		var->player.step = var->player.sidedirection * var->player.movespeed;
+		var->player.x += cos(var->player.rotationangle + M_PI/2) * var->player.step;
+		var->player.y += sin(var->player.rotationangle + M_PI/2) * var->player.step;
+	}
+	if (keycode == LEFT)
+	{
+		var->player.sidedirection = -1;
+		var->player.step = var->player.sidedirection * var->player.movespeed;
+		var->player.x += cos(var->player.rotationangle + M_PI/2) * var->player.step;
+		var->player.y += sin(var->player.rotationangle + M_PI/2) * var->player.step;
+	}
+	// printf("rotationAngle = %f\n", var->player.rotationangle);
+	stop_wall(&var->player, var, keycode);
+	if (keycode == ESC)
+		free_mlx(var);
+	if (keycode == FORWARD || keycode == BACKWARD
+		|| keycode == LEFT || keycode == RIGHT
+		|| keycode == 65361 || keycode == 65363)
+		update_img(var);
+	return (0);
+}
 
 	/* at the beginning */
 	// static int i = 0; //SUPPRIMER
