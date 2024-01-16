@@ -15,6 +15,58 @@
 // fonction qui permet de caster chaque rayon un par un en calculant les
 	//intersections avec les murs + distances
 
+void	assign_horhit_val(t_cast *cast, int i)
+{
+	if (i == 1)
+	{
+		cast->next_horizontal_x = cast->x_inter;
+		cast->next_horizontal_y = cast->y_inter;
+	}
+	else if (i == 2)
+	{
+		cast->current_x = cast->next_horizontal_x;
+		cast->current_y = cast->next_horizontal_y;
+	}
+	else if (i == 3)
+	{
+		cast->horizontal_hit_x = cast->next_horizontal_x;
+		cast->horizontal_hit_y = cast->next_horizontal_y;
+		cast->horizontal_content = 1;
+		cast->horizontal_hit = 1;
+	}
+	else if (i == 4)
+	{
+		cast->next_horizontal_x += cast->x_step;
+		cast->next_horizontal_y += cast->y_step;
+	}
+}
+
+void	assign_verthit_val(t_cast *cast, int i)
+{
+	if (i == 1)
+	{
+		cast->next_vertical_x = cast->x_inter;
+		cast->next_vertical_y = cast->y_inter;
+	}
+	else if (i == 2)
+	{
+		cast->current_x = cast->next_vertical_x;
+		cast->current_y = cast->next_vertical_y;
+	}
+	else if (i == 3)
+	{
+		cast->vertical_hit_x = cast->next_vertical_x;
+		cast->vertical_hit_y = cast->next_vertical_y;
+		cast->vertical_content = 1;
+		cast->vertical_hit = 1;
+	}
+	else if (i == 4)
+	{
+		cast->next_vertical_x += cast->x_step;
+		cast->next_vertical_y += cast->y_step;
+	}
+}
+
 static void	cast_ray(t_vars *cub, float ray_angle, t_ray *ray)
 {
 	t_cast	cast;

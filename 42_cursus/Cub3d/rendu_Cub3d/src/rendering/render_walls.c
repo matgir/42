@@ -35,8 +35,7 @@ void	compose_wall_strip(t_vars *var, t_render *render, int i, t_data *text)
 	int	y;
 	int	limit_x;
 
-	// (void)text; //SUPPRIMER
-	x = i * render->wallstripwidth;
+	x = i * render->wallstripwidth;// (void)text; //SUPPRIMER
 	limit_x = x + render->wallstripwidth;
 	y = render->walltoppxl;
 	while (y <= render->wallbottompxl)
@@ -51,8 +50,7 @@ void	compose_wall_strip(t_vars *var, t_render *render, int i, t_data *text)
 		x = i * render->wallstripwidth;
 		while (x < limit_x)
 		{
-			if ((x < WINDOW_WIDTH && y < WINDOW_HEIGHT)
-				&& (x >= 0 && y >= 0))
+			if ((x < WINDOW_WIDTH && y < WINDOW_HEIGHT) && (x >= 0 && y >= 0))
 				put_pix(&var->img, x, y, render->pxl);
 			x++;
 		}
@@ -88,5 +86,7 @@ void	render_walls(t_vars *var)
 		compose_wall_strip(var, &render, i, text);
 		i++;
 	}
-	// printf("orientation du joueur == %f\n", var->player.rotationangle);
 }
+
+/* before last parenthesis */
+/* printf("orientation du joueur == %f\n", var->player.rotationangle);*/

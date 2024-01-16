@@ -105,34 +105,25 @@ void	horizontal_hit(t_vars *cub, t_cast *cast)
 	int	wall;
 
 	wall = 0;
-	cast->next_horizontal_x = cast->x_inter;
-	cast->next_horizontal_y = cast->y_inter;
+	assign_horhit_val(cast, 1);
 	while (cast->next_horizontal_x >= 0 && cast->next_horizontal_y >= 0
 		&& cast->next_horizontal_x < (cub->win.width)
 		&& cast->next_horizontal_y < (cub->win.height))
 	{
-		cast->current_x = cast->next_horizontal_x;
-		cast->current_y = cast->next_horizontal_y;
+		assign_horhit_val(cast, 2);
 		if (cast->ray_facingup)
 			cast->current_y --;
 		else
 			cast->current_y = cast->next_horizontal_y;
-/*  */	if ((wall = is_wall(cub, cast->current_x, cast->current_y)))
+		wall = is_wall(cub, cast->current_x, cast->current_y);
+		if (wall)
 		{
 			if (wall == 1)
-			{
-				cast->horizontal_hit_x = cast->next_horizontal_x;
-				cast->horizontal_hit_y = cast->next_horizontal_y;
-				cast->horizontal_content = 1;
-				cast->horizontal_hit = 1;
-			}
+				assign_horhit_val(cast, 3);
 			break ;
 		}
 		else
-		{
-			cast->next_horizontal_x += cast->x_step;
-			cast->next_horizontal_y += cast->y_step;
-		}
+			assign_horhit_val(cast, 4);
 	}
 }
 
@@ -162,33 +153,24 @@ void	vertical_hit(t_vars *cub, t_cast *cast)
 	int	wall;
 
 	wall = 0;
-	cast->next_vertical_x = cast->x_inter;
-	cast->next_vertical_y = cast->y_inter;
+	assign_verthit_val(cast, 1);
 	while (cast->next_vertical_x >= 0 && cast->next_vertical_y >= 0
 		&& cast->next_vertical_x < (cub->win.width)
 		&& cast->next_vertical_y < (cub->win.height))
 	{
-		cast->current_x = cast->next_vertical_x;
-		cast->current_y = cast->next_vertical_y;
+		assign_verthit_val(cast, 2);
 		if (cast->ray_facingleft)
 			cast->current_x --;
 		cast->current_y = cast->next_vertical_y;
-/*  */	if ((wall = is_wall(cub, cast->current_x, cast->current_y)))
+		wall = is_wall(cub, cast->current_x, cast->current_y);
+		if (wall)
 		{
 			if (wall == 1)
-			{
-				cast->vertical_hit_x = cast->next_vertical_x;
-				cast->vertical_hit_y = cast->next_vertical_y;
-				cast->vertical_content = 1;
-				cast->vertical_hit = 1;
-			}
+				assign_verthit_val(cast, 3);
 			break ;
 		}
 		else
-		{
-			cast->next_vertical_x += cast->x_step;
-			cast->next_vertical_y += cast->y_step;
-		}
+			assign_verthit_val(cast, 4);
 	}
 }
 

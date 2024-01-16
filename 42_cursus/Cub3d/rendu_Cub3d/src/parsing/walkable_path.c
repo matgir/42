@@ -38,41 +38,50 @@
 // 	}
 // }
 
+void	reverse_pos_for_back(t_player *player, int keycode)
+{
+	if (keycode == FORWARD)
+		player->waldirection = -1;
+	else if (keycode == BACKWARD)
+		player->waldirection = 1;
+	player->step = player->waldirection * player->movespeed;
+	player->x += cos(player->rotationangle) * player->step;
+	player->y += sin(player->rotationangle) * player->step;
+}
+
+void	reverse_pos_left_right(t_player *player, int keycode)
+{
+	if (keycode == LEFT)
+		player->sidedirection = 1;
+	else if (keycode == RIGHT)
+		player->sidedirection = -1;
+	player->step = player->sidedirection * player->movespeed;
+	player->x += cos(player->rotationangle + M_PI / 2) * player->step;
+	player->y += sin(player->rotationangle + M_PI / 2) * player->step;
+}
+
 void	stop_wall(t_player *player, t_vars *var, int keycode)
 {
 	int		x;
 	int		y;
-	// float	angle;
 
 	x = floor(player->y / TILE_SIZE);
 	y = floor(player->x / TILE_SIZE);
+	if (var->map[x][y] == '1')
+	{
+		if (keycode == FORWARD || keycode == BACKWARD)
+			reverse_pos_for_back(player, keycode);
+		if (keycode == LEFT || keycode == RIGHT)
+			reverse_pos_left_right(player, keycode);
+	}
+}
+
+	// float	angle;
+
+/* before if */
 	// angle = var->rays[NUM_RAYS / 2].ray_angle;
 	// if (((player->y / TILE_SIZE) == x) && (angle >= M_PI))
 	// 	x--;
 	// if (((player->x / TILE_SIZE) == y) && ((angle > M_PI / 2)
 	// 		|| angle < 3 * (M_PI / 2)))
 	// 	y--;
-	if (var->map[x][y] == '1')
-	{
-		if (keycode == FORWARD || keycode == BACKWARD)
-		{
-			if (keycode == FORWARD)
-				player->waldirection = -1;
-			else if (keycode == BACKWARD)
-				player->waldirection = 1;
-			player->step = player->waldirection * player->movespeed;
-			player->x += cos(player->rotationangle) * player->step;
-			player->y += sin(player->rotationangle) * player->step;
-		}
-		if (keycode == LEFT || keycode == RIGHT)
-		{
-			if (keycode == LEFT)
-				player->sidedirection = 1;
-			else if (keycode == RIGHT)
-				player->sidedirection = -1;
-			player->step = player->sidedirection * player->movespeed;
-			player->x += cos(player->rotationangle + M_PI/2) * player->step;
-			player->y += sin(player->rotationangle + M_PI/2) * player->step;
-		}
-	}
-}

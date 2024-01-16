@@ -238,6 +238,8 @@ void	get_color(char *rgb, char *color, int *i);
 
 void	start_position(t_vars *var, t_player *player);
 void	stop_wall(t_player *player, t_vars *var, int keycode);
+void	reverse_pos_for_back(t_player *player, int keycode);
+void	reverse_pos_left_right(t_player *player, int keycode);
 void	init_player(t_player *player, t_vars *var);
 void	vision_line(t_data *img, t_player *player, int color); // à supprimer
 
@@ -254,6 +256,7 @@ void	destroy_textures(t_vars *var);
 
 int		key_hook(int keycode, t_vars *var);
 void	update_img(t_vars *var);
+void	keycode_assignation(t_vars *var, int i);
 
 // Raycasting
 
@@ -271,6 +274,8 @@ void	set_distance(t_vars *cub, t_cast *cast);
 void	compare_distance(t_cast *cast, t_ray *ray, float ray_angle);
 void	render_fov(t_vars *cub, t_player *player, int color);
 void	adjust_distance(t_player *player, t_ray *ray);
+void	assign_verthit_val(t_cast *cast, int i);
+void	assign_horhit_val(t_cast *cast, int i);
 
 // Rendering
 
