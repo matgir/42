@@ -66,4 +66,6 @@ void	init_player(t_player *player, t_vars *var)
 	player->step = 0;
 	player->movespeed = 8.0;
 	player->rotationspeed = 2 * (M_PI / 180);
+	player->new_x = player->x;
+	player->new_y = player->y;
 }

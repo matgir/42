@@ -38,12 +38,12 @@ SRCS =	main.c								\
 		${UTILS}free_utils.c				\
 		${UTILS}utils.c						\
 		${UTILS}split.c						\
-		${UTILS}bresenham.c					\
 		${RAYCASTING}rays.c					\
 		${RAYCASTING}rays_init.c			\
 		${RAYCASTING}rays_utils.c			\
 		${RENDERING}render_walls.c			\
 		${RENDERING}renders.c				\
+		${RENDERING}render_fov.c			\
 		${RENDERING}render_floor_ceiling.c	\
 		${RENDERING}texture.c				\
 		./src/key_hook.c					\

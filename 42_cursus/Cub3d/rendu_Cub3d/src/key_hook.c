@@ -59,6 +59,8 @@ void	update_img(t_vars *var)
 
 void	keycode_assign(t_vars *var, int i)
 {
+	var->player.new_x = var->player.x;
+	var->player.new_y = var->player.y;
 	if (i == 1 || i == 2)
 	{
 		if (i == 1)
@@ -66,8 +68,8 @@ void	keycode_assign(t_vars *var, int i)
 		else if (i == 2)
 			var->player.waldirection = -1;
 		var->player.step = var->player.waldirection * var->player.movespeed;
-		var->player.x += cos(var->player.rotationangle) * var->player.step;
-		var->player.y += sin(var->player.rotationangle) * var->player.step;
+		var->player.new_x += cos(var->player.rotationangle) * var->player.step;
+		var->player.new_y += sin(var->player.rotationangle) * var->player.step;
 	}
 	if (i == 3 || i == 4)
 	{
@@ -76,9 +78,9 @@ void	keycode_assign(t_vars *var, int i)
 		else if (i == 4)
 			var->player.sidedirection = -1;
 		var->player.step = var->player.sidedirection * var->player.movespeed;
-		var->player.x += cos(var->player.rotationangle + M_PI / 2)
+		var->player.new_x += cos(var->player.rotationangle + M_PI / 2)
 			* var->player.step;
-		var->player.y += sin(var->player.rotationangle + M_PI / 2)
+		var->player.new_y += sin(var->player.rotationangle + M_PI / 2)
 			* var->player.step;
 	}
 }
@@ -101,7 +103,7 @@ int	key_hook(int keycode, t_vars *var)
 		keycode_assign(var, 3);
 	if (keycode == LEFT)
 		keycode_assign(var, 4);
-	stop_wall(&var->player, var, keycode);
+	stop_wall(&var->player, var/* , keycode */);
 	if (keycode == ESC)
 		free_mlx(var);
 	if (keycode == FORWARD || keycode == BACKWARD

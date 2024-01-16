@@ -44,6 +44,16 @@
 # define W 4
 // # define NUM_RAYS 10
 
+typedef struct s_line {
+	int		delta_x;
+	int		delta_y;
+	int		sidelength;
+	float	yinc;
+	float	xinc;
+	float	current_x;
+	float	current_y;
+}				t_line;
+
 typedef struct s_data {
 	void	*img;
 	char	*addr;
@@ -51,7 +61,6 @@ typedef struct s_data {
 	int		line_length;
 	int		endian;
 }				t_data;
-
 
 // AJOUT de la branche elise-freshstart
 typedef struct s_config {			//
@@ -76,6 +85,9 @@ typedef struct s_player {
 	float	step;
 	float	movespeed; // 2.0
 	float	rotationspeed; // 2 * (MAth.PI / 180)
+	t_line	trajectory;
+	float	new_x;
+	float	new_y;
 }				t_player;
 
 typedef struct s_window {
@@ -97,6 +109,7 @@ typedef struct s_ray {
 	int		wall_hitcontent; /* what is in the tile	that was hit by the ray
 								(1 ? 0 ?...?). Useful for the textures*/
 	int		was_hitvertical;
+	t_line	line;
 }				t_ray;
 
 typedef struct s_cast {
@@ -238,9 +251,9 @@ void	get_color(char *rgb, char *color, int *i);
 // Player SetUp
 
 void	start_position(t_vars *var, t_player *player);
-void	stop_wall(t_player *player, t_vars *var, int keycode);
-void	reverse_pos_for_back(t_player *player, int keycode);
-void	reverse_pos_left_right(t_player *player, int keycode);
+void	stop_wall(t_player *player, t_vars *var/* , int keycode */);
+// void	reverse_pos_for_back(t_player *player, int keycode);
+// void	reverse_pos_left_right(t_player *player, int keycode);
 void	init_player(t_player *player, t_vars *var);
 void	vision_line(t_data *img, t_player *player, int color); // à supprimer
 
@@ -292,5 +305,6 @@ void	render_floor(t_vars *var, int y, int color);
 void	render_ceiling(t_vars *var, int y, int color);
 void	text_offset_x(t_ray *ray, t_render *render);
 void	init_textures(t_vars *var);
+void	dda(t_player *player, t_vars *var, t_ray *ray, int color);
 
 #endif

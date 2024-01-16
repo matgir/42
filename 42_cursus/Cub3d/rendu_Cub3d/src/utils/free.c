@@ -61,8 +61,8 @@ int	free_mlx(t_vars *var)
 		mlx_destroy_display(var->mlx);
 		free(var->mlx);
 	}
-	return (1);
-	// exit(1);
+	// return (1);
+	exit(1);
 }
 
 /*------ free mlx only et fermer programme -------*/
