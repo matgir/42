@@ -6,7 +6,7 @@
 /*   By: itahani <itahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 19:32:38 by itahani           #+#    #+#             */
-/*   Updated: 2024/01/13 18:34:17 by itahani          ###   ########.fr       */
+/*   Updated: 2024/01/17 14:56:03 by itahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 void	render_minimap(t_vars *var)
 {
 	composer_map(var);
-	// vision_line(&var->img, &var->player, 0xda0722); //SUPRIMER
-	render_fov(var, &var->player, 0x00FF00);
-	show_player_on_minimap(&var->player, var);
 }
 
 /*------ render map 3d -------*/

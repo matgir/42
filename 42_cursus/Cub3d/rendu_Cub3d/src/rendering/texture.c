@@ -70,7 +70,6 @@ t_data	*get_texture(t_ray *ray, t_vars *var)
 	else
 		texture = &var->text[3];
 	return (texture);
-	// else if (ray->ray_facingright)
 }
 
 void	text_offset_x(t_ray *ray, t_render *render)

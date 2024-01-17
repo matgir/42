@@ -6,7 +6,7 @@
 /*   By: itahani <itahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 20:04:22 by itahani           #+#    #+#             */
-/*   Updated: 2024/01/15 23:47:20 by itahani          ###   ########.fr       */
+/*   Updated: 2024/01/17 16:05:23 by itahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <fcntl.h>
 # include "./Libft/libft.h"
 # include <math.h>
-# include <limits.h> // SUPPRIMER
 # include <unistd.h>
 
 # define TILE_SIZE 128
@@ -33,16 +32,6 @@
 # define WINDOW_WIDTH 1500 // add secur par rapport a resolution max de l'ecran
 # define WINDOW_HEIGHT 900
 # define WALL_STRIP_WIDTH 1
-
-# define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP_WIDTH)
-# define FOV_ANGLE (60 * (M_PI / 180))
-# define TWO_PI M_PI * 2
-
-# define N 1
-# define S 2
-# define E 3
-# define W 4
-// # define NUM_RAYS 10
 
 typedef struct s_line {
 	int		delta_x;
@@ -62,29 +51,27 @@ typedef struct s_data {
 	int		endian;
 }				t_data;
 
-// AJOUT de la branche elise-freshstart
-typedef struct s_config {			//
-	char	**tab;					//
-	char	*north;					//
-	char	*south;					//
-	char	*west;					//
-	char	*east;					//
-	int		floor;					//
-	int		ceiling;				//
-}			t_config;				//
-// AJOUT de la branche elise-freshstart
+typedef struct s_config {
+	char	**tab;
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	int		floor;
+	int		ceiling;
+}			t_config;				
 
 typedef struct s_player {
-	float	x; //middle of the map, window width/2
-	float	y; //window height/2
-	int		radius; //3pxl
-	float	turndirection; //-1 if left and +1 if right
-	float	waldirection; //-1 if back and +1 if forward
-	float	rotationangle; //Math.PI/2 (90 degrees)
+	float	x;
+	float	y;
+	int		radius;
+	float	turndirection;
+	float	waldirection;
+	float	rotationangle;
 	float	sidedirection;
 	float	step;
-	float	movespeed; // 2.0
-	float	rotationspeed; // 2 * (MAth.PI / 180)
+	float	movespeed;
+	float	rotationspeed;
 	t_line	trajectory;
 	float	new_x;
 	float	new_y;
@@ -92,8 +79,8 @@ typedef struct s_player {
 
 typedef struct s_window {
 	void	*win;
-	int		width; //y //en pixel
-	int		height; //x // en pixel
+	int		width;
+	int		height;
 }				t_window;
 
 typedef struct s_ray {
@@ -106,8 +93,7 @@ typedef struct s_ray {
 	int		ray_facingup;
 	int		ray_facingright;
 	int		ray_facingleft;
-	int		wall_hitcontent; /* what is in the tile	that was hit by the ray
-								(1 ? 0 ?...?). Useful for the textures*/
+	int		wall_hitcontent;
 	int		was_hitvertical;
 	t_line	line;
 }				t_ray;
@@ -152,10 +138,10 @@ typedef struct s_vars {
 	t_window	win;
 	char		**infile;
 	char		**map;
-	t_config	config; // struct for elements parsing
-	t_ray		rays[NUM_RAYS];
+	t_config	config;
+	float		scale_minimap;
+	t_ray		rays[WINDOW_WIDTH / WALL_STRIP_WIDTH];
 	t_data		text[4];
-	float		tmp_distance; //SUPPRIMER
 }				t_vars;
 
 typedef struct s_color {
@@ -216,17 +202,10 @@ int		check_doublons(char **tab, char *elem);
 int		add_element(char *element, t_vars *var);
 void	set_valid_value(char **file, int *i, int *valid);
 
-// Draw Minimap
-
-void	my_mlx_pixel_put(t_data *img, int x, int y, int color);
-void	draw_square(t_vars *var, int x, int y, int color);
-void	draw_grid(t_vars *var, int x, int y, int color);
-void	composer_map(t_vars *var);
-void	show_player_on_minimap(t_player *player, t_vars *var);
-
 // Check error
 
 int		check_cr(char *valeur);
+int		margin_check(t_player *player, char	**map, int i);
 
 // Init Map
 
@@ -251,11 +230,8 @@ void	get_color(char *rgb, char *color, int *i);
 // Player SetUp
 
 void	start_position(t_vars *var, t_player *player);
-void	stop_wall(t_player *player, t_vars *var/* , int keycode */);
-// void	reverse_pos_for_back(t_player *player, int keycode);
-// void	reverse_pos_left_right(t_player *player, int keycode);
+void	stop_wall(t_player *player, t_vars *var);
 void	init_player(t_player *player, t_vars *var);
-void	vision_line(t_data *img, t_player *player, int color); // à supprimer
 
 // Free
 
@@ -290,11 +266,12 @@ void	render_fov(t_vars *cub, t_player *player, int color);
 void	adjust_distance(t_player *player, t_ray *ray);
 void	assign_verthit_val(t_cast *cast, int i);
 void	assign_horhit_val(t_cast *cast, int i);
+int		mapped_region(t_vars *var, int x, int y);
+int		is_wall(t_vars *cub, float x, float y);
 
 // Rendering
 
 void	render_walls(t_vars *var);
-// void	update_render(t_vars *var);
 t_data	*get_texture(t_ray *ray, t_vars *var);
 void	compose_wall_strip(t_vars *var, t_render *render, int i, t_data *text);
 void	put_pix(t_data *img, int x, int y, int color);
@@ -306,5 +283,12 @@ void	render_ceiling(t_vars *var, int y, int color);
 void	text_offset_x(t_ray *ray, t_render *render);
 void	init_textures(t_vars *var);
 void	dda(t_player *player, t_vars *var, t_ray *ray, int color);
+void	my_mlx_pixel_put(t_vars *var, int x, int y, int color);
+void	draw_square(t_vars *var, int x, int y, int color);
+void	draw_grid(t_vars *var, int x, int y, int color);
+void	composer_map(t_vars *var);
+void	show_player_on_minimap(t_player *player, t_vars *var);
+void	compose_wall(t_vars *var);
+void	compose_floor(t_vars *var);
 
 #endif

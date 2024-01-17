@@ -6,7 +6,7 @@
 /*   By: itahani <itahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 19:46:51 by itahani           #+#    #+#             */
-/*   Updated: 2024/01/14 21:54:18 by itahani          ###   ########.fr       */
+/*   Updated: 2024/01/17 16:13:32 by itahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,16 @@ void	get_win_size(t_vars *var)
 /*------ définition window, img à composer et à afficher -------*/
 void	def_var(t_vars *var)
 {
-	get_win_size(var); //SUPPRIMER
+	get_win_size(var);
 	var->win.win = mlx_new_window(var->mlx, WINDOW_WIDTH, \
 		WINDOW_HEIGHT, "Minimap - itahani & mgirardo");
 	var->img.img = mlx_new_image(var->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	var->img.addr = mlx_get_data_addr(var->img.img, \
 		&var->img.bits_per_pixel, &var->img.line_length, &var->img.endian);
+	var->scale_minimap = 0.08;
+	while (var->mapheight * var->scale_minimap > WINDOW_HEIGHT * 0.2
+		|| var->mapwidth * var->scale_minimap > WINDOW_WIDTH * 0.2)
+		var->scale_minimap -= 0.001;
 	init_config(&var->config);
 	init_textures(var);
 	init_player(&var->player, var);
@@ -77,7 +81,6 @@ char	**cub_to_tab(int fd)
 	return (tab);
 }
 
-/*------ extraction de la map dans infile.cub a un char ** -------*/
 char	**get_map(t_vars *var, char **file)
 {
 	int		i;
@@ -87,7 +90,7 @@ char	**get_map(t_vars *var, char **file)
 
 	i = parsing_elements(var, file);
 	if (i == 1)
-		return (/* ft_putstr_fd("Error: Invalid input\n", 2) , */NULL);
+		return (NULL);
 	valeur = ft_strdup("");
 	i += 1;
 	while (file[i] != NULL)

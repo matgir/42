@@ -17,7 +17,7 @@ void	init_rays(t_vars *cub)
 	int	ray_id;
 
 	ray_id = 0;
-	while (ray_id < NUM_RAYS)
+	while (ray_id < (WINDOW_WIDTH / WALL_STRIP_WIDTH))
 	{
 		cub->rays[ray_id].ray_facingdown = 0;
 		cub->rays[ray_id].ray_facingup = 0;

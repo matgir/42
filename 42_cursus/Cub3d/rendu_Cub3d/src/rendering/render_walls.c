@@ -6,21 +6,11 @@
 /*   By: itahani <itahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 18:31:08 by itahani           #+#    #+#             */
-/*   Updated: 2024/01/14 21:05:31 by itahani          ###   ########.fr       */
+/*   Updated: 2024/01/17 14:56:59 by itahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../../cub3d.h"
-
-/*
-void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = img->addr + (y * img->ll + x * (img->bits / 8));
-	*(unsigned int *)dst = color;
-}
-*/
 
 void	put_pix(t_data *img, int x, int y, int color)
 {
@@ -35,7 +25,7 @@ void	compose_wall_strip(t_vars *var, t_render *render, int i, t_data *text)
 	int	y;
 	int	limit_x;
 
-	x = i * render->wallstripwidth;// (void)text; //SUPPRIMER
+	x = i * render->wallstripwidth;
 	limit_x = x + render->wallstripwidth;
 	y = render->walltoppxl;
 	while (y <= render->wallbottompxl)
@@ -48,7 +38,7 @@ void	compose_wall_strip(t_vars *var, t_render *render, int i, t_data *text)
 					* text->line_length + render->offset_x
 					* (text->bits_per_pixel / 8)));
 		x = i * render->wallstripwidth;
-		while (x < limit_x)
+		while (x <= limit_x)
 		{
 			if ((x < WINDOW_WIDTH && y < WINDOW_HEIGHT) && (x >= 0 && y >= 0))
 				put_pix(&var->img, x, y, render->pxl);
@@ -58,7 +48,11 @@ void	compose_wall_strip(t_vars *var, t_render *render, int i, t_data *text)
 	}
 }
 
-/*------ render des murs en 3d ------*/
+float	proj_plane(void)
+{
+	return ((WINDOW_WIDTH / 2) / tan((60 * (M_PI / 180)) / 2));
+}
+
 void	render_walls(t_vars *var)
 {
 	int			i;
@@ -67,11 +61,11 @@ void	render_walls(t_vars *var)
 	t_data		*text;
 
 	i = 0;
-	while (i < NUM_RAYS)
+	while (i < (WINDOW_WIDTH / WALL_STRIP_WIDTH))
 	{
 		ray = var->rays[i];
 		text_offset_x(&ray, &render);
-		render.dist_proj_plane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
+		render.dist_proj_plane = proj_plane();
 		render.wallstripheight = (TILE_SIZE / ray.distance)
 			* render.dist_proj_plane;
 		render.wallstripwidth = WALL_STRIP_WIDTH;
@@ -87,6 +81,3 @@ void	render_walls(t_vars *var)
 		i++;
 	}
 }
-
-/* before last parenthesis */
-/* printf("orientation du joueur == %f\n", var->player.rotationangle);*/

@@ -14,10 +14,10 @@
 
 int	ft_write_str(char *str)
 {
-	int i;
+	int	i;
 
 	while (*str)
-		 i = write(2, str++, 1);
+		i = write(2, str++, 1);
 	(void)i;
 	return (1);
 }
@@ -45,10 +45,9 @@ int	entry_test(t_vars *var, int fd, char *argv)
 		return (close(fd), free_mlxptr(var), ft_exit("Could not malloc\n"));
 	var->map = get_map(var, var->infile);
 	if (var->map == NULL)
-		return (close(fd), free_tab(var->infile), free_mlxptr(var), ft_exit("Invalid identifier\n"));
+		return (close(fd), free_tab(var->infile), free_mlxptr(var),
+			ft_exit("Invalid identifier\n"));
 	parsing(var, fd);
-	// if (parsing(var) == 1)
-	// 	return (close(fd), free_for_parser(var), ft_exit("Invalid map\n"));
 	return (0);
 }
 
@@ -61,26 +60,10 @@ int	main(int argc, char *argv[])
 	{
 		fd = 0;
 		entry_test(&var, fd, argv[1]);
-			// {
-			// 	fd = open(argv[1], O_RDONLY);
-			// 	if (fd == -1)
-			// 		return (print_error("map not read\n"), 1);
-			// 	if (check_extension(argv[1]) == 1)
-			// 		return (print_error("file.cub needed\n"), close(fd), 1);
-			// 	var.mlx = mlx_init();
-			// 	if (!var.mlx)
-			// 		return (close(fd), 1);
-			// 	if ((var.infile = cub_to_tab(fd)) == NULL)
-			// 		return (close(fd), free_mlxptr(&var), 1);
-			// 	if ((var.map = get_map(&var, var.infile)) == NULL)
-			// 		return (close(fd), free_tab(var.infile), free_mlxptr(&var), 1);
-			// 	if (parsing(&var) == 1)
-			// 		return (close(fd), free_for_parser(&var), 1);
-			// }			
 		def_var(&var);
 		mlx_put_image_to_window(var.mlx, var.win.win, var.img.img, 0, 0);
 		mlx_hook(var.win.win, 2, 1L << 0, key_hook, &var);
-		mlx_hook(var.win.win, 17, 0, free_mlx, &var); // clic sur la croix
+		mlx_hook(var.win.win, 17, 0, free_mlx, &var);
 		mlx_loop(var.mlx);
 	}
 	else

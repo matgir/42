@@ -68,12 +68,12 @@ int	is_valid_element(char *element)
 		path_texture = get_path_texture(element);
 		if (check_xpm(path_texture) == 1
 			|| access(path_texture, R_OK) != 0)
-			return (free(path_texture), 1); // invalid input: wrong path
+			return (free(path_texture), 1);
 	}
 	else if (id_ret == 0)
 	{
 		if (is_color_code(element, 1) == 1)
-			return (1); // invalid input: wrong color code
+			return (1);
 	}
 	else if (id_ret == 1)
 		return (1);
@@ -85,7 +85,7 @@ int	add_element(char *element, t_vars *var)
 {
 	static int	i = 0;
 
-	if (check_doublons(var->config.tab, element) == 1) //invalid input: doublons
+	if (check_doublons(var->config.tab, element) == 1)
 		return (free_tab(var->config.tab), 1);
 	var->config.tab[i] = ft_strdup(element);
 	i += 1;
@@ -117,6 +117,5 @@ int	parsing_elements(t_vars *var, char **file)
 			return (free_tab(var->config.tab), 1);
 		i++;
 	}
-	return (i); /*	return l'index de la ligne a partir de laquelle on a fini de
-					parser les elements, pour commencer a parser la map */
+	return (i);
 }

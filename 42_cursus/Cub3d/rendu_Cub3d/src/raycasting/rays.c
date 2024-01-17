@@ -78,7 +78,7 @@ static void	cast_ray(t_vars *cub, float ray_angle, t_ray *ray)
 	vertical_hit(cub, &cast);
 	set_distance(cub, &cast);
 	compare_distance(&cast, ray, ray_angle);
-	adjust_distance(&cub->player, ray); // a retirer pour le rendu minimap
+	adjust_distance(&cub->player, ray);
 }
 
 void	cast_all_rays(t_vars *cub)
@@ -87,17 +87,14 @@ void	cast_all_rays(t_vars *cub)
 	int		ray_id;
 
 	ray_id = 0;
-	// ray_angle = cub->player.rotationangle - (FOV_ANGLE / 2);
-	while (ray_id < NUM_RAYS)
+	while (ray_id < (WINDOW_WIDTH / WALL_STRIP_WIDTH))
 	{
-		ray_angle = cub->player.rotationangle
-			+ atan((ray_id - NUM_RAYS / 2) / ((WINDOW_WIDTH / 2)
-					/ tan(FOV_ANGLE / 2)));
-		// printf("angle == %f\n", ray_angle);
+		ray_angle = cub->player.rotationangle + atan((ray_id - (WINDOW_WIDTH
+						/ WALL_STRIP_WIDTH) / 2) / ((WINDOW_WIDTH / 2)
+					/ tan((60 * (M_PI / 180)) / 2)));
 		cub->rays[ray_id].ray_angle = normalize_angle(ray_angle);
 		cast_ray(cub, cub->rays[ray_id].ray_angle, &cub->rays[ray_id]);
-		ray_angle += (FOV_ANGLE / NUM_RAYS);
+		ray_angle += ((60 * (M_PI / 180)) / (WINDOW_WIDTH / WALL_STRIP_WIDTH));
 		ray_id ++;
 	}
-	// printf("FIN\n");
 }

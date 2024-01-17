@@ -41,6 +41,8 @@ SRCS =	main.c								\
 		${RAYCASTING}rays.c					\
 		${RAYCASTING}rays_init.c			\
 		${RAYCASTING}rays_utils.c			\
+		${RAYCASTING}rays_utils_2.c			\
+		${RAYCASTING}rays_utils_3.c			\
 		${RENDERING}render_walls.c			\
 		${RENDERING}renders.c				\
 		${RENDERING}render_fov.c			\
@@ -48,6 +50,7 @@ SRCS =	main.c								\
 		${RENDERING}texture.c				\
 		./src/key_hook.c					\
 		./src/draw_map.c					\
+		./src/draw_map_utils.c				\
 
 SRCSB = 
 

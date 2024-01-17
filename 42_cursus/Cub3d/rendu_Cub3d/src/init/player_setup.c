@@ -6,7 +6,7 @@
 /*   By: itahani <itahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:55:45 by itahani           #+#    #+#             */
-/*   Updated: 2024/01/15 23:47:16 by itahani          ###   ########.fr       */
+/*   Updated: 2024/01/17 15:45:35 by itahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	start_orientation(t_vars *var, t_player *player)
 	else if (orientation == 'S')
 		player->rotationangle = M_PI_2;
 	else if (orientation == 'E')
-		player->rotationangle = M_PI * 2;
+		player->rotationangle = ((((((M_PI * 2))))));
 	else if (orientation == 'W')
 		player->rotationangle = M_PI;
 }
@@ -64,7 +64,7 @@ void	init_player(t_player *player, t_vars *var)
 	player->waldirection = 0;
 	player->sidedirection = 0;
 	player->step = 0;
-	player->movespeed = 3.0;
+	player->movespeed = 1.0;
 	player->rotationspeed = 2 * (M_PI / 180);
 	player->new_x = player->x;
 	player->new_y = player->y;

@@ -6,13 +6,13 @@
 /*   By: itahani <itahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 00:49:44 by itahani           #+#    #+#             */
-/*   Updated: 2023/11/08 15:14:26 by itahani          ###   ########.fr       */
+/*   Updated: 2024/01/17 15:02:03 by itahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-/*clairement juste de la norme*/
+/*-------- clairement juste de la norme --------*/
 void	set_valid_value(char **file, int *i, int *valid)
 {
 	if (is_only_whitespace(file[*i]) == 0)
@@ -64,7 +64,7 @@ int	valid_rgb_index(char *element, int *i)
 	color = ft_atoi(nb);
 	if (ft_strlen(nb) > 3 || ft_strlen(nb) == 0
 		|| color < 0 || color > 255)
-		return (/* printf("(1)erreur color\n"),  */free(nb), 1);
+		return (free(nb), 1);
 	return (free(nb), 0);
 }
 
