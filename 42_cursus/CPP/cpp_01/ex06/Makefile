@@ -1,13 +1,14 @@
-SRC		=	Account.cpp \
-			test.cpp
+SRC		=	main.cpp \
+			Harl.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	GlobalBanster
+NAME	=	harlFilter
 
-INCL	=	Account.hpp
+INCL	=	Harl.hpp
+# INCL	=	Harl.hpp Makefile
 
 PP		=	c++
 
@@ -26,7 +27,7 @@ ${NAME}:	${OBJ} ${INCL}
 				${PP} ${FLAG} ${OBJ} -o ${NAME}
 
 clean:	
-				${RM} ${OBJ} ${DOBJ} myresult
+				${RM} ${OBJ} ${DOBJ}
 
 fclean:		clean
 				${RM} ${NAME}

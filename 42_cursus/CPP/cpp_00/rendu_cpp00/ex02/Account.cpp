@@ -112,7 +112,29 @@ void	Account::displayStatus(void)const
 
 void	Account::_displayTimestamp(void)
 {
-	std::time_t	timeStamp = std::time(NULL);
-	std::cout << "[" << timeStamp << "]";
-	/* ########## faire calucul qui permet dafficher date ########## */
+	std::time_t	timeInSeconds = std::time(NULL);
+	std::tm		*time = std::localtime(&timeInSeconds);
+
+	std::cout << "[" << time->tm_year + 1900;
+	if (time->tm_mon + 1 < 10)
+		std::cout << "0" << time->tm_mon + 1;
+	else
+		std::cout << time->tm_mon + 1;
+	if (time->tm_mday < 10)
+		std::cout << "0" << time->tm_mday;
+	else
+		std::cout << time->tm_mday;
+	std::cout << "_";
+	if (time->tm_hour < 10)
+		std::cout << "0" << time->tm_hour;
+	else
+		std::cout << time->tm_hour;
+	if (time->tm_min < 10)
+		std::cout << "0" << time->tm_min;
+	else
+		std::cout << time->tm_min;
+	if (time->tm_sec < 10)
+		std::cout << "0" << time->tm_sec << "]";
+	else
+		std::cout << time->tm_sec << "]";
 }
