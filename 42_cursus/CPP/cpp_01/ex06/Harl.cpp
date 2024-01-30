@@ -76,6 +76,7 @@ void	Harl::complain(std::string level)
 		default:
 			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 			break;
+			/* ##### PAS ENCORE AU POINT ##### */
 	}
 	return;
 }
