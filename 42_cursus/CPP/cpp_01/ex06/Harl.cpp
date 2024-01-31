@@ -54,7 +54,7 @@ void	Harl::complain(std::string level)
 		{"WARNING", &Harl::warning},
 		{"ERROR", &Harl::error},
 	};
-	int				j;
+	int				j = -1;
 
 	for(int i = 0; i < 4; i++)
 		if (list[i].level == level)
@@ -76,7 +76,6 @@ void	Harl::complain(std::string level)
 		default:
 			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 			break;
-			/* ##### PAS ENCORE AU POINT ##### */
 	}
 	return;
 }
