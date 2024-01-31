@@ -11,10 +11,10 @@ class Canonical
 	public:
 
 		Canonical(void);
-		Canonical(Canonical const & src);
+		Canonical(Canonical const & assign);
 		virtual ~Canonical(void);
 
-		Canonical	&operator=(Canonical const & rhs);
+		Canonical	&operator=(Canonical const & copy);
 
 		int		getvariable(void)const;//
 
@@ -31,10 +31,10 @@ Canonical::Canonical(void) : _variable(0)
 	return;
 }
 
-Canonical::Canonical(Canonical const & src)
+Canonical::Canonical(Canonical const & copy)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = src;
+	this->_variable = copy.getvariable();
 	return;
 }
 
@@ -49,12 +49,12 @@ int	Canonical::getvariable(void)const
 	return this->_variable;
 }
 
-Canonical	&Canonical::operator=(Canonical const & rhs)
+Canonical	&Canonical::operator=(Canonical const & assign)
 {
 	std::cout << "assignment operator called" << std::endl;
 
-	if (this != &rhs)
-		this->_variable = rhs.getvariable();
+	if (this != &assign)
+		this->_variable = assign.getvariable();
 
 	return *this;
 }
