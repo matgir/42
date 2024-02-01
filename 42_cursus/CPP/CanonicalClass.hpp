@@ -11,10 +11,10 @@ class Canonical
 	public:
 
 		Canonical(void);
-		Canonical(Canonical const & assign);
+		Canonical(Canonical const & copy);
 		virtual ~Canonical(void);
 
-		Canonical	&operator=(Canonical const & copy);
+		Canonical	&operator=(Canonical const & assign);
 
 		int		getvariable(void)const;//
 

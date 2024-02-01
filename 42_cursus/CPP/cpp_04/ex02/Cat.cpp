@@ -18,7 +18,8 @@ Cat::Cat(Cat const & copy) : AAnimal(copy)
 
 Cat::~Cat(void)
 {
-	delete this->_brain;
+	if (this->_brain)
+		delete this->_brain;
 	std::cout << "Cat destructor called" << std::endl;
 	return;
 }
@@ -30,6 +31,7 @@ Cat	&Cat::operator=(Cat const & assign)
 	if (this != &assign)
 	{
 		this->_type = assign.getType();
+		delete this->_brain;
 		this->_brain = new Brain(*(assign.getBrain()));
 	}
 
@@ -38,7 +40,7 @@ Cat	&Cat::operator=(Cat const & assign)
 
 void	Cat::makeSound(void)
 {
-	std::cout << "*MEOW*" << std::endl;
+	std::cout << "* MEOW *" << std::endl;
 	return;
 }
 

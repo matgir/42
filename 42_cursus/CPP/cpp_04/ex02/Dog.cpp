@@ -18,18 +18,21 @@ Dog::Dog(Dog const & copy) : AAnimal(copy)
 
 Dog::~Dog(void)
 {
-	delete this->_brain;
+	if (this->_brain)
+		delete this->_brain;
 	std::cout << "Dog destructor called" << std::endl;
 	return;
 }
 
-Dog	&Dog::operator=(Dog const & assign)
+// Dog	&Dog::operator=(Dog const & assign)
+Dog	&Dog::operator=(Dog const assign)
 {
 	std::cout << "Dog assignment operator called" << std::endl;
 
 	if (this != &assign)
 	{
 		this->_type = assign.getType();
+		delete this->getBrain();
 		this->_brain = new Brain(*(assign.getBrain()));
 	}
 
@@ -38,7 +41,7 @@ Dog	&Dog::operator=(Dog const & assign)
 
 void	Dog::makeSound(void)
 {
-	std::cout << "*BARK*" << std::endl;
+	std::cout << "* BARK *" << std::endl;
 	return;
 }
 
