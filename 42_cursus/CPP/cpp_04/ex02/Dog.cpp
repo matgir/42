@@ -24,16 +24,16 @@ Dog::~Dog(void)
 	return;
 }
 
-Dog	&Dog::operator=(Dog const & assign)
 // Dog	&Dog::operator=(Dog const assign)//
+Dog	&Dog::operator=(Dog const & assign)
 {
 	std::cout << "Dog assignment operator called" << std::endl;
 
 	if (this != &assign)
 	{
 		this->_type = assign.getType();
-		// delete this->getBrain();
-		// this->_brain = new Brain(*(assign.getBrain()));
+		delete this->getBrain();
+		this->_brain = new Brain(*(assign.getBrain()));
 		// *this->_brain = *(assign.getBrain());//
 		*this->_brain = *assign._brain;//
 	}

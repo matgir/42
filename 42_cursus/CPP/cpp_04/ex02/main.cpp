@@ -24,7 +24,10 @@ int main()
 		d->getBrain()->setIdeas(" * DDDDDDDDD * ", 0);
 		std::cout << d->getBrain()->getIdeas(0) << std::endl;
 
-		Dog	*g = d;
+		// Dog	*g = d;
+		Dog	*g = new Dog();
+		g = d;
+		// Dog	*g = new Dog(*d);
 		// Dog	*g = dynamic_cast<Dog*>(j);
 		std::cout << g->getType() << std::endl;
 		dynamic_cast<Dog*>(g)->getBrain()->setIdeas("* I am GG *", 0);

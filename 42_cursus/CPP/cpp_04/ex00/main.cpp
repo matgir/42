@@ -36,5 +36,9 @@ int main()
 		delete meta;
 		delete i;
 	}
+	{
+		Dog	j;
+		Dog	h = j;
+	}
 	return 0;
 }
