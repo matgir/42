@@ -13,7 +13,6 @@ class Dog : public AAnimal
 		Dog(Dog const & copy);
 		~Dog(void);
 
-		// Dog	&operator=(Dog const assign);//
 		Dog	&operator=(Dog const & assign);
 
 		void	makeSound(void);
