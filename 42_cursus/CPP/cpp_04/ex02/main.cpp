@@ -21,10 +21,14 @@ int main()
 		std::cout << dynamic_cast<Dog*>(j)->getBrain()->getIdeas(0);
 		std::cout << std::endl;
 
-		Dog		*g = dynamic_cast<Dog*>(j);
+		d->getBrain()->setIdeas(" * DDDDDDDDD * ", 0);
+		std::cout << d->getBrain()->getIdeas(0) << std::endl;
+
+		Dog	*g = d;
+		// Dog	*g = dynamic_cast<Dog*>(j);
 		std::cout << g->getType() << std::endl;
 		dynamic_cast<Dog*>(g)->getBrain()->setIdeas("* I am GG *", 0);
-		std::cout << dynamic_cast<Dog*>(j)->getBrain()->getIdeas(0);
+		std::cout << dynamic_cast<Dog*>(d)->getBrain()->getIdeas(0);
 		std::cout << std::endl;
 
 		dynamic_cast<Dog*>(j)->makeSound();

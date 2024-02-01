@@ -40,7 +40,7 @@ int main()
 		dog1->getBrain()->setIdeas("dog1 idea 1", 0);
 		dog1->getBrain()->setIdeas("dog1 idea 2", 1);
 		const Dog	*dog2 = new Dog(*dog1);
-		dog2->getBrain()->setIdeas("dog2 idea 1", 0);
+		dog2->getBrain()->setIdeas("I AM DOG 2", 0);
 		std::cout << dog1->getBrain()->getIdeas(0) << std::endl;
 		std::cout << dog2->getBrain()->getIdeas(0) << std::endl;
 		delete dog1;
