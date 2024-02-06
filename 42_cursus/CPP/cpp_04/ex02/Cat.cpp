@@ -31,7 +31,8 @@ Cat	&Cat::operator=(Cat const & assign)
 	if (this != &assign)
 	{
 		this->_type = assign.getType();
-		delete this->_brain;
+		if (this->_brain)
+			delete this->_brain;
 		this->_brain = new Brain(*(assign.getBrain()));
 	}
 

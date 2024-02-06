@@ -31,7 +31,8 @@ Dog	&Dog::operator=(Dog const & assign)
 	if (this != &assign)
 	{
 		this->_type = assign.getType();
-		delete this->getBrain();
+		if (this->_brain)
+			delete this->_brain;
 		this->_brain = new Brain(*(assign.getBrain()));
 	}
 

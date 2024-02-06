@@ -1,60 +1,27 @@
-// replace canonical by your class name
+// replace ICharacter by your class name
 // replace variable by your variable name
 
-#ifndef CANONICALCLASS_HPP
-# define CANONICALCLASS_HPP
+#ifndef ICHARACTER_HPP
+# define ICHARACTER_HPP
 
 # include <iostream>
+# include "AMateria.hpp"
 
-class Canonical
+class ICharacter
 {
 	public:
 
-		Canonical(void);
-		Canonical(Canonical const & copy);
-		virtual ~Canonical(void);
-
-		Canonical	&operator=(Canonical const & assign);
-
-		int		getvariable(void)const;//
-
-	private:
-
-		int		_variable;//
+		virtual						~ICharacter(void);
+		virtual std::string const &	getName() const = 0;
+		virtual void				equip(AMateria * m) = 0;
+		virtual void				unequip(int idx) = 0;
+		virtual void				use(int idx, ICharacter & target) = 0;
 };
 
 #endif
 
-Canonical::Canonical(void) : _variable(0)
-{
-	std::cout <<"Default constructor called" << std::endl;
-	return;
-}
-
-Canonical::Canonical(Canonical const & copy)
-{
-	std::cout << "Copy constructor called" << std::endl;
-	this->_variable = copy.getvariable();
-	return;
-}
-
-Canonical::~Canonical(void)
+ICharacter::~ICharacter(void)
 {
 	std::cout << "Destructor called" << std::endl;
 	return;
-}
-
-int	Canonical::getvariable(void)const
-{
-	return this->_variable;
-}
-
-Canonical	&Canonical::operator=(Canonical const & assign)
-{
-	std::cout << "assignment operator called" << std::endl;
-
-	if (this != &assign)
-		this->_variable = assign.getvariable();
-
-	return *this;
 }

@@ -1,60 +1,69 @@
-// replace canonical by your class name
+// replace Character by your class name
 // replace variable by your variable name
 
-#ifndef CANONICALCLASS_HPP
-# define CANONICALCLASS_HPP
+#ifndef CHARACTER_HPP
+# define CHARACTER_HPP
 
 # include <iostream>
+# include "ICharacter.hpp"
 
-class Canonical
+class Character : public ICharacter
 {
 	public:
 
-		Canonical(void);
-		Canonical(Canonical const & copy);
-		virtual ~Canonical(void);
+		Character(void);
+		Character(std::string name);
+		Character(Character const & copy);
+		~Character(void);
 
-		Canonical	&operator=(Canonical const & assign);
+		Character	&operator=(Character const & assign);
 
-		int		getvariable(void)const;//
+		AMateria	*getMateria(int idx)const;
+		std::string const &	getName() const;
+		void		equip(AMateria * m);
+		void		unequip(int idx);
+		void		use(int idx, ICharacter & target);
 
 	private:
 
-		int		_variable;//
+		AMateria	_materias[4];
+		std::string	_name;
 };
 
 #endif
 
-Canonical::Canonical(void) : _variable(0)
+Character::Character(void)
 {
 	std::cout <<"Default constructor called" << std::endl;
+	this->_name = "Default character name";
+	this->_materias = new AMateria[4];
 	return;
 }
 
-Canonical::Canonical(Canonical const & copy)
+Character::Character(Character const & copy)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	this->_variable = copy.getvariable();
+	this->_materias = copy.getMateria();
 	return;
 }
 
-Canonical::~Canonical(void)
+Character::~Character(void)
 {
 	std::cout << "Destructor called" << std::endl;
 	return;
 }
 
-int	Canonical::getvariable(void)const
+AMateria	*Character::getMateria(int idx)const
 {
-	return this->_variable;
+	return this->_materias;
 }
 
-Canonical	&Canonical::operator=(Canonical const & assign)
+Character	&Character::operator=(Character const & assign)
 {
 	std::cout << "assignment operator called" << std::endl;
 
 	if (this != &assign)
-		this->_variable = assign.getvariable();
+		this->_materias = assign.getMateria();
 
 	return *this;
 }
