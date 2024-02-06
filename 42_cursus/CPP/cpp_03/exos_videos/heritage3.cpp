@@ -13,7 +13,7 @@ class	Quadruped
 
 	public:
 
-		void	run(); //Accessible from whereever
+		void	run(); //Accessible from wherever
 };
 
 class	Dog : public Quadruped

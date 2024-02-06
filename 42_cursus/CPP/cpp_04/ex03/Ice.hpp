@@ -1,60 +1,88 @@
-// replace canonical by your class name
-// replace variable by your variable name
-
-#ifndef CANONICALCLASS_HPP
-# define CANONICALCLASS_HPP
+#ifndef ICE_HPP
+# define ICE_HPP
 
 # include <iostream>
+# include "AMateria.hpp"
 
-class Canonical
+class Ice : public AMateria
 {
 	public:
 
-		Canonical(void);
-		Canonical(Canonical const & copy);
-		virtual ~Canonical(void);
+		Ice(void);
+		// Ice(std::string const & type);//a retirer pour ice et cure
+		Ice(Ice const & copy);
+		~Ice(void);
 
-		Canonical	&operator=(Canonical const & assign);
+		Ice	&operator=(Ice const & assign); // a modifier pour ice et cure
 
-		int		getvariable(void)const;//
+		// std::string			const & getType()const;	//Return materia type
+													//a retirer pour ice et Cure
+		
+		Ice		*clone()const; //a creer pour ice et cure
+		void	use(ICharacter & target); // a refaire pour ice et cure
+
+	protected:
+
+		// std::string	_type; //retirer pour ice et cure mais bien set leur type a creation
 
 	private:
 
-		int		_variable;//
 };
 
 #endif
 
-Canonical::Canonical(void) : _variable(0)
+Ice::Ice(void) : AMateria("ice")
 {
-	std::cout <<"Default constructor called" << std::endl;
+	std::cout << "Default constructor called" << std::endl;
+	this->_type = "ice";
 	return;
 }
 
-Canonical::Canonical(Canonical const & copy)
+/* Ice::Ice(std::string const & type)
+{
+	std::cout << "Typing constructor called" << std::endl;
+	this->_type = type;
+	return;
+} */
+
+Ice::Ice(Ice const & copy) : AMateria(copy)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	this->_variable = copy.getvariable();
+	// this->_type = copy.getType(); // pas sur si oui ou non
 	return;
 }
 
-Canonical::~Canonical(void)
+Ice::~Ice(void)
 {
 	std::cout << "Destructor called" << std::endl;
 	return;
 }
 
-int	Canonical::getvariable(void)const
+Ice	&Ice::operator=(Ice const & assign)
 {
-	return this->_variable;
-}
+	std::cout << "Assignment operator called" << std::endl;
 
-Canonical	&Canonical::operator=(Canonical const & assign)
-{
-	std::cout << "assignment operator called" << std::endl;
-
-	if (this != &assign)
-		this->_variable = assign.getvariable();
+	// if (this != &assign)
+		// this->_type = assign.getType();
 
 	return *this;
+}
+
+/* std::string	const & Ice::getType()const
+{
+	return this->_type;
+} */
+
+void		Ice::use(ICharacter & target)
+{
+	/*	#### something that truly hurt de Icharacter, maybe the use of function
+		getHurt()  in ICharacter */
+	std::cout << "'* shoots an ice bolt at " << target.getName() << " *'"; // change for Cure
+	std::cout << std::endl;
+}
+
+Ice		*Ice::clone()const
+{
+	Ice	*newice = new Ice();
+	return newice;
 }

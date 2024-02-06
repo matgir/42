@@ -1,60 +1,77 @@
-// replace canonical by your class name
-// replace variable by your variable name
-
-#ifndef CANONICALCLASS_HPP
-# define CANONICALCLASS_HPP
+#ifndef AMATERIA_HPP
+# define AMATERIA_HPP
 
 # include <iostream>
 
-class Canonical
+class AMateria
 {
 	public:
 
-		Canonical(void);
-		Canonical(Canonical const & copy);
-		virtual ~Canonical(void);
+		AMateria(void);
+		AMateria(std::string const & type);
+		AMateria(AMateria const & copy);
+		virtual ~AMateria(void);
 
-		Canonical	&operator=(Canonical const & assign);
+		AMateria	&operator=(AMateria const & assign);
 
-		int		getvariable(void)const;//
+		std::string			const & getType()const; //Return materia type
+		
+		virtual AMateria	*clone()const = 0;
+		virtual void		use(ICharacter & target);
+
+	protected:
+
+		std::string	_type;
 
 	private:
 
-		int		_variable;//
 };
 
 #endif
 
-Canonical::Canonical(void) : _variable(0)
+AMateria::AMateria(void)
 {
-	std::cout <<"Default constructor called" << std::endl;
+	std::cout << "Default constructor called" << std::endl;
+	this->_type = "Default type";
 	return;
 }
 
-Canonical::Canonical(Canonical const & copy)
+AMateria::AMateria(std::string const & type)
+{
+	std::cout << "Typing constructor called" << std::endl;
+	this->_type = type;
+	return;
+}
+
+AMateria::AMateria(AMateria const & copy)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	this->_variable = copy.getvariable();
+	this->_type = copy.getType();
 	return;
 }
 
-Canonical::~Canonical(void)
+AMateria::~AMateria(void)
 {
 	std::cout << "Destructor called" << std::endl;
 	return;
 }
 
-int	Canonical::getvariable(void)const
-{
-	return this->_variable;
-}
-
-Canonical	&Canonical::operator=(Canonical const & assign)
+AMateria	&AMateria::operator=(AMateria const & assign)
 {
 	std::cout << "assignment operator called" << std::endl;
 
 	if (this != &assign)
-		this->_variable = assign.getvariable();
+		this->_type = assign.getType();
 
 	return *this;
+}
+
+std::string	const & AMateria::getType()const
+{
+	return this->_type;
+}
+
+void		AMateria::use(ICharacter & target)
+{
+	/* ####### */
 }
