@@ -1,19 +1,19 @@
-#ifndef ICE_HPP
-# define ICE_HPP
+#ifndef MUD_HPP
+# define MUD_HPP
 
 # include <iostream>
 # include <string>
 # include "AMateria.hpp"
 
-class Ice : public AMateria
+class Mud : public AMateria
 {
 	public:
 
-		Ice(void);
-		Ice(Ice const & copy);
-		~Ice(void);
+		Mud(void);
+		Mud(Mud const & copy);
+		~Mud(void);
 
-		Ice	&operator=(Ice const & assign);
+		Mud	&operator=(Mud const & assign);
 		
 		AMateria	*clone()const;
 		void		use(ICharacter & target);

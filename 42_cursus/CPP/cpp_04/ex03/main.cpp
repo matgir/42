@@ -1,46 +1,93 @@
-#include "AAnimal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
-#include "WrongCat.hpp"
-#include "WrongAnimal.hpp"
+#include "Ice.hpp"
+#include "Water.hpp"
+#include "Mud.hpp"
+#include "Fire.hpp"
+#include "Cure.hpp"
+#include "Character.hpp"
+#include "MateriaSource.hpp"
 
 int main()
 {
+	std::cout << std::endl << std::endl;
 	{
-		AAnimal	*j = new Dog();
-		AAnimal	*i = new Cat();
-		// AAnimal	*meta = new AAnimal();
-		Dog		*d = new Dog();
-		Dog		*f = new Dog(*d);
+		IMateriaSource * src = new MateriaSoucre();
+		AMateria* tmp;
 
-		std::cout << j->getType() << std::endl;
-		std::cout << i->getType() << std::endl;
-		std::cout << d->getType() << std::endl;
-		std::cout << f->getType() << std::endl;
-		dynamic_cast<Dog*>(j)->getBrain()->setIdeas("* EAT MEOW *", 0);
-		std::cout << dynamic_cast<Dog*>(j)->getBrain()->getIdeas(0);
-		std::cout << std::endl;
+		tmp = new Ice();
+		src->learnMateria(tmp);
+		delete tmp;
+		tmp = new Cure();
+		src->learnMateria(tmp);
+		delete tmp;
 
-		d->getBrain()->setIdeas("* DDDDDDDDD *", 0);
-		std::cout << d->getBrain()->getIdeas(0) << std::endl;
+		ICharacter * me = new Character("me");
 
-		Dog	*g = new Dog();
-		*g = *d;
-		std::cout << g->getType() << std::endl;
-		dynamic_cast<Dog*>(g)->getBrain()->setIdeas("* I am GG *", 0);
-		std::cout << dynamic_cast<Dog*>(d)->getBrain()->getIdeas(0);
-		std::cout << std::endl;
-		std::cout << dynamic_cast<Dog*>(g)->getBrain()->getIdeas(0);
-		std::cout << std::endl;
+		tmp = src->createMateria("ice");
+		me->equip(tmp);
+		tmp = src->createMateria("cure");
+		me->equip(tmp);
 
-		dynamic_cast<Dog*>(j)->makeSound();
+		ICharacter * bob = new Character("bob");
 
-		delete j;
-		delete i;
-		delete d;
-		delete f;
-		delete g;
-		// delete meta;
+		me->use(0, *bob);
+		me->use(1, *bob);
+
+		delete bob;
+		delete me;
+		delete src;
 	}
+	std::cout << std::endl << std::endl;
+	{
+		ICharacter *	random = new Character("Bernard");
+
+		random->getName();
+
+		random->equip(new Ice());
+		random->equip(new Mud());
+		random->equip(new Water());
+		random->equip(new Fire());
+
+		random->unequip(0);
+		random->unequip(0);
+		random->unequip(27);
+
+		random->equip(new Fire());
+		random->equip(new Cure());
+		random->equip(new Ice());
+
+		random->use(0, *random);
+		random->use(1, *random);
+		random->use(2, *random);
+		random->use(3, *random);
+
+		delete random;
+	}
+	std::cout << std::endl << std::endl;
+	{
+		IMateriaSource *	src = new MateriaSoucre();
+		ICharacter *		bernard = new Character("Bernard");
+		AMateria *			tmp;
+
+		src->learnMateria(new Mud());
+		src->learnMateria(new Mud());
+
+		bernard->equip(src->createMateria("mud"));
+		bernard->equip(src->createMateria("fire"));
+
+		dynamic_cast<MateriaSoucre*>(src)->getMateria(3);
+		
+		src->learnMateria(new Fire());
+
+		bernard->equip(src->createMateria("fire"));
+
+		src->learnMateria(new Fire());
+		src->learnMateria(new Fire());
+		src->learnMateria(NULL);
+
+		delete bernard;
+		delete src;
+	}
+	std::cout << std::endl << std::endl;
 	return 0;
 }
+

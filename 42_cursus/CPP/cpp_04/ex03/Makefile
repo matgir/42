@@ -1,5 +1,12 @@
 SRC		=	main.cpp \
-			####
+			AMateria.cpp \
+			Character.cpp \
+			Cure.cpp \
+			Ice.cpp \
+			MateriaSource.cpp \
+			Mud.cpp \
+			Fire.cpp \
+			Water.cpp
 			
 OBJ		=	${SRC:.cpp=.o}
 
@@ -7,7 +14,17 @@ DOBJ	=	${SRC:.cpp=.d}
 
 NAME	=	Interface
 
-INCL	=	####
+INCL	=	AMateria.hpp \
+			Character.hpp \
+			Cure.hpp \
+			Ice.hpp \
+			ICharacter.hpp \
+			IMateriaSource.hpp \
+			MateriaSource.hpp \
+			Fire.hpp \
+			Mud.hpp \
+			Water.hpp \
+			Makefile ####
 
 PP		=	c++
 
