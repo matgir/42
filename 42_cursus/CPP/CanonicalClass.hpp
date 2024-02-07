@@ -27,20 +27,20 @@ class Canonical
 
 Canonical::Canonical(void) : _variable(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Cannocical default constructor called" << std::endl;
 	return;
 }
 
 Canonical::Canonical(Canonical const & copy)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Cannocical copy constructor called" << std::endl;
 	this->_variable = copy.getvariable();
 	return;
 }
 
 Canonical::~Canonical(void)
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "Cannocical destructor called" << std::endl;
 	return;
 }
 
@@ -51,7 +51,7 @@ int	Canonical::getvariable(void)const
 
 Canonical	&Canonical::operator=(Canonical const & assign)
 {
-	std::cout << "Assignment operator called" << std::endl;
+	std::cout << "Cannocical assignment operator called" << std::endl;
 
 	if (this != &assign)
 		this->_variable = assign.getvariable();
