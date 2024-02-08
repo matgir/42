@@ -5,7 +5,7 @@ Form::Form(const std::string name, int sigrade, int exgrade) :
 		_siGrade(sigrade),
 		_exGrade(exgrade)
 {
-	std::cout << "Form default constructor called" << std::endl;
+	std::cout << "Form initializing constructor called" << std::endl;
 	if (this->_siGrade < 1 || this->_exGrade < 1)
 		throw Form::GradeTooHighException();
 	else if (this->_siGrade > 150 || this->_exGrade > 150)
