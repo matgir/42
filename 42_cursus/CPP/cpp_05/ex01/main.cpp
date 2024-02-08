@@ -13,7 +13,6 @@ int	main(void)
 		{
 			bernard = new Bureaucrat("Bernard", 652);
 			// bernard = new Bureaucrat("Bernard", 150);
-			// bernard = new Bureaucrat();
 			bernard->decrementGrade();
 			for (int i = 0; i < 65; i++)
 				bernard->incrementGrade();

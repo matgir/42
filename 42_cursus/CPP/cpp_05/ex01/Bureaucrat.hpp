@@ -7,6 +7,7 @@
 # include <iostream>
 # include <string>
 # include <stdexcept>
+# include "Form.hpp"
 
 class Bureaucrat
 {
@@ -29,7 +30,7 @@ class Bureaucrat
 			public:
 				virtual const char * what() const throw()
 				{
-					return ("Grade too High !");
+					return ("Bureaucrat : grade too high !");
 				}
 		};
 
@@ -38,7 +39,7 @@ class Bureaucrat
 			public:
 				virtual const char * what() const throw()
 				{
-					return ("Grade too Low !");
+					return ("Bureaucrat : grade too low !");
 				}
 		};
 
