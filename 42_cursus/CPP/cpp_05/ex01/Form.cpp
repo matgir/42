@@ -48,12 +48,12 @@ bool				Form::getSignature(void)const
 	return this->_isSigned;
 }
 
-const int			Form::getSiGrade(void)const
+int					Form::getSiGrade(void)const
 {
 	return this->_siGrade;
 }
 
-const int			Form::getExGrade(void)const
+int					Form::getExGrade(void)const
 {
 	return this->_exGrade;
 }

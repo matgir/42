@@ -6,6 +6,8 @@
 # include <stdexcept>
 # include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form
 {
 	public:
@@ -18,8 +20,8 @@ class Form
 
 		const std::string	getName(void)const;
 		bool				getSignature(void)const;
-		const int			getSiGrade(void)const;
-		const int			getExGrade(void)const;
+		int					getSiGrade(void)const;
+		int					getExGrade(void)const;
 		void				beSigned(Bureaucrat const & bureaucrat);
 
 		class	GradeTooHighException : std::exception

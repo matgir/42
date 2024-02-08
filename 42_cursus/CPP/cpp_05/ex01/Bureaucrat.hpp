@@ -6,6 +6,8 @@
 # include <stdexcept>
 # include "Form.hpp"
 
+class Form;
+
 class Bureaucrat
 {
 	public:

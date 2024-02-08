@@ -1,6 +1,6 @@
 SRC		=	main.cpp \
 			Bureaucrat.cpp \
-			####
+			Form.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
@@ -9,7 +9,7 @@ DOBJ	=	${SRC:.cpp=.d}
 NAME	=	Maggots
 
 INCL	=	Bureaucrat.hpp \
-			####
+			Form.hpp \
 			Makefile
 
 PP		=	c++
