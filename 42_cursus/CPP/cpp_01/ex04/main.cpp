@@ -8,7 +8,8 @@ int	main(int ac, char **av)
 {
 	if (ac != 4)
 	{
-		std::cout << "Please start program as follow : ./Sed <filename> <string1> <string2>" << std::endl;
+		std::cout << "Please start program as follow : ./Sed <filename> <string1>";
+		std::cout << " <string2>" << std::endl;
 		return 1;
 	}
 
