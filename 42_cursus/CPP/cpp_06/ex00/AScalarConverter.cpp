@@ -110,7 +110,7 @@ void	AScalarConverter::convert(std::string input)
 	}
 	else
 	{
-		/* ######### */
+		/* savoir quoi faire quand ca ne rentre dans aucune des cases */
 	}
 	}
 
