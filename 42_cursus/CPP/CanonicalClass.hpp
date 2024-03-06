@@ -26,7 +26,7 @@ class Canonical
 
 #endif
 
-#include Canonical.hpp
+#include "Canonical.hpp"
 
 Canonical::Canonical(void) : _variable(0)
 {
