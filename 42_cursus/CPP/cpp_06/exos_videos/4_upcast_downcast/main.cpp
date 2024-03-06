@@ -12,7 +12,10 @@ int	main(void)
 	Parent *	c = (Parent *)&a;	/* Explicit 'reinterpretation' cast */
 
 	Parent *	d = &a;				/* Implicit upcast		-> Ok */
-	Child1 *	e = d;				/* Implicit downcast	-> Hell no ! */
-	Child2 *	f = (Child2 *)d;	/* Eplicit downcast		-> Ok, but really ? */
+	Child1 *	e = d;				/* Implicit downcast	-> Hell no !,
+										le compilo l'empeche*/
+	Child2 *	f = (Child2 *)d;	/* Explicit downcast	-> Ok, but really ?
+										pas ouf au moment de la compil car
+										child1 est surement different de child2*/
 	return 0;
 }
