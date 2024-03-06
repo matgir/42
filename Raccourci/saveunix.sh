@@ -32,3 +32,5 @@ find . -mindepth 2 -name "a.out" -type f -exec rm -rf {} \;
 git add .
 git commit -m "Save Commit"
 git push
+
+cd -
