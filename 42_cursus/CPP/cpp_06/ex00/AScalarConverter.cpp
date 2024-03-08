@@ -11,7 +11,7 @@ bool	displayable(char c)
 bool	dot_ocurence(std::string input)
 {
 	int	point = 0;
-	for (int i = 0; input[i]; i++)
+	for (unsigned long i = 0; input[i]; i++)
 		if (input[i] == '.')
 			point++;
 	if (point == 1)
@@ -23,7 +23,7 @@ bool	dot_ocurence(std::string input)
 bool	f_ocurence(std::string input)
 {
 	int	f_float = 0;
-	for (int i = 0; input[i]; i++)
+	for (unsigned long i = 0; input[i]; i++)
 		if (input[i] == 'f')
 			f_float++;
 	if (f_float == 1 && (input.rfind('f') == input.length() - 1))
@@ -35,12 +35,31 @@ bool	f_ocurence(std::string input)
 bool	is_num(std::string input)
 {
 	std::string::iterator	it = input.begin();
-	while (it != input.end())
-		it = input.erase(static_cast<std::string::iterator>("f"));
+
+	/* while (it != input.end())
+	{
+		if (input.find_first_of('f') != std::string::npos)
+			it = input.erase(input.begin() + static_cast<long>(input.find_first_of('f')));
+		else
+			break;
+	}
 	it = input.begin();
 	while (it != input.end())
-		it = input.erase(static_cast<std::string::iterator>("."));
-	for (int i = 0; input[i]; i++)
+	{
+		if (input.find_first_of('.') == std::string::npos)
+			it = input.erase(input.begin());
+		else
+			it = input.erase(input.begin() + static_cast<long>(input.find_first_of('.')));
+	} */
+	while (input.find_first_of('f') != std::string::npos)
+		it = input.erase(input.begin() + static_cast<long>(input.find_first_of('f')));
+	it = input.begin();
+	while (input.find_first_of('.') != std::string::npos)
+			it = input.erase(input.begin() + static_cast<long>(input.find_first_of('.')));
+	it = input.begin();
+	while (input.find_first_of('-') != std::string::npos)
+			it = input.erase(input.begin() + static_cast<long>(input.find_first_of('-')));
+	for (unsigned long i = 0; input[i]; i++)
 		if (!std::isdigit(input[i]))
 			return false;
 	return true;
@@ -49,7 +68,7 @@ bool	is_num(std::string input)
 bool	neg(std::string input)
 {
 	int	neg_sign = 0;
-	for (int i = 0; input[i]; i++)
+	for (unsigned long i = 0; input[i]; i++)
 		if (input[i] == '-')
 			neg_sign++;
 	if (neg_sign == 0 || (neg_sign == 1 && input.find('-') == 0))
@@ -58,67 +77,77 @@ bool	neg(std::string input)
 		return false;
 }
 
+void	output(char c, int i, float f, double d)
+{
+	if (displayable(c))
+		std::cout << "char: '" << c << "'" << std::endl;
+	else
+		std::cout << "char: Non Displayable" << std::endl;
+	std::cout << "int: " << i << std::endl;
+	std::cout << "float: " << f << (f == static_cast<float>(i) ? ".0f" : "f") << std::endl;
+	std::cout << "double: " << d << (d == static_cast<double>(i) ? ".0" : "") << std::endl;
+}
+
 void	AScalarConverter::convert(std::string input)
 {
 	char	c;
 	int		i;
 	float	f;
 	double	d;
-	// int		point;
-	// int		f_float;
-
-	// point = point_ocurence(input);
-	// f_float = f_ocurence(input);
 
 	while (1)
 	{
-	if (input.length() == 1 && displayable((input.c_str())[0]))
-	{
-		c = reinterpret_cast<char>(input.c_str());
-		i = static_cast<int>(c);
-		f = static_cast<float>(c);
-		d = static_cast<double>(c);
-		break;
+		/*	#### char ####	*/
+		if (input.length() == 1 && displayable((input.c_str())[0]))
+		{
+			c = reinterpret_cast<char>(input.c_str()[0]);
+			i = static_cast<int>(c);
+			f = static_cast<float>(c);
+			d = static_cast<double>(c);
+			std::cout << "CHAR" << std::endl; //
+			output(c, i, f, d);
+			break;
+		}
+		/*	#### float ####	*/
+		else if ((f_ocurence(input) || (f_ocurence(input) && dot_ocurence(input))) && neg(input) && is_num(input))
+		{
+			// gerer -inff +inff
+			f = static_cast<float>(std::atof(input.c_str()));
+			d = static_cast<double>(f);
+			i = static_cast<int>(f);
+			c = static_cast<char>(i);
+			std::cout << "FLOAT" << std::endl; //
+			output(c, i, f, d);
+			break;
+		}
+		/*	#### double ####	*/
+		else if (dot_ocurence(input) && neg(input) && is_num(input))
+		{
+			// gerer -inf +inf
+			d = std::atof(input.c_str());
+			f = static_cast<float>(d);
+			i = static_cast<int>(d);
+			c = static_cast<char>(i);
+			std::cout << "DOUBLE" << std::endl; //
+			output(c, i, f, d);
+			break;
+		}
+		/*	#### int ####	*/
+		else if (neg(input) && is_num(input))
+		{
+			i = atoi(input.c_str());
+			c = static_cast<char>(i);
+			f = static_cast<float>(i);
+			d = static_cast<double>(i);
+			std::cout << "INT" << std::endl; //
+			output(c, i, f, d);
+			break;
+		}
+		else
+		{
+			std::cout << "char: impossible\nint: impossible" << std::endl;
+			std::cout << "float: nanf\ndouble: nan" << std::endl;
+			break;
+		}
 	}
-	else if (f_ocurence(input) && dot_ocurence(input) && neg(input) && is_num(input))
-	{
-		// gerer -inff +inff nanf
-		f = static_cast<float>(std::atof(input.c_str()));
-		d = static_cast<double>(f);
-		// implemeter verif pour nanf avant conversion en int et c
-		i = static_cast<int>(f);
-		c = static_cast<char>(i);
-		break;
-	}
-	else if (dot_ocurence(input) && neg(input) && is_num(input))
-	{
-		// gerer -inf +inf nan
-		d = std::atof(input.c_str());
-		f = static_cast<float>(d);
-		// implemeter verif pour nan avant conversion en int et c
-		i = static_cast<int>(d);
-		c = static_cast<char>(i);
-		break;
-	}
-	else if (neg(input) && is_num(input))
-	{
-		i = atoi(input.c_str());
-		c = static_cast<char>(i);
-		f = static_cast<float>(i);
-		d = static_cast<double>(i);
-		break;
-	}
-	else
-	{
-		/* savoir quoi faire quand ca ne rentre dans aucune des cases */
-	}
-	}
-
-	if (displayable(c))
-		std::cout << "char: " << c << std::endl;
-	else
-		std::cout << "char: Non Displayable" << std::endl;
-	std::cout << "int: " << i << std::endl;
-	std::cout << "float: " << f << std::endl;
-	std::cout << "double: " << d << std::endl;
 }

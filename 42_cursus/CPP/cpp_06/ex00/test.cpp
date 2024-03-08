@@ -12,3 +12,17 @@ int main() {
 
 	return 0;
 }
+
+/* #################################################################### */
+
+#include <iostream>
+#include <iomanip>
+
+int main() {
+    float floatValue = 3.14f; // Example float value
+
+    // Use std::cout to display the float value
+    std::cout << std::fixed << std::setprecision(2) << floatValue << std::endl;
+
+    return 0;
+}

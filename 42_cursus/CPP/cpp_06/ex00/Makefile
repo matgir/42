@@ -1,4 +1,5 @@
-SRC		=	#####
+SRC		=	AScalarConverter.cpp \
+			main.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
@@ -6,7 +7,7 @@ DOBJ	=	${SRC:.cpp=.d}
 
 NAME	=	Convert
 
-INCL	=	#####
+INCL	=	AScalarConverter.hpp
 
 PP		=	c++
 

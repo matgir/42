@@ -9,6 +9,7 @@
 # include <cstdlib>
 # include <string>
 # include <cmath>
+# include <iomanip>
 // # include <cfloat>
 
 class AScalarConverter
