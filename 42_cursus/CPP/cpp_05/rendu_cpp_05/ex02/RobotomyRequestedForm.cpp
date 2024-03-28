@@ -3,7 +3,6 @@
 RobotomyRequestForm::RobotomyRequestForm(std::string target) :
 		AForm("Robotomy_Requested_Form", 72, 45)
 {
-	// std::cout << "rf creqted" << std::endl;
 	this->_target = target;
 	return;
 }

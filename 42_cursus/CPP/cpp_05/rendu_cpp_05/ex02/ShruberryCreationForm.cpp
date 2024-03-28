@@ -3,7 +3,6 @@
 ShruberryCreationForm::ShruberryCreationForm(std::string target) :
 		AForm("Shruberry_Creation_form", 145, 137)
 {
-	// std::cout << "sf creqted" << std::endl;
 	this->_target = target;
 	return;
 }
