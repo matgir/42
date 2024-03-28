@@ -66,6 +66,8 @@ class AForm
 
 	private:
 
+		AForm(void);
+		
 		const std::string	_name;
 		bool				_isSigned;
 		const int			_siGrade;

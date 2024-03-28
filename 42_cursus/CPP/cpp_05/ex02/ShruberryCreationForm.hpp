@@ -27,6 +27,8 @@ class ShruberryCreationForm : public AForm
 
 	private:
 
+		ShruberryCreationForm(void);
+		
 		std::string	_target;
 };
 

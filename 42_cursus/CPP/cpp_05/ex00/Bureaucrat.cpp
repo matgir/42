@@ -7,7 +7,7 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name)
 		throw Bureaucrat::GradeTooHighException();
 	else if (this->_grade > 150)
 		throw Bureaucrat::GradeTooLowException();
-	std::cout << ", initialising constructor called" << std::endl;
+	std::cout << ", initialising constructor called" << std::endl;//
 	return;
 }
 

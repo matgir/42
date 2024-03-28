@@ -44,6 +44,8 @@ class Form
 
 	private:
 
+		Form(void);
+		
 		const std::string	_name;
 		bool				_isSigned;
 		const int			_siGrade;

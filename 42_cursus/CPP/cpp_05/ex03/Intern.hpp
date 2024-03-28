@@ -37,11 +37,14 @@ class Intern
 		};
 
 	protected:
-
+		
 		AForm * makeShrub(std::string target);
 		AForm * makeRobotomy(std::string target);
 		AForm * makePardon(std::string target);
 
+	private:
+
+		Intern(void);
 };
 
 #endif

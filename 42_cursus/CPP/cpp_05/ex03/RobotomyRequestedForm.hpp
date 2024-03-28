@@ -25,6 +25,8 @@ class RobotomyRequestForm : public AForm
 
 	private:
 
+		RobotomyRequestForm(void);
+		
 		std::string	_target;
 };
 

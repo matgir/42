@@ -24,6 +24,8 @@ class PresidentialPardonForm : public AForm
 
 	private:
 
+		PresidentialPardonForm(void);
+		
 		std::string	_target;
 };
 
