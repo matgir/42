@@ -37,12 +37,16 @@ int	main(void)
 	std::cout << std::endl << std::endl;
 	{
 		Bureaucrat * bernard = NULL;
+		Bureaucrat * benoit = NULL;
 		try
 		{
 			bernard = new Bureaucrat("Bernard", 150);
+			*benoit = *bernard;
+			benoit = new Bureaucrat(*bernard);
 			for (int i = 0; i < 65; i++)
 				bernard->incrementGrade();
 			std::cout << *bernard << std::endl;
+			std::cout << *benoit << std::endl;
 			delete(bernard);
 		}
 		catch (Bureaucrat::GradeTooHighException & except)
