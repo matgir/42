@@ -36,21 +36,6 @@ bool	is_num(std::string input)
 {
 	std::string::iterator	it = input.begin();
 
-	/* while (it != input.end())
-	{
-		if (input.find_first_of('f') != std::string::npos)
-			it = input.erase(input.begin() + static_cast<long>(input.find_first_of('f')));
-		else
-			break;
-	}
-	it = input.begin();
-	while (it != input.end())
-	{
-		if (input.find_first_of('.') == std::string::npos)
-			it = input.erase(input.begin());
-		else
-			it = input.erase(input.begin() + static_cast<long>(input.find_first_of('.')));
-	} */
 	while (input.find_first_of('f') != std::string::npos)
 		it = input.erase(input.begin() + static_cast<long>(input.find_first_of('f')));
 	it = input.begin();
@@ -77,13 +62,26 @@ bool	neg(std::string input)
 		return false;
 }
 
+bool	asciiRange(char c)
+{
+	if (c < 0 || c > 127)
+		return true;
+	else
+		return false;
+}
+
 void	output(char c, int i, float f, double d)
 {
-	if (displayable(c))
+	if (asciiRange(c) || f == INFINITY || f == -INFINITY)
+		std::cout << "char: impossible" << std::endl;
+	else if (displayable(c))
 		std::cout << "char: '" << c << "'" << std::endl;
 	else
 		std::cout << "char: Non Displayable" << std::endl;
-	std::cout << "int: " << i << std::endl;
+	if (f == INFINITY || f == -INFINITY)
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << i << std::endl;
 	std::cout << "float: " << f << (f == static_cast<float>(i) ? ".0f" : "f") << std::endl;
 	std::cout << "double: " << d << (d == static_cast<double>(i) ? ".0" : "") << std::endl;
 }
@@ -98,7 +96,7 @@ void	AScalarConverter::convert(std::string input)
 	while (1)
 	{
 		/*	#### char ####	*/
-		if (input.length() == 1 && displayable((input.c_str())[0]))
+		if (input.length() == 1 && displayable((input.c_str())[0]) && !is_num(input))
 		{
 			c = reinterpret_cast<char>(input.c_str()[0]);
 			i = static_cast<int>(c);
@@ -111,8 +109,8 @@ void	AScalarConverter::convert(std::string input)
 		/*	#### float ####	*/
 		else if ((f_ocurence(input) || (f_ocurence(input) && dot_ocurence(input))) && neg(input) && is_num(input))
 		{
-			// gerer -inff +inff
 			f = static_cast<float>(std::atof(input.c_str()));
+			// f = INFINITY; //
 			d = static_cast<double>(f);
 			i = static_cast<int>(f);
 			c = static_cast<char>(i);
@@ -123,8 +121,8 @@ void	AScalarConverter::convert(std::string input)
 		/*	#### double ####	*/
 		else if (dot_ocurence(input) && neg(input) && is_num(input))
 		{
-			// gerer -inf +inf
 			d = std::atof(input.c_str());
+			// d = -INFINITY; //
 			f = static_cast<float>(d);
 			i = static_cast<int>(d);
 			c = static_cast<char>(i);

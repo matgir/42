@@ -3,7 +3,6 @@
 ShruberryCreationForm::ShruberryCreationForm(std::string target) :
 		AForm("Shruberry_Creation_form", 145, 137)
 {
-	// std::cout << "sf creqted" << std::endl;
 	this->_target = target;
 	return;
 }
@@ -31,7 +30,14 @@ ShruberryCreationForm	&ShruberryCreationForm::operator=(ShruberryCreationForm co
 void		ShruberryCreationForm::executed(void)const
 {
 	std::ofstream	output;
+		std::ifstream	check_existence;
 
+	check_existence.open((this->_target + "_shruberry").c_str());
+	if (check_existence)
+	{
+		check_existence.close();
+		std::rename((this->_target + "_shruberry").c_str(), ("bis_" + this->_target + "_shruberry").c_str());
+	}
 	output.open((this->_target + "_shruberry").c_str(), std::fstream::app);
 	if (!output)
 	{
