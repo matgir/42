@@ -53,18 +53,18 @@ int	main(void)
 		delete rform;
 		delete sform;
 	}
-	// std::cout << std::endl << std::endl;
-	// {
-	// 	AForm *	rform = new RobotomyRequestForm("Meriadoc");
-	// 	Bureaucrat *	hermes = new Bureaucrat("Hermes", 44);
+	std::cout << std::endl << std::endl;
+	{
+		AForm *	rform = new RobotomyRequestForm("Meriadoc");
+		Bureaucrat *	hermes = new Bureaucrat("Hermes", 44);
 
-	// 	hermes->signForm(*rform);
-	// 	for (int i = 0; i < 1000000; i++)
-	// 		hermes->executeForm(*rform);
+		hermes->signForm(*rform);
+		for (int i = 0; i < 10000; i++)
+			hermes->executeForm(*rform);
 
-	// 	delete hermes;
-	// 	delete rform;
-	// }
+		delete hermes;
+		delete rform;
+	}
 	std::cout << std::endl << std::endl;
 	return 0;
 }

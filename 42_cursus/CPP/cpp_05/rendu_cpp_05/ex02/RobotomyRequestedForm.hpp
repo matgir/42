@@ -28,6 +28,7 @@ class RobotomyRequestForm : public AForm
 		RobotomyRequestForm(void);
 		
 		std::string	_target;
+		static int	_nbRob;
 };
 
 #endif

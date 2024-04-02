@@ -31,10 +31,11 @@ void		RobotomyRequestForm::executed(void)const
 {
 	std::cout << "DRIIIIIIIIIIIIIIIIIIIIIIIIIIIIILLING" << std::endl;
 	std::cout << "DRIIIIIIIIIIIIIIIIIIIIIIIIIIIIILLING" << std::endl;
-	if (std::time(NULL) % 2 == 0)
+	if (RobotomyRequestForm::_nbRob % 2 == 0)
 		std::cout << this->_target << " has been robotomized !" << std::endl;
 	else
 		std::cout << "The robotomy failed !" << std::endl;
+	RobotomyRequestForm::_nbRob++;
 	return;
 }
 
@@ -42,3 +43,5 @@ std::string	RobotomyRequestForm::getTarget(void)const
 {
 	return this->_target;
 }
+
+int	RobotomyRequestForm::_nbRob = 0;
