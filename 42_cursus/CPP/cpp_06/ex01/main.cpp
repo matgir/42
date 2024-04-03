@@ -18,5 +18,7 @@ int	main(void)
 	std::cout << data2->dataName << std::endl;
 	std::cout << data2->dataNumber << std::endl;
 
+	delete data1;
+
 	return 0;
 }
