@@ -1,12 +1,14 @@
-SRC		=	#####
+SRC		=	main.cpp \
+			Serializer.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	#####
+NAME	=	Lizer
 
-INCL	=	#####
+INCL	=	Data.hpp \
+			Serializer.hpp
 
 PP		=	c++
 
