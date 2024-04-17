@@ -28,7 +28,6 @@ Intern	&Intern::operator=(Intern const & assign)
 
 AForm *	Intern::makeForm(std::string formName, std::string target)
 {
-	//AForm		form = NULL;//
 	formList	list[12] = 
 	{
 		{"shruberry creation", &Intern::makeShrub},

@@ -5,7 +5,6 @@ AForm::AForm(const std::string name, int sigrade, int exgrade) :
 		_siGrade(sigrade),
 		_exGrade(exgrade)
 {
-	// std::cout << "AForm initializing constructor called" << std::endl;
 	if (this->_siGrade < 1 || this->_exGrade < 1)
 		throw AForm::GradeTooHighException();
 	else if (this->_siGrade > 150 || this->_exGrade > 150)
@@ -19,21 +18,17 @@ AForm::AForm(AForm const & copy) :
 		_siGrade(copy.getSiGrade()),
 		_exGrade(copy.getExGrade())
 {
-	// std::cout << "AForm copy constructor called" << std::endl;
 	this->_isSigned = copy.getSignature();
 	return;
 }
 
 AForm::~AForm(void)
 {
-	// std::cout << "AForm destructor called" << std::endl;
 	return;
 }
 
 AForm	&AForm::operator=(AForm const & assign)
 {
-	// std::cout << "AForm assignment operator called" << std::endl;
-
 	if (this != &assign)
 		this->_isSigned = assign.getSignature();
 	return *this;
@@ -85,7 +80,7 @@ void				AForm::execute(Bureaucrat const & executor)const
 
 std::ostream	&operator<<(std::ostream & o, AForm const & form)
 {
-	o << "AForm : " << form.getName() << "\nGrade " << form.getSiGrade();
+	o << "Form : " << form.getName() << "\nGrade " << form.getSiGrade();
 	o << " or higher to be signed\nGrade " << form.getExGrade();
 	if (form.getSignature() == true)
 		o << " or higher to be executed\nIs currently signed.";

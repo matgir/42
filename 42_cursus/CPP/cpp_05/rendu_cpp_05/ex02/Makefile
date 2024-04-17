@@ -2,7 +2,7 @@ SRC		=	main.cpp \
 			Bureaucrat.cpp \
 			AForm.cpp \
 			PresidentialPardonForm.cpp \
-			RobotomyRequestedForm.cpp \
+			RobotomyRequestForm.cpp \
 			ShruberryCreationForm.cpp
 
 OBJ		=	${SRC:.cpp=.o}
@@ -14,7 +14,7 @@ NAME	=	Execution
 INCL	=	Bureaucrat.hpp \
 			AForm.hpp \
 			PresidentialPardonForm.hpp \
-			RobotomyRequestedForm.hpp \
+			RobotomyRequestForm.hpp \
 			ShruberryCreationForm.hpp \
 			Makefile
 

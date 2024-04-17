@@ -1,7 +1,7 @@
-#include "RobotomyRequestedForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target) :
-		AForm("Robotomy_Requested_Form", 72, 45)
+		AForm("Robotomy_Request_Form", 72, 45)
 {
 	this->_target = target;
 	return;

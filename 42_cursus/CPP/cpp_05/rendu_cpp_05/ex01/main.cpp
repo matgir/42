@@ -8,13 +8,15 @@ int	main(void)
 		Form *			form = NULL;
 		Bureaucrat *	brad = NULL;
 
-		// brad = new Bureaucrat("Brad", 60);
-		brad = new Bureaucrat("Brad", 12);
+		brad = new Bureaucrat("Brad", 60);
 		form = new Form("25F", 55, 48);
 
 		std::cout << *form << std::endl;
 		std::cout << *brad << std::endl;
 		
+		brad->signForm(*form);
+		for (int i = 0; i < 10; i++)
+			brad->incrementGrade();
 		brad->signForm(*form);
 		std::cout << *form << std::endl;
 

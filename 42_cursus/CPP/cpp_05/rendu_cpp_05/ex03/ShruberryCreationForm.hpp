@@ -8,9 +8,6 @@
 # include <fstream>
 # include <filesystem>
 # include <ctime>
-// # include "Bureaucrat.hpp"
-
-// class Bureaucrat;
 
 class ShruberryCreationForm : public AForm
 {

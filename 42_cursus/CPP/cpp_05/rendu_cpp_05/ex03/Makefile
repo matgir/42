@@ -2,7 +2,7 @@ SRC		=	main.cpp \
 			Bureaucrat.cpp \
 			AForm.cpp \
 			PresidentialPardonForm.cpp \
-			RobotomyRequestedForm.cpp \
+			RobotomyRequestForm.cpp \
 			ShruberryCreationForm.cpp \
 			Intern.cpp
 
@@ -15,7 +15,7 @@ NAME	=	Intern
 INCL	=	Bureaucrat.hpp \
 			AForm.hpp \
 			PresidentialPardonForm.hpp \
-			RobotomyRequestedForm.hpp \
+			RobotomyRequestForm.hpp \
 			ShruberryCreationForm.hpp \
 			Intern.hpp \
 			Makefile

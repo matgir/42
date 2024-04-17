@@ -3,7 +3,6 @@
 PresidentialPardonForm::PresidentialPardonForm(std::string target) :
 		AForm("Presidential_Pardon_form", 25, 5)
 {
-	// std::cout << "pf creqted" << std::endl;
 	this->_target = target;
 	return;
 }

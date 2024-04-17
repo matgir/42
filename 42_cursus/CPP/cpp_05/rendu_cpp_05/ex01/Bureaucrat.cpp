@@ -47,20 +47,16 @@ int					Bureaucrat::getGrade(void)const
 
 void				Bureaucrat::incrementGrade(void)
 {
-	this->_grade -= 1;
-	if (this->_grade < 1)
+	if (this->_grade - 1 < 1)
 		throw Bureaucrat::GradeTooHighException();
-	else if (this->_grade > 150)
-		throw Bureaucrat::GradeTooLowException();
+	this->_grade -= 1;
 }
 
 void				Bureaucrat::decrementGrade(void)
 {
-	this->_grade += 1;
-	if (this->_grade < 1)
-		throw Bureaucrat::GradeTooHighException();
-	else if (this->_grade > 150)
+	if (this->_grade + 1 > 150)
 		throw Bureaucrat::GradeTooLowException();
+	this->_grade += 1;
 }
 
 void				Bureaucrat::signForm(Form & form)const
@@ -74,7 +70,6 @@ void				Bureaucrat::signForm(Form & form)const
 	{
 		std::cout << this->getName() << " couldn't sign " << form.getName();
 		std::cout << " because his grade is too low" << std::endl;
-		// std::cerr << except.what() << std::endl;
 	}
 	return;
 }

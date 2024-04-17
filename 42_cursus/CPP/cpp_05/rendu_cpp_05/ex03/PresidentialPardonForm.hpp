@@ -5,9 +5,6 @@
 # include <string>
 # include <stdexcept>
 # include "AForm.hpp"
-// # include "Bureaucrat.hpp"
-
-// class Bureaucrat;
 
 class PresidentialPardonForm : public AForm
 {

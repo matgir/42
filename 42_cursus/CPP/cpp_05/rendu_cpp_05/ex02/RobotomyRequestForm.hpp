@@ -6,9 +6,6 @@
 # include <stdexcept>
 # include "AForm.hpp"
 # include <ctime>
-// # include "Bureaucrat.hpp"
-
-// class Bureaucrat;
 
 class RobotomyRequestForm : public AForm
 {

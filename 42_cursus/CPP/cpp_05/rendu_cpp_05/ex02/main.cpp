@@ -1,7 +1,7 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "PresidentialPardonForm.hpp"
-#include "RobotomyRequestedForm.hpp"
+#include "RobotomyRequestForm.hpp"
 #include "ShruberryCreationForm.hpp"
 
 void	trythings(Bureaucrat * b, AForm * pf, AForm * rf, AForm * sf)
@@ -34,6 +34,10 @@ int	main(void)
 
 		Bureaucrat *	hermes = new Bureaucrat("Hermes", 150);
 
+		std::cout << *pform << std::endl;
+		std::cout << *rform << std::endl;
+		std::cout << *sform << std::endl;
+
 		trythings(hermes, pform, rform, sform);
 		increase(hermes, 5);
 		trythings(hermes, pform, rform, sform);
@@ -54,17 +58,17 @@ int	main(void)
 		delete sform;
 	}
 	std::cout << std::endl << std::endl;
-	{
-		AForm *	rform = new RobotomyRequestForm("Meriadoc");
-		Bureaucrat *	hermes = new Bureaucrat("Hermes", 44);
+	// {
+	// 	AForm *	rform = new RobotomyRequestForm("Meriadoc");
+	// 	Bureaucrat *	hermes = new Bureaucrat("Hermes", 44);
 
-		hermes->signForm(*rform);
-		for (int i = 0; i < 10000; i++)
-			hermes->executeForm(*rform);
+	// 	hermes->signForm(*rform);
+	// 	for (int i = 0; i < 10000; i++)
+	// 		hermes->executeForm(*rform);
 
-		delete hermes;
-		delete rform;
-	}
-	std::cout << std::endl << std::endl;
+	// 	delete hermes;
+	// 	delete rform;
+	// }
+	// std::cout << std::endl << std::endl;
 	return 0;
 }
