@@ -27,7 +27,7 @@ class Intern
 			formPtr		form;
 		} formList;
 
-		class	FormDoesNotExist : std::exception
+		class	FormDoesNotExist : public std::exception
 		{
 			public:
 				virtual const char * what() const throw()

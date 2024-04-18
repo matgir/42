@@ -81,6 +81,7 @@ int	main(void)
 		catch (Bureaucrat::GradeTooLowException & except)
 		{
 			std::cerr << except.what() << std::endl;
+			std::cout << *bernard << std::endl;
 			delete(bernard);
 		}
 	}
