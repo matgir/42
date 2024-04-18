@@ -2,6 +2,7 @@
 # define IDENTIFY_H
 
 # include <ctime>
+# include <cstdlib>
 # include "Base.hpp"
 # include "A.hpp"
 # include "B.hpp"

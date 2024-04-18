@@ -3,10 +3,14 @@
 Base *	generate(void)
 {
 	Base *		baseClass;
+	int			i;
 
-	if (std::time(NULL) % 3 == 0)
+	srand(time(NULL));
+	i = rand() % 3;
+
+	if (i == 0)
 		baseClass = new A;
-	else if (std::time(NULL) % 2 == 0)
+	else if (i == 1)
 		baseClass = new B;
 	else
 		baseClass = new C;
@@ -16,7 +20,7 @@ Base *	generate(void)
 
 void	identify(Base * p)
 {
-	std::cout << "pointer identify" << std::endl;
+	std::cout << "Pointer identify" << std::endl;
 
 	if (dynamic_cast<A *>(p))
 		std::cout << "Base type is : A" << std::endl;
@@ -30,12 +34,13 @@ void	identify(Base * p)
 
 void	identify(Base & p)
 {
-	std::cout << "reference identify" << std::endl;
+	std::cout << "Reference identify" << std::endl;
 
 	try
 	{
 		dynamic_cast<A &>(p);
 		std::cout << "Base type is : A" << std::endl;
+		return;
 	}
 	catch(const std::exception& e)
 	{
@@ -45,6 +50,7 @@ void	identify(Base & p)
 	{
 		dynamic_cast<B &>(p);
 		std::cout << "Base type is : B" << std::endl;
+		return;
 	}
 	catch(const std::exception& e)
 	{
@@ -54,6 +60,7 @@ void	identify(Base & p)
 	{
 		dynamic_cast<C &>(p);
 		std::cout << "Base type is : C" << std::endl;
+		return;
 	}
 	catch(const std::exception& e)
 	{

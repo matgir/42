@@ -1,6 +1,6 @@
 SRC		=	main.cpp \
 			Base.cpp \
-			# Identify.cpp
+			Identify.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
@@ -12,7 +12,7 @@ INCL	=	A.hpp \
 			B.hpp \
 			C.hpp \
 			Base.hpp \
-			# Identify.h
+			Identify.h
 
 PP		=	c++
 
