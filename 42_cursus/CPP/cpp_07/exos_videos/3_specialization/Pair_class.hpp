@@ -51,13 +51,15 @@ class	Pair<bool, bool>
 		{
 			std::cout << "Bool/bool specialization" << std::endl;
 			this->_n = 0;
-			this->_n != static_cast<int>(lhs) << 0;
-			this->_n != static_cast<int>(rhs) << 1;
+			this->_n |= static_cast<int>(lhs) << 0;
+			this->_n |= static_cast<int>(rhs) << 1;
+			return;
 		}
 		~Pair<bool, bool>(void) {}
 
 		bool	fst(void)const {return (this->_n & 0x01);}
 		bool	snd(void)const {return (this->_n & 0x02);}
+		int		getN(void)const {return (this->_n);}
 
 	private:
 		int	_n;
@@ -73,6 +75,6 @@ std::ostream &	operator<<(std::ostream & o, Pair<T, U> const & p)
 
 std::ostream &	operator<<(std::ostream & o, Pair<bool, bool> const & p)
 {
-	o << std::boolalpha << "Pair( " << p.fst() << ", " << p.snd() << " )";
+	o << std::boolalpha << "Pair( " << p.fst() << ", " << p.snd() << " ) " << p.getN();
 	return o;
 }

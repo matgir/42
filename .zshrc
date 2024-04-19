@@ -112,7 +112,7 @@ alias pwls='pwd && ls -la'
 alias savemacos='cd ~/Raccourci && ./savemacos.sh'
 alias saveunix='cd ~/Raccourci && ./saveunix.sh'
 alias pullgit='cd ~/Raccourci && ./forcepull.sh'
-alias gppflag='g++ -Werror -Wall -Wextra -Wno-unused -std=c++98'
+alias gppflag='c++ -Werror -Wall -Wextra -Wno-unused -std=c++98'
 # pour lockscreen avec une animation
 # nb 1 = demarage image pixel vers la droite
 # nb 2 = demarage image pixel vers le bas = 0.5625*nb1
