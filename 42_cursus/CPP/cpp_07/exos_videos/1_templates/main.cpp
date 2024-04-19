@@ -14,7 +14,7 @@ template< typename T >				//Template definition
 
 T const &	max(T const & x, T const & y)
 {
-	return (x >= y ? x : y);
+	return (y >= x ? y : x);
 }
 
 int	foo(int x)
@@ -26,10 +26,11 @@ int	foo(int x)
 int	main(void)
 {
 	int	a = 21;
-	int	b = 42;
+	int	b = 22;
 
 	std::cout << "Max of " << a << " and " << b << " is ";
-	std::cout << max<int>(a ,b) << std::endl;		//explicit instanciation
+	if (&max<int>(a, b) == &b)
+		std::cout << max<int>(a ,b) << std::endl;		//explicit instanciation
 	std::cout << "Max of " << a << " and " << b << " is ";
 	std::cout << max(a ,b) << std::endl;			//implicit instanciation
 
@@ -41,8 +42,8 @@ int	main(void)
 	std::cout << "Max of " << c << " and " << d << " is ";
 	std::cout << max(c ,d) << std::endl;			//implicit instanciation
 
-	char	e = 21;
-	char	f = 42;
+	char	e = 'a';
+	char	f = 'z';
 
 	std::cout << "Max of " << e << " and " << f << " is ";
 	std::cout << max<char>(e ,f) << std::endl;		//explicit instanciation
