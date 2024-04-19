@@ -1,11 +1,15 @@
-#include <iostream>
+#ifndef ITER_HPP
+# define ITER_HPP
+
+#include <iostream>	
+# include <cstddef>
 
 template<typename T>
-void	iter(T * array, size_t size, void (*f)(T &))
+void	iter(T * array, std::size_t size, void (*f)(T &))
 {
-	for (int i = 0; i < size; i++)
+	for (std::size_t i = 0; i < size; i++)
 	{
-		f(array[i]);
+		(*f)(array[i]);
 	}
 	return;
 }
@@ -13,6 +17,8 @@ void	iter(T * array, size_t size, void (*f)(T &))
 template<typename T>
 void	showMe(T & toPrint)
 {
-	std::cout << toPrint << std::cout << toPrint << std::endl;
+	std::cout << toPrint << std::endl;
 	return;
 }
+
+#endif
