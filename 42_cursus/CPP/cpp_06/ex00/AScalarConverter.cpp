@@ -109,6 +109,9 @@ void	AScalarConverter::convert(std::string input)
 		/*	#### float ####	*/
 		else if ((f_ocurence(input) || (f_ocurence(input) && dot_ocurence(input))) && neg(input) && is_num(input))
 		{
+			// long int n = atol(input.c_str());
+			// if ( n > FLT_MAX || n < -FLT_MAX)
+			//...
 			f = static_cast<float>(std::atof(input.c_str()));
 			// f = INFINITY; //
 			d = static_cast<double>(f);
@@ -121,6 +124,11 @@ void	AScalarConverter::convert(std::string input)
 		/*	#### double ####	*/
 		else if (dot_ocurence(input) && neg(input) && is_num(input))
 		{
+			// long int n = atol(input.c_str());
+			// if ( n > DBL_MAX || n < -DBL_MAX)
+			//...
+
+
 			d = std::atof(input.c_str());
 			// d = -INFINITY; //
 			f = static_cast<float>(d);
@@ -133,12 +141,19 @@ void	AScalarConverter::convert(std::string input)
 		/*	#### int ####	*/
 		else if (neg(input) && is_num(input))
 		{
-			i = atoi(input.c_str());
-			c = static_cast<char>(i);
-			f = static_cast<float>(i);
-			d = static_cast<double>(i);
-			std::cout << "INT" << std::endl; //
-			output(c, i, f, d);
+			
+			// long int n = atol(input.c_str());
+			// if ( n > INT_MAX || n < INT_MIN)
+				// std::cout << " overflow " << std::endl;
+			// else
+			// {
+				i = atoi(input.c_str());
+				c = static_cast<char>(i);
+				f = static_cast<float>(i);
+				d = static_cast<double>(i);
+				std::cout << "INT" << std::endl; //
+				output(c, i, f, d);
+			// }
 			break;
 		}
 		else

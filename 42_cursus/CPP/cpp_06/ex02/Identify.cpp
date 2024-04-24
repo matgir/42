@@ -43,9 +43,7 @@ void	identify(Base & p)
 		return;
 	}
 	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	{}
 	try
 	{
 		dynamic_cast<B &>(p);
@@ -53,9 +51,7 @@ void	identify(Base & p)
 		return;
 	}
 	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	{}
 	try
 	{
 		dynamic_cast<C &>(p);
@@ -63,7 +59,5 @@ void	identify(Base & p)
 		return;
 	}
 	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	{}
 }

@@ -10,7 +10,8 @@
 # include <string>
 # include <cmath>
 # include <iomanip>
-// # include <cfloat>
+# include <limits>
+# include <cfloat>
 
 class AScalarConverter
 {
