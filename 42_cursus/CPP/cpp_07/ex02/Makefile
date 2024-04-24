@@ -1,12 +1,12 @@
-SRC		=	####
+SRC		=	main.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	####
+NAME	=	Array
 
-INCL	=	####
+INCL	=	Array.hpp
 
 PP		=	c++
 
