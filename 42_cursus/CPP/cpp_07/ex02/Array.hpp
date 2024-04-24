@@ -1,27 +1,74 @@
-#include <iostream>
+#ifndef ARRAY_HPP
+# define ARRAY_HPP
 
-template<Typename T>
+# include <iostream>
+# include <stdexcept>
+
+template<typename T>
 class	Array
 {
 	public:
 		Array<T>(void);
-		/* Construction with no parameter: Creates an empty array. */
 		Array<T>(unsigned int i);
-		/* Construction with an unsigned int n as a parameter: Creates an array of n elements
-initialized by default.
-Tip: Try to compile int * a = new int(); then display *a. */
 		Array<T>(Array const & copy);
-		/* Construction by copy and assignment operator. In both cases, modifying either the
-original array or its copy after copying musn’t affect the other array. */
 
 		&operator=(Array const & assign);
-		/* Construction by copy and assignment operator. In both cases, modifying either the
-original array or its copy after copying musn’t affect the other array. */
-		&operator[](void);
-		/* When accessing an element with the [ ] operator, if its index is out of bounds, an
-std::exception is thrown. */
+		&operator[](unsigned int i);
 
-		unsigned int	size(void)const;
-		/* A member function size() that returns the number of elements in the array. This
-member function takes no parameter and musn’t modify the current instance. */
+		unsigned int	size(void)const;//
+
+		class	IndexOutOfRangeException : public std::exception
+		{
+			public:
+				virtual const char *	what()const throw()
+					return ("Index out of range !");
+		};
+
+	private:
+		T *				_array;
+		unsigned int	_size;
+};
+
+#endif
+
+#include "Array.hpp"
+
+Array::Array<T>(void)
+{
+	_array = NULL;
+	_size = 0;
+}
+
+Array::Array<T>(unsigned int i)
+{
+	_array = new T[i];
+	_size = i;
+}
+
+Array::Array(Array const & copy)
+{
+	_size = copy.size();
+	_array = new T[this->_size];
+	for (unsigned int i = 0; i < this->_size; i++)
+		_array[i] = copy._array[i];
+}
+
+Array	&Array::operator=(Array const & assign)
+{
+	if (this != assign)
+	{
+		delete this->_array[];
+		_size = assign.size();
+		_array = new T[this->_size];
+		for (unsigned int i = 0; i < this->_size; i++)
+			_array[i] = assign._array[i];
+	}
+	return *this;
+}
+
+T	&Array::operator[](unsigned int i)
+{
+	if (i < 0 || i > this->_size)
+		throw Array::IndexOutOfRangeException();
+	return this->_array[i];
 }
