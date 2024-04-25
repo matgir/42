@@ -74,18 +74,26 @@ void	output(char c, int i, float f, double d)
 {
 	std::cout << "In Output" << std::endl;//
 	std::cout << f << std::endl; //
-	if (asciiRange(c) || f == NAN || f == INFINITY || f == -INFINITY)
+	if (asciiRange(c)/*  || f == INFINITY || f == -INFINITY */)
 		std::cout << "char: impossible" << std::endl;
 	else if (displayable(c))
 		std::cout << "char: '" << c << "'" << std::endl;
 	else
 		std::cout << "char: Non Displayable" << std::endl;
-	if (f == NAN || f == INFINITY || f == -INFINITY)
-		std::cout << "int: impossible" << std::endl;
-	else
-		std::cout << "int: " << i << std::endl;
+	// if (f == INFINITY || f == -INFINITY)
+		// std::cout << "int: impossible" << std::endl;
+	// else
+	std::cout << "int: " << i << std::endl;
 	std::cout << "float: " << f << (f == static_cast<float>(i) ? ".0f" : "f") << std::endl;
 	std::cout << "double: " << d << (d == static_cast<double>(i) ? ".0" : "") << std::endl;
+}
+
+bool	pseudoLiterals(std::string input)
+{
+	if (input == "nan")
+		output(static_cast<char>(NAN), static_cast<int>(NAN),
+				static_cast<float>(NAN), static_cast<double>(NAN));
+	return true;
 }
 
 void	AScalarConverter::convert(std::string input)
@@ -97,7 +105,12 @@ void	AScalarConverter::convert(std::string input)
 
 	while (1)
 	{
+		// if (pseudoLiterals(input))
+		// {
+			// break;
+		// }
 		/*	#### char ####	*/
+		// else if (input.length() == 1 && displayable((input.c_str())[0]) && !is_num(input))
 		if (input.length() == 1 && displayable((input.c_str())[0]) && !is_num(input))
 		{
 			c = reinterpret_cast<char>(input.c_str()[0]);
@@ -114,12 +127,13 @@ void	AScalarConverter::convert(std::string input)
 			// long int n = atol(input.c_str());
 			// if ( n > FLT_MAX || n < -FLT_MAX)
 			//...
-			f = static_cast<float>(std::atof(input.c_str()));
+			// f = static_cast<float>(std::atof(input.c_str()));
 			// f = INFINITY; //
-			// f = NAN;//
+			f = NAN;//
 			d = static_cast<double>(f);
 			i = static_cast<int>(f);
 			c = static_cast<char>(i);
+			std::cout << "char: '" << c << "'" << std::endl;
 			std::cout << "FLOAT" << std::endl; //
 			std::cout << f << std::endl; //
 			output(c, i, f, d);
@@ -135,9 +149,9 @@ void	AScalarConverter::convert(std::string input)
 
 			d = std::atof(input.c_str());
 			// d = -INFINITY; //
-			d = NAN;//
-			if (d == NAN)
-				break;
+			// d = NAN;//
+			// if (d == NAN)//
+				// break;//
 			f = static_cast<float>(d);
 			i = static_cast<int>(d);
 			c = static_cast<char>(i);

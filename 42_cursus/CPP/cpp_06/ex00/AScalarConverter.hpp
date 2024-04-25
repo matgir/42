@@ -12,6 +12,7 @@
 # include <iomanip>
 # include <limits>
 # include <cfloat>
+# include <math.h>
 
 class AScalarConverter
 {
