@@ -40,10 +40,10 @@ bool	is_num(std::string input)
 		it = input.erase(input.begin() + static_cast<long>(input.find_first_of('f')));
 	it = input.begin();
 	while (input.find_first_of('.') != std::string::npos)
-			it = input.erase(input.begin() + static_cast<long>(input.find_first_of('.')));
+		it = input.erase(input.begin() + static_cast<long>(input.find_first_of('.')));
 	it = input.begin();
 	while (input.find_first_of('-') != std::string::npos)
-			it = input.erase(input.begin() + static_cast<long>(input.find_first_of('-')));
+		it = input.erase(input.begin() + static_cast<long>(input.find_first_of('-')));
 	for (unsigned long i = 0; input[i]; i++)
 		if (!std::isdigit(input[i]))
 			return false;
@@ -72,18 +72,24 @@ bool	asciiRange(char c)
 
 void	output(char c, int i, float f, double d)
 {
-	std::cout << "In Output" << std::endl;//
-	std::cout << f << std::endl; //
-	if (asciiRange(c)/*  || f == INFINITY || f == -INFINITY */)
+	// std::cout << "In Output" << std::endl;//
+	// std::cout << f << std::endl; //
+	// if (asciiRange(c)/*  || f == INFINITY || f == -INFINITY */)
+	if (c == -1)
+	{
 		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+	}
 	else if (displayable(c))
+	{
 		std::cout << "char: '" << c << "'" << std::endl;
+		std::cout << "int: " << i << std::endl;
+	}
 	else
+	{
 		std::cout << "char: Non Displayable" << std::endl;
-	// if (f == INFINITY || f == -INFINITY)
-		// std::cout << "int: impossible" << std::endl;
-	// else
-	std::cout << "int: " << i << std::endl;
+		std::cout << "int: " << i << std::endl;
+	}
 	std::cout << "float: " << f << (f == static_cast<float>(i) ? ".0f" : "f") << std::endl;
 	std::cout << "double: " << d << (d == static_cast<double>(i) ? ".0" : "") << std::endl;
 }
@@ -91,9 +97,42 @@ void	output(char c, int i, float f, double d)
 bool	pseudoLiterals(std::string input)
 {
 	if (input == "nan")
-		output(static_cast<char>(NAN), static_cast<int>(NAN),
+	{
+		output(static_cast<char>(-1), static_cast<int>(-1),
 				static_cast<float>(NAN), static_cast<double>(NAN));
-	return true;
+		return true;
+	}
+	else if (input == "nanf")
+	{
+		output(static_cast<char>(-1), static_cast<int>(-1),
+				static_cast<float>(NAN), static_cast<double>(NAN));
+		return true;
+	}
+	else if (input == "inf")
+	{
+		output(static_cast<char>(-1), static_cast<int>(-1),
+				static_cast<float>(INFINITY), static_cast<double>(INFINITY));
+		return true;
+	}
+	else if (input == "inff")
+	{
+		output(static_cast<char>(-1), static_cast<int>(-1),
+				static_cast<float>(INFINITY), static_cast<double>(INFINITY));
+		return true;
+	}
+	else if (input == "-inf")
+	{
+		output(static_cast<char>(-1), static_cast<int>(-1),
+				static_cast<float>(-INFINITY), static_cast<double>(-INFINITY));
+		return true;
+	}
+	else if (input == "-inff")
+	{
+		output(static_cast<char>(-1), static_cast<int>(-1),
+				static_cast<float>(-INFINITY), static_cast<double>(-INFINITY));
+		return true;
+	}
+	return false;
 }
 
 void	AScalarConverter::convert(std::string input)
@@ -105,13 +144,10 @@ void	AScalarConverter::convert(std::string input)
 
 	while (1)
 	{
-		// if (pseudoLiterals(input))
-		// {
-			// break;
-		// }
+		if (pseudoLiterals(input))
+			break;
 		/*	#### char ####	*/
-		// else if (input.length() == 1 && displayable((input.c_str())[0]) && !is_num(input))
-		if (input.length() == 1 && displayable((input.c_str())[0]) && !is_num(input))
+		else if (input.length() == 1 && displayable((input.c_str())[0]) && !is_num(input))
 		{
 			c = reinterpret_cast<char>(input.c_str()[0]);
 			i = static_cast<int>(c);
@@ -127,9 +163,9 @@ void	AScalarConverter::convert(std::string input)
 			// long int n = atol(input.c_str());
 			// if ( n > FLT_MAX || n < -FLT_MAX)
 			//...
-			// f = static_cast<float>(std::atof(input.c_str()));
+			f = static_cast<float>(std::atof(input.c_str()));
 			// f = INFINITY; //
-			f = NAN;//
+			// f = NAN;//
 			d = static_cast<double>(f);
 			i = static_cast<int>(f);
 			c = static_cast<char>(i);
@@ -151,7 +187,7 @@ void	AScalarConverter::convert(std::string input)
 			// d = -INFINITY; //
 			// d = NAN;//
 			// if (d == NAN)//
-				// break;//
+			// break;//
 			f = static_cast<float>(d);
 			i = static_cast<int>(d);
 			c = static_cast<char>(i);
@@ -162,26 +198,26 @@ void	AScalarConverter::convert(std::string input)
 		/*	#### int ####	*/
 		else if (neg(input) && is_num(input))
 		{
-			
+
 			// long int n = atol(input.c_str());
 			// if ( n > INT_MAX || n < INT_MIN)
-				// std::cout << " overflow " << std::endl;
+			// std::cout << " overflow " << std::endl;
 			// else
 			// {
-				i = atoi(input.c_str());
-				c = static_cast<char>(i);
-				f = static_cast<float>(i);
-				d = static_cast<double>(i);
-				std::cout << "INT" << std::endl; //
-				output(c, i, f, d);
+			i = atoi(input.c_str());
+			c = static_cast<char>(i);
+			f = static_cast<float>(i);
+			d = static_cast<double>(i);
+			std::cout << "INT" << std::endl; //
+			output(c, i, f, d);
 			// }
 			break;
 		}
-		else
-		{
-			std::cout << "char: impossible\nint: impossible" << std::endl;
-			std::cout << "float: nanf\ndouble: nan" << std::endl;
-			break;
-		}
+		// else
+		// {
+		// 	std::cout << "char: impossible\nint: impossible" << std::endl;
+		// 	std::cout << "float: nanf\ndouble: nan" << std::endl;
+		// 	break;
+		// }
 	}
 }
