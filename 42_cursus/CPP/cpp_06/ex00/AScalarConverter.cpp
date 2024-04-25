@@ -72,13 +72,15 @@ bool	asciiRange(char c)
 
 void	output(char c, int i, float f, double d)
 {
-	if (asciiRange(c) || f == INFINITY || f == -INFINITY)
+	std::cout << "In Output" << std::endl;//
+	std::cout << f << std::endl; //
+	if (asciiRange(c) || f == NAN || f == INFINITY || f == -INFINITY)
 		std::cout << "char: impossible" << std::endl;
 	else if (displayable(c))
 		std::cout << "char: '" << c << "'" << std::endl;
 	else
 		std::cout << "char: Non Displayable" << std::endl;
-	if (f == INFINITY || f == -INFINITY)
+	if (f == NAN || f == INFINITY || f == -INFINITY)
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << i << std::endl;
@@ -114,10 +116,12 @@ void	AScalarConverter::convert(std::string input)
 			//...
 			f = static_cast<float>(std::atof(input.c_str()));
 			// f = INFINITY; //
+			// f = NAN;//
 			d = static_cast<double>(f);
 			i = static_cast<int>(f);
 			c = static_cast<char>(i);
 			std::cout << "FLOAT" << std::endl; //
+			std::cout << f << std::endl; //
 			output(c, i, f, d);
 			break;
 		}
@@ -131,6 +135,9 @@ void	AScalarConverter::convert(std::string input)
 
 			d = std::atof(input.c_str());
 			// d = -INFINITY; //
+			d = NAN;//
+			if (d == NAN)
+				break;
 			f = static_cast<float>(d);
 			i = static_cast<int>(d);
 			c = static_cast<char>(i);
