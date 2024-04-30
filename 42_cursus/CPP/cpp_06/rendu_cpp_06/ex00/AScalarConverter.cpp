@@ -14,7 +14,7 @@ bool	dot_ocurence(std::string input)
 	for (unsigned long i = 0; input[i]; i++)
 		if (input[i] == '.')
 			point++;
-	if (point == 1)
+	if (point == 1)\
 		return true;
 	else
 		return false;
@@ -78,7 +78,7 @@ void	output(char c, int i, float f, double d)
 		std::cout << "char: '" << c << "'" << std::endl;
 	else
 		std::cout << "char: Non Displayable" << std::endl;
-	if (c == -12 || f == INFINITY || f == -INFINITY)
+	if (c == -12 || f == INFINITY || f == -INFINITY || f > static_cast<float>(2147483647) || f < static_cast<float>(-2147483648))
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << i << std::endl;
@@ -100,13 +100,13 @@ bool	pseudoLiterals(std::string input)
 				static_cast<float>(NAN), static_cast<double>(NAN));
 		return true;
 	}
-	else if (input == "inf")
+	else if (input == "+inf")
 	{
 		output(static_cast<char>(-12), static_cast<int>(-1),
 				static_cast<float>(INFINITY), static_cast<double>(INFINITY));
 		return true;
 	}
-	else if (input == "inff")
+	else if (input == "+inff")
 	{
 		output(static_cast<char>(-12), static_cast<int>(-1),
 				static_cast<float>(INFINITY), static_cast<double>(INFINITY));
@@ -152,7 +152,7 @@ void	AScalarConverter::convert(std::string input)
 		else if ((f_ocurence(input) || (f_ocurence(input) && dot_ocurence(input))) && neg(input) && is_num(input))
 		{
 			double	overflow = std::atof(input.c_str());
-			if (overflow > FLT_MAX || overflow < FLT_MIN)
+			if (overflow > FLT_MAX || overflow < -FLT_MAX)
 			{
 				std::cout << "Float overflow, could not convert" << std::endl;
 				break;
