@@ -72,13 +72,13 @@ bool	asciiRange(char c)
 
 void	output(char c, int i, float f, double d)
 {
-	if (asciiRange(c))
+	if (asciiRange(c) || i < 0 || f == INFINITY || f == -INFINITY)
 		std::cout << "char: impossible" << std::endl;
 	else if (displayable(c))
 		std::cout << "char: '" << c << "'" << std::endl;
 	else
 		std::cout << "char: Non Displayable" << std::endl;
-	if (c == -12)
+	if (c == -12 || f == INFINITY || f == -INFINITY)
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << i << std::endl;
@@ -167,9 +167,12 @@ void	AScalarConverter::convert(std::string input)
 		/*	#### double ####	*/
 		else if (dot_ocurence(input) && neg(input) && is_num(input))
 		{
-			// long int n = atol(input.c_str());
-			// if ( n > DBL_MAX || n < -DBL_MAX)
-			//...
+			char **	endptr = NULL;
+			if (strtod(input.c_str(), endptr) == -HUGE_VAL || strtod(input.c_str(), endptr) == HUGE_VAL)
+			{
+				std::cout << "Double overflow, could not convert" << std::endl;
+				break;
+			}
 			d = std::atof(input.c_str());
 			f = static_cast<float>(d);
 			i = static_cast<int>(d);
