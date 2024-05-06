@@ -8,6 +8,7 @@
 # include <iostream>
 # include <forward_list>
 # include <stdexcept>
+# include "Span.h"
 
 class Span
 {
@@ -82,7 +83,7 @@ void			Span::addNumber(int newNumber)
 
 unsigned int	Span::shortestSpan(void)
 {
-	unsigned int	distance;
+	unsigned int	distance = UINT32_MAX;
 
 	if (this->_size <= 1 || this->_fillAt <= 1)
 	{
@@ -90,5 +91,14 @@ unsigned int	Span::shortestSpan(void)
 		return;
 	}
 	this->_span.sort();
-	
+
+	std::forward_list<int>::const_iterator	it = this->_span.begin();
+	std::forward_list<int>::const_iterator	ite = this->_span.end();
+
+	distance = difference(*it, *it + 1);
+	it++;
+	for (it; it != ite; it++)
+	{
+	}
+
 }
