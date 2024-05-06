@@ -6,10 +6,9 @@
 # define SPAN_CLASS
 
 # include <iostream>
-# include <array>
+# include <forward_list>
 # include <stdexcept>
 
-template <typename T>
 class Span
 {
 	public:
@@ -19,7 +18,7 @@ class Span
 
 		unsigned int	getSize(void)const;
 		void			addNumber(int newNumber);
-		unsigned int	shortestSpan(void)const;
+		unsigned int	shortestSpan(void);
 		unsigned int	longestSpan(void)const;
 
 	private:
@@ -30,7 +29,7 @@ class Span
 
 		unsigned int			_size;
 		unsigned int			_fillAt;
-		std::array<int, 0>		_array;
+		std::forward_list<int>	_span;
 };
 
 #endif
@@ -76,12 +75,12 @@ void			Span::addNumber(int newNumber)
 		throw std::out_of_range("Your Span is full !");
 		return;
 	}
-	this->_array[this->_fillAt] = newNumber;
+	this->_span.push_front(newNumber);
 	this->_fillAt += 1;
 	return;
 }
 
-unsigned int	Span::shortestSpan(void)const
+unsigned int	Span::shortestSpan(void)
 {
 	unsigned int	distance;
 
@@ -90,4 +89,6 @@ unsigned int	Span::shortestSpan(void)const
 		throw std::length_error("Your Span is too small to call this function !");
 		return;
 	}
+	this->_span.sort();
+	
 }
