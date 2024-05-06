@@ -6,7 +6,10 @@
 # define SPAN_CLASS
 
 # include <iostream>
+# include <array>
+# include <stdexcept>
 
+template <typename T>
 class Span
 {
 	public:
@@ -15,7 +18,9 @@ class Span
 		virtual ~Span(void);
 
 		unsigned int	getSize(void)const;
-		void			addNumber(int newNumber);//
+		void			addNumber(int newNumber);
+		unsigned int	shortestSpan(void)const;
+		unsigned int	longestSpan(void)const;
 
 	private:
 
@@ -25,12 +30,12 @@ class Span
 
 		unsigned int			_size;
 		unsigned int			_fillAt;
-		std::array<int, _size>	_array;
+		std::array<int, 0>		_array;
 };
 
 #endif
 
-#include "Span.hpp"
+// #include "Span.hpp"
 
 Span::Span(unsigned int size) : _size(size)
 {
@@ -62,4 +67,27 @@ Span	&Span::operator=(Span const & assign)
 unsigned int	Span::getSize(void)const
 {
 	return this->_size;
+}
+
+void			Span::addNumber(int newNumber)
+{
+	if (this->_fillAt == this->_size)
+	{
+		throw std::out_of_range("Your Span is full !");
+		return;
+	}
+	this->_array[this->_fillAt] = newNumber;
+	this->_fillAt += 1;
+	return;
+}
+
+unsigned int	Span::shortestSpan(void)const
+{
+	unsigned int	distance;
+
+	if (this->_size <= 1 || this->_fillAt <= 1)
+	{
+		throw std::length_error("Your Span is too small to call this function !");
+		return;
+	}
 }
