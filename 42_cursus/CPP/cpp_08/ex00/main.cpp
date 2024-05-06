@@ -40,9 +40,9 @@ int	main(void)
 
 		try
 		{
-			std::cout << *easyfind(vect, 2147483647) << std::endl;
-			std::cout << *easyfind(vect, -3658) << std::endl;
-			std::cout << *easyfind(vect, -3) << std::endl;
+			std::cout << *easyfind(vect, 1) << std::endl;
+			std::cout << *easyfind(vect, -12) << std::endl;
+			std::cout << *easyfind(vect, 23) << std::endl;
 		}
 		catch(const std::exception& e)
 		{
