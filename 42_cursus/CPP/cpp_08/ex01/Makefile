@@ -1,12 +1,13 @@
-SRC		=	#####
+SRC		=	main.cpp \
+			Span.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	#####
+NAME	=	Span
 
-INCL	=	#####
+INCL	=	Span.hpp Span.h
 
 PP		=	c++
 

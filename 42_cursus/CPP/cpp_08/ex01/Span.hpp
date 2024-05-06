@@ -6,7 +6,7 @@
 # define SPAN_CLASS
 
 # include <iostream>
-# include <forward_list>
+# include <list>
 # include <stdexcept>
 # include "Span.h"
 
@@ -21,7 +21,8 @@ class Span
 		void			addNumber(int newNumber);
 		unsigned int	shortestSpan(void);
 		unsigned int	longestSpan(void);
-		void			fillSpan(std::forward_list<int>::iterator begin, std::forward_list<int>::iterator end);
+		void			fillSpan(std::list<int>::iterator begin, std::list<int>::iterator end);
+		std::list<int>	getSpan(void)const;
 
 	private:
 
@@ -31,7 +32,7 @@ class Span
 
 		unsigned int			_size;
 		unsigned int			_fillAt;
-		std::forward_list<int>	_span;
+		std::list<int>	_span;
 };
 
 #endif
