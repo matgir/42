@@ -20,7 +20,7 @@ class Span
 		unsigned int	getSize(void)const;
 		void			addNumber(int newNumber);
 		unsigned int	shortestSpan(void);
-		unsigned int	longestSpan(void)const;
+		unsigned int	longestSpan(void);
 
 	private:
 
@@ -83,8 +83,6 @@ void			Span::addNumber(int newNumber)
 
 unsigned int	Span::shortestSpan(void)
 {
-	unsigned int	distance = UINT32_MAX;
-
 	if (this->_size <= 1 || this->_fillAt <= 1)
 	{
 		throw std::length_error("Your Span is too small to call this function !");
@@ -95,10 +93,31 @@ unsigned int	Span::shortestSpan(void)
 	std::forward_list<int>::const_iterator	it = this->_span.begin();
 	std::forward_list<int>::const_iterator	ite = this->_span.end();
 
-	distance = difference(*it, *it + 1);
+	unsigned int	distance = difference(*it, *it + 1);
+	unsigned int	tmp;
+	it++;
 	it++;
 	for (it; it != ite; it++)
 	{
+		tmp = difference(*it - 1, *it);
+		if (tmp < distance)
+			distance = tmp;
+		if (distance == 0)
+			return distance;
 	}
+	return distance;
+}
 
+unsigned int	Span::longestSpan(void)
+{
+	if (this->_size <= 1 || this->_fillAt <= 1)
+	{
+		throw std::length_error("Your Span is too small to call this function !");
+		return;
+	}
+	this->_span.sort();
+	int	small = *this->_span.begin();
+	this->_span.reverse();
+	int	big = *this->_span.begin();
+	return (difference(small, big));
 }
