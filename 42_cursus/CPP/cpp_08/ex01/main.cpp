@@ -10,18 +10,18 @@ int	main(void)
 		try
 		{
 			span->addNumber(56);
-			span->addNumber(23);
+			span->longestSpan();
 		}
-		catch(const std::exception& e)
+		catch(const std::length_error& e)
 		{
 			std::cerr << e.what() << '\n';
 		}
 		try
 		{
 			span->addNumber(56);
-			span->longestSpan();
+			span->addNumber(23);
 		}
-		catch(const std::exception& e)
+		catch(const std::out_of_range& e)
 		{
 			std::cerr << e.what() << '\n';
 		}
@@ -30,7 +30,7 @@ int	main(void)
 			span->addNumber(89);
 			span->shortestSpan();
 		}
-		catch(const std::exception& e)
+		catch(const std::length_error& e)
 		{
 			std::cerr << e.what() << '\n';
 		}
@@ -41,16 +41,26 @@ int	main(void)
 		Span *	span = new Span(15000);
 		
 		srand(time(NULL));
-		for (int i = 0; i > -15000; i--)
-			span->addNumber(rand() * i);
+		for (int i = 0; i < 15000; i++)
+			span->addNumber(rand());
 		std::cout << span->longestSpan() << std::endl;
 		std::cout << span->shortestSpan() << std::endl;
+		std::cout << (span->getSpan().size()) << std::endl;
 
-		Span *	copy = new Span(15002);
+		Span *	copy = new Span(15000);
 
-		copy->fillSpan((span->getSpan()).begin(), (span->getSpan()).end());
+		try
+		{
+			copy->fillSpan((span->getSpan()).begin(), (span->getSpan()).end());
+		}
+		catch(const std::exception & e)
+		{
+			std::cerr << e.what() << "\n";
+		}
+		std::cout << (copy->getSpan().size()) << std::endl;
 		std::cout << copy->longestSpan() << std::endl;
 		std::cout << copy->shortestSpan() << std::endl;
+
 		delete span;
 		delete copy;
 	}

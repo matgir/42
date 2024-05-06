@@ -20,8 +20,8 @@ void			Span::addNumber(int newNumber)
 {
 	if (this->_fillAt == this->_size)
 	{
-		throw std::out_of_range("Your Span is full !");
-		return;
+		// throw std::out_of_range("Your Span is full !");
+		// return;
 	}
 	this->_span.push_back(newNumber);
 	this->_fillAt += 1;
@@ -32,10 +32,9 @@ unsigned int	Span::shortestSpan(void)
 {
 	if (this->_size <= 1 || this->_fillAt <= 1)
 	{
-		throw std::length_error("Your Span is too small to call this function !");
-		return 0	;
+		// throw std::length_error("Your Span is too small to call this function !");
+		// return 0;
 	}
-
 	std::list<int>	copy = this->_span;
 	copy.sort();
 
@@ -61,13 +60,14 @@ unsigned int	Span::longestSpan(void)
 {
 	if (this->_size <= 1 || this->_fillAt <= 1)
 	{
-		throw std::length_error("Your Span is too small to call this function !");
-		return 0;
+		// throw std::length_error("Your Span is too small to call this function !");
+		// return 0;
 	}
-	this->_span.sort();
-	int	small = *this->_span.begin();
-	this->_span.reverse();
-	int	big = *this->_span.begin();
+	std::list<int>	copy = this->_span;
+	copy.sort();
+	int	small = *copy.begin();
+	copy.reverse();
+	int	big = *copy.begin();
 	return (difference(small, big));
 }
 
@@ -75,11 +75,10 @@ void			Span::fillSpan(std::list<int>::iterator begin, std::list<int>::iterator e
 {
 	for (std::list<int>::iterator it = begin; it != end; it++)
 	{
-		std::cout << this->_fillAt << std::endl;//
-		if (this->_fillAt == this->_size)
+		if (this->_span.size() == this->_size)
 		{
-			throw std::out_of_range("Your Span is full !");
-			return;
+			// throw std::out_of_range("Your Span is full !");
+			// return;
 		}
 		this->_span.push_back(*it);
 		this->_fillAt++;
