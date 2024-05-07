@@ -1,7 +1,8 @@
 #include "MutantClass.hpp"
-
+// template<typename T>
 int main()
 {
+	// MutantStack<T>		mstack;
 	MutantStack<int>		mstack;
 	mstack.push(5);
 	mstack.push(17); 

@@ -17,7 +17,7 @@ class MutantStack
 		{
 			return;
 		}
-		MutantStack< T >(MutantStack const & copy)
+		MutantStack< T >(MutantStack< T > const & copy)
 		{
 			this->_stack = this->getStack();
 		}
@@ -48,17 +48,20 @@ class MutantStack
 			return this->_stack.size();
 		}
 
+		template<typename T>
 		T				top(void)
 		{
 			return this->_stack.top();
 		}
 
+		template<typename T>
 		void			push(T & val)
 		{
 			this->_stack.push(val);
 			return;
 		}
 
+		template<typename T>
 		void			emplace(T & args)
 		{
 			this->_stack.emplace(args);
@@ -79,7 +82,7 @@ class MutantStack
 
 	private:
 
-		std::stack<T>	_stack;
+		std::stack<T> *	_stack;
 };
 
 #endif
