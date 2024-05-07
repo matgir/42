@@ -1,7 +1,3 @@
-// replace canonical by your class unsigned int
-// replace getSize(void)const par nouveau getteur
-// replace variable by your variable name
-
 #ifndef SPAN_CLASS
 # define SPAN_CLASS
 

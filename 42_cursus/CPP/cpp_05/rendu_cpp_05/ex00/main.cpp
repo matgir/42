@@ -86,5 +86,28 @@ int	main(void)
 		}
 	}
 	std::cout << std::endl << std::endl;
+		{
+		Bureaucrat * bernard = NULL;
+		try
+		{
+			bernard = new Bureaucrat("Bernard", 150);
+			for (int i = 0; i < 151; i++)
+				bernard->incrementGrade();
+			std::cout << *bernard << std::endl;
+			delete(bernard);
+		}
+		catch (Bureaucrat::GradeTooHighException & except)
+		{
+			std::cerr << except.what() << std::endl;
+			delete(bernard);
+		}
+		catch (Bureaucrat::GradeTooLowException & except)
+		{
+			std::cerr << except.what() << std::endl;
+			std::cout << *bernard << std::endl;
+			delete(bernard);
+		}
+	}
+	std::cout << std::endl << std::endl;
 	return 0;
 }

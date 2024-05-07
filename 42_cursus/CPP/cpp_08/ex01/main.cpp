@@ -19,7 +19,6 @@ int	main(void)
 		try
 		{
 			span->addNumber(56);
-			span->addNumber(23);
 		}
 		catch(Span::SpanIsFull & e)
 		{
@@ -27,7 +26,6 @@ int	main(void)
 		}
 		try
 		{
-			span->addNumber(89);
 			span->shortestSpan();
 		}
 		catch(Span::SpanIsTooShort& e)
@@ -72,6 +70,7 @@ int	main(void)
 		sp.addNumber(17);
 		sp.addNumber(9);
 		sp.addNumber(11);
+		// sorted 3 (3) 6 (3) 9 (2) 11 (6) 17
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
 	}

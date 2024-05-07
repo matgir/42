@@ -66,19 +66,20 @@ unsigned int	Span::shortestSpan(void)
 	std::list<int>::const_iterator	it = copy.begin();
 	std::list<int>::const_iterator	ite = copy.end();
 
-	unsigned int	distance = difference(*it, *it + 1);
-	std::cout << distance << std::endl;//
-	unsigned int	tmp;
+	unsigned int	intTmp = *it;
 	it++;
+	unsigned int	distance = difference(*it, intTmp);
+	intTmp = *it;
 	it++;
 	for (it; it != ite; it++)
 	{
-		tmp = difference(*it - 1, *it);
-		std::cout << tmp << std::endl;//
-		if (tmp < distance)
-			distance = tmp;
+		unsigned int	distTmp = distance;
+		distance = difference(*it, intTmp);
+		if (distTmp < distance)
+			distance = distTmp;
 		if (distance == 0)
 			return distance;
+		intTmp = *it;
 	}
 	return distance;
 }
