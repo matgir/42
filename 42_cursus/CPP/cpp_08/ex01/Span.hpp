@@ -14,7 +14,10 @@ class Span
 {
 	public:
 
+		Span(void);
 		Span(unsigned int size);
+		Span(Span const & copy);
+		Span	&operator=(Span const & assign);
 		virtual ~Span(void);
 
 		unsigned int	getSize(void)const;
@@ -23,15 +26,30 @@ class Span
 		unsigned int	longestSpan(void);
 		void			fillSpan(std::list<int>::iterator begin, std::list<int>::iterator end);
 		std::list<int>	getSpan(void)const;
+		unsigned int	getFillAt(void)const;
+
+		class	SpanIsFull : public std::exception
+		{
+			public:
+				virtual const char *	what() const throw()
+				{
+					return ("Your Span is full !");
+				}
+		};
+
+		class	SpanIsTooShort : public std::exception
+		{
+			public:
+				virtual const char *	what() const throw()
+				{
+					return ("Your Span is too short to call this function");
+				}
+		};
 
 	private:
 
-		Span(void);
-		Span(Span const & copy);
-		Span	&operator=(Span const & assign);
-
-		unsigned int			_size;
-		unsigned int			_fillAt;
+		unsigned int	_size;
+		unsigned int	_fillAt;
 		std::list<int>	_span;
 };
 

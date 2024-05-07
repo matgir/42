@@ -1,9 +1,34 @@
 #include "Span.hpp"
 
+Span::Span(void) : _size(0)
+{
+	this->_fillAt = 0;
+	return;
+}
+
 Span::Span(unsigned int size) : _size(size)
 {
 	this->_fillAt = 0;
 	return;
+}
+
+Span::Span(Span const & copy)
+{
+	this->_size = copy.getSize();
+	this->_fillAt = copy.getFillAt();
+	this->_span = copy.getSpan();
+	return;
+}
+
+Span	&Span::operator=(Span const & assign)
+{
+	if (this != &assign)
+	{
+		this->_size = assign.getSize();
+		this->_fillAt = assign.getFillAt();
+		this->_span = assign.getSpan();
+	}
+	return *this;
 }
 
 Span::~Span(void)
@@ -20,8 +45,8 @@ void			Span::addNumber(int newNumber)
 {
 	if (this->_fillAt == this->_size)
 	{
-		// throw std::out_of_range("Your Span is full !");
-		// return;
+		throw Span::SpanIsFull();
+		return;
 	}
 	this->_span.push_back(newNumber);
 	this->_fillAt += 1;
@@ -32,8 +57,8 @@ unsigned int	Span::shortestSpan(void)
 {
 	if (this->_size <= 1 || this->_fillAt <= 1)
 	{
-		// throw std::length_error("Your Span is too small to call this function !");
-		// return 0;
+		throw Span::SpanIsTooShort();
+		return 0;
 	}
 	std::list<int>	copy = this->_span;
 	copy.sort();
@@ -42,12 +67,14 @@ unsigned int	Span::shortestSpan(void)
 	std::list<int>::const_iterator	ite = copy.end();
 
 	unsigned int	distance = difference(*it, *it + 1);
+	std::cout << distance << std::endl;//
 	unsigned int	tmp;
 	it++;
 	it++;
 	for (it; it != ite; it++)
 	{
 		tmp = difference(*it - 1, *it);
+		std::cout << tmp << std::endl;//
 		if (tmp < distance)
 			distance = tmp;
 		if (distance == 0)
@@ -60,8 +87,8 @@ unsigned int	Span::longestSpan(void)
 {
 	if (this->_size <= 1 || this->_fillAt <= 1)
 	{
-		// throw std::length_error("Your Span is too small to call this function !");
-		// return 0;
+		throw Span::SpanIsTooShort();
+		return 0;
 	}
 	std::list<int>	copy = this->_span;
 	copy.sort();
@@ -77,8 +104,8 @@ void			Span::fillSpan(std::list<int>::iterator begin, std::list<int>::iterator e
 	{
 		if (this->_span.size() == this->_size)
 		{
-			// throw std::out_of_range("Your Span is full !");
-			// return;
+			throw Span::SpanIsFull();
+			return;
 		}
 		this->_span.push_back(*it);
 		this->_fillAt++;
@@ -89,6 +116,11 @@ void			Span::fillSpan(std::list<int>::iterator begin, std::list<int>::iterator e
 std::list<int>	Span::getSpan(void)const
 {
 	return this->_span;
+}
+
+unsigned int	Span::getFillAt(void)const
+{
+	return this->_fillAt;
 }
 
 unsigned int	difference(int a, int b)
