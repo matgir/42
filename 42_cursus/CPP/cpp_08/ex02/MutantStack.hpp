@@ -8,10 +8,12 @@
 # include <iostream>
 # include <stack>
 
-template<typename T>
+template<template T>
 class MutantStack : public std::stack<T>
 {
 	public:
+
+		typedef typename std::stack<T>::container_type::iterator	iterator;
 
 		MutantStack< T >(void)
 		{
@@ -26,8 +28,8 @@ class MutantStack : public std::stack<T>
 			return;
 		}
 
-		typedef std::iterator<T> iterator;
-		typedef std::const_iterator<T> const_iterator;
+		// typedef std::iterator<T> iterator;
+		// typedef std::const_iterator<T> const_iterator;
 
 		MutantStack	&operator=(MutantStack< T > const & assign)
 		{
