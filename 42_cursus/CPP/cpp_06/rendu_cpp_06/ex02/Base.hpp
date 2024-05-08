@@ -6,14 +6,6 @@
 # define BASE_HPP
 
 # include <iostream>
-// # include "Identify.h"
-
-// class Base
-// {
-// 	public:
-
-// 		virtual ~Base(void);
-// };
 
 class Base
 {

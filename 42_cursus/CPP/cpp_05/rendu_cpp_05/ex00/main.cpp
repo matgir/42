@@ -2,9 +2,9 @@
 
 int	main(void)
 {
-	// std::cout << std::endl << std::endl;
+	std::cout << std::endl << std::endl;
 	{
-		// Bureaucrat *	bernard1222 = new Bureaucrat("Bernard", 1222);//
+		Bureaucrat *	bernard1222 = new Bureaucrat("Bernard", 1222);//
 	}
 	// std::cout << std::endl << std::endl;
 	// {
@@ -40,7 +40,7 @@ int	main(void)
 		Bureaucrat benoit("Benoit", 12);
 		try
 		{
-			bernard = new Bureaucrat("Bernard", 150);
+			bernard = new Bureaucrat("Bernard", 151);
 			benoit = *bernard;
 			for (int i = 0; i < 65; i++)
 				bernard->incrementGrade();
