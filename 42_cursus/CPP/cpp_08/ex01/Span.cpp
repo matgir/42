@@ -16,7 +16,8 @@ Span::Span(Span const & copy)
 {
 	this->_size = copy.getSize();
 	this->_fillAt = copy.getFillAt();
-	this->_span = copy.getSpan();
+	this->_span.clear();
+	this->_span.insert(this->_span.end(), (copy.getSpan()).begin(), (copy.getSpan()).end());
 	return;
 }
 
@@ -26,7 +27,8 @@ Span	&Span::operator=(Span const & assign)
 	{
 		this->_size = assign.getSize();
 		this->_fillAt = assign.getFillAt();
-		this->_span = assign.getSpan();
+		this->_span.clear();
+		this->_span.insert(this->_span.end(), (assign.getSpan()).begin(), (assign.getSpan()).end());
 	}
 	return *this;
 }
@@ -60,7 +62,7 @@ unsigned int	Span::shortestSpan(void)
 		throw Span::SpanIsTooShort();
 		return 0;
 	}
-	std::list<int>	copy = this->_span;
+	std::list<int>	copy = std::list<int>(this->_span);
 	copy.sort();
 
 	std::list<int>::const_iterator	it = copy.begin();
@@ -91,7 +93,7 @@ unsigned int	Span::longestSpan(void)
 		throw Span::SpanIsTooShort();
 		return 0;
 	}
-	std::list<int>	copy = this->_span;
+	std::list<int>	copy = std::list<int>(this->_span);
 	copy.sort();
 	int	small = *copy.begin();
 	copy.reverse();
