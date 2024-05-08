@@ -9,76 +9,89 @@
 # include <stack>
 
 template<typename T>
-class MutantStack
+class MutantStack : public std::stack<T>
 {
 	public:
 
-		MutantStack< T >(void);
-		// {
-		// 	return;
-		// }
-		MutantStack< T >(MutantStack< T > const & copy);
-		// {
-		// 	this->_stack = copy.getStack();
-		// }
-		virtual ~MutantStack< T >(void);
-		// {
-		// 	return;
-		// }
+		MutantStack< T >(void)
+		{
+			return;
+		}
+		MutantStack< T >(MutantStack< T > const & copy)
+		{
+			this->_stack = copy.getStack();
+		}
+		virtual ~MutantStack< T >(void)
+		{
+			return;
+		}
 
-		MutantStack	&operator=(MutantStack const & assign);
-		// {
-		// 	if (this != &assign)
-		// 		this->_stack = assign.getStack();
-		// 	return *this;
-		// }
+		typedef std::iterator<T> iterator;
+		typedef std::const_iterator<T> const_iterator;
 
-		std::stack<T>	getStack(void)const;
-		// {
-		// 	return this->_stack;
-		// }
+		MutantStack	&operator=(MutantStack< T > const & assign)
+		{
+			if (this != &assign)
+				this->_stack = assign.getStack();
+			return *this;
+		}
 
-		bool			empty(void)const;
-		// {
-		// 	return this->_stack.empty();
-		// }
+		std::stack<T>	getStack(void)const
+		{
+			return this->_stack;
+		}
 
-		unsigned int	size(void)const;
-		// {
-		// 	return this->_stack.size();
-		// }
+		bool			empty(void)const
+		{
+			return this->_stack.empty();
+		}
 
-		// template<typename T>
-		T				top(void);
-		// {
-		// 	return this->_stack.top();
-		// }
+		unsigned int	size(void)const
+		{
+			return this->_stack.size();
+		}
 
-		// template<typename T>
-		void			push(const T & val);
-		// {
-		// 	this->_stack.push(val);
-		// 	return;
-		// }
+		T				top(void)
+		{
+			return this->_stack.top();
+		}
 
-		// template<typename T>
-		void			emplace(const T & args);
-		// {
-		// 	this->_stack.emplace(args);
-		// 	return;
-		// }
+		void			push(T const & val)
+		{
+			this->_stack.push(val);
+			return;
+		}
 
-		void			pop(void);
-		// {
-		// 	this->_stack.pop();
-		// 	return;
-		// }
+		void			emplace(T const & args)
+		{
+			this->_stack.emplace(args);
+			return;
+		}
 
-		void			swap(std::stack< T > & x);
-		// {
-		// 	this->_stack.swap(x);
-		// 	return;
-		// }
+		void			pop(void)
+		{
+			this->_stack.pop();
+			return;
+		}
+
+		void			swap(std::stack< T > & x)
+		{
+			this->_stack.swap(x);
+			return;
+		}
+
+		iterator		begin(void)const
+		{
+			return this->_stack.top();
+		}
+
+		iterator		end(void)const
+		{
+			std::stack<T>	tmp = new this->_stack;
+
+			for (tmp.size; tmp.size != 0; tmp.pop())
+			return tmp;
+		}
 
 	private:
 
@@ -86,34 +99,3 @@ class MutantStack
 };
 
 #endif
-
-// #include "MutantStack.hpp"
-
-// MutantStack::MutantStack(void) : _variable(0)
-// {
-// 	std::cout << "MutantStack default constructor called" << std::endl;
-// 	return;
-// }
-
-// MutantStack::MutantStack(MutantStack const & copy)
-// {
-// 	std::cout << "MutantStack copy constructor called" << std::endl;
-// 	this->_variable = copy.getvariable();
-// 	return;
-// }
-
-// MutantStack::~MutantStack(void)
-// {
-// 	std::cout << "MutantStack destructor called" << std::endl;
-// 	return;
-// }
-
-// MutantStack	&MutantStack::operator=(MutantStack const & assign)
-// {
-// 	std::cout << "MutantStack assignment operator called" << std::endl;
-
-// 	if (this != &assign)
-// 		this->_variable = assign.getvariable();
-
-// 	return *this;
-// }
