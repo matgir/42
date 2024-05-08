@@ -1,12 +1,12 @@
-SRC		=	#####
+SRC		=	main.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
 DOBJ	=	${SRC:.cpp=.d}
 
-NAME	=	#####
+NAME	=	Mutant
 
-INCL	=	#####
+INCL	=	MutantStack.hpp
 
 PP		=	c++
 
