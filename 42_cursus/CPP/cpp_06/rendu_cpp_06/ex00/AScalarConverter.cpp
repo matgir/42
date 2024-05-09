@@ -1,5 +1,11 @@
 #include "AScalarConverter.hpp"
 
+AScalarConverter	&AScalarConverter::operator=(AScalarConverter const & assign)
+{
+	(void)assign;
+	return (*this);
+}
+
 bool	displayable(char c)
 {
 	if (c < 32 || c > 126)

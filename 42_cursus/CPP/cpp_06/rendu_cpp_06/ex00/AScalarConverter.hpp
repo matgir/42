@@ -17,8 +17,17 @@
 class AScalarConverter
 {
 	public:
+
 		virtual		~AScalarConverter(void) = 0;
+
 		static void	convert(std::string input);
+
+	private:
+
+		AScalarConverter(void);
+		AScalarConverter(AScalarConverter const & copy);
+
+		AScalarConverter	&operator=(AScalarConverter const & assign);
 };
 
 #endif
