@@ -1,7 +1,8 @@
 #include "BitcoinExchange.hpp"
 // #include <iostream>
-// #include <fstream>
+#include <fstream>
 #include <filesystem>
+// #include <string>
 
 int	main(int argc, char ** argv)
 {
@@ -12,4 +13,17 @@ int	main(int argc, char ** argv)
 	}
 
 	std::ifstream	inputcsv;
+	
+	inputcsv.open(argv[1]);
+	if (!inputcsv)
+	{
+		std::cout << argv[1] << " : could not be open, choose another" << std::endl;
+		return 1;
+	}
+	if (inputcsv.eof())
+	{
+		std::cout << argv[1] << " : file is empty, choose another" << std::endl;
+		return 1;
+	}
+	
 }
