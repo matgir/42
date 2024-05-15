@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <math.h>
 
 int	main(int argc, char ** argv)
 {
@@ -33,25 +34,34 @@ int	main(int argc, char ** argv)
 	std::map<std::string, int>	mapTxt;
 	std::string					extracted;
 
-	while (std::getline(inputTxt, extracted, "\n"))
+	std::getline(inputTxt, extracted, '\n');
+	std::cout << extracted << std::endl; //
+	while (std::getline(inputTxt, extracted, '\n'))
 	{
+		std::cout << extracted << std::endl; //
+		mapTxt[extracted.substr(0, 9)] = atoi((extracted.substr(12, std::string::npos).c_str()));
+		if (inputTxt.eof())
+			break;
 	}
+	std::cout << "mapTxt constains :" << std::endl;//
+	for (std::map<std::string, int>::iterator it = mapTxt.begin(); it != mapTxt.end(); it++)//
+		std::cout << it->first << "    " << it->second << std::endl;//
 
 
 	/* check data.csv */
 
 	std::ifstream	inputCsv;
 	
-	inputcsv.open(/* #### */);
-	if (!inputcsv)
-	{
-		std::cout << /* #### */ << " : could not be open, choose another" << std::endl;
-		return 1;
-	}
-	if (inputcsv.eof())
-	{
-		std::cout << /* #### */ << " : file is empty, choose another" << std::endl;
-		return 1;
-	}
+	// inputcsv.open(/* #### */);
+	// if (!inputcsv)
+	// {
+	// 	std::cout << /* #### */ << " : could not be open, choose another" << std::endl;
+	// 	return 1;
+	// }
+	// if (inputcsv.eof())
+	// {
+	// 	std::cout << /* #### */ << " : file is empty, choose another" << std::endl;
+	// 	return 1;
+	// }
 
 }
