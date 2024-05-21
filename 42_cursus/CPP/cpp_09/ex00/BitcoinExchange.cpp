@@ -57,12 +57,11 @@ void	checkStream(std::string inputName)
 
 std::string		lineToUse(std::string extracted)
 {
-	std::getline(*inputTxt, extracted);
-	if (extracted.size() < 14 || extracted.size() > 17)
+	// std::cout << extracted.substr(10, 3) << std::endl;//
+	if (extracted.size() < 14 || extracted.substr(10, 3) != " | " || /*check les tirets in between date*/)
 	{
 		std::cout << "Error : bad input => " << extracted << std::endl;
-		return (lineToUse(inputTxt));
+		return "continue";
 	}
-
 	return extracted;
 }
