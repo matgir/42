@@ -12,10 +12,12 @@ int	main(int argc, char ** argv)
 		return 1;
 	}
 
-	(void)argv;//
+	// (void)argv;//
+	
 
 	std::map<std::string, float>	mapCsv = mapFromCsv();
-	std::string						extracted = lineTo
+	std::ifstream					inputTxt = inputFromTxt(dynamic_cast<std::string>(argv[1]));
+	std::string						extracted = lineToUse(inputTxt);
 
 	return 0;
 }

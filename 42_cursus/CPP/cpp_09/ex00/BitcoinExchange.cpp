@@ -8,18 +8,18 @@ std::map<std::string, float>	mapFromCsv(void)
 	inputCsv.open("data.csv");
 	if (!inputCsv)
 	{
-		std::cout << "data.csv" << " : could not be open, choose another" << std::endl;
+		std::cout << "data.csv : could not be open" << std::endl;
 		exit(0);
 	}
 	if (inputCsv.eof())
 	{
-		std::cout << "data.csv" << " : file empty, choose another" << std::endl;
+		std::cout << "data.csv : file empty" << std::endl;
 		inputCsv.close();
 		exit(0);
 	}
 
 	std::map<std::string, float>	mapCsv;
-	std::string					extracted;
+	std::string						extracted;
 
 	std::getline(inputCsv, extracted, '\n');
 	while (std::getline(inputCsv, extracted, '\n'))
@@ -28,9 +28,18 @@ std::map<std::string, float>	mapFromCsv(void)
 		if (inputCsv.eof())
 			break;
 	}
-	for (std::map<std::string, float>::iterator it = mapCsv.begin(); it != mapCsv.end(); it++)//
-		std::cout << it->first << "    " << it->second << std::endl;//
+	// for (std::map<std::string, float>::iterator it = mapCsv.begin(); it != mapCsv.end(); it++)//
+		// std::cout << it->first << "    " << it->second << std::endl;//
 
 	inputCsv.close();
 	return mapCsv;
+}
+
+std::ifstream	inputFromTxt()
+
+std::string		lineToUse(std::ifstream	input)
+{
+	std::string	extracted;
+
+	return extracted;
 }

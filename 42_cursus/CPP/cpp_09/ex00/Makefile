@@ -1,4 +1,5 @@
-SRC		=	#####
+SRC		=	main.cpp \
+			BitcoinExchange.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
@@ -6,7 +7,7 @@ DOBJ	=	${SRC:.cpp=.d}
 
 NAME	=	btc
 
-INCL	=	#####
+INCL	=	BitcoinExchange.hpp
 
 PP		=	c++
 

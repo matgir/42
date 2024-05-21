@@ -7,5 +7,7 @@
 # include <stdlib.h>
 
 std::map<std::string, float>	mapFromCsv(void);
+std::ifstream					inputFromTxt(char ** toOpen);
+std::string						lineToUse(std::ifstream input);
 
 #endif
