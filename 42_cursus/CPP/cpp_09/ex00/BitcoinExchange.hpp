@@ -8,7 +8,7 @@
 // # include <filesystem>
 
 std::map<std::string, float>	mapFromCsv(void);
-std::ifstream *					inputFromTxt(std::string inputName);
-std::string						lineToUse(std::ifstream * inputTxt);
+void							checkStream(std::string inputName);
+std::string						lineToUse(std::string extracted);
 
 #endif

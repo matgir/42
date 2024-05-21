@@ -17,16 +17,16 @@ int	main(int argc, char ** argv)
 
 	std::map<std::string, float>	mapCsv = mapFromCsv();
 	std::string						inputName(argv[1]);
-	std::cout << inputName << std::endl;//
-	std::ifstream *					inputTxt = inputFromTxt(inputName);
+	checkStream(inputName);
+	std::ifstream					inputTxt(inputName);
 	std::string						extracted;
 
-	std::getline(*inputTxt, extracted);
+	// inputTxt.open(inputName);
+	std::getline(inputTxt, extracted);
 
-	// while(!inputTxt->eof())
-	// {
-		extracted = lineToUse(inputTxt);
-	// }
+	while (std::getline(inputTxt, extracted))
+	{
+	}
 
 	return 0;
 }

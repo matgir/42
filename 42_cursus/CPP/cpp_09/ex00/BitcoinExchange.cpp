@@ -35,32 +35,28 @@ std::map<std::string, float>	mapFromCsv(void)
 	return mapCsv;
 }
 
-std::ifstream *	inputFromTxt(std::string inputName)
+void	checkStream(std::string inputName)
 {
-	std::ifstream *	inputTxt = NULL;
+	std::ifstream	inputTxt;
 
-	std::cout << "openning *.txt\n";//
-	std::cout << inputName << std::endl;//
-	inputTxt->open(inputName);
-	std::cout << "openned *.txt\n";//
+	inputTxt.open(inputName);
 	if (!inputTxt)
 	{
 		std::cout << inputName << " : could not be open, select another" << std::endl;
 		exit (0);
 	}
-	if (inputTxt->eof())
+	if (inputTxt.eof())
 	{
 		std::cout << inputName << " : file empty, select another" << std::endl;
-		inputTxt->close();
+		inputTxt.close();
 		exit (0);
 	}
-	return inputTxt;
+	inputTxt.close();
+	return;
 }
 
-std::string		lineToUse(std::ifstream * inputTxt)
+std::string		lineToUse(std::string extracted)
 {
-	std::string	extracted;
-
 	std::getline(*inputTxt, extracted);
 	if (extracted.size() < 14 || extracted.size() > 17)
 	{
