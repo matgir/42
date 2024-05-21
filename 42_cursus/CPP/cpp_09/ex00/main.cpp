@@ -13,11 +13,17 @@ int	main(int argc, char ** argv)
 	}
 
 	// (void)argv;//
-	
+
+	std::string		inputName(argv[1]);
 
 	std::map<std::string, float>	mapCsv = mapFromCsv();
-	std::ifstream					inputTxt = inputFromTxt(dynamic_cast<std::string>(argv[1]));
-	std::string						extracted = lineToUse(inputTxt);
+	std::ifstream *					inputTxt = inputFromTxt(inputName);
+	std::string						extracted;
+
+	std::getline(*inputTxt, extracted, '\n');
+
+	while(inputTxt->eof())
+	// std::string						extracted = lineToUse(inputTxt);
 
 	return 0;
 }

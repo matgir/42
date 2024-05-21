@@ -35,11 +35,31 @@ std::map<std::string, float>	mapFromCsv(void)
 	return mapCsv;
 }
 
-std::ifstream	inputFromTxt()
+std::ifstream *	inputFromTxt(std::string inputName)
+{
+	std::ifstream *	inputTxt;
 
-std::string		lineToUse(std::ifstream	input)
+	inputTxt->open(inputName);
+	if (!inputTxt)
+	{
+		std::cout << inputName << " : could not be open, select another" << std::endl;
+		exit (0);
+	}
+	if (inputTxt->eof())
+	{
+		std::cout << inputName << " : file empty, select another" << std::endl;
+		inputTxt->close();
+		exit (0);
+	}
+
+	return inputTxt;
+}
+
+std::string		lineToUse(std::ifstream * inputTxt)
 {
 	std::string	extracted;
+
+	std::getline(*inputTxt, extracted, '\n');
 
 	return extracted;
 }

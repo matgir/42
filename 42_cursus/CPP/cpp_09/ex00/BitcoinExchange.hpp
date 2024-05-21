@@ -5,9 +5,10 @@
 # include <iostream>
 # include <fstream>
 # include <stdlib.h>
+// # include <filesystem>
 
 std::map<std::string, float>	mapFromCsv(void);
-std::ifstream					inputFromTxt(char ** toOpen);
-std::string						lineToUse(std::ifstream input);
+std::ifstream *					inputFromTxt(std::string inputName);
+std::string						lineToUse(std::ifstream * inputTxt);
 
 #endif
