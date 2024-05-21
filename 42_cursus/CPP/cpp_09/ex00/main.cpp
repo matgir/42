@@ -14,16 +14,19 @@ int	main(int argc, char ** argv)
 
 	// (void)argv;//
 
-	std::string		inputName(argv[1]);
 
 	std::map<std::string, float>	mapCsv = mapFromCsv();
+	std::string						inputName(argv[1]);
+	std::cout << inputName << std::endl;//
 	std::ifstream *					inputTxt = inputFromTxt(inputName);
 	std::string						extracted;
 
-	std::getline(*inputTxt, extracted, '\n');
+	std::getline(*inputTxt, extracted);
 
-	while(inputTxt->eof())
-	// std::string						extracted = lineToUse(inputTxt);
+	// while(!inputTxt->eof())
+	// {
+		extracted = lineToUse(inputTxt);
+	// }
 
 	return 0;
 }
