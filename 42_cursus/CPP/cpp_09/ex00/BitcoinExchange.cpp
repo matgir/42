@@ -64,7 +64,7 @@ bool	is_num(std::string str)
 	return true;
 }
 
-bool	isValidIntFloat(std::string str, unsigned int * isNeg, unsigned int * isFloat)
+bool	isValidIntFloat(std::string str, bool * isNeg, bool * isFloat)
 {
 	unsigned int	negSign = 0;
 	unsigned int	dot = 0;
@@ -81,12 +81,12 @@ bool	isValidIntFloat(std::string str, unsigned int * isNeg, unsigned int * isFlo
 	if (negSign == 1 && str.find('-') == 0)
 	{
 		str.erase(0, 1);
-		*isNeg = 1;
+		*isNeg = true;
 	}
 	if (dot == 1)
 	{
 		str.erase(str.find('.'), 1);
-		*isFloat = 1;
+		*isFloat = true;
 	}
 	if (!is_num(str) || str.empty())
 		return false;
@@ -141,18 +141,15 @@ bool	wasBitcoinHere(std::string date)
 	return true;
 }
 
-bool		lineToUse(std::string extracted)
+bool		lineToUse(std::string extracted, bool * isFloat)
 {
-	unsigned int	isNeg = 0;
-	unsigned int	isFloat = 0;
-	// std::cout << extracted.substr(0, 10) << std::endl;//
-	// std::cout << extracted.substr(5, 2) << std::endl;//
-	// std::cout << extracted.substr(8, 2) << std::endl;//
+	bool	isNeg = false;
+
 	if (extracted.size() < 14 || extracted.substr(10, 3) != " | "
 		|| extracted[4] != '-' || extracted[7] != '-'
 		|| !is_num(extracted.substr(0, 4)) || !is_num(extracted.substr(5, 2))
 		|| !is_num(extracted.substr(8, 2))
-		|| !isValidIntFloat(extracted.substr(13, std::string::npos), &isNeg, &isFloat))
+		|| !isValidIntFloat(extracted.substr(13, std::string::npos), &isNeg, isFloat))
 	{
 		std::cout << "Error : bad input => " << extracted << std::endl;
 		return false;
@@ -167,12 +164,12 @@ bool		lineToUse(std::string extracted)
 		std::cout << "Error : no prior information to this date => " << extracted << std::endl;
 		return false;
 	}
-	else if (isNeg == 1)
+	else if (isNeg)
 	{
 		std::cout << "Error : not a positive number => " << extracted << std::endl;
 		return false;
 	}
-	else if ((isFloat == 1
+	else if ((isFloat
 				&& std::atof((extracted.substr(13, std::string::npos)).c_str()) > 1000)
 				|| std::atol((extracted.substr(13, std::string::npos)).c_str()) > 1000)
 	{
@@ -181,3 +178,18 @@ bool		lineToUse(std::string extracted)
 	}
 	return true;
 }
+
+void	giveTheResult(std::string str, bool * isFloat)
+{
+	std::string		date = str.substr(0, 10);
+	unsigned int	value;
+	if (*isFloat)
+		value = std::atof((str.substr(13, std::string::npos)).c_str());
+	else
+		value = std::atoi((str.substr(13, std::string::npos)).c_str());
+	//find, if dont work then key_comp
+	/*####################################################*/
+	*isFloat = false;
+	return;
+}
+

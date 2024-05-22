@@ -28,10 +28,14 @@ int	main(int argc, char ** argv)
 	// inputTxt.open(inputName);
 	std::getline(inputTxt, extracted);
 
+	bool			isFloat = false;
+	// std::string		date;
+	// unsigned int	value;
+
 	while (std::getline(inputTxt, extracted))
 	{
-		if (lineToUse(extracted))
-			continue;
+		if (lineToUse(extracted, &isFloat))
+			giveTheResult(extracted, &isFloat);
 	}
 
 	inputTxt.close();
