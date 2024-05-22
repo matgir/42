@@ -87,9 +87,26 @@ bool	isValidIntFloat(std::string str)
 	return true;
 }
 
+bool	isValidDate(std::string date)
+{
+	unsigned int	year = std::atoi((date.substr(0, 4)).c_str());
+	unsigned int	month = std::atoi((date.substr(5, 2)).c_str());
+	unsigned int	day = std::atoi((date.substr(8, 2)).c_str());
+
+	if (year < 0 || year > 3000 || month < 1 || month > 12 || day < 1)
+		return false;
+	else if (month == (1 || 3 || 5 || 7 || 8 || 10 || 12))
+		if (day > 31)
+			return false;
+	else if (month == (2 || 4 || 6 || 9 || 11))
+		// #############################
+	// std::cout << year << " " << month << " " << day << std::endl;//
+	return true;
+}
+
 std::string		lineToUse(std::string extracted)
 {
-	// std::cout << extracted.substr(0, 4) << std::endl;//
+	// std::cout << extracted.substr(0, 10) << std::endl;//
 	// std::cout << extracted.substr(5, 2) << std::endl;//
 	// std::cout << extracted.substr(8, 2) << std::endl;//
 	if (extracted.size() < 14 || extracted.substr(10, 3) != " | "
@@ -101,6 +118,10 @@ std::string		lineToUse(std::string extracted)
 		std::cout << "Error : bad input => " << extracted << std::endl;
 		return "continue";
 	}
-	// else if ()
+	else if (!isValidDate(extracted.substr(0, 10)))
+	{
+		std::cout << "Error : invalid date => " << extracted << std::endl;
+		return "continue";
+	}
 	return extracted;
 }

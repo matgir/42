@@ -19,7 +19,9 @@ int	main(int argc, char ** argv)
 
 	std::map<std::string, float>	mapCsv = mapFromCsv();
 	std::string						inputName(argv[1]);
+
 	checkStream(inputName);
+
 	std::ifstream					inputTxt(inputName);
 	std::string						extracted;
 
@@ -31,6 +33,8 @@ int	main(int argc, char ** argv)
 		if (lineToUse(extracted) == "continue")
 			continue;
 	}
+
+	inputTxt.close();
 
 	std::cout << std::endl << std::endl;//
 	return 0;
