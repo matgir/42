@@ -55,13 +55,26 @@ void	checkStream(std::string inputName)
 	return;
 }
 
+bool	is_num(std::string str)
+{
+	for (unsigned long i = 0; str[i]; i++)
+		if (!std::isdigit(str[i]))
+			return false;
+	return true;
+}
+
 std::string		lineToUse(std::string extracted)
 {
-	// std::cout << extracted.substr(10, 3) << std::endl;//
-	if (extracted.size() < 14 || extracted.substr(10, 3) != " | " || extracted[4] != '-' || extracted[7] != '-')
+	// std::cout << extracted.substr(0, 4) << std::endl;//
+	// std::cout << extracted.substr(5, 2) << std::endl;//
+	// std::cout << extracted.substr(8, 2) << std::endl;//
+	if (extracted.size() < 14 || extracted.substr(10, 3) != " | "
+		|| extracted[4] != '-' || extracted[7] != '-' || !is_num(extracted.substr(0, 4))
+		|| !is_num(extracted.substr(5, 2)) || !is_num(extracted.substr(8, 2)))
 	{
 		std::cout << "Error : bad input => " << extracted << std::endl;
 		return "continue";
 	}
+	// else if ()
 	return extracted;
 }
