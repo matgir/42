@@ -30,7 +30,7 @@ int	main(int argc, char ** argv)
 
 	while (std::getline(inputTxt, extracted))
 	{
-		if (lineToUse(extracted) == "continue")
+		if (lineToUse(extracted))
 			continue;
 	}
 

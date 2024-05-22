@@ -64,7 +64,7 @@ bool	is_num(std::string str)
 	return true;
 }
 
-bool	isValidIntFloat(std::string str)
+bool	isValidIntFloat(std::string str, unsigned int * isNeg, unsigned int * isFloat)
 {
 	unsigned int	negSign = 0;
 	unsigned int	dot = 0;
@@ -79,9 +79,15 @@ bool	isValidIntFloat(std::string str)
 	if (negSign > 1 || dot > 1)
 		return false;
 	if (negSign == 1 && str.find('-') == 0)
+	{
 		str.erase(0, 1);
+		*isNeg = 1;
+	}
 	if (dot == 1)
+	{
 		str.erase(str.find('.'), 1);
+		*isFloat = 1;
+	}
 	if (!is_num(str) || str.empty())
 		return false;
 	return true;
@@ -130,14 +136,15 @@ bool	wasBitcoinHere(std::string date)
 	unsigned int	month = std::atoi((date.substr(5, 2)).c_str());
 	unsigned int	day = std::atoi((date.substr(8, 2)).c_str());
 
-	if (year < 2009 && month < 1 && day < 2)
+	if (year < 2009 || (year == 2009 && month < 1) || (year == 2009 && month == 1 && day < 2))
 		return false;
 	return true;
 }
 
-std::string		lineToUse(std::string extracted)
+bool		lineToUse(std::string extracted)
 {
-	unsigned int	neg//#############
+	unsigned int	isNeg = 0;
+	unsigned int	isFloat = 0;
 	// std::cout << extracted.substr(0, 10) << std::endl;//
 	// std::cout << extracted.substr(5, 2) << std::endl;//
 	// std::cout << extracted.substr(8, 2) << std::endl;//
@@ -145,20 +152,32 @@ std::string		lineToUse(std::string extracted)
 		|| extracted[4] != '-' || extracted[7] != '-'
 		|| !is_num(extracted.substr(0, 4)) || !is_num(extracted.substr(5, 2))
 		|| !is_num(extracted.substr(8, 2))
-		|| !isValidIntFloat(extracted.substr(13, std::string::npos)))
+		|| !isValidIntFloat(extracted.substr(13, std::string::npos), &isNeg, &isFloat))
 	{
 		std::cout << "Error : bad input => " << extracted << std::endl;
-		return "continue";
+		return false;
 	}
 	else if (!isValidDate(extracted.substr(0, 10)))
 	{
 		std::cout << "Error : invalid date => " << extracted << std::endl;
-		return "continue";
+		return false;
 	}
 	else if (!wasBitcoinHere(extracted.substr(0, 10)))
 	{
 		std::cout << "Error : no prior information to this date => " << extracted << std::endl;
-		return "continue";
+		return false;
 	}
-	return extracted;
+	else if (isNeg == 1)
+	{
+		std::cout << "Error : not a positive number => " << extracted << std::endl;
+		return false;
+	}
+	else if ((isFloat == 1
+				&& std::atof((extracted.substr(13, std::string::npos)).c_str()) > 1000)
+				|| std::atol((extracted.substr(13, std::string::npos)).c_str()) > 1000)
+	{
+		std::cout << "Error : too large a number => " << extracted << std::endl;
+		return false;
+	}
+	return true;
 }

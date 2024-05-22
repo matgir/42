@@ -9,6 +9,6 @@
 
 std::map<std::string, float>	mapFromCsv(void);
 void							checkStream(std::string inputName);
-std::string						lineToUse(std::string extracted);
+bool							lineToUse(std::string extracted);
 
 #endif
