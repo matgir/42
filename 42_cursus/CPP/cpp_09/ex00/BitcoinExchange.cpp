@@ -95,17 +95,49 @@ bool	isValidDate(std::string date)
 
 	if (year < 0 || year > 3000 || month < 1 || month > 12 || day < 1)
 		return false;
-	else if (month == (1 || 3 || 5 || 7 || 8 || 10 || 12))
+	else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8
+				|| month == 10 || month == 12)
+	{
 		if (day > 31)
 			return false;
-	else if (month == (2 || 4 || 6 || 9 || 11))
-		// #############################
+	}
+	else if (month == 2 || month == 4 || month == 6 || month == 9 || month == 11)
+	{
+		if (day > 30)
+			return false;
+		if (month == 2)
+		{
+			if ((year % 4 == 0 && year % 100 != 0)
+				|| (year % 100 == 0 && year % 400 == 0))
+			{
+				if (day > 29)
+					return false;
+			}
+			else
+			{
+				if (day > 28)
+					return false;
+			}
+		}
+	}
 	// std::cout << year << " " << month << " " << day << std::endl;//
+	return true;
+}
+
+bool	wasBitcoinHere(std::string date)
+{
+	unsigned int	year = std::atoi((date.substr(0, 4)).c_str());
+	unsigned int	month = std::atoi((date.substr(5, 2)).c_str());
+	unsigned int	day = std::atoi((date.substr(8, 2)).c_str());
+
+	if (year < 2009 && month < 1 && day < 2)
+		return false;
 	return true;
 }
 
 std::string		lineToUse(std::string extracted)
 {
+	unsigned int	neg//#############
 	// std::cout << extracted.substr(0, 10) << std::endl;//
 	// std::cout << extracted.substr(5, 2) << std::endl;//
 	// std::cout << extracted.substr(8, 2) << std::endl;//
@@ -121,6 +153,11 @@ std::string		lineToUse(std::string extracted)
 	else if (!isValidDate(extracted.substr(0, 10)))
 	{
 		std::cout << "Error : invalid date => " << extracted << std::endl;
+		return "continue";
+	}
+	else if (!wasBitcoinHere(extracted.substr(0, 10)))
+	{
+		std::cout << "Error : no prior information to this date => " << extracted << std::endl;
 		return "continue";
 	}
 	return extracted;
