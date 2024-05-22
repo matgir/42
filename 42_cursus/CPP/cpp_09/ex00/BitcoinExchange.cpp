@@ -67,22 +67,36 @@ bool	isValidIntFloat(std::string str)
 {
 	{
 		unsigned int	negSign = 0;
+		unsigned int	f = 0;
+		unsigned int	dot = 0;
 
 		for (unsigned long i = 0; str[i]; i++)
 			if (str[i] == '-')
 				negSign++;
-		if (negSign > 1 || !(negSign == 1 && str.find('-') == 0))
-			return false;
-		str.erase(str[0]);
-	}
-	{
-		unsigned int	f = 0;
-
 		for (unsigned long i = 0; str[i]; i++)
 			if (str[i] == 'f')
 				f++;
-		if (f > 1 || !(f == 1 && str[str.length() - 1] == 'f'))
+		for (unsigned long i = 0; str[i]; i++)
+			if (str[i] == '.')
+				dot++;
+		
+		if (negSign > 1 || f > 1 || dot > 1)
 			return false;
+		else if (negSign == 1 && str.find('-') == 0)
+
+			
+		if (negSign > 1 || (negSign == 1 && str.find('-') == 0))
+			return false;
+		if (f > 1 || (f == 1 && str[str.length() - 1] == 'f'))
+			return false;
+		std::cout << "HERE\n";//
+		str.erase(0, 1);
+		std::cout << str[str.length() - 1] << std::endl; //
+		str.erase(str.length() - 1, 1);
+		std::cout << "HERE AS WELL\n";//
+	}
+	{
+
 	}
 	{
 		// dot;
@@ -90,6 +104,7 @@ bool	isValidIntFloat(std::string str)
 	{
 		// is_num;
 	}
+	return true;
 }
 
 std::string		lineToUse(std::string extracted)
