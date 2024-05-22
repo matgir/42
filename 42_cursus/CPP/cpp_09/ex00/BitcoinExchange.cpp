@@ -57,6 +57,7 @@ void	checkStream(std::string inputName)
 
 bool	is_num(std::string str)
 {
+	// std::cout << str << std::endl;//
 	for (unsigned long i = 0; str[i]; i++)
 		if (!std::isdigit(str[i]))
 			return false;
@@ -65,45 +66,24 @@ bool	is_num(std::string str)
 
 bool	isValidIntFloat(std::string str)
 {
-	{
-		unsigned int	negSign = 0;
-		unsigned int	f = 0;
-		unsigned int	dot = 0;
+	unsigned int	negSign = 0;
+	unsigned int	dot = 0;
 
-		for (unsigned long i = 0; str[i]; i++)
-			if (str[i] == '-')
-				negSign++;
-		for (unsigned long i = 0; str[i]; i++)
-			if (str[i] == 'f')
-				f++;
-		for (unsigned long i = 0; str[i]; i++)
-			if (str[i] == '.')
-				dot++;
-		
-		if (negSign > 1 || f > 1 || dot > 1)
-			return false;
-		else if (negSign == 1 && str.find('-') == 0)
-
-			
-		if (negSign > 1 || (negSign == 1 && str.find('-') == 0))
-			return false;
-		if (f > 1 || (f == 1 && str[str.length() - 1] == 'f'))
-			return false;
-		std::cout << "HERE\n";//
+	for (unsigned long i = 0; str[i]; i++)
+		if (str[i] == '-')
+			negSign++;
+	for (unsigned long i = 0; str[i]; i++)
+		if (str[i] == '.')
+			dot++;
+	
+	if (negSign > 1 || dot > 1)
+		return false;
+	if (negSign == 1 && str.find('-') == 0)
 		str.erase(0, 1);
-		std::cout << str[str.length() - 1] << std::endl; //
-		str.erase(str.length() - 1, 1);
-		std::cout << "HERE AS WELL\n";//
-	}
-	{
-
-	}
-	{
-		// dot;
-	}
-	{
-		// is_num;
-	}
+	if (dot == 1)
+		str.erase(str.find('.'), 1);
+	if (!is_num(str) || str.empty())
+		return false;
 	return true;
 }
 
