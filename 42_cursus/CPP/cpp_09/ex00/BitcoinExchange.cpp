@@ -63,14 +63,45 @@ bool	is_num(std::string str)
 	return true;
 }
 
+bool	isValidIntFloat(std::string str)
+{
+	{
+		unsigned int	negSign = 0;
+
+		for (unsigned long i = 0; str[i]; i++)
+			if (str[i] == '-')
+				negSign++;
+		if (negSign > 1 || !(negSign == 1 && str.find('-') == 0))
+			return false;
+		str.erase(str[0]);
+	}
+	{
+		unsigned int	f = 0;
+
+		for (unsigned long i = 0; str[i]; i++)
+			if (str[i] == 'f')
+				f++;
+		if (f > 1 || !(f == 1 && str[str.length() - 1] == 'f'))
+			return false;
+	}
+	{
+		// dot;
+	}
+	{
+		// is_num;
+	}
+}
+
 std::string		lineToUse(std::string extracted)
 {
 	// std::cout << extracted.substr(0, 4) << std::endl;//
 	// std::cout << extracted.substr(5, 2) << std::endl;//
 	// std::cout << extracted.substr(8, 2) << std::endl;//
 	if (extracted.size() < 14 || extracted.substr(10, 3) != " | "
-		|| extracted[4] != '-' || extracted[7] != '-' || !is_num(extracted.substr(0, 4))
-		|| !is_num(extracted.substr(5, 2)) || !is_num(extracted.substr(8, 2)))
+		|| extracted[4] != '-' || extracted[7] != '-'
+		|| !is_num(extracted.substr(0, 4)) || !is_num(extracted.substr(5, 2))
+		|| !is_num(extracted.substr(8, 2))
+		|| !isValidIntFloat(extracted.substr(13, std::string::npos)))
 	{
 		std::cout << "Error : bad input => " << extracted << std::endl;
 		return "continue";
