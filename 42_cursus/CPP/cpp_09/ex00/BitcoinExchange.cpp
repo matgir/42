@@ -1,6 +1,5 @@
 #include "BitcoinExchange.hpp"
 
-/* check data.csv */
 std::map<std::string, float>	mapFromCsv(void)
 {
 	std::ifstream	inputCsv;
@@ -28,9 +27,6 @@ std::map<std::string, float>	mapFromCsv(void)
 		if (inputCsv.eof())
 			break;
 	}
-	// for (std::map<std::string, float>::iterator it = mapCsv.begin(); it != mapCsv.end(); it++)//
-		// std::cout << it->first << "    " << it->second << std::endl;//
-
 	inputCsv.close();
 	return mapCsv;
 }
@@ -57,7 +53,6 @@ void	checkStream(std::string inputName)
 
 bool	is_num(std::string str)
 {
-	// std::cout << str << std::endl;//
 	for (unsigned long i = 0; str[i]; i++)
 		if (!std::isdigit(str[i]))
 			return false;
@@ -75,7 +70,7 @@ bool	isValidIntFloat(std::string str, bool * isNeg, bool * isFloat)
 	for (unsigned long i = 0; str[i]; i++)
 		if (str[i] == '.')
 			dot++;
-	
+
 	if (negSign > 1 || dot > 1)
 		return false;
 	if (negSign == 1 && str.find('-') == 0)
@@ -102,7 +97,7 @@ bool	isValidDate(std::string date)
 	if (year < 0 || year > 3000 || month < 1 || month > 12 || day < 1)
 		return false;
 	else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8
-				|| month == 10 || month == 12)
+			|| month == 10 || month == 12)
 	{
 		if (day > 31)
 			return false;
@@ -114,7 +109,7 @@ bool	isValidDate(std::string date)
 		if (month == 2)
 		{
 			if ((year % 4 == 0 && year % 100 != 0)
-				|| (year % 100 == 0 && year % 400 == 0))
+					|| (year % 100 == 0 && year % 400 == 0))
 			{
 				if (day > 29)
 					return false;
@@ -126,7 +121,6 @@ bool	isValidDate(std::string date)
 			}
 		}
 	}
-	// std::cout << year << " " << month << " " << day << std::endl;//
 	return true;
 }
 
@@ -146,10 +140,10 @@ bool		lineToUse(std::string extracted, bool * isFloat)
 	bool	isNeg = false;
 
 	if (extracted.size() < 14 || extracted.substr(10, 3) != " | "
-		|| extracted[4] != '-' || extracted[7] != '-'
-		|| !is_num(extracted.substr(0, 4)) || !is_num(extracted.substr(5, 2))
-		|| !is_num(extracted.substr(8, 2))
-		|| !isValidIntFloat(extracted.substr(13, std::string::npos), &isNeg, isFloat))
+			|| extracted[4] != '-' || extracted[7] != '-'
+			|| !is_num(extracted.substr(0, 4)) || !is_num(extracted.substr(5, 2))
+			|| !is_num(extracted.substr(8, 2))
+			|| !isValidIntFloat(extracted.substr(13, std::string::npos), &isNeg, isFloat))
 	{
 		std::cout << "Error : bad input => " << extracted << std::endl;
 		return false;
@@ -171,7 +165,7 @@ bool		lineToUse(std::string extracted, bool * isFloat)
 	}
 	else if ((isFloat
 				&& std::atof((extracted.substr(13, std::string::npos)).c_str()) > 1000)
-				|| std::atol((extracted.substr(13, std::string::npos)).c_str()) > 1000)
+			|| std::atol((extracted.substr(13, std::string::npos)).c_str()) > 1000)
 	{
 		std::cout << "Error : too large a number => " << extracted << std::endl;
 		return false;
@@ -186,18 +180,9 @@ void	giveTheResult(std::string str, bool * isFloat, std::map<std::string, float>
 	float			value;
 
 	if (*isFloat == 1)
-	{//
-		// std::cout << "ISFLOAT\n";//
 		value = std::atof((str.substr(13, std::string::npos)).c_str());
-	}//
 	else
-	{//
-		// std::cout << "ISNOTFLOAT\n";//
 		value = std::atoi((str.substr(13, std::string::npos)).c_str());
-	}//
-	// std::cout << value << std::endl; //
-
-	// std::cout << date << " => " << value << "\n";//
 
 	std::map<std::string, float>::iterator	it;
 
@@ -206,42 +191,26 @@ void	giveTheResult(std::string str, bool * isFloat, std::map<std::string, float>
 	{
 		std::cout << date << " => " << value << " = ";
 		std::cout << value * it->second << std::endl;
-		// std::cout << it->second << std::endl;//
 	}
 	else
 	{
-		it = mapCsv.begin();
-
 		std::map<std::string, float>::key_compare	compare = mapCsv.key_comp();
 
-		do
+		it = mapCsv.begin();
+		if (compare(mapCsv.rbegin()->first, date))
 		{
-			// std::cout << str << std::endl; //
-			// std::cout << date << std::endl;//
-			// std::cout << it->first << std::endl;//
-			// it++;
-			if (it == mapCsv.end())
-				break;
-			// std::cout << "TAUX			" << it->second << std::endl;//
-			// std::cout << "COMPARAISON :				" << it->first << " < " << date << std::endl;//
-			++it;
+			std::cout << date << " => " << value << " = ";
+			std::cout << value * mapCsv.rbegin()->second << std::endl;
 		}
-		while (/*it != mapCsv.end() || */compare(it->first, date));
-			// {
-			// std::cout << "HERE\n";//
-			// it++;
-			// }
-		// while (it != mapCsv.end() || compare((*it++).first, date));
-		// {
-			// ++it;
-		// }
-		--it;
-		std::cout << date << " => " << value << " = ";
-		std::cout << value * it->second << std::endl;
-		// std::cout << "TAUX			" << it->second << std::endl;//
-		// std::cout << "	COMPARAISON :				" << it->first << " < " << date << std::endl;//
+		else
+		{
+			while (compare(it->first, date))
+			{++it;}
+			--it;
+			std::cout << date << " => " << value << " = ";
+			std::cout << value * it->second << std::endl;
+		}
 	}
 	*isFloat = false;
 	return;
 }
-

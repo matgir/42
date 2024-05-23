@@ -5,7 +5,6 @@
 # include <iostream>
 # include <fstream>
 # include <stdlib.h>
-// # include <filesystem>
 
 std::map<std::string, float>	mapFromCsv(void);
 void							checkStream(std::string inputName);
