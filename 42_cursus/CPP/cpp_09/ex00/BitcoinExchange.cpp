@@ -197,24 +197,28 @@ void	giveTheResult(std::string str, bool * isFloat)
 	{
 		std::cout << date << " => " << value << " = ";
 		std::cout << value * it->second << std::endl;
-		std::cout << it->second << std::endl;//
+		// std::cout << it->second << std::endl;//
 	}
 	else
 	{
 		it = mapCsv.begin();
+
 		std::map<std::string, float>::key_compare	compare = mapCsv.key_comp();
-		while (compare(it->first, date) || it != mapCsv.end())
-		{
-			it++;
-		}
-			std::cout << "HERE\n";//
-		it--;
+
+		do {it++;}
+		while (/*it != mapCsv.end() || */compare(it->first, date));
+		// while (it != mapCsv.end() || compare((*it++).first, date));
+		// {
+			// std::cout << it->first << "	" << date << std::endl;//
+			// ++it;
+		// }
+		// std::cout << "HERE\n";//
+		--it;
 		std::cout << date << " => " << value << " = ";
 		std::cout << value * it->second << std::endl;
+		std::cout << "TAUX			" << it->second;//
+		std::cout << "	COMPARAISON :				" << it->first << " < " << date << std::endl;//
 	}
-
-	//find, if dont work then key_comp
-	/*####################################################*/
 	*isFloat = false;
 	return;
 }
