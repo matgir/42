@@ -179,17 +179,26 @@ bool		lineToUse(std::string extracted, bool * isFloat)
 	return true;
 }
 
-void	giveTheResult(std::string str, bool * isFloat)
+void	giveTheResult(std::string str, bool * isFloat, std::map<std::string, float> mapCsv)
 {
+
 	std::string		date = str.substr(0, 10);
 	float			value;
 
-	if (*isFloat)
+	if (*isFloat == 1)
+	{//
+		// std::cout << "ISFLOAT\n";//
 		value = std::atof((str.substr(13, std::string::npos)).c_str());
+	}//
 	else
+	{//
+		// std::cout << "ISNOTFLOAT\n";//
 		value = std::atoi((str.substr(13, std::string::npos)).c_str());
+	}//
+	// std::cout << value << std::endl; //
 
-	std::map<std::string, float>	mapCsv = mapFromCsv();
+	// std::cout << date << " => " << value << "\n";//
+
 	std::map<std::string, float>::iterator	it;
 
 	it = mapCsv.find(date);
@@ -205,19 +214,32 @@ void	giveTheResult(std::string str, bool * isFloat)
 
 		std::map<std::string, float>::key_compare	compare = mapCsv.key_comp();
 
-		do {it++;}
+		do
+		{
+			// std::cout << str << std::endl; //
+			// std::cout << date << std::endl;//
+			// std::cout << it->first << std::endl;//
+			// it++;
+			if (it == mapCsv.end())
+				break;
+			// std::cout << "TAUX			" << it->second << std::endl;//
+			// std::cout << "COMPARAISON :				" << it->first << " < " << date << std::endl;//
+			++it;
+		}
 		while (/*it != mapCsv.end() || */compare(it->first, date));
+			// {
+			// std::cout << "HERE\n";//
+			// it++;
+			// }
 		// while (it != mapCsv.end() || compare((*it++).first, date));
 		// {
-			// std::cout << it->first << "	" << date << std::endl;//
 			// ++it;
 		// }
-		// std::cout << "HERE\n";//
 		--it;
 		std::cout << date << " => " << value << " = ";
 		std::cout << value * it->second << std::endl;
-		std::cout << "TAUX			" << it->second;//
-		std::cout << "	COMPARAISON :				" << it->first << " < " << date << std::endl;//
+		// std::cout << "TAUX			" << it->second << std::endl;//
+		// std::cout << "	COMPARAISON :				" << it->first << " < " << date << std::endl;//
 	}
 	*isFloat = false;
 	return;

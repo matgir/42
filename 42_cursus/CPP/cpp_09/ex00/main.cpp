@@ -26,6 +26,7 @@ int	main(int argc, char ** argv)
 
 	// inputTxt.open(inputName);
 	std::getline(inputTxt, extracted);
+	std::map<std::string, float>	mapCsv = mapFromCsv();
 
 	bool			isFloat = false;
 	// std::string		date;
@@ -33,8 +34,12 @@ int	main(int argc, char ** argv)
 
 	while (std::getline(inputTxt, extracted))
 	{
+		isFloat = false;
 		if (lineToUse(extracted, &isFloat))
-			giveTheResult(extracted, &isFloat);
+		{//
+			// std::cout << "EXTRACTED		" << extracted << std::endl; //
+			giveTheResult(extracted, &isFloat, mapCsv);
+		}//
 	}
 
 	inputTxt.close();
