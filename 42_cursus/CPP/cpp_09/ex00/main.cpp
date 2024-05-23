@@ -17,7 +17,6 @@ int	main(int argc, char ** argv)
 	// (void)argv;//
 
 
-	std::map<std::string, float>	mapCsv = mapFromCsv();
 	std::string						inputName(argv[1]);
 
 	checkStream(inputName);

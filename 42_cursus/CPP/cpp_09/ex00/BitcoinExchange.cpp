@@ -24,7 +24,7 @@ std::map<std::string, float>	mapFromCsv(void)
 	std::getline(inputCsv, extracted, '\n');
 	while (std::getline(inputCsv, extracted, '\n'))
 	{
-		mapCsv[extracted.substr(0, 10)] = atoi((extracted.substr(11, std::string::npos).c_str()));
+		mapCsv[extracted.substr(0, 10)] = atof((extracted.substr(11, std::string::npos).c_str()));
 		if (inputCsv.eof())
 			break;
 	}
@@ -182,11 +182,37 @@ bool		lineToUse(std::string extracted, bool * isFloat)
 void	giveTheResult(std::string str, bool * isFloat)
 {
 	std::string		date = str.substr(0, 10);
-	unsigned int	value;
+	float			value;
+
 	if (*isFloat)
 		value = std::atof((str.substr(13, std::string::npos)).c_str());
 	else
 		value = std::atoi((str.substr(13, std::string::npos)).c_str());
+
+	std::map<std::string, float>	mapCsv = mapFromCsv();
+	std::map<std::string, float>::iterator	it;
+
+	it = mapCsv.find(date);
+	if (it != mapCsv.end())
+	{
+		std::cout << date << " => " << value << " = ";
+		std::cout << value * it->second << std::endl;
+		std::cout << it->second << std::endl;//
+	}
+	else
+	{
+		it = mapCsv.begin();
+		std::map<std::string, float>::key_compare	compare = mapCsv.key_comp();
+		while (compare(it->first, date) || it != mapCsv.end())
+		{
+			it++;
+		}
+			std::cout << "HERE\n";//
+		it--;
+		std::cout << date << " => " << value << " = ";
+		std::cout << value * it->second << std::endl;
+	}
+
 	//find, if dont work then key_comp
 	/*####################################################*/
 	*isFloat = false;
