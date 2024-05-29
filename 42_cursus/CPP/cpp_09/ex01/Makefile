@@ -1,4 +1,5 @@
-SRC		=	#####
+SRC		=	main.cpp \
+			ReversePolishNotation.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
@@ -6,7 +7,7 @@ DOBJ	=	${SRC:.cpp=.d}
 
 NAME	=	RPN
 
-INCL	=	#####
+INCL	=	ReversePolishNotation.hpp
 
 PP		=	c++
 

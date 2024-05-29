@@ -8,11 +8,15 @@ bool	isOperator(char c)
 		return false;
 }
 
-void	checkArg(std::string str)
+std::string	checkArg(std::string str)
 {
-	/* #### ajouter le retrait des espaces #### */
-	if (str.empty() || str.length() < 3 || !isdigit(str[0]) || !isdigit(str[1]
-			|| !isOperator(str[str.length() - 1])))
+	for (int i = 0; str[i]; i++)
+	{
+		if (str[i] == ' ')
+			str.erase(i, 1);
+	}
+	if (str.empty() || str.length() < 3 || !isdigit(str[0]) || !isdigit(str[1])
+			|| !isOperator(str[str.length() - 1]))
 	{
 		std::cout << "Error : No possible way to calculate" << std::endl;
 		exit(0);
@@ -41,7 +45,7 @@ void	checkArg(std::string str)
 		exit(0);
 	}
 
-	return;
+	return str;
 }
 
 std::stack<char>	createStack(std::string str)
@@ -56,7 +60,47 @@ std::stack<char>	createStack(std::string str)
 	return myStack;
 }
 
-void	printResult(std::stack<char> myStack)
+int	printResult(std::stack<char> * myStack)
 {
-
+	char	c;
+	int		i;
+	
+	if (isOperator(myStack->top()))
+	{
+		c = myStack->top();
+		myStack->pop();
+		i = printResult(myStack);
+		if (c == '+')
+		{//
+			i = i + (myStack->top() - 48);
+			myStack->pop();
+			return i;
+		}//
+		else if (c == '-')
+		{//
+			i = i - (myStack->top() - 48);
+			myStack->pop();
+			return i;
+		}//
+		else if (c == '*')
+		{//
+			i = i * (myStack->top() - 48);
+			myStack->pop();
+			return i;
+		}//
+		else
+		{//
+			i = i / (myStack->top() - 48);
+			myStack->pop();
+			return i;
+		}//
+	}
+	else
+	{
+		i = myStack->top() - 48;
+		myStack->pop();
+		/* #### trouver solution pour continuer quand apres num cest operator #### */
+		return i;
+	}
+	
 }

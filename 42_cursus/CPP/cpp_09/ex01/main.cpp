@@ -10,9 +10,11 @@ int	main(int argc, char ** argv)
 	
 	std::string	calculus(argv[1]);
 
-	checkArg(calculus);
+	calculus = checkArg(calculus);
 	
 	std::stack<char>	myStack = createStack(calculus);
 
-	printResult(myStack);
+	std::cout << printResult(&myStack) << std::endl;
+
+	return 1;
 }
