@@ -28,6 +28,8 @@ std::map<std::string, float>	mapFromCsv(void)
 			break;
 	}
 	inputCsv.close();
+	if (mapCsv.empty())
+		exit(0);
 	return mapCsv;
 }
 
@@ -35,7 +37,7 @@ void	checkStream(std::string inputName)
 {
 	std::ifstream	inputTxt;
 
-	inputTxt.open(inputName);
+	inputTxt.open(inputName.c_str());
 	if (!inputTxt)
 	{
 		std::cout << inputName << " : could not be open, select another" << std::endl;
@@ -185,7 +187,7 @@ void	giveTheResult(std::string str, bool * isFloat, std::map<std::string, float>
 		value = std::atoi((str.substr(13, std::string::npos)).c_str());
 
 	std::map<std::string, float>::iterator	it;
-
+	
 	it = mapCsv.find(date);
 	if (it != mapCsv.end())
 	{

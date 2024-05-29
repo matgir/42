@@ -17,7 +17,7 @@ int	main(int argc, char ** argv)
 
 	checkStream(inputName);
 
-	std::ifstream					inputTxt(inputName);
+	std::ifstream					inputTxt(inputName.c_str());
 	std::string						extracted;
 	std::map<std::string, float>	mapCsv = mapFromCsv();
 	bool							isFloat = false;
