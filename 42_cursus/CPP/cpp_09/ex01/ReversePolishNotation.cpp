@@ -65,81 +65,33 @@ int	printResult(std::stack<char> * myStack)
 	char	op;
 	int		right;
 	int		left;
-	int		result;
 
-	// while (!myStack->empty())
-	// {
 	if (isOperator(myStack->top()))
 	{
 		op = myStack->top();
 		myStack->pop();
 		right = printResult(myStack);
+		left = printResult(myStack);
 		if (op == '+')
-		{//
-			right = (myStack->top() - 48) + right;
-			myStack->pop();
-			return right;
-		}//
+			return left + right;
 		else if (op == '-')
-		{//
-			right = (myStack->top() - 48) - right;
-			myStack->pop();
-			return right;
-		}//
+			return left - right;
 		else if (op == '*')
-		{//
-			right = (myStack->top() - 48) * right;
-			myStack->pop();
-			return right;
-		}//
+			return left * right;
 		else
-		{//
-			/* if divided by 0 send error */
-			right = (myStack->top() - 48) / right;
-			myStack->pop();
-			return right;
-		}//
+		{
+			if (right == 0)
+			{
+				std::cout << "Error : there was a division by 0" << std::endl;
+				exit(0);
+			}
+			return left / right;
+		}
 	}
 	else
 	{
-		i = myStack->top() - 48;
+		left = myStack->top() - 48;
 		myStack->pop();
-		if (!isOperator(myStack->top()))
-			return i;
-		else
-		{
-			op = myStack->top();
-			myStack->pop();
-			int	j = printResult(myStack);
-			if (op == '+')
-			{//
-				j = j + i;
-				myStack->pop();
-				return j;
-			}//
-			else if (op == '-')
-			{//
-				j = j - i;
-				myStack->pop();
-				return j;
-			}//
-			else if (op == '*')
-			{//
-				j = j * i;
-				myStack->pop();
-				return j;
-			}//
-			else
-			{//
-				/* if divided by 0 send error */
-				j = j / i;
-				myStack->pop();
-				return j;
-			}//
-			/* #### trouver solution pour continuer quand apres num cest operator #### */
-		}
-		// return i;
+		return left;
 	}
-	// }
-
 }
