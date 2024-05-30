@@ -56,51 +56,90 @@ std::stack<char>	createStack(std::string str)
 	{
 		myStack.push(str[i]);
 	}
-	
+
 	return myStack;
 }
 
 int	printResult(std::stack<char> * myStack)
 {
-	char	c;
-	int		i;
-	
+	char	op;
+	int		right;
+	int		left;
+	int		result;
+
+	// while (!myStack->empty())
+	// {
 	if (isOperator(myStack->top()))
 	{
-		c = myStack->top();
+		op = myStack->top();
 		myStack->pop();
-		i = printResult(myStack);
-		if (c == '+')
+		right = printResult(myStack);
+		if (op == '+')
 		{//
-			i = i + (myStack->top() - 48);
+			right = (myStack->top() - 48) + right;
 			myStack->pop();
-			return i;
+			return right;
 		}//
-		else if (c == '-')
+		else if (op == '-')
 		{//
-			i = i - (myStack->top() - 48);
+			right = (myStack->top() - 48) - right;
 			myStack->pop();
-			return i;
+			return right;
 		}//
-		else if (c == '*')
+		else if (op == '*')
 		{//
-			i = i * (myStack->top() - 48);
+			right = (myStack->top() - 48) * right;
 			myStack->pop();
-			return i;
+			return right;
 		}//
 		else
 		{//
-			i = i / (myStack->top() - 48);
+			/* if divided by 0 send error */
+			right = (myStack->top() - 48) / right;
 			myStack->pop();
-			return i;
+			return right;
 		}//
 	}
 	else
 	{
 		i = myStack->top() - 48;
 		myStack->pop();
-		/* #### trouver solution pour continuer quand apres num cest operator #### */
-		return i;
+		if (!isOperator(myStack->top()))
+			return i;
+		else
+		{
+			op = myStack->top();
+			myStack->pop();
+			int	j = printResult(myStack);
+			if (op == '+')
+			{//
+				j = j + i;
+				myStack->pop();
+				return j;
+			}//
+			else if (op == '-')
+			{//
+				j = j - i;
+				myStack->pop();
+				return j;
+			}//
+			else if (op == '*')
+			{//
+				j = j * i;
+				myStack->pop();
+				return j;
+			}//
+			else
+			{//
+				/* if divided by 0 send error */
+				j = j / i;
+				myStack->pop();
+				return j;
+			}//
+			/* #### trouver solution pour continuer quand apres num cest operator #### */
+		}
+		// return i;
 	}
-	
+	// }
+
 }
