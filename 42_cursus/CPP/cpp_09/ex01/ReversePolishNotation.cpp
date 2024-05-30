@@ -15,12 +15,6 @@ std::string	checkArg(std::string str)
 		if (str[i] == ' ')
 			str.erase(i, 1);
 	}
-	if (str.empty() || str.length() < 3 || !isdigit(str[0]) || !isdigit(str[1])
-			|| !isOperator(str[str.length() - 1]))
-	{
-		std::cout << "Error : No possible way to calculate" << std::endl;
-		exit(0);
-	}
 
 	unsigned int	nbValue = 0;
 	unsigned int	nbOperator = 0;
@@ -37,7 +31,12 @@ std::string	checkArg(std::string str)
 			exit(0);
 		}
 	}
-
+	if (str.empty() || str.length() < 3 || !isdigit(str[0]) || !isdigit(str[1])
+			|| !isOperator(str[str.length() - 1]))
+	{
+		std::cout << "Error : No possible way to calculate" << std::endl;
+		exit(0);
+	}
 	if (nbOperator != nbValue - 1)
 	{
 		std::cout << "Error : the balance between the values and operators is not respected";

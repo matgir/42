@@ -5,7 +5,7 @@ int	main(int argc, char ** argv)
 	if (argc != 2)
 	{
 		std::cout << "Error : wrong number of arguments" << std::endl;
-		return (0);
+		return 0;
 	}
 	
 	std::string	calculus(argv[1]);
@@ -16,5 +16,5 @@ int	main(int argc, char ** argv)
 
 	std::cout << printResult(&myStack) << std::endl;
 
-	return 1;
+	return 0;
 }
