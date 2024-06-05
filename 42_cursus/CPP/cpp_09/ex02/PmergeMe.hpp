@@ -6,58 +6,63 @@
 # define PMERGEME_HPP
 
 # include <iostream>
+# include <utility>
+# include <vector>
+# include <stdlib.h>
 
-class Canonical
-{
-	public:
-
-		Canonical(void);
-		Canonical(Canonical const & copy);
-		virtual ~Canonical(void);
-
-		Canonical	&operator=(Canonical const & assign);
-
-		int		getvariable(void)const;//
-
-	private:
-
-		int		_variable;//
-};
+std::vector<int>	algoVect(std::vector<int> myVect);
 
 #endif
 
-#include "Canonical.hpp"
+// class Canonical
+// {
+// 	public:
 
-Canonical::Canonical(void) : _variable(0)
-{
-	std::cout << "Canonical default constructor called" << std::endl;
-	return;
-}
+// 		Canonical(void);
+// 		Canonical(Canonical const & copy);
+// 		virtual ~Canonical(void);
 
-Canonical::Canonical(Canonical const & copy)
-{
-	std::cout << "Canonical copy constructor called" << std::endl;
-	this->_variable = copy.getvariable();
-	return;
-}
+// 		Canonical	&operator=(Canonical const & assign);
 
-Canonical::~Canonical(void)
-{
-	std::cout << "Canonical destructor called" << std::endl;
-	return;
-}
+// 		int		getvariable(void)const;//
 
-Canonical	&Canonical::operator=(Canonical const & assign)
-{
-	std::cout << "Canonical assignment operator called" << std::endl;
+// 	private:
 
-	if (this != &assign)
-		this->_variable = assign.getvariable();
+// 		int		_variable;//
+// };
 
-	return *this;
-}
+// #include "Canonical.hpp"
 
-int	Canonical::getvariable(void)const
-{
-	return this->_variable;
-}
+// Canonical::Canonical(void) : _variable(0)
+// {
+// 	std::cout << "Canonical default constructor called" << std::endl;
+// 	return;
+// }
+
+// Canonical::Canonical(Canonical const & copy)
+// {
+// 	std::cout << "Canonical copy constructor called" << std::endl;
+// 	this->_variable = copy.getvariable();
+// 	return;
+// }
+
+// Canonical::~Canonical(void)
+// {
+// 	std::cout << "Canonical destructor called" << std::endl;
+// 	return;
+// }
+
+// Canonical	&Canonical::operator=(Canonical const & assign)
+// {
+// 	std::cout << "Canonical assignment operator called" << std::endl;
+
+// 	if (this != &assign)
+// 		this->_variable = assign.getvariable();
+
+// 	return *this;
+// }
+
+// int	Canonical::getvariable(void)const
+// {
+// 	return this->_variable;
+// }

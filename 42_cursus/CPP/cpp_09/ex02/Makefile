@@ -1,4 +1,5 @@
-SRC		=	#####
+SRC		=	main.cpp \
+			PmergeMe.cpp
 
 OBJ		=	${SRC:.cpp=.o}
 
@@ -6,7 +7,7 @@ DOBJ	=	${SRC:.cpp=.d}
 
 NAME	=	PmergeMe
 
-INCL	=	#####
+INCL	=	PmergeMe.hpp
 
 PP		=	c++
 

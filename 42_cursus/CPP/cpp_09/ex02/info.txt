@@ -5,27 +5,27 @@ first list
 	pairing
 		(7, 8)(5, 9)(11, 0)(2, 1)(10, 3)(4, 6)
 	comparing to put bigger to the right
-		(7, 8)(5, 9)(0, 11)(1, 2)(3, 10)(4, 6)
+		(7, 8)(5, 9)(0, 11)(1, 2)(3, 10)(4, 6) //myPairVect
 	sending the biggest in the algorythm
-		8, 9, 11, 2, 10, 6
+		8, 9, 11, 2, 10, 6 //newvect
 @@ seconde entry in algorythm
 	pairing
 		(8, 9)(11, 2)(10, 6)
 	comparing to put bigger to the right
-		(8, 9)(2, 11)(6, 10)
+		(8, 9)(2, 11)(6, 10) //myPairVect
 	sending the biggest in the algorythm
-		9, 11, 10
+		9, 11, 10 //newvect
 @@@ third entry in the algorythm
 	pairing
 		(9, 11)(10, smt) //here we add smt because the number of element is odd, smt will always be considere de biggest
 	comparing to put bigger to the right
-		(9, 11)(10, smt)
+		(9, 11)(10, smt) //myPairVect
 	sending the biggest in the algorythm
-		11
+		11 newvect
 @@@@ fourth entry in the algorythm
 	only one element so sending it back
 @@@
-	[11] {11} no comp because nothing in the list
+	myVect = [11] {11} no comp because nothing in the list
 	(9, 11)	(10, smt)
 	P1		P2
 	[9, 11] {9} no comp because we know 9 < 11
