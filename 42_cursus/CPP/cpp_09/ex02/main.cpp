@@ -15,9 +15,9 @@ int	main(int argc, char ** argv)
 		myDeque.push_back(atoi(argv[i]));
 	}
 	
-	for (size_t i = 0; i < myVect.size(); i++)//
-		std::cout << myVect[i] << " ";//
-	std::cout << std::endl;//
+	// for (size_t i = 0; i < myVect.size(); i++)//
+	// 	std::cout << myVect[i] << " ";//
+	// std::cout << std::endl;//
 	for (size_t i = 0; i < myDeque.size(); i++)//
 		std::cout << myDeque[i] << " ";//
 	std::cout << std::endl;//
@@ -30,9 +30,9 @@ int	main(int argc, char ** argv)
 	myDeque = algoDeque(myDeque);
 	//##### dif avec deuxieme time stamp
 
-	for (size_t i = 0; i < myVect.size(); i++)//
-		std::cout << myVect[i] << " ";//
-	std::cout << std::endl;//
+	// for (size_t i = 0; i < myVect.size(); i++)//
+	// 	std::cout << myVect[i] << " ";//
+	// std::cout << std::endl;//
 	for (size_t i = 0; i < myDeque.size(); i++)//
 		std::cout << myDeque[i] << " ";//
 	std::cout << std::endl;//

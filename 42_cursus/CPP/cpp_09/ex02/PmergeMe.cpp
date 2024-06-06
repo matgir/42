@@ -1,25 +1,40 @@
 #include "PmergeMe.hpp"
 
-template <typename T>
-std::pair<int, int>	foundValue(int toFind, T myPairContainer)
-{
-	for (size_t i = 0; i < myPairContainer.size(); i++)
-	{
-		if (toFind == myPairContainer[i].second)
-			return myPairContainer[i];
-	}
-	return myPairContainer[0];
-}
+// template <typename T>
+// std::pair<int, int>	foundValue(int toFind, T * myPairContainer)
+// {
+// 	for (size_t i = 0; i < myPairContainer->size(); i++)
+// 	{
+// 		if (toFind == *myPairContainer[i].second)
+// 			return myPairContainer[i];
+// 	}
+// 	return myPairContainer[0];
+// }
 
 std::vector<std::pair<int,int> >	reorganiseMyPairVect(std::vector<std::pair<int, int> > myPairVect, std::vector<int> myVect)
 {
 	std::vector<std::pair<int, int> >	myNewPairVect;
 
 	for (size_t i = 0; i < myVect.size(); i++)
-		myNewPairVect.push_back(foundValue(myVect[i], myPairVect));
+	{
+		// std::pair<int, int>	goodPair;
+		for (size_t j = 0; j < myPairVect.size(); j++)
+		{
+			if (myVect[i] == myPairVect[j].second)
+			{
+				// goodPair = myPairVect[j];
+				myNewPairVect.push_back(myPairVect[j]);
+				myPairVect.erase(myPairVect.begin() + j);
+			}
+		}
+		// myNewPairVect.push_back(foundValue(myVect[i], &myPairVect));
+	}
 	
-	if (myPairVect[myPairVect.size() - 1].second == -1)//
-		myNewPairVect.push_back(myPairVect[myPairVect.size() - 1]);//
+	if (!myPairVect.empty())
+	{
+		if (myPairVect[0].second == -1)//
+			myNewPairVect.push_back(myPairVect[0]);//
+	}
 
 	return myNewPairVect;
 }
@@ -113,10 +128,22 @@ std::deque<std::pair<int, int> >	reorganiseMyPairDeque(std::deque<std::pair<int,
 	std::deque<std::pair<int, int> >	myNewPairDeque;
 
 	for (size_t i = 0; i < myDeque.size(); i++)
-		myNewPairDeque.push_back(foundValue(myDeque[i], myPairDeque));
-	
-	if (myPairDeque[myPairDeque.size() - 1].second == -1)//
-		myNewPairDeque.push_back(myPairDeque[myPairDeque.size() - 1]);//
+	{
+		for (size_t j = 0; j < myPairDeque.size(); j++)
+		{
+			if (myDeque[i] == myPairDeque[j].second)
+			{
+				myNewPairDeque.push_back(myPairDeque[j]);
+				myPairDeque.erase(myPairDeque.begin() + j);
+			}
+		}
+	}
+		// myNewPairDeque.push_back(foundValue(myDeque[i], &myPairDeque));
+	if (!myPairDeque.empty())
+	{
+		if (myPairDeque[0].second == -1)//
+			myNewPairDeque.push_back(myPairDeque[0]);//
+	}
 
 	return myNewPairDeque;
 }
@@ -150,8 +177,12 @@ std::deque<int>	algoDeque(std::deque<int> myDeque)
 	}
 
 	myDeque = algoDeque(newDeque);
+
+	std::cout << "hello\n";//
+
 	myPairDeque = reorganiseMyPairDeque(myPairDeque, myDeque);
 
+	std::cout << "pairs done\n";//
 	// std::deque<int>::iterator	it = myDeque.begin();
 
 	// myDeque.insert(it, foundValue(it, myPairDeque));
