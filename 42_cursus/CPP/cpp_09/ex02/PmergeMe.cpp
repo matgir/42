@@ -1,13 +1,14 @@
 #include "PmergeMe.hpp"
 
-std::pair<int, int>	foundValue(int toFind, std::vector<std::pair<int, int> > myPairVect)
+template <typename T>
+std::pair<int, int>	foundValue(int toFind, T myPairContainer)
 {
-	for (size_t i = 0; i < myPairVect.size(); i++)
+	for (size_t i = 0; i < myPairContainer.size(); i++)
 	{
-		if (toFind == myPairVect[i].second)
-			return myPairVect[i];
+		if (toFind == myPairContainer[i].second)
+			return myPairContainer[i];
 	}
-	return myPairVect[0];
+	return myPairContainer[0];
 }
 
 std::vector<std::pair<int,int> >	reorganiseMyPairVect(std::vector<std::pair<int, int> > myPairVect, std::vector<int> myVect)
@@ -23,16 +24,17 @@ std::vector<std::pair<int,int> >	reorganiseMyPairVect(std::vector<std::pair<int,
 	return myNewPairVect;
 }
 
-int	binarySearch(std::pair<int, int> myPair, std::vector<int> myVect)
+template <typename T>
+int	binarySearch(std::pair<int, int> myPair, T myContainer)
 {
 	int	L = 0;
 	int	R = 0;
 
 	if (myPair.second == -1)//
-		R = myVect.size() - 1;//
+		R = myContainer.size() - 1;//
 	else//
 	{//
-		while (myPair.second != myVect[R])
+		while (myPair.second != myContainer[R])
 			R++;
 		R--;
 	}//
@@ -42,9 +44,9 @@ int	binarySearch(std::pair<int, int> myPair, std::vector<int> myVect)
 	while (L <= R)
 	{
 		m = (L + R) / 2;
-		if (myPair.first > myVect[m])
+		if (myPair.first > myContainer[m])
 			L = m + 1;
-		else if (myPair.first < myVect[m])
+		else if (myPair.first < myContainer[m])
 			R = m - 1;
 		else
 			return m;
@@ -58,8 +60,6 @@ std::vector<int>	algoVect(std::vector<int> myVect)
 		return myVect;
 	
 	std::vector<std::pair<int, int> >	myPairVect;
-
-	/* ADD VERIF IF MYVECT.SIZE() IS ODD THEN DO SOMETHING*/
 
 	for (size_t i = 1; i < myVect.size(); i += 2)
 		myPairVect.push_back(std::make_pair (myVect[i - 1], myVect[i]));
@@ -102,8 +102,72 @@ std::vector<int>	algoVect(std::vector<int> myVect)
 		jacobN_2 = jacobN_1;
 		jacobN_1 = jacobN;
 	}
-	for (int i = myPairVect.size() - 1; i > jacobN_1 -1; i--)
+	for (int i = myPairVect.size() - 1; i > jacobN_1 - 1; i--)
 		myVect.insert(it + binarySearch(myPairVect[i], myVect), myPairVect[i].first);
 	
 	return myVect;
+}
+
+std::deque<std::pair<int, int> >	reorganiseMyPairDeque(std::deque<std::pair<int, int> > myPairDeque, std::deque<int> myDeque)
+{
+	std::deque<std::pair<int, int> >	myNewPairDeque;
+
+	for (size_t i = 0; i < myDeque.size(); i++)
+		myNewPairDeque.push_back(foundValue(myDeque[i], myPairDeque));
+	
+	if (myPairDeque[myPairDeque.size() - 1].second == -1)//
+		myNewPairDeque.push_back(myPairDeque[myPairDeque.size() - 1]);//
+
+	return myNewPairDeque;
+}
+
+std::deque<int>	algoDeque(std::deque<int> myDeque)
+{
+	if (myDeque.size() == 1)
+		return myDeque;
+
+	std::deque<std::pair<int, int> >	myPairDeque;
+
+	for (size_t i = 1; i < myDeque.size(); i += 2)
+		myPairDeque.push_back(std::make_pair (myDeque[i - 1], myDeque[i]));
+
+	if (myDeque.size() % 2 != 0)
+		myPairDeque.push_back(std::make_pair (myDeque[myDeque.size() - 1], -1));
+
+	std::deque<int>	newDeque;
+
+	for (size_t i = 0; i < myPairDeque.size(); i++)
+	{
+		if (myPairDeque.size() != 1 && myDeque.size() % 2 != 0 && i == myPairDeque.size() - 1)
+			break;
+		if (myPairDeque[i].first > myPairDeque[i].second)
+		{
+			int	tmp = myPairDeque[i].first;
+			myPairDeque[i].first = myPairDeque[i].second;
+			myPairDeque[i].second = tmp;
+		}
+		newDeque.push_back(myPairDeque[i].second);
+	}
+
+	myDeque = algoDeque(newDeque);
+	myPairDeque = reorganiseMyPairDeque(myPairDeque, myDeque);
+
+	// std::deque<int>::iterator	it = myDeque.begin();
+
+	// myDeque.insert(it, foundValue(it, myPairDeque));
+	myDeque.insert(myDeque.begin(), myPairDeque[0].first);
+
+	int	jacobN_2 = 1;
+	int	jacobN_1 = 1;
+	for (size_t jacobN = jacobN_1 + (jacobN_2 * 2); jacobN < myPairDeque.size(); jacobN = jacobN_1 + (jacobN_2 * 2))
+	{
+		for (int i = jacobN - 1; i > jacobN_1 - 1; i--)
+			myDeque.insert(myDeque.begin() + binarySearch(myPairDeque[i], myDeque), myPairDeque[i].first);
+		jacobN_2 = jacobN_1;
+		jacobN_1 = jacobN;
+	}
+	for (int i = myPairDeque.size() - 1; i > jacobN_1 - 1; i--)
+		myDeque.insert(myDeque.begin() + binarySearch(myPairDeque[i], myDeque), myPairDeque[i].first);
+	
+	return myDeque;
 }

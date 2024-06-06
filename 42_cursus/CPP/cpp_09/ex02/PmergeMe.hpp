@@ -9,8 +9,10 @@
 # include <utility>
 # include <vector>
 # include <stdlib.h>
+# include <deque>
 
 std::vector<int>	algoVect(std::vector<int> myVect);
+std::deque<int>		algoDeque(std::deque<int> myDeque);
 
 #endif
 
