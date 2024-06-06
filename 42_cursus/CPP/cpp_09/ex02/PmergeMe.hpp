@@ -10,6 +10,7 @@
 # include <vector>
 # include <stdlib.h>
 # include <deque>
+# include <sys/time.h>
 
 std::vector<int>	algoVect(std::vector<int> myVect);
 std::deque<int>		algoDeque(std::deque<int> myDeque);
