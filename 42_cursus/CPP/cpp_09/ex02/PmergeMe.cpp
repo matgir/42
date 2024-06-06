@@ -88,6 +88,7 @@ std::vector<int>	algoVect(std::vector<int> myVect)
 
 	int	jacobN_2 = 1;
 	int	jacobN_1 = 1;
+	
 	for (size_t jacobN = jacobN_1 + (jacobN_2 * 2); jacobN < myPairVect.size(); jacobN = jacobN_1 + (jacobN_2 * 2))
 	{
 		for (int i = jacobN - 1; i > jacobN_1 - 1; i--)
@@ -159,6 +160,7 @@ std::deque<int>	algoDeque(std::deque<int> myDeque)
 
 	int	jacobN_2 = 1;
 	int	jacobN_1 = 1;
+
 	for (size_t jacobN = jacobN_1 + (jacobN_2 * 2); jacobN < myPairDeque.size(); jacobN = jacobN_1 + (jacobN_2 * 2))
 	{
 		for (int i = jacobN - 1; i > jacobN_1 - 1; i--)
@@ -170,4 +172,39 @@ std::deque<int>	algoDeque(std::deque<int> myDeque)
 		myDeque.insert(myDeque.begin() + binarySearch(myPairDeque[i], myDeque), myPairDeque[i].first);
 	
 	return myDeque;
+}
+
+bool	checkArg(char ** argv, int argc)
+{
+	if (argc < 2)
+	{
+		std::cout << "Error : no sequence to sort" << std::endl;
+		return false;
+	}
+	for (int j = 1; argv[j]; j++)
+	{
+		for (int i = 0; argv[j][i]; i++)
+		{
+			if (!isdigit(argv[j][i]))
+			{
+				std::cout << "Error : There is not only number or a negative number in the sequence" << std::endl;
+				return false;
+			}
+		}
+		long int	value = atol(argv[j]);
+		if (value > 2147483647)
+		{
+			std::cout << "Error : A number in the sequence is to big to fit in an integer" << std::endl;
+			return false;
+		}
+	}
+	return true;
+}
+
+time_t	getTimeInMs(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000000) + (tv.tv_usec));
 }
