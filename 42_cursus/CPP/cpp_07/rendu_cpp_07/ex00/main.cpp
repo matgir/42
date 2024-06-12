@@ -28,5 +28,9 @@ int	main( void )
 	std::cout << "min( e, f ) = " << ::min(e, f) << std::endl;
 	std::cout << "max( e, f ) = " << ::max(e, f) << std::endl;
 
+	// ::min(a, c);
+	// ::max(a, c);
+	// ::swap(a, c);
+
 	return 0;
 }

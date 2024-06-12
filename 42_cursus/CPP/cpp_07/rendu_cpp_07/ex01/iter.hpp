@@ -21,4 +21,11 @@ void	showMe(T & toPrint)
 	return;
 }
 
+template<typename T>
+void	incrementMe(T & toUp)
+{
+	toUp = toUp + '1';
+	return;
+}
+
 #endif

@@ -37,6 +37,16 @@ int main(int, char**)
 	}
 	try
 	{
+		std::cout << numbers[0] << std::endl;
+		numbers[0] = 0;
+		std::cout << numbers[0] << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
 		numbers[MAX_VAL] = 0;
 	}
 	catch(const std::exception& e)
