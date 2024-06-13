@@ -10,7 +10,6 @@ class Span
 {
 	public:
 
-		Span(void);
 		Span(unsigned int size);
 		Span(Span const & copy);
 		Span	&operator=(Span const & assign);
@@ -44,6 +43,7 @@ class Span
 
 	private:
 
+		Span(void);
 		unsigned int	_size;
 		unsigned int	_fillAt;
 		std::list<int>	_span;
