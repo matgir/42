@@ -64,7 +64,7 @@ std::stack<char>	createStack(std::string str)
 	return myStack;
 }
 
-double	printResult(std::stack<char> * myStack)
+double	printResult(std::stack<char> * myStack, bool * divByZero)
 {
 	char	op;
 	double	right;
@@ -74,8 +74,10 @@ double	printResult(std::stack<char> * myStack)
 	{
 		op = myStack->top();
 		myStack->pop();
-		right = printResult(myStack);
-		left = printResult(myStack);
+		right = printResult(myStack, divByZero);
+		left = printResult(myStack, divByZero);
+		if (*divByZero == true)
+			return 0;
 		if (op == '+')
 			return left + right;
 		else if (op == '-')
@@ -86,8 +88,9 @@ double	printResult(std::stack<char> * myStack)
 		{
 			if (right == 0)
 			{
-				std::cout << "Error : there was a division by 0" << std::endl;
-				exit(1);
+				std::cout << "Error : there was a division by ";
+				*divByZero = true;
+				return 0;
 			}
 			return left / right;
 		}

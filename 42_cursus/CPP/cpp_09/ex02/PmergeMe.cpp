@@ -183,6 +183,11 @@ bool	checkArg(char ** argv, int argc)
 	}
 	for (int j = 1; argv[j]; j++)
 	{
+		if (argv[j][0] == '\0')
+		{
+			std::cout << "Error : There is not only number or a negative number in the sequence" << std::endl << std::endl;
+			return false;
+		}
 		for (int i = 0; argv[j][i]; i++)
 		{
 			if (!isdigit(argv[j][i]))

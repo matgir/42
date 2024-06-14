@@ -4,7 +4,7 @@ std::map<std::string, float>	mapFromCsv(void)
 {
 	std::ifstream	inputCsv;
 
-	inputCsv.open("data.csv");
+	inputCsv.open("dat.csv");
 	if (!inputCsv)
 	{
 		std::cout << "data.csv : could not be open" << std::endl;
@@ -29,7 +29,10 @@ std::map<std::string, float>	mapFromCsv(void)
 	}
 	inputCsv.close();
 	if (mapCsv.empty())
+	{
+		std::cout << "Error : No information was found in data.csv" << std::endl;
 		exit(0);
+	}
 	return mapCsv;
 }
 

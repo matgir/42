@@ -14,7 +14,9 @@ int	main(int argc, char ** argv)
 	
 	std::stack<char>	myStack = createStack(calculus);
 
-	std::cout << printResult(&myStack) << std::endl;
+	bool	divByZero = false;
+
+	std::cout << printResult(&myStack, &divByZero) << std::endl;
 
 	return 1;
 }
