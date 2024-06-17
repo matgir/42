@@ -14,12 +14,19 @@ int	main(int argc, char ** argv)
 		return 1;
 	}
 	std::string						inputName(argv[1]);
+	bool							isThereProblem = false;
 
-	checkStream(inputName);
+	checkStream(inputName, &isThereProblem);
+	if (isThereProblem == true)
+		return 1;	
 
 	std::ifstream					inputTxt(inputName.c_str());
 	std::string						extracted;
-	std::map<std::string, float>	mapCsv = mapFromCsv();
+	std::map<std::string, float>	mapCsv = mapFromCsv(&isThereProblem);
+
+	if (isThereProblem == true)
+		return 1;	
+
 	bool							isFloat = false;
 
 	std::getline(inputTxt, extracted);
@@ -31,5 +38,5 @@ int	main(int argc, char ** argv)
 	}
 	inputTxt.close();
 	std::cout << std::endl << std::endl;//
-	return 0;
+	return 1;
 }

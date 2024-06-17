@@ -8,14 +8,15 @@ bool	isOperator(char c)
 		return false;
 }
 
-std::string	checkArg(std::string str)
+std::string	checkArg(std::string str, bool * isThereProblem)
 {
 	for (int i = str.size() - 2; i > 0; i-=2)
 	{
 		if (str[i] != ' ')
 		{
 			std::cout << "Error : wrong input, put a space inbetween each element" << std::endl;
-			exit(1);
+			*isThereProblem = true;
+			return str;
 		}
 		else
 			str.erase(i, 1);
@@ -33,20 +34,23 @@ std::string	checkArg(std::string str)
 		else
 		{
 			std::cout << "Error : <" << str[i] << "> invalid character" << std::endl;
-			exit(1);
+			*isThereProblem = true;
+			return str;
 		}
 	}
 	if (str.empty() || str.length() < 3 || !isdigit(str[0]) || !isdigit(str[1])
 			|| !isOperator(str[str.length() - 1]))
 	{
 		std::cout << "Error : No possible way to calculate" << std::endl;
-		exit(1);
+		*isThereProblem = true;
+		return str;
 	}
 	if (nbOperator != nbValue - 1)
 	{
 		std::cout << "Error : the balance between the values and operators is not respected";
 		std::cout << std::endl;
-		exit(1);
+		*isThereProblem = true;
+		return str;
 	}
 
 	return str;

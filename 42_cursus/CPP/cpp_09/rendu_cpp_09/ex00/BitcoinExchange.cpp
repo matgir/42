@@ -1,23 +1,26 @@
 #include "BitcoinExchange.hpp"
 
-std::map<std::string, float>	mapFromCsv(void)
+std::map<std::string, float>	mapFromCsv(bool * isThereProblem)
 {
 	std::ifstream	inputCsv;
+	std::map<std::string, float>	mapCsv;
 
+	// inputCsv.open("data.csv");
 	inputCsv.open("dat.csv");
 	if (!inputCsv)
 	{
 		std::cout << "data.csv : could not be open" << std::endl;
-		exit(0);
+		*isThereProblem = true;
+		return mapCsv;
 	}
 	if (inputCsv.eof())
 	{
 		std::cout << "data.csv : file empty" << std::endl;
 		inputCsv.close();
-		exit(0);
+		*isThereProblem = true;
+		return mapCsv;
 	}
 
-	std::map<std::string, float>	mapCsv;
 	std::string						extracted;
 
 	std::getline(inputCsv, extracted, '\n');
@@ -31,12 +34,13 @@ std::map<std::string, float>	mapFromCsv(void)
 	if (mapCsv.empty())
 	{
 		std::cout << "Error : No information was found in data.csv" << std::endl;
-		exit(0);
+		*isThereProblem = true;
+		return mapCsv;
 	}
 	return mapCsv;
 }
 
-void	checkStream(std::string inputName)
+void	checkStream(std::string inputName, bool * isThereProblem)
 {
 	std::ifstream	inputTxt;
 
@@ -44,13 +48,15 @@ void	checkStream(std::string inputName)
 	if (!inputTxt)
 	{
 		std::cout << inputName << " : could not be open, select another" << std::endl;
-		exit (0);
+		*isThereProblem = true;
+		return;
 	}
 	if (inputTxt.eof())
 	{
 		std::cout << inputName << " : file empty, select another" << std::endl;
 		inputTxt.close();
-		exit (0);
+		*isThereProblem = true;
+		return;
 	}
 	inputTxt.close();
 	return;

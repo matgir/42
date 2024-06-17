@@ -9,8 +9,11 @@ int	main(int argc, char ** argv)
 	}
 	
 	std::string	calculus(argv[1]);
+	bool		isThereProblem = false;
 
-	calculus = checkArg(calculus);
+	calculus = checkArg(calculus, &isThereProblem);
+	if (isThereProblem == true)
+		return 1;
 	
 	std::stack<char>	myStack = createStack(calculus);
 

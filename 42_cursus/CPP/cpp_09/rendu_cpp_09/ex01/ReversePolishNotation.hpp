@@ -5,7 +5,7 @@
 # include <stack>
 # include <stdlib.h>
 
-std::string			checkArg(std::string str);
+std::string			checkArg(std::string str, bool * isThereProblem);
 std::stack<char>	createStack(std::string str);
 double				printResult(std::stack<char> * myStack, bool * divByZero);
 
