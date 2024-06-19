@@ -9,7 +9,7 @@ int	main(int argc, char ** argv)
 	std::cout << std::endl << std::endl;//
 	if (argc != 2)
 	{
-		std::cerr << "Not the right number of argument : <./btc file.txt>" << std::endl;
+		std::cout << "Not the right number of argument : <./btc file.txt>" << std::endl;
 		std::cout << std::endl << std::endl;//
 		return 1;
 	}

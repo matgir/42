@@ -15,6 +15,7 @@ std::string	checkArg(std::string str, bool * isThereProblem)
 		if (str[i] != ' ')
 		{
 			std::cout << "Error : wrong input, put a space inbetween each element" << std::endl;
+			std::cout << std::endl << std::endl;//
 			*isThereProblem = true;
 			return str;
 		}
@@ -34,6 +35,7 @@ std::string	checkArg(std::string str, bool * isThereProblem)
 		else
 		{
 			std::cout << "Error : <" << str[i] << "> invalid character" << std::endl;
+			std::cout << std::endl << std::endl;//
 			*isThereProblem = true;
 			return str;
 		}
@@ -42,13 +44,14 @@ std::string	checkArg(std::string str, bool * isThereProblem)
 			|| !isOperator(str[str.length() - 1]))
 	{
 		std::cout << "Error : No possible way to calculate" << std::endl;
+		std::cout << std::endl << std::endl;//
 		*isThereProblem = true;
 		return str;
 	}
 	if (nbOperator != nbValue - 1)
 	{
 		std::cout << "Error : the balance between the values and operators is not respected";
-		std::cout << std::endl;
+		std::cout << std::endl << std::endl;
 		*isThereProblem = true;
 		return str;
 	}
@@ -69,6 +72,7 @@ std::stack<char>	createStack(std::string str)
 }
 
 double	printResult(std::stack<char> * myStack, bool * divByZero)
+// double	printResult(std::stack<char> * myStack, bool * divByZero, int level)
 {
 	char	op;
 	double	right;
@@ -78,10 +82,18 @@ double	printResult(std::stack<char> * myStack, bool * divByZero)
 	{
 		op = myStack->top();
 		myStack->pop();
+		// level++;
+		// right = printResult(myStack, divByZero, level);
 		right = printResult(myStack, divByZero);
+		// left = printResult(myStack, divByZero, level);
 		left = printResult(myStack, divByZero);
 		if (*divByZero == true)
 			return 0;
+		// if (level == 1 && !myStack->empty())
+		// {
+			// std::cout << "Error : there was an error in the calculation" << std::endl;
+			// return 0;
+		// }
 		if (op == '+')
 			return left + right;
 		else if (op == '-')

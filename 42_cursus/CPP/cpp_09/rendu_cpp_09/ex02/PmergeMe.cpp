@@ -178,28 +178,32 @@ bool	checkArg(char ** argv, int argc)
 {
 	if (argc < 2)
 	{
-		std::cout << "Error : no sequence to sort" << std::endl << std::endl;
+		std::cout << "Error : no sequence to sort" << std::endl;
+		std::cout << std::endl << std::endl;
 		return false;
 	}
 	for (int j = 1; argv[j]; j++)
 	{
 		if (argv[j][0] == '\0')
 		{
-			std::cout << "Error : There is not only number or a negative number in the sequence" << std::endl << std::endl;
+			std::cout << "Error : one of the elements is empty" << std::endl;
+			std::cout << std::endl << std::endl;
 			return false;
 		}
 		for (int i = 0; argv[j][i]; i++)
 		{
 			if (!isdigit(argv[j][i]))
 			{
-				std::cout << "Error : There is not only number or a negative number in the sequence" << std::endl << std::endl;
+				std::cout << "Error : There is not only number or a negative number in the sequence" << std::endl;
+				std::cout << std::endl << std::endl;
 				return false;
 			}
 		}
 		long int	value = atol(argv[j]);
 		if (value > 2147483647)
 		{
-			std::cout << "Error : A number in the sequence is to big to fit in an integer" << std::endl << std::endl;
+			std::cout << "Error : A number in the sequence is too big to fit in an integer" << std::endl;
+			std::cout << std::endl << std::endl;
 			return false;
 		}
 	}
