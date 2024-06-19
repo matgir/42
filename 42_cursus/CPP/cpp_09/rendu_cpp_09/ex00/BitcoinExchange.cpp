@@ -10,14 +10,14 @@ std::map<std::string, float>	mapFromCsv(bool * isThereProblem)
 	if (!inputCsv)
 	{
 		std::cout << "data.csv : could not be open" << std::endl;
-		std::cout << std::endl << std::endl;//
+		std::cout << std::endl << std::endl;
 		*isThereProblem = true;
 		return mapCsv;
 	}
 	if (inputCsv.eof())
 	{
 		std::cout << "data.csv : file empty" << std::endl;
-		std::cout << std::endl << std::endl;//
+		std::cout << std::endl << std::endl;
 		inputCsv.close();
 		*isThereProblem = true;
 		return mapCsv;
@@ -36,7 +36,7 @@ std::map<std::string, float>	mapFromCsv(bool * isThereProblem)
 	if (mapCsv.empty())
 	{
 		std::cout << "Error : No information was found in data.csv" << std::endl;
-		std::cout << std::endl << std::endl;//
+		std::cout << std::endl << std::endl;
 		*isThereProblem = true;
 		return mapCsv;
 	}
@@ -51,14 +51,14 @@ void	checkStream(std::string inputName, bool * isThereProblem)
 	if (!inputTxt)
 	{
 		std::cout << inputName << " : could not be open, select another" << std::endl;
-		std::cout << std::endl << std::endl;//
+		std::cout << std::endl << std::endl;
 		*isThereProblem = true;
 		return;
 	}
 	if (inputTxt.eof())
 	{
 		std::cout << inputName << " : file empty, select another" << std::endl;
-		std::cout << std::endl << std::endl;//
+		std::cout << std::endl << std::endl;
 		inputTxt.close();
 		*isThereProblem = true;
 		return;

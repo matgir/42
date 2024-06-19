@@ -6,11 +6,11 @@
 
 int	main(int argc, char ** argv)
 {
-	std::cout << std::endl << std::endl;//
+	std::cout << std::endl << std::endl;
 	if (argc != 2)
 	{
 		std::cout << "Not the right number of argument : <./btc file.txt>" << std::endl;
-		std::cout << std::endl << std::endl;//
+		std::cout << std::endl << std::endl;
 		return 1;
 	}
 	std::string						inputName(argv[1]);
@@ -37,6 +37,6 @@ int	main(int argc, char ** argv)
 			giveTheResult(extracted, &isFloat, mapCsv);
 	}
 	inputTxt.close();
-	std::cout << std::endl << std::endl;//
+	std::cout << std::endl << std::endl;
 	return 1;
 }
