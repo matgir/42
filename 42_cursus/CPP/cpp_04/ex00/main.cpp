@@ -42,3 +42,43 @@ int main()
 	}
 	return 0;
 }
+
+
+// int	main()
+// {
+// 	{
+// 		const Animal meta = Animal();
+// 		const Animal j = Dog();
+// 		const Animal i = Cat();
+
+// 		std::cout << meta.getType() << " " << std::endl;
+// 		std::cout << j.getType() << " " << std::endl;
+// 		std::cout << i.getType() << " " << std::endl;
+
+// 		i.makeSound(); //will output the cat sound!
+// 		j.makeSound(); //will output the dog sound!
+// 		meta.makeSound();
+
+// 		// delete meta;
+// 		// delete j;
+// 		// delete i;
+// 	}
+// 	{
+// 		const WrongAnimal meta = WrongAnimal();
+// 		const WrongAnimal i = WrongCat();
+
+// 		std::cout << meta.getType() << " " << std::endl;
+// 		std::cout << i.getType() << " " << std::endl;
+
+// 		i.makeSound(); //will output the WrongAnimal sound!
+// 		meta.makeSound();
+
+// 		// delete meta;
+// 		// delete i;
+// 	}
+// 	{
+// 		Dog	j;
+// 		Dog	h = j;
+// 	}
+// 	return 0;
+// }

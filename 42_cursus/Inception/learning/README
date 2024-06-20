@@ -1,0 +1,49 @@
+COMMAND
+	docker rmi <image_id>
+		delete the image designated by image id
+
+	docker image
+		show the list of all existing docker image, with their id
+
+	docker ps -as
+		show lists of all containers on the system, running or stopped
+
+	docker stop <container_id>
+		it stops the container affiliated to the <container_id>
+
+	docker rm <container_id>
+		it erased the container affiliated to the <container_id>
+
+	docker-compose images
+		show list of the images created with the current docker-compose.yml
+
+	docker-compose stop
+		this command stops the running containers of specified services
+
+	docker-compose run <service_name>
+		this is similar to the docker run command. It will create containers
+		from images built for the <service_name> mentioned in the compose file
+
+	docker-compose ps
+		this command list all the containers in the current docker-compose file.
+		They can then either be running or stopped.
+
+WEBSITES
+	How to remove docker images "CONSULTED"
+		https://www.cherryservers.com/blog/how-to-remove-docker-images
+	Getting started with Docker and Kubernetes: A beginners guide "CONSULTED"
+		https://www.educative.io/blog/docker-kubernetes-beginners-guide
+	Install Docker Engine on Debian "NOT"
+		https://docs.docker.com/engine/install/debian/
+	Docker Compose Tutorial: Advanced Docker made simple
+		https://www.educative.io/blog/docker-compose-tutorial
+
+TO KNOW
+-	To erase a docker image if it is still linked to a container, you must stop
+	the container, then delete it then erase your docker image
+-	Dockerfile :	text document that contains the commands to call on the command
+					line to build an image
+-	Docker compose :	tool for defining and running multi-container docker
+						applications. Information descirbing services and networks
+						for an application are contained within a YAML file, called
+						docker-compose.yml
