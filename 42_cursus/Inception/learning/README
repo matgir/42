@@ -35,8 +35,20 @@ WEBSITES
 		https://www.educative.io/blog/docker-kubernetes-beginners-guide
 	Install Docker Engine on Debian "NOT"
 		https://docs.docker.com/engine/install/debian/
-	Docker Compose Tutorial: Advanced Docker made simple
+	Docker Compose Tutorial: Advanced Docker made simple "CONSULTED"
 		https://www.educative.io/blog/docker-compose-tutorial
+	Docker Networking "CONSULTED"
+		https://www.aquasec.com/cloud-native-academy/docker-container/docker-networking/
+	 vbachele / Inception
+		https://github.com/vbachele/Inception/tree/main
+	 llescure / 42_Inception
+		https://github.com/llescure/42_Inception
+	Set environment variables within your containers environment
+		https://docs.docker.com/compose/environment-variables/set-environment-variables/
+	tblaase / inception
+		https://github.com/tblaase/inception
+	Forstman1 / inception-42 
+		https://github.com/Forstman1/inception-42
 
 TO KNOW
 -	To erase a docker image if it is still linked to a container, you must stop
@@ -47,3 +59,41 @@ TO KNOW
 						applications. Information descirbing services and networks
 						for an application are contained within a YAML file, called
 						docker-compose.yml
+
+
+
+/* - docker ps or docker ps -a //show the names of all the containers you have + the id you need and the port associated.
+- docker pull "NameOfTheImage" // pull an image from dockerhub
+- docker "Three first letter of your docker" // show the logs of your last run of dockers
+- docker rm $(docker ps -a -q) //allow to delete all the opened images
+- docker exec -it "Three first letter of your docker" sh // to execute the program with the shell
+
+- docker run "name of the docker image" //to run the docker image
+- docker run -d, // run container in background
+- docker run -p,// publish a container's port to the host
+- docker run -P, // publish all exposed port to random ports
+- docker run -it "imageName", //le programme continuera de fonctionner et on pourra interagir avec le container
+- docker run -name sl mysql, //give a name for the container instead an ID
+- docker run -d -p 7000:80 test:latest
+
+- docker image rm -f "image name/id", //delete the image, if the image is running you need to kill it first.
+- docker image kill "name", //stop a running image,
+
+- docker-compose up -d --build, //Create and build all the containers and they still run in the background
+- docker-compose ps, //Check the status for all the containers
+- docker-compose logs -f --tail 5, //see the first 5 lines of the logs of your containers
+- docker-compose stop , //stop a stack of your docker compose
+- Docker-compose down, //destroy all your ressources
+- docker-compose config, //check the syntax of you docker-compose file
+
+mysql -uroot // To connect on mysql CLI
+SELECT User FROM mysql.user; // To see all the users
+USE wordpress // To connect on your wordpress database
+mysqldump -u username -p databasename > filename.sql // To export the file
+mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /usr/local/bin/wordpress.sql // To import the file
+
+SHOW DATABASES; // show the databes
+use 'wordpress'; // go in the wordpress databse
+SHOW TABLES; // show all the tables from the database you selected
+SELECT wp_users.display_name FROM wp_users; // display username from wordpress database
+SELECT *  FROM wp_users; // select */
