@@ -11,7 +11,7 @@ COMMAND
 	docker rmi <image_id>
 		delete the image designated by image id
 
-	docker image
+	docker image ls
 		show the list of all existing docker image, with their id
 
 	docker ps -as
