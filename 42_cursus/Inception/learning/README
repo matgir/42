@@ -1,4 +1,13 @@
 COMMAND
+	docker build -t <docker_name> .
+		build a docker with the name <docker_name> using the Dockerfile in the current directory
+	
+	docker run -it <docker_name>
+		starts the container and open a terminal inside it
+
+	exit (inside a docker terminal)
+		exits the docker
+
 	docker rmi <image_id>
 		delete the image designated by image id
 
@@ -31,7 +40,7 @@ COMMAND
 WEBSITES
 	How to remove docker images "CONSULTED"
 		https://www.cherryservers.com/blog/how-to-remove-docker-images
-	Getting started with Docker and Kubernetes: A beginners guide "CONSULTED"
+	Getting stardockrted with Docker and Kubernetes: A beginners guide "CONSULTED"
 		https://www.educative.io/blog/docker-kubernetes-beginners-guide
 	Install Docker Engine on Debian "NOT"
 		https://docs.docker.com/engine/install/debian/
