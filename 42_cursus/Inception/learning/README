@@ -48,9 +48,9 @@ WEBSITES
 		https://www.educative.io/blog/docker-compose-tutorial
 	Docker Networking "CONSULTED"
 		https://www.aquasec.com/cloud-native-academy/docker-container/docker-networking/
-	 vbachele / Inception
+	vbachele / Inception
 		https://github.com/vbachele/Inception/tree/main
-	 llescure / 42_Inception
+	llescure / 42_Inception
 		https://github.com/llescure/42_Inception
 	Set environment variables within your containers environment
 		https://docs.docker.com/compose/environment-variables/set-environment-variables/
@@ -68,6 +68,27 @@ TO KNOW
 						applications. Information descirbing services and networks
 						for an application are contained within a YAML file, called
 						docker-compose.yml
+-	To cleanly install docker on your Ubuntu machine :
+	a.	remove any conflicting packages
+		for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+	b.	set up docker's apt repository
+		# Add Docker's official GPG key:
+		sudo apt-get update
+		sudo apt-get install ca-certificates curl
+		sudo install -m 0755 -d /etc/apt/keyrings
+		sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+		sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+		# Add the repository to Apt sources:
+		echo \
+		"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+		$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+		sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+		sudo apt-get update
+	c.	Instal latest version
+		sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	d.	Verify if it is succesfull
+		sudo docker run hello-world
 
 
 
