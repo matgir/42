@@ -90,6 +90,12 @@ TO KNOW
 	d.	Verify if it is succesfull
 		sudo docker run hello-world
 
+-	To make your current user to use docker without sudo
+	a.	sudo groupadd docker
+	b.	sudo usermod -aG docker $USER
+	c.	newgrp docker
+	d.	docker run hello-world
+
 
 
 /* - docker ps or docker ps -a //show the names of all the containers you have + the id you need and the port associated.
