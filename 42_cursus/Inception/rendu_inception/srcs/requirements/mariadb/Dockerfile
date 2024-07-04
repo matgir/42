@@ -8,7 +8,7 @@ RUN apt-get install mariadb-server -y
 
 RUN apt install vim -y
 
-COPY conf/50-server.cnf etc/mysql/mariadb.conf.d/50-server.cnf
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY tools/script_mysql.sh /usr/local/bin/
 
