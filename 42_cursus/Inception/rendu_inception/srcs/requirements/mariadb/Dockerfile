@@ -14,4 +14,4 @@ COPY tools/script_mysql.sh /usr/local/bin/
 
 RUN chmod 777 /usr/local/bin/script_mysql.sh
 
-#ENTRYPOINT [ "/usr/local/bin/script_mysql.sh" ]
+ENTRYPOINT [ "/usr/local/bin/script_mysql.sh" ]
