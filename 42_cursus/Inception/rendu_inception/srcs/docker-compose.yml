@@ -1,20 +1,20 @@
-version: '3.8'
+version: '3'
 
 volumes:
-  wordpress:
-    name: wordpress
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: '/home/mateo/Desktop/Inception/rendu_inception/srcs/requirements/wordpress'
   mariadb:
     name: mariadb
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/mateo/Desktop/Inception/rendu_inception/srcs/requirements/mariadb'
+      device: '/home/mateo/Desktop/Inception/rendu_inception/srcs/requirements/mariadb/'
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/mateo/Desktop/Inception/rendu_inception/srcs/requirements/wordpress/'
 
 networks:
   inception:
