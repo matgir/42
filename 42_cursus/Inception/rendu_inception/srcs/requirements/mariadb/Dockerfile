@@ -10,8 +10,8 @@ RUN apt install vim -y
 
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
-COPY tools/script_mysql.sh /usr/local/bin/
+COPY tools/script_mysql.sh /usr/local/bin/script_mysql.sh
 
-RUN chmod 777 /usr/local/bin/script_mysql.sh
+RUN chmod +x /usr/local/bin/script_mysql.sh
 
 ENTRYPOINT [ "/usr/local/bin/script_mysql.sh" ]

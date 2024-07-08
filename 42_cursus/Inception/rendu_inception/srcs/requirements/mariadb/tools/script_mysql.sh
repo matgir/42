@@ -1,6 +1,6 @@
 #!/bin/bash
 
-service mysql start;
+service mysql start
 	#	starts mysql
 mysql -e "CREATE DATABASE IF NOT EXISTS \`${DB_DATABASE}\`;"
 	#	creates a table if it does not exists with ${DB_DATABEASE} name indicated in .env
@@ -14,5 +14,5 @@ mysql -e "FLUSH PRIVILEGES"
 	#	update the last changes in mysql
 mysqladmin -u root -p$DB_ROOT_PASSWORD shutdown
 	#	reboot mysql
-exec mysql_safe
+exec mysqld_safe
 	#	command that mysql ask at start
