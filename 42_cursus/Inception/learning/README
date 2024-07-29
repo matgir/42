@@ -11,6 +11,9 @@ COMMAND
 	docker rmi <image_id>
 		delete the image designated by image id
 
+	sudo docker rmi -f $(sudo docker image ls -aq)
+		delete all images forcefully
+
 	docker image ls
 		show the list of all existing docker image, with their id
 

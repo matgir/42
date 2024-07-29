@@ -16,7 +16,8 @@ RUN mkdir -p /etc/nginx/ssl
 RUN apt install openssl -y
 # 	install ssl tool
 
-RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=login.42.fr/UID=mgirardo"
+RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=mgirardo.42.fr/UID=mgirardo"
+# RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=login.42.fr/UID=login" 
 # 	creates the certificate	-x509 : selfsigned certificate
 # 							-nodes : whithout mdp for the private key
 # 							-out : where to put the certificate
