@@ -14,8 +14,8 @@ COPY tools/script_mysql.sh /usr/local/bin/script_mysql.sh
 
 RUN chmod +x /usr/local/bin/script_mysql.sh
 
-ENV DB_DATABASE=wordpress
-ENV DB_USER=mgirardo
+ENV DB_DATABASE=wordpress 
+ENV DB_USER=mgirardo 
 ENV DB_PASSWORD=introuvable
 ENV DB_ROOT_PASSWORD=pasmoi
 ENV DB_HOST=mariadb:3306
