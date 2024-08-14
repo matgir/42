@@ -14,9 +14,9 @@ RUN wget https://fr.wordpress.org/wordpress-6.5.4-fr_FR.tar.gz -P /var/www
 	# download wordpress
 
 RUN	cd /var/www/ \
-	tar -xzf wordpress-6.5.4-fr_FR.tar.gz \
-	rm wordpress-6.5.4-fr_FR.tar.gz \
-	cd - \
+	&& tar -xzf wordpress-6.5.4-fr_FR.tar.gz \
+	&& rm wordpress-6.5.4-fr_FR.tar.gz \
+	&& cd - \
 	# all this to un-tar the wordpress download
 	chown -R root:root /var/www/wordpress
 	# change the owner of wordpress to root
@@ -39,4 +39,4 @@ RUN chmod 777 /usr/local/bin/script_wordpress.sh
 
 #maybe create /run/php here
 
-ENTRYPOINT [ "/usr/local/bin/script_wordpress.sh" ]
+# ENTRYPOINT [ "/usr/local/bin/script_wordpress.sh" ]
