@@ -1,35 +1,26 @@
-SRC		=	#####
+all:
+	mkdir -p /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
+	# bien delete ces dossier et les recreer
+	docker compose -f ./srcs/docker-compose.yml up
 
-OBJ		=	${SRC:.cpp=.o}
+install:
+	apt-get update
+	apt-get upgrade -y
+	apt-get install -y curl gnupg ca-certificates lsb-release docker.io docker docker-compose
+	mkdir -p /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
 
-DOBJ	=	${SRC:.cpp=.d}
+build:	all
+	docker compose -f ./srcs/docker-compose.yml up -d --build
 
-NAME	=	#####
+clean:
+	# docker compose -f ./srcs/docker-compose.yml pause
+	# docker compose -f ./srcs/docker-compose.yml stop
+	# docker compose -f ./srcs/docker-compose.yml down
+	sudo rm -rf -r /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
+	docker system prune
+	# docker stop -f $$(sudo docker ps -aq)
+	docker rmi -f $$(docker image ls -aq)
+	docker system prune
+	docker rm -f $$(sudo docker ps -aq)
 
-INCL	=	#####
-
-PP		=	c++
-
-FLAG	=	-g -Werror -Wall -Wextra -Wno-unused -MMD -std=c++98####
-
-RM		=	rm -rf
-
-all:		${NAME}
-
--include ${DOBJ}
-
-.cpp.o:
-				${PP} ${FLAG} -I -include -c $< -o ${<:.cpp=.o}
-
-${NAME}:	${OBJ} ${INCL}
-				${PP} ${FLAG} ${OBJ} -o ${NAME}
-
-clean:	
-				${RM} ${OBJ} ${DOBJ}
-
-fclean:		clean
-				${RM} ${NAME}
-
-re:			fclean all
-
-.PHONY:		all .cpp.o clean fclean re
+re: clean all

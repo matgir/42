@@ -35,8 +35,8 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 
 COPY tools/script_wordpress.sh /usr/local/bin/
 
-RUN chmod 777 /usr/local/bin/script_wordpress.sh
+RUN chmod +x /usr/local/bin/script_wordpress.sh
 
 #maybe create /run/php here
 
-# ENTRYPOINT [ "/usr/local/bin/script_wordpress.sh" ]
+ENTRYPOINT [ "/usr/local/bin/script_wordpress.sh" ]

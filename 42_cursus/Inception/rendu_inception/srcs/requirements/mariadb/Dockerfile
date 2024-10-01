@@ -8,13 +8,13 @@ RUN apt-get install mariadb-server -y
 
 RUN apt install vim -y
 
-COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 
-COPY tools/script_mysql.sh /usr/local/bin/script_mysql.sh
+COPY tools/script_mysql.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/script_mysql.sh
 
-# ENV DB_DATABASE=wordpress 
+# ENV DB_DATABASE=wordpress 	
 # ENV DB_USER=mgirardo 
 # ENV DB_PASSWORD=introuvable
 # ENV DB_ROOT_PASSWORD=pasmoi

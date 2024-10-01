@@ -35,7 +35,7 @@
 #!/bin/bash
 
 if [ ! -e "/var/www/html/wp-config.php" ]; then
-        sleep 10
+        sleep 20
 
         wp core download --path=/var/www/html --allow-root
 
