@@ -20,23 +20,26 @@ RUN	cd /var/www/ \
 	# all this to un-tar the wordpress download
 	chown -R root:root /var/www/wordpress
 	# change the owner of wordpress to root
+	
+# maybe create /run/php here
 
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
-COPY conf/wp-config.php /var/www/wordpress/wp-config-sample.php
+COPY conf/wp-config.php /var/www/wordpress/wp-config.php
 
-RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-	# install the CLI nedeed to setup wordpress
+# RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+# 	# install the CLI nedeed to setup wordpress
 
-RUN chmod +x wp-cli.phar
-	# gives the proper right to the document
+# RUN chmod +x wp-cli.phar
+# 	# gives the proper right to the document
 
-RUN mv wp-cli.phar /usr/local/bin/wp
-	# so that it can be used as an executable
+# RUN mv wp-cli.phar /usr/local/bin/
+# 	# so that it can be used as an executable
 
 COPY tools/script_wordpress.sh /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/script_wordpress.sh
+# RUN chmod +x /usr/local/bin/script_wordpress.sh
 
-#maybe create /run/php here
+EXPOSE 9000
 
-ENTRYPOINT [ "/usr/local/bin/script_wordpress.sh" ]
+
+# ENTRYPOINT [ "/usr/local/bin/script_wordpress.sh" ]
