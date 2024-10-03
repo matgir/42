@@ -109,6 +109,23 @@ COMMAND
 		docker network inspect <network_name>
 			display information on one or more networks
 
+	MYSQL IN MARIADB
+		mysql -uroot
+			To connect on mysql CLIENT, as root
+
+# FINISH MISE EN PAGE ##############################
+####################################################
+####################################################
+		SELECT User FROM mysql.user; // To see all the users
+		USE wordpress // To connect on your wordpress database
+		mysqldump -u username -p databasename > filename.sql // To export the file
+		mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /usr/local/bin/wordpress.sql // To import the file
+
+		SHOW DATABASES; // show the databes
+		use 'wordpress'; // go in the wordpress databse
+		SHOW TABLES; // show all the tables from the database you selected
+		SELECT wp_users.display_name FROM wp_users; // display username from wordpress database
+		SELECT *  FROM wp_users; // select */
 
 WEBSITES
 	How to remove docker images "CONSULTED"
@@ -137,44 +154,49 @@ WEBSITES
 		https://stackoverflow.com/questions/76156527/what-does-the-first-line-in-the-docker-compose-yml-file-that-specifies-the-ve
 	help about php and wordpress config
 		https://howto.wared.fr/installation-wordpress-ubuntu-nginx/
+	Tliot / inception
+		https://github.com/Theo2lt/Inception/blob/main/README.md
 
 TO KNOW
--	To erase a docker image if it is still linked to a container, you must stop
-	the container, then delete it then erase your docker image
--	Dockerfile :	text document that contains the commands to call on the command
-					line to build an image
--	Docker compose :	tool for defining and running multi-container docker
-						applications. Information descirbing services and networks
-						for an application are contained within a YAML file, called
-						docker-compose.yml
--	To cleanly install docker on your Ubuntu machine :
-	a.	remove any conflicting packages
-		for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
-	b.	set up docker's apt repository
-		# Add Docker's official GPG key:
-		sudo apt-get update
-		sudo apt-get install ca-certificates curl
-		sudo install -m 0755 -d /etc/apt/keyrings
-		sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-		sudo chmod a+r /etc/apt/keyrings/docker.asc
+	-	To erase a docker image if it is still linked to a container, you must stop
+		the container, then delete it then erase your docker image
+	-	Dockerfile :	text document that contains the commands to call on the command
+						line to build an image
+	-	Docker compose :	tool for defining and running multi-container docker
+							applications. Information descirbing services and networks
+							for an application are contained within a YAML file, called
+							docker-compose.yml
+	-	To cleanly install docker on your Ubuntu machine :
+		a.	remove any conflicting packages
+			for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+		b.	set up docker's apt repository
+			# Add Docker's official GPG key:
+			sudo apt-get update
+			sudo apt-get install ca-certificates curl
+			sudo install -m 0755 -d /etc/apt/keyrings
+			sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+			sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-		# Add the repository to Apt sources:
-		echo \
-		"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-		$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-		sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-		sudo apt-get update
-	c.	Instal latest version
-		sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-	d.	Verify if it is succesfull
-		sudo docker run hello-world
+			# Add the repository to Apt sources:
+			echo \
+			"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+			$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+			sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+			sudo apt-get update
+		c.	Instal latest version
+			sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+		d.	Verify if it is succesfull
+			sudo docker run hello-world
 
--	To make your current user to use docker without sudo
-	a.	sudo groupadd docker
-	b.	sudo usermod -aG docker $USER
-	c.	newgrp docker
-	d.	docker run hello-world
+	-	To make your current user to use docker without sudo
+		a.	sudo groupadd docker
+		b.	sudo usermod -aG docker $USER
+		c.	newgrp docker
+		d.	docker run hello-world
 
+	-	When you want to communicate between container on a network you created, you
+		should refer to the container with their <container_name>, because their
+		ip address might change depending on the order they are started
 
 
 /* - docker ps or docker ps -a //show the names of all the containers you have + the id you need and the port associated.
@@ -200,15 +222,3 @@ TO KNOW
 - docker-compose stop , //stop a stack of your docker compose
 - Docker-compose down, //destroy all your ressources
 - docker-compose config, //check the syntax of you docker-compose file
-
-mysql -uroot // To connect on mysql CLI
-SELECT User FROM mysql.user; // To see all the users
-USE wordpress // To connect on your wordpress database
-mysqldump -u username -p databasename > filename.sql // To export the file
-mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /usr/local/bin/wordpress.sql // To import the file
-
-SHOW DATABASES; // show the databes
-use 'wordpress'; // go in the wordpress databse
-SHOW TABLES; // show all the tables from the database you selected
-SELECT wp_users.display_name FROM wp_users; // display username from wordpress database
-SELECT *  FROM wp_users; // select */
