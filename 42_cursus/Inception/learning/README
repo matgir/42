@@ -1,56 +1,114 @@
 COMMAND
-	docker build -t <docker_name> .
-		build a docker with the name <docker_name> using the Dockerfile in the current directory
+	DOCKER
+		docker build -t <docker_name> .
+			build a docker with the name <docker_name> using the Dockerfile in the
+			current directory
 
-	docker run -it <docker_name>
-		starts the container and open a terminal inside it
+		docker run [OPTIONS] <docker_name>/<docker_image[:TAG]>
+			[OPTIONS]
+				-it			: starts the container and open a terminal inside it
+				-d			: run container in background
+				-p			: publish a container port(s) to the host
+				--rm		: automaticaly remove the container when it exits, so a the
+							  end
+				--hostname	: container hostname
+				--name		: assign a name to the container
+				--mount		: to use a container with volume/mount/tmpfs existing
+				--env-file	: to create the container with an envfile
+				--network	: to create the container connected to a network
+			exemple
+				$ docker run -d -ti -p 80:80 --rm --name web-ngnix --hostname nginx
+				container nginx:latest
+				$ docker run -d --name TestBindMount --mount
+				type=bind,source=/data/,target=/usr/share/nginx/html -p 80:80
+				nginx:latest
+				$ docker run -tid --name testenv --env-file .ENV debian:latest
+				$ docker run -d --name c1 --network mynetwork nginx:latest
 
-	exit (inside a docker terminal)
-		exits the docker
+		docker start <container_id>/<name>
+			it starts the container affiliated to the <container_id>
 
-	docker rmi <image_id>
-		delete the image designated by image id
+		docker stop <container_id>/<name>
+			it stops the container affiliated to the <container_id>
 
-	sudo docker rmi -f $(sudo docker image ls -aq)
-		delete all images forcefully
+		docker exec -it <container_name> bash
+			lets you go inside a container and interact with it in bash
+		
+		sudo docker exec -it <continer id> bash
+			let you get inside a container that won't stop
 
-	docker image ls
-		show the list of all existing docker image, with their id
+		service --status-all
+			show the service running in a container and that may block the stopping of
+			it
+		
+		service <service_name> stop
+			stop a particular service so that the container may be stopped
 
-	docker ps -as
-		show lists of all containers on the system, running or stopped
+		exit (inside a docker terminal)
+			exits the docker
 
-	docker stop <container_id>
-		it stops the container affiliated to the <container_id>
+	DOCKER IMAGES
+		docker image ls
+			show the list of all existing docker image, with their id
 
-	docker rm <container_id>
-		it erased the container affiliated to the <container_id>
+		docker rmi <image_id>
+			delete the image designated by image id
 
-	sudo docker rm -f $(sudo docker ps -aq)
-		remove all container forcefully
+		sudo docker rmi -f $(sudo docker image ls -aq)
+			delete all images forcefully (-f)
 
-	docker-compose images
-		show list of the images created with the current docker-compose.yml
 
-	docker-compose stop
-		this command stops the running containers of specified services
+	DOCKER CONTAINER
+		docker ps -as
+			show lists of all containers on the system, running or stopped
 
-	docker-compose run <service_name>
-		this is similar to the docker run command. It will create containers
-		from images built for the <service_name> mentioned in the compose file
+		docker rm <container_id>
+			it erased the container affiliated to the <container_id>
 
-	docker-compose ps
-		this command list all the containers in the current docker-compose file.
-		They can then either be running or stopped.
+		sudo docker rm -f $(sudo docker ps -aq)
+			remove all container forcefully, even if it is running
 
-	sudo docker exec -it <continer id> bash
-		let you get inside a container that won't stop
-	
-	service --status-all
-		show the service running in a container and that may block the stopping of it
-	
-	service <service_name> stop
-		stop a particular service so that the container may be stopped
+	DOCKER COMPOSE
+		docker-compose images
+			show list of the images created with the current docker-compose.yml
+
+		docker-compose ps
+			this command list all the containers in the current docker-compose file.
+			They can then either be running or stopped.
+
+		docker-compose run <service_name>
+			this is similar to the docker run command. It will create containers
+			from images built for the <service_name> mentioned in the compose file
+
+		docker-compose stop
+			this command stops the running containers of specified services
+
+	DOCKER VOLUMES
+		docker volume ls
+			list volumes created
+
+		docker volume create <volume_name>
+			creates a new volume with <volume_name>
+
+		docker volume rm <volume_name>
+			delete the volume designated by <volume_name>
+
+		docker volume inspect <volume_name>
+			inspection of a volume, gives you information about it
+
+	DOCKER NETWORK
+		docker network ls
+			list networks
+
+		docker create <network_name>
+			creates network
+
+		docker network rm <network_name>
+			remove one or more networks
+
+		docker network inspect <network_name>
+			display information on one or more networks
+
 
 WEBSITES
 	How to remove docker images "CONSULTED"
