@@ -112,20 +112,30 @@ COMMAND
 	MYSQL IN MARIADB
 		mysql -uroot
 			To connect on mysql CLIENT, as root
+		
+		mysqldump -u username -p databasename > filename.sql
+			To export the file
 
-# FINISH MISE EN PAGE ##############################
-####################################################
-####################################################
-		SELECT User FROM mysql.user; // To see all the users
-		USE wordpress // To connect on your wordpress database
-		mysqldump -u username -p databasename > filename.sql // To export the file
-		mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /usr/local/bin/wordpress.sql // To import the file
+		mysql -uroot -p $MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /usr/local/bin/wordpress.sql
+			To import the file
+		
+		SELECT user,host,password FROM mysql.user;
+			To see all the users, host and password on mysql
 
-		SHOW DATABASES; // show the databes
-		use 'wordpress'; // go in the wordpress databse
-		SHOW TABLES; // show all the tables from the database you selected
-		SELECT wp_users.display_name FROM wp_users; // display username from wordpress database
-		SELECT *  FROM wp_users; // select */
+		USE wordpress
+			To connect on your wordpress database
+		
+		SHOW databases;
+			show all the databases
+		
+		SHOW tables; #NE FONCTIONNE PAS A COMPRENDRE
+			show all the tables from the database you selected
+		
+		SELECT wp_users.display_name FROM wp_users; #NE FONCTIONNE PAS A COMPRENDRE
+			display username from wordpress database
+		
+		SELECT * FROM wp_users; #NE FONCTIONNE PAS A COMPRENDRE
+			select */
 
 WEBSITES
 	How to remove docker images "CONSULTED"
