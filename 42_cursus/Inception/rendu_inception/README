@@ -80,8 +80,23 @@ COMMAND
 			this is similar to the docker run command. It will create containers
 			from images built for the <service_name> mentioned in the compose file
 
+		docker-compose start
+			to start a container
+
 		docker-compose stop
 			this command stops the running containers of specified services
+
+		docker-compose down
+			to stop and delete a container
+
+		docker-compose build
+			it will build the images using the docker-compose.yml
+
+		docker-compose up -d
+			to run containers in the daemon mode
+
+		docker-compose up --build -d
+			it builds and runs conatiner in daemon mode
 
 	DOCKER VOLUMES
 		docker volume ls

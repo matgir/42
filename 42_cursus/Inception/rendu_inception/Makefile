@@ -19,6 +19,7 @@ clean:
 	-docker stop $$(docker ps -aq)
 	-docker rm -f $$(docker ps -aq)
 	-docker rmi -f $$(docker image ls -aq)
+	-docker volume rm $$(docker volume ls -q)
 	# -rm -rf -r /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
 	-sudo rm -rf -r /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
 	docker system prune
