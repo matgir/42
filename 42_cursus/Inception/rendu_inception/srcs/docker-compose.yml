@@ -7,14 +7,14 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/mateo/data/db'
+      device: '/home/mateo/dat/db'
   wp:
     name: wp
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/mateo/data/wp'
+      device: '/home/mateo/dat/wp'
 
 services:
   mariadb:

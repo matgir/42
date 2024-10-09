@@ -19,6 +19,28 @@ services:
       - db:/var/lib/mysql
     env_file: .env
 
+  nginx:
+    container_name: nginx
+    build: ./NGINX/
+    restart: always
+    volumes:
+      - WordPress:/var/www/html
+    depends_on:
+      - wordpress
+    ports:
+      - "443:443"
+    networks:
+      - mynetwork
+
+  wordpress:
+    container_name: wordpress
+    build: ./wordpress/
+    restart: always
+    volumes:
+      - WordPress:/var/www/html
+    networks:
+      - mynetwork
+
 networks:
   mynetwork:
     name: mynetwork
@@ -32,3 +54,10 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '/home/mateo/Desktop/Inception/rendu_inception/Inception_bis/my_volume'
+
+  WordPress:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: /home/mateo/data/website

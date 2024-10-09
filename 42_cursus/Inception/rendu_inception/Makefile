@@ -6,10 +6,10 @@ install:
 	sudo apt-get update
 	sudo apt-get upgrade -y
 	# sudo apt-get install -y curl gnupg ca-certificates lsb-release docker.io wmdocker docker-compose
-	mkdir -p /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
+	mkdir -p /home/$$USER/dat /home/$$USER/dat/db /home/$$USER/dat/wp
 
 build: install
-	# mkdir -p /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
+	# mkdir -p /home/$$USER/dat /home/$$USER/dat/db /home/$$USER/dat/wp
 	docker compose -f ./srcs/docker-compose.yml up -d --build
 
 clean:
@@ -20,8 +20,8 @@ clean:
 	-docker rm -f $$(docker ps -aq)
 	-docker rmi -f $$(docker image ls -aq)
 	-docker volume rm $$(docker volume ls -q)
-	# -rm -rf -r /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
-	-sudo rm -rf -r /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
+	# -rm -rf -r /home/$$USER/dat /home/$$USER/dat/db /home/$$USER/dat/wp
+	-sudo rm -rf -r /home/$$USER/dat /home/$$USER/dat/db /home/$$USER/dat/wp
 	docker system prune
 	# docker system prune
 
