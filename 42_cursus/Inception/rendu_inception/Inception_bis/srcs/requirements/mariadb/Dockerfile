@@ -8,10 +8,10 @@ RUN apt install -y mariadb-server
 
 # It will copy our configuration file in the container, used for the bind and
 # the SQL script
-COPY 50-server.cnf /etc/mysql/mariadb.conf.d/
+COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 
 # Copy the script in the container and modify execution rights
-COPY script.sh /
+COPY ./tools/script.sh /
 RUN chmod +x /script.sh
 
 ENTRYPOINT [ "/script.sh" ]

@@ -1,0 +1,64 @@
+version: '3.8'
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx/
+    restart: always
+    depends_on:
+      - wordpress
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - mynetwork
+    volumes:
+      - WordPress:/var/www/html
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress/
+    restart: always
+    depends_on:
+      - mariadb
+    networks:
+      - mynetwork
+    volumes:
+      - WordPress:/var/www/html
+    env_file: .env
+  mariadb:
+    container_name: Mariadb
+    build: ./requirements/mariadb/
+    restart: always
+    networks:
+      - mynetwork
+    volumes:
+      - db:/var/lib/mysql
+    env_file: .env
+  adminer:
+    container_name: Adminer     # name redirect to IP -> 172.x.x.x
+    build: ./requirements/adminer            # build the dockerfile in this adminer_directory
+    restart: always             # restart the container if it stops
+    networks:
+      - mynetwork               # use mynetwork for communication with mariadb
+    ports:
+      - "80:80"                 # redirect port 80 of Adminer on the host
+
+networks:
+  mynetwork:
+    name: mynetwork
+    driver: bridge
+
+volumes:
+  db:
+    name: db
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/mateo/data/db'
+
+  WordPress:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/mateo/data/website'

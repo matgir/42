@@ -3,7 +3,7 @@ FROM debian:buster
 RUN apt-get update
 RUN apt install -y adminer
 
-COPY 000-default.conf /etc/apache2/sites-available/
+COPY ./conf/000-default.conf /etc/apache2/sites-available/
 RUN echo 'ServerName adminer' >> /etc/apache2/apache2.conf
 
 RUN service apache2 start && a2enconf adminer.conf

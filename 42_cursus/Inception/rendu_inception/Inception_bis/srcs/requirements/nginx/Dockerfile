@@ -12,8 +12,16 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private
 RUN echo "ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;\nssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;" > /etc/nginx/snippets/self_signed.conf
 RUN openssl dhparam -out /etc/nginx/dhparam.pem 2048
 
-COPY ./conf/ssl-param.conf /etc/nginx/snippets/
+COPY ./conf/ssl-params.conf /etc/nginx/snippets/
 
-COPY ./conf/default /etc/nginx/sites-available/default
+# COPY ./conf/default /etc/nginx/sites-available/default
+COPY ./conf/default /etc/nginx/sites-available/
+COPY ./conf/adminer.conf /etc/nginx/sites-available/
+COPY ./conf/subdomain.conf /etc/nginx/sites-available/
+
+# ln -s, creates a symbolic link/shortcut between the two docs, with this
+# nginx will recognise and load the conf files
+RUN ln -s /etc/nginx/sites-available/adminer.conf /etc/nginx/sites-enabled/
+RUN ln -s /etc/nginx/sites-available/subdomain.conf /etc/nginx/sites-enabled/
 
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
