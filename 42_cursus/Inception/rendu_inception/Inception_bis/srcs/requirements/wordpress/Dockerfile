@@ -7,6 +7,7 @@ RUN apt-get install php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php
 RUN apt-get install default-mysql-client -y
 
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/
+COPY ./conf/wp-config.php /var/www/wordpress/wp-config.php
 
 RUN mkdir /run/php
 

@@ -39,8 +39,8 @@ services:
     restart: always             # restart the container if it stops
     networks:
       - mynetwork               # use mynetwork for communication with mariadb
-    ports:
-      - "80:80"                 # redirect port 80 of Adminer on the host
+    # ports:
+    #   - "80:80"                 # redirect port 80 of Adminer on the host
 
 networks:
   mynetwork:
