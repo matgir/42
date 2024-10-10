@@ -12,7 +12,7 @@ services:
     networks:
       - mynetwork
     volumes:
-      - WordPress:/var/www/html
+      - wp:/var/www/html
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress/
@@ -22,7 +22,7 @@ services:
     networks:
       - mynetwork
     volumes:
-      - WordPress:/var/www/html
+      - wp:/var/www/html
     env_file: .env
   mariadb:
     container_name: Mariadb
@@ -55,8 +55,8 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '/home/mateo/data/db'
-
-  WordPress:
+  wp:
+    name: wp
     driver: local
     driver_opts:
       type: 'none'

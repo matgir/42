@@ -9,6 +9,10 @@ server {
 		listen [::]:443 ssl default_server;
 
 		ssl_protocols TLSv1.3;
+		ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+		# ssl_certificate
+		ssl_certificate_key /etc/ssl/private/nginx-selsigned.key;
+		# ssl_certificate_key
 
 
 		# ssl

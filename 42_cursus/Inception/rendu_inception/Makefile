@@ -20,6 +20,7 @@ clean:
 	-docker rm -f $$(docker ps -aq)
 	-docker rmi -f $$(docker image ls -aq)
 	-docker volume rm $$(docker volume ls -q)
+	-docker network rm $$(docker network ls -q)
 	# -rm -rf -r /home/$$USER/dat /home/$$USER/dat/db /home/$$USER/dat/wp
 	-sudo rm -rf -r /home/$$USER/dat /home/$$USER/dat/db /home/$$USER/dat/wp
 	docker system prune

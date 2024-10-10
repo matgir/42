@@ -2,7 +2,9 @@
 FILE=wordpress
 cd /var/www/html
 
-if [ -d "$FILE" ]; then
+sleep 10
+
+if [ -d "/var/www/html/$FILE" ]; then
 	echo "$FILE exists."
 else
 	echo "$FILE does not exist."
