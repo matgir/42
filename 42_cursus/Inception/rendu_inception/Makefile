@@ -1,31 +1,35 @@
 all: build
-	# bien delete ces dossier et les recreer
-	docker compose -f ./srcs/docker-compose.yml up
+	docker compose -f ./Inception_bis/srcs/docker-compose.yml up
 
-install:
+setup:
 	sudo apt-get update
 	sudo apt-get upgrade -y
-	# sudo apt-get install -y curl gnupg ca-certificates lsb-release docker.io wmdocker docker-compose
-	mkdir -p /home/$$USER/dat /home/$$USER/dat/db /home/$$USER/dat/wp
+# sudo apt-get install -y curl gnupg ca-certificates lsb-release docker.io wmdocker docker-compose
+	mkdir -p /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp /home/$$USER/data/usefull_nginx
 
-build: install
-	# mkdir -p /home/$$USER/dat /home/$$USER/dat/db /home/$$USER/dat/wp
-	docker compose -f ./srcs/docker-compose.yml up -d --build
+build: setup
+# mkdir -p /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
+	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/$$USER/data/usefull_nginx/nginx-selfsigned.key -out /home/$$USER/data/usefull_nginx/nginx-selfsigned.crt -subj '/C=FR/ST=Ile-de-France/L=Paris/O=42/OU=42Paris/CN=MGIRARDO/UID=TTT'
+	sudo chmod 600 /home/$$USER/data/usefull_nginx/nginx-selfsigned.key
+	sudo chown root:root /home/$$USER/data/usefull_nginx/nginx-selfsigned.key
+	docker compose -f ./Inception_bis/srcs/docker-compose.yml up -d --build
 
-clean:
-	-docker compose -f ./srcs/docker-compose.yml pause
-	-docker compose -f ./srcs/docker-compose.yml stop
-	-docker compose -f ./srcs/docker-compose.yml down
+down:
+	-docker compose -f ./Inception_bis/srcs/docker-compose.yml pause
+	-docker compose -f ./Inception_bis/srcs/docker-compose.yml stop
+	-docker compose -f ./Inception_bis/srcs/docker-compose.yml down
+
+purge: down
 	-docker stop $$(docker ps -aq)
 	-docker rm -f $$(docker ps -aq)
 	-docker rmi -f $$(docker image ls -aq)
 	-docker volume rm $$(docker volume ls -q)
 	-docker network rm $$(docker network ls -q)
-	# -rm -rf -r /home/$$USER/dat /home/$$USER/dat/db /home/$$USER/dat/wp
-	-sudo rm -rf -r /home/$$USER/dat /home/$$USER/dat/db /home/$$USER/dat/wp
+# -rm -rf -r /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
+	-sudo rm -rf -r /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp /home/$$USER/data/usefull_nginx
 	docker system prune
-	# docker system prune
+# docker system prune
 
-re: clean all
+re: purge all
 
-.PHONY:	all install build clean re
+.PHONY:	all setup build down purge re

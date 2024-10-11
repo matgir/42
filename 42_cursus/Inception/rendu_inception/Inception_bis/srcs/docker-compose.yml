@@ -1,7 +1,8 @@
 version: '3.8'
 services:
   nginx:
-    container_name: nginx
+    container_name: nginx_container
+    image: nginx_image
     build: ./requirements/nginx/
     restart: always
     depends_on:
@@ -13,8 +14,11 @@ services:
       - mynetwork
     volumes:
       - wp:/var/www/html
+      - /home/$$USER/data/usefull_nginx/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key
+      - /home/$$USER/data/usefull_nginx/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt
   wordpress:
-    container_name: wordpress
+    container_name: wordpress_container
+    image: wordpress_image
     build: ./requirements/wordpress/
     restart: always
     depends_on:
@@ -25,7 +29,8 @@ services:
       - wp:/var/www/html
     env_file: .env
   mariadb:
-    container_name: Mariadb
+    container_name: mariadb_container
+    image: mariadb_image
     build: ./requirements/mariadb/
     restart: always
     networks:
@@ -33,12 +38,12 @@ services:
     volumes:
       - db:/var/lib/mysql
     env_file: .env
-  adminer:
-    container_name: Adminer     # name redirect to IP -> 172.x.x.x
-    build: ./requirements/adminer            # build the dockerfile in this adminer_directory
-    restart: always             # restart the container if it stops
-    networks:
-      - mynetwork               # use mynetwork for communication with mariadb
+  # adminer:
+  #   container_name: Adminer     # name redirect to IP -> 172.x.x.x
+  #   build: ./requirements/adminer            # build the dockerfile in this adminer_directory
+  #   restart: always             # restart the container if it stops
+  #   networks:
+  #     - mynetwork               # use mynetwork for communication with mariadb
     # ports:
     #   - "80:80"                 # redirect port 80 of Adminer on the host
 

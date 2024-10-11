@@ -9,7 +9,7 @@ COMMAND
 				-it			: starts the container and open a terminal inside it
 				-d			: run container in background
 				-p			: publish a container port(s) to the host
-				--rm		: automaticaly remove the container when it exits, so a the
+				--rm		: automaticaly remove the container when it exits, so at the
 							  end
 				--hostname	: container hostname
 				--name		: assign a name to the container
@@ -143,14 +143,14 @@ COMMAND
 		SHOW databases;
 			show all the databases
 		
-		SHOW tables; #NE FONCTIONNE PAS A COMPRENDRE
+		SHOW tables;
 			show all the tables from the database you selected
 		
-		SELECT wp_users.display_name FROM wp_users; #NE FONCTIONNE PAS A COMPRENDRE
+		SELECT wp_users.display_name FROM wp_users;
 			display username from wordpress database
 		
-		SELECT * FROM wp_users; #NE FONCTIONNE PAS A COMPRENDRE
-			select */
+		SELECT * FROM wp_users;
+			display all info from wordpress users
 
 WEBSITES
 	How to remove docker images "CONSULTED"
