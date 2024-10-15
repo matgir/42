@@ -1,0 +1,56 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	server_name mgirardo.42.fr;
+	return 301 https://mgirardo.42.fr$request_uri;
+}
+server {
+		listen 443 ssl default_server;
+		listen [::]:443 ssl default_server;
+
+		ssl_protocols TLSv1.3;
+		ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+		# ssl_certificate
+		ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+		# ssl_certificate_key
+
+
+		# ssl
+		include snippets/self-signed.conf;	# self-signed SSL
+		include snippets/ssl-params.conf;	# strong encryption
+
+		root /var/www/html/wordpress;
+		index index.php;
+
+		server_name mgirardo.42.fr;
+		
+		# logging
+		access_log /var/log/nginx/wordpress.access.log;
+		error_log /var/log/nginx/wordpress.error.log;
+
+		location / {
+				try_files $uri $uri/ =404;
+		}
+
+		location ~ \.php$ {
+				try_files $uri = 404;
+				fastcgi_split_path_info ^(.+\.php)(/.+)$;
+				fastcgi_pass wordpress:9000; # redirect to wordpress container
+				fastcgi_index index.php;
+				include fastcgi_params;
+				fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+				fastcgi_param PATH_INFO $fastcgi_path_info;
+		}
+
+		error_page 403 404 /404.html;
+		location = /404.html {
+				root /var/www/html/web-404;
+				internal;
+		}
+
+		error_page 500 502 503 504 /505.html;
+		location = /505.html {
+				root /var/www/html/web-500;
+				internal;
+		}
+}

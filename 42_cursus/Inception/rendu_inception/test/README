@@ -152,6 +152,13 @@ COMMAND
 		SELECT * FROM wp_users;
 			display all info from wordpress users
 
+	SSL
+		openssl x509 -in /path_to/nginx-selfsigned.crt -text -noout
+			to check if your contract is valid
+
+		sudo openssl rsa -in /path_to/nginx-selfsigned.key -check
+			to check if your key is valid
+
 WEBSITES
 	How to remove docker images "CONSULTED"
 		https://www.cherryservers.com/blog/how-to-remove-docker-images

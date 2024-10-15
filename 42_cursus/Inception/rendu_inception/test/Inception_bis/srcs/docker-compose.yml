@@ -14,8 +14,8 @@ services:
       - mynetwork
     volumes:
       - wp:/var/www/html
-      - /home/$$USER/data/usefull_nginx/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key
-      - /home/$$USER/data/usefull_nginx/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt
+      # - /home/mateo/Desktop/Inception/rendu_inception/Inception_bis/srcs/requirements/nginx/tools/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key
+      # - /home/mateo/Desktop/Inception/rendu_inception/Inception_bis/srcs/requirements/nginx/tools/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt
   wordpress:
     container_name: wordpress_container
     image: wordpress_image
