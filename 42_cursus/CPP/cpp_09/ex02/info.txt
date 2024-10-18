@@ -1,0 +1,116 @@
+/*####	EXEMAPLE OF HOW THE ALGORYTHM WORKS	####*/
+first list
+		7, 8, 5, 9, 11, 0, 2, 1, 10, 3, 4, 6
+@ first entry in the algorythm
+	pairing
+		(7, 8)(5, 9)(11, 0)(2, 1)(10, 3)(4, 6)
+	comparing to put bigger to the right
+		(7, 8)(5, 9)(0, 11)(1, 2)(3, 10)(4, 6) //myPairVect
+	sending the biggest in the algorythm
+		8, 9, 11, 2, 10, 6 //newvect
+@@ seconde entry in algorythm
+	pairing
+		(8, 9)(11, 2)(10, 6)
+	comparing to put bigger to the right
+		(8, 9)(2, 11)(6, 10) //myPairVect
+	sending the biggest in the algorythm
+		9, 11, 10 //newvect
+@@@ third entry in the algorythm
+	pairing
+		(9, 11)(10, smt) //here we add smt because the number of element is odd, smt will always be considere de biggest
+	comparing to put bigger to the right
+		(9, 11)(10, smt) //myPairVect
+	sending the biggest in the algorythm
+		11 newvect
+@@@@ fourth entry in the algorythm
+	only one element so sending it back
+@@@
+	myVect = [11] {11} no comp because nothing in the list
+	(9, 11)	(10, smt)
+	P1		P2
+	[9, 11] {9} no comp because we know 9 < 11
+	[9, 10, 11] {10} 2 comp
+@@
+	[9, 10, 11]
+	(8, 9)	(6, 10)	(2, 11)
+	P1		P2		P3
+	[8, 9, 10, 11] {8} no comp because 8 < 9
+	[2, 8, 9, 10, 11] {2} 2 comp because need to be inserted in [8, 9, 10] because we know 2 < 11
+	[2, 6, 8, 9, 10, 11] {6} 2 comp because need to be inserted in [2, 8, 9] because we know 6 < 10
+@
+	[2, 6, 8, 9, 10, 11]
+	(2, 1)	(4, 6)	(7, 8)	(5, 9)	(3, 10)	(0, 11)
+	P1		P2		P3		P4		P5		P6
+	[1, 2, 6, 8, 9, 10, 11] {1} no comp because we know 1 < 2
+
+
+/*####	JACOBSTHAL NUMBER IN RELATION WITH THE MERGE INSERT SORT NUMBER	####*/
+Jacob	0, 1, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731
+MIS		  0, 1, 2, 2, 6, 10, 22, 42, 86, 170, 342, 682, 1366
+
+/*####	BOUCLE POUR AJOUTER LES PAIRES EN FONCTION DE JACOB	####*/
+int	jacobN_2 = 1;
+int	jacobN_1 = 1;
+for (int jacobN = jacobN_1 + (jacobN_2 * 2); jacobN < container.size(); jacobN = jacobN_1 + (jacobN_2 * 2))
+{
+	for (int i = jacobN - 1; i > jacobN_1 - jacobN_2; i--)
+		binary_insert(container[i].rhs, final_list(jusqua container[i].lhs))
+	jacobN_2 = jacobN_1;
+	jacobN_1 = jacobN;
+}
+for (int i = container.size() - 1; i > jacobN_1 - 1; i--)
+	binary_insert(container[i].rhs, final_list(jusqua container[i].lhs))
+
+
+[11]
+(9, 11)	(10, smt)
+[9, 11]
+int	jacobN_2 = 1;
+int	jacobN_1 = 1;
+for (int jacobN = jacobN_1 + (jacobN_2 * 2); jacobN < 2; jacobN = jacobN_1 + (jacobN_2 * 2))
+{
+	for (int i = jacobN - 1; i > jacobN_2 - 1; i--)
+		binary_insert(container[i].rhs, final_list)
+	jacobN_2 = jacobN_1;
+	jacobN_1 = jacobN;
+}
+for (int i = 1; i > 0; i--)
+	binary_insert(container[1].rhs, final_list)
+	[9, 10, 11]
+
+[9, 10, 11]
+(8, 9)	(6, 10)	(2, 11)
+[8, 9, 10, 11]
+int	jacobN_2 = 1;
+int	jacobN_1 = 1;
+for (int jacobN = jacobN_1 + (jacobN_2 * 2); jacobN < 3; jacobN = jacobN_1 + (jacobN_2 * 2))
+{
+	for (int i = jacobN - 1; i > jacobN_2 - 1; i--)
+		binary_insert(container[i].rhs, final_list)
+	jacobN_2 = jacobN_1;
+	jacobN_1 = jacobN;
+}
+for (int i = 2; i > 0; i--)
+	binary_insert(container[2].rhs, final_list)
+	[2, 8, 9, 10, 11]
+	binary_insert(container[1].rhs, final_list)
+	[2, 6, 8, 9, 10, 11]
+
+[2, 6, 8, 9, 10, 11]
+(2, 1)	(4, 6)	(7, 8)	(5, 9)	(3, 10)	(0, 11)
+[1, 2, 6, 8, 9, 10, 11]
+int	jacobN_2 = 1;
+int	jacobN_1 = 1;
+for (int jacobN = jacobN_1 + (jacobN_2 * 2); 11 < 6; jacobN = jacobN_1 + (jacobN_2 * 2))
+{
+	for (int i = 4; i > 2; i--)
+		binary_insert(container[4].rhs, final_list(jusqua container[4]))
+		[1, 2, 3, 4, 6, 7, 8, 9, 10, 11]
+		binary_insert(container[3].rhs, final_list)
+		[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+	jacobN_2 = 3;
+	jacobN_1 = 5;
+}
+for (int i = 5; i > 4; i--)
+	binary_insert(container[5].rhs, final_list)
+	[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]

@@ -1,0 +1,8 @@
+ps -aux | grep "docker compose up" | awk ' NR==1{ print $2 }' | xargs kill -9 $1
+	kill the container running, still has to delete images and containers
+docker system prune
+	erase all everything related to docker comppose
+docker logs <container_name>
+	show you the logs relate to the <container_name>
+docker exec -it <container_name> bash
+	lets you go inside a container and interact with it in bash
