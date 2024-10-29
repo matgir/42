@@ -8,14 +8,11 @@ services:
     depends_on:
       - wordpress
     ports:
-      - "80:80"
       - "443:443"
     networks:
       - mynetwork
     volumes:
       - wp:/var/www/html
-      # - /home/mateo/Desktop/Inception/rendu_inception/Inception_bis/srcs/requirements/nginx/tools/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key
-      # - /home/mateo/Desktop/Inception/rendu_inception/Inception_bis/srcs/requirements/nginx/tools/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt
   wordpress:
     container_name: wordpress_container
     image: wordpress_image
@@ -38,18 +35,10 @@ services:
     volumes:
       - db:/var/lib/mysql
     env_file: .env
-  # adminer:
-  #   container_name: Adminer     # name redirect to IP -> 172.x.x.x
-  #   build: ./requirements/adminer            # build the dockerfile in this adminer_directory
-  #   restart: always             # restart the container if it stops
-  #   networks:
-  #     - mynetwork               # use mynetwork for communication with mariadb
-    # ports:
-    #   - "80:80"                 # redirect port 80 of Adminer on the host
 
 networks:
   mynetwork:
-    name: mynetwork
+    name: my_inception_`network
     driver: bridge
 
 volumes:
@@ -59,11 +48,11 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/mateo/data/db'
+      device: '/home/$USER/data/db'
   wp:
     name: wp
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/mateo/data/website'
+      device: '/home/$USER/data/wp'

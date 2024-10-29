@@ -47,6 +47,9 @@ COMMAND
 		exit (inside a docker terminal)
 			exits the docker
 
+		docker logs <container_name>
+			give you the logs from the container
+
 	DOCKER IMAGES
 		docker image ls
 			show the list of all existing docker image, with their id
@@ -151,6 +154,13 @@ COMMAND
 		
 		SELECT * FROM wp_users;
 			display all info from wordpress users
+
+	SSL
+		openssl x509 -in /path_to/nginx-selfsigned.crt -text -noout
+			to check if your contract is valid
+
+		sudo openssl rsa -in /path_to/nginx-selfsigned.key -check
+			to check if your key is valid
 
 WEBSITES
 	How to remove docker images "CONSULTED"

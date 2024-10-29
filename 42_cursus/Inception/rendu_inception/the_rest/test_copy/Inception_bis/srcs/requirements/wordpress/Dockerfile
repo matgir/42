@@ -13,7 +13,7 @@ RUN mkdir /run/php
 
 COPY ./tools/install.sh /home/
 RUN chmod 777 /home/install.sh
-# COPY ./conf/index.php /etc/www/html/wordpress/index.php
+COPY ./tools/index.php /etc/www/html/wordpress/index.php
 
 EXPOSE 9000
 

@@ -1,23 +1,25 @@
 all: build
-	docker compose -f ./Inception_bis/srcs/docker-compose.yml up
+	docker compose -f ./srcs/docker-compose.yml start
 
-setup:
-	sudo apt-get update
-	sudo apt-get upgrade -y
-# sudo apt-get install -y curl gnupg ca-certificates lsb-release docker.io wmdocker docker-compose
-	mkdir -p /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp /home/$$USER/data/usefull_nginx
+update:
+	-sudo apt-get update
+	-sudo apt-get upgrade -y
+	-sudo apt-get install -y curl gnupg ca-certificates lsb-release docker.io wmdocker docker-compose
+	-sudo apt install mysql-client-core-8.0
+	-sudo apt install mariadb-client-core
 
-build: setup
-# mkdir -p /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
-	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/$$USER/data/usefull_nginx/nginx-selfsigned.key -out /home/$$USER/data/usefull_nginx/nginx-selfsigned.crt -subj '/C=FR/ST=Ile-de-France/L=Paris/O=42/OU=42Paris/CN=MGIRARDO/UID=TTT'
-	sudo chmod 600 /home/$$USER/data/usefull_nginx/nginx-selfsigned.key
-	sudo chown root:root /home/$$USER/data/usefull_nginx/nginx-selfsigned.key
-	docker compose -f ./Inception_bis/srcs/docker-compose.yml up -d --build
+build:
+	sudo mkdir -p /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
+	docker compose -f ./srcs/docker-compose.yml up -d --build
 
-down:
-	-docker compose -f ./Inception_bis/srcs/docker-compose.yml pause
-	-docker compose -f ./Inception_bis/srcs/docker-compose.yml stop
-	-docker compose -f ./Inception_bis/srcs/docker-compose.yml down
+pause:
+	-docker compose -f ./srcs/docker-compose.yml pause
+
+stop: pause
+	-docker compose -f ./srcs/docker-compose.yml stop
+
+down: stop
+	-docker compose -f ./srcs/docker-compose.yml down
 
 purge: down
 	-docker stop $$(docker ps -aq)
@@ -25,11 +27,9 @@ purge: down
 	-docker rmi -f $$(docker image ls -aq)
 	-docker volume rm $$(docker volume ls -q)
 	-docker network rm $$(docker network ls -q)
-# -rm -rf -r /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
-	-sudo rm -rf -r /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp /home/$$USER/data/usefull_nginx
+	-sudo rm -rf -r /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
 	docker system prune
-# docker system prune
 
 re: purge all
 
-.PHONY:	all setup build down purge re
+.PHONY:	all update build pause stop down purge re

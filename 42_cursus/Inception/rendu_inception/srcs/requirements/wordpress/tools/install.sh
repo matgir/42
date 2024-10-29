@@ -10,7 +10,6 @@ else
 	echo "$FILE does not exist."
 	mkdir -p wordpress
 	cd wordpress
-
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 	php wp-cli.phar --info
 	chmod +x wp-cli.phar
@@ -25,13 +24,7 @@ else
 	wp user create $WP_USER $WP_USER_MAIL --user_pass=$WP_USER_PASSWORD --role=$WP_USER_ROLE --porcelain --allow-root
 	wp theme install astra --activate --allow-root
 
-	# wp config set WP_REDIS_HOST redis --add --allow-root
-	# wp config set WP_REDIS_PORT 6379 --add --allow-root
-	# wp config set WP_CACHE true --add --allow-root
-	# wp plugin install redis-cache --activate --allow-root
-	# wp plugin update --all --allow-root
-	# wp redis enable --allow-root
 	echo "END"
 fi
 
-/usr/sbin/php-fpm7.3 -F
+/usr/sbin/php-fpm8.0 -F

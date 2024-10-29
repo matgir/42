@@ -1,0 +1,13 @@
+PHP Warning:  mysqli_real_connect(): php_network_getaddresses: getaddrinfo failed: Temporary failure in name resolution in phar:///usr/local/bin/wp/vendor/wp-cli/config-command/src/Config_Command.php on line 234
+Error: Database connection error (2002) php_network_getaddresses: getaddrinfo failed: Temporary failure in name resolution
+7
+Error: 'wp-config.php' not found.
+Either create one manually or use `wp config create`.
+8
+Error: 'wp-config.php' not found.
+Either create one manually or use `wp config create`.
+9
+Error: 'wp-config.php' not found.
+Either create one manually or use `wp config create`.
+10
+END

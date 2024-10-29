@@ -1,6 +1,7 @@
 #!/bin/sh
 
-service mysql start
+service mariadb start
+# service mysql start
 
 # Create user
 echo "CREATE USER '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';" | mysql

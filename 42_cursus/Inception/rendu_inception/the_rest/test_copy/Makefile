@@ -1,5 +1,5 @@
 all: build
-	docker compose -f ./Inception_bis/srcs/docker-compose.yml up
+	docker compose -f ./Inception_bis/srcs/docker-compose.yml start
 
 setup:
 	sudo apt-get update
