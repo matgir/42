@@ -14,6 +14,8 @@ echo "FLUSH PRIVILEGES;" | mysql
 # Create wordpress database
 echo "CREATE DATABASE $DB_DATABASE;" | mysql
 
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PASSWORD';" | mysql
+
 kill $(cat /var/run/mysqld/mysqld.pid)
 
 mysqld

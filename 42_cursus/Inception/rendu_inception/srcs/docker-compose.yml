@@ -38,7 +38,7 @@ services:
 
 networks:
   mynetwork:
-    name: my_inception_`network
+    name: my_inception_network
     driver: bridge
 
 volumes:
