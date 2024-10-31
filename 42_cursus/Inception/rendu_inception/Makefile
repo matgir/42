@@ -21,7 +21,7 @@ stop: pause
 down: stop
 	-docker compose -f ./srcs/docker-compose.yml down
 
-purge: down
+fclean: down
 	-docker stop $$(docker ps -aq)
 	-docker rm -f $$(docker ps -aq)
 	-docker rmi -f $$(docker image ls -aq)
@@ -30,6 +30,6 @@ purge: down
 	-sudo rm -rf -r /home/$$USER/data /home/$$USER/data/db /home/$$USER/data/wp
 	docker system prune
 
-re: purge all
+re: fclean all
 
-.PHONY:	all update build pause stop down purge re
+.PHONY:	all update build pause stop down fclean re

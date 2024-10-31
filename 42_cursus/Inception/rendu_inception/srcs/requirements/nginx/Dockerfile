@@ -20,3 +20,6 @@ COPY ./conf/ssl-params.conf /etc/nginx/snippets/
 COPY ./conf/default /etc/nginx/sites-available/
 
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
+# set nginx as the main process in the container, allow to modify in this command
+# line instead of modifying a config file, and to run in the foreground instead of
+# background when daemon on
