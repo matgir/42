@@ -239,3 +239,10 @@ TO KNOW
 	-	When you want to communicate between container on a network you created, you
 		should refer to the container with their <container_name>, because their
 		ip address might change depending on the order they are started
+
+	-	Docker is usefull for its adaptability over every plateform ,inside a container
+		you can run whatever you want, everything you need can be installed automaticaly
+		thanks to a Dockerfile
+
+	-	Docker compose is a way to start and launch a whole lot of container at the
+		same time and make them work with each other
