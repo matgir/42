@@ -1,3 +1,15 @@
--	IRC = Internet Relay Chat
--	IRC server may contain several channels, also containing several IRC clients,
-	represented by a specific nickame in the server
+-	IRC : Internet Relay Chat
+-	IRC server : may contain several channels, also containing several IRC
+	clients, represented by a specific nickame in the server
+-	IRC networks : contains multiple server all sharing information about local
+	events, they all have a copy of the same global state, it provides greater
+	capacity
+-	IRC client connecting to IRC server : at its first connection a user must
+	register, to do that it has to send to messages
+		1st "NICK <nikcname>"
+		2nd "USER <username> *<hostname> *<servername> <full_name>"
+	the * parameter can be replaced by *, because current IRC server determine
+	themselves those informations
+-	WHOIS <nickname> : show different information about the chosen user
+	(basic info, connected channels, connected server, operator status ...)
+
