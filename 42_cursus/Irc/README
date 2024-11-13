@@ -1,0 +1,3 @@
+-	IRC = Internet Relay Chat
+-	IRC server may contain several channels, also containing several IRC clients,
+	represented by a specific nickame in the server
