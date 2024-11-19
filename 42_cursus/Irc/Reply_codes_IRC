@@ -1,0 +1,93 @@
+General Reply Codes
+
+	001: Welcome message (sent after successful connection).
+		Example: :irc.example.com 001 YourNick :Welcome to the IRC network YourNick!
+	002: Your host information.
+		Example: :irc.example.com 002 YourNick :Your host is irc.example.com, running version 2.12.0
+	003: Server creation date.
+		Example: :irc.example.com 003 YourNick :This server was created Thu Jan 1 1970
+	004: Server information (name, version, user modes, channel modes).
+		Example: :irc.example.com 004 YourNick irc.example.com 2.12.0 ao mtov
+
+WHOIS Command Replies
+
+	311: WHOIS user information (nickname, username, hostname, real name).
+		Example: :irc.example.com 311 YourNick TargetNick user host * :Real Name
+	312: Server information for the user.
+		Example: :irc.example.com 312 YourNick TargetNick irc.example.com :Server description
+	313: WHOIS operator status (if the user is an IRC operator).
+		Example: :irc.example.com 313 YourNick TargetNick :is an IRC Operator
+	317: WHOIS idle time and sign-on time.
+		Example: :irc.example.com 317 YourNick TargetNick 1234 1618910200 :seconds idle, signon time
+	318: End of WHOIS list.
+		Example: :irc.example.com 318 YourNick TargetNick :End of /WHOIS list.
+	319: Channels the user is in.
+		Example: :irc.example.com 319 YourNick TargetNick :#channel1 #channel2
+
+Channel Replies
+
+	321: Channel list header (used in response to LIST).
+		Example: :irc.example.com 321 YourNick Channel :Users Name
+	322: Channel list entry.
+		Example: :irc.example.com 322 YourNick #channel 10 :Topic
+	323: End of channel list.
+		Example: :irc.example.com 323 YourNick :End of /LIST
+	324: Channel mode.
+		Example: :irc.example.com 324 YourNick #channel +nt
+	329: Channel creation time.
+		Example: :irc.example.com 329 YourNick #channel 1618910200
+	332: Chanel topic (used in response to JOIN, TOPIC or LIST) often followed by 333
+		Example: :irc.example.com 332 YourNick #channel :<channel_topic>
+	333: Who set the channel topic and when (unix timestamp)
+		Example: :irc.example.com 333 YourNick #channel :<topic_channel_setter> 1696863000
+	331: response if no topic is set for the channel (used in response to JOIN, TOPIC or LIST)
+		Example: :irc.example.com 331 YourNick :No topic is set
+	353: list of users in a channel (used in response to JOIN or NAMES, often followd by 366)
+		Example: :irc.example.com 353 YourNick <symbol> <channel> : <user_list>
+		<symbol>: = for puyblic channel, @ for secret channel, * for private channel
+		<user_list>: space separated user list, users may have a prefix, @ operator user, + voice privileges user
+	366: End of NAMES list (following 353)
+		Example: :irc.example.com 366 YourNick #channel :End of /NAMES list
+
+Errors
+
+	401: No such nick/channel.
+		Example: :irc.example.com 401 YourNick TargetNick :No such nick/channel
+	403: No such channel.
+		Example: :irc.example.com 403 YourNick #channel :No such channel
+	404: Cannot send to channel (e.g., restricted or you’re banned).
+		Example: :irc.example.com 404 YourNick #channel :Cannot send to channel
+	421: Unknown command.
+		Example: :irc.example.com 421 YourNick CMD :Unknown command
+
+Server Info
+
+	251: Server users summary.
+		Example: :irc.example.com 251 YourNick :There are 5 users and 1 invisible on 1 servers
+	252: Number of IRC operators online.
+		Example: :irc.example.com 252 YourNick 2 :IRC Operators online
+	254: Number of channels currently active.
+		Example: :irc.example.com 254 YourNick 15 :Channels formed
+	255: Local/total user count.
+		Example: :irc.example.com 255 YourNick :There are 10 users on 1 servers
+
+Nick/Name Replies
+
+	431: No nickname given.
+		Example: :irc.example.com 431 :No nickname given
+	432: Erroneous nickname.
+		Example: :irc.example.com 432 YourNick BadNick :Erroneous Nickname
+	433: Nickname is already in use.
+		Example: :irc.example.com 433 YourNick NickInUse :Nickname is already in use
+
+Miscellaneous
+
+	375: Start of server message of the day (MOTD).
+		Example: :irc.example.com 375 YourNick :- irc.example.com Message of the Day -
+	372: MOTD text.
+		Example: :irc.example.com 372 YourNick :- Welcome to Example IRC!
+	376: End of MOTD.
+		Example: :irc.example.com 376 YourNick :End of /MOTD command.
+
+exhaustive list of error code :
+https://datatracker.ietf.org/doc/html/rfc2812#section-5

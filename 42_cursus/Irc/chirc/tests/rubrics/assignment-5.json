@@ -1,0 +1,52 @@
+{
+  "name": "Assignment 5",
+  "total_points": 100,
+  "categories": [
+    {
+      "name": "Server Registration",
+      "subcategories": [
+        {
+          "cid": "SERVER_REGISTRATION",
+          "num_tests": 7
+        },
+        {
+          "cid": "CONNECT",
+          "num_tests": 1
+        }
+      ],
+      "points": 50
+    },
+    {
+      "name": "Relaying Commands",
+      "subcategories": [
+        {
+          "cid": "NETWORK_RELAY_NO_CONNECT",
+          "num_tests": 11
+        },
+        {
+          "cid": "NETWORK_RELAY_CONNECT",
+          "num_tests": 2
+        }
+      ],
+      "points": 30
+    },
+    {
+      "name": "Querying the Network's State",
+      "subcategories": [
+        {
+          "cid": "NETWORK_STATE_WHOIS",
+          "num_tests": 3
+        },
+        {
+          "cid": "NETWORK_STATE_LUSERS",
+          "num_tests": 5
+        },
+        {
+          "cid": "NETWORK_STATE_LIST",
+          "num_tests": 3
+        }
+      ],
+      "points": 20
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+Quels modes implémenter pour les channels, et pour les users ?
+
+The various modes available for channels are as follows:
+    o - give/take channel operator privileges;
+    p - private channel flag;
+    s - secret channel flag;
+    i - invite-only channel flag;
+    t - topic settable by channel operator only flag;
+    n - no messages to channel from clients on the outside;
+    m - moderated channel;
+    l - set the user limit to channel;
+    b - set a ban mask to keep users out;
+    v - give/take the ability to speak on a moderated channel;
+    k - set a channel key (password).
+
+The available (user) modes are as follows:
+    i - marks a users as invisible;
+    s - marks a user for receipt of server notices;
+    w - user receives wallops;
+    o - operator flag.
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Doit on implementer les channels private et et secret, ou juste public ? 
+
+Faut-il implémenter les server operators ? vu qu'a qu'un seul serveur et que doit pas
+gérer les échanges inter-serveurs
+
+Limite de 512 caractères par buffer envoyé (510 en enlevant le CRLF) : choix arbitraire de l'implémenter ou non ?

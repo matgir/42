@@ -1,0 +1,37 @@
+---------------------------------------------------
+
+
+Côté serveur : 
+Crée la socket serveur, la rend non bloquante, la lie au port renseigné, et la rend passive avec listen().
+Boucle principale poll() : agit à chaque fois sur chaque fd étant "dispo" en conséquence
+S'il s'agit d'une demande de connection : vérifier les data (password, si le username est libre, etc), puis accept(), 
+créant une nouvelle eocket pour communiquer avec ce client
+S'il s'agit d'une requete d'un client déjà connecté : lire la commande avec recv(), puis la parser
+En profiter pour checker si un client s'est déconnecté : quel flag pour pollfd.revents ? 
+
+Côté client : 
+Crée une socket client, puis effectue une demande de connection au serveur, avec connect().
+
+Quand un client se déconnecte, le supprimer de la liste des clients du serveur, ou simplement l'ajouter à
+une liste contenant les clients déconnectés ? Dépend de ce que ca implique de recréer à chaque fois qu'un client se connecte 
+
+
+---------------------------------------------------
+
+boucle principale : poll()
+    -> check le status de retour de poll(), envoie une exception en conséquence
+    -> si tvb, itère sur chaque pollfd, et effectue l'action appropriée en conséquence (accepter une nouvelle connection client,
+    broadcaster un message, ...). Checker si un client a shutdown() sa socket ?
+    -> pour chaque nouvelle connection, ajouter la socket au tableau de struct pollfd, renseigner les flags
+
+
+Client socket (active socket) :
+Handles user input, sends messages to the server, processes server responses
+
+Server socket (passive socket / server-side listening socket) :
+Manages multiple clients connections simultaneously : handles commands and messages from each connected client, 
+broadcasts messages to all clients as needed
+-> server socket is made passive using listen()
+
+
+---------------------------------------------------

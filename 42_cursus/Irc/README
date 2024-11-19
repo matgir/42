@@ -1,15 +1,35 @@
--	IRC : Internet Relay Chat
--	IRC server : may contain several channels, also containing several IRC
-	clients, represented by a specific nickame in the server
--	IRC networks : contains multiple server all sharing information about local
-	events, they all have a copy of the same global state, it provides greater
-	capacity
--	IRC client connecting to IRC server : at its first connection a user must
-	register, to do that it has to send to messages
-		1st "NICK <nikcname>"
-		2nd "USER <username> *<hostname> *<servername> <full_name>"
-	the * parameter can be replaced by *, because current IRC server determine
-	themselves those informations
--	WHOIS <nickname> : show different information about the chosen user
-	(basic info, connected channels, connected server, operator status ...)
+Information:
+	-	IRC : Internet Relay Chat
+	-	IRC server : may contain several channels, also containing several IRC
+		clients, represented by a specific nickame in the server
+	-	IRC networks : contains multiple server all sharing information about local
+		events, they all have a copy of the same global state, it provides greater
+		capacity
+	-	IRC client connecting to IRC server : at its first connection a user must
+		register, to do that it has to send to messages
+			1st "NICK <nikcname>"
+			2nd "USER <username> *<hostname> *<servername> <full_name>"
+		the * parameter can be replaced by *, because current IRC server determine
+		themselves those informations
+	-	IRC protocol 'reply' message : it always include a prefix, reply code 
+		(3 digits), the first parameters is always the target of the reply (a nick)
+	-	PRIVMSG <nickname_receiver> :<pirvate_message> : this command sends a
+		<private_message> to the <nickname_receiver>
+		the server receive this command, then look for the <nickname_recceiver>
+		and forward him the <private_message>
+		the <nickname_receiver> will receive the command line prefixed with
+		the senders full client identifier
+	-	Socket: way to speak to other programs using stantards Unix file descriptors
+	-	Big-Endian(Network Byte Order) : storing hex number b34f in sequential order b3 followed by 4f
+	-	Little-Endian : sotring hex number b34f in sequential order 4f followed by b3
+	-	Full client identifier : ????????????????????????????????????
+	-	Prefixes : ??????????????????????????????????????
+	-	Internet socket, Stream socket, SOCK_STREAM : ?????????????????
+	-	Internet socket, Datagram socket, SOCK_DGRAM : ?????????????????
 
+Command:
+	-	JOIN #<channel_name> : to join #<channel_name>
+	-	PART #<channel_name> :<parting_message> :	to leave #<channel_name> and
+													leaving a <parting message>
+	-	WHOIS <nickname> : show different information about the chosen user
+		(basic info, connected channels, connected server, operator status ...)
