@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:05:03 by Helene            #+#    #+#             */
-/*   Updated: 2024/11/02 15:03:54 by Helene           ###   ########.fr       */
+/*   Updated: 2024/11/22 17:07:04 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,21 @@ void    joinChannel(CommandContext &ctx, std::string const& channelName, std::st
         return ;
     }
     
-    if (channel->isInvited(ctx._client.getNickname()))
-        channel->addInvitedUser(ctx._client.getNickname());
-    else if (channel->isFull())
+    // if (channel->isInvited(ctx._client.getNickname()))
+        // channel->addInvitedUser(ctx._client.getNickname()); // commente, verifier que change r
+    if (channel->isFull())
         ctx._client.addToWriteBuffer(ERR_CHANNELISFULL(ctx._client.getNickname(), channelName));
-    else if (channel->getInviteOnlyMode() && channel->isInvited(ctx._client.getNickname()))
+    else if (channel->getInviteOnlyMode() && !channel->isInvited(ctx._client.getNickname()))
         ctx._client.addToWriteBuffer(ERR_INVITEONLYCHAN(ctx._client.getNickname(), channelName));
     else if (channel->getPasswordMode() && (key.empty() || key != channel->getPassword()))
         ctx._client.addToWriteBuffer(ERR_BADCHANNELKEY(ctx._client.getNickname(), channelName));
     else
     {
-        joinRpl(ctx._client, *channel);
         channel->addMember(&ctx._client);
+        joinRpl(ctx._client, *channel);
         channel->sendToAll(ctx._client.getNickname(), ctx._client.getUserID() + " JOIN " + channel->getName() + CRLF);
+        if (channel->isInvited(ctx._client.getNickname()))
+            channel->removeInvitedUser(ctx._client.getNickname());
     }
 }
 

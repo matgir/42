@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   invite.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 17:09:33 by Helene            #+#    #+#             */
-/*   Updated: 2024/11/02 16:43:03 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/11/22 14:59:13 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void    cmdInvite(CommandContext &ctx)
     if (!channel)
         ctx._client.addToWriteBuffer(ERR_NOSUCHCHANNEL(ctx._client.getNickname(), channelName));
     else if (!ctx._server.nickInUse(nickToInvite))
-        ctx._client.addToWriteBuffer(ERR_NOSUCHNICK(ctx._client.getNickname(), nickToInvite)); // vérifier a quoi correspond client (le 1er param du error rpl)
+        ctx._client.addToWriteBuffer(ERR_NOSUCHNICK(ctx._client.getNickname(), nickToInvite));
     else if (!channel->isMember(ctx._client.getNickname()))
         ctx._client.addToWriteBuffer(ERR_NOTONCHANNEL(ctx._client.getNickname(), channelName));
     else if (channel->isMember(nickToInvite))

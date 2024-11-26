@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   kick.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 18:13:19 by Helene            #+#    #+#             */
-/*   Updated: 2024/10/27 18:55:00 by Helene           ###   ########.fr       */
+/*   Updated: 2024/11/22 16:59:35 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,17 @@ void    cmdKick(CommandContext &ctx)
         // in case the only user in that channel kicked itself out 
         if (channel->isEmpty())
             ctx._server.removeChannel(channelName); 
+
+        /*
+        This message may be sent from a server to a client to notify the client that 
+            someone has been removed from a channel. 
+        In this case, the message <source> will be the client who is being removed, 
+            and <channel> will be the channel which that client has been removed from.
+        
+        -> send a part msg to all users from channel, when a client is being kicked out of that channel, additionnally from the KICK msg that 
+            is already being broadcasted to entire channel ?
+        ie : clientBeingKicked.ID + PART + channelName + reason (if exists)
+        */
     }
 
     // check if channel exists : ERR_NOSUCHCHANNEL

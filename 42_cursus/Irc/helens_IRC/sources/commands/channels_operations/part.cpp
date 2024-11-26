@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 15:26:00 by Helene            #+#    #+#             */
-/*   Updated: 2024/11/02 16:16:56 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/11/22 17:00:27 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void    cmdPart(CommandContext &ctx)
     std::string channelName;
     std::stringstream ss(ctx._parameters[0]);
     std::stringstream msg;
-    std::string reason = (ctx._parameters.size() >= 2) ? ctx._parameters[1] : "";
+    std::string reason = (ctx._parameters.size() >= 2) ? ctx._parameters[1] : ctx._client.getNickname(); //: "";
     bool delChannel;
     
     getline(ss, channelName, ','); // car ss n'est d'office pas vide
@@ -47,6 +47,11 @@ void    cmdPart(CommandContext &ctx)
         else
         {
             channel = ctx._server.getChannel(channelName);
+            if (!channel->isMember(ctx._client.getNickname()))
+            {
+                ctx._client.addToWriteBuffer(ERR_NOTONCHANNEL(ctx._client.getNickname(), channel->getName()));
+                return ;
+            }
             delChannel = (channel->getNumberOfMembers() == 1);
             msg << ctx._client.getUserID() << " PART " << channelName << " :" << reason << CRLF;
             ctx._client.addToWriteBuffer(msg.str());

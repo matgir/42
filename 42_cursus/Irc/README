@@ -24,7 +24,10 @@ Information:
 	-	Little-Endian : sotring hex number b34f in sequential order 4f followed by b3
 	-	Internet socket, Stream socket, SOCK_STREAM : reliable two-way connected communication streams. thimgs you output into the socket in a certain order will arrive in the same order on the opposite end. Error free. Used by telnet, ssh, http (web browser). Uses TCP
 	-	Internet socket, Datagram socket (connectionless sockets), SOCK_DGRAM : Uses UDP (User Datagram Protocol). No need to maintain an open connection, build a packet, gives it an IP header with destination information and send it out. Used when TCP stack is unavailable, or when dropped packets isn't the end. Used in tftp (FTP little brother), dhcpcd (DHCP client), multiplayer games, streaming video, video conferencing...
+	-	Usable port : between 1024 and 65535 if unused
 	-	NAT : Network Adress Translation
+	-	ligne de commande pour lancer IRC avec irssi, un client de reference : irssi -c localhost -w pwd(server-password) -p <port_number>
+	-	ctrl+shift+p pour voir les conversations
 	-	Full client identifier : ????????????????????????????????????
 	-	Prefixes : ??????????????????????????????????????
 

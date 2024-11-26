@@ -26,8 +26,7 @@ class Channel
 {
     private:
         typedef std::map<std::string, Client*> members;
-        typedef std::map<std::string, Client*> operators;
-        // typedef std::map<std::string, Client*> invitedUsers;
+        typedef std::map<std::string, Client*> operators; // autre maniere de garder en memoire quels users sont operators, qui ne necessite pas une copie de leur nick ? car fait un truc de plus a changer qd user modifie son nick
 		typedef std::vector<std::string> invitedUsers;
         
 		members			_members;
@@ -52,7 +51,7 @@ class Channel
         Channel& operator = (const Channel& other);
 
 		bool				isMember(const std::string& nick);
-        Client&				getMember(const std::string& nick);
+        Client*				getMember(const std::string& nick);
 		unsigned int		getNumberOfMembers();
 		void				addMember(Client *client);
 		void				removeMember(std::string const& client);
@@ -91,8 +90,10 @@ class Channel
 		bool 				isEmpty();
 
 		// send the given message to all clients of this channel, excluding the client given as parameter
-		void				sendToAll(std::string const& client, std::string const& msg);
+		void				sendToAll(std::string const& client, std::string const& msg, bool excludeSource = true);
+		void 				sendToOperators(std::string const& client, std::string const& msg, bool excludeSource = true);
 		members&			getAllMembers(void);
 		std::string 		getFounder();
 		bool 				isFounder(std::string const& client);
+		void 				updateNickOnChannel(std::string const& oldNick, std::string const& newNick);
 };

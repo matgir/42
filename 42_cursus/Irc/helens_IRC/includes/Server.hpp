@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 14:56:29 by Helene            #+#    #+#             */
-/*   Updated: 2024/10/27 17:50:45 by Helene           ###   ########.fr       */
+/*   Updated: 2024/11/22 17:37:09 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ class Server
         void                addChannel(Channel &newChannel, std::string const& name);
         void                removeChannel(std::string const& name);
         bool                channelExists(std::string const& channel);
+        void                updateNick(Client &client, std::string const& oldNick, std::string const& newNick); // when a client changes its nick, updates the nick associated with them in the channels they're in
 };
 
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:51:46 by Helene            #+#    #+#             */
-/*   Updated: 2024/10/05 14:59:26 by Helene           ###   ########.fr       */
+/*   Updated: 2024/11/22 18:28:52 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ std::string Client::getPassword(void)
 
 std::string Client::getUserID(void) const
 {
-    std::string userID = ":" + getNickname() + "!" + getUsername() + "@" + getHostname();
+    std::string userID = ":" + getNickname() + "!" + getUsername() + "@localhost"; //  + getHostname()
     return userID;
 }
 

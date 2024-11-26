@@ -3,6 +3,7 @@ showip.c -- show IP adresses for a host given on the command line
 command to enter
 	gccflag -o showip showip.c
 	./showip www.google.com
+	rm showip
 */
 
 #include <stdio.h>

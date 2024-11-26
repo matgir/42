@@ -1,0 +1,20 @@
+struct addrinfo
+{
+	int				ai_flags;		//AI_PASSIVE, AI_CANONNAME, etc
+	int				ai_family;		//AF_INET, AF_INET6, AF_UNSPEC
+	int				ai_socktype;	//SOCK_STREAM, SOCK_DGRAM
+	int				ai_protocol;	//use of 0 for "any"
+	size_t			ai_addrlen;		//size of the ai_addr in bytes
+	struct sockaddr	*ai_addr;		//struct sockaddr_in or _in6
+	char			*ai_canonname;	//full canonical hostname
+
+	struct addrinfo	*ai_next;		//linked list, next node
+}
+
+int	getaddrinfo(const char *node,
+				const char *service,
+				const struct addrinfo *hints,
+				struct addrinfo **res);
+	node 	= host name to connect to, or an IP address
+	service	= port number, or service name (http, ftp, telnet, smtp ...)
+	hints	= points to a struct addrinfo filled out with relevant information

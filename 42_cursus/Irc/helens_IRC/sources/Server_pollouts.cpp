@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server_pollouts.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itahani <itahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:35:43 by hlesny            #+#    #+#             */
-/*   Updated: 2024/10/27 13:12:43 by Helene           ###   ########.fr       */
+/*   Updated: 2024/11/21 17:26:31 by itahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void    Server::SendWriteBuffer(Client *client)
     // }
 
     std::string toSend = client->getWriteBuffer();
-    if (toSend.empty() || toSend.find(CRLF) == std::string::npos)
+    if (toSend.empty() || toSend.find(CRLF) == std::string::npos) //tocheck : rajouter check pr savoir si CRLF est a la fin du buffer. sinon, juste envoyer juqu a ce delimiteur, mettre le buffer a jour en consequence
         return ;
     
     int bytes_sent = send(client->getSockFd(), toSend.c_str(), toSend.size(), 0);
