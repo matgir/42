@@ -22,10 +22,11 @@ Information:
 	-	Socket: way to speak to other programs using stantards Unix file descriptors
 	-	Big-Endian(Network Byte Order) : storing hex number b34f in sequential order b3 followed by 4f
 	-	Little-Endian : sotring hex number b34f in sequential order 4f followed by b3
+	-	Internet socket, Stream socket, SOCK_STREAM : reliable two-way connected communication streams. thimgs you output into the socket in a certain order will arrive in the same order on the opposite end. Error free. Used by telnet, ssh, http (web browser). Uses TCP
+	-	Internet socket, Datagram socket (connectionless sockets), SOCK_DGRAM : Uses UDP (User Datagram Protocol). No need to maintain an open connection, build a packet, gives it an IP header with destination information and send it out. Used when TCP stack is unavailable, or when dropped packets isn't the end. Used in tftp (FTP little brother), dhcpcd (DHCP client), multiplayer games, streaming video, video conferencing...
+	-	NAT : Network Adress Translation
 	-	Full client identifier : ????????????????????????????????????
 	-	Prefixes : ??????????????????????????????????????
-	-	Internet socket, Stream socket, SOCK_STREAM : ?????????????????
-	-	Internet socket, Datagram socket, SOCK_DGRAM : ?????????????????
 
 Command:
 	-	JOIN #<channel_name> : to join #<channel_name>
