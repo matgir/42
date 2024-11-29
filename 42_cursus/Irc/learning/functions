@@ -21,4 +21,39 @@ int	getaddrinfo(const char *node,
 	node 	= host name to connect to, or an IP address
 	service	= port number, or service name (http, ftp, telnet, smtp ...)
 	hints	= points to a struct addrinfo filled out with relevant information
-	res		= pointer to a linked list res that was filled by getaddrinfo itself
+	res		= pointer to a linked list res that will be filled by getaddrinfo itself
+returns one or more addrinfo struct wich contains and internet adress that can be use
+in a call bind() or connect()
+
+int	socket(	int domain,
+			int type,
+			int protocol)
+	domain		= communication domain, the protocol family used for the communication,
+				usualy ai_family of a struct addrinfo
+	type		= socket type, usualy ai_socktype of a struct addrinfo
+	protocol	= specifies particular protocol to use, usualy ai_protocols of a
+				struct addrinfo, 0 if no need to specifie a specific protocol
+creates an endpoint for communications and return a file descriptor that refers
+to that endpoint, e.g. the socket file descriptor
+
+int	setsockopt(	int sockfd,
+				int level,
+				int optname,
+				const void optval[.optlen],
+				socklen_t optlen)
+	sockfd	= socket file descriptor (return of socket())
+	level	= level at wich the option reside, SOL_SOCKET for the API level
+	optname	= specified options passed to appropriate protocol module for
+			interpretation, SO_REUSEADDR for reuse of local addresses, a socket may
+			bind except when there is an active listening socket bound to the
+			address
+manipulates options for the socket reffered by sockfd
+
+int	fcntl(	int fd,
+			int op,
+			.../* arg */)
+	fd			= the open file descriptor on witch the orperations are gonna be done
+	op			= operations done to the file descriptor, F_SETFL set the file status
+				flag specified by arg
+	/* arg */	= depends on op, O_NONBLOCK for I/O operations won't cause the
+				colling process to wait
