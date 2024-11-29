@@ -28,6 +28,12 @@ void handleSignal(int signal)
 }
 
 // Vérifier comment sont Ctrl+Z et Ctrl+D 
+// struct sigaction : used to define the behavior of our IRC when a specific signal
+    // is received
+    // act.sa_handler can hold any given function, here the handleSignal function
+    // will set our serverShutdown to true to shutdown the IRC server
+// bzero is used to ensure no unexpected behavior due to uninitialized fields
+// sigaction() installs the sa_handler for the SIGINT/SIGQUIT signal, ctrl+C/ctrl+'\'
 void setSignalHandlers()
 {
     struct sigaction act;
@@ -37,6 +43,8 @@ void setSignalHandlers()
     
     sigaction(SIGINT, &act, NULL);
     sigaction(SIGQUIT, &act, NULL);
+    // should we deal with ctrl+Z/SIGSTP (terminal stop)
+    // should we deal with ctrl+D/EOF
 }
 
 int main(int argc, char **argv)

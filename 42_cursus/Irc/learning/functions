@@ -1,9 +1,12 @@
 struct addrinfo
 {
 	int				ai_flags;		//AI_PASSIVE, AI_CANONNAME, etc
-	int				ai_family;		//AF_INET, AF_INET6, AF_UNSPEC
-	int				ai_socktype;	//SOCK_STREAM, SOCK_DGRAM
-	int				ai_protocol;	//use of 0 for "any"
+	int				ai_family;		//AF_INET (IPv4), AF_INET6 (IPv6), AF_UNSPEC
+										// (toutes), tye de famille d'adresse desire
+	int				ai_socktype;	//type de socket, SOCK_STREAM, SOCK_DGRAM ...
+										// if = 0 means any socket type
+	int				ai_protocol;	//use of 0 for "any" (tcp, ip, udp),
+										// security protocols
 	size_t			ai_addrlen;		//size of the ai_addr in bytes
 	struct sockaddr	*ai_addr;		//struct sockaddr_in or _in6
 	char			*ai_canonname;	//full canonical hostname
@@ -18,3 +21,4 @@ int	getaddrinfo(const char *node,
 	node 	= host name to connect to, or an IP address
 	service	= port number, or service name (http, ftp, telnet, smtp ...)
 	hints	= points to a struct addrinfo filled out with relevant information
+	res		= pointer to a linked list res that was filled by getaddrinfo itself

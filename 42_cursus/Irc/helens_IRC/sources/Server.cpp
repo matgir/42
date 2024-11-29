@@ -31,6 +31,9 @@ Server::Server(std::string const& port, std::string const& password)
     // this->_logger.log(INFO, "Server address : " + ss.str());
 }
 
+// std::stringstream : support input and output operations, can add and use info in
+// it, used for string parsing and formating
+
 Server::~Server()
 {
     // close(_server_socket);
@@ -58,9 +61,10 @@ void    Server::InitServer(void)
     
     struct addrinfo hints, *res;
     memset(&hints, 0, sizeof(hints));
-    hints.ai_family = AF_INET;
-    hints.ai_socktype = SOCK_STREAM;
-    hints.ai_flags = AI_PASSIVE; // localhost by default
+    hints.ai_family = AF_INET; //set to IPv4
+    hints.ai_socktype = SOCK_STREAM; // TCP stream socket
+    hints.ai_flags = AI_PASSIVE; // localhost by default, means that it fills it with
+                                    // our own ip
     if (getaddrinfo(NULL, (this->_port).c_str(), &hints, &res))
     {
         serverShutdown = true;
@@ -69,6 +73,7 @@ void    Server::InitServer(void)
     _server_socket = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
     
     this->_logger.log(INFO, "Connection socket created");
+    // maybe add a check to verify that it returned 0 and not -1 
 
     int en = 1;
     // The setsockopt() API allows the application to reuse the local address when the server is restarted before the required wait time expires.

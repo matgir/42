@@ -33,12 +33,12 @@ class Channel
 		operators		_operators;
         std::string     _name;
         std::string     _topic;
-        bool            _topicRestrictionMode;
-        bool            _inviteOnlyMode;
+        bool            _topicRestrictionMode; // MODE t
+        bool            _inviteOnlyMode; // MODE i
 		invitedUsers	_invitedUsers;
-        bool            _passwordMode;
+        bool            _passwordMode; // MODE k
         std::string     _password;
-        bool            _userLimitMode;
+        bool            _userLimitMode; // MODE l
         unsigned int    _userLimit;
 		std::string 	_founder;
         
@@ -59,33 +59,33 @@ class Channel
 		bool				isOperator(const std::string& nick);
 		Client& 			getOperator(const std::string& nick);
 		unsigned int		getNumberOfOperators();
-		void				addOperator(Client *client);
-		void				removeOperator(std::string const& client);
+		void				addOperator(Client *client); // MODE o
+		void				removeOperator(std::string const& client); // MODE o
 
-		bool				isInvited(const std::string& nick);
+		bool				isInvited(const std::string& nick); // MODE i
 		// Client&				getInvitedUser(const std::string& nick);
-		unsigned int		getNumberOfInvitedUsers();
-		void				addInvitedUser(std::string const& client);
-		void				removeInvitedUser(std::string const& client);
+		unsigned int		getNumberOfInvitedUsers(); // MODE i
+		void				addInvitedUser(std::string const& client); // MODE i
+		void				removeInvitedUser(std::string const& client); // MODE i
 		// void				addInvitedUser(Client *client);
 		// void				removeInvitedUser(const Client& client);
 
 		const std::string&	getName();
 		bool				hasTopic();
 		const std::string&	getTopic();
-		void 				setTopic(std::string const& newTopic);
+		void 				setTopic(std::string const& newTopic); // MODE t
 		const bool&			getTopicRestrictionMode();
-		void 				setTopicRestrictionMode(bool mode);
+		void 				setTopicRestrictionMode(bool mode); // MODE t
 		const bool&			getInviteOnlyMode();
-		void 				setInviteOnlyMode(bool mode);
+		void 				setInviteOnlyMode(bool mode); // MODE i
 		const bool&			getPasswordMode();
-		void 				setPasswordMode(bool mode);
-		void 				setPassword(std::string const& passwd);
-		const std::string&	getPassword();
-		const bool&			getUserLimitMode();
-		void 				setUserLimitMode(bool mode);
+		void 				setPasswordMode(bool mode); // MODE k
+		void 				setPassword(std::string const& passwd); // MODE k
+		const std::string&	getPassword(); // MODE k
+		const bool&			getUserLimitMode(); // MODE l
+		void 				setUserLimitMode(bool mode); // MODE l
 		const unsigned int&	getUserLimit();
-		void 				setUserLimit(int const& limit);
+		void 				setUserLimit(int const& limit); // MODE l ?
 		bool 				isFull();
 		bool 				isEmpty();
 

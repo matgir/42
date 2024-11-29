@@ -105,3 +105,20 @@ class Server
 Functionalities that might have to be implemented :
 The server pings its clients periodically in order to identify timed out clients. 
 */
+
+/*
+struct pollfd {
+    int   fd;
+        // File descriptor to monitor, can represent sockets, pipes, or orther
+        // I/O ressources
+    short events;
+        // Events to monitor, POLLIN (data available to read), POLLOUT (ready for
+        // writting), POLLERR (an error condition occured), POLLHUP (hang up occured
+        // on the file descriptor), POLLPRI high priority data available to read)...
+    short revents;
+        // Events that occurred on fd, contain part or all the events requested in
+        // events this is set by poll()
+};
+
+-   cant copy or assign server class, can only be created with port and password
+*/

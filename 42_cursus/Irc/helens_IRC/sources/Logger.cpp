@@ -19,6 +19,12 @@ Logger::Logger(std::string const& logFileName)
         std::cerr << "[Logger Error] : failed to open the given log file" << std::endl;
 }
 
+// std::ofstream::out : flag to open a file in writting mode
+// std::ofstream::app : flag to open a file in append mode, everything will be added
+    // to the end of the file
+// when combined with '|' it opens the fill for writting and it will append to the
+    // of the file
+
  Logger::~Logger()
  {
     if (_logFile.is_open())
@@ -79,4 +85,5 @@ void    Logger::log(e_logLevel const& level, std::string const& msg)
         _logFile.flush(); // same as _logFile << std::endl ? minus the '\n' obv
     }
 }
-    
+
+// std::ostringstream : use for dinamically building formated string, output only

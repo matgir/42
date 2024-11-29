@@ -21,6 +21,7 @@
     vérifier donc que CommandContext donne bien accès à toutes les infos nécessaires au traitement de la commande
 */
 typedef void (*CommandExecutor)(CommandContext &ctx); // reference to CommandContext bc will be modifying the client and server attributes
+// ceci est un pointeur sur fonction, qui recevra une reference CommandContext pour s'effectuer
 
 // classe repertoriant avec le container map toutes les commandes implémentées
 // a besoin de quoi comme attributs a part la map ?

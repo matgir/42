@@ -28,6 +28,10 @@ Information:
 	-	NAT : Network Adress Translation
 	-	ligne de commande pour lancer IRC avec irssi, un client de reference : irssi -c localhost -w pwd(server-password) -p <port_number>
 	-	ctrl+shift+p pour voir les conversations
+	-	ctrl+D = sends EOF (end of file) indicator to the process stdin
+	-	ctrl+Z = SIGSTP (terminal stop) it puts the program in a stop state, it remaines in memory but isn't executed unti resumed. use fg to bring process back to foreground and bg to continue process in background
+	-	ctrl+C = SIGINT (interupt) interupts the program and generally causses it to terminate
+	-	ctrl+\ = SIGQUIT (terminate the process) it is used to terminate the process and generate a core dump, a core dump is used for debugging with tools like gdb
 	-	Full client identifier : ????????????????????????????????????
 	-	Prefixes : ??????????????????????????????????????
 
