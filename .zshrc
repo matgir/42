@@ -115,11 +115,12 @@ alias savemacos='cd ~/Raccourci && ./savemacos.sh'
 alias saveunix='cd ~/Raccourci && ./saveunix.sh'
 alias pullgit='cd ~/Raccourci && ./forcepull.sh'
 alias gppflag='c++ -Werror -Wall -Wextra -Wno-unused -std=c++98'
+alias lock='ft_lock'
 # pour lockscreen avec une animation
 # nb 1 = demarage image pixel vers la droite
 # nb 2 = demarage image pixel vers le bas = 0.5625*nb1
 # nb 3 = hauteur animation = 1.125*nb1
 # nb 4 = largeur animation = 2*nb1
 # nb1, 
-alias lockmac='/sgoinfre/goinfre/Perso/jmaia/Public/pimp_my_lock/pimp_my_lock.sh ~/Desktop/42_cursus/join_us_o.mp4 0 0 1440 2560'
-alias lockdell='/sgoinfre/goinfre/Perso/jmaia/Public/pimp_my_lock/pimp_my_lock.sh ~/Desktop/42_cursus/join_us_o.mp4 0 0 1080 1920'
+# alias lockmac='/sgoinfre/goinfre/Perso/jmaia/Public/pimp_my_lock/pimp_my_lock.sh ~/Desktop/42_cursus/join_us_o.mp4 0 0 1440 2560'
+# alias lockdell='/sgoinfre/goinfre/Perso/jmaia/Public/pimp_my_lock/pimp_my_lock.sh ~/Desktop/42_cursus/join_us_o.mp4 0 0 1080 1920'

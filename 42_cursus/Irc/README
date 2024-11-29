@@ -32,6 +32,7 @@ Information:
 	-	ctrl+Z = SIGSTP (terminal stop) it puts the program in a stop state, it remaines in memory but isn't executed unti resumed. use fg to bring process back to foreground and bg to continue process in background
 	-	ctrl+C = SIGINT (interupt) interupts the program and generally causses it to terminate
 	-	ctrl+\ = SIGQUIT (terminate the process) it is used to terminate the process and generate a core dump, a core dump is used for debugging with tools like gdb
+	-	bitwise AND operator (&) : compare each bit of first and second operand, if both bits are 1 the bit is set to 1 otherwise the bit is set to 0.
 	-	Full client identifier : ????????????????????????????????????
 	-	Prefixes : ??????????????????????????????????????
 

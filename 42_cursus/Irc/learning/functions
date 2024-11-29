@@ -47,6 +47,7 @@ int	setsockopt(	int sockfd,
 			interpretation, SO_REUSEADDR for reuse of local addresses, a socket may
 			bind except when there is an active listening socket bound to the
 			address
+	optval/optlen	= not important here but optval cannot be equal to 0
 manipulates options for the socket reffered by sockfd
 
 int	fcntl(	int fd,
@@ -57,3 +58,56 @@ int	fcntl(	int fd,
 				flag specified by arg
 	/* arg */	= depends on op, O_NONBLOCK for I/O operations won't cause the
 				colling process to wait
+
+struct sockaddr
+{
+	unsigned short	sa_family;		//adress family, AF_XXX
+	char			sa_data[14];	//14 byte of protocol address, destination adress
+										//and prot number for the socket
+}
+
+int	bind(	int sockfd,
+			const struct sockaddr *addr,
+			socklen_t addrlen)
+	sockfd	= socket file descriptor
+	addr	= address that will be assigned to sockfd, usualy ai_addr of struct 
+			addrinfo
+	addrlen	= size of the assigned address, usualy ai_addrlen of struct addrinfo
+when a socket is created with socket() a name space exist but no address is assigned
+to it, bind() assign an address to the socket, "assigning a name to a socket"
+necessary before a SOCK_STREAM can receive connections
+
+int	listen(	int sockfd,
+			int backlog)
+	sockfd	= socket file descriptor
+	backlog	= max number of pending connection to the socket identified by sockfd
+mark the socket referenced by sock fd as passive, meaning it becomes a socket that
+will accept incomming connection request using accept()
+
+struct pollfd
+{
+    int   fd;
+        // File descriptor to monitor, can represent sockets, pipes, or orther
+        // I/O ressources
+    short events;
+        // Events to monitor, POLLIN (data available to read), POLLOUT (ready for
+        // writting), POLLERR (an error condition occured), POLLHUP (hang up occured
+        // on the file descriptor), POLLPRI high priority data available to read)...
+    short revents;
+        // Events that occurred on fd, contain part or all the events requested in
+        // events this is set by poll()
+};
+
+
+int	poll(	struct pollfd *fds,
+			nfds_t nfds,
+			int timeout)
+	fds		= set of file descriptors to be monitored, composed of an array of
+			struct pollfd
+	nfds	= number of struct pollfd in the array
+	timeout	= number of miliseconds that poll() should block waiting for a fd 
+			to become ready, if negative means infinite timeout
+
+char	*strerror(int errnum)
+	errnum	= error code
+return a pointer to a string that describes the error code errnum
