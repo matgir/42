@@ -35,7 +35,7 @@ void    Server::SendWriteBuffer(Client *client)
     if (bytes_sent == -1)
     {
         std::perror("send() :");
-        return ;   
+        return ;
     }
     else
     {

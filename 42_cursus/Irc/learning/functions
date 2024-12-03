@@ -111,3 +111,25 @@ int	poll(	struct pollfd *fds,
 char	*strerror(int errnum)
 	errnum	= error code
 return a pointer to a string that describes the error code errnum
+
+ssize_t	recv(	int sockfd,
+				void buf[.len],
+				size_t len,
+				int flags)
+	sockfd		= socket file descriptor
+	buf[.len]	= buffer to be filled by the function
+	len			= size of the buffer
+	flags		= flags, if set to 0 then no flags
+used to receive message from a socket, fill buff with it at a certain size
+on error return -1 else the length of the message
+
+ssize_t	send(	int sockfd,
+				const void buf[.len],
+				size_t len,
+				int flags)
+	sockfd		= socket file descriptor
+	buf[.len]	= buffer with the message to be send
+	len			= size of the buffer
+	flags		= flags, if set to 0 then no flags
+used to send a message from a socket identified by sockfd, the socket must be
+in connected state, so that the intented recipient is know

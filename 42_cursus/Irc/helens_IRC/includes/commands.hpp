@@ -30,7 +30,7 @@ void    cmdJoin(CommandContext &ctx);
 void    cmdPart(CommandContext &ctx);
 void	cmdPrivmsg(CommandContext &ctx);
 
-// void    cmdMode(CommandContext &ctx);
+void    cmdMode(CommandContext &ctx);
 void    cmdInvite(CommandContext &ctx);
 void    cmdKick(CommandContext &ctx);
 void    cmdTopic(CommandContext &ctx);

@@ -42,7 +42,7 @@ SRCS = 	main.cpp \
 		commands/ping.cpp \
 		commands/quit.cpp \
 		commands/privmsg.cpp \
-		# commands/mode.cpp \
+		commands/mode.cpp \
 		# commands/mode.cpp \
 		# commands/help.cpp 
 		
