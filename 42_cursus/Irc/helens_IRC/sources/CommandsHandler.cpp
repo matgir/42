@@ -58,7 +58,7 @@ CommandsHandler::CommandsHandler()
 	_commands["KICK"] = &cmdKick;
 	_commands["INVITE"] = &cmdInvite;
 	_commands["TOPIC"] = &cmdTopic;
-	_commands["MODE"] = &cmdMode;
+	// _commands["MODE"] = &cmdMode;
 }
 
 void    CommandsHandler::execCommand(std::string const& name)

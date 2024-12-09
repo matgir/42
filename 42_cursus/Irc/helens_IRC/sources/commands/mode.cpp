@@ -98,7 +98,12 @@ void  channelMode(CommandContext &ctx) // todo :
    if (!channel)
       ctx._client.addToWriteBuffer(ERR_NOSUCHCHANNEL(ctx._client.getNickname(), channelName));
    else if (params.size() == 1) // check if is member of that channel ? ie ERR_NOTONCHANNEL ? 
-         ;// ctx._client.addToWriteBuffer(RPL_CHANNELMODEIS(ctx._client.getNickname(), channelName, ))
+   {
+
+/*    324 your_nickname #example +itkol secretpass 50
+      353 your_nickname #example @operator_nick
+ */   }
+      // ctx._client.addToWriteBuffer(RPL_CHANNELMODEIS(ctx._client.getNickname(), channelName, ));
    else if (! channel->isOperator(ctx._client.getNickname()))
       ctx._client.addToWriteBuffer(ERR_CHANOPRIVSNEEDED(ctx._client.getNickname(), channelName));
    else 
