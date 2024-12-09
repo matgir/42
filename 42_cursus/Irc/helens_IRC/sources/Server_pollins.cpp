@@ -66,6 +66,7 @@ void    Server::ReadData(int fd)
     
 
     int bytes_read = recv(client->getSockFd(), buffer, BUFSIZ, 0);
+    std::cout << buffer << std::endl; //TO ERASE
     if (bytes_read == -1)
     {
         int errNum = errno;
@@ -96,6 +97,8 @@ void    Server::ReadData(int fd)
         //     ; // throw exception
         
         // check limite des 512 caractères ou balec ?
+
+
         client->addToReadBuffer(std::string(&buffer[0], &buffer[bytes_read]));
         
         // Gestion Ctrl+D

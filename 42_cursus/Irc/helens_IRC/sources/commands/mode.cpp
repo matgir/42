@@ -37,8 +37,8 @@ void  operatorMode(bool setMode, Client &client, Channel *channel, std::string c
 void  usersLimitMode(bool setMode, Client &client, Channel *channel, int const& limit)
 {
    // check if valid limit, ie non negative
-   if (limit < 0)
-      ; // error msg
+   // if (limit < 0)
+   //    ; // error msg
    
    std::cout << "in usersLimitMode(), " << (setMode ? "adding" : "removing") << " mode" << std::endl;
 }
@@ -108,77 +108,116 @@ void  channelMode(CommandContext &ctx) // todo :
       ctx._client.addToWriteBuffer(ERR_CHANOPRIVSNEEDED(ctx._client.getNickname(), channelName));
    else 
    {
+      for (std::vector<std::string>:: iterator it = ctx._parameters.begin(); it!= ctx._parameters.end(); it++)//
+      {//
+         std::cout << *it << std::endl; //TO ERASE
+      }//
+
+      /* to do :  if '-'
+                     if mode that need param, look for the first param
+                        if first param good
+                           check if mode already removed
+                           update mode
+                           add mode to removed mode
+                           switch to second param
+                        else
+                           not enough params
+                     else if mode doesn't need param
+                        check if mode already removed
+                        update mode
+                        add mode to removed mode
+                     else
+                        unknown mode
+                     next mode
+                  if '+'
+                     if mode that need param, look for the first param
+                        if first param good
+                           check if mode already added
+                           update mode
+                           add mode to added mode
+                           switch to second param
+                        else
+                           not enough params
+                     else if mode doesn't need param
+                        check if mode already added
+                        update mode
+                        add mode to added mode
+                     else
+                        unkown mode
+                     next mode
+                */
+
       /*
       todo :   checker si peut avoir -ik par ex (ie plusieurs modes d'un coup)
                si c'est le cas, checker le comportement à avoir quand a un mode invalide 
                   parmi une chaine de modes valides
                   (ie process ceux valides, ou print juste un msg d'erreur et ignore les valides ?)
       */
-      std::string mode = params[1];
-      std::string validModes = "itkol";
-      std::vector<t_tuple> removedParams;
-      std::vector<t_tuple> addedParams;
+      // std::string mode = params[1];
+      // std::string validModes = "itkol";
+      // std::vector<t_tuple> removedParams;
+      // std::vector<t_tuple> addedParams;
       
-      std::vector<std::string> modeParams(params.begin() + 3, params.end());
-      std::vector<std::string>::iterator itParams = modeParams.begin(); // empty if modeParams.begin() == params.end()
+      // std::vector<std::string> modeParams(params.begin() + 3, params.end());
+      // std::vector<std::string>::iterator itParams = modeParams.begin(); // empty if modeParams.begin() == params.end()
       
-      for (std::string::const_iterator it = mode.begin(), end = mode.end(); it != end; ++it) // const_iterator for read-only
-      {
-         if (*it == '-')
-         {
-            while (it != end && *it != '+')
-            {
-               if (validModes.find(*it) != std::string::npos)
-               {
-                  if (!removedParams.empty() && std::find(removedParams.begin(), removedParams.end(), *it) == removedParams.end() && std::find(addedParams.begin(), addedParams.end(), *it) == addedParams.end()) // eviter les doublons + ne rien faire si a deja ete added plus tot dans la commande (a verif)
-                  {
-                     t_tuple mode;
-                     mode.mode = *it;
-                     if (*it == 'o') //  ( || *it == 'l' || *it == 'k') ?
-                     {
-                        if (itParams != modeParams.end())
-                        {
-                           mode.modeArg = *itParams;
-                           itParams++;    
-                        }
-                     }
-                     removedParams.push_back(mode);
-                  }
-               }
-               else
-                  ctx._client.addToWriteBuffer(ERR_UMODEUNKNOWNFLAG(ctx._client.getNickname()));
-               it++;
-            }
-         }
-         else
-         {
-            while (it != end && *it != '-')
-            {
-               if (validModes.find(*it) != std::string::npos)
-               {
-                  if (!addedParams.empty() && std::find(addedParams.begin(), addedParams.end(), *it) == addedParams.end() && std::find(removedParams.begin(), removedParams.end(), *it) == removedParams.end())
-                  {
-                     t_tuple mode;
-                     mode.mode = *it;
-                     if (*it == 'k' || *it == 'o' || *it == 'l')
-                     {
-                        if (itParams != modeParams.end())
-                        {
-                           mode.modeArg = *itParams;
-                           itParams++;    
-                        }
-                     }
-                     addedParams.push_back(mode);
-                  }
-               }
-               else
-                  ctx._client.addToWriteBuffer(ERR_UMODEUNKNOWNFLAG(ctx._client.getNickname()));
-               it++;
-            }
-         }
-      }
-      addChanModes(channel, addedParams, ctx._client);
-      removeChanModes(channel, removedParams, ctx._client); 
+      // for (std::string::const_iterator it = mode.begin(), end = mode.end(); it != end; ++it) // const_iterator for read-only
+      // {
+      //    if (*it == '-')
+      //    {
+      //       while (it != end && *it != '+')
+      //       {
+      //          if (validModes.find(*it) != std::string::npos)
+      //          {
+      //             if (!removedParams.empty() && std::find(removedParams.begin(), removedParams.end(), *it) == removedParams.end() && std::find(addedParams.begin(), addedParams.end(), *it) == addedParams.end()) // eviter les doublons + ne rien faire si a deja ete added plus tot dans la commande (a verif)
+      //             {
+      //                t_tuple mode;
+      //                mode.mode = *it;
+      //                if (*it == 'o') //  ( || *it == 'l' || *it == 'k') ?
+      //                {
+      //                   if (itParams != modeParams.end())
+      //                   {
+      //                      mode.modeArg = *itParams;
+      //                      itParams++;    
+      //                   }
+      //                }
+      //                removedParams.push_back(mode);
+      //             }
+      //          }
+      //          else
+      //             ctx._client.addToWriteBuffer(ERR_UMODEUNKNOWNFLAG(ctx._client.getNickname()));
+      //          it++;
+      //       }
+      //    }
+      //    else
+      //    {
+      //       while (it != end && *it != '-')
+      //       {
+      //          if (validModes.find(*it) != std::string::npos)
+      //          {
+      //             if (!addedParams.empty() && std::find(addedParams.begin(), addedParams.end(), *it) == addedParams.end() && std::find(removedParams.begin(), removedParams.end(), *it) == removedParams.end())
+      //             {
+      //                t_tuple mode;
+      //                mode.mode = *it;
+      //                if (*it == 'k' || *it == 'o' || *it == 'l')
+      //                {
+      //                   if (itParams != modeParams.end())
+      //                   {
+      //                      mode.modeArg = *itParams;
+      //                      itParams++;    
+      //                   }
+      //                }
+      //                addedParams.push_back(mode);
+      //             }
+      //          }
+      //          else
+      //             ctx._client.addToWriteBuffer(ERR_UMODEUNKNOWNFLAG(ctx._client.getNickname()));
+      //          it++;
+      //       }
+      //    }
+      // }
+      // addChanModes(channel, addedParams, ctx._client);
+      // removeChanModes(channel, removedParams, ctx._client); 
    }
 }
 
@@ -203,6 +242,7 @@ void  cmdMode(CommandContext &ctx)
    std::vector<std::string> params = ctx._parameters;
    if (params.empty())
    {
+      //CETTE VERIF N'A PAS L'AIR DE FONCTIONNER
        ctx._client.addToWriteBuffer(ERR_NEEDMOREPARAMS(ctx._client.getNickname(), ctx.getCommand()));
        return ;
    }
