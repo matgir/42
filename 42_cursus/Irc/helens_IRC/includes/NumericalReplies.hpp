@@ -82,6 +82,7 @@ A numeric reply is not allowed to originate from a client.
 # define ERR_BANNEDFROMCHAN(client, channel) (": 474 " + client + " " + channel + " :Cannot join channel (+b)" + CRLF)  // doit pas gérer MODE +b, si ?
 # define ERR_BADCHANNELKEY(client, channel) (": 475 " + client + " " + channel + " :Cannot join channel (+k)" + CRLF)
 # define ERR_BADCHANMASK(channel) (": 476 " + channel + " :Bad Channel Mask" + CRLF)
+# define ERR_NOPRIVILEGES(client, channel) (": 481 " + client + " " + channel + " :Permision denied not an IRC operator" + CRLF)
 # define ERR_CHANOPRIVSNEEDED(client, channel) (": 482 " + client + " " + channel + " :You're not channel operator" + CRLF)
 # define ERR_UMODEUNKNOWNFLAG(client) (": 501 " + client + " :Unknown MODE flag" + CRLF) // préciser le flag ?
 # define ERR_USERSDONTMATCH(client) (": 502 " + client + " :Can't change mode for other users" + CRLF)
