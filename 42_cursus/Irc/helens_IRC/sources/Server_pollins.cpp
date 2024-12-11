@@ -66,7 +66,7 @@ void    Server::ReadData(int fd)
     
 
     int bytes_read = recv(client->getSockFd(), buffer, BUFSIZ, 0);
-    std::cout << buffer << std::endl; //TO ERASE
+    std::cout << "buffer printed from ReadData()\n" << buffer << std::endl; //DEBUG
     if (bytes_read == -1)
     {
         int errNum = errno;

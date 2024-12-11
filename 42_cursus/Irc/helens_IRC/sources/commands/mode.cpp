@@ -95,23 +95,24 @@ void  channelMode(CommandContext &ctx) // todo :
    std::string channelName = params[0];
    Channel *channel = ctx._server.getChannel(channelName);
    
+   std::cout << "ctx printe from channelMode()\n" << ctx._prefix << "  " << ctx._command << std::endl;//DEBUG
+   for (std::vector<std::string>:: iterator it = ctx._parameters.begin(); it!= ctx._parameters.end(); it++)//DEBUG
+   {//DEBUG
+      std::cout << *it << std::endl; //DEBUG
+   }//DEBUG
    if (!channel)
       ctx._client.addToWriteBuffer(ERR_NOSUCHCHANNEL(ctx._client.getNickname(), channelName));
    else if (params.size() == 1) // check if is member of that channel ? ie ERR_NOTONCHANNEL ? 
    {
-
+      // /MODE command on its own so must show the mode of the channel
 /*    324 your_nickname #example +itkol secretpass 50
       353 your_nickname #example @operator_nick
- */   }
       // ctx._client.addToWriteBuffer(RPL_CHANNELMODEIS(ctx._client.getNickname(), channelName, ));
+ */   }
    else if (! channel->isOperator(ctx._client.getNickname()))
       ctx._client.addToWriteBuffer(ERR_CHANOPRIVSNEEDED(ctx._client.getNickname(), channelName));
    else 
    {
-      for (std::vector<std::string>:: iterator it = ctx._parameters.begin(); it!= ctx._parameters.end(); it++)//
-      {//
-         std::cout << *it << std::endl; //TO ERASE
-      }//
 
       /* to do :  if '-'
                      if mode that need param, look for the first param
@@ -153,23 +154,50 @@ void  channelMode(CommandContext &ctx) // todo :
                   parmi une chaine de modes valides
                   (ie process ceux valides, ou print juste un msg d'erreur et ignore les valides ?)
       */
-      // std::string mode = params[1];
-      // std::string validModes = "itkol";
+
+      std::string mode = params[1];
+      std::string validModes = "itkol";
+      std::string addedParams = NULL;
+      std::string removedParams = NULL;
       // std::vector<t_tuple> removedParams;
       // std::vector<t_tuple> addedParams;
+
+      addedParams.clear();
+      removedParams.clear();
+
+      std::vector<std::string> modeParams(params.begin() + 3, params.end());
+      std::vector<std::string>::iterator itParams = modeParams.begin(); // empty if modeParams.begin() == params.end()
       
-      // std::vector<std::string> modeParams(params.begin() + 3, params.end());
-      // std::vector<std::string>::iterator itParams = modeParams.begin(); // empty if modeParams.begin() == params.end()
+      for (std::string::const_iterator it = mode.begin(), end = mode.end(); it != end; ++it) // const_iterator for read-only
+      {
+         if (*it == '-')
+         {
+            it++;//
+            while (it != end && *it != '+')
+            {
+               if (validModes.find(*it) != std::string::npos)
+               {
+                  if (!removedParams.empty() && removedParams.find(*it) == std::string::npos)
+                  // if (!removedParams.empty() && std::find(removedParams.begin(), removedParams.end(), *it) == removedParams.end()
+                  // && std::find(addedParams.begin(), addedParams.end(), *it) == addedParams.end())
+                  // eviter les doublons + ne rien faire si a deja ete added plus tot dans la commande (a verif)
+                  {
+
+
+bool  parseModeWithParams(char mode, std::vector<std::string> params)
+{
+   if (mode == o)
+   {
       
-      // for (std::string::const_iterator it = mode.begin(), end = mode.end(); it != end; ++it) // const_iterator for read-only
-      // {
-      //    if (*it == '-')
-      //    {
-      //       while (it != end && *it != '+')
-      //       {
-      //          if (validModes.find(*it) != std::string::npos)
-      //          {
-      //             if (!removedParams.empty() && std::find(removedParams.begin(), removedParams.end(), *it) == removedParams.end() && std::find(addedParams.begin(), addedParams.end(), *it) == addedParams.end()) // eviter les doublons + ne rien faire si a deja ete added plus tot dans la commande (a verif)
+   }
+}
+
+                     if (*it != 'i' && *it != 't' && !parseModeWithParams(*it, &modeparams))
+                     {
+                        
+                     }
+                     removedParams += *it;
+                  }                  
       //             {
       //                t_tuple mode;
       //                mode.mode = *it;
@@ -247,6 +275,7 @@ void  cmdMode(CommandContext &ctx)
        return ;
    }
    if (params[0][0] == '#' || params[0][0] == '&')
+   //pourquoi la verif de '&' ca represente quoi ?
       channelMode(ctx);
    else
       userMode(ctx);
