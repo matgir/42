@@ -89,17 +89,39 @@ To implement : i - invite-only channel flag;
                o - give/take channel operator privileges;
                l - set the user limit to channel;
 */
+
+// function to add
+bool	isStrAllDigit(std::string str)
+{
+	for (unsigned long i = 0; str[i]; i++)
+		if (!std::isdigit(str[i]))
+			return false;
+	return true;
+}
+
+// function to add
+bool  parseModeWithParams(char mode, std::string param, Channel *channel)
+{
+   if (mode == 'o' && channel->isMember(param) && !channel->isOperator(param))
+      return true;
+   else if (mode == 'l' && !isStrAllDigit(param))
+      return true;
+   else if (mode == 'k')
+      return true;
+   return false;
+}
+
 void  channelMode(CommandContext &ctx) // todo : 
 {
    std::vector<std::string> params = ctx._parameters;
    std::string channelName = params[0];
    Channel *channel = ctx._server.getChannel(channelName);
    
-   std::cout << "ctx printe from channelMode()\n" << ctx._prefix << "  " << ctx._command << std::endl;//DEBUG
    for (std::vector<std::string>:: iterator it = ctx._parameters.begin(); it!= ctx._parameters.end(); it++)//DEBUG
    {//DEBUG
       std::cout << *it << std::endl; //DEBUG
    }//DEBUG
+   std::cout << ctx._prefix << "  " << ctx._command << "\nctx print from channelMode()" << std::endl;//DEBUG
    if (!channel)
       ctx._client.addToWriteBuffer(ERR_NOSUCHCHANNEL(ctx._client.getNickname(), channelName));
    else if (params.size() == 1) // check if is member of that channel ? ie ERR_NOTONCHANNEL ? 
@@ -157,8 +179,8 @@ void  channelMode(CommandContext &ctx) // todo :
 
       std::string mode = params[1];
       std::string validModes = "itkol";
-      std::string addedParams = NULL;
-      std::string removedParams = NULL;
+      std::string addedParams;
+      std::string removedParams;
       // std::vector<t_tuple> removedParams;
       // std::vector<t_tuple> addedParams;
 
@@ -170,34 +192,39 @@ void  channelMode(CommandContext &ctx) // todo :
       
       for (std::string::const_iterator it = mode.begin(), end = mode.end(); it != end; ++it) // const_iterator for read-only
       {
-         if (*it == '-')
+         if (*it == '+')
          {
-            it++;//
-            while (it != end && *it != '+')
+            // it++;//
+            while (it != end && *it != '-')
             {
+               std::cout << "*end = " << *end << std::endl << "mode = " << mode << std::endl;//debug
+               // for (it; it != mode.end(); it++) //debug
+                  // std::cout << *it;//debug
                if (validModes.find(*it) != std::string::npos)
                {
+                  std::cout << *it << "\nsegfault ici" << std::endl; //Debug
+                  std::cout << removedParams << std::endl; //debug
                   if (!removedParams.empty() && removedParams.find(*it) == std::string::npos)
                   // if (!removedParams.empty() && std::find(removedParams.begin(), removedParams.end(), *it) == removedParams.end()
                   // && std::find(addedParams.begin(), addedParams.end(), *it) == addedParams.end())
                   // eviter les doublons + ne rien faire si a deja ete added plus tot dans la commande (a verif)
                   {
+                  std::cout << *it << *itParams << "\nsegfault peut etre ici" << std::endl; //Debug
 
 
-bool  parseModeWithParams(char mode, std::vector<std::string> params)
-{
-   if (mode == o)
-   {
-      
-   }
-}
-
-                     if (*it != 'i' && *it != 't' && !parseModeWithParams(*it, &modeparams))
+                     if (*it != 'i' && *it != 't' && parseModeWithParams(*it, *itParams, channel))
                      {
                         
                      }
                      removedParams += *it;
-                  }                  
+                  }
+               }
+               it++;//
+            }
+         }
+      }
+   }
+}
       //             {
       //                t_tuple mode;
       //                mode.mode = *it;
@@ -246,8 +273,9 @@ bool  parseModeWithParams(char mode, std::vector<std::string> params)
       // }
       // addChanModes(channel, addedParams, ctx._client);
       // removeChanModes(channel, removedParams, ctx._client); 
-   }
-}
+//    }
+// }
+// }
 
 /*
 User modes :
