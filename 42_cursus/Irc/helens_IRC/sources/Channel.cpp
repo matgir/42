@@ -42,7 +42,8 @@ Channel::Channel(const std::string& name, Client* member) : _topic(""),
 	this->_name = name;
 	this->_members[member->getNickname()] = member; 
 	this->_operators[member->getNickname()] = member;
-	this->_founder = name;
+	this->_founder = member->getNickname();
+	// std::cout << "at channel creation founder is : " << this->_founder << "\n"; //debugmg
 }
 
 Channel::~Channel() {}
@@ -60,6 +61,7 @@ Channel& Channel::operator = (const Channel& other)
 	this->_password = other._password;
 	this->_userLimitMode = other._userLimitMode;
 	this->_userLimit = other._userLimit;
+	this->_founder = other._founder;
 	return (*this);
 }
 

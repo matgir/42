@@ -287,6 +287,8 @@ void    Server::DisconnectClient(Client *client, std::string const& reason = DEP
 {    
     // InformOfDisconnect(*client, reason);
     InformOthers(*client, client->getUserID(), "QUIT :" + reason);
+    /* #############################
+    faire command part de tout les channel du clien */
     client->setState(Disconnected);
 }
 

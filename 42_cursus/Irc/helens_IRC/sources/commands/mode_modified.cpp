@@ -120,11 +120,11 @@ void  channelMode(CommandContext &ctx) // todo :
    std::string channelName = params[0];
    Channel *channel = ctx._server.getChannel(channelName);
    
-   for (std::vector<std::string>:: iterator it = ctx._parameters.begin(); it!= ctx._parameters.end(); it++)//DEBUG
-   {//DEBUG
-      std::cout << *it << std::endl; //DEBUG
-   }//DEBUG
-   std::cout << ctx._prefix << "  " << ctx._command << "\nctx print from channelMode()" << std::endl;//DEBUG
+   for (std::vector<std::string>:: iterator it = ctx._parameters.begin(); it!= ctx._parameters.end(); it++)//DEBUGmg
+   {//DEBUGmg
+      std::cout << *it << std::endl; //DEBUGmg
+   }//DEBUGmg
+   std::cout << ctx._prefix << "  " << ctx._command << "\nctx print from channelMode()" << std::endl;//DEBUGmg
    if (!channel)
       ctx._client.addToWriteBuffer(ERR_NOSUCHCHANNEL(ctx._client.getNickname(), channelName));
    else if (params.size() == 1) // check if is member of that channel ? ie ERR_NOTONCHANNEL ? 
@@ -190,8 +190,8 @@ void  channelMode(CommandContext &ctx) // todo :
       addedParams.clear();
       removedParams.clear();
 
-      removedParams.find('d'); //debug
-      std::cout << "find on empty string works\n";// debug
+      removedParams.find('d'); //debugmg
+      std::cout << "find on empty string works\n";// debugmg
 
       std::vector<std::string> modeParams(params.begin() + 3, params.end());
       if (!modeParams.empty())
@@ -208,19 +208,19 @@ void  channelMode(CommandContext &ctx) // todo :
             while (it != end && *it != '-')
                                                                                                                         // while (it != mode.end() && *it != '-')
             {
-                                                                             // std::cout << "*end = " << *end << std::endl << "mode = " << mode << std::endl;//debug
-                                                                                                                                                // for (it; it != mode.end(); it++) //debug
-                                                                               // std::cout << *it;//debug
+                                                                             // std::cout << "*end = " << *end << std::endl << "mode = " << mode << std::endl;//debugmg
+                                                                                                                                                // for (it; it != mode.end(); it++) //debugmg
+                                                                               // std::cout << *it;//debugmg
                if (validModes.find(*it) != std::string::npos)
                {
-                                                                                               std::cout << *it << "\nsegfault ici" << std::endl; //Debug
-                                                                                                         // std::cout << removedParams << std::endl; //debug
+                                                                                               std::cout << *it << "\nsegfault ici" << std::endl; //Debugmg
+                                                                                                         // std::cout << removedParams << std::endl; //debugmg
                   if (/*!removedParams.empty() && */removedParams.find(*it) == std::string::npos)
                   {
-                                                                                                                           std::cout << *it << *itParams << "\nsegfault peut etre ici" << std::endl; //Debug
+                                                                                                                           std::cout << *it << *itParams << "\nsegfault peut etre ici" << std::endl; //Debugmg
                      if (*it == 'i' || *it == 't')
                      {
-                        std::cout << "mode i or t added\n"; //debug
+                        std::cout << "mode i or t added\n"; //debugmg
                         removedParams += *it;
                      }
                      else if (!parseModeWithParams(*it, *itParams, channel))
@@ -229,14 +229,14 @@ void  channelMode(CommandContext &ctx) // todo :
                      }
                      else
                         removedParams += *it;
-                                                                                                                        std::cout << "removed params = " << removedParams << std::endl; //debug
+                                                                                                                        std::cout << "removed params = " << removedParams << std::endl; //debugmg
                   }
                }
                else
                   ctx._client.addToWriteBuffer(ERR_UMODEUNKNOWNFLAG(ctx._client.getNickname()));
                it++;//
             }
-            std::cout << "je suis sorti de la boucle while" << std::endl; //debug
+            std::cout << "je suis sorti de la boucle while" << std::endl; //debugmg
          }
       }
    }

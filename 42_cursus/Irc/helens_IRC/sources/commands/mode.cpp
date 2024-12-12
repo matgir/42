@@ -14,8 +14,8 @@ void	channelModeIs(CommandContext &ctx)
 	std::string						lParams;
 	std::string						clientName = ctx._client.getNickname();
 
-	kParams.empty();
-	lParams.empty();
+	kParams.clear();
+	lParams.clear();
 	if (chan->getInviteOnlyMode())
 		activeMode.append("i");
 	if (chan->getPasswordMode())
@@ -39,14 +39,19 @@ void	channelModeIs(CommandContext &ctx)
 		ctx._client.addToWriteBuffer(RPL_CHANNELMODEIS(clientName, channelName, activeMode, kParams, lParams));
 	else
 	{
-		kParams.empty();
+		kParams.clear();
 		ctx._client.addToWriteBuffer(RPL_CHANNELMODEIS(clientName, channelName, activeMode, kParams, lParams));
 	}
 
 	std::stringstream ss;
 	ss << RPL_NAMREPLY(clientName, "=", channelName);
+
+	std::string	founder = chan->getFounder();
+	if (chan->isMember(founder))
+		ss << " ~" << founder;
 	for (std::map<std::string, Client*>::iterator it = chan->getAllOperators().begin(), end = chan->getAllOperators().end(); it != end; it++)
-			ss << " " << "@" << it->first;
+		if (it->first != founder)
+			ss << " @" << it->first;
 	ss << CRLF;
 	ctx._client.addToWriteBuffer(ss.str());
 
@@ -56,7 +61,7 @@ void	channelModeIs(CommandContext &ctx)
 void	channelMode(CommandContext &ctx)
 {
 	std::string	channelName = ctx._parameters[0];
-
+	/* ###### check how else if work pour etre sur que si rentre dans un ne va pas dans les autres */
 	if (!ctx._server.getChannel(channelName))
 		ctx._client.addToWriteBuffer(ERR_NOSUCHCHANNEL(ctx._client.getNickname(), channelName));
 	else if (!ctx._server.getChannel(channelName)->isMember(ctx._client.getNickname()))
@@ -66,7 +71,64 @@ void	channelMode(CommandContext &ctx)
 	else if (!ctx._server.getChannel(channelName)->isOperator(ctx._client.getNickname()))
 		ctx._client.addToWriteBuffer(ERR_NOPRIVILEGES(ctx._client.getNickname(), channelName));
 	else
-		std::cout << "Mode to code\n"; //debug
+	{
+		std::cout << "ctx has this inside :\nprefix :\t" << ctx._prefix << "\ncommand :\t";//debugmg
+		std::cout << ctx._command << "\nparameters :\n";//debugmg
+		for (std::vector<std::string>:: iterator it = ctx._parameters.begin(), end = ctx._parameters.end();//debugmg
+				it != end; it++)//DEBUGmg
+			std::cout << "\t\t" << *it << std::endl; //DEBUGmg
+		std::cout << "Mode to code\n"; //debugmg
+		
+		std::string	mode = ctx._parameters[1];
+		std::string	validMode = "itkol";
+		std::string	addedParams;
+		std::string	removedParams;
+
+		addedParams.clear();
+		removedParams.clear();
+
+		if (ctx._parameters.size() > 2)
+		{
+			std::vector<std::string>	modeParams(ctx._parameters.begin() + 2/* ou 3 a checker */, ctx._parameters.end());
+			unsigned int				sizeModeParams = modeParams.size();
+			std::string::const_iterator	it = mode.begin();
+			std::string::const_iterator	end = mode.end();
+			unsigned int				sizeMode = mode.size();
+			
+			std::cout << "segfault 1	"; //debugmg
+			// for (it; it != end; it++)
+			for (unsigned int i = 0; i < sizeMode; i++)
+			{
+			std::cout << "sizeMode = " << sizeMode << "\nint i = " << i << std::endl; //debugmg
+			std::cout << "segfault 2	"; //debugmg
+				if (*it == '+')
+				{
+			std::cout << "segfault 3	"; //debugmg
+					while (it != end && *it != '-')
+					{
+			std::cout << "segfault 4	"; //debugmg
+						if (validMode.find(*it) != std::string::npos)
+						{
+			std::cout << "segfault 5	"; //debugmg
+							if (addedParams.find(*it) == std::string::npos)
+							{
+			std::cout << "segfault 6	"; //debugmg
+								/* ################ reprendre ici avec parsing des params0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 */
+								addedParams += *it;
+			std::cout << "list of added params : " << addedParams << std::endl; //debugmg
+							}
+						}
+						else
+							ctx._client.addToWriteBuffer(ERR_UNKNOWNCOMMAND(ctx._client.getNickname()));
+						it++;
+						i++;
+					}
+				}
+			}
+
+			std::cout << "list of added params : " << addedParams << std::endl; //debugmg
+		}
+	}
 
 /*	
 	if only param = <chanel_name> send this
@@ -114,11 +176,6 @@ to do :	if '-'
 
 void	cmdMode(CommandContext &ctx)
 {
-	std::cout << "ctx has this inside :\nprefix :\t" << ctx._prefix << "\ncommand :\t";//debug
-	std::cout << ctx._command << "\nparameters :\n";//debug
-	for (std::vector<std::string>:: iterator it = ctx._parameters.begin(), end = ctx._parameters.end();//debug
-			it != end; it++)//DEBUG
-		std::cout << "\t\t" << *it << std::endl; //DEBUG
 
 	if (ctx._parameters.empty())
 	{
