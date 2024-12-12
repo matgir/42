@@ -93,6 +93,7 @@ class Channel
 		void				sendToAll(std::string const& client, std::string const& msg, bool excludeSource = true);
 		void 				sendToOperators(std::string const& client, std::string const& msg, bool excludeSource = true);
 		members&			getAllMembers(void);
+		operators&			getAllOperators(void);
 		std::string 		getFounder();
 		bool 				isFounder(std::string const& client);
 		void 				updateNickOnChannel(std::string const& oldNick, std::string const& newNick);

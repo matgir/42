@@ -56,7 +56,7 @@ A numeric reply is not allowed to originate from a client.
 # define RPL_TIME(client, server, time) (": 391 " + client + " " + server + " :" + time + CRLF) // vérifier le format du message
 
 //todo
-# define RPL_CHANNELMODEIS(client, channel, channel_string, mode_arguments) () // pas compris si mode_string etait celui de la commande MODE, ou les current channel modes du channel en question ? 
+# define RPL_CHANNELMODEIS(client, channel, activeMode, kParams, lParams) (": 324 " + client + " " + channel + " " + activeMode + kParams + lParams + CRLF ) // pas compris si mode_string etait celui de la commande MODE, ou les current channel modes du channel en question ? 
 
 
 /* -------------------------- Numerics : Errors ------------------------------- */

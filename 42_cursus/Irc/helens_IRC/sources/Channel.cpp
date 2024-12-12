@@ -333,6 +333,11 @@ Channel::members 	&Channel::getAllMembers(void)
 	return this->_members;
 }
 
+Channel::operators	&Channel::getAllOperators(void)
+{
+	return this->_operators;
+}
+
 void 	Channel::sendToAll(std::string const& client, std::string const& msg, bool excludeSource)
 {
 	for (members::iterator it = this->_members.begin(); it != this->_members.end(); it++)

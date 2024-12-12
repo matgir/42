@@ -2,6 +2,58 @@
 #include "../../includes/commands.hpp"
 #include "../../includes/Client.hpp"
 #include "../../includes/Server.hpp"
+#include "../../includes/Channel.hpp"
+#include <stdio.h>
+#include <stdlib.h>
+
+void	channelModeIs(CommandContext &ctx)
+{
+	std::string						channelName = ctx._parameters[0];
+	Channel							*chan = ctx._server.getChannel(channelName);
+	std::map<std::string, Client*>	operatorsList = chan->getAllOperators();
+	std::string						activeMode = "+o";
+	std::string						kParams;
+	std::string						lParams;
+	std::string						clientName = ctx._client.getNickname();
+
+	kParams.empty();
+	lParams.empty();
+	if (chan->getInviteOnlyMode())
+		activeMode.append("i");
+	if (chan->getPasswordMode())
+	{
+		activeMode.append("k");
+		kParams.append(" ");
+		kParams.append(chan->getPassword());
+	}
+	if (chan->getTopicRestrictionMode())
+		activeMode.append("t");
+	if (chan->getUserLimitMode())
+	{
+		activeMode.append("l");
+		lParams.append(" ");
+		std::ostringstream	ss;
+		ss << chan->getUserLimit();
+		lParams.append(ss.str());
+	}
+	
+	if (ctx._server.getChannel(channelName)->isOperator(clientName))
+		ctx._client.addToWriteBuffer(RPL_CHANNELMODEIS(clientName, channelName, activeMode, kParams, lParams));
+	else
+	{
+		kParams.empty();
+		ctx._client.addToWriteBuffer(RPL_CHANNELMODEIS(clientName, channelName, activeMode, kParams, lParams));
+	}
+
+	std::stringstream ss;
+	ss << RPL_NAMREPLY(clientName, "=", channelName);
+	for (std::map<std::string, Client*>::iterator it = chan->getAllOperators().begin(), end = chan->getAllOperators().end(); it != end; it++)
+			ss << " " << "@" << it->first;
+	ss << CRLF;
+	ctx._client.addToWriteBuffer(ss.str());
+
+	return;
+}
 
 void	channelMode(CommandContext &ctx)
 {
@@ -12,11 +64,10 @@ void	channelMode(CommandContext &ctx)
 	else if (!ctx._server.getChannel(channelName)->isMember(ctx._client.getNickname()))
 		ctx._client.addToWriteBuffer(ERR_NOTONCHANNEL(ctx._client.getNickname(), channelName));
 	if (ctx._parameters.size() == 1)
-	{
-		//reprendre ici
-	}
+		channelModeIs(ctx);
 	else if (!ctx._server.getChannel(channelName)->isOperator(ctx._client.getNickname()))
 		ctx._client.addToWriteBuffer(ERR_NOPRIVILEGES(ctx._client.getNickname(), channelName));
+
 /*	
 	if only param = <chanel_name> send this
 	# define RPL_CHANNELMODEIS(client, channel, channel_string, mode_arguments) ()
