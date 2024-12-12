@@ -3,8 +3,6 @@
 #include "../../includes/Client.hpp"
 #include "../../includes/Server.hpp"
 #include "../../includes/Channel.hpp"
-#include <stdio.h>
-#include <stdlib.h>
 
 void	channelModeIs(CommandContext &ctx)
 {
@@ -63,10 +61,12 @@ void	channelMode(CommandContext &ctx)
 		ctx._client.addToWriteBuffer(ERR_NOSUCHCHANNEL(ctx._client.getNickname(), channelName));
 	else if (!ctx._server.getChannel(channelName)->isMember(ctx._client.getNickname()))
 		ctx._client.addToWriteBuffer(ERR_NOTONCHANNEL(ctx._client.getNickname(), channelName));
-	if (ctx._parameters.size() == 1)
+	else if (ctx._parameters.size() == 1)
 		channelModeIs(ctx);
 	else if (!ctx._server.getChannel(channelName)->isOperator(ctx._client.getNickname()))
 		ctx._client.addToWriteBuffer(ERR_NOPRIVILEGES(ctx._client.getNickname(), channelName));
+	else
+		std::cout << "Mode to code\n"; //debug
 
 /*	
 	if only param = <chanel_name> send this

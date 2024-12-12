@@ -60,6 +60,7 @@ void    joinChannel(CommandContext &ctx, std::string const& channelName, std::st
         Channel newChannel(channelName, &ctx._client);
         ctx._server.addChannel(newChannel, channelName);
         joinRpl(ctx._client, newChannel);
+        
         return ;
     }
     
