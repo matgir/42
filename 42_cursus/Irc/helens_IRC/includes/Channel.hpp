@@ -67,6 +67,7 @@ class Channel
 		unsigned int		getNumberOfInvitedUsers(); // MODE i
 		void				addInvitedUser(std::string const& client); // MODE i
 		void				removeInvitedUser(std::string const& client); // MODE i
+		void				removeInviteList(void);
 		// void				addInvitedUser(Client *client);
 		// void				removeInvitedUser(const Client& client);
 

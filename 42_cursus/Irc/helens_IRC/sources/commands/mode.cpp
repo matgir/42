@@ -120,6 +120,26 @@ void	addModeWithParam(char mode, std::string param, Channel *chan, Client *clien
 	}
 }
 
+// void	removeOpParam(std::string param, Channel *chan, Client *client)
+// {
+// 	chan->removeOperator(param)
+// }
+
+void	removeMode(char mode, Channel *chan)
+{
+	if (mode == 'i')
+	{
+		chan->setInviteOnlyMode(false);
+		chan->removeInviteList();
+	}
+	else if (mode == 't')
+		chan->setTopicRestrictionMode(false);
+	else if (mode == 'k')
+		chan->setPasswordMode(false);
+	else
+		chan->setUserLimitMode(false);
+}
+
 void	channelMode(CommandContext &ctx)
 {
 	std::string	channelName = ctx._parameters[0];
@@ -150,7 +170,6 @@ void	channelMode(CommandContext &ctx)
 		removedParams.clear();
 
 		std::vector<std::string>	modeParams(ctx._parameters.begin() + 2, ctx._parameters.end());
-		unsigned int				sizeModeParams = modeParams.size();
 		std::string::const_iterator	it = mode.begin();
 		std::string::const_iterator	end = mode.end();
 		unsigned int				sizeMode = mode.size();
@@ -181,11 +200,9 @@ void	channelMode(CommandContext &ctx)
 										addedParams += *it;
 								}
 								else
-									std::cout << "*it = " << *it << "\nerror message to code, 461 ERR_NEEDMOREPARAMS \n";//debugmg
+									ctx._client.addToWriteBuffer(ERR_NEEDMOREPARAMS(ctx._client.getNickname(), channelName));
 							}
 						}
-						else
-							std::cout << "error message for mode already added ?\n"; //debugmg
 					}
 					else
 						ctx._client.addToWriteBuffer(ERR_UNKNOWNCOMMAND(ctx._client.getNickname()));
@@ -195,7 +212,34 @@ void	channelMode(CommandContext &ctx)
 			}
 			else
 			{
-				std::cout << "still need to code the removed params\n";//debugmg
+				while (it != end && *it != '+')
+				{
+					if (validMode.find(*it) != std::string::npos)
+					{
+						if (removedParams.find(*it) == std::string::npos)
+						{
+							if (*it == 'o' && !modeParams.empty())
+							{
+								if (chan->isMember(modeParams[0]) && chan->isOperator(modeParams[0]))
+								{
+									chan->removeOperator(modeParams[0]);
+									modeParams.erase(modeParams.begin());
+								}
+								else
+									ctx._client.addToWriteBuffer(ERR_NEEDMOREPARAMS(ctx._client.getNickname(), channelName));
+							}
+							else
+							{
+								removeMode(*it, chan);
+								removedParams += *it;
+							}
+						}
+					}
+					else
+						ctx._client.addToWriteBuffer(ERR_UNKNOWNCOMMAND(ctx._client.getNickname()));
+					it++;
+					i++;
+				}
 			}
 		}
 		std::cout << "list of added params : " << addedParams << std::endl; //debugmg

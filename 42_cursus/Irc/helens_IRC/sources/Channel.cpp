@@ -207,6 +207,11 @@ void 	Channel::removeInvitedUser(std::string const& client)
 	this->_invitedUsers.erase(it);
 }
 
+void	Channel::removeInviteList(void)
+{
+	this->_invitedUsers.clear();
+}
+
 // void Channel::addInvitedUser(Client *client)
 // {
 // 	this->_invitedUsers[client->getNickname()] = client;

@@ -48,7 +48,7 @@ void    cmdTopic(CommandContext &ctx)
     std::string channelName = params[0];
     bool topic = (params.size() > 1);
     Channel *channel = ctx._server.getChannel(channelName);
-    
+
     if (!channel)
         ctx._client.addToWriteBuffer(ERR_NOSUCHCHANNEL(ctx._client.getNickname(), channelName));
     else if (!channel->isMember(ctx._client.getNickname()))

@@ -24,7 +24,6 @@ static void    joinRpl(Client &client, Channel &channel)
 {
     // A JOIN message with the client as the message <source> and the channel they have 
     //  joined as the first parameter of the message.
-    // std:: cout << channel.getFounder() << " is the founder of the channel\n"; //debugmg
     client.addToWriteBuffer(client.getUserID() + " JOIN " + channel.getName() + CRLF);
     
     if (!channel.getTopic().empty())
@@ -71,7 +70,6 @@ void    joinChannel(CommandContext &ctx, std::string const& channelName, std::st
     else if (channel->getInviteOnlyMode() && !channel->isInvited(ctx._client.getNickname()))
         ctx._client.addToWriteBuffer(ERR_INVITEONLYCHAN(ctx._client.getNickname(), channelName));
     else if (channel->getPasswordMode() && (key.empty() || key != channel->getPassword()))
-    /* ###################### check comment la commande join recois le password */
         ctx._client.addToWriteBuffer(ERR_BADCHANNELKEY(ctx._client.getNickname(), channelName));
     else
     {
@@ -94,11 +92,11 @@ void    parseParameters(std::vector<std::string> &params, std::vector<std::strin
 
     while (getline(ss, buffer, ','))
         channels.push_back(buffer);
-    
     if (params.size() >= 2)
     {
-        ss.str(params[1]);
-        while (getline(ss, buffer, ','))
+        buffer.clear();
+        std::stringstream ss2(params[1]);
+        while (std::getline(ss2, buffer, ','))
             keys.push_back(buffer);
     }
 
@@ -119,7 +117,6 @@ void    cmdJoin(CommandContext &ctx)
     size_t j = 0;
     for (size_t i = 0; i < channels.size(); i++)
     {
-        // std::cout << channels[i]. //debug
         if (!checkChanMask(channels[i]))
         {
             ctx._client.addToWriteBuffer(ERR_BADCHANMASK(channels[i]));
