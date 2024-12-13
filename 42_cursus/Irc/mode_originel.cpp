@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 
-#include "../../includes/irc.hpp"
-#include "../../includes/commands.hpp"
-#include "../../includes/Client.hpp"
-#include "../../includes/Server.hpp"
+#include "helens_IRC/includes/irc.hpp"
+#include "helens_IRC/includes/commands.hpp"
+#include "helens_IRC/includes/Client.hpp"
+#include "helens_IRC/includes/Server.hpp"
 
 typedef struct s_tuple
 {

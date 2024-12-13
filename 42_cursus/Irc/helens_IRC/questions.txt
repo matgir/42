@@ -2,11 +2,11 @@ Quels modes implémenter pour les channels, et pour les users ?
 
 The various modes available for channels are as follows:
 i - invite-only channel flag;
-    /MODE <chanel_name> -i
     /MODE <chanel_name> +i
+    /MODE <chanel_name> -i
 t - topic settable by channel operator only flag;
-    /MODE <chanel_name> -t
     /MODE <chanel_name> +t
+    /MODE <chanel_name> -t
 o - give/take channel operator privileges;
     /MODE <channel_name> +o <user_nick> <user_nick2> <...>
     /MODE <channel_name> -o <user_nick> <user_nick2> <...>

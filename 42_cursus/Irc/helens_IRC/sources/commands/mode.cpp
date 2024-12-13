@@ -58,6 +58,45 @@ void	channelModeIs(CommandContext &ctx)
 	return;
 }
 
+void	addModeWithoutParam(char mode, Channel *chan)
+{
+	if (mode == 'i')
+		chan->setInviteOnlyMode(true);
+	else
+		chan->setTopicRestrictionMode(true);
+	return;
+}
+
+bool	isStrAllDigit(std::string str)
+{
+	for (unsigned long int i = 0; str[i]; i++)
+		if (!std::isdigit(str[i]))
+			return false;
+	return true;
+}
+
+bool	parseModeWithParams(char mode, std::string param, Channel *chan)
+{
+	if (param.empty())
+		return false;
+	else if (mode == 'o' && chan->isMember(param) && !chan->isOperator(param))
+		return true;
+	else if (mode == 'l' && isStrAllDigit(param))
+		return true;
+	else if (mode == 'k'/* check if password max lenght exist, asked question to group */)
+		return true;
+	else
+		return false;
+}
+
+void	addModeWithParam(char mode, std::string param, Channel *chan)
+{
+	if (mode == 'o')
+	{
+		/* #################### ici */
+	}
+}
+
 void	channelMode(CommandContext &ctx)
 {
 	std::string	channelName = ctx._parameters[0];
@@ -74,48 +113,53 @@ void	channelMode(CommandContext &ctx)
 	{
 		std::cout << "ctx has this inside :\nprefix :\t" << ctx._prefix << "\ncommand :\t";//debugmg
 		std::cout << ctx._command << "\nparameters :\n";//debugmg
-		for (std::vector<std::string>:: iterator it = ctx._parameters.begin(), end = ctx._parameters.end();//debugmg
+		for (std::vector<std::string>::iterator it = ctx._parameters.begin(), end = ctx._parameters.end();//debugmg
 				it != end; it++)//DEBUGmg
 			std::cout << "\t\t" << *it << std::endl; //DEBUGmg
-		std::cout << "Mode to code\n"; //debugmg
 		
 		std::string	mode = ctx._parameters[1];
 		std::string	validMode = "itkol";
 		std::string	addedParams;
 		std::string	removedParams;
+		Channel		*chan = ctx._server.getChannel(channelName);
 
 		addedParams.clear();
 		removedParams.clear();
 
 		if (ctx._parameters.size() > 2)
 		{
-			std::vector<std::string>	modeParams(ctx._parameters.begin() + 2/* ou 3 a checker */, ctx._parameters.end());
+			std::vector<std::string>	modeParams(ctx._parameters.begin() + 2, ctx._parameters.end());
 			unsigned int				sizeModeParams = modeParams.size();
 			std::string::const_iterator	it = mode.begin();
 			std::string::const_iterator	end = mode.end();
 			unsigned int				sizeMode = mode.size();
 			
-			std::cout << "segfault 1	"; //debugmg
-			// for (it; it != end; it++)
 			for (unsigned int i = 0; i < sizeMode; i++)
 			{
-			std::cout << "sizeMode = " << sizeMode << "\nint i = " << i << std::endl; //debugmg
-			std::cout << "segfault 2	"; //debugmg
 				if (*it == '+')
 				{
-			std::cout << "segfault 3	"; //debugmg
 					while (it != end && *it != '-')
 					{
-			std::cout << "segfault 4	"; //debugmg
 						if (validMode.find(*it) != std::string::npos)
 						{
-			std::cout << "segfault 5	"; //debugmg
 							if (addedParams.find(*it) == std::string::npos)
 							{
-			std::cout << "segfault 6	"; //debugmg
-								/* ################ reprendre ici avec parsing des params0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 */
-								addedParams += *it;
-			std::cout << "list of added params : " << addedParams << std::endl; //debugmg
+								if (*it == 'i' || *it == 't')
+								{
+									addModeWithoutParam(*it, chan);
+									addedParams += *it;
+								}
+								else
+								{
+									if (modeParams.empty() && parseModeWithParams(*it, modeParams[0], chan))
+									{
+										addModeWithParam(*it, modeParams[0], chan);
+										modeParams.erase(modeParams.begin());
+										addedParams += *it;
+									}
+									else
+										/* errorneed more param */
+								}
 							}
 						}
 						else
