@@ -150,6 +150,7 @@ unsigned int Channel::getNumberOfOperators()
 void Channel::addOperator(Client *client)
 {
 	this->_operators[client->getNickname()] = client;
+	std::cout << client->getNickname() << " was added to operators\n"; //debugmg
 }
 
 void 	Channel::removeOperator(std::string const& client)

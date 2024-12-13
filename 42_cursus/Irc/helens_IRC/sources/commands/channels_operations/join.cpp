@@ -71,6 +71,7 @@ void    joinChannel(CommandContext &ctx, std::string const& channelName, std::st
     else if (channel->getInviteOnlyMode() && !channel->isInvited(ctx._client.getNickname()))
         ctx._client.addToWriteBuffer(ERR_INVITEONLYCHAN(ctx._client.getNickname(), channelName));
     else if (channel->getPasswordMode() && (key.empty() || key != channel->getPassword()))
+    /* ###################### check comment la commande join recois le password */
         ctx._client.addToWriteBuffer(ERR_BADCHANNELKEY(ctx._client.getNickname(), channelName));
     else
     {
