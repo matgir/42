@@ -119,7 +119,8 @@ void    cmdNick(CommandContext &ctx)
         // ctx._client.addToWriteBuffer("You are now known as " + nickname + CRLF);
         // std::string oldUserID = oldNick + "!" + ctx._client.getUsername() + "@" + ctx._client.getHostname();
         ctx._server.InformOthers(ctx._client, oldUserID, "NICK " + nickname);
-        ctx._server.updateNick(ctx._client, oldNick, nickname);
+        ctx._server.updateNick(oldNick, nickname);
+        // ctx._server.updateNick(ctx._client, oldNick, nickname);
         // met a jour le nick dans tous les channels dans lesquels est le client (maniere plus simple de faire ?)
         
     }

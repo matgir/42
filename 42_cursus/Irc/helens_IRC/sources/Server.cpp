@@ -273,7 +273,8 @@ void    Server::InformOthers(Client &client, std::string const& source,  std::st
         it->second->addToWriteBuffer(source + " " + msg + CRLF);
 }
 
-void    Server::updateNick(Client &client, std::string const& oldNick, std::string const& newNick)
+// void    Server::updateNick(Client &client, std::string const& oldNick, std::string const& newNick)
+void    Server::updateNick(std::string const& oldNick, std::string const& newNick)
 {
     for (channels_it it = this->_channels.begin(), end = this->_channels.end(); it != end; it++)
     {

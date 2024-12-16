@@ -98,7 +98,8 @@ class Server
         void                addChannel(Channel &newChannel, std::string const& name);
         void                removeChannel(std::string const& name);
         bool                channelExists(std::string const& channel);
-        void                updateNick(Client &client, std::string const& oldNick, std::string const& newNick); // when a client changes its nick, updates the nick associated with them in the channels they're in
+        void                updateNick(std::string const& oldNick, std::string const& newNick); // when a client changes its nick, updates the nick associated with them in the channels they're in
+        // void                updateNick(Client &client, std::string const& oldNick, std::string const& newNick); // when a client changes its nick, updates the nick associated with them in the channels they're in
 };
 
 /*

@@ -300,5 +300,9 @@ void	cmdMode(CommandContext &ctx)
 	if (ctx._parameters[0][0] == '#' || ctx._parameters[0][0] == '&')
 		channelMode(ctx);
 	else
-		ctx._client.addToWriteBuffer(ERR_NOSUCHCHANNEL(ctx._client.getNickname(), ctx._parameters[0]));
+	{
+		Client	*client = ctx._server.getClientByNick(ctx._parameters[0]);
+		if (!client)
+			ctx._client.addToWriteBuffer(ERR_NOSUCHCHANNEL(ctx._client.getNickname(), ctx._parameters[0]));
+	}
 }

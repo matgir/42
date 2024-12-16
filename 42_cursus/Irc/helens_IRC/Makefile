@@ -12,7 +12,7 @@
 
 NAME = ircserv
 CC = g++ # c++ ? std::string incomplete type error when compiling using c++ 
-CFLAGS = -std=c++98 -Wall -Wextra -g3 #-v (verbose) #-Werror -fsanitize=address
+CFLAGS = -std=c++98 -Wall -Werror -Wextra -g3 #-v (verbose) #-Werror -fsanitize=address
 RM = rm -f
 
 SRCS_DIR = ./sources/

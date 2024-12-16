@@ -48,6 +48,7 @@ CommandsHandler::CommandsHandler()
     _commands["CAP"] = NULL;
     _commands["PASS"] = &cmdPass;
     _commands["USER"] = &cmdUser;
+    // _commands["userhost"] = &cmdUser;
     _commands["NICK"] = &cmdNick;
     _commands["MOTD"] = &cmdMotd;
     _commands["QUIT"] = &cmdQuit;
