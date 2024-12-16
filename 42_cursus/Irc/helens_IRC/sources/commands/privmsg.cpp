@@ -68,8 +68,12 @@ void    msgToChannel(CommandContext& ctx)
         ctx._client.addToWriteBuffer(ERR_NOSUCHCHANNEL(ctx._client.getNickname(), channelName));
         return ;
     }
+    else if (!channel->isMember(ctx._client.getNickname()))
+    {
+        ctx._client.addToWriteBuffer(ERR_NOTONCHANNEL(ctx._client.getNickname(), channelName));
+        return;
+    }
 
-    
     if (operators)
         channel->sendToOperators(ctx._client.getNickname(), getFinalText(ctx, text, channelName));
     else

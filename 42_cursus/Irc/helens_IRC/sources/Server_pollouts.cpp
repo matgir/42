@@ -40,7 +40,8 @@ void    Server::SendWriteBuffer(Client *client)
     else
     {
         std::stringstream ss;
-        ss << client->getSockFd();
+        // ss << client->getSockFd();
+        ss << client->getSockFd() << ' ' << client->getNickname();//debugmg
         _logger.log(DEBUG, "<Client " + ss.str() + "><SEND> " + toSend);
     }
     client->clearWriteBuffer();

@@ -110,6 +110,7 @@ void Channel::removeMember(std::string const& client)
 	std::map<std::string, Client*>::iterator	it;
 
 	it = this->_members.find(client);
+	std::cout << client << " was removed from channel " << this->getName() << '\n'; //debugmg
 	this->_members.erase(it);
 }
 

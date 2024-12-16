@@ -41,6 +41,7 @@ void    cmdKick(CommandContext &ctx)
     std::string user = params[1];
     std::string comment = params.size() > 2 ? params[2] : DEFAULT_KICK_REASON;
     Channel *channel = ctx._server.getChannel(channelName);
+    std::cout << "entering kick command\nuser is " << user << '\n'; //debugmg
     
     if (!channel)
         ctx._client.addToWriteBuffer(ERR_NOSUCHCHANNEL(ctx._client.getNickname(), channelName));
@@ -53,8 +54,11 @@ void    cmdKick(CommandContext &ctx)
     else
     {
         std::stringstream ss;
-        ss << ctx._client.getUserID() << " KICK " << channelName << " " << ctx._client.getNickname() << " : " << comment << CRLF;
-        channel->sendToAll(user, ss.str());
+
+        // ss << ctx._client.getUserID() << " KICK " << channelName << " " << ctx._client.getNickname() << " : " << comment << CRLF;
+        ss << ctx._client.getUserID() << " KICK " << channelName << " " << user << " : " << comment << CRLF; //debugmg
+        std::cout << ss.str() << '\n'; //debugmg
+        channel->sendToAll(user, ss.str(), 0);
         
         // is it possible for a chanOp to kick another chanOp ?
         if (channel->isOperator(user))

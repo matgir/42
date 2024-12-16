@@ -253,7 +253,8 @@ void    Server::ProcessBuffer(Client* &client)
         it = client->getReadBuffer().begin();
         std::string test = std::string(it, it + pos);
 
-        std::stringstream ss; ss << client->getSockFd();
+        // std::stringstream ss; ss << client->getSockFd();
+        std::stringstream ss; ss << client->getSockFd() << ' ' << client->getNickname(); //debugmg
         this->_logger.log(DEBUG, "<Client " + ss.str() + "><RECV> " + std::string(it, it + pos));
         // this->_logger.log(DEBUG, "current parsed command : " + std::string(it, it + pos));
         

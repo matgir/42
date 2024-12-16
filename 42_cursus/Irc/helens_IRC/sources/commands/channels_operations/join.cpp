@@ -62,6 +62,7 @@ void    joinChannel(CommandContext &ctx, std::string const& channelName, std::st
         joinRpl(ctx._client, newChannel);
         return ;
     }
+    std::cout << "in command join after entering joinChannel\n"; //debugmg
     
     // if (channel->isInvited(ctx._client.getNickname()))
         // channel->addInvitedUser(ctx._client.getNickname()); // commente, verifier que change r
@@ -114,6 +115,7 @@ void    cmdJoin(CommandContext &ctx)
     std::vector<std::string> channels;
     std::vector<std::string> keys;
     parseParameters(params, channels, keys);
+    std::cout << "in command join after parseParam\n"; //debugmg
     size_t j = 0;
     for (size_t i = 0; i < channels.size(); i++)
     {
