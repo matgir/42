@@ -96,7 +96,7 @@ A numeric reply is not allowed to originate from a client.
 # define ERR_CHANOPRIVSNEEDED(client, channel) (": 482 " + client + " " + channel + " :You're not channel operator" + CRLF)
 # define ERR_UMODEUNKNOWNFLAG(client) (": 501 " + client + " :Unknown MODE flag" + CRLF) // préciser le flag ?
 # define ERR_USERSDONTMATCH(client) (": 502 " + client + " :Can't change mode for other users" + CRLF)
-
+# define ERR_UNKNOWNMODE(mode, channel) (": 472 " + mode + " :is unknown mode char to me for " + channel + CRLF)
 # define ERR_ALREADYJOINED(client, channel) (client + " : cannot join " + channel + " : already on channel" + CRLF)
 
 

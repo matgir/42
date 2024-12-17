@@ -214,7 +214,12 @@ void	channelMode(CommandContext &ctx)
 					else
 					{
 						if (*it != '+')
-							ctx._client.addToWriteBuffer(ERR_UNKNOWNCOMMAND(ctx._client.getNickname()));
+						{
+							std::string	umode;
+							umode += *it;
+							ctx._client.addToWriteBuffer(ERR_UNKNOWNMODE(umode, channelName));
+						}
+							// ctx._client.addToWriteBuffer(ERR_UNKNOWNMODE(*it, channelName));
 						std::cout << "From cmdMode\n"; //debug
 					}
 					it++;
@@ -249,7 +254,11 @@ void	channelMode(CommandContext &ctx)
 					else
 					{
 						if (*it != '-')
-							ctx._client.addToWriteBuffer(ERR_UNKNOWNCOMMAND(ctx._client.getNickname()));
+						{
+							std::string	umode;
+							umode += *it;
+							ctx._client.addToWriteBuffer(ERR_UNKNOWNMODE(umode, channelName));
+						}
 					}
 					it++;
 					i++;
