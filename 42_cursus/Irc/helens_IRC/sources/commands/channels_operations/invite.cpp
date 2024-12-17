@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   invite.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 17:09:33 by Helene            #+#    #+#             */
-/*   Updated: 2024/11/22 14:59:13 by Helene           ###   ########.fr       */
+/*   Updated: 2024/12/17 15:49:31 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void    cmdInvite(CommandContext &ctx)
     else if (!channel->isMember(ctx._client.getNickname()))
         ctx._client.addToWriteBuffer(ERR_NOTONCHANNEL(ctx._client.getNickname(), channelName));
     else if (channel->isMember(nickToInvite))
-        ctx._client.addToWriteBuffer(ERR_USERONCHANNEL(ctx._client.getNickname(), ctx._client.getNickname(), channelName));
+        ctx._client.addToWriteBuffer(ERR_USERONCHANNEL(ctx._client.getNickname(), nickToInvite, channelName));
     else if (channel->getInviteOnlyMode() && !channel->isOperator(ctx._client.getNickname()))
         ctx._client.addToWriteBuffer(ERR_CHANOPRIVSNEEDED(ctx._client.getNickname(), channelName));
     else 

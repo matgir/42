@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server_pollouts.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itahani <itahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:35:43 by hlesny            #+#    #+#             */
-/*   Updated: 2024/11/21 17:26:31 by itahani          ###   ########.fr       */
+/*   Updated: 2024/12/17 10:48:38 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ void    Server::handlePollOut(int fd)
         RemoveSocket(fd);
         return;
     }
+    
+    //todel 
+    if (client->checkState(Disconnected))
+        std::cout << "debug" << std::endl;
     
     SendWriteBuffer(client);
     // check if client is disconnected. Or is there another place to do it ?

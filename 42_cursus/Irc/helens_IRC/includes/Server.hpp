@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 14:56:29 by Helene            #+#    #+#             */
-/*   Updated: 2024/11/22 17:37:09 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/17 09:56:11 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ class Server
             // Remove client from the server's map<fd, client>, and from the vector of pollfds
         void                RemoveClient(Client *client);
         void                RemoveSocket(int client_fd);
+        void                removeClientFromChannels(Client *client);
         
         void                RestartServer();
         void                ShutdownServer();

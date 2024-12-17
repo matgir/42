@@ -9,7 +9,7 @@ void	channelModeIs(CommandContext &ctx)
 	std::string						channelName = ctx._parameters[0];
 	Channel							*chan = ctx._server.getChannel(channelName);
 	std::map<std::string, Client*>	operatorsList = chan->getAllOperators();
-	std::string						activeMode = "+o";
+	std::string						activeMode = "+";
 	std::string						kParams;
 	std::string						lParams;
 	std::string						clientName = ctx._client.getNickname();
@@ -34,6 +34,8 @@ void	channelModeIs(CommandContext &ctx)
 		ss << chan->getUserLimit();
 		lParams.append(ss.str());
 	}
+	if (!operatorsList.empty())
+		activeMode.append("o");
 	
 	if (ctx._server.getChannel(channelName)->isOperator(clientName))
 		ctx._client.addToWriteBuffer(RPL_CHANNELMODEIS(clientName, channelName, activeMode, kParams, lParams));
@@ -43,18 +45,22 @@ void	channelModeIs(CommandContext &ctx)
 		ctx._client.addToWriteBuffer(RPL_CHANNELMODEIS(clientName, channelName, activeMode, kParams, lParams));
 	}
 
-	std::stringstream ss;
+	std::stringstream	ss;
+	std::string			prefix;
 	ss << RPL_NAMREPLY(clientName, "=", channelName);
 
-	std::string	founder = chan->getFounder();
-	if (chan->isMember(founder))
-		ss << " ~" << founder;
+	// std::string	founder = chan->getFounder();
+	// if (chan->isMember(founder))
+	// 	ss << " ~" << founder;
 	for (std::map<std::string, Client*>::iterator it = chan->getAllOperators().begin(), end = chan->getAllOperators().end(); it != end; it++)
-		if (it->first != founder)
-			ss << " @" << it->first;
+	{
+		prefix = getPrefix(*it->second, *chan);
+		if (it != chan->getAllOperators().begin())
+			ss << " ";
+		ss << prefix << it->first;
+	}	
 	ss << CRLF;
 	ctx._client.addToWriteBuffer(ss.str());
-
 	return;
 }
 
@@ -89,11 +95,12 @@ bool	parseModeWithParams(char mode, std::string param, Channel *chan)
 	{
 		unsigned long int	i = std::atol(param.c_str());
 		if (i > 4294967295)
+		// if (i > SIZ)
 			return false;
 		else
 			return true;
 	}
-	else if (mode == 'k'/* check if password max lenght exist, asked question to group */)
+	else if (mode == 'k' && !param.empty()/* check if password max lenght exist, asked question to group */)
 		return true;
 	else
 		return false;
@@ -187,7 +194,7 @@ void	channelMode(CommandContext &ctx)
 							if (*it == 'i' || *it == 't')
 							{
 								addModeWithoutParam(*it, chan);
-								addedParams += *it;
+					 			addedParams += *it;
 							}
 							else
 							{
@@ -205,7 +212,11 @@ void	channelMode(CommandContext &ctx)
 						}
 					}
 					else
-						ctx._client.addToWriteBuffer(ERR_UNKNOWNCOMMAND(ctx._client.getNickname()));
+					{
+						if (*it != '+')
+							ctx._client.addToWriteBuffer(ERR_UNKNOWNCOMMAND(ctx._client.getNickname()));
+						std::cout << "From cmdMode\n"; //debug
+					}
 					it++;
 					i++;
 				}
@@ -236,13 +247,17 @@ void	channelMode(CommandContext &ctx)
 						}
 					}
 					else
-						ctx._client.addToWriteBuffer(ERR_UNKNOWNCOMMAND(ctx._client.getNickname()));
+					{
+						if (*it != '-')
+							ctx._client.addToWriteBuffer(ERR_UNKNOWNCOMMAND(ctx._client.getNickname()));
+					}
 					it++;
 					i++;
 				}
 			}
 		}
 		std::cout << "list of added params : " << addedParams << std::endl; //debugmg
+		// channelModeIs(ctx);
 	}
 
 /*	
@@ -306,3 +321,4 @@ void	cmdMode(CommandContext &ctx)
 			ctx._client.addToWriteBuffer(ERR_NOSUCHCHANNEL(ctx._client.getNickname(), ctx._parameters[0]));
 	}
 }
+

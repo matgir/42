@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itahani <itahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 17:24:51 by Helene            #+#    #+#             */
-/*   Updated: 2024/10/27 17:26:48 by Helene           ###   ########.fr       */
+/*   Updated: 2024/12/17 11:24:43 by itahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 std::string  getPrefix(Client &client, Channel &channel)
 {
     std::string prefix;
-    if (channel.isFounder(client.getNickname()))
-        prefix = "~";
-    else if (channel.isOperator(client.getNickname()))
+    // if (channel.isFounder(client.getNickname()))
+    //     prefix = "~";
+    if (channel.isOperator(client.getNickname()))
         prefix = "@";
     else // halfops are not implemented here
         prefix = ""; 

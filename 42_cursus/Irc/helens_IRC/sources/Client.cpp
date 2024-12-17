@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:51:46 by Helene            #+#    #+#             */
-/*   Updated: 2024/11/22 18:28:52 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/17 11:06:32 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,38 @@ int Client::getSockFd(void)
     return this->_sockFd;
 }
 
-std::vector<std::string> Client::getChannels(void)
+// added reference to vector as return value
+std::vector<std::string> &Client::getChannels(void)
 {
     return this->_channelNames;
+}
+
+void    Client::addChannel(std::string const& channel)
+{
+    // sans doute inutile et a enlever
+    if (std::find(this->_channelNames.begin(), this->_channelNames.end(), channel) != this->_channelNames.end())
+    {
+        // error log
+        return ;
+    }
+    
+    this->_channelNames.push_back(channel);
+}
+
+void    Client::removeChannel(std::string const& channel)
+{
+    if (this->_channelNames.empty())
+    {
+        // error log
+        return ;
+    }
+    std::vector<std::string>::iterator it = std::find(this->_channelNames.begin(), this->_channelNames.end(), channel);
+    if (it == this->_channelNames.end())
+    {
+        // error log
+        return;
+    }
+    this->_channelNames.erase(it);
 }
 
 // ---------------- Client's state methods ----------------

@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:51:49 by Helene            #+#    #+#             */
-/*   Updated: 2024/11/22 19:11:55 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/17 15:23:17 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ void    Server::InitServer(void)
         throw(std::runtime_error("getaddrinfo() call failed"));
     }
     _server_socket = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+    if (_server_socket == -1)
+    {
+        serverShutdown = true;
+        throw(std::runtime_error("socket() call failed"));
+    }
     
     this->_logger.log(INFO, "Connection socket created");
     // maybe add a check to verify that it returned 0 and not -1 
@@ -264,7 +269,7 @@ void    Server::InformOthers(Client &client, std::string const& source,  std::st
         
         for (std::map<std::string, Client*>::iterator itt = currentChan->getAllMembers().begin(); itt != currentChan->getAllMembers().end(); itt++)
         {
-            if (recipients.empty() || recipients.find(itt->first) != recipients.end())
+            if (recipients.empty() || recipients.find(itt->first) == recipients.end())
                 recipients[itt->first] = itt->second;
         }
     }
@@ -286,11 +291,12 @@ void    Server::updateNick(std::string const& oldNick, std::string const& newNic
 // method to call in case of error return (poll(), recv() )
 void    Server::DisconnectClient(Client *client, std::string const& reason = DEPARTURE_REASON)
 {    
-    // InformOfDisconnect(*client, reason);
     InformOthers(*client, client->getUserID(), "QUIT :" + reason);
+    
     /* #############################
     faire command part de tout les channel du clien */
-    client->setState(Disconnected);
+    client->setState(Disconnected); //tocheck : peut pas juste remove le client directement ? plutot que d'attendre le prochain appel a poll() ?
+    
 }
 
 void    Server::RemoveSocket(int client_fd)
@@ -303,6 +309,25 @@ void    Server::RemoveSocket(int client_fd)
             break;
         }
     }
+}
+
+void    Server::removeClientFromChannels(Client *client)
+{
+    Channel *channel;
+    
+    for (std::vector<std::string>::iterator it = client->getChannels().begin(),
+        end = client->getChannels().end(); it != end; it++)
+        {
+            channel = this->getChannel(*it);
+            if (!channel)
+            {
+                //tocheck : remove channel name from client's channels  registry ?
+                continue;
+            }
+            channel->removeMember(client->getNickname());
+            if (channel->isEmpty())
+                this->removeChannel(channel->getName());
+        }
 }
 
 /*
@@ -320,6 +345,7 @@ void    Server::RemoveClient(Client *client)
     int client_fd = client->getSockFd();
     clients_it it = _clients.find(client_fd);
     
+    removeClientFromChannels(client); //tocheck
     RemoveSocket(client_fd);
     if (close(client_fd) == -1)
         std::perror("close() :");
@@ -327,15 +353,7 @@ void    Server::RemoveClient(Client *client)
         return ; // client does not exist
     _clients.erase(it);
 
-    /* for (poll_it it = _sockets.begin(); it != _sockets.end(); it++)
-    {        
-        if (it->fd == client_fd)
-        {
-            _sockets.erase(it);
-            break;
-        }
-    } */
-    }
+}
 
 
 

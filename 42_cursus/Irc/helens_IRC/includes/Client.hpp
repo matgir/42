@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 14:56:26 by Helene            #+#    #+#             */
-/*   Updated: 2024/10/05 14:55:37 by Helene           ###   ########.fr       */
+/*   Updated: 2024/12/17 11:06:38 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,8 @@ class Client
         std::string&    getWriteBuffer(void);
         void            clearWriteBuffer(void);
 
-        std::vector<std::string> getChannels(void);
+        std::vector<std::string> &getChannels(void);
+        void    addChannel(std::string const& channel);
+        void    removeChannel(std::string const& channel);
+
 };

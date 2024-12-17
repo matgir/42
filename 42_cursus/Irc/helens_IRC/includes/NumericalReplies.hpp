@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 19:03:14 by Helene            #+#    #+#             */
-/*   Updated: 2024/11/22 18:27:25 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/17 16:27:56 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ A numeric reply is not allowed to originate from a client.
 
 # define SERVER_NAME "LadyGaga"
 # define VERSION    "13.12"
-# define USER_MODES " a remplir "
+# define USER_MODES " no user modes available "
 # define CHANNEL_MODES " itkol "
-# define DEPARTURE_REASON "A bas l'etat"
+# define DEPARTURE_REASON "Leaving, bye bye"
 
 # define userID(nick, user, host) (nick + "!" + user + "@localhost") //  + host
 
 /* -------------------------- Numerics : Replies ------------------------------- */
 
 # define ERROR_RPL(reason) ("Error :" + reason + CRLF)
-# define QUIT_RPL(nick, user, host, reason) (":" + userID(nick, user, host) + " QUIT :" + reason + CRLF)
+# define QUIT_RPL(source, reason) (source + " QUIT :" + reason + CRLF)
 
 # define RPL_WELCOME(client, nick, user, host) (": 001 " + client + " :Welcome to the Internet Relay Network " + userID(nick, user, host) + CRLF)
 # define RPL_YOURHOST(client, server, version) (": 002 " + client + " :Your host is " + server + ", running on version " + version + CRLF)
@@ -58,6 +58,16 @@ A numeric reply is not allowed to originate from a client.
 //todo
 # define RPL_CHANNELMODEIS(client, channel, activeMode, kParams, lParams) (": 324 " + client + " " + channel + " " + activeMode + kParams + lParams + CRLF ) // pas compris si mode_string etait celui de la commande MODE, ou les current channel modes du channel en question ? 
 
+
+// 381    RPL_YOUREOPER
+//               ":You are now an IRC operator"
+
+//          - RPL_YOUREOPER is sent back to a client which has
+//            just successfully issued an OPER message and gained
+//            operator status.
+
+// 472    ERR_UNKNOWNMODE
+            //   "<char> :is unknown mode char to me for <channel>"
 
 /* -------------------------- Numerics : Errors ------------------------------- */
 
@@ -87,6 +97,7 @@ A numeric reply is not allowed to originate from a client.
 # define ERR_UMODEUNKNOWNFLAG(client) (": 501 " + client + " :Unknown MODE flag" + CRLF) // préciser le flag ?
 # define ERR_USERSDONTMATCH(client) (": 502 " + client + " :Can't change mode for other users" + CRLF)
 
+# define ERR_ALREADYJOINED(client, channel) (client + " : cannot join " + channel + " : already on channel" + CRLF)
 
 
 /* ---- In case HELP and INFO turn out to be implemented */

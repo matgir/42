@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:55:46 by Helene            #+#    #+#             */
-/*   Updated: 2024/11/22 19:37:36 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/17 11:46:44 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void    cmdNick(CommandContext &ctx)
     }
     if (ctx._server.nickInUse(nickname))
     {
-        ctx._client.addToWriteBuffer(ERR_NICKNAMEINUSE(ctx._client.getNickname(), nickname)); // verifier les params a donner a la macro, pas sure que 'client' soit le nick
+        ctx._client.addToWriteBuffer(ERR_NICKNAMEINUSE(ctx._client.getNickname(), nickname));
         return ;
     }
     
@@ -115,7 +115,7 @@ void    cmdNick(CommandContext &ctx)
         std::stringstream ss;
         std::string oldUserID = userID(oldNick, ctx._client.getUsername(), ctx._client.getHostname());
         ss << ":" << oldUserID << " NICK " << nickname + CRLF;
-        ctx._client.addToWriteBuffer(ss.str());
+        // ctx._client.addToWriteBuffer(ss.str()); //tocheck : commente car le fait deja dans InformOthers
         // ctx._client.addToWriteBuffer("You are now known as " + nickname + CRLF);
         // std::string oldUserID = oldNick + "!" + ctx._client.getUsername() + "@" + ctx._client.getHostname();
         ctx._server.InformOthers(ctx._client, oldUserID, "NICK " + nickname);

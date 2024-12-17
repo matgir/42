@@ -18,7 +18,7 @@
 typedef enum 
 {
 	Normal = 0,
-	Founder = 1 << 0,
+	// Founder = 1 << 0,
 	Operator = 1 << 1
 }	e_memberState;
 
@@ -40,7 +40,7 @@ class Channel
         std::string     _password;
         bool            _userLimitMode; // MODE l
         unsigned int    _userLimit;
-		std::string 	_founder;
+		// std::string 	_founder;
         
     public:
         Channel();
@@ -48,7 +48,8 @@ class Channel
         Channel (const Channel& other);
         ~Channel();
 
-        Channel& operator = (const Channel& other);
+        // Channel& operator = (const Channel& other);
+        Channel& operator = (Channel& other); //debugmg
 
 		bool				isMember(const std::string& nick);
         Client*				getMember(const std::string& nick);
@@ -95,7 +96,8 @@ class Channel
 		void 				sendToOperators(std::string const& client, std::string const& msg, bool excludeSource = true);
 		members&			getAllMembers(void);
 		operators&			getAllOperators(void);
-		std::string 		getFounder();
-		bool 				isFounder(std::string const& client);
+		invitedUsers&		getInvitedUsers(void);
+		// std::string 		getFounder();
+		// bool 				isFounder(std::string const& client);
 		void 				updateNickOnChannel(std::string const& oldNick, std::string const& newNick);
 };

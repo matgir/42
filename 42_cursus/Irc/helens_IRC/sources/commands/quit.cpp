@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:36:02 by Helene            #+#    #+#             */
-/*   Updated: 2024/10/04 17:15:37 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/17 12:06:42 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,26 @@ la connection client a été rompue.
 */
 void    cmdQuit(CommandContext &ctx)
 {
-    std::string reason = ctx._parameters.empty() ? "" : ctx._parameters[0];
-    // ctx._client.addToWriteBuffer("QUIT :" + reason + CRLF);
+    std::string reason = ctx._parameters.empty() ? DEPARTURE_REASON : ctx._parameters[0];
     
     // The server acknowledges this by replying with an ERROR message and closing the connection to the client.
-    ctx._client.addToWriteBuffer(ERROR_RPL(reason));
+    // ctx._client.addToWriteBuffer(ERROR_RPL(reason));
+
+    /*
+    - Remove l'user de chaque channel dans lequel il est (dans les donnees serveur, autre part aussi ?)
+    - Envoyer Quit msg a tous les users ayant au moins un channel en commun avec l'user qui exit
+    - Envoyer Quit server rpl pour signifier a l'user (et au client) qu'il a bien ete bien deconnecte
+    - Set user state as disconnected. Permet d'attendre d'avoir envoye le sendBuffer du client avant de le tej des donnees du serveur
+    
+    */
     
     std::stringstream ss;
-    ss << ctx._client.getSockFd();
-    ctx._server._log(INFO, "Client " + ss.str() + " disconnected.");
-    ctx._server.DisconnectClient(&ctx._client, reason);
+    ss << "Client " << ctx._client.getSockFd() << " disconnected.";
+    ctx._server._log(INFO, ss.str());
+    ctx._server.DisconnectClient(&ctx._client, reason); 
+    
+    // signifie (entre autres) a irssi de deconnecter le client qui a emit la cmd quit
+    // ctx._client.addToWriteBuffer(QUIT_RPL(ctx._client.getUserID(), reason)); //tocheck : commente car le fait dej dans InformOthers (ou alors ajouter un check dans InformOthers pour exclure la source du msg (ce qui etait l'idee de base....))
 
     
     // envoie un QUIT msg aux autres clients mtn ou apres ?

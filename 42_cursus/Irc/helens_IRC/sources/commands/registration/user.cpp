@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   user.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:54:21 by Helene            #+#    #+#             */
-/*   Updated: 2024/10/27 16:54:27 by Helene           ###   ########.fr       */
+/*   Updated: 2024/12/17 16:28:28 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void    cmdUser(CommandContext &ctx)
     }
     
     std::vector<std::string> params = ctx._parameters;
-    if (params.empty() || params.size() < 4 || params[3].empty())
+    if (params.empty() || params.size() < 4 || params[0].size() < 2 || params[3].empty()) // minimum length of username is 1 
     {
         ctx._client.addToWriteBuffer(ERR_NEEDMOREPARAMS(ctx._client.getNickname(), ctx._command));
         return ;
@@ -44,13 +44,13 @@ void    cmdUser(CommandContext &ctx)
         Modes").
     */
    //todo : juste appeler la commande MODE ?
-    int mode = atoi(params[1].c_str());
-    std::string modes;
-    if (mode & (1 << 3)) // ie si if (mode == 8)
-        modes += "i"; // ou "+i" ? 
+    // int mode = atoi(params[1].c_str());
+    // std::string modes;
+    // if (mode & (1 << 3)) // ie si if (mode == 8)
+        // modes += "i"; // ou "+i" ? 
     
     ctx._client.setUsername(params[0]);
-    ctx._client.addModes(modes);
+    // ctx._client.addModes(modes);
     ctx._client.setHostname(params[2]); // ? -> ou met juste localhost ? 
     ctx._client.setRealname(params[3]);
     

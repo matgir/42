@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 18:13:19 by Helene            #+#    #+#             */
-/*   Updated: 2024/11/22 16:59:35 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/17 12:28:15 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,14 @@ void    cmdKick(CommandContext &ctx)
         channel->sendToAll(user, ss.str(), 0);
         
         // is it possible for a chanOp to kick another chanOp ?
+        
+        //todo : Server::removeMemberFromChannel(), which calls Channel::removeMemver() and then checks if channel is then empty to potentially delete it
+        // channel->removeMember(user); // remove user from channel's registry 
         if (channel->isOperator(user))
             channel->removeOperator(user);
         else
             channel->removeMember(user);
+            
         // in case the only user in that channel kicked itself out 
         if (channel->isEmpty())
             ctx._server.removeChannel(channelName); 
