@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 19:03:14 by Helene            #+#    #+#             */
-/*   Updated: 2024/12/17 16:27:56 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/17 21:37:13 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ A numeric reply is not allowed to originate from a client.
 //todo
 # define RPL_CHANNELMODEIS(client, channel, activeMode, kParams, lParams) (": 324 " + client + " " + channel + " " + activeMode + kParams + lParams + CRLF ) // pas compris si mode_string etait celui de la commande MODE, ou les current channel modes du channel en question ? 
 
+# define RPL_MODEMSG(source, channelName, modeParams) (source + " MODE " + channelName + " " + modeParams + CRLF)
 
 // 381    RPL_YOUREOPER
 //               ":You are now an IRC operator"

@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:05:03 by Helene            #+#    #+#             */
-/*   Updated: 2024/12/17 15:51:30 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/17 21:26:39 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void    parseParameters(std::vector<std::string> &params, std::vector<std::strin
 void    cmdJoin(CommandContext &ctx)
 {
     std::vector<std::string> params = ctx._parameters;
-    if (params.empty() || params.size() < 1)
+    if (params.empty() || params.size() < 1 || params[0].empty())
     {
         ctx._client.addToWriteBuffer(ERR_NEEDMOREPARAMS(ctx._client.getNickname(), ctx.getCommand()));
         return ;
@@ -135,7 +135,7 @@ void    cmdJoin(CommandContext &ctx)
     std::cout << "in command join after parseParam\n"; //debugmg
     size_t j = 0;
     for (size_t i = 0; i < channels.size(); i++)
-    {        
+    {     
         if (!checkChanMask(channels[i]))
         {
             ctx._client.addToWriteBuffer(ERR_BADCHANMASK(channels[i]));

@@ -37,13 +37,7 @@ void	channelModeIs(CommandContext &ctx)
 	if (!operatorsList.empty())
 		activeMode.append("o");
 	
-	if (ctx._server.getChannel(channelName)->isOperator(clientName))
-		ctx._client.addToWriteBuffer(RPL_CHANNELMODEIS(clientName, channelName, activeMode, kParams, lParams));
-	else
-	{
-		kParams.clear();
-		ctx._client.addToWriteBuffer(RPL_CHANNELMODEIS(clientName, channelName, activeMode, kParams, lParams));
-	}
+	ctx._client.addToWriteBuffer(RPL_CHANNELMODEIS(clientName, channelName, activeMode, kParams, lParams));
 
 	std::stringstream	ss;
 	std::string			prefix;
@@ -61,6 +55,7 @@ void	channelModeIs(CommandContext &ctx)
 	}	
 	ss << CRLF;
 	ctx._client.addToWriteBuffer(ss.str());
+    // ctx._client.addToWriteBuffer(RPL_ENDOFNAMES(clientName, channelName));
 	return;
 }
 
@@ -194,6 +189,8 @@ void	channelMode(CommandContext &ctx)
 							if (*it == 'i' || *it == 't')
 							{
 								addModeWithoutParam(*it, chan);
+								// ln
+								chan->sendToAll(ctx._client.getNickname(), RPL_MODEMSG(ctx._client.getUserID(), chan->getName(), "+" + *it), false);
 					 			addedParams += *it;
 							}
 							else
@@ -202,6 +199,8 @@ void	channelMode(CommandContext &ctx)
 								{
 									std::cout << modeParams[0] << " is modeParams[0]\n"; //debugmg
 									addModeWithParam(*it, modeParams[0], chan, ctx._server.getChannel(channelName)->getMember(modeParams[0]));
+									// ln
+									chan->sendToAll(ctx._client.getNickname(), RPL_MODEMSG(ctx._client.getUserID(), chan->getName(), "+" + *it + " " + modeParams[0]), false);
 									modeParams.erase(modeParams.begin());
 									if (*it != 'o')
 										addedParams += *it;
@@ -239,6 +238,8 @@ void	channelMode(CommandContext &ctx)
 								if (chan->isMember(modeParams[0]) && chan->isOperator(modeParams[0]))
 								{
 									chan->removeOperator(modeParams[0]);
+									// ln
+									chan->sendToAll(ctx._client.getNickname(), RPL_MODEMSG(ctx._client.getUserID(), chan->getName(), "-" + *it + " " + modeParams[0]), false);
 									modeParams.erase(modeParams.begin());
 								}
 								else
@@ -247,6 +248,8 @@ void	channelMode(CommandContext &ctx)
 							else
 							{
 								removeMode(*it, chan);
+								// ln
+								chan->sendToAll(ctx._client.getNickname(), RPL_MODEMSG(ctx._client.getUserID(), chan->getName(), "-" + *it), false);
 								removedParams += *it;
 							}
 						}

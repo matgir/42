@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:55:46 by Helene            #+#    #+#             */
-/*   Updated: 2024/12/17 11:46:44 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/17 21:05:36 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static bool    validNick(std::string const& s)
     it++;
     for (std::string::const_iterator itt = it; itt != s.end(); itt++)
     {
-        if (! (std::isalnum(*itt) || validChar(*itt))) // suffit, ou rajouter des checks d'autres caractères ?
+        if (! (std::isalnum(*itt) || validChar(*itt) || *itt == '-')) // suffit, ou rajouter des checks d'autres caractères ?
             return false;
     }
     return true;
@@ -115,7 +115,7 @@ void    cmdNick(CommandContext &ctx)
         std::stringstream ss;
         std::string oldUserID = userID(oldNick, ctx._client.getUsername(), ctx._client.getHostname());
         ss << ":" << oldUserID << " NICK " << nickname + CRLF;
-        // ctx._client.addToWriteBuffer(ss.str()); //tocheck : commente car le fait deja dans InformOthers
+        ctx._client.addToWriteBuffer(ss.str()); //tocheck : commente car le fait deja dans InformOthers
         // ctx._client.addToWriteBuffer("You are now known as " + nickname + CRLF);
         // std::string oldUserID = oldNick + "!" + ctx._client.getUsername() + "@" + ctx._client.getHostname();
         ctx._server.InformOthers(ctx._client, oldUserID, "NICK " + nickname);

@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:51:52 by Helene            #+#    #+#             */
-/*   Updated: 2024/12/17 14:02:53 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/17 19:30:06 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,31 +119,31 @@ void Channel::addMember(Client *client)
 	this->_members[client->getNickname()] = client;
 }
 
-void Channel::removeMember(std::string const& client)
-{
-	std::map<std::string, Client*>::iterator	it;
- 
-	it = this->_members.find(client);
-	std::cout << client << " was removed from channel " << this->getName() << '\n'; //debugmg
-	this->_members.erase(it);
-}
-
 // void Channel::removeMember(std::string const& client)
 // {
 // 	std::map<std::string, Client*>::iterator	it;
-
+ 
 // 	it = this->_members.find(client);
-// 	if (it == this->_members.end())
-// 		return ;
-// 	this->_members[client] = NULL; // tocheck
-// 	this->_members.erase(it);
 // 	std::cout << client << " was removed from channel " << this->getName() << '\n'; //debugmg
-
-// 	it = this->_operators.find(client);
-// 	if (it == this->_operators.end())
-// 		return ;
-// 	this->_operators.erase(it);
+// 	this->_members.erase(it);
 // }
+
+void Channel::removeMember(std::string const& client)
+{
+	std::map<std::string, Client*>::iterator	it;
+
+	it = this->_members.find(client);
+	if (it == this->_members.end())
+		return ;
+	// this->_members[client] = NULL; // tocheck
+	this->_members.erase(it);
+	std::cout << client << " was removed from channel " << this->getName() << '\n'; //debugmg
+
+	it = this->_operators.find(client);
+	if (it == this->_operators.end())
+		return ;
+	this->_operators.erase(it);
+}
 
 
 

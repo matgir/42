@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:36:02 by Helene            #+#    #+#             */
-/*   Updated: 2024/12/17 12:06:42 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/17 20:54:49 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void    cmdQuit(CommandContext &ctx)
     ctx._server.DisconnectClient(&ctx._client, reason); 
     
     // signifie (entre autres) a irssi de deconnecter le client qui a emit la cmd quit
-    // ctx._client.addToWriteBuffer(QUIT_RPL(ctx._client.getUserID(), reason)); //tocheck : commente car le fait dej dans InformOthers (ou alors ajouter un check dans InformOthers pour exclure la source du msg (ce qui etait l'idee de base....))
+    ctx._client.addToWriteBuffer(QUIT_RPL(ctx._client.getUserID(), reason)); //tocheck : commente car le fait dej dans InformOthers (ou alors ajouter un check dans InformOthers pour exclure la source du msg (ce qui etait l'idee de base....))
 
     
     // envoie un QUIT msg aux autres clients mtn ou apres ?
