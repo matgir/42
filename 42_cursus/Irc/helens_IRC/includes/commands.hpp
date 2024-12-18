@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:46:42 by Helene            #+#    #+#             */
-/*   Updated: 2024/11/02 15:50:28 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/18 10:59:09 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "irc.hpp"
 #include "CommandContext.hpp"
 #include "NumericalReplies.hpp"
-
-# define DEFAULT_KICK_REASON "vote rn"
 
 class Channel;
 

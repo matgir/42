@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:55:46 by Helene            #+#    #+#             */
-/*   Updated: 2024/12/17 21:05:36 by hlesny           ###   ########.fr       */
+/*   Updated: 2024/12/18 11:30:19 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void    cmdNick(CommandContext &ctx)
         ctx._client.addToWriteBuffer(ss.str()); //tocheck : commente car le fait deja dans InformOthers
         // ctx._client.addToWriteBuffer("You are now known as " + nickname + CRLF);
         // std::string oldUserID = oldNick + "!" + ctx._client.getUsername() + "@" + ctx._client.getHostname();
-        ctx._server.InformOthers(ctx._client, oldUserID, "NICK " + nickname);
+        ctx._server.InformOthers(ctx._client, ":" + oldUserID, "NICK " + nickname);
         ctx._server.updateNick(oldNick, nickname);
         // ctx._server.updateNick(ctx._client, oldNick, nickname);
         // met a jour le nick dans tous les channels dans lesquels est le client (maniere plus simple de faire ?)

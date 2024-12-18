@@ -153,7 +153,7 @@ void	channelMode(CommandContext &ctx)
 	else if (ctx._parameters.size() == 1)
 		channelModeIs(ctx);
 	else if (!ctx._server.getChannel(channelName)->isOperator(ctx._client.getNickname()))
-		ctx._client.addToWriteBuffer(ERR_NOPRIVILEGES(ctx._client.getNickname(), channelName));
+		ctx._client.addToWriteBuffer(ERR_CHANOPRIVSNEEDED(ctx._client.getNickname(), channelName));
 	else
 	{
 		std::cout << "ctx has this inside :\nprefix :\t" << ctx._prefix << "\ncommand :\t";//debugmg

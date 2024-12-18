@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   registration.cpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 10:58:41 by Helene            #+#    #+#             */
-/*   Updated: 2024/10/27 14:17:31 by Helene           ###   ########.fr       */
+/*   Updated: 2024/12/18 12:12:20 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,14 @@ void    Server::tryLogin(Client &client)
     // todo
     // The first parameter of the RPL_WELCOME (001) message is the nickname assigned by the network to the client -> comment faire avec netcat ? 
     
-    client.addToWriteBuffer(RPL_WELCOME(client.getNickname(), client.getNickname(), client.getUsername(), client.getHostname()));
+    client.addToWriteBuffer(RPL_WELCOME(client.getNickname(), std::string(SERVER_NAME), client.getNickname(), client.getUsername(), client.getHostname()));
     client.addToWriteBuffer(RPL_YOURHOST(client.getNickname(), std::string(SERVER_NAME), std::string(VERSION)));
     client.addToWriteBuffer(RPL_CREATED(client.getNickname(), this->getCreationDate()));
+    // debug
+    std::cout << " getCreationDate :" << std::endl << this->getCreationDate() << std::endl;
     client.addToWriteBuffer(RPL_MYINFO(client.getNickname(), std::string(SERVER_NAME), std::string(VERSION), std::string(USER_MODES), std::string(CHANNEL_MODES)));
+    // debug
+    // std::cout << "After RPL_MYINFO :" << std::endl << client.getWriteBuffer() << std::endl;
     this->sendMotd(client);
 
     client.setState(Registered); // setState ou addState ?
