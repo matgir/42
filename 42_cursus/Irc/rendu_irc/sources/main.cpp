@@ -50,6 +50,13 @@ int main(int argc, char **argv)
         std::cerr << "Input should look like this : ./ircserv <port> <password>" << std::endl;
         return (INVALID_ARGUMENTS); 
     }
+    long l = atol(argv[1]);
+    if (l < 1024 || l > 65535)
+    {
+        std::cerr << "Invalid port number" << std::endl;
+        return (INVALID_ARGUMENTS);
+    }
+    
 
     setSignalHandlers();
     Server IrcServer(argv[1], argv[2]);

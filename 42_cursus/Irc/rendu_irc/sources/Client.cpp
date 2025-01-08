@@ -22,7 +22,6 @@ Client::Client()
 Client::Client(int fd, Server *server)
 : _sockFd(fd), _state(Unregistered), _server(server)
 {
-    printf("Client constructor, _server address : %p\n", &(*(this->_server)));
 }
 
 Client::~Client()

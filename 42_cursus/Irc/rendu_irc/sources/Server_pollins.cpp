@@ -184,6 +184,9 @@ void Server::ProcessCommand(std::string const& line, Client* client)
     std::transform(cmd.begin(), cmd.end(), cmd.begin(), toupper);
     ctx.setCommand(cmd);
     
+    if ((!client->checkState(Registered)) && cmd != "PASS" && cmd != "USER" && cmd != "NICK")
+        return ;
+
     std::map<std::string, CommandExecutor>::iterator it = _commandsHandler._commands.find(cmd);
     if (it == _commandsHandler._commands.end())
     {
