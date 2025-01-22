@@ -1,2 +1,0 @@
- # Launch 42_EXAM in ONE COMMAND : 
- bash -c "$(curl https://grademe.fr)"

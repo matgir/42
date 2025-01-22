@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background-image: linear-gradient(
+            to top, #ffda77, #ffa45b);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board {
+    position: relative;
+    z-index: 1;
+    height: 85vh;
+    width: 80vw;
+    background: rgba(0, 0, 0, 0.42); /* semi-transparent background */
+    border: 1px solid white;
+    border-radius: 42px;
+    overflow: hidden; /* Prevents shine effects from overflowing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Smooth shadow for depth */
+    animation: borderGlow 5s ease-in-out infinite;
+}
+
+.smooth-appearance {
+    animation: smoothAppearence 1.3s ease forwards;
+}
+
+.ball {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    position: fixed;
+    top: calc(50% - 15px);
+    left: calc(50% - 15px);
+}
+
+.ball_effect {
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    background-color: red;
+    animation: spinBall 1s linear infinite;
+    box-shadow: inset 0 0 18px #fff,
+        inset 6px 0 18px #DC91C2,
+        inset -6px 0 18px #EEC881,
+        inset 6px 0 30px #DC91C2,
+        inset -6px 0 30px #EEC881,
+        0 0 18px #fff, -4px 0 18px
+        #DC91C2, 4px 0 18px #EEC881;
+}
+
+@keyframes spinBall {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.paddle {
+    height: 200px;
+    width: 18px;
+    border-radius: 20px;
+    position: fixed;
+}
+
+.paddle_1 {
+    top: calc(40vh);
+    left: calc(10vw + 50px);
+    box-shadow: inset 0 0 18px #fff,
+        inset -6px 0 18px #EEC881,
+        inset 6px 0 18px #DC91C2,
+        inset -6px 0 30px #EEC881,
+        inset 6px 0 30px #DC91C2,
+        0 0 18px #fff, 4px 0 18px
+        #EEC881, -4px 0 18px #DC91C2;
+}
+
+.paddle_2 {
+    top: calc(40vh);
+    right: calc(10vw + 50px);
+    box-shadow: inset 0 0 18px #fff,
+        inset 6px 0 18px #DC91C2,
+        inset -6px 0 18px #EEC881,
+        inset 6px 0 30px #DC91C2,
+        inset -6px 0 30px #EEC881,
+        0 0 18px #fff, -4px 0 18px
+        #DC91C2, 4px 0 18px #EEC881;
+}
+
+.player_1_username {
+	position: fixed;
+	font-family: 'Stacker', sans-serif; /* Google Font */
+    color: white;
+    font-size: 2vw;
+    left: 18%;
+    margin-top: 30px;
+}
+
+.player_2_username {
+    position: fixed;
+	font-family: 'Stacker', sans-serif; /* Google Font */
+    color: white;
+    font-size: 2vw;
+    right: 18%;
+    margin-top: 30px;
+}
+
+
+.player_1_score {
+    height: 50px;
+    width: 50px;
+    color: #DC91C2;
+    position: fixed;
+    left: 35vw;
+    margin-top: 28px;
+    font-family: 'Neon'; /* Police pour cohérence */
+    font-size: 3vw;
+}
+
+.player_2_score {
+    height: 50px;
+    width: 50px;
+    color: #EEC881;
+    position: fixed;
+    left: 62vw;
+    margin-top: 28px;
+    font-family: 'Neon'; /* Police pour cohérence */
+    font-size: 3vw;
+}
+
+.message {
+    position: absolute; /* Permet de positionner l'élément par rapport à son parent */
+    top: 40%; /* Position verticale au centre */
+    left: 50%; /* Position horizontale au centre */
+    transform: translate(-50%, -50%); /* Centrer parfaitement l'élément */
+    white-space: nowrap; /* Empêche le texte de se briser sur plusieurs lignes */
+    width: max-content; /* Ajuste automatiquement la largeur à la longueur du texte */
+}
+
+.message-info-style {
+    color: #c9cbff; /* Couleur du texte */
+    font-size: 2.5vw; /* Ajuste la taille du texte */
+    text-align: center; /* Centre le texte horizontalement */
+    font-family: 'Stacker', sans-serif; /* Police pour cohérence */
+}
+
+.speed-message-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000; /* Assurez-vous que le message est au-dessus */
+    text-align: right;
+}
+
+.message-ball-speed-style {
+    font-family: 'Neon'; /* Police pour cohérence */
+    color: white; /* Couleur du texte */
+    font-size: 2vw; /* Ajuste la taille du texte */
+    text-align: center; /* Centre le texte horizontalement */
+}
+
+@keyframes intensifiedGlow {
+    0% {
+        box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 42px 30px rgba(255, 255, 255, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+    }
+}
+
+.board-glow-effect {
+    animation: intensifiedGlow 1s ease-out;
+}
+
+.board::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px; /* Ajustez selon vos préférences */
+    z-index: -1; /* Derrière la board */
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0); /* Pas d'effet initial */
+    transition: box-shadow 0.3s ease; /* Transition fluide */
+}
+
+.board-glow-effect::after {
+    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8); /* Effet de glow */
+}

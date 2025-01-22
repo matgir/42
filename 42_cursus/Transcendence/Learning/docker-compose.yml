@@ -1,0 +1,8 @@
+services:
+  django:
+    container_name: django
+    image: django_image
+    # tty: true
+    build: .
+    ports:
+      - 8880:8880

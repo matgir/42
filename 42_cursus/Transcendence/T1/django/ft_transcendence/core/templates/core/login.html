@@ -1,0 +1,162 @@
+{% load static %}
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'core/css/login.css' %}">
+  <!---------- Media Queries ---------->
+  <link rel="stylesheet" href="{% static 'core/css/media-queries/login_media-queries-width.css' %}" media="screen and (max-width: 600px)">
+  <link rel="stylesheet" href="{% static 'core/css/media-queries/login_media-queries-height.css' %}" media="screen and (max-height: 500px)">
+
+  <title>Transcendence</title>
+</head>
+  <body class="no-scroll">
+  <!---------- Global container for layout management ---------->
+    <div class="container">
+
+    <!---------- Background Video ---------->
+      <video autoplay muted loop class="video-background">
+        <source src="{% static 'core/images/galaxy-background.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+    <!---------- Invalid Signin Credentials ---------->
+    {% if signin_form.errors %}
+      <div class="title">
+        <h1 class="title--style">SpacePong</h1>
+      </div>
+      <div class="container--login-form">
+        <form action="/" method="post" id="signin-form">
+          <div class="container--username-password-field">
+            {% csrf_token %}
+            {{ signin_form }}
+          </div>
+          <div class="container--submit-button">
+            <input type="submit" value="Submit" class="submit-button">
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+    <!---------- Invalid Signup Credentials ---------->
+    {% elif signup_form.errors %}
+      <div class="title">
+        <h1 class="title--style">SpacePong</h1>
+      </div>
+
+      <div class="container--login-form">
+        <form action="/" method="post" id="signup-form">
+          <div class="container--username-password-field">
+            {% csrf_token %}
+            {{ signup_form }}
+          </div>
+          <div class="container--submit-button">
+            <input type="submit" value="Submit" class="submit-button">
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+    {% else %}
+    <div class="title">
+      <h1 class="title--style title--move">SpacePong</h1>
+    </div>
+
+        <!---------- Hide Forms, Show Login Buttons only ---------->
+        <!-- Hidden Login Form -->
+        <div class="container--login-form">
+          <form action="/" method="post" id="signin-form" class="hidden">
+            <div class="container--username-password-field">
+              {% csrf_token %}
+              {{ signin_form }}
+            </div>
+            <div class="container--submit-button">
+              <input type="submit" value="Submit" class="submit-button">
+            </div>
+          </form>
+        </div>
+
+        <!-- Hidden Sign Up Form -->
+        <div class="container--login-form">
+          <form action="/" method="post" id="signup-form" class="hidden">
+            <div class="container--username-password-field">
+              {% csrf_token %}
+              {{ signup_form }}
+            </div>
+            <div class="container--submit-button">
+              <input type="submit" value="Submit" class="submit-button">
+            </div>
+          </form>
+        </div>
+      <!---------- Login Buttons ---------->
+        <!-- 42 Button - Top button -->
+        <div class="container--login-buttons">
+          <div class="login-buttons--top">
+            <form action="{% provider_login_url 'fortytwo' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="buttons-design login--options-buttons 42-button">
+                Sign in with
+                <img src="{% static 'core/images/42_Logo_gradient.png' %}" class="icons-logos">
+              </button>
+            </form>
+          </div>
+
+        <!-- Login and Sign Up Button - Bottom Buttons -->
+          <div class="login-buttons--bottom">
+            <button class="buttons-design login--options-buttons" id="signin-button">Login</button>
+            <button class="buttons-design login--options-buttons" id="signup-button">Sign Up </button>
+          </div>
+        </div>
+
+      <!---------- Show Forms only, Hide Login Buttons ---------->
+        <!-- Hide buttons on click -->
+        <script>
+          // Get all buttons with the "js-buttons" class
+          const loginButtons = document.querySelectorAll('.buttons-design');
+
+          // Loop through the buttons and add the same click event listener to each
+          loginButtons.forEach(button => {
+            if (!button.classList.contains('42-button')) {
+              button.addEventListener('click', function() {
+              // Hide all login buttons
+                loginButtons.forEach(btn => btn.classList.add('hidden'));
+                loginButtons.forEach(btn => btn.classList.remove('buttons-design'));
+              });
+            }
+          });
+        </script>
+        <!-- Show Login Form -->
+        <script>
+          // JavaScript to handle the button click
+          document.getElementById('signin-button').addEventListener('click', function() {
+            // Show the login form
+            document.getElementById('signin-form').classList.remove('hidden');
+            document.getElementById('signup-form').classList.add('hidden');
+          });
+        </script>
+
+        <!-- Show Sign Up Form -->
+        <script>
+          // JavaScript to handle the button click
+          document.getElementById('signup-button').addEventListener('click', function() {
+            // Show the login form
+            document.getElementById('signup-form').classList.remove('hidden');
+            document.getElementById('signin-form').classList.add('hidden');
+          });
+        </script>
+      </div>
+  </body>
+</html>
+{% endif %}

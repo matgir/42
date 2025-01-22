@@ -1,0 +1,95 @@
+{% load socialaccount %}
+{% load static %}
+{% include 'core/sidenav.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+		<link rel="stylesheet" href="{% static 'core/css/social.css' %}">
+		<link rel="stylesheet" href="{% static 'core/css/notifications.css' %}">
+		<link rel="stylesheet" href="{% static 'css/main.css' %}">
+	</head>
+
+	<body class="no-scroll">
+		<script src="{% static 'core/js/social_utils.js' %}"></script>
+		<!---------- Background Video ---------->
+		<video autoplay muted loop class="video-background">
+			<source src="{% static 'core/images/planet-background.mp4' %}" type="video/mp4">
+			Your browser does not support the video tag.
+		</video>
+
+		{% if message_to_user %}
+			<div id="message_to_user" class="exception hidden"> {{ message_to_user }} </div>
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+					showNotification("{{ message_to_user }}");
+				});
+			</script>
+		{% endif %}
+
+
+		<div class="container">
+			
+			<div class="notifications--black-box">
+				{% for notification in notifications %}
+					{% if notification.friend_request.sender %}
+						<div class="notification--each-container">
+							<div class="container--user-avatar">
+								<img src="{{ notification.friend_request.sender.userprofile.avatar.url }}" alt="User Avatar" class="notif-avatar user-avatar-img"/>
+							</div>
+							<div class="notifications--text">Friend request received from
+								<a href="/profile/{{ notification.friend_request.sender }}"> {{notification.friend_request.sender}}</a>
+								<div class="notifications-buttons-container">
+									<button type="submit" class="notifications--options-buttons buttons-design">
+										<a href="{% url 'core:accept_friend_request' notification.friend_request.id %}">
+											<img src="{% static 'core/images/accept-logo.png' %}" class="icons-logos">
+										</a>
+									</button>
+									<button type="submit" class="notifications--options-buttons buttons-design">
+										<a href="{% url 'core:decline_friend_request' notification.friend_request.id %}">
+											<img src="{% static 'core/images/decline-logo.png' %}" class="icons-logos">
+										</a>
+									</button>
+								</div>
+							</div>
+						</div>
+					{% elif notification.message %}
+						<div class="notification--each-container">
+							<div class="notifications--text">
+								<div class="notif--avatar-container container--user-avatar">
+									<img src="{{ notification.message.author.userprofile.avatar.url }}" alt="User Avatar" class="notif-avatar user-avatar-img"/>
+								</div>
+								Message from
+								{{ notification.message.author }} : {{ notification.message.message }}
+							</div>
+						</div>
+						{% elif notification.game_invitation %}
+						<div class="notification--each-container">
+							<div class="notifications--text">
+								<div class="container--user-avatar">
+									<img src="{{ notification.game_invitation.invitation_sender.userprofile.avatar.url }}" alt="User Avatar" class="notif-avatar user-avatar-img"/>
+								</div>
+								Game Invitation from
+								{{ notification.game_invitation.invitation_sender }}
+								<div class="notifications-buttons-container">
+									<button type="submit" class="notifications--options-buttons buttons-design">
+										<a href="{% url 'game:accept_game' notification.game_invitation.id %}"> Accept Invitation Game 
+											<img src="{% static 'core/images/game-logo.png' %}" class="icons-logos">
+										</a>
+									</button>
+									<button type="submit" class="notifications--options-buttons buttons-design">
+										<a href="{% url 'game:decline_game' notification.game_invitation.id %}"> Decline Invitation Game
+											<img src="{% static 'core/images/decline-logo.png' %}" class="icons-logos">
+										</a>
+									</button>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+		</div>
+	</body>
+</html>
