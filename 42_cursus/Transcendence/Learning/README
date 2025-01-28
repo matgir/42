@@ -1,9 +1,9 @@
 command to set up django project inside .venv
 
-	<$> python -m venv tutorial-env
+	<$> python -m venv <your_venv_name>
 	creates tutorial-env directory if it does not exist
 
-	<$> source tutorial-env/bin/activate
+	<$> source <your_venv_name>/bin/activate
 	activate the virtual environment to work in it
 
 	<$> python -m pip install Django
