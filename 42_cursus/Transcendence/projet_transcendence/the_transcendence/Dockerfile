@@ -1,24 +1,33 @@
-FROM python:3.12-alpine3.19
+FROM python:3.13-alpine3.19
 # from image python (to run python applications) and alpine (lighweight linux)
 
-COPY . /the_transcendence
+RUN mkdir /app
+# create the app directory
 
+WORKDIR /app
+# set the working directory inside the container
 
-# RUN python -m venv tutorial-env
-# create a virtual environement
+# set the environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+# prevents python from writting pyc files to disk
+ENV PYTHONUNBUFFERED=1
+# prevents python from buffering stdout and stderr
 
-# RUN source tutorial-env/bin/activate
-# activates the virtual environment
+RUN pip install --upgrade pip
+# upgrade pip
 
-RUN python -m pip install django psycopg2-binary
-# install django and necessary pack for postgresql
+COPY requirements.txt /app/
+# copy the django project and install dependencies
 
-# RUN mkdir djangotutorial
-# RUN django-admin startproject mysite djangotutorial
+RUN pip install --no-cache-dir -r requirements.txt
+# run this command to install all dependencies
 
-# RUN cd djangotutorial
-WORKDIR /the_transcendence
-RUN chmod +x run.sh
-# COPY run.sh .
+COPY . /app/
+# copy the django project to the container
 
-ENTRYPOINT [ "sh", "run.sh" ]
+EXPOSE 8000
+# expose the django port
+
+CMD ["sh", "run.sh"]
+# run the django's development server
+
