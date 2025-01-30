@@ -139,6 +139,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTIFICATION_CLASSES': (
         'rest_framework_simplejwt.authentification.JWTAuthentification'
     ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
 }
 
 SIMPLE_JWT = {
@@ -161,7 +164,7 @@ SIMPLE_JWT = {
     'VERIFYING_KEY': None,
     # used for asymmetric encryption (RS256) when verifying tokens, here None
     # because we use HS256 (symmetric encryption)
-    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_TYPES': ('mgirardo',),
     # specifies the prefix used in the authorization header,
     # example : 'Authorization: Bearer <token>'
     # can be anything you want : 'hello', 'moilepluscool' ...

@@ -12,5 +12,5 @@ def	pong_game(request):
 class ProtectedView(APIView):
 	permission_classes = [IsAuthenticated]
 
-	def get(self,request):
+	def get(self, request):
 		return Response({"message": "This view is protected"})
