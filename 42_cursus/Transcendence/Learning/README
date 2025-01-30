@@ -22,8 +22,17 @@ generates a new secret key for django
 different tuto for django
 	https://learndjango.com/tutorials/
 
+symmetric encryption
+	the same key is used for encrypting and decrypting data
+
+asymmetric encryption
+	uses a public key for encryption and a private key for decryption,
+	private key remains secret
+
 History of usefull website
 	django tutorial part 1 trough 8
 		https://docs.djangoproject.com/en/5.1/
 	dockerize django and add postgresql database
 		https://www.docker.com/blog/how-to-dockerize-django-app/
+	JWT tokens
+		https://unfoldai.com/jwt-auth-in-django-guide/

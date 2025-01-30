@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework', # jwt
+    'users', # jwt
 ]
 
 MIDDLEWARE = [
@@ -130,3 +133,47 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# for JWT
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTIFICATION_CLASSES': (
+        'rest_framework_simplejwt.authentification.JWTAuthentification'
+    ),
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    # Defines how long acces tokens are valid, access tokens are used for
+    # authentification in API requests
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    # defines how long refresh tokens are valid, refresh tokens are used to
+    # get new access tokens when it expires
+    'ROTATE_REFRESH_TOKENS': False,
+    # If True, new refresh tokens are issued when refreshing access tokens
+    'BLACKLIST_AFTER_ROTATION': True,
+    # if True, used refresh tokens are added to a blacklist when rotated,
+    # prevents reuse of old refresh tokens
+    'ALGORITHM': 'HS256',
+    # Specifies the algorithm used for token signing (HS256 = HMAC with SHA-256)
+    'SIGNING_KEY': SECRET_KEY,
+    # the secret key used to sign tokens (same as Django's 'SECRET_KEY) only
+    # used for symmetric encryption (HS256)
+    'VERIFYING_KEY': None,
+    # used for asymmetric encryption (RS256) when verifying tokens, here None
+    # because we use HS256 (symmetric encryption)
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    # specifies the prefix used in the authorization header,
+    # example : 'Authorization: Bearer <token>'
+    # can be anything you want : 'hello', 'moilepluscool' ...
+    'USER_ID_FIELD': 'id',
+    # defines which field in the user model represents the user ID in the token
+    'USER_ID_CLAIM': 'user_id',
+    # the claim name in the JWT payload(part of the token containing the user data)
+    # where the user id is stored
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    # defines the token classes used
+    'TOKEN_TYPE_CLAIM': 'token_type',
+    # the claim in the JWT that specifies the type of token (access or refresh)
+}
+
+AUTH_USER_MODEL = 'users.CustomUser'

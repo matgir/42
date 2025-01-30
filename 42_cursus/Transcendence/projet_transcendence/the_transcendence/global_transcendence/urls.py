@@ -16,9 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from users.views import CustomTokenObtainPairView, CustomTokenRefreshView, RegisterView
 
 urlpatterns = [
     path('where_you_deal_with_things/', admin.site.urls),
+    # this is the admin url, changed to not have the generic name
     path('transcendence_login/', include("transcendence_login.urls")),
     path("pong_game/", include("pong_game.urls")),
+    path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', CustomTokenRefreshView.as_view(), name='token_refresh'),
+    path('api/register/', RegisterView.as_view(), name='register'),
 ]

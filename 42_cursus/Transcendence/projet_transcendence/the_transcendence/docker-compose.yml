@@ -1,5 +1,6 @@
 services:
   db:
+    container_name: db_the_transcendence
     image: postgres:17
     environment:
       - POSTGRES_DB=${DATABASE_NAME}
