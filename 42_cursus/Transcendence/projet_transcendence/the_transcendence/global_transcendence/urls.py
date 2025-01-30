@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users.views import CustomTokenObtainPairView, CustomTokenRefreshView, RegisterView
+from pong_game.views import ProtectedView
 
 urlpatterns = [
     path('where_you_deal_with_things/', admin.site.urls),
@@ -26,4 +27,5 @@ urlpatterns = [
     path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', CustomTokenRefreshView.as_view(), name='token_refresh'),
     path('api/register/', RegisterView.as_view(), name='register'),
+    path('api/protected/', ProtectedView.as_view(), name='protected'),
 ]

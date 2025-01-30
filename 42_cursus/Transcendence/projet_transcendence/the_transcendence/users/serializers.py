@@ -1,4 +1,4 @@
-from rest_framework_simplejwt import TokenObtainPairSerializer
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from .models import CustomUser
 
@@ -8,6 +8,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 		token = super().get_token(user)
 		# add custom claims
 		token['email'] = user.email
+		""" here you can add any other info the the JWT token payload
+		toke['roles'] = list(user.groups.values_list('name', flat=True)) """
 		return token
 # allows us to add custom claims to the token payload, here adding user's email
 
