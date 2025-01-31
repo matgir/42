@@ -57,6 +57,7 @@ git checkout -- <file_name> :	discards local changes of <file_name> and
 git checkout -- . :	up but for all the working directory, dangerous
 
 git merge <branch_name> :	merge a different branch into your active branch
+git merge --abort :	exits the merge process to return to the state before the merge
 
 git pull :	fetch and merge changes from the remote server to your working
 			directory
@@ -73,6 +74,7 @@ git tag :	lists all the tags, tags are used to mark a significant change in
 
 git log :	lists the version history of the current branch
 	git log --follow <file_name> : list the version history of <file_name>
+	git log --merge : lists the commits that are causing the merge conflict
 
 git show <commitID> :	shows the metadate of the specified commit
 
