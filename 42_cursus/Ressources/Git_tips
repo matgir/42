@@ -1,0 +1,96 @@
+git config :	tell git who you are
+	git config --global user.name "mgirardo"
+	git config --global user.email mgirardo@student.42.fr
+
+git init :	create a new local repository
+	git init : to initalize a new repository in the directory you are
+	git init /the/path/where/to/create/your/repository
+
+git clone :	clone a repository
+	git clone <the_name_or_url_of_your_repo> <the_name_you_want_to_give_it>
+
+git add :	to add files to your repository
+	git add <file_name1> <file_name2> ...
+	git add * : add everything from the directory you are in
+	git add -u : modifie/add/delete only tracked files
+
+git commit :	to commit your changes to the head of your repository, not the
+				remote repository yet
+	git commit -m 'description_of_your_last_commit'
+	git commit -a : to skip the command add, but only works for tracked files
+
+git status :	list the changed files, and those that needs to be add or commit
+
+git push :	to push the commit on the remote repository
+	git push origin master : to push your commit to the master branch
+	git push origin main : to push your commit to the main branch
+	git push : to push your commit on the branch your are in
+	git push origin <branch_name> :	push the branch to your remote repository
+									so others can use/see it
+	git push --all origin : push all branches to your remote repository
+	git push origin :<branch_name> : delete the branch from the remote repository
+	git push origin --delete <branch_name> : up
+
+git remote add origin <git_url/server> :	to connect a local repository to a
+											remote repository in order to push
+
+git branch <branch_name> :	create a new branch but does not switch to init
+git branch :	lists all the branches in your repository, and shows you on
+				which you are
+git branch -d <branch_name> :	delete <branch_name> on your local repository,
+								only if merged
+
+git checkout <branch_name> :	switch to an already existing branch
+git checkout -b <branch_name> :	create a new branch and switch to init
+git checkout <tag_name> :	switches your working directory to the state of the
+							repository at the given tag, you are now on a detached
+							head, meaning not on a branch, so no commit possible,
+							only viewing mode
+git checkout -b <new_branch_name> <tag_name> :	creates a new branch from the
+												commit tagged by <tag_name>
+git checkout -- <file_name> :	discards local changes of <file_name> and
+								restores it to the last committed version, does
+								not affect staged or commited changes, only
+								modifies working directory, it is irreversible, the
+								changes in your working directory will be lost,
+								unless you have a backup elsewhere
+git checkout -- . :	up but for all the working directory, dangerous
+
+git merge <branch_name> :	merge a different branch into your active branch
+
+git pull :	fetch and merge changes from the remote server to your working
+			directory
+
+git diff :	view all the merge conflict
+	git diff <source_branch> <target_branch> : preview changes, before merging
+
+git tag :	lists all the tags, tags are used to mark a significant change in
+			your repository
+	git tag <tag_name> : create a new tag
+	git tag <tag_name> <commitID> : tag a specific commit
+	git push --tags origin : push all tags to the remote repository
+	git tag -d <tag_name> : delete a tag
+
+git log :	lists the version history of the current branch
+	git log --follow <file_name> : list the version history of <file_name>
+
+git show <commitID> :	shows the metadate of the specified commit
+
+git reset :	unstages all staged file (the git add command was used on them),
+			but does not modify them in your working directory
+	git reset <file_name> : same but only for <file_name>
+	git reset --soft <commitID> :	moves head to <commitID>, deletes later
+									commits, keeps staged files, keeps changes
+									in your working directory
+	git reset --mixed <commitID> :	moves head to <commitID>, deletes later
+									commits, deletes staged files, keeps changes
+									in your working directory
+	git reset --soft <commitID> :	moves head to <commitID>, deletes permanantly
+									later commits, deletes staged files, deletes
+									changes in your working directory
+
+git stash :	temporarily stores all the modified tracked files
+	git stash save <stash_message> : up but with a <stash_message>
+	git stash list : lists all the stashed changesets
+	git stash pop : restores the most recently stashed files
+	git stash drop : discards the most recently stashed files
