@@ -22,6 +22,9 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 # run this command to install all dependencies
 
+RUN apk update && apk upgrade && apk add --no-cache postgresql-client
+# may erase it later, needed to check postgresql connection
+
 COPY . /app/
 # copy the django project to the container
 

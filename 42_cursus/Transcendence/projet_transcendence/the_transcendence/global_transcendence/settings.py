@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,8 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-hryap(i1(2^pl$#pg0gz0dht(!rc@2v50%k$r+&teswh7ptolo'
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback_secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -72,12 +71,21 @@ SITE_ID = 1 #User Managment
 
 ACCOUNT_EMAIL_VERIFICATION = "none" #User Managment
 
+LOGIN_REDIRECT_URL = '/'
+# Where users are redirected after login in successfully, if not specified
+# elsewhere
+# LOGIN_URL = '/'
+# Where users are redirected if they try to access a protected view whithout
+# being logged in
+# LOGOUT_REDIRECT_URL = '/'
+# Where user go after logging out, if not specified elsewhere
+
 ROOT_URLCONF = 'global_transcendence.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"], # to know where to look for templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,11 +107,12 @@ WSGI_APPLICATION = 'global_transcendence.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
-        'NAME': os.getenv('DATABASE_NAME', 'polls'),
-        'USER': os.getenv('DATABASE_USERNAME', 'myprojectuser'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'password'),
-        'HOST': os.getenv('DATABASE_HOST', '127.0.0.1'),
-        'PORT': os.getenv('DATABASE_PORT', 5432),
+        # 'NAME': os.getenv('DATABASE_NAME', 'polls'),
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USERNAME'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DATABASE_PORT'),
     }
 }
 
