@@ -139,6 +139,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTIFICATION_CLASSES': (
         'rest_framework_simplejwt.authentification.JWTAuthentification'
     ),
+    'DEFAULT_PERMISSION_CLASSES': ( #
+        'rest_framework.permissions.IsAuthenticated', #
+    ), #
 }
 
 SIMPLE_JWT = {

@@ -43,8 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework', # jwt
-    'users', # jwt
+    'rest_framework', # JWT
+    'rest_framework_simplejwt', #JWT
+    'users', # JWT
+    'django.contrib.sites', #User Managment
+    'allauth', #User Managment
+    'allauth.account', #User Managment
 ]
 
 MIDDLEWARE = [
@@ -55,7 +59,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware', #User Managment
 ]
+
+# Django allauth configurations
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend', #User Managment
+    'allauth.account.auth_backends.AuthenticationBackend', #User Managment
+]
+
+SITE_ID = 1 #User Managment
+
+ACCOUNT_EMAIL_VERIFICATION = "none" #User Managment
 
 ROOT_URLCONF = 'global_transcendence.urls'
 
@@ -134,14 +149,23 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# # for JWT pasoim
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated',
+#     ),
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     ],
+# }
 # for JWT
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTIFICATION_CLASSES': (
-        'rest_framework_simplejwt.authentification.JWTAuthentification'
-    ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
+    ],
 }
 
 SIMPLE_JWT = {

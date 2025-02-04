@@ -96,3 +96,16 @@ git stash :	temporarily stores all the modified tracked files
 	git stash list : lists all the stashed changesets
 	git stash pop : restores the most recently stashed files
 	git stash drop : discards the most recently stashed files
+
+.gitignore :
+	*.log : ignores all files with the extension .log
+	logs/ : ignores the entire logs directory and all of its content
+	config.py : ignore the file config.py
+	/build/ :	ignores the build directory only if it is in the root directory
+				of the repository
+	**/build/ :	ignores the build directory and all of its content, no matter
+				where it is in the repository
+	git check-ignore -v <file_name> :	command to use at the root of your
+										repository where your .gitignore is,
+										it check wether or not the file name
+										has a rule to explude it in your .gitignore
