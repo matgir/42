@@ -1,6 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}
 <h1>
 	Welcome to our pong
 </h1>
+{% endblock %}
 {% if user.is_authenticated %}
 <h2>
 	Welcome, {{user.username}} !
@@ -23,6 +27,8 @@
 {% endif %}
 
 <h2>
+	Options:
+</h2>
 	<ul>
 		{% if not user.is_authenticated %}
 		<li>
@@ -42,4 +48,3 @@
 			</a>
 		</li>
 	</ul>
-</h2>

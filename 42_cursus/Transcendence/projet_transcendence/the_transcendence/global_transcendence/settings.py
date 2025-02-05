@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.sites', #User Managment
     'allauth', #User Managment
     'allauth.account', #User Managment
+    'pong_game',
+    'transcendence_login',
 ]
 
 MIDDLEWARE = [
@@ -71,13 +73,13 @@ SITE_ID = 1 #User Managment
 
 ACCOUNT_EMAIL_VERIFICATION = "none" #User Managment
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'home'
 # Where users are redirected after login in successfully, if not specified
 # elsewhere
 # LOGIN_URL = '/'
 # Where users are redirected if they try to access a protected view whithout
 # being logged in
-# LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = 'home'
 # Where user go after logging out, if not specified elsewhere
 
 ROOT_URLCONF = 'global_transcendence.urls'
@@ -107,7 +109,6 @@ WSGI_APPLICATION = 'global_transcendence.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
-        # 'NAME': os.getenv('DATABASE_NAME', 'polls'),
         'NAME': os.getenv('DATABASE_NAME'),
         'USER': os.getenv('DATABASE_USERNAME'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),

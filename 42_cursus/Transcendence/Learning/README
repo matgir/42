@@ -22,6 +22,9 @@ generates a new secret key for django
 different tuto for django
 	https://learndjango.com/tutorials/
 
+usefull for superuser in docker
+https://stackoverflow.com/questions/30027203/create-django-super-user-in-a-docker-container-without-inputting-password
+
 symmetric encryption
 	the same key is used for encrypting and decrypting data
 

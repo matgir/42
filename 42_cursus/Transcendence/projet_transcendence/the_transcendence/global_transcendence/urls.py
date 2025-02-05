@@ -30,5 +30,5 @@ urlpatterns = [
     path('api/register/', RegisterView.as_view(), name='register'), #JWT
     path('api/protected/', ProtectedView.as_view(), name='protected'), #JWT
     path('accounts/', include("allauth.urls")), # User managment
-    path("", TemplateView.as_view(template_name="home.html")), # should create our own view
+    path("", TemplateView.as_view(template_name="home.html"), name="home"), # should create our own view
 ]
