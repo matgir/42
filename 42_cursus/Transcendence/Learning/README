@@ -23,7 +23,7 @@ different tuto for django
 	https://learndjango.com/tutorials/
 
 usefull for superuser in docker
-https://stackoverflow.com/questions/30027203/create-django-super-user-in-a-docker-container-without-inputting-password
+	https://stackoverflow.com/questions/30027203/create-django-super-user-in-a-docker-container-without-inputting-password
 
 symmetric encryption
 	the same key is used for encrypting and decrypting data
@@ -31,6 +31,19 @@ symmetric encryption
 asymmetric encryption
 	uses a public key for encryption and a private key for decryption,
 	private key remains secret
+
+speaking with your postgresql database
+	https://dev.to/kihuni/working-with-databases-in-django-using-postgresql-9co
+
+Many-to-one relationships
+	https://docs.djangoproject.com/en/5.0/topics/db/examples/many_to_one/
+many-to-many relationships
+	https://docs.djangoproject.com/en/5.0/topics/db/examples/many_to_many/
+one-to-one relationships
+	https://docs.djangoproject.com/en/5.0/topics/db/examples/one_to_one/
+
+user model
+	https://docs.djangoproject.com/fr/4.2/ref/contrib/auth/#django.contrib.auth.models.User
 
 History of usefull website
 	django tutorial part 1 trough 8

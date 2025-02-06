@@ -11,6 +11,8 @@ stop:
 
 restart: stop start
 
+rebuildstart: stop all
+
 prune:
 	-docker stop $$(docker ps -aq)
 	-docker rm -f $$(docker ps -aq)
@@ -21,4 +23,4 @@ prune:
 
 reprune: prune all
 
-.PHONY: all prune reprune build start stop
+.PHONY: all prune reprune build start stop restart rebuildstart

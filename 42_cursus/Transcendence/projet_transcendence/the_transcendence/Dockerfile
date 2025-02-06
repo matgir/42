@@ -31,6 +31,6 @@ COPY . /app/
 EXPOSE 8000
 # expose the django port
 
-CMD ["sh", "run.sh"]
+ENTRYPOINT ["sh", "run.sh"]
 # run the django's development server
 
