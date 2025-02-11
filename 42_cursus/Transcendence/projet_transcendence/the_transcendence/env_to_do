@@ -26,4 +26,4 @@ DATABASE_PASSWORD=
 DATABASE_HOST=
 # your database host
 DATABASE_PORT=
-your database port, for postgresql : 5432
+# your database port, for postgresql : 5432

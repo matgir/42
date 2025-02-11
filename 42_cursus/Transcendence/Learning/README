@@ -57,3 +57,5 @@ History of usefull website
 		https://unfoldai.com/jwt-auth-in-django-guide/
 	Django Models
 		https://docs.djangoproject.com/en/5.1/topics/db/models/
+	Django auth system
+		https://docs.djangoproject.com/en/5.1/topics/auth/default/
