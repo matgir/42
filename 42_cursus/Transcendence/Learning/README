@@ -45,6 +45,9 @@ one-to-one relationships
 user model
 	https://docs.djangoproject.com/fr/4.2/ref/contrib/auth/#django.contrib.auth.models.User
 
+Django Password hash
+	https://docs.djangoproject.com/en/5.1/topics/auth/passwords/
+
 History of usefull website
 	django tutorial part 1 trough 8
 		https://docs.djangoproject.com/en/5.1/
@@ -52,3 +55,5 @@ History of usefull website
 		https://www.docker.com/blog/how-to-dockerize-django-app/
 	JWT tokens
 		https://unfoldai.com/jwt-auth-in-django-guide/
+	Django Models
+		https://docs.djangoproject.com/en/5.1/topics/db/models/

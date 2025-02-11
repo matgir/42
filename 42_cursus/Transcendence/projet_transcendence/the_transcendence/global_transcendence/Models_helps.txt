@@ -1,0 +1,14 @@
+to use models in a models.py
+	from django.db import models
+
+field options
+	unique=True
+		if True, must be unique troughtout the DB table
+	null=True
+		if True, Django will store empty values as NULL in the database, default is False
+	blank=True
+		if True, this field is allowed to be blank, default is False
+	symmetrical=True
+		for ManyToMany field on self, Default is True
+		example : friends = models.ManyToManyField("self"), this assume that if
+		I you are my friend, I am yours too
