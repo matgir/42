@@ -2,7 +2,7 @@
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from .models import PongUser
+from .models import CustomUser
 
 # Create your tests here.
 
@@ -11,11 +11,11 @@ from .models import PongUser
 # from django.urls import reverse
 # from rest_framework import status
 # from rest_framework.test import APITestCase
-# from .models import PongUser
+# from .models import CustomUser
 
 # class JWTAuthenticationTests(APITestCase):
 #     def setUp(self):
-#         self.user = PongUser.objects.create_user(
+#         self.user = CustomUser.objects.create_user(
 #             email='test@example.com',
 #             username='testuser',
 #             password='testpass123'
@@ -56,7 +56,7 @@ from .models import PongUser
 
 class JWTAuthenticationTests(APITestCase):
 	def setUp(self):
-		self.user = PongUser.objects.create_user(
+		self.user = CustomUser.objects.create_user(
 			email='test@example.com',
 			username='testuser',
 			password='testpass123'
@@ -91,7 +91,7 @@ class JWTAuthenticationTests(APITestCase):
 
 		print(self.user) #
 		print(self.user.is_active) #
-		print(PongUser.objects.all()) #
+		print(CustomUser.objects.all()) #
 
 		protected_url = reverse('protected')
 		print(f"Authorization: mgirardo {access_token}") #

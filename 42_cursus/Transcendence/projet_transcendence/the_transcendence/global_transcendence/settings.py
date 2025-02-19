@@ -213,4 +213,4 @@ SIMPLE_JWT = {
     # the claim in the JWT that specifies the type of token (access or refresh)
 }
 
-AUTH_USER_MODEL = 'users.PongUser'
+AUTH_USER_MODEL = 'users.CustomUser'
