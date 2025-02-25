@@ -6,7 +6,7 @@ from django.db import models
 class CustomUser(AbstractUser):
 	email =		models.EmailField(unique=True)
 	username =	models.CharField(max_length=30, unique=True)
-	friends =	models.ManyToManyField("self")
+	# friends =	models.ManyToManyField("self")
 	# add any additionnal fields here
 
 	USERNAME_FIELD = 'username'
