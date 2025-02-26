@@ -1,4 +1,5 @@
 all: build start
+	mkdir -p media/users_avatars
 
 build:
 	docker compose up -d --build
@@ -23,4 +24,4 @@ prune:
 
 reprune: prune all
 
-.PHONY: all prune reprune build start stop restart rebuildstart
+.PHONY: all build start stop restart rebuildstart prune reprune
