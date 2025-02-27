@@ -4,6 +4,8 @@
 #include <netdb.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 int extract_message(char **buf, char **msg)
 {
@@ -49,7 +51,8 @@ char *str_join(char *buf, char *add)
 	return (newbuf);
 }
 int main() {
-	int sockfd, connfd, len;
+	int sockfd, connfd;
+	socklen_t	len;
 	struct sockaddr_in servaddr, cli;
 	// socket create and verification
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);

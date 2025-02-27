@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <netinet/ip.h>
+#include <sys/select.h>
 
 int		count = 0, max_fd = 0;
 int		ids[65536];
@@ -10,7 +11,6 @@ char	*msgs[65536];
 
 fd_set	rfds, wfds, afds;
 char	buf_read[1001], buf_write[42];
-
 
 // START COPY-PASTE FROM GIVEN MAIN
 
@@ -63,7 +63,6 @@ char *str_join(char *buf, char *add)
 
 // END COPY-PASTE
 
-
 void	fatal_error()
 {
 	write(2, "Fatal error\n", 12);
@@ -101,6 +100,10 @@ void	remove_client(int fd)
 void	send_msg(int fd)
 {
 	char *msg;
+
+	write(1, "######", 6);
+	write(1, msgs[fd], strlen(msgs[fd]));
+	write(1, "######", 6);
 
 	while (extract_message(&(msgs[fd]), &msg))
 	{

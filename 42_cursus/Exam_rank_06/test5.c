@@ -5,11 +5,12 @@
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <sys/select.h>
 
 int extract_message(char **buf, char **msg)
 {
 	char	*newbuf;
-	int	i;
+	int		i;
 
 	*msg = 0;
 	if (*buf == 0)
@@ -53,27 +54,30 @@ char *str_join(char *buf, char *add)
 	return (newbuf);
 }
 
+void err(char *msg) {
+	if (msg)
+		write(2, msg, strlen(msg));
+	else
+		write(2, "Fatal error", 11);
+	write(2, "\n", 1);
+	exit(1);
+}
+
 int main(int argc, char** argv) {
-	int sockfd, connfd, max_fd, ret;
-	socklen_t	len;
-	struct timeval timeout;
-	struct sockaddr_in servaddr, cli; 
-	fd_set	set_read, set_write;
-	char	buff[4096];
-	ssize_t	ssize_len;
+	int					sockfd, connfd, max_fd, ret;
+	socklen_t			len;
+	// struct timeval		timeout;
+	struct sockaddr_in	servaddr, cli; 
+	fd_set				set_read, set_write;
+	char				buff[4096];
+	ssize_t				ssize_len;
 
 	if (argc != 2)
-	{
-		write(1, "Wrong number of arguments\n", 26); 
-		exit(1);
-	}
+		err("Wrong number of arguments");
 	// socket create and verification 
 	sockfd = socket(AF_INET, SOCK_STREAM, 0); 
 	if (sockfd == -1)
-	{
-		write(1, "Fatal error\n", 12); 
-		exit(1);
-	} 
+		err("socket did not worked");
 	bzero(&servaddr, sizeof(servaddr)); 
 	// assign IP, PORT 
 	servaddr.sin_family = AF_INET; 
@@ -82,18 +86,12 @@ int main(int argc, char** argv) {
   
 	// Binding newly created socket to given IP and verification 
 	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
-	{ 
-		write(1, "Fatal error\n", 12); 
-		exit(1);
-	} 
+		err("bind did not worked");
 	if (listen(sockfd, 10) != 0)
-	{
-		write(1, "Fatal error\n", 12); 
-		exit(1);
-	}
+		err("listen did not work");
 	len = sizeof(cli);
-	timeout.tv_sec = 5;
-	timeout.tv_usec = 0;
+	// timeout.tv_sec = 5;
+	// timeout.tv_usec = 0;
 	FD_ZERO(&set_read);
 	FD_ZERO(&set_write);
 	FD_SET(sockfd, &set_read);
@@ -102,19 +100,18 @@ int main(int argc, char** argv) {
 	connfd = -1;
 	while (42)
 	{
-//		write(1, "loop\n", 5);
-		ret = select(max_fd + 1, &set_read, &set_write, NULL, &timeout);
+		// write(1, "loop\n", 5);
+		// ret = select(max_fd + 1, &set_read, &set_write, NULL, &timeout);
+		ret = select(max_fd + 1, &set_read, &set_write, NULL, NULL);
 		if (ret > 0)
 		{
-//			write(1, "here\n", 5);
+			write(1, "here\n", 5);
 			if (FD_ISSET(sockfd, &set_read)) // new connection
 			{
-//				write(1, "bzzz\n", 5);
+				write(1, "bzzz\n", 5);
 				connfd = accept(sockfd, (struct sockaddr *)&cli, &len);
-				if (connfd < 0) { 
-					write(1, "Fatal error\n", 12); 
-					exit(1);
-				} 
+				if (connfd < 0)
+					err("accept did not worked");
 				FD_SET(connfd, &set_read);
 				max_fd = (max_fd < connfd ? connfd : max_fd);
 				write(1, "connected\n", 10);
