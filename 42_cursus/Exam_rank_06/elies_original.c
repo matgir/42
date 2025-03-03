@@ -9,14 +9,14 @@
 #include <sys/types.h>
 #include <sys/select.h>
 
-int					sockfd, clientfd, fd_max;
+int sockfd, clientfd, fd_max;
 socklen_t			len;
-fd_set				_fds, _fds_read, _fds_write;
-struct sockaddr_in	servaddr, cli; 
+fd_set		_fds, _fds_read, _fds_write;
+struct sockaddr_in servaddr, cli; 
 int					client = 0;
 int					_usr[65000];
 char				*_msg[65000];
-char				buffer[4096];
+char				buffer[1025];
 char				send_info[50];
 
 int extract_message(char **buf, char **msg)
@@ -96,7 +96,7 @@ int main(int argc, char **argv) {
 	servaddr.sin_port = htons(atoi(argv[1])); 
 	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0) 
 		fatal();
-	if (listen(sockfd, 500) != 0)
+	if (listen(sockfd, 1024) != 0)
 		fatal();
 	FD_ZERO(&_fds);
 	FD_SET(sockfd, &_fds);
@@ -112,7 +112,6 @@ int main(int argc, char **argv) {
 		{
 			if (!FD_ISSET(fd, &_fds_read))
 				continue;
-				// next iteration of for loop
 			if (fd == sockfd)
 			{
 				len = sizeof(cli);
@@ -127,11 +126,10 @@ int main(int argc, char **argv) {
 				send_all(clientfd, send_info);
 				FD_SET(clientfd, &_fds);
 				break;
-				// gets out of for loop
 			}
 			else
 			{
-				int	ret = recv(fd, buffer, 4096, 0);
+				int	ret = recv(fd, buffer, 1024, 0);
 				if (ret <= 0)
 				{
 					sprintf(send_info, "server: client %d just left\n", _usr[fd]);
@@ -144,6 +142,7 @@ int main(int argc, char **argv) {
 				}
 				buffer[ret] = '\0';
 				_msg[fd] = str_join(_msg[fd], buffer);
+				
 				for (char *msg = NULL; extract_message(&_msg[fd], &msg);)
 				{
 					sprintf(send_info, "client %d: ", _usr[fd]);
