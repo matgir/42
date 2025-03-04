@@ -7,8 +7,8 @@ class CustomUser(models.Model):
 	username =	models.CharField(max_length=30, unique=True)
 	is_connected = models.BooleanField(default=False)
 	avatar = models.ImageField(upload_to="avatar/", default="default_avatar") #(default image if none provided)
-	victory = PositiveIntegerField(default=0)
-	defeat = PositiveIntegerField(default=0)
+	victory = models.PositiveIntegerField(default=0)
+	defeat = models.PositiveIntegerField(default=0)
 	# friends = ###
 	# match_history = ### (1v1 games, dates, result of the game)
 	# blocked_by_me = ###
