@@ -1,11 +1,14 @@
 all: build start
 	mkdir -p media/users_avatars
+	docker compose logs -f --timestamps 
+# show the logs of the docker in real time with the timestamp
 
 build:
 	docker compose up -d --build
 
 start:
 	docker compose start
+	docker compose logs -f --timestamps 
 
 stop:
 	docker compose stop

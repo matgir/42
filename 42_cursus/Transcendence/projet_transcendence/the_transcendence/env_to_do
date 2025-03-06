@@ -27,3 +27,9 @@ DATABASE_HOST=
 # your database host
 DATABASE_PORT=
 # your database port, for postgresql : 5432
+
+# 42 AUTH
+FT_CLIENT=
+# to get on 42 API
+FT_SECRET=
+# to get on 42 API

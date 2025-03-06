@@ -19,17 +19,20 @@ from django.urls import path, include
 # from users.views import CustomTokenObtainPairView, CustomTokenRefreshView, RegisterView
 # from pong_game.views import ProtectedView
 from django.views.generic import TemplateView
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('where_you_deal_with_things/', admin.site.urls),
     # this is the admin url, changed to not have the generic name
     path('transcendence_login/', include("transcendence_login.urls")),
     path("pong_game/", include("pong_game.urls")),
+    path("forty_two/", include("forty_two.urls")),
+    # path("users/", include("users.urls")),
     # path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'), #JWT
     # path('api/token/refresh/', CustomTokenRefreshView.as_view(), name='token_refresh'), #JWT
     # path('api/register/', RegisterView.as_view(), name='register'), #JWT
     # path('api/protected/', ProtectedView.as_view(), name='protected'), #JWT
     path('accounts/', include("allauth.urls")), # User managment
-    path('accounts/signup', auth_views.SignupView.as_view(template_name="users/sign_up.html")), # User managment
+    # path('accounts/signup/', TemplateView.as_view(template_name="users/sign_up.html"), name="signup"), # User managment
     path("", TemplateView.as_view(template_name="users/home.html"), name="home"), # should create our own view
 ]

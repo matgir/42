@@ -36,23 +36,30 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")
 # Application definition
 
 INSTALLED_APPS = [
+    # default
     'django.contrib.admin',
     'django.contrib.auth', #contains auth framework and its default models
     'django.contrib.contenttypes', #to allow permissions to be assiciated with my own model
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # JWT
     'rest_framework', # JWT
     'rest_framework_simplejwt', #JWT
     'users', # JWT
+    # allauth
     'django.contrib.sites', #User Managment
     'allauth', #User Managment
     'allauth.account', #User Managment
+    'allauth.socialaccount', #User Managment
+    # custom
     'pong_game',
     'transcendence_login',
+    'forty_two',
 ]
 
 MIDDLEWARE = [
+    # default
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware', #manage sessions across requests
     'django.middleware.common.CommonMiddleware',
@@ -60,21 +67,29 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware', #associates user with requests using sessions
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # allauth
     'allauth.account.middleware.AccountMiddleware', #User Managment
 ]
 
 # Django allauth configurations
 AUTHENTICATION_BACKENDS = [
+    # default
     'django.contrib.auth.backends.ModelBackend', #User Managment
+    # allauth
     'allauth.account.auth_backends.AuthenticationBackend', #User Managment
 ]
 
 SITE_ID = 1 #User Managment
 
-ACCOUNT_EMAIL_VERIFICATION = "none" #User Managment
+# Allauth settings
+ACCOUNT_EMAIL_REQUIRED = False # no need of email for signing up
+ACCOUNT_EMAIL_VERIFICATION = "none" # no way to ckeck email because no email
+ACCOUNT_LOGIN_METHODS = "username" # use username to login
+ACCOUNT_USERNAME_MIN_LENGHT = 5 # minimum lenght of username of 5
+ACCOUNT_USERNAME_VALIDATORS = 'users.validators.custom_username_validdators' # custom way to check username, only ascii and @, ., +, -, _
 
 LOGIN_REDIRECT_URL = 'home'
-# Where users are redirected after login in successfully, if not specified
+# Where users are redirected after login in successfully or signing up, if not specified
 # elsewhere
 # LOGIN_URL = '/'
 # Where users are redirected if they try to access a protected view whithout
@@ -87,7 +102,7 @@ ROOT_URLCONF = 'global_transcendence.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"], # to know where to look for templates
+        # 'DIRS': [BASE_DIR / * / "templates"], # to know where to look for templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -213,7 +228,26 @@ SIMPLE_JWT = {
     # the claim in the JWT that specifies the type of token (access or refresh)
 }
 
-# AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = 'users.CustomUser'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL = ####
+
+SOCIALACCOUNT_PROVIDERS = {
+    "fortytwo": {
+        "APP": {
+            "client_id": os.getenv('FT_CLIENT'),
+            "secret": os.getenv('FT_SECRET'),
+        },
+        "SCOPE": [
+            "public",
+        ],
+        "AUTH_PARAMS": {
+            "response_type": "code",
+        },
+    }
+}
+
+SOCIALACCOUNT_LOGIN_ON_GET=False
+
+SOCIALACCOUNT_STORE_TOKENS=True

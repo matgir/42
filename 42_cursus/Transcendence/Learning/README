@@ -12,6 +12,8 @@ command to set up django project inside .venv
 	<$> mkdir djangotutorial
 	<$> django-admin startproject mysite djangotutorial
 	creates a prject called mysite inside djangotutorial
+	<$> python manage.py startapp <app_name>
+	creates an app to your existing project
 
 usefull site for understanding css
 	https://www.w3schools.com/cssref/playdemo.php?filename=playcss_accent-color
