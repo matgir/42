@@ -61,3 +61,5 @@ History of usefull website
 		https://docs.djangoproject.com/en/5.1/topics/db/models/
 	Django auth system
 		https://docs.djangoproject.com/en/5.1/topics/auth/default/
+	how to write to protect against sql injection
+		https://www.stackhawk.com/blog/sql-injection-prevention-django/

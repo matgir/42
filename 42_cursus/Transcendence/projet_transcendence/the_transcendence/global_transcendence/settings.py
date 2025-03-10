@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     # custom
     'pong_game',
     'transcendence_login',
-    'forty_two',
+    'fortytwo',
 ]
 
 MIDDLEWARE = [
@@ -88,7 +88,7 @@ ACCOUNT_LOGIN_METHODS = "username" # use username to login
 ACCOUNT_USERNAME_MIN_LENGHT = 5 # minimum lenght of username of 5
 ACCOUNT_USERNAME_VALIDATORS = 'users.validators.custom_username_validdators' # custom way to check username, only ascii and @, ., +, -, _
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/'
 # Where users are redirected after login in successfully or signing up, if not specified
 # elsewhere
 # LOGIN_URL = '/'
@@ -238,6 +238,7 @@ SOCIALACCOUNT_PROVIDERS = {
         "APP": {
             "client_id": os.getenv('FT_CLIENT'),
             "secret": os.getenv('FT_SECRET'),
+            # "key": "",
         },
         "SCOPE": [
             "public",

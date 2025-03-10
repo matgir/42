@@ -13,6 +13,10 @@ class FortytwoOAuth2Adapter(OAuth2Adapter):
 	authorize_url = f'{FT_API_BASE_URL}/oauth/authorize'
 	profile_url = f'{FT_API_BASE_URL}/v2/me'
 
+	def get_callback_url(self, request, app):
+		callback_url = super().get_callback_url(request, app)
+		print("Callback URL being sent to 42 API:", callback_url)
+		return callback_url
 
 	def complete_login(self, request, app, token, **kwargs):
 		headers = {
