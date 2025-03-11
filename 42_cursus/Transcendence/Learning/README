@@ -50,6 +50,19 @@ user model
 Django Password hash
 	https://docs.djangoproject.com/en/5.1/topics/auth/passwords/
 
+To see all URL in your django project, type in django shell
+	from django.urls import get_resolver
+
+	def list_urls(patterns, prefix=''):
+		for pattern in patterns:
+			if hasattr(pattern, 'url_patterns'):  # If it's an included URL pattern
+				list_urls(pattern.url_patterns, prefix + str(pattern.pattern))
+			else:
+				print(prefix + str(pattern.pattern))
+
+	list_urls(get_resolver().url_patterns)
+
+
 History of usefull website
 	django tutorial part 1 trough 8
 		https://docs.djangoproject.com/en/5.1/

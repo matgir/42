@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+<h1>
+	{{ user.display_name}}
+</h1>
+<img src="{{ user.avatar.url }}" alt="Avatar">
+<p>
+	Wins : {{ user.wins }} | Losses : {{ user.losses }}
+</p>
+<a href="{% url 'add_friend' user.username %}">
+	Add Friend
+</a>

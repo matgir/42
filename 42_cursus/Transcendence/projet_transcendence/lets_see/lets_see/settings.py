@@ -43,12 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # users
+    # allauth/users
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    # custom
     'users',
+    'tournament',
 ]
 
 MIDDLEWARE = [
@@ -64,12 +66,33 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware', #User Managment
 ]
 
+AUTH_USER_MODEL = 'users.CustomUser'
+# to use our user model define in the users folder
+
+AUTHENTICATION_BACKENDS = [
+    # default
+    'django.contrib.auth.backends.ModelBackend',
+    # allauth
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+# to use allauth when authenticating users
+
+SITE_ID = 1
+# allauth
+
+# allauth settings
+ACCOUNT_EMAIL_REQUIRED = False # no need of email for signing up
+ACCOUNT_EMAIL_VERIFICATION = "none" # no way to ckeck email because no email
+ACCOUNT_LOGIN_METHODS = "username" # use username to login
+ACCOUNT_USERNAME_MIN_LENGHT = 5 # minimum lenght of username of 5
+ACCOUNT_USERNAME_VALIDATORS = 'users.validators.custom_username_validdators' # custom way to check username, only ascii and @, ., +, -, _
+
 ROOT_URLCONF = 'lets_see.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/ "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -97,6 +120,7 @@ DATABASES = {
         'PASSWORD' : os.environ.get("DATABASE_PASSWORD"),
         'HOST' : os.environ.get("DATABASE_HOST"),
         'PORT' : os.environ.get("DATABASE_PORT"),
+        'TIME_ZONE' : 'Europe/Paris',
     }
 }
 
@@ -141,12 +165,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-AUTH_USER_MODEL = 'users.CustomUser'
-# to use our user model define in the users folder
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-# to use allauth when authenticating users

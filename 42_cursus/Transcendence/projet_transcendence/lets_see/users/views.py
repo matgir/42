@@ -21,3 +21,14 @@ def add_friend(request, username):
     user_to_add = get_object_or_404(CustomUser, username=username)
     request.user.friends.add(user_to_add)
     return redirect('profile', username=username)
+
+@login_required
+def user_profile(request, username):
+    user = get_object_or_404(CustomUser, username=username)
+    return render(request, 'users/profile.html', {'user': user})
+
+@login_required
+def search_friends(request):
+    query = request.GET.get('q', '')
+    results = CustomUser.object.filter(display_name__icontains=query) if query else None
+    return render(request, 'users/search_results.html', {'results': results, 'query': query})
