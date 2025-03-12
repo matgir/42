@@ -19,6 +19,8 @@ def profile_update(request):
 @login_required
 def add_friend(request, username):
     user_to_add = get_object_or_404(CustomUser, username=username)
+    if user_to_add.username == request.user.username or request.user.friends.filter(username=user_to_add.username):
+        return redirect('user_profile', username=request.user.username)
     request.user.friends.add(user_to_add)
     return redirect('user_profile', username=username)
 

@@ -2,13 +2,17 @@
 
 {% block content %}
 <h1>
-	{{ user.username}}
+	{{ user.username }}
 </h1>
 <img src="{{ user.avatar.url }}" alt="Avatar">
 <p>
 	Wins : {{ user.wins }} | Losses : {{ user.losses }}
 </p>
+<!-- if not user.username == user.username -->
 <a href="{% url 'add_friend' user.username %}">
 	Add Friend
+</a>
+<a href="{% url 'match_history' user.username %}">
+	View Match History
 </a>
 {% endblock %}

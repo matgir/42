@@ -1,24 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<nav>
-	<a href="{% url 'home' %}">
-		Home
-	</a>
-	{% if user.is_authenticated %}
-	<a href="{% url 'profile_edit' %}">
-		Edit Profile
-	</a>
-	<a href="{% url 'account_logout' %}">
-		Logout
-	</a>
-	{% else %}
-	<a href="{% url 'account_login' %}">
-		Login
-	</a>
-	<a href="{% url 'account_signup' %}">
-		Sign Up
-	</a>
-	{% endif %}
-</nav>
+<h1>
+	WELCOME TO DA PONG GAME
+</h1>
 {% endblock %}

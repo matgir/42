@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="{% url 'match_history' user.username %}">
-	View Match History
-</a>
+<h1>
+	{{ user.username }}'s match history'
+</h1>
 {% endblock %}

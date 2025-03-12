@@ -5,7 +5,7 @@ from django.db import models
 
 class CustomUser(AbstractUser):
 	# display_name = models.CharField(max_length=30, unique=True)
-	avatar = models.ImageField(upload_to='users_avatars/', default='default_avatar.png')
+	avatar = models.ImageField(upload_to="avatars/", default="default.png")
 	friends = models.ManyToManyField('self', blank=True)
 	wins = models.PositiveIntegerField(default=0)
 	losses = models.PositiveIntegerField(default=0)
