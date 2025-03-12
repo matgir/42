@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% block content %}
 <nav>
 	<a href="{% url 'home' %}">
 		Home
@@ -20,3 +21,4 @@
 	</a>
 	{% endif %}
 </nav>
+{% endblock %}

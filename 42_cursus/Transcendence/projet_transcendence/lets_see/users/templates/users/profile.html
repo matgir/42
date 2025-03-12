@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
+{% block content %}
 <h1>
-	{{ user.display_name}}
+	{{ user.username}}
 </h1>
 <img src="{{ user.avatar.url }}" alt="Avatar">
 <p>
@@ -10,3 +11,4 @@
 <a href="{% url 'add_friend' user.username %}">
 	Add Friend
 </a>
+{% endblock %}

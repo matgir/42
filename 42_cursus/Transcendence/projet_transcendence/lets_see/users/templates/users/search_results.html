@@ -13,7 +13,7 @@ Search Friends
 	{% for user in results %}
 	<li>
 		<a href="{% url 'user_profile' user.username %}">
-			{{ user.display_name }}
+			{{ user.username }}
 		</a>
 		<a href="{% url 'add_friend' user.username %}">
 			Add Friend

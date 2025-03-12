@@ -77,6 +77,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 # to use allauth when authenticating users
 
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/users/account/login/'
+
+
 SITE_ID = 1
 # allauth
 
@@ -165,3 +169,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_ROOT = '/app/media/users_avatars/'

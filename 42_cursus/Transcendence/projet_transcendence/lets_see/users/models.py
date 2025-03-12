@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 class CustomUser(AbstractUser):
-	display_name = models.CharField(max_length=30, unique=True)
+	# display_name = models.CharField(max_length=30, unique=True)
 	avatar = models.ImageField(upload_to='users_avatars/', default='default_avatar.png')
 	friends = models.ManyToManyField('self', blank=True)
 	wins = models.PositiveIntegerField(default=0)
@@ -12,4 +12,4 @@ class CustomUser(AbstractUser):
 	online_status = models.BooleanField(default=False)
 
 	def __str__(self):
-		return self.display_name
+		return self.username
