@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}
+			Da pong Game
+			{% endblock %}
+		</title>
+		<style>
+			nav {
+				background-color: #333;
+				padding: 10px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			nav a {
+				color: white;
+				text-decoration: none;
+				margin: 0 10px;
+				padding: 8px 12px;
+				background-color: #555;
+				border-radius: 5px;
+			}
+			nav a:hover {
+				background-color: #777;
+			}
+			.search-form {
+				display: flex;
+				align-items: center;
+			}
+			.search-form input {
+				padding: 5px;
+				margin-right: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<nav>
+			<div>
+				<a href="{% url 'home' %}">
+					Home
+				</a>
+				{% if user.is_authenticated %}
+				<a href="{% url 'user_profile' user.username %}">
+					My Profile
+				</a>
+				<a href="{% url 'match_history' user.username %}">
+					Match History
+				</a>
+				{% endif %}
+			</div>
+			{% if user.is_authenticated %}
+			<div class="search-form">
+				<form method="GET" action="{% url 'search_friends' %}">
+					<input type="text" name="q" placeholder="Search friends" required>
+					<button type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+			{% endif %}
+			<div>
+				{% if user.is_authenticated %}
+				<a href="{% url 'account_logout' %}">
+					Logout
+				</a>
+				{% else %}
+				<a href="{% url 'account_login' %}">
+					Login
+				</a>
+				<a href="{% url 'account_signup' %}">
+					Sign Up
+				</a>
+				<a href="https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code">
+					Log in with 42
+				</a>
+				{% endif %}
+			</div>
+		</nav>
+	</body>
+	<div>
+		{% block content %}
+		{% endblock %}
+	</div>
+</html>
