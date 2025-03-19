@@ -9,5 +9,7 @@ urlpatterns = [
 	path('profile/edit/', views.profile_update, name='profile_edit'),
 	path('search/', views.search_friends, name='search_friends'),
 	path('add-friend/<str:username>/', views.add_friend, name='add_friend'),
-	path('<str:username>/', views.user_profile, name='user_profile'),
+	path('remove-friend/<str:username>/', views.remove_friend, name='remove_friend'),
+	path('profile/<str:username>/', views.user_profile, name='user_profile'),
+	path('my_profile/', views.my_profile, name='my_profile'),
 ]

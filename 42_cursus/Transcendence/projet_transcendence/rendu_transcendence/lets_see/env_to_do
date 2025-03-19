@@ -4,7 +4,6 @@ DJANGO_SECRET_KEY=
 # to generate a new key, you can change the number the higher the more secured
 DEBUG=
 # True when in dev, False when in prod
-DJANGO_LOGLEVEL=
 DJANGO_ALLOWED_HOSTS=
 # where you want to be able to connect
 DJANGO_SUPERUSER=

@@ -84,7 +84,7 @@ AUTHENTICATION_BACKENDS = [
 # to use allauth when authenticating users
 
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/users/account/login/'
+LOGIN_URL = '/users/accounts/login/'
 
 
 SITE_ID = 1

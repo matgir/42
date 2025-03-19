@@ -1,9 +1,9 @@
 all: build start
-	-mkdir -p media/avatars
 	docker compose logs -f --timestamps 
 # show the logs of the docker in real time with the timestamp
 
 build:
+	-mkdir media/avatars
 	docker compose up -d --build
 
 start:
@@ -18,6 +18,7 @@ restart: stop start
 rebuildstart: stop all
 
 prune:
+	rm -rf media/avatars
 	-docker stop $$(docker ps -aq)
 	-docker rm -f $$(docker ps -aq)
 	-docker rmi -f $$(docker image ls -aq)

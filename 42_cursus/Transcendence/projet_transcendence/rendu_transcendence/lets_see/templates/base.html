@@ -1,5 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+	{% if messages %}
+		<ul class=""messages>
+			{% for message in messages %}
+				<li class="{{ message.tags }}">
+					{{ message }}
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	<script>
+		document.addEventListener("DOMContentLoaded", function (){
+			setTimeout(function() {
+						let messages = document.querySelector(".messages li");
+						messages.forEach(function (message) {
+							message.style.opacity = "0";
+							setTimeout(() => message.style.display = "none", 500);
+						});
+					}, 3 );
+				});
+	</script>
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,10 +64,10 @@
 					Home
 				</a>
 				{% if user.is_authenticated %}
-				<a href="{% url 'user_profile' user.username %}">
+				<a href="{% url 'my_profile' %}">
 					My Profile
 				</a>
-				<a href="{% url 'match_history' user.username %}">
+				<a href="{% url 'my_match_history' %}">
 					Match History
 				</a>
 				{% endif %}
