@@ -21,14 +21,14 @@ def profile_update(request):
 def add_friend(request, username):
 	# print("request in add friend is : \n\t", request)#####
 	if request.user.username == username:
-		messages.error(request, "You can not be friends with yoursefl.")
+		messages.error(request, "You can not be friends with yoursefl.", extra_tags="error")
 		return (my_profile(request))
 	if request.user.friends.filter(username=username).exists():
-		messages.error(request, f"You are already friends with {username}.")
+		messages.error(request, f"You are already friends with {username}.", extra_tags="warning")
 	else:
 		user_to_add = get_object_or_404(CustomUser, username=username)
 		request.user.friends.add(user_to_add)
-		messages.success(request, f"You are now friends with {username}.")
+		messages.success(request, f"You are now friends with {username}.", extra_tags="success")
 	return redirect('user_profile', username=username)
 	# print("\nuser_to_add in add friend is : \n\t", user_to_add.username, "\nrequest.user.username in add frisnd is : \n\t", request.user.username) #####
 	# if user_to_add.username == request.user.username or request.user.friends.filter(username=user_to_add.username):
@@ -40,9 +40,9 @@ def remove_friend(request, username):
 	if request.user.friends.filter(username=username).exists():
 		user_to_remove = get_object_or_404(CustomUser, username=username)
 		request.user.friends.remove(user_to_remove)
-		messages.success(request, f"You removed {username} from your friends")
+		messages.success(request, f"You removed {username} from your friends", extra_tags="success")
 	else:
-		messages.error(request, f"{username} is not in your friends list")
+		messages.error(request, f"{username} is not in your friends list", extra_tags="warning")
 	return redirect('user_profile', username=username)
 
 # @login_required

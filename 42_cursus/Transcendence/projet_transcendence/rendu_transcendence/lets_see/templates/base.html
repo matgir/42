@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-	{% if messages %}
+	<!-- {% if messages %}
 		<ul class=""messages>
 			{% for message in messages %}
 				<li class="{{ message.tags }}">
@@ -8,18 +8,7 @@
 				</li>
 			{% endfor %}
 		</ul>
-	{% endif %}
-	<script>
-		document.addEventListener("DOMContentLoaded", function (){
-			setTimeout(function() {
-						let messages = document.querySelector(".messages li");
-						messages.forEach(function (message) {
-							message.style.opacity = "0";
-							setTimeout(() => message.style.display = "none", 500);
-						});
-					}, 3 );
-				});
-	</script>
+	{% endif %} -->
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +44,27 @@
 				padding: 5px;
 				margin-right: 5px;
 			}
+			.message-popup {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			min-width: 250px;
+			padding: 15px;
+			border-radius: 8px;
+			color: white;
+			font-size: 16px;
+			display: none;
+			opacity: 0;
+			transition: opacity 0.5s ease-in-out;
+			z-index: 1000;
+			}
+			.message-popup.success { background-color: #4CAF50; } /* Green */
+			.message-popup.error { background-color: #f44336; } /* Red */
+			.message-popup.warning { background-color: #ff9800; } /* Orange */
+			.message-popup.show {
+				display: block;
+				opacity: 1;
+			}
 		</style>
 	</head>
 	<body>
@@ -67,9 +77,9 @@
 				<a href="{% url 'my_profile' %}">
 					My Profile
 				</a>
-				<a href="{% url 'my_match_history' %}">
+				<!-- <a href="{% url 'my_match_history' %}">
 					Match History
-				</a>
+				</a> -->
 				{% endif %}
 			</div>
 			{% if user.is_authenticated %}
@@ -101,8 +111,43 @@
 			</div>
 		</nav>
 	</body>
-	<div>
+	<body>
 		{% block content %}
 		{% endblock %}
-	</div>
+	
+		<!-- Message Pop-up Container -->
+		<div id="message-popup" class="message-popup"></div>
+	
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				const messagePopup = document.getElementById("message-popup");
+	
+				{% if messages %}
+					let messages = [
+						{% for message in messages %}
+							{ text: "{{ message|escapejs }}", tag: "{{ message.tags }}" },
+						{% endfor %}
+					];
+	
+					function showMessage(index) {
+						if (index < messages.length) {
+							let msg = messages[index];
+	
+							messagePopup.innerText = msg.text;
+							messagePopup.className = "message-popup " + msg.tag + " show";
+	
+							setTimeout(() => {
+								messagePopup.classList.remove("show");
+								setTimeout(() => {
+									showMessage(index + 1);
+								}, 500);  // Delay before next message
+							}, 3000);  // Message duration
+						}
+					}
+	
+					showMessage(0);
+				{% endif %}
+			});
+		</script>
+	</body>
 </html>
