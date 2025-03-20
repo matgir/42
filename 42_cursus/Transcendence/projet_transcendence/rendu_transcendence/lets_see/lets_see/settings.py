@@ -42,6 +42,10 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")
 # Application definition
 
 INSTALLED_APPS = [
+    # daphne
+    "daphne",
+    #websocket
+    "channels",
     # default
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,6 +61,7 @@ INSTALLED_APPS = [
     # custom
     'users',
     'tournament',
+    'fortytwo',
 ]
 
 MIDDLEWARE = [
@@ -85,7 +90,6 @@ AUTHENTICATION_BACKENDS = [
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/users/accounts/login/'
-
 
 SITE_ID = 1
 # allauth
@@ -118,7 +122,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'lets_see.wsgi.application'
-
+ASGI_APPLICATION = "lets_see.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -135,7 +139,6 @@ DATABASES = {
         'TIME_ZONE' : 'Europe/Paris',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -155,7 +158,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -166,7 +168,6 @@ TIME_ZONE = 'Europe/Paris'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
