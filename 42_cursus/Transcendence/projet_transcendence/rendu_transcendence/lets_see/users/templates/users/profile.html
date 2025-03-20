@@ -4,17 +4,25 @@
 <h1>
 	{{ user.username }}
 </h1>
-<img src="{{ user.avatar.url }}" alt="Avatar">
+<img src="{{ user.avatar.url }}" alt="Avatar" witdth="100px">
 <p>
 	Wins : {{ user.wins }} | Losses : {{ user.losses }}
 </p>
-<a href="{% url 'add_friend' user.username %}">
-	Add Friend
-</a>
-<a href="{% url 'remove_friend' user.username %}">
-	Remove Friend
-</a>
-<a href="{% url 'match_history' user.username %}">
-	View Match History
-</a>
+{% if user == request.user %}
+	<a href="{% url 'match_history' user.username %}">
+		View Match History
+	</a>
+	<hr>
+	<a href="{% url 'friends_list' %}">
+		View friends
+	</a>
+{% else %}
+	<a href="{% url 'add_friend' user.username %}">
+		Add Friend
+	</a>
+	<hr>
+	<a href="{% url 'remove_friend' user.username %}">
+		Remove Friend
+	</a>
+{% endif %}
 {% endblock %}

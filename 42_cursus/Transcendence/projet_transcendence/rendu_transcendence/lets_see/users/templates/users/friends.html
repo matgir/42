@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+My friends
+{% endblock %}
+
+{% block content %}
+<h2>
+	My Friends
+</h2>
+{% if friends %}
+<ul>
+	{% for friend in friends %}
+	<li>
+		<a href="{% url 'user_profile' friend.username %}">
+			{{ friend.username }}
+		</a>
+		<!-- <a href="{% url 'remove_friend' friend.username %}">
+			Remove from friends
+		</a> -->
+	</li>
+	{% endfor %}
+</ul>
+{% else %}
+<p>
+	You have no friends yet.
+</p>
+{% endif %}
+{% endblock %}

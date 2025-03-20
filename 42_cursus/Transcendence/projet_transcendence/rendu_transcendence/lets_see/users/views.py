@@ -22,7 +22,7 @@ def add_friend(request, username):
 	# print("request in add friend is : \n\t", request)#####
 	if request.user.username == username:
 		messages.error(request, "You can not be friends with yoursefl.", extra_tags="error")
-		return (my_profile(request))
+		return (redirect('my_profile'))
 	if request.user.friends.filter(username=username).exists():
 		messages.error(request, f"You are already friends with {username}.", extra_tags="warning")
 	else:
@@ -37,6 +37,9 @@ def add_friend(request, username):
 
 @login_required
 def remove_friend(request, username):
+	if request.user.username == username:
+		message.error(request, "As you can not be friends with yourself, you can not unfriend yourself.", extra_tags='error')
+		return (redirect('my_profile'))
 	if request.user.friends.filter(username=username).exists():
 		user_to_remove = get_object_or_404(CustomUser, username=username)
 		request.user.friends.remove(user_to_remove)
@@ -87,3 +90,8 @@ def search_friends(request):
 		None
 	# print("query in search friends is : \n\t", query, "\nresults in search friends is : \n\t", results)#####
 	return render(request, 'users/search_results.html', {'results': results, 'query': query})
+
+@login_required
+def friends_list(request):
+	friends = request.user.friends.all()
+	return render(request, 'users/friends.html', {'friends': friends})
