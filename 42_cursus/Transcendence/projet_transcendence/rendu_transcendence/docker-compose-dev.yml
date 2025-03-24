@@ -11,10 +11,12 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     env_file:
-      - .env
+      - dev.env
 
   the_transcendence:
-    build: .
+    build:
+      context: ./lets_see/
+      dockerfile: Dockerfile.dev
     container_name: the_transcendence
     ports:
       - "8000:8000"
@@ -31,8 +33,15 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_PORT: ${DATABASE_PORT}
+
+      OAUTH_CLIENT_ID: ${OAUTH_CLIENT_ID}
+      OAUTH_CLIENT_SECRET: ${OAUTH_CLIENT_SECRET}
     env_file:
-      - .env
-    
+      - dev.env
+    expose:
+      - 8000
+
 volumes:
   postgres_data:
+  caddy_data:
+  caddy_config:

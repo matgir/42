@@ -10,6 +10,7 @@ PyJWT==2.10.1
 pillow==11.1.0
 psycopg2-binary==2.9.10
 requests==2.32.3
+channels-redis==4.2.1
 sqlparse==0.5.2
 #gunicorn==23.0.0
 #djangorestframework_simplejwt==5.4.0

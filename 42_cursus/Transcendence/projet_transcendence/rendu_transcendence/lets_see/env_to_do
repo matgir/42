@@ -28,7 +28,7 @@ DATABASE_PORT=
 # your database port, for postgresql : 5432
 
 # 42 AUTH
-FT_CLIENT=
+OAUTH_CLIENT_ID=
 # to get on 42 API
-FT_SECRET=
+OAUTH_CLIENT_SECRET=
 # to get on 42 API

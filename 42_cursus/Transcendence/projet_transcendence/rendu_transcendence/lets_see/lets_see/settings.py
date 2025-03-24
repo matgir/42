@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os #for using the getenv function to get info from my .env
 from datetime import timedelta #to set the date and time to europe paris
+# from dotenv import load_dotenv
+from distutils.util import strtobool
+
+# load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,14 +30,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # Get environment variables
-OAUTH_CLIENT_ID = os.getenv('OAUTH_CLIENT_ID')
-OAUTH_CLIENT_SECRET = os.getenv('OAUTH_CLIENT_SECRET')
+OAUTH_CLIENT_ID = os.environ.get('OAUTH_CLIENT_ID')
+OAUTH_CLIENT_SECRET = os.environ.get('OAUTH_CLIENT_SECRET')
 
-DJANGO_SETTINGS_MODULE = os.getenv("DJANGO_SETTINGS_MODULE", "lets_see.settings")
+DJANGO_SETTINGS_MODULE = os.environ.get("DJANGO_SETTINGS_MODULE", "lets_see.settings")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = bool(os.environ.get("DEBUG"))
+# DEBUG = os.environ.get("DEBUG", "False") == True
+# DEBUG = False
+# DEBUG = os.environ.get("DEBUG")
+# DEBUG = bool(os.environ.get("DEBUG"))
+DEBUG = bool(strtobool(os.environ.get("DEBUG")))
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")
@@ -172,7 +180,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -194,3 +202,15 @@ ACCOUNT_FORMS = {
     'signup': 'allauth.account.forms.SignupForm',
     'user_token': 'allauth.account.forms.UserTokenForm',
 }
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer", # in dev
+        # "BACKEND": "channels_redis.core.RedisChannelLayer", #in prod
+        # "CONFIG": { # in prod
+            # "hosts": [("127.0.0.1", 6379)], # in prod
+        # }, # in prod
+    }
+}
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

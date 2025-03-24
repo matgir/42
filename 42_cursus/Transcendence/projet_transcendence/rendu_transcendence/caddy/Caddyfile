@@ -1,0 +1,10 @@
+{
+	https_port 4443
+	http_port 8080
+}
+
+localhost {
+	reverse_proxy the_transcendence:8000
+	encode gzip
+	tls internal
+}
