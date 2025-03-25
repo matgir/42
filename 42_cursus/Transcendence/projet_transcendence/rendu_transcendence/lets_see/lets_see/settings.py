@@ -37,11 +37,11 @@ DJANGO_SETTINGS_MODULE = os.environ.get("DJANGO_SETTINGS_MODULE", "lets_see.sett
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
+DEBUG = False
 # DEBUG = os.environ.get("DEBUG", "False") == True
-# DEBUG = False
 # DEBUG = os.environ.get("DEBUG")
 # DEBUG = bool(os.environ.get("DEBUG"))
-DEBUG = bool(strtobool(os.environ.get("DEBUG")))
+# DEBUG = bool(strtobool(os.environ.get("DEBUG")))
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")

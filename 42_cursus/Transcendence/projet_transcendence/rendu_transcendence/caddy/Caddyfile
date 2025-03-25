@@ -4,7 +4,19 @@
 }
 
 localhost {
-	reverse_proxy the_transcendence:8000
+	handle_path /static/* {
+		root * /app/static
+		file_server browse
+	}
+
+	handle /media/* {
+		root * /app/media
+		file_server browse
+	}
+
+	handle {
+		reverse_proxy the_transcendence:8000
+	}
 	encode gzip
 	tls internal
 }

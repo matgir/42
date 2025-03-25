@@ -40,6 +40,9 @@ services:
       - .env
     expose:
       - 8000
+    volumes:
+      - ./lets_see/media:/app/media
+      - ./lets_see/static:/app/static
 
   caddy:
     image: caddy:latest
@@ -50,6 +53,8 @@ services:
       - "4443:4443"
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./lest_see/media:/app/media
+      - ./lets_see/static:/app/static
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
