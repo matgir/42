@@ -3,7 +3,7 @@ all: build_prod start_prod
 # show the logs of the docker in real time with the timestamp
 
 build_prod:
-	-mkdir lets_see/media/avatars
+	-mkdir -p -v lets_see/media/avatars
 	docker compose -f docker-compose-prod.yml up -d --build
 
 start_prod:
@@ -21,7 +21,7 @@ dev: build_dev start_dev
 	docker compose -f docker-compose-dev.yml logs -f --timestamps
 
 build_dev:
-	-mkdir lets_see/media/avatars
+	-mkdir -p -v lets_see/media/avatars
 	docker compose -f docker-compose-dev.yml up -d --build
 
 start_dev:

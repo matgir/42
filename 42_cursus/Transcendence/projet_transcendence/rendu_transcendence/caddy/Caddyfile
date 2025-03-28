@@ -10,7 +10,7 @@ localhost {
 	}
 
 	handle /media/* {
-		root * /app/media
+		root * /app
 		file_server browse
 	}
 

@@ -29,7 +29,7 @@ def add_friend(request, username):
 		user_to_add = get_object_or_404(CustomUser, username=username)
 		request.user.friends.add(user_to_add)
 		messages.success(request, f"You are now friends with {username}.", extra_tags="success")
-	return redirect('user_profile', username=username)
+	return redirect('friends_list')
 	# print("\nuser_to_add in add friend is : \n\t", user_to_add.username, "\nrequest.user.username in add frisnd is : \n\t", request.user.username) #####
 	# if user_to_add.username == request.user.username or request.user.friends.filter(username=user_to_add.username):
 		# return redirect('my_profile')
@@ -46,7 +46,7 @@ def remove_friend(request, username):
 		messages.success(request, f"You removed {username} from your friends", extra_tags="success")
 	else:
 		messages.error(request, f"{username} is not in your friends list", extra_tags="warning")
-	return redirect('user_profile', username=username)
+	return redirect('friends_list')
 
 # @login_required
 # def user_profile(request, username):

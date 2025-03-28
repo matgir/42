@@ -53,12 +53,13 @@ services:
       - "4443:4443"
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-      - ./lest_see/media:/app/media
+      - ./lets_see/media:/app/media
       - ./lets_see/static:/app/static
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
-      - the_transcendence
+      the_transcendence:
+        condition: service_started
 
 volumes:
   postgres_data:
