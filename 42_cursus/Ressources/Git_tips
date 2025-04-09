@@ -87,7 +87,7 @@ git reset :	unstages all staged file (the git add command was used on them),
 	git reset --mixed <commitID> :	moves head to <commitID>, deletes later
 									commits, deletes staged files, keeps changes
 									in your working directory
-	git reset --soft <commitID> :	moves head to <commitID>, deletes permanantly
+	git reset --hard <commitID> :	moves head to <commitID>, deletes permanantly
 									later commits, deletes staged files, deletes
 									changes in your working directory
 
