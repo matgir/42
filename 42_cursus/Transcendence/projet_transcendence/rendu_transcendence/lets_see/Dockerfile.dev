@@ -32,8 +32,6 @@ COPY ./run_dev.sh /tmp/
 EXPOSE 8000
 # expose the django port
 
-# ENV DEBUG=True
-
 ENTRYPOINT ["sh", "/tmp/run_dev.sh"]
 # run the django's development server
 

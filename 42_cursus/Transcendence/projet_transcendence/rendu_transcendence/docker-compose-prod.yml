@@ -18,13 +18,10 @@ services:
       context: ./lets_see/
       dockerfile: Dockerfile.prod
     container_name: the_transcendence
-    # ports:
-    #   - "8000:8000"
     depends_on:
       - db
     environment:
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
-      DEBUG: ${DEBUG}
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
       DATABASE_ENGINE: ${DATABASE_ENGINE}
       DATABASE_NAME: ${DATABASE_NAME}
@@ -41,6 +38,7 @@ services:
     expose:
       - 8000
     volumes:
+      - ./lets_see:/app
       - ./lets_see/media:/app/media
       - ./lets_see/static:/app/static
 

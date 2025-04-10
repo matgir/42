@@ -25,14 +25,13 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN apk update && apk upgrade && apk add --no-cache postgresql-client
 # may erase it later, needed to check postgresql connection
 
-COPY . /app/
+# COPY . /app/
+COPY ./run_prod.sh /tmp/
 # copy the django project to the container
 
 EXPOSE 8000
 # expose the django port
 
-# ENV DEBUG=False
-
-ENTRYPOINT ["sh", "run_prod.sh"]
+ENTRYPOINT ["sh", "/tmp/run_prod.sh"]
 # run the django's development server
 

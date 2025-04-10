@@ -22,11 +22,8 @@ services:
       - "8000:8000"
     depends_on:
       - db
-    volumes:
-      - ./lets_see:/app
     environment:
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
-      DEBUG: ${DEBUG}
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
       DATABASE_ENGINE: ${DATABASE_ENGINE}
       DATABASE_NAME: ${DATABASE_NAME}
@@ -42,6 +39,8 @@ services:
       - dev.env
     expose:
       - 8000
+    volumes:
+      - ./lets_see:/app
 
 volumes:
   postgres_data:
