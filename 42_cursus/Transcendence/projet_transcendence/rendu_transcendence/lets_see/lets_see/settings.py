@@ -36,8 +36,8 @@ OAUTH_CLIENT_SECRET = os.environ.get('OAUTH_CLIENT_SECRET')
 DJANGO_SETTINGS_MODULE = os.environ.get("DJANGO_SETTINGS_MODULE", "lets_see.settings")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")
