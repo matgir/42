@@ -16,7 +16,9 @@ import os
 from django.urls import reverse
 from django.conf import settings
 from users.models import CustomUser
-from allauth.account.forms import LoginForm
+# from allauth.account.forms import LoginForm
+from django.contrib.auth import login
+from django.contrib.auth import get_backends
 
 # HELPFUL TOOL
 # SUPPRIMER
@@ -145,25 +147,30 @@ def	pong_game(request):
     else:
         return JsonResponse({"error": "Impossible de récupérer les infos utilisateur"}, status=500)
 
-    #     # Vérifier si l'utilisateur existe déjà
-    # user, created = CustomUser.objects.get_or_create(
-    #     # intra_id=user_info["login"],
-    #     defaults={
-    #         "username": user_info["login"],  # Nom d'utilisateur 42
-    #         "avatar": user_info["image"]["link"]  # URL de l'avatar
-    #     }
-    # )
 
-    # # Mettre à jour les infos si l'utilisateur existe déjà
-    # if not created:
-    #     user.username = user_info["login"]
-    #     user.avatar = user_info["image"]["link"]
-    #     user.save()
+        # Vérifier si l'utilisateur existe déjà
+    user, created = CustomUser.objects.get_or_create(
+        username=user_info["login"],
+        defaults={
+            "username": user_info["login"]  # Nom d'utilisateur 42
+            # "avatar": user_info["image"]["link"]  # URL de l'avatar
+        }
+    )
 
-    # print("REQUEST >>> ", request)
+    # Mettre à jour les infos si l'utilisateur existe déjà
+    if not created:
+        user.username = user_info["login"]
+        # user.avatar = user_info["image"]["link"]
+        user.save()
 
-    # # Connecter l'utilisateur automatiquement
-    # LoginForm.login(request, user)
+    print("REQUEST >>> ", request)
+
+    print("42 USER >>> ", user)
+    # Connecter l'utilisateur automatiquement
+
+    # Assigner un backend d'authentification au user
+    user.backend = 'allauth.account.auth_backends.AuthenticationBackend'
+    login(request, user)
 
 
     request.session["access_token"] = access_token

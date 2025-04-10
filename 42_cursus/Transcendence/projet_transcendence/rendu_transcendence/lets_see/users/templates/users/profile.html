@@ -16,6 +16,10 @@
 	<a href="{% url 'friends_list' %}">
 		View friends
 	</a>
+	<hr>
+	<a href="{% url 'profile_edit' %}">
+		Edit profile
+	</a>
 {% else %}
 	<a href="{% url 'add_friend' user.username %}">
 		Add Friend

@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>
-	whare you update youre profile
-</h1>
+<form method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<!-- <img src="{{ user.avatar.url }}" width="100" height="100" alt="Avatar"> -->
+	<!-- Curent avatar -->
+	<!-- <hr> -->
+	<button type="submit">
+		Save Changes
+	</button>
+</form>
 {% endblock %}
