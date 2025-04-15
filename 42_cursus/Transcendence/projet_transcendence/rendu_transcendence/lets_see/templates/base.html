@@ -148,6 +148,17 @@
 					showMessage(0);
 				{% endif %}
 			});
+
+			const socket = new WebSocket('ws://' + window.location.host + '/ws/status/');
+
+			socket.onopen = function(e) {
+				console.log("WebSocket connected");
+			}
+		
+			socket.onclose = function(e) {
+				console.log("WebSocket disconnected");
+			}
+
 		</script>
 	</body>
 </html>

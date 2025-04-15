@@ -9,7 +9,7 @@ def delete_old_avatar(sender, instance, **kwargs):
 	except sender.DoesNotExist:
 		return
 
-	if old_avatar and old_avatar != instance.avatar and old_avatar.name != 'default*.png':
+	if old_avatar and old_avatar != instance.avatar and old_avatar.name != 'default.png':
 		old_avatar.delete(save=False)
 
 # @receiver(pre_save, sender=CustomUser)

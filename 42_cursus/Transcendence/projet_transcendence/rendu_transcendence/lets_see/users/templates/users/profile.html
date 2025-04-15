@@ -28,5 +28,17 @@
 	<a href="{% url 'remove_friend' user.username %}">
 		Remove Friend
 	</a>
+	<hr>
+	<div>
+		{% if user.online_status %}
+			<span style="color:green">
+				Online
+			</span>
+		{% else %}
+			<span style="color:red">
+				Offline
+			</span>
+		{% endif %}
+	</div>
 {% endif %}
 {% endblock %}

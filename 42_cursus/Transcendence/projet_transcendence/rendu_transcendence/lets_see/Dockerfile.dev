@@ -1,4 +1,4 @@
-FROM python:3.13-alpine3.19
+FROM python:3.10-alpine3.19
 # from image python (to run python applications) and alpine (lighweight linux)
 
 RUN mkdir /app

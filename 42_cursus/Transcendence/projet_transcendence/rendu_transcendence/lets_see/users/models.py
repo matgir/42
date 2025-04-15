@@ -24,6 +24,7 @@ class CustomUser(AbstractUser):
 	wins = models.PositiveIntegerField(default=0)
 	losses = models.PositiveIntegerField(default=0)
 	online_status = models.BooleanField(default=False)
+	login_42 = models.CharField(max_length=30, blank=True)
 
 	def __str__(self):
 		return self.username

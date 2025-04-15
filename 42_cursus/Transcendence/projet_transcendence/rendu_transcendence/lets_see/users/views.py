@@ -8,6 +8,7 @@ from django.contrib import messages
 
 @login_required
 def profile_update(request):
+	print(request, " #### ", request.method, " #### ", request.POST, " #### ", request.FILES, " #### ", request.user)
 	if request.method == 'POST':
 		form = UserProfileForm(request.POST, request.FILES, instance=request.user)
 		if form.is_valid():

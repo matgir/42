@@ -32,6 +32,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # Get environment variables
 OAUTH_CLIENT_ID = os.environ.get('OAUTH_CLIENT_ID')
 OAUTH_CLIENT_SECRET = os.environ.get('OAUTH_CLIENT_SECRET')
+REDIRECT_URI = os.environ.get('REDIRECT_URI')
 
 DJANGO_SETTINGS_MODULE = os.environ.get("DJANGO_SETTINGS_MODULE", "lets_see.settings")
 
