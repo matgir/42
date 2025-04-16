@@ -19,6 +19,29 @@ from users.models import CustomUser
 # from allauth.account.forms import LoginForm
 from django.contrib.auth import login
 from django.contrib.auth import get_backends
+# from django.contrib.auth.decorators import login_required
+from .forms import FortyTwoUsername
+
+# @login_required
+def fortytwo_username(request):
+	print("forty_two_username")
+	print("REQUEST de 42 >>> ", request)
+	if request.method == 'POST':
+		print("DANS IF >>>>>>>>>>>>>")
+		form = FortyTwoUsername(request.POST, request.FILES, instance=request.user)
+		if form.is_valid():
+			print("form is vaid")
+			form.save()
+			# return
+			return redirect('home')
+			# return redirect('user_profile', username=request.user.username)
+	else:
+		print("DANS ELSE >>>>>>>>>>>>>")
+		form = FortyTwoUsername(instance=request.user)
+	return render(request, 'fortytwo/fortytwo_username.html', {'form': form})
+
+
+
 
 # HELPFUL TOOL
 # SUPPRIMER
@@ -27,6 +50,9 @@ def foo(ft):
     foo.counter += 1
     print ("Step %d -> " % foo.counter, ft, " function")
 foo.counter = 0
+
+
+
 
 
 print("\n\n===================== VIEW DJANGO PONG GAME ==========================\n\n")
@@ -118,6 +144,12 @@ def refresh_access_token(refresh_token):
     else:
         return None
 
+from django.core.files.base import ContentFile #deplacer en haut du fichier
+def download_avatar(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return ContentFile(response.content)
+    return None
 
 def	pong_game(request):
     foo("pong_game")
@@ -144,41 +176,67 @@ def	pong_game(request):
     user_info = get_42_user_info(access_token)
     if user_info:
         print("! Infos du user obtenues !")
-        print("Voici infos user >> ", user_info.get("login"))
+        # print("Voici infos user >> ", user_info.get("login"))
+        print("Voici infos user >> ", user_info)
     else:
         return JsonResponse({"error": "Impossible de récupérer les infos utilisateur"}, status=500)
 
 
         # Vérifier si l'utilisateur existe déjà
     user, created = CustomUser.objects.get_or_create(
-        username=user_info["login"],
+        login_42=user_info["login"],
+        # avatar=user_info["image"]["versions"]["small"],  # URL de l'avatar
+        # avatar=download_avatar(user_info["image"]["versions"]["small"])
         defaults={
-            "username": user_info["login"]  # Nom d'utilisateur 42
-            # "avatar": user_info["image"]["link"]  # URL de l'avatar
+            "login_42": user_info["login"],  # Nom d'utilisateur 42
         }
     )
 
+
+            # "avatar": user_info["image"]["link"]  # URL de l'avatar
+
+    if created or not user.avatar or user.avatar.name == "default.png":
+        avatar_file = download_avatar(user_info["image"]["versions"]["medium"])
+        if avatar_file:
+            user.avatar.save(f"{user_info['login']}_avatar.jpg", avatar_file)
+            user.save()
+
+    ### test mateo
+    # user.username = user.login_42
+    # print("DEBUG : USERNAME=LOGIN42? --> ", user.username, "=", user.login_42)
+    ### test mateo
+
+            ###### REACTIVER ######
     # Mettre à jour les infos si l'utilisateur existe déjà
-    if not created:
-        user.username = user_info["login"]
-        # user.avatar = user_info["image"]["link"]
-        user.save()
+    # if not created:
+    #     user.username = user_info["login"]
+    #     user.avatar = user_info["image"]["versions"]["small"]
+    #     # avatar=download_avatar(user_info["image"]["versions"]["small"])
+    #     print(user.avatar)
+    #     user.save()
 
     print("REQUEST >>> ", request)
+    print(request, request.method, request.POST, request.FILES, request.user)
 
     print("42 USER >>> ", user)
     # Connecter l'utilisateur automatiquement
 
     # Assigner un backend d'authentification au user
     user.backend = 'allauth.account.auth_backends.AuthenticationBackend'
+    # fortytwo_username(request, user)
     login(request, user)
+    print(request.user)###
 
 
     request.session["access_token"] = access_token
     request.session.modified = True
     print("2- ACCESS TOKEN >>>", request.session.get("access_token"))
 
-    return redirect('home')
+    # return (fortytwo_username(request))
+    if (user.username):
+        return (redirect("home"))
+    return (redirect("/fortytwo/fortytwo_username/"))
+    # return (redirect("home"))
     # return (HttpResponse("Hello, this will be the pong game."))
 
 class ProtectedView(APIView):

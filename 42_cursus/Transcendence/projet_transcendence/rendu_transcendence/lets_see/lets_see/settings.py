@@ -126,7 +126,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'lets_see.wsgi.application'
+# WSGI_APPLICATION = 'lets_see.wsgi.application'
 ASGI_APPLICATION = "lets_see.asgi.application"
 
 # Database

@@ -5,6 +5,17 @@
 	{{ user.username }}
 </h1>
 <img src="{{ user.avatar.url }}" alt="Avatar" width="256" height="256">
+
+<!-- Ancienne version de Mateo (n'inclut pas les photos de l'intra) -->
+<!-- <img src="{{ user.avatar }}" alt="Avatar" style="width:100px; height:100px; border-radius: 50%;"> -->
+
+<!-- Ancienne version de Ines (fonctionnelle mais pas propre) -->
+<!-- {% if user.avatar %}
+  <img src="{{ user.avatar }}" alt="Avatar" style="width:100px; height:100px; border-radius: 50%;">
+{% else %}
+  <img src="/media/default.png" alt="Default Avatar" style="width:100px; height:100px; border-radius: 50%;">
+{% endif %} -->
+
 <p>
 	Wins : {{ user.wins }} | Losses : {{ user.losses }}
 </p>

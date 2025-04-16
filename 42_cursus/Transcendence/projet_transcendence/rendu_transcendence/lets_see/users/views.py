@@ -8,14 +8,17 @@ from django.contrib import messages
 
 @login_required
 def profile_update(request):
-	print(request, " #### ", request.method, " #### ", request.POST, " #### ", request.FILES, " #### ", request.user)
+	print("profile_update")
 	if request.method == 'POST':
+		print("DANS IF >>>>>>>>>>>>>")
 		form = UserProfileForm(request.POST, request.FILES, instance=request.user)
 		if form.is_valid():
+			print("In profile_update, form is valid")
 			form.save()
 			return redirect('my_profile')
 			# return redirect('user_profile', username=request.user.username)
 	else:
+		print("DANS ELSE >>>>>>>>>>>>>")
 		form = UserProfileForm(instance=request.user)
 	return render(request, 'users/profile_update.html', {'form': form})
 
@@ -40,7 +43,7 @@ def add_friend(request, username):
 @login_required
 def remove_friend(request, username):
 	if request.user.username == username:
-		message.error(request, "As you can not be friends with yourself, you can not unfriend yourself.", extra_tags='error')
+		messages.error(request, "As you can not be friends with yourself, you can not unfriend yourself.", extra_tags='error')
 		return (redirect('my_profile'))
 	if request.user.friends.filter(username=username).exists():
 		user_to_remove = get_object_or_404(CustomUser, username=username)

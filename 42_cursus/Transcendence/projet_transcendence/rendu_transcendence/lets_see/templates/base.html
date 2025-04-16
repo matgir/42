@@ -149,7 +149,8 @@
 				{% endif %}
 			});
 
-			const socket = new WebSocket('ws://' + window.location.host + '/ws/status/');
+			const ws_sheme = window.location.protocol === "https:" ? "wss" : "ws";
+			const socket = new WebSocket(ws_sheme + '://' + window.location.host + '/ws/status/');
 
 			socket.onopen = function(e) {
 				console.log("WebSocket connected");

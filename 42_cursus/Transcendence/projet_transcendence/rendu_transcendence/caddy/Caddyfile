@@ -5,7 +5,7 @@
 
 localhost {
 	handle_path /static/* {
-		root * /app/static
+		root * /app
 		file_server browse
 	}
 
@@ -17,6 +17,11 @@ localhost {
 	handle {
 		reverse_proxy the_transcendence:8000
 	}
+
+	reverse_proxy /ws/* the_transcendence:8000 {
+		flush_interval -1
+	}
+
 	encode gzip
 	tls internal
 }
