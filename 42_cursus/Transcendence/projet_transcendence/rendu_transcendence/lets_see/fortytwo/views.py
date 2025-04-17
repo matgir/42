@@ -30,7 +30,6 @@ def fortytwo_username(request):
 		print("DANS IF >>>>>>>>>>>>>")
 		form = FortyTwoUsername(request.POST, request.FILES, instance=request.user)
 		if form.is_valid():
-			print("form is vaid")
 			form.save()
 			# return
 			return redirect('home')

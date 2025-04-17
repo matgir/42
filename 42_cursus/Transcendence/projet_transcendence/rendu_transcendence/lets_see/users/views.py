@@ -13,7 +13,6 @@ def profile_update(request):
 		print("DANS IF >>>>>>>>>>>>>")
 		form = UserProfileForm(request.POST, request.FILES, instance=request.user)
 		if form.is_valid():
-			print("In profile_update, form is valid")
 			form.save()
 			return redirect('my_profile')
 			# return redirect('user_profile', username=request.user.username)

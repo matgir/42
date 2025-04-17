@@ -18,7 +18,9 @@ class OnlineStatusConsumer(AsyncWebsocketConsumer):
 
 	@database_sync_to_async
 	def set_online(self, status):
-		user = self.scope["user"]
-		if user.is_authenticated:
-			user.online_status = status
-			user.save()
+		from users.models import CustomUser
+		CustomUser.objects.filter(id=self.scope["user"].id).update(online_status=status)
+		# user = self.scope["user"]
+		# if user.is_authenticated:
+		# 	user.online_status = status
+		# 	user.save()
