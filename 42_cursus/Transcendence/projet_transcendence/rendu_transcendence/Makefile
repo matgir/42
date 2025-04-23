@@ -37,6 +37,7 @@ rebuildstart_dev: stop_dev dev
 
 prune:
 	rm -rf lets_see/media/avatars
+	rm -rf lets_see/staticfiles
 	-docker stop $$(docker ps -aq)
 	-docker rm -f $$(docker ps -aq)
 	-docker rmi -f $$(docker image ls -aq)

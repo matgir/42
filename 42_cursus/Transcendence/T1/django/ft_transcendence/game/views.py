@@ -141,3 +141,4 @@ def	delete_game(request, game_uuid):
 		request.session['message_to_user'] = "Game Does not Exist. Impossible to delete Game Session."
 		return redirect(reverse('core:home'))
 	return HttpResponse("Game Deleted", status=200)
+0

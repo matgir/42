@@ -243,3 +243,12 @@ class ProtectedView(APIView):
 
 	def get(self, request):
 		return Response({"message": "This view is protected"})
+    
+
+
+
+    
+    
+
+
+

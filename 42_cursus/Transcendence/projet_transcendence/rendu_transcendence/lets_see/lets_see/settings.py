@@ -18,6 +18,7 @@ from distutils.util import strtobool
 
 # load_dotenv()
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,8 +38,7 @@ REDIRECT_URI = os.environ.get('REDIRECT_URI')
 DJANGO_SETTINGS_MODULE = os.environ.get("DJANGO_SETTINGS_MODULE", "lets_see.settings")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = False
+DEBUG = strtobool(os.environ.get("DJANGO_DEBUG", "True"))
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")
@@ -136,11 +136,11 @@ ASGI_APPLICATION = "lets_see.asgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get("DATABASE_NAME"),
-        'USER' : os.environ.get("DATABASE_USERNAME"),
-        'PASSWORD' : os.environ.get("DATABASE_PASSWORD"),
-        'HOST' : os.environ.get("DATABASE_HOST"),
-        'PORT' : os.environ.get("DATABASE_PORT"),
+        'NAME': os.environ.get("POSTGRES_DB"),
+        'USER' : os.environ.get("POSTGRES_USER"),
+        'PASSWORD' : os.environ.get("POSTGRES_PASSWORD"),
+        'HOST' : os.environ.get("POSTGRES_HOST"),
+        'PORT' : os.environ.get("POSTGRES_PORT"),
         'TIME_ZONE' : 'Europe/Paris',
     }
 }
@@ -174,11 +174,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = '/static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -197,6 +192,7 @@ ACCOUNT_FORMS = {
     'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
     'set_password': 'allauth.account.forms.SetPasswordForm',
     'signup': 'allauth.account.forms.SignupForm',
+    # 'home_game': 'allauth.account.forms.Home_gameForm',
     'user_token': 'allauth.account.forms.UserTokenForm',
 }
 
@@ -211,3 +207,10 @@ CHANNEL_LAYERS = {
 }
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

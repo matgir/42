@@ -1,0 +1,30 @@
+{% load static %}
+
+
+<!-- Fonts et CSS -->
+<link rel="stylesheet" href="{% static 'css/game_home.css' %}">
+<div id="app-content">
+ 
+
+        <div id="navigation" class="navig">
+            
+            <div class="links_transition">
+                <button id="start_transition" class="start_transition">transition</button>
+            </div>
+            
+           
+
+                <img class="logo_" src="{% static 'logo/entropia9.png' %}" alt="Logo">
+
+                <form class="blur-box_" method="post">
+                    <button id="start_game" class="start_game">START GAME</button>
+                    <button id="join_tournament" class="join_tournament">JOIN TOURNAMENT</button>
+                </form>
+        
+    </div>
+
+
+  <!-- <script src="router.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.min.js"></script>
+  <canvas class="webgl"></canvas>

@@ -1,0 +1,79 @@
+{% load static %}
+
+<!-- Fonts et CSS -->
+<link rel="stylesheet" href="{% static 'users/css/profil.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.min.js"></script>
+
+
+<div id="app-content">
+  <div id="navigation" class="navig">
+    <!-- <div class="navig"> -->
+      
+      <button class="link_temp" id="avatar">AVATAR / link</button>
+      <div class="blur-box_profil">
+        <div class="bento-container">
+          
+          <div class="card bento_large">
+            <h4>Match history</h4>
+            <a href="{% url 'match_history' user.username %}">
+              View Match History
+            </a>
+            <!-- <button>Explore</button> -->
+          </div>
+          
+          <div class="card bento_long">
+            <h1>
+              {{ user.username }}
+              <br></br>
+            </h1>
+            <p>
+              Wins : {{ user.wins }} | Losses : {{ user.losses }}
+            </p>
+            {% if user == request.user %}
+            <a href="{% url 'friends_list' %}">
+              View friends
+            </a>
+            <h4>Profil</h4>
+          </div>
+          
+          <div class="card bento_small">
+            <h3>Settings</h3>
+            <a href="{% url 'profile_edit' %}">
+              Edit profile
+            </a>
+          </div>
+          
+          <div class="card bento_small">
+            <h3>Avatar</h3>
+            <img src="{{ user.avatar.url }}" alt="Avatar" width="256" height="256">
+          </div>
+          
+            {% else %}
+              <a href="{% url 'add_friend' user.username %}">
+                Add Friend
+              </a>
+              <hr>
+              <a href="{% url 'remove_friend' user.username %}">
+                Remove Friend
+              </a>
+              <hr>
+              <div>
+                {% if user.online_status %}
+                  <span style="color:green">
+                    Online
+                  </span>
+                {% else %}
+                  <span style="color:red">
+                    Offline
+                  </span>
+                {% endif %}
+              </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+    
+  </div>

@@ -13,7 +13,7 @@ python3 manage.py migrate
 
 # echo 'yes' | python3 manage.py collectstatic
 
-daphne -b 0.0.0.0 -p 8000 lets_see.asgi:application
-# python3 manage.py runserver 0.0.0.0:8000
+# daphne -b 0.0.0.0 -p 8000 lets_see.asgi:application
+python3 manage.py runserver 0.0.0.0:8000
 
 

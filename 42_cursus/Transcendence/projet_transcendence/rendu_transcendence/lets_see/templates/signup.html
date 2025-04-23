@@ -1,0 +1,88 @@
+{% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    
+
+    <!-- <link rel="stylesheet"  href = '/static/css/signup.css'>  -->
+
+
+    
+    <div id="app-content">
+        <div id="navigation" >
+            
+            <img class="logo" src="{% static 'logo/entropia9.png' %}" alt="Logo">
+            
+            <div class="blur-box-parent">
+                
+                <form class="blur-box" method="post">
+
+                    {% csrf_token %}
+                    <div class="already_sign_up">
+                        <p class="account_sentence">Already have an account? 
+                        	<a href="{% url 'home' %}" >
+                                <button class="go_to_signin_page"  type="button" id="go_to_signin_page">Sign In</button>
+                            </a>
+                    </div>    
+                    
+                    <p class="sign_title">SIGN UP</p>
+
+                    <div class="form-group">
+                        <div class="login_up">
+                             <input class="login" type="text" id="username" name="username" placeholder="Username" required>
+                            </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input class="password" type="password" id="password" name="password" placeholder="Password" required 
+                               minlength="8" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$" 
+                               title="Password must be at least 8 characters long and contain at least one letter and one number.">
+                    </div>
+
+                    <div class="form-group">
+                        <input class="password" type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                    </div>
+
+                    <div class="password-requirements">
+                        <div class="requirement">
+                          <span class="check-icon" id="check1">✔</span>
+                          <p class="condition">Min 8 caractères</p>
+                        </div>
+                        <div class="requirement">
+                          <span class="check-icon" id="check2">✔</span>
+                          <p class="condition">Un nombre</p>
+                        </div>
+                        <div class="requirement">
+                          <span class="check-icon" id="check3">✔</span>
+                          <p class="condition" >Une majuscule</p>
+                        </div>
+                        <div class="requirement">
+                          <span class="check-icon" id="check4">✔</span>
+                          <p class="condition" >Un caractère spécial</p>
+                        </div>
+                    </div>
+                    
+                                 
+                    <button id="signup_submit" class="signup_submit" type="submit">Sign Up</button>
+                    <!-- <button class="signup_42_up">Sign up with 42</button> -->
+                    
+                  
+                </form>
+              
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="{% static '/js/password-condition.js' %}"></script>
+
+    <!-- <script type="module" src="{% static '/router.js' %}"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.min.js"></script>
+
+    <script type="module" src="{% static '/js/home.js' %}"></script>
+
+    
+
+
+
+
+

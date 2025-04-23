@@ -1,0 +1,52 @@
+{% load static %}
+
+
+<!-- Fonts et CSS -->
+<link rel="stylesheet" href="{% static 'css/pong.css' %}">
+<div id="app-content">
+ 
+
+        <div id="navigation" class="navig">
+
+          <!-- <div class="links_transition">
+            <button id="start_transition" class="start_transition">transition</button>
+        </div>
+         -->
+
+                <img class="logo_" src="{% static 'logo/entropia9.png' %}" alt="Logo">
+
+                <!-- <div class="links_transition">
+                  <button id="pause" class="start_transition">PAUSE (ou)</button>
+              </div> -->
+              
+              <div class="links_transition">
+                <button id="pause" class="pause">PAUSE ( ou crash)</button>
+                <h2>(j'aurais prévenu)</h2>
+                <h2>(et aussi, le bouton est cassé)</h2>
+                <h2>(mais tu peux faire ESPACE)</h2>
+
+
+                <!-- <a>(j'aurais prévenu)</a> -->
+
+            </div>
+            
+
+                <!-- <form class="blur-box_" method="post">
+                    <button id="start_game" class="start_game">START GAME</button>
+                    <button id="join_tournament" class="join_tournament">JOIN TOURNAMENT</button>
+                </form> -->
+        
+    </div>
+
+
+  <!-- <script src="router.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/FontLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/geometries/TextGeometry.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/FontLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/geometries/TextGeometry.js"></script>
+
+
+  <canvas class="webgl"></canvas>

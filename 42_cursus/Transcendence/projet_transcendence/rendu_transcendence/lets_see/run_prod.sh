@@ -11,7 +11,7 @@ python3 manage.py makemigrations tournament
 python3 manage.py makemigrations
 python3 manage.py migrate
 
-# echo 'yes' | python3 manage.py collectstatic
+python3 manage.py collectstatic --noinput
 
 daphne -b 0.0.0.0 -p 8000 lets_see.asgi:application
 
