@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'users',
     'tournament',
     'fortytwo',
+    'jeux_du_pong',
 ]
 
 MIDDLEWARE = [
