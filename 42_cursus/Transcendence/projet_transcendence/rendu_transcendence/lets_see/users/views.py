@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserProfileForm
 from .models import CustomUser
 from django.contrib import messages
-import json
 
 # Create your views here.
 
@@ -71,20 +70,17 @@ def remove_friend(request, username):
 #	 return render(request, 'users/profile.html', {'user': user}) """
 
 @login_required
-def user_profile(request):
+def user_profile(request, username):
 	# print("username in user_profile is : \n\t", username, "\nrequest in user_profile is : \n\t", request, "\nrequest.user.username in user_profile is : \n\t", request.user.username) #####
-	body_unicode = request.body.decode('utf-8')
-	body = json.loads(body_unicode)
-	user = get_object_or_404(CustomUser, username=body['username'])
+	user = get_object_or_404(CustomUser, username=username)
 	# if user.username != request.user.username:
-	return render(request, 'users/profil.html', {'user': user})
-	# return render(request, 'users/profile.html', {'user': user})
+	return render(request, 'users/profile.html', {'user': user})
 	# else:
 		# return render(request, 'users/profile.html', {'user': request.user})
 
 @login_required
 def my_profile(request):
-	return(render(request, 'users/profil.html', {'user': request.user}))
+	return(user_profile(request, request.user.username))
 	# return render(request, 'users/profile.html', {'user': request.user})
 
 @login_required
@@ -93,8 +89,7 @@ def search_friends(request):
 	query = request.GET.get('q', '')
 	user = request.user
 	if query:
-		# results = CustomUser.objects.filter(username__icontains=query).exclude(id=user.id)
-		results = CustomUser.objects.filter(username__icontains=query)
+		results = CustomUser.objects.filter(username__icontains=query).exclude(id=user.id)
 	else:
 		None
 	# print("query in search friends is : \n\t", query, "\nresults in search friends is : \n\t", results)#####

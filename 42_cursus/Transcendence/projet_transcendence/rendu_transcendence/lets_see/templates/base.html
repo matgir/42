@@ -1,13 +1,3 @@
-<!-- "dependencies": {
-    "cannon-es": "^0.20.0",
-    "lil-gui": "^0.19.2",
-    "three": "^0.166.1"
-  }
-A INTEGRER ? JSAIS PAS COMMENT / C DANS LE .JSON DANS MON VITE -->
-
-
-
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 	<!-- {% if messages %}
@@ -22,133 +12,106 @@ A INTEGRER ? JSAIS PAS COMMENT / C DANS LE .JSON DANS MON VITE -->
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		
-		<title>ENTROPIA</title>
-
-		<!-- Fonts et CSS -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;800&display=swap" rel="stylesheet">
+		<title>
+			{% block title %}
+			Da pong Game
+			{% endblock %}
+		</title>
 		<style>
-
-		nav {
-			font-family: "roboto";
-			display: flex;
-			justify-content: space-between;  /* logo à gauche / liens à droite */
-			align-items: center;             /* les aligner verticalement */
-			padding: 10px;
-			position: absolute;
-			width: 100%;
-			background: transparent;
- 			border: 2px solid rgba(255, 192, 203, 0.059);
-			 z-index: 3;
-		}
-
-		.nav-right {
-			disp    console.log(event.target.dataset);
-			lay: flex;
-			align-items: center;
-		}
-
-		nav a {
-			font-weight: 600;
-			text-decoration: none;
-			margin: 0 10px;
-			padding: 8px 8px;
-			color: #9a98983d;
-			border-radius: 5px;
-			border: solid 1px #9a989812;
-			background: transparent;
-		}
-
-		.search-form {
-			display: flex;
-			align-items: center;
-		}
-		.search-form input {
-			padding: 5px;
-			margin-right: 5px;
-		}
-		
-
-		.home-logo:hover {
-			background: none;
-		}
-
-		.home-logo img {
-			height: 45px;
-			width: auto;
-			transition: transform 0.2s ease;
-		}
-
-		.home-logo:hover img {
-			transform: scale(1.1);
-		}
-
-
-		.link_temp {
-		font-weight: 400;
-		font-size: 15px;
-		padding: 7px 17px;
-		color: rgba(209, 29, 29, 0.711);
-		margin-left: 15px;
-		background: none;
-		border-radius: 5px;
-		cursor: pointer;
-		font-family: "Roboto", sans-serif;
-		border: solid 1px rgba(207, 30, 30, 0.461);
-		text-align: center;
-		}
-
-		.link_temp:hover {
-		transform: scale(1.05);
-		}
-
+			nav {
+				background-color: #333;
+				padding: 10px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			nav a {
+				color: white;
+				text-decoration: none;
+				margin: 0 10px;
+				padding: 8px 12px;
+				background-color: #058;
+				border-radius: 5px;
+			}
+			nav a:hover {
+				background-color: #777;
+			}
+			.search-form {
+				display: flex;
+				align-items: center;
+			}
+			.search-form input {
+				padding: 5px;
+				margin-right: 5px;
+			}
+			.message-popup {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			min-width: 250px;
+			padding: 15px;
+			border-radius: 8px;
+			color: white;
+			font-size: 16px;
+			display: none;
+			opacity: 0;
+			transition: opacity 0.5s ease-in-out;
+			z-index: 1000;
+			}
+			.message-popup.success { background-color: #4CAF50; } /* Green */
+			.message-popup.error { background-color: #f44336; } /* Red */
+			.message-popup.warning { background-color: #ff9800; } /* Orange */
+			.message-popup.show {
+				display: block;
+				opacity: 1;
+			}
 		</style>
-	
-
-	 <!-- <script type="module" src="{% static 'script.js' %}"></script> -->
-	
-	 <!-- <link rel="icon" href="{% static 'icons/icon4/favicon.ico' %}" sizes="any"> -->
-	 <!-- <link rel="apple-touch-icon" href="{% static 'icons/icon4/favicon-96x96.png' %}"> -->
-	 <link rel="icon" href="{% static 'icons/icon4/favicon-96x96.png' %}" type="image/png">	
-			
 	</head>
 	<body>
 		<nav>
-			<div class="nav-left">
-				<a href="{% url 'home' %}" class="home-logo">
-					<img src="{% static 'logo/logo_square.png' %}" alt="Logo">
+			<div>
+				<a href="{% url 'home' %}">
+					Home
 				</a>
-			</div>
-		
-			<div class="nav-right">
 				{% if user.is_authenticated %}
-					<a href="{% url 'my_profile' %}">My Profile</a>
-					<form class="search-form" method="GET" action="{% url 'search_friends' %}">
-						<input type="text" name="q" placeholder="Search friends" required>
-						<button type="submit">Search</button>
-					</form>
-					<a href="{% url 'account_logout' %}">Logout</a>
-					<button class="link_temp" id="profil">PROFIL / link</button>
+				<a href="{% url 'my_profile' %}">
+					My Profile
+				</a>
+				<!-- <a href="{% url 'my_match_history' %}">
+					Match History
+				</a> -->
+				{% endif %}
+			</div>
+			{% if user.is_authenticated %}
+			<div class="search-form">
+				<form method="GET" action="{% url 'search_friends' %}">
+					<input type="text" name="q" placeholder="Search friends" required>
+					<button type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+			{% endif %}
+			<div>
+				{% if user.is_authenticated %}
+				<a href="{% url 'account_logout' %}">
+					Logout
+				</a>
 				{% else %}
-					<!-- <a href="{% url 'account_login' %}">Sign in</a> -->
-					
-                    <!-- <a id="go_to_signup_page">Sign Up</a>  !!!!! ATTENTION si tu rajoute ca "go_to_sign_up_page" 
-					le link Sign up de la home casse , je sais pas pk alors on va juste pas le mettre lol--> 
-					
-					<!-- <a href="{% url 'account_signup' %}">Sign Up</a> -->
-
-					<a href="{% url 'home' %}" class="link_temp">Sign In</a> 
-					<a href="https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code" class="link_temp">Sign In with 42</a>
-
-					
-
-
-			
+				<a href="{% url 'account_login' %}">
+					Login
+				</a>
+				<a href="{% url 'account_signup' %}">
+					Sign Up
+				</a>
+				<a href="https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code">
+					Log in with 42
+				</a>
 				{% endif %}
 			</div>
 		</nav>
+	</body>
+	<body>
 		{% block content %}
 		{% endblock %}
 	
@@ -200,5 +163,3 @@ A INTEGRER ? JSAIS PAS COMMENT / C DANS LE .JSON DANS MON VITE -->
 		</script>
 	</body>
 </html>
-
-

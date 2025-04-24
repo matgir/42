@@ -7,6 +7,3 @@ urlpatterns = [
 	path("", views.pong_game, name="pong_game"),
 	path("fortytwo_username/", views.fortytwo_username, name="fortytwo_username"),
 ]
-
-
-

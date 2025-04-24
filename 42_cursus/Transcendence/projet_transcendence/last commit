@@ -1,0 +1,1 @@
+new default.png / updated makefile for staticfiles / updated caddyfile for staticfiles / updated docker-compose for cleaner env / updated settings for DEBUG, new env variables name, STATIC useful var / updated run.sh for staticfiles / autoupdate works again

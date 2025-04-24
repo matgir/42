@@ -1,38 +1,23 @@
 {% extends "base.html" %}
-{% load static %}
-
-
 
 {% block title %}
 Search Friends
 {% endblock %}
 
 {% block content %}
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
 <h2>
 	Search Results for "{{ query }}"
 </h2>
-<div id="app-content"></div>
 {% if results %}
 <ul>
 	{% for user in results %}
 	<li>
-	{% csrf_token %}
-		<button class="link_temp" id="user_profil" params='{"username": "{{ user.username }}"}'>
+		<a href="{% url 'user_profile' user.username %}">
 			{{ user.username }}
-		</button>
-	{% comment %}	<!-- <a href="{% url 'user_profile' user.username %}">
-			{{ user.username }}
-		</a> -->
+		</a>
 		<!-- <a href="{% url 'add_friend' user.username %}">
 			Add Friend
-		</a> --> {% endcomment %}
+		</a> -->
 	</li>
 	{% endfor %}
 </ul>
@@ -44,6 +29,4 @@ Search Friends
 <!-- <a href="{% url 'home' %}">
 	Back to Home
 </a> -->
-<script type="module" src="{% static 'router.js' %}"></script>
-
 {% endblock %}
