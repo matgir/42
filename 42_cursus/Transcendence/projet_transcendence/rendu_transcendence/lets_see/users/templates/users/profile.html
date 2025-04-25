@@ -19,11 +19,12 @@
 <p>
 	Wins : {{ user.wins }} | Losses : {{ user.losses }}
 </p>
+<hr>
+<a href="{% url 'match_history' user.username %}">
+	View Match History
+</a>
+<hr>
 {% if user == request.user %}
-	<a href="{% url 'match_history' user.username %}">
-		View Match History
-	</a>
-	<hr>
 	<a href="{% url 'friends_list' %}">
 		View friends
 	</a>

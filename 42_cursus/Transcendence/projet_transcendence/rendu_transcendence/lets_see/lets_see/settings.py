@@ -37,8 +37,8 @@ REDIRECT_URI = os.environ.get('REDIRECT_URI')
 DJANGO_SETTINGS_MODULE = os.environ.get("DJANGO_SETTINGS_MODULE", "lets_see.settings")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = strtobool(os.environ.get("DJANGO_DEBUG", "True"))
-# DEBUG = True
+# DEBUG = strtobool(os.environ.get("DJANGO_DEBUG", "True"))
+DEBUG = True
 # DEBUG = False
 
 # ALLOWED_HOSTS = []

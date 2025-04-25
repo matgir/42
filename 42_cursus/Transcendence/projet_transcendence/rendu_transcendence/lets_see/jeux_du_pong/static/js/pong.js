@@ -1,3 +1,17 @@
+function getCookie(name) {
+	let cookieValue = null;
+	if (document.cookie && document.cookie !== '') {
+		for (let cookie of document.cookie.split(';')) {
+			cookie = cookie.trim();
+			if (cookie.startsWith(name + '=')) {
+				cookieValue = decodeURIComponent(cookie.slice(name.length + 1));
+				break;
+			}
+		}
+	}
+	return cookieValue;
+}
+
 console.log("Pong script loaded");
 
 const canvas = document.getElementById("pongCanvas");
@@ -111,6 +125,24 @@ function draw() {
 
 	if (score1 >= winningScore || score2 >= winningScore) {
 		gameOver = true;
+
+		const winnerIsPlayer1 = score1>score2;
+		const result = winnerIsPlayer1 ? "win" : "loss";
+
+		fetch("/jeux_du_pong/report-match/", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"X-CSRFToken": getCookie("csrftoken"),
+			},
+			body: JSON.stringify({
+				result: result,
+				player_score: score1,
+				opponent_score: score2,
+				opponent_alias: "Player 2"
+			}),
+		});
+
 		ctx.fillStyle = "#000";
 		ctx.font = "40px Arial";
 		ctx.textAlign = "center";
