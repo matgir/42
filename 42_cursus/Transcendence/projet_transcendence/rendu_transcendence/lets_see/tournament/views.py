@@ -9,9 +9,10 @@ from django.contrib.auth.decorators import login_required
 def match_history(request, username):
 	user = get_object_or_404(CustomUser, username=username)
 	matches = Match.objects.filter(player=user).order_by('-played_at')
+	print(user)
 	return render(request, 'tournament/match_history.html', {
 		'matches': matches,
-		'user_profile': user,
+		'user': user,
 	})
 
 @login_required

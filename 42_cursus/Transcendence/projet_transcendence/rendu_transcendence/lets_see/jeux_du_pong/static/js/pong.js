@@ -34,8 +34,8 @@ let player2Y = canvas.height / 2 - paddleHeight / 2;
 // Ball position and velocity
 let ballX = canvas.width / 8;
 let ballY = canvas.height / 2;
-let ballSpeedX = 10;
-let ballSpeedY = 8;
+let ballSpeedX = 20;
+let ballSpeedY = 30;
 
 // Input flags
 let wPressed = false;
