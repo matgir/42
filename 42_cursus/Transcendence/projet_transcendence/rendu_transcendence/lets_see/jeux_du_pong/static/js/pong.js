@@ -49,6 +49,10 @@ let score2 = 0;
 let gameOver = false;
 const winningScore = 5;
 
+//players
+const player2name = currentUserName;
+const player1name = "player";
+
 const playAgainBtn = document.getElementById("playAgainBtn");
 
 // Draw paddles
@@ -71,8 +75,8 @@ function drawBall() {
 function drawScores() {
 	ctx.font = "20px Arial";
 	ctx.fillStyle = "#000";
-	ctx.fillText(`${currentUserName}: ${score1}`, 50, 30);
-	ctx.fillText(`P2: ${score2}`, canvas.width - 100, 30);
+	ctx.fillText(`${player1name}: ${score1}`, 50, 30);
+	ctx.fillText(`${player2name}: ${score2}`, canvas.width - 100, 30);
 }
 
 // Game loop
@@ -126,28 +130,44 @@ function draw() {
 	if (score1 >= winningScore || score2 >= winningScore) {
 		gameOver = true;
 
-		const winnerIsPlayer1 = score1>score2;
-		const result = winnerIsPlayer1 ? "win" : "loss";
+		let playerScore, opponentScore, result, opponentAlias;
 
-		fetch(reportMatchUrl, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				"X-CSRFToken": getCookie("csrftoken"),
-			},
-			body: JSON.stringify({
-				result: result,
-				player_score: score1,
-				opponent_score: score2,
-				opponent_alias: "Player 2"
-			}),
-		});
+		if (player1name === currentUserName) {
+			playerScore = score1;
+			opponentScore = score2;
+			opponentAlias = player2name;
+			result = score1 > score2 ? "win" : "loss";
+		} else if (player2name === currentUserName) {
+			playerScore = score2;
+			opponentScore = score1;
+			opponentAlias = player1name;
+			result = score2 > score1 ? "win" : "loss";
+		} else {
+			console.warn("Current user not in the match");
+		}
 
+		if (result) {
+			fetch(reportMatchUrl, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"X-CSRFToken": getCookie("csrftoken"),
+				},
+				body: JSON.stringify({
+					result: result,
+					player_score: playerScore,
+					opponent_score: opponentScore,
+					opponent_alias: opponentAlias
+				}),
+			});
+		}
+
+		const winnerName = score1 > score2 ? player1name : player2name;
 		ctx.fillStyle = "#000";
 		ctx.font = "40px Arial";
 		ctx.textAlign = "center";
 		ctx.fillText(
-			score1 > score2 ? gettext("%s Wins !").replace("%s", currentUserName) : gettext("Player 2 Wins !"),
+			gettext("%s Wins !").replace("%s", winnerName),
 			// score1 > score2 ? `${currentUserName} Wins !` : "Player 2 Wins !",
 			canvas.width / 2,
 			canvas.height / 2

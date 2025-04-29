@@ -25,8 +25,8 @@ from django.conf.urls.static import static #####
 
 urlpatterns = [
     path('i18n/setlang/', set_language_and_remember, name='set_language'),
-    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('i18n/', include('django.conf.urls.i18n')),
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
 ]
 
 urlpatterns += i18n_patterns(

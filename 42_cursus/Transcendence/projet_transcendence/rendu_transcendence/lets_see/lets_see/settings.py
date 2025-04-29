@@ -65,7 +65,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     # custom
-    'users',
+    # 'users',
+    'users.apps.UsersConfig',
     'tournament',
     'fortytwo',
     'jeux_du_pong',
@@ -75,11 +76,13 @@ MIDDLEWARE = [
     # default
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     # Internationalization
     'django.middleware.locale.LocaleMiddleware',
     'users.middleware.UserLanguageMiddleware',
     # default
+    # Internationalization
+    # default
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -87,6 +90,14 @@ MIDDLEWARE = [
     # allauth
     'allauth.account.middleware.AccountMiddleware', #User Managment
 ]
+
+# not commented 'users.middleware.UserLanguageMiddleware'
+    # cannot change language when not authenticated
+    # when we authenticate and the user has not the same lamguage then it craches
+# commented 'users.middleware.UserLanguageMiddleware'
+    # can change language whenever we want
+    # does not change to the preferred language of the user
+
 
 AUTH_USER_MODEL = 'users.CustomUser'
 # to use our user model define in the users folder
@@ -215,7 +226,8 @@ ACCOUNT_FORMS = {
     'reset_password': 'allauth.account.forms.ResetPasswordForm',
     'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
     'set_password': 'allauth.account.forms.SetPasswordForm',
-    'signup': 'allauth.account.forms.SignupForm',
+    # 'signup': 'allauth.account.forms.SignupForm',
+    'signup': 'users.forms.CustomSignupForm',
     'user_token': 'allauth.account.forms.UserTokenForm',
 }
 

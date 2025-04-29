@@ -18,8 +18,6 @@
 			Entropia
 			{% endblock %}
 		</title>
-		<script src="{% url 'javascript-catalog' %}">
-		</script>
 		<style>
 			nav {
 				background-color: #777;
@@ -78,7 +76,7 @@
 				</a>
 				{% if user.is_authenticated %}
 				<a href="{% url 'my_profile' %}">
-					{% trans "Profile" %}
+					{% trans "My Profile" %}
 				</a>
 				{% endif %}
 			</div>
@@ -132,6 +130,8 @@
 		<!-- Message Pop-up Container -->
 		<div id="message-popup" class="message-popup"></div>
 	
+		<script src="{% url 'javascript-catalog' %}">
+		</script>
 		<script>
 			document.addEventListener("DOMContentLoaded", function() {
 				const messagePopup = document.getElementById("message-popup");

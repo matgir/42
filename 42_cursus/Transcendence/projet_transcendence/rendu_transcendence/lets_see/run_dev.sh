@@ -1,8 +1,10 @@
 #!/bin/sh
 
-django-admin makemessages -l fr
-django-admin makemessages -l es
-django-admin compilemessages
+python3 manage.py makemessages -l fr
+python3 manage.py makemessages -l es
+python3 manage.py makemessages -d djangojs -l fr
+python3 manage.py makemessages -d djangojs -l es
+python3 manage.py compilemessages
 
 python3 manage.py makemigrations users
 python3 manage.py migrate

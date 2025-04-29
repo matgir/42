@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from .validators import validate_avatar
+from .validators import validate_avatar, validate_not_banned_username
 import uuid
 import os
 from PIL import Image
@@ -17,7 +17,11 @@ def avatar_upload_path(instance, filename):
 	return os.path.join('avatars', filename) # saves in media avatars
 
 class CustomUser(AbstractUser):
-	username = models.CharField(max_length=30, unique=True)
+	username = models.CharField(
+		max_length=30,
+		unique=True,
+		validators=[validate_not_banned_username]
+	)
 	avatar = models.ImageField(
 		upload_to=avatar_upload_path,
 		validators=[validate_avatar],

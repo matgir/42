@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-29 15:58+0200\n"
+"POT-Creation-Date: 2025-04-29 19:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,35 +70,37 @@ msgstr "Requete invalide"
 msgid "Value does not exist"
 msgstr "Cette valeur n'existe pas"
 
-#: templates/base.html:77
+#: templates/base.html:75
 msgid "Home"
 msgstr "Maison"
 
-#: templates/base.html:81
-msgid "Profile"
+#: templates/base.html:79
+#, fuzzy
+#| msgid "Profile"
+msgid "My Profile"
 msgstr "Profil"
 
-#: templates/base.html:88
+#: templates/base.html:86
 msgid "Search friends"
 msgstr "Rechercher amies"
 
-#: templates/base.html:90
+#: templates/base.html:88
 msgid "Search"
 msgstr "Rechercher"
 
-#: templates/base.html:98
+#: templates/base.html:96
 msgid "Logout"
 msgstr "Se deconnecter"
 
-#: templates/base.html:102
+#: templates/base.html:100
 msgid "Login"
 msgstr "Se connecter"
 
-#: templates/base.html:105
+#: templates/base.html:103
 msgid "Sign Up"
 msgstr "S'inscrire"
 
-#: templates/base.html:108
+#: templates/base.html:106
 msgid "Login with 42"
 msgstr "Se connecter avec 42"
 
@@ -118,7 +120,7 @@ msgid ""
 "\t"
 msgstr ""
 "\n"
-"\t\tHistorique de match de %(username)s\n"
+"\t\tHistorique des matchs de %(username)s\n"
 "\t"
 
 #: tournament/templates/tournament/match_history.html:15
@@ -149,9 +151,9 @@ msgstr "Defaite"
 msgid "No matches recorded yet."
 msgstr "Pas de match effectue"
 
-#: users/models.py:35
+#: users/models.py:39
 msgid "Prefered Language"
-msgstr ""
+msgstr "Langue selectionner"
 
 #: users/templates/users/friends.html:5
 msgid "My friends"
@@ -231,18 +233,22 @@ msgstr ""
 msgid "No users found."
 msgstr "Aucuns utilisateurs trouve"
 
-#: users/validators.py:13
+#: users/validators.py:16
 #, python-format
 msgid "Avatar is too large (max %(max_size)s)."
 msgstr "Avatar est trop grand (max %(max_size)s)."
 
-#: users/validators.py:21
+#: users/validators.py:24
 msgid "Unsuported image format. Only JPEG and PNG allowed."
 msgstr "Format de l'image non supporter. Seulement JPEG et PNG"
 
-#: users/validators.py:23
+#: users/validators.py:26
 msgid "Invalide image file."
 msgstr "Ficher image non valide"
+
+#: users/validators.py:32
+msgid "This username is not allowed."
+msgstr "Ce username n'est pas valide"
 
 #: users/views.py:34
 msgid "You can not be friends with yoursefl."

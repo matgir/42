@@ -55,7 +55,7 @@ def fortytwo_username(request):
 
 
 
-print("\n\n===================== VIEW DJANGO PONG GAME ==========================\n\n")
+# print("\n\n===================== VIEW DJANGO PONG GAME ==========================\n\n")
 
 # Récupérer le client_id et client_secret depuis les settings
 CLIENT_ID = settings.OAUTH_CLIENT_ID
