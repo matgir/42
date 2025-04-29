@@ -17,17 +17,27 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.views.i18n import JavaScriptCatalog
+from django.conf.urls.i18n import i18n_patterns
+from users.views import set_language_and_remember
 from django.conf import settings #####
 from django.conf.urls.static import static #####
 
 urlpatterns = [
+    path('i18n/setlang/', set_language_and_remember, name='set_language'),
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+    path('i18n/', include('django.conf.urls.i18n')),
+]
+
+urlpatterns += i18n_patterns(
+    # path('', include('lets_see.urls')),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('jeux_du_pong/', include('jeux_du_pong.urls')),
     path('tournament/', include('tournament.urls')),
     path('fortytwo/', include('fortytwo.urls')),
-]
+)
 
 if settings.DEBUG:#####
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)#####

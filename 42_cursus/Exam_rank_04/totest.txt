@@ -1,5 +1,0 @@
-to check open fds : valgrind --track-fds=all
-
-/bin/ls "|" /usr/bin/grep microshell ";" /bin/echo i love my microshell
-
-/bin/cat README

@@ -1,0 +1,265 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-29 15:58+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
+
+#: fortytwo/templates/fortytwo/fortytwo_username.html:9
+msgid "Submit Username"
+msgstr ""
+
+#: fortytwo/views.py:78
+msgid "1- No authorization code given"
+msgstr ""
+
+#: fortytwo/views.py:104
+msgid "Error during the access token exchange"
+msgstr ""
+
+#: fortytwo/views.py:108
+msgid "2- No authorization code given"
+msgstr ""
+
+#: fortytwo/views.py:161
+msgid "Missing authorization code during session"
+msgstr ""
+
+#: fortytwo/views.py:174
+msgid "Error during the exchange of the code for the token"
+msgstr ""
+
+#: fortytwo/views.py:178
+msgid "Token expired"
+msgstr ""
+
+#: fortytwo/views.py:187
+msgid "Could not collect user informations"
+msgstr ""
+
+#: jeux_du_pong/templates/jeux_du_pong/game.html:3
+msgid "Play Pong"
+msgstr ""
+
+#: jeux_du_pong/templates/jeux_du_pong/game.html:14
+msgid "Play Again"
+msgstr ""
+
+#: jeux_du_pong/views.py:38
+msgid "ok"
+msgstr ""
+
+#: jeux_du_pong/views.py:39
+msgid "Invalid request"
+msgstr ""
+
+#: lets_see/context_processors.py:6 lets_see/context_processors.py:11
+msgid "Value does not exist"
+msgstr ""
+
+#: templates/base.html:77
+msgid "Home"
+msgstr "la casa de la mama"
+
+#: templates/base.html:81
+msgid "Profile"
+msgstr ""
+
+#: templates/base.html:88
+msgid "Search friends"
+msgstr ""
+
+#: templates/base.html:90
+msgid "Search"
+msgstr ""
+
+#: templates/base.html:98
+msgid "Logout"
+msgstr ""
+
+#: templates/base.html:102
+msgid "Login"
+msgstr ""
+
+#: templates/base.html:105
+msgid "Sign Up"
+msgstr ""
+
+#: templates/base.html:108
+msgid "Login with 42"
+msgstr ""
+
+#: templates/home.html:6
+msgid "WELCOME TO ENTROPIA"
+msgstr ""
+
+#: templates/home.html:12
+msgid "Play Pong Now"
+msgstr ""
+
+#: tournament/templates/tournament/match_history.html:6
+#, python-format
+msgid ""
+"\n"
+"\t\t%(username)s's match history\n"
+"\t"
+msgstr ""
+
+#: tournament/templates/tournament/match_history.html:15
+msgid "Opponent"
+msgstr ""
+
+#: tournament/templates/tournament/match_history.html:16
+msgid "Result"
+msgstr ""
+
+#: tournament/templates/tournament/match_history.html:17
+msgid "Score"
+msgstr ""
+
+#: tournament/templates/tournament/match_history.html:18
+msgid "Date"
+msgstr ""
+
+#: tournament/templates/tournament/match_history.html:28
+msgid "Win"
+msgstr ""
+
+#: tournament/templates/tournament/match_history.html:32
+msgid "Loss"
+msgstr ""
+
+#: tournament/templates/tournament/match_history.html:48
+msgid "No matches recorded yet."
+msgstr ""
+
+#: users/models.py:35
+msgid "Prefered Language"
+msgstr ""
+
+#: users/templates/users/friends.html:5
+msgid "My friends"
+msgstr ""
+
+#: users/templates/users/friends.html:10
+msgid "My Friends"
+msgstr ""
+
+#: users/templates/users/friends.html:24
+msgid "You have no friends yet."
+msgstr ""
+
+#: users/templates/users/profile.html:21
+#, python-format
+msgid ""
+"\n"
+"\t\tWins : %(wins)s | Losses : %(losses)s\n"
+"\t"
+msgstr ""
+
+#: users/templates/users/profile.html:27
+msgid "My Match History"
+msgstr ""
+
+#: users/templates/users/profile.html:31
+msgid "View friends"
+msgstr ""
+
+#: users/templates/users/profile.html:35
+msgid "Edit profile"
+msgstr ""
+
+#: users/templates/users/profile.html:39
+msgid "View Match History"
+msgstr ""
+
+#: users/templates/users/profile.html:43
+msgid "Add Friend"
+msgstr ""
+
+#: users/templates/users/profile.html:47
+msgid "Remove Friend"
+msgstr ""
+
+#: users/templates/users/profile.html:53
+msgid "Online"
+msgstr ""
+
+#: users/templates/users/profile.html:57
+msgid "Offline"
+msgstr ""
+
+#: users/templates/users/profile_update.html:9
+msgid "Save Changes"
+msgstr ""
+
+#: users/templates/users/search_results.html:5
+msgid "Search Friends"
+msgstr ""
+
+#: users/templates/users/search_results.html:10
+#, python-format
+msgid ""
+"\n"
+"\t\tSearch Results for \"%(query)s\"\n"
+"\t"
+msgstr ""
+
+#: users/templates/users/search_results.html:26
+msgid "No users found."
+msgstr ""
+
+#: users/validators.py:13
+#, python-format
+msgid "Avatar is too large (max %(max_size)s)."
+msgstr ""
+
+#: users/validators.py:21
+msgid "Unsuported image format. Only JPEG and PNG allowed."
+msgstr ""
+
+#: users/validators.py:23
+msgid "Invalide image file."
+msgstr ""
+
+#: users/views.py:34
+msgid "You can not be friends with yoursefl."
+msgstr ""
+
+#: users/views.py:37
+#, python-format
+msgid "You are already friends with %(username)s."
+msgstr ""
+
+#: users/views.py:41
+#, python-format
+msgid "You are now friends with %(username)s."
+msgstr ""
+
+#: users/views.py:51
+msgid "As you can not be friends with yourself, you can not unfriend yourself."
+msgstr ""
+
+#: users/views.py:56
+#, python-format
+msgid "You removed %(username)s from your friends"
+msgstr ""
+
+#: users/views.py:58
+#, python-format
+msgid "%(username)s is not in your friends list"
+msgstr ""

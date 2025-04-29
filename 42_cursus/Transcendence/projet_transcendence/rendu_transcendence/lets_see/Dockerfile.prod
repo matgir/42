@@ -25,6 +25,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN apk update && apk upgrade && apk add --no-cache postgresql-client
 # may erase it later, needed to check postgresql connection
 
+RUN apk add --no-cache gettext gcc musl-dev libffi-dev
+# for the translation modul, may not need the ones after the first
+
 # COPY . /app/
 COPY ./run_prod.sh /tmp/
 # copy the django project to the container

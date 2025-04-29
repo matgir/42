@@ -1,5 +1,9 @@
 #!/bin/sh
 
+django-admin makemessages -l fr
+django-admin makemessages -l es
+django-admin compilemessages
+
 python3 manage.py makemigrations users
 python3 manage.py migrate
 

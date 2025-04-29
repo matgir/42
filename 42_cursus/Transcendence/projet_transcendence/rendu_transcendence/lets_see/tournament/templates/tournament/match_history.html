@@ -1,18 +1,21 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <h1>
-	{{ user.username }}'s match history'
+	{% blocktrans with username=user.username %}
+		{{ username }}'s match history
+	{% endblocktrans %}
 </h1>
 
 	{% if matches %}
 		<table>
 			<thead>
 				<tr>
-					<th>Opponent</th>
-					<th>Result</th>
-					<th>Score</th>
-					<th>Date</th>
+					<th>{% trans "Opponent" %}</th>
+					<th>{% trans "Result" %}</th>
+					<th>{% trans "Score" %}</th>
+					<th>{% trans "Date" %}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -22,11 +25,11 @@
 						<td>
 							{% if match.result == "win" %}
 								<span style="color: green;">
-									Win
+									{% trans "Win" %}
 								</span>
 							{% else %}
 								<span style="color: red;">
-									Loss
+									{% trans "Loss" %}
 								</span>
 							{% endif %}
 						</td>
@@ -42,7 +45,7 @@
 		</table>
 	{% else %}
 		<p>
-			No matches recorded yet.
+			{% trans "No matches recorded yet." %}
 		</p>
 	{% endif %}
 {% endblock %}

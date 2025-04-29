@@ -1,5 +1,9 @@
 #!/bin/sh
 
+python3 manage.py makemessages -l fr
+python3 manage.py makemessages -l es
+python3 manage.py compilemessages
+
 python3 manage.py makemigrations users
 python3 manage.py migrate
 

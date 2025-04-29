@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 from .models import Match
+from django.utils.translation import gettext as _
 
 @login_required
 def pong_game(request):
@@ -34,5 +35,5 @@ def report_match(request):
 			request.user.losses += 1
 		request.user.save()
 
-		return JsonResponse({"status": "ok"})
-	return JsonResponse({"error": "Invalid request"}, status=400)
+		return JsonResponse({"status": _("ok")})
+	return JsonResponse({"error": _("Invalid request")}, status=400)

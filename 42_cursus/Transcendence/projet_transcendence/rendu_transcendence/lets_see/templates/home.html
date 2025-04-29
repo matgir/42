@@ -1,14 +1,15 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <h1>
-	WELCOME TO DA PONG GAME
+	{% trans "WELCOME TO ENTROPIA" %}
 </h1>
 {% if user.is_authenticated %}
 <div>
 	<a href="{% url 'pong_game' %}">
 		<button class="bg-blue-600 text-white px-6 py-3 rounded-2xl shadow-lg hover:bg-blue-700 text-lg font-semibold">
-			Play Pong Now
+			{% trans "Play Pong Now" %}
 		</button>
 	</a>
 </div>

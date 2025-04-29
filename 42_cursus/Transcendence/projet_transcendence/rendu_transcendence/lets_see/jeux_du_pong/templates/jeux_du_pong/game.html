@@ -1,15 +1,17 @@
 {% extends "base.html" %}
-{% block title %}Play Pong{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Play Pong" %}{% endblock %}
 
 {% block content %}
 {% load static %}
 <h2>🎮 Pong Game</h2>
 <script>
-	const currentUserName = "{{ player_name|escapejs }}"
+	const currentUserName = "{{ player_name|escapejs }}";
+	const reportMatchUrl = "{% url 'report_match' %}";
 </script>
 <canvas id="pongCanvas" width="800" height="500" style="border:1px solid #000;"></canvas>
 <button id="playAgainBtn" style="margin-top: 20px; display: none;">
-Play Again
+{% trans "Play Again" %}
 </button>
 <script src="{% static 'js/pong.js' %}"></script>
 {% endblock %}

@@ -1,5 +1,0 @@
-don't bother closing the file the with keyword does it automatically when you leave its scope.
-bonsoir
-je suis la
-
-hello

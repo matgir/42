@@ -1,5 +1,0 @@
-FROM debian:bullseye
-# creates a docker image from debian:bullseye
-
-CMD [ "echo", "Hello world I'm a second Dockerfile" ]
-# make it run the echo command for "Hello world I'm a second Dockerfile"

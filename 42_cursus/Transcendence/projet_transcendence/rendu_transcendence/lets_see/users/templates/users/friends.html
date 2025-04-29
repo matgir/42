@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}
-My friends
+{% trans "My friends" %}
 {% endblock %}
 
 {% block content %}
 <h2>
-	My Friends
+	{% trans "My Friends" %}
 </h2>
 {% if friends %}
 <ul>
@@ -15,15 +16,12 @@ My friends
 		<a href="{% url 'user_profile' friend.username %}">
 			{{ friend.username }}
 		</a>
-		<!-- <a href="{% url 'remove_friend' friend.username %}">
-			Remove from friends
-		</a> -->
 	</li>
 	{% endfor %}
 </ul>
 {% else %}
 <p>
-	You have no friends yet.
+	{% trans "You have no friends yet." %}
 </p>
 {% endif %}
 {% endblock %}

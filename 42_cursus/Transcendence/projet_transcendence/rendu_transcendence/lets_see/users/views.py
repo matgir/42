@@ -3,36 +3,42 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserProfileForm
 from .models import CustomUser
 from django.contrib import messages
+from django.utils.translation import gettext as _
+from django.views.decorators.csrf import csrf_exempt
+from django.views.i18n import set_language as django_set_language
+from django.conf import settings
 
 # Create your views here.
 
 @login_required
 def profile_update(request):
-	print("profile_update")
+	# print("profile_update")
 	if request.method == 'POST':
-		print("DANS IF >>>>>>>>>>>>>")
+		# print("DANS IF >>>>>>>>>>>>>")
 		form = UserProfileForm(request.POST, request.FILES, instance=request.user)
 		if form.is_valid():
 			form.save()
 			return redirect('my_profile')
 			# return redirect('user_profile', username=request.user.username)
 	else:
-		print("DANS ELSE >>>>>>>>>>>>>")
+		# print("DANS ELSE >>>>>>>>>>>>>")
 		form = UserProfileForm(instance=request.user)
 	return render(request, 'users/profile_update.html', {'form': form})
+
+
 
 @login_required
 def add_friend(request, username):
 	# print("request in add friend is : \n\t", request)#####
 	if request.user.username == username:
-		messages.error(request, "You can not be friends with yoursefl.", extra_tags="error")
+		messages.error(request, _("You can not be friends with yoursefl."), extra_tags="error")
 		return (redirect('my_profile'))
 	if request.user.friends.filter(username=username).exists():
-		messages.error(request, f"You are already friends with {username}.", extra_tags="warning")
+		messages.error(request, _("You are already friends with %(username)s.") % {'username': username}, extra_tags="warning")
 	else:
 		user_to_add = get_object_or_404(CustomUser, username=username)
 		request.user.friends.add(user_to_add)
-		messages.success(request, f"You are now friends with {username}.", extra_tags="success")
+		messages.success(request, _("You are now friends with %(username)s.") % {'username': username}, extra_tags="success")
 	return redirect('friends_list')
 	# print("\nuser_to_add in add friend is : \n\t", user_to_add.username, "\nrequest.user.username in add frisnd is : \n\t", request.user.username) #####
 	# if user_to_add.username == request.user.username or request.user.friends.filter(username=user_to_add.username):
@@ -42,14 +48,14 @@ def add_friend(request, username):
 @login_required
 def remove_friend(request, username):
 	if request.user.username == username:
-		messages.error(request, "As you can not be friends with yourself, you can not unfriend yourself.", extra_tags='error')
+		messages.error(request, _("As you can not be friends with yourself, you can not unfriend yourself."), extra_tags='error')
 		return (redirect('my_profile'))
 	if request.user.friends.filter(username=username).exists():
 		user_to_remove = get_object_or_404(CustomUser, username=username)
 		request.user.friends.remove(user_to_remove)
-		messages.success(request, f"You removed {username} from your friends", extra_tags="success")
+		messages.success(request, _("You removed %(username)s from your friends") % {'username': username}, extra_tags="success")
 	else:
-		messages.error(request, f"{username} is not in your friends list", extra_tags="warning")
+		messages.error(request, _("%(username)s is not in your friends list") % {'username': username}, extra_tags="warning")
 	return redirect('friends_list')
 
 # @login_required
@@ -99,3 +105,15 @@ def search_friends(request):
 def friends_list(request):
 	friends = request.user.friends.all()
 	return render(request, 'users/friends.html', {'friends': friends})
+
+@csrf_exempt
+def set_language_and_remember(request):
+	response = django_set_language(request)
+
+	if hasattr(request, 'user') and request.user.is_authenticated:
+		lang_code = request.POST.get('language')
+		if lang_code in dict(settings.LANGUAGES):
+			request.user.preferred_language = lang_code
+			request.user.save()
+
+	return response

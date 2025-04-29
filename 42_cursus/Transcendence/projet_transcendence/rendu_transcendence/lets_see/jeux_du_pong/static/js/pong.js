@@ -129,7 +129,7 @@ function draw() {
 		const winnerIsPlayer1 = score1>score2;
 		const result = winnerIsPlayer1 ? "win" : "loss";
 
-		fetch("/jeux_du_pong/report-match/", {
+		fetch(reportMatchUrl, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -147,7 +147,8 @@ function draw() {
 		ctx.font = "40px Arial";
 		ctx.textAlign = "center";
 		ctx.fillText(
-			score1 > score2 ? `${currentUserName} Wins !` : "Player 2 Wins !",
+			score1 > score2 ? gettext("%s Wins !").replace("%s", currentUserName) : gettext("Player 2 Wins !"),
+			// score1 > score2 ? `${currentUserName} Wins !` : "Player 2 Wins !",
 			canvas.width / 2,
 			canvas.height / 2
 		);

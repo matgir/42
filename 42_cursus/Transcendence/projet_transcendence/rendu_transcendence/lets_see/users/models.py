@@ -5,6 +5,9 @@ import uuid
 import os
 from PIL import Image
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGE_CHOICES = settings.LANGUAGES
 
 # modify the name of the uploaded avatar so that if 2 user upload
 # an avatar with the same name django does not mix them
@@ -25,6 +28,12 @@ class CustomUser(AbstractUser):
 	losses = models.PositiveIntegerField(default=0)
 	online_status = models.BooleanField(default=False)
 	login_42 = models.CharField(max_length=30, blank=True)
+	preferred_language = models.CharField(
+		max_length=10,
+		choices=LANGUAGE_CHOICES,
+		default='en',
+		verbose_name=_("Prefered Language")
+	)
 
 	def __str__(self):
 		return self.username

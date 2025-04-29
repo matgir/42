@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <h1>
@@ -17,41 +18,43 @@
 {% endif %} -->
 
 <p>
-	Wins : {{ user.wins }} | Losses : {{ user.losses }}
+	{% blocktrans with wins=user.wins losses=user.losses %}
+		Wins : {{ wins }} | Losses : {{ losses }}
+	{% endblocktrans %}
 </p>
 {% if user == request.user %}
 	<a href="{% url 'my_match_history' %}">
-		View Match History
+		{% trans "My Match History" %}
 	</a>
 	<hr>
 	<a href="{% url 'friends_list' %}">
-		View friends
+		{% trans "View friends" %}
 	</a>
 	<hr>
 	<a href="{% url 'profile_edit' %}">
-		Edit profile
+		{% trans "Edit profile" %}
 	</a>
 {% else %}
 	<a href="{% url 'match_history' user.username %}">
-		View Match History
+		{% trans "View Match History" %}
 	</a>
 	<hr>
 	<a href="{% url 'add_friend' user.username %}">
-		Add Friend
+		{% trans "Add Friend" %}
 	</a>
 	<hr>
 	<a href="{% url 'remove_friend' user.username %}">
-		Remove Friend
+		{% trans "Remove Friend" %}
 	</a>
 	<hr>
 	<div>
 		{% if user.online_status %}
 			<span style="color:green">
-				Online
+				{% trans "Online" %}
 			</span>
 		{% else %}
 			<span style="color:red">
-				Offline
+				{% trans "Offline" %}
 			</span>
 		{% endif %}
 	</div>

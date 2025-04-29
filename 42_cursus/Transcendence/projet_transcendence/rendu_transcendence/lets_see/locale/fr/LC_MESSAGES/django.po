@@ -1,0 +1,273 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-29 15:58+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: fortytwo/templates/fortytwo/fortytwo_username.html:9
+msgid "Submit Username"
+msgstr "Soumettre nom d'utilisateur"
+
+#: fortytwo/views.py:78
+msgid "1- No authorization code given"
+msgstr "1 - Pas de code d'autorisation recu"
+
+#: fortytwo/views.py:104
+msgid "Error during the access token exchange"
+msgstr "Erreur pendant l'echange du token d'acces"
+
+#: fortytwo/views.py:108
+msgid "2- No authorization code given"
+msgstr "2 - Pas de code d'autorisation recu"
+
+#: fortytwo/views.py:161
+msgid "Missing authorization code during session"
+msgstr "Code d'autorisation manquant pour la session en court"
+
+#: fortytwo/views.py:174
+msgid "Error during the exchange of the code for the token"
+msgstr "Erreur pendant l'echange du code pour le token"
+
+#: fortytwo/views.py:178
+msgid "Token expired"
+msgstr "Token expirer"
+
+#: fortytwo/views.py:187
+msgid "Could not collect user informations"
+msgstr "Impossible de recuperer les informations utilisateurs"
+
+#: jeux_du_pong/templates/jeux_du_pong/game.html:3
+msgid "Play Pong"
+msgstr "Jouer au Pong"
+
+#: jeux_du_pong/templates/jeux_du_pong/game.html:14
+msgid "Play Again"
+msgstr "Jouer de nouveau"
+
+#: jeux_du_pong/views.py:38
+msgid "ok"
+msgstr "ok"
+
+#: jeux_du_pong/views.py:39
+msgid "Invalid request"
+msgstr "Requete invalide"
+
+#: lets_see/context_processors.py:6 lets_see/context_processors.py:11
+msgid "Value does not exist"
+msgstr "Cette valeur n'existe pas"
+
+#: templates/base.html:77
+msgid "Home"
+msgstr "Maison"
+
+#: templates/base.html:81
+msgid "Profile"
+msgstr "Profil"
+
+#: templates/base.html:88
+msgid "Search friends"
+msgstr "Rechercher amies"
+
+#: templates/base.html:90
+msgid "Search"
+msgstr "Rechercher"
+
+#: templates/base.html:98
+msgid "Logout"
+msgstr "Se deconnecter"
+
+#: templates/base.html:102
+msgid "Login"
+msgstr "Se connecter"
+
+#: templates/base.html:105
+msgid "Sign Up"
+msgstr "S'inscrire"
+
+#: templates/base.html:108
+msgid "Login with 42"
+msgstr "Se connecter avec 42"
+
+#: templates/home.html:6
+msgid "WELCOME TO ENTROPIA"
+msgstr "BIENVENUE SUR ENTROPIA"
+
+#: templates/home.html:12
+msgid "Play Pong Now"
+msgstr "Jouer au pong maintenant"
+
+#: tournament/templates/tournament/match_history.html:6
+#, python-format
+msgid ""
+"\n"
+"\t\t%(username)s's match history\n"
+"\t"
+msgstr ""
+"\n"
+"\t\tHistorique de match de %(username)s\n"
+"\t"
+
+#: tournament/templates/tournament/match_history.html:15
+msgid "Opponent"
+msgstr "Adversaire"
+
+#: tournament/templates/tournament/match_history.html:16
+msgid "Result"
+msgstr "Resultat"
+
+#: tournament/templates/tournament/match_history.html:17
+msgid "Score"
+msgstr "Score"
+
+#: tournament/templates/tournament/match_history.html:18
+msgid "Date"
+msgstr "Date"
+
+#: tournament/templates/tournament/match_history.html:28
+msgid "Win"
+msgstr "Victoire"
+
+#: tournament/templates/tournament/match_history.html:32
+msgid "Loss"
+msgstr "Defaite"
+
+#: tournament/templates/tournament/match_history.html:48
+msgid "No matches recorded yet."
+msgstr "Pas de match effectue"
+
+#: users/models.py:35
+msgid "Prefered Language"
+msgstr ""
+
+#: users/templates/users/friends.html:5
+msgid "My friends"
+msgstr "Mes amies"
+
+#: users/templates/users/friends.html:10
+msgid "My Friends"
+msgstr "Mes amies"
+
+#: users/templates/users/friends.html:24
+msgid "You have no friends yet."
+msgstr "Tu n'as pas encore d'amies"
+
+#: users/templates/users/profile.html:21
+#, python-format
+msgid ""
+"\n"
+"\t\tWins : %(wins)s | Losses : %(losses)s\n"
+"\t"
+msgstr ""
+"\n"
+"\t\tVictoires : %(wins)s | Defaites : %(losses)s\n"
+"\t"
+
+#: users/templates/users/profile.html:27
+msgid "My Match History"
+msgstr "Historique de mes matchs"
+
+#: users/templates/users/profile.html:31
+msgid "View friends"
+msgstr "Voir amies"
+
+#: users/templates/users/profile.html:35
+msgid "Edit profile"
+msgstr "Modifier profil"
+
+#: users/templates/users/profile.html:39
+msgid "View Match History"
+msgstr "Voir historique des matchs"
+
+#: users/templates/users/profile.html:43
+msgid "Add Friend"
+msgstr "Ajouter a la liste d'amies"
+
+#: users/templates/users/profile.html:47
+msgid "Remove Friend"
+msgstr "Retirer de la liste d'amies"
+
+#: users/templates/users/profile.html:53
+msgid "Online"
+msgstr "Actif"
+
+#: users/templates/users/profile.html:57
+msgid "Offline"
+msgstr "Inactif"
+
+#: users/templates/users/profile_update.html:9
+msgid "Save Changes"
+msgstr "Sauvegarder changements"
+
+#: users/templates/users/search_results.html:5
+msgid "Search Friends"
+msgstr "Rechercher amies"
+
+#: users/templates/users/search_results.html:10
+#, python-format
+msgid ""
+"\n"
+"\t\tSearch Results for \"%(query)s\"\n"
+"\t"
+msgstr ""
+"\n"
+"\t\tResultat de la recherche pour \"%(query)s\"\n"
+"\t"
+
+#: users/templates/users/search_results.html:26
+msgid "No users found."
+msgstr "Aucuns utilisateurs trouve"
+
+#: users/validators.py:13
+#, python-format
+msgid "Avatar is too large (max %(max_size)s)."
+msgstr "Avatar est trop grand (max %(max_size)s)."
+
+#: users/validators.py:21
+msgid "Unsuported image format. Only JPEG and PNG allowed."
+msgstr "Format de l'image non supporter. Seulement JPEG et PNG"
+
+#: users/validators.py:23
+msgid "Invalide image file."
+msgstr "Ficher image non valide"
+
+#: users/views.py:34
+msgid "You can not be friends with yoursefl."
+msgstr "Pas possible de faire ca avec toi"
+
+#: users/views.py:37
+#, python-format
+msgid "You are already friends with %(username)s."
+msgstr "%(username)s est deja ton amies"
+
+#: users/views.py:41
+#, python-format
+msgid "You are now friends with %(username)s."
+msgstr "Desormais amies avec %(username)s"
+
+#: users/views.py:51
+msgid "As you can not be friends with yourself, you can not unfriend yourself."
+msgstr "Toujours pas possible de faire ca"
+
+#: users/views.py:56
+#, python-format
+msgid "You removed %(username)s from your friends"
+msgstr "C'est fini avec %(username)s"
+
+#: users/views.py:58
+#, python-format
+msgid "%(username)s is not in your friends list"
+msgstr "%(username)s n'est pas dans ta liste"
