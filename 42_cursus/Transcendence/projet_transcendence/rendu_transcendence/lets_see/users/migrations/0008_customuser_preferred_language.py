@@ -15,4 +15,10 @@ class Migration(migrations.Migration):
             name='preferred_language',
             field=models.CharField(choices=[('en', 'English'), ('fr', 'French'), ('es', 'Spanish')], default='en', max_length=10, verbose_name='Prefered Language'),
         ),
+        migrations.AddField(
+            model_name='customuser',
+            name='two_factor',
+            field=models.BooleanField(default=False),
+        ),
     ]
+

@@ -17,6 +17,7 @@ def avatar_upload_path(instance, filename):
 	return os.path.join('avatars', filename) # saves in media avatars
 
 class CustomUser(AbstractUser):
+	two_factor = models.BooleanField(default=False)
 	username = models.CharField(
 		max_length=30,
 		unique=True,
@@ -31,7 +32,7 @@ class CustomUser(AbstractUser):
 	wins = models.PositiveIntegerField(default=0)
 	losses = models.PositiveIntegerField(default=0)
 	online_status = models.BooleanField(default=False)
-	login_42 = models.CharField(max_length=30, blank=True)
+	login_42 = models.CharField(max_length=30, null=False)
 	preferred_language = models.CharField(
 		max_length=10,
 		choices=LANGUAGE_CHOICES,

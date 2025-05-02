@@ -1,17 +1,114 @@
-{% extends "base.html" %}
+{% comment %} {% extends "base.html" %} {% endcomment %}
 {% load i18n %}
+{% load static %}
 
-{% block content %}
-<h1>
-	{% trans "WELCOME TO ENTROPIA" %}
-</h1>
-{% if user.is_authenticated %}
-<div>
-	<a href="{% url 'pong_game' %}">
-		<button class="bg-blue-600 text-white px-6 py-3 rounded-2xl shadow-lg hover:bg-blue-700 text-lg font-semibold">
-			{% trans "Play Pong Now" %}
-		</button>
-	</a>
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<script type="module" src="{% static '/js/password-condition.js' %}"></script>
+<script type="module" src="{% static '/js/home.js' %}"></script>
+
+{% if not user.is_authenticated %}
+<div id="navigation">
+
+        <img class="logo" src="{% static 'logo/entropia9.png' %}" alt="Logo">
+        <!-- <button class="vs_tournois" id="avatar">AVATAR -proto-</button> -->
+
+          <div class="links_boutons">
+            <!-- <a class="link_big_pages" href="/pong/">PONG</a> -->
+            <a class="link_big_pages" href="/tournois/">TOURNAMENT</a>
+            <a class="link_big_pages" href="/duel/">DUEL</a>
+
+            <a class="link_temp" href="/vs_tournois/">VS MENU</a>
+            <a class="link_temp" href="/basic_setting/">SETTINGS MENU</a>
+            <a class="link_temp" href="/3_blue_rubix/">SETTINGS<a>
+            <a class="link_temp" href="/4_fall/">CREDITS</a>
+
+            <a class="link_temp_template" href="/1_space_cubes/">3D SPACE_CUBES</a>
+            <a class="link_temp_template" href="/2_pink_cubes/">3D PINK_CUBES</a>
+            <!-- <a class="link_temp_template" href="/6_torus/">3D TORUS</a> -->
+            <a class="link_temp_test" href="/testeur/">TESTEUR</a>
+            <a class="link_temp_test" href="/avatar/">AVATAR PNG</a>
+            <a class="link_temp_test" href="/404/">AVATAR 404</a>
+
+
+            <!-- <a class="link_temp_test" href="/choose_your_perso/">GLOBOS GRID</a> -->
+
+          </div>
+          <div class="blur-box-parent">
+              <form class="blur-box" method="post" id="loginForm" action="/api/users/accounts/login/">  
+                
+                <div class="no_account">
+                    <p class="no_account_sentence">
+                      {% trans "No account? Sign up first!" %}
+                    </p>
+                    <button id="go_to_signup_page" class="go_to_signup_page" type="button">
+                      {% trans "Sign up" %}
+                    </button>
+                </div>   
+
+                  <p class="sign_title">
+                    {% trans "SIGN IN" %}
+                  </p>
+                  {% csrf_token %}
+                  
+                  <input class="login" type="text" id="usernameSignin" name="login" placeholder="Login" required>
+                  <input class="password" type="password" id="passwordSignin" name="password" placeholder="Password" required>
+                  
+              
+                  <label class="remember-container">
+                      <input type="checkbox" name="remember">
+                      <span>
+                        {% trans "Remember Me" %}
+                      </span>
+                  </label>
+
+                    <button id="signin_submit" class="signin_submit"  type="submit" >
+                      {% trans "Sign In" %}
+                    </button>
+
+                    <button class="signin_42" id="signin_42" href="https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code">
+                      {% trans "Sign In with 42" %}
+                    </button>
+                          <script>
+                            document.getElementById('signin_42').onclick = function() {
+                              window.location.href = 'https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code';
+                            }
+                          </script>
+
+                    <!-- <button class="forgot">Forgot password?</button>  -->
+
+              </form>
+              <div id="signupContainer" style="display: none;">
+                {% include 'signup.html' %}
+              </div>
+              <div class="blur-box-parent">
 </div>
+
+<!-- <div id="js-loader" class="loader-overlay">
+  <div class="loader-bar"></div>
+</div> -->
+
+<canvas id="background" class="webgl"></canvas>
+
+<script>
+    const baseScreen = 1920;
+    function updateLogo() {
+      const logo = document.querySelector('.logo');
+      const width = window.innerWidth;
+      const percent = width / baseScreen;
+      if (percent < 0.60) {
+        logo.src = "{% static 'logo/logo_square.png' %}"; 
+        logo.style.width = "280px";
+        logo.style.left = "15%";
+      } else {
+        logo.src = "{% static 'logo/entropia9.png' %}";
+        logo.style.width = "550px";
+        logo.style.left = "25%";
+      }
+    }
+    window.addEventListener('resize', updateLogo);
+    window.addEventListener('load', updateLogo);
+</script>
+{% else %}
+{% include 'vs_tournois.html' %}
 {% endif %}
-{% endblock %}
+

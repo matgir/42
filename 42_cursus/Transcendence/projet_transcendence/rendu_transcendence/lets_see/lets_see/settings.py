@@ -18,6 +18,7 @@ from distutils.util import strtobool
 
 # load_dotenv()
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,9 +38,10 @@ REDIRECT_URI = os.environ.get('REDIRECT_URI')
 DJANGO_SETTINGS_MODULE = os.environ.get("DJANGO_SETTINGS_MODULE", "lets_see.settings")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = strtobool(os.environ.get("DJANGO_DEBUG", "True"))
-DEBUG = True
+# DEBUG = True
 # DEBUG = False
+DEBUG = strtobool(os.environ.get("DJANGO_DEBUG", "True")) ###### checke if it works
+
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")
@@ -70,6 +72,14 @@ INSTALLED_APPS = [
     'tournament',
     'fortytwo',
     'jeux_du_pong',
+    #2fa
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',       # pour les TOTP comme Google Authenticator
+    'django_otp.plugins.otp_hotp',
+    'two_factor',                        # le cœur de 2FA
+    # 'otp_yubikey',
+    # 'two_factor.plugins.phonenumber',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +90,6 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
     'users.middleware.UserLanguageMiddleware',
     # default
-    # Internationalization
-    # default
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -89,15 +97,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # allauth
     'allauth.account.middleware.AccountMiddleware', #User Managment
+    #2fa
+    'django_otp.middleware.OTPMiddleware',   
 ]
-
-# not commented 'users.middleware.UserLanguageMiddleware'
-    # cannot change language when not authenticated
-    # when we authenticate and the user has not the same lamguage then it craches
-# commented 'users.middleware.UserLanguageMiddleware'
-    # can change language whenever we want
-    # does not change to the preferred language of the user
-
 
 AUTH_USER_MODEL = 'users.CustomUser'
 # to use our user model define in the users folder
@@ -110,8 +112,12 @@ AUTHENTICATION_BACKENDS = [
 ]
 # to use allauth when authenticating users
 
-LOGIN_REDIRECT_URL = '/'
+# LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/users/accounts/login/'
+# LOGIN_URL = 'two_factor:login'
+LOGIN_REDIRECT_URL = 'home'  # ou un autre nom de route après login
+
+
 
 SITE_ID = 1
 # allauth
@@ -200,14 +206,7 @@ TIME_ZONE = 'Europe/Paris'
 
 USE_TZ = True
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -228,6 +227,7 @@ ACCOUNT_FORMS = {
     'set_password': 'allauth.account.forms.SetPasswordForm',
     # 'signup': 'allauth.account.forms.SignupForm',
     'signup': 'users.forms.CustomSignupForm',
+    # 'home_game': 'allauth.account.forms.Home_gameForm',
     'user_token': 'allauth.account.forms.UserTokenForm',
 }
 
@@ -240,3 +240,12 @@ CHANNEL_LAYERS = {
         # }, # in prod
     }
 }
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

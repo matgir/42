@@ -126,7 +126,7 @@ function draw() {
 	drawPaddles();
 	drawBall();
 	drawScores();
-
+function report(){
 	if (score1 >= winningScore || score2 >= winningScore) {
 		gameOver = true;
 
@@ -161,6 +161,7 @@ function draw() {
 				}),
 			});
 		}
+	}
 
 		const winnerName = score1 > score2 ? player1name : player2name;
 		ctx.fillStyle = "#000";

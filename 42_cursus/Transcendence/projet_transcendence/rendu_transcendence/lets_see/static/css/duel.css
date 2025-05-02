@@ -1,0 +1,554 @@
+@font-face {
+  font-family: 'Entropia_sansserif-Regular';
+  src: url('../fonts/Entropia_sansserif-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.app-content {
+  width: 100%;
+  max-width: 1200px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative; 
+}
+
+.app-content2 {
+  width: 100%;
+  height: 80%;
+  max-width: 1200px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-right: 70px;
+  margin-top: 100px;
+  position: relative; 
+  /* border: solid 2px pink; */
+
+}
+
+body {
+  position: relative;
+  overflow: hidden;
+}
+
+.navig {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  /* border: solid 2px pink; */
+
+}
+
+.logo_ {
+  position: absolute;
+  top: 0px;        /* distance depuis le haut */
+  right: 0px;      /* distance depuis la droite */
+  width: 430px;
+  z-index: 10;
+
+  /* border: solid 2px pink; */
+}
+
+
+.image_column {
+  position: absolute;
+  top: 53%;
+  left: 150px; /* 30px + 40px de décalage */
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  z-index: 5;
+  height: auto;
+  border-radius: 12px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  /* border-radius: solid 9px rgb(91, 46, 255); */
+
+}
+
+
+
+
+.bracket {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  /* outline: 4px solid rgba(255, 255, 255, 0.8);  */
+}
+
+
+.round {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 60px;
+  flex: 1;
+  position: relative;
+  /* outline: 4px solid rgba(255, 255, 255, 0.8);  */
+}
+
+
+
+
+
+.player {
+  /* background: rgba(0, 0, 0, 0.2); */
+  padding: 10px 10px;
+  border-radius: 6px;
+}
+
+/* Update player styles to work with the new container */
+.player, .player1, .player2, .player3, .player4, .player_round2 {
+  flex: 1;
+  font-size: 30px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.659);
+  border: 1px solid rgba(254, 254, 255, 0.586);
+  /* box-shadow: 0 0px 5px 0 rgba(80, 92, 255, 0.108); */
+  padding: 22px 45px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  margin: 0; 
+}
+
+
+
+.player_round2{
+
+  border: 2px solid rgb(33, 17, 213);
+  margin: 10px 10px;
+
+}
+
+
+.player1, .player2{
+  font-size: 30px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.583);
+  /* border: 2px solid rgb(184, 17, 213); */
+  border: 2px solid rgb(15, 255, 111);
+
+  box-shadow: 0 0px 10px 0 rgba(0, 17, 255, 0.733);
+  padding: 22px 50px;
+  margin: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.player3, .player4{
+  font-size: 30px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.583);
+
+  border: 2px solid rgb(33, 17, 213);
+  box-shadow: 0 0px 5px 0 rgba(80, 86, 255, 0.459);
+  padding: 22px 50px;
+  margin: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+
+.globo_tournament{
+  font-size: 30px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  color: rgba(204, 252, 32, 0.659);
+  border: 1px solid rgb(13, 163, 95);
+  box-shadow: 0 0px 5px 0 rgba(127, 80, 255, 0.459);
+  padding: 22px 50px;
+  margin: 10px 20px;
+  border-radius: 10px;
+  /* outline: 4px solid rgba(255, 255, 255, 0.8); */
+  
+
+}
+
+.globo_tournois {
+  width: 120px; /* un peu plus grand */
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  /* border-radius: solid 9px rgb(91, 46, 255); */
+  outline: 1px solid rgba(33, 43, 132, 0.071);
+  /* border: 1px solid rgba(33, 17, 213, 0.578); */
+  box-shadow: 0 0px 5px 0 rgba(80, 86, 255, 0.459);
+
+}
+
+
+.webgl-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+  z-index: -1;
+}
+
+.scroll-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scroll-container::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+.fullpage-section {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Adaptation des styles existants */
+.navig {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 60px ;
+
+}
+
+.blur-box_avatar, .canvas_tournois {
+  transform: translateZ(50px);
+}
+
+/* Reset des positions */
+.blur-box_avatar{
+
+  /* border: solid 2px rgb(255, 148, 225); */
+  /* background: rgba(169, 241, 255, 0); */
+
+  border-radius: 14px;
+  /* backdrop-filter: blur(15px); */
+  /* -webkit-backdrop-filter: blur(10px); */
+  /* border: 1.5px solid rgba(208, 114, 255, 0);
+  box-shadow: 0 8px 500px 0 rgba(6, 6, 255, 0.155); */
+  /* padding: 20px; */
+  color: white;
+
+  
+}
+#app-content, .navig, .blur-box_avatar, .canvas_tournois {
+  position: static !important;
+  transform: none !important;
+
+}
+
+/* Ajustements visuels */
+.character-grid {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.canvas_tournois {
+  max-width: 90vw;
+  margin: 0 auto;
+  border-radius: solid 9px rgb(91, 46, 255);
+
+  
+}
+
+/* Scroll personnalisé */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 4px;
+}
+
+
+
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Modifiez votre section .fullpage-section */
+.fullpage-section {
+  width: 100% !important; /* Remplace 100vw par 100% */
+  overflow-x: hidden;
+  left: 0;
+  right: 0;
+}
+
+/* Ajoutez ce conteneur wrapper */
+.scroll-container {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.globo_name{
+  border: none;
+  border-radius: 19px; /* Bords arrondis */
+}
+
+
+
+
+html, body {
+  scroll-behavior: auto;
+}
+
+
+/* Animation de défilement des images */
+@keyframes scrollImages {
+  0% {
+      transform: translateY(0);
+  }
+  100% {
+      transform: translateY(-100px);
+  }
+}
+
+/* Appliquer l'animation au lancement */
+.slot-image {
+  animation: scrollImages 0.5s ease-in-out infinite;
+}
+
+
+.fullpage-section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  align-items: center; /* centre verticalement */
+}
+
+
+
+
+.play-button, .shuffle{
+  font-size: 35px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  /* box-shadow: 0 0px 5px 0 rgba(80, 92, 255, 0.108); */
+  padding: 14px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  margin: 0; 
+  background: none;
+  border-color: rgba(18, 223, 255, 0.867);
+  background: rgba(0, 255, 251, 0);
+  box-shadow: 0 0px 15px 0 rgba(24, 213, 255, 0.312);
+  /* border: 3px double rgb(221, 0, 255); */
+  /* border-image: linear-gradient(45deg, rgb(0, 51, 255),pink, rgb(255, 34, 255)) 1; */
+}
+
+
+
+.play-button:hover {
+  transform: scale(1.05);
+  background: rgba(222, 35, 255, 0.872);
+  color: rgb(255, 255, 255);
+  border: 3px double rgb(227, 67, 255);
+
+}
+
+
+.shuffle {
+  position: absolute;
+  left:-35px ;
+  top: 48%;
+  font-size: 18px;
+  border-radius:50px ;
+  padding: 14px 18px;
+  color: rgb(255, 255, 255);
+  background: rgb(33, 17, 255);
+  border: 3px outset rgba(20, 20, 130, 0.804);
+  box-shadow: 0 0px 15px 0 rgb(10, 24, 136);
+
+}
+
+.shuffle:hover {
+  color: rgba(255, 255, 255, 0.812);
+
+  background: rgb(15, 0, 219);
+  border: 3px outset rgba(73, 73, 196, 0.56);
+  transform: scale(0.95);
+
+}
+
+
+/* .play-button.active {
+  cursor: pointer;
+  background: rgb(217, 0, 255);
+  box-shadow: 0 0px 5px 0 rgba(197, 80, 255, 0.459);
+  border: 3px outset rgb(248, 200, 255);
+} */
+
+/* .play-button.active:hover {
+  transform: scale(1.1);
+  background: rgb(217, 0, 255);
+  color: rgb(255, 255, 255);
+} */
+
+/* .play-button:disabled {
+  pointer-events: none; 
+} */
+
+
+
+.play_buttons {
+  position: absolute;
+  bottom: 0px;
+  right: 30px;
+  width: 200px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column; 
+  gap: 28px;             
+}
+
+
+
+
+.win {
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transform: translate(-50%, -50%); /* Centre parfaitement l'élément */
+  font-size: 140px;
+  border-radius: 10px;
+  z-index: 10;
+  font-family: 'Entropia_sansserif-Regular', regular;
+  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
+  /* box-shadow: 0 0px 1px 0 rgba(80, 86, 255, 0.459); */
+}
+
+
+.confirmButton {
+  /* Styles de base */
+  font-size: 35px;
+  padding: 7px 40px;
+  color: rgb(255, 255, 255);
+  background: #a200b700;
+  border-radius: 5px;
+  cursor: not-allowed; /* Curseur interdit par défaut */
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  border: 3px double rgb(182, 0, 214);
+  text-align: center;
+  margin-bottom: 60px;
+  opacity: 0.35;
+  transition: all 0.3s ease;
+}
+
+.confirmButton.active {
+  cursor: pointer;
+  opacity: 1;
+  border: 4px double rgb(168, 7, 255);
+
+  color: rgb(255, 255, 255);
+}
+
+.confirmButton.active:hover {
+  background: #b700a5fd;
+  transform: scale(1.1);
+}
+
+.confirmButton:disabled {
+  /* Styles quand non clicable */
+  pointer-events: none; /* Désactive les interactions */
+}
+
+
+.matchup {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* centre horizontalement */
+  gap: 70px; /* espace entre les deux joueurs */
+  padding: 40px;
+  margin-right: 200px;
+  margin-bottom: 50px;
+  /* border: solid 2px pink; */
+  /* border: solid 2px rgb(255, 148, 225); */
+  /* background: rgba(169, 241, 255, 0);
+  background-color: rgba(229, 158, 255, 0.087);
+  border-radius: 14px; */
+  /* backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(5px); */
+  /* border: 3px double rgb(114, 255, 152); */
+  box-shadow: 0 8px 500px 0 rgba(143, 147, 255, 0.07);
+  /* padding: 20px; */
+  color: white;
+}
+
+.player-container {
+    backdrop-filter: blur(1px);
+  padding: 40px;
+  display: flex;
+  background-color: rgba(164, 112, 255, 0.165);
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid rgba(89, 85, 214, 0.255);
+  border-radius: 15px;
+  box-shadow: 0 8px 200px 0 rgba(0, 5, 152, 0.193);
+
+}
+
+.player-image {
+  width: 200px;  /* agrandit l’image */
+  height: 200px; /* tu peux mettre auto si tu veux garder le ratio */
+  object-fit: cover; /* pour bien cadrer l’image dans le carré */
+  border-radius: 8px; /* arrondi les coins, optionnel */
+  margin-bottom: 20px;
+  box-shadow: 0 7px 200px 0 rgba(0, 5, 152, 0.193);
+  border: 8px double rgb(47, 255, 134);
+  box-shadow: 0 0px 10px 0 rgba(0, 255, 157, 0.734);
+
+  border-radius: 40px;
+}
+
+.player {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#section {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in 0.2s forwards; /* Le dernier 2s est le délai */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

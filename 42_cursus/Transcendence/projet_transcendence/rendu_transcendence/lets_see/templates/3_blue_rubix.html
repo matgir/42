@@ -1,0 +1,97 @@
+{% load static %}
+
+<!-- Fonts et CSS -->
+<!-- <link rel="stylesheet" href="{% static 'css/3_blue_rubix.css' %}"> -->
+<script type="module" src="{% static 'js/3_blue_rubix.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/3_blue_rubix.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+
+<div id="app-content">
+
+  <div id="navigation" class="navig">
+
+
+    <div class="settings-container">
+      <img class="logo_" src="{% static 'logo/entropia9.png' %}" alt="Logo">
+      <div class="settings-container">
+        <img class="logo_" src="{% static 'logo/entropia9.png' %}" alt="Logo">
+      
+        <!-- Level Category -->
+        <div class="category">
+          <h2>Level</h2>
+          <div class="options">
+            <div class="option">
+              <input type="radio" name="level" id="easy">
+              <label for="easy"></label>
+              <span>Noob</span>
+            </div>
+            <div class="option">
+              <input type="radio" name="level" id="medium">
+              <label for="medium"></label>
+              <span>Medium</span>
+            </div>
+            <div class="option">
+              <input type="radio" name="level" id="hard">
+              <label for="hard"></label>
+              <span>Hard</span>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Colors Category -->
+        <div class="category2">
+          <h2>Color Mode</h2>
+          <div class="options">
+            <div class="option">
+              <input type="radio" name="color" id="color1">
+              <label for="color1"></label>
+              <span>The Special</span>
+            </div>
+            <div class="option">
+              <input type="radio" name="color" id="color2">
+              <label for="color2"></label>
+              <span>Too Blue</span>
+            </div>
+            <div class="option">
+              <input type="radio" name="color" id="color3">
+              <label for="color3"></label>
+              <span>White Light</span>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Points to Win Category -->
+        <div class="category3">
+          <h2>Points to Win</h2>
+          <div class="options">
+            <div class="option">
+              <input type="radio" name="points" id="pt5">
+              <label for="pt5"></label>
+              <span>3 points</span>
+            </div>
+            <div class="option">
+              <input type="radio" name="points" id="pt10">
+              <label for="pt10"></label>
+              <span>6 points</span>
+            </div>
+            <div class="option">
+              <input type="radio" name="points" id="pt15">
+              <label for="pt15"></label>
+              <span>12 points</span>
+            </div>
+          </div>
+        </div>
+      </div>   
+      <div class="play_buttons">
+        <button class="quit-button">QUIT</button>
+        <button class="play-button">PLAY</button>
+      </div>
+
+    </div>
+  <canvas class="webgl"></canvas>
+</div>
+</div>
+
+
+

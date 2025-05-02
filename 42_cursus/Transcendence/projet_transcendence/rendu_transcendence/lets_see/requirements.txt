@@ -14,3 +14,8 @@ channels-redis==4.2.1
 sqlparse==0.5.2
 #gunicorn==23.0.0
 #djangorestframework_simplejwt==5.4.0
+
+django-two-factor-auth==1.17.0
+django-otp==1.6.0
+phonenumbers==9.0.3
+qrcode==7.4.2

@@ -1,0 +1,2372 @@
+diff --git a/docker-compose-dev.yml b/docker-compose-dev.yml
+index 747cf00..1bff7b9 100644
+--- a/docker-compose-dev.yml
++++ b/docker-compose-dev.yml
+@@ -2,6 +2,8 @@ services:
+   db:
+     container_name: db_the_transcendence
+     image: postgres:latest
++    # ports:
++      # - "5432:5432" why not put it ?
+     volumes:
+       - postgres_data:/var/lib/postgresql/data
+     env_file:
+diff --git a/lets_see/Dockerfile.dev b/lets_see/Dockerfile.dev
+index 38e0464..700bebe 100644
+--- a/lets_see/Dockerfile.dev
++++ b/lets_see/Dockerfile.dev
+@@ -25,6 +25,9 @@ RUN pip install --no-cache-dir -r requirements.txt
+ RUN apk update && apk upgrade && apk add --no-cache postgresql-client
+ # may erase it later, needed to check postgresql connection
+ 
++RUN apk add --no-cache gettext gcc musl-dev libffi-dev
++# for the translation modul, may not need the ones after the first
++
+ # COPY . /app/
+ COPY ./run_dev.sh /tmp/
+ # copy the django project to the container
+diff --git a/lets_see/Dockerfile.prod b/lets_see/Dockerfile.prod
+index 1d1c426..a5ae67c 100644
+--- a/lets_see/Dockerfile.prod
++++ b/lets_see/Dockerfile.prod
+@@ -25,6 +25,9 @@ RUN pip install --no-cache-dir -r requirements.txt
+ RUN apk update && apk upgrade && apk add --no-cache postgresql-client
+ # may erase it later, needed to check postgresql connection
+ 
++RUN apk add --no-cache gettext gcc musl-dev libffi-dev
++# for the translation modul, may not need the ones after the first
++
+ # COPY . /app/
+ COPY ./run_prod.sh /tmp/
+ # copy the django project to the container
+diff --git a/lets_see/fortytwo/templates/fortytwo/fortytwo_username.html b/lets_see/fortytwo/templates/fortytwo/fortytwo_username.html
+index 69361c3..d8af329 100644
+--- a/lets_see/fortytwo/templates/fortytwo/fortytwo_username.html
++++ b/lets_see/fortytwo/templates/fortytwo/fortytwo_username.html
+@@ -1,4 +1,5 @@
+ {% extends "base.html" %}
++{% load i18n %}
+ 
+ {% block content %}
+ <hr>
+@@ -9,15 +10,10 @@
+ <hr>
+ <hr>
+ <form method="post">
+-<!-- <form method="post" enctype="multipart/form-data"> -->
+ 	{% csrf_token %}
+ 	{{ form }}
+-	<!-- {{ form.as_p }} -->
+-	<!-- <img src="{{ user.avatar.url }}" width="100" height="100" alt="Avatar"> -->
+-	<!-- Curent avatar -->
+-	<!-- <hr> -->
+ 	<button type="submit">
+-		Submit Username
++		{% trans "Submit Username" %}
+ 	</button>
+ </form>
+ {% endblock %}
+diff --git a/lets_see/fortytwo/views.py b/lets_see/fortytwo/views.py
+index d3a0d7f..065655f 100644
+--- a/lets_see/fortytwo/views.py
++++ b/lets_see/fortytwo/views.py
+@@ -21,13 +21,14 @@ from django.contrib.auth import login
+ from django.contrib.auth import get_backends
+ # from django.contrib.auth.decorators import login_required
+ from .forms import FortyTwoUsername
++from django.utils.translation import gettext as _
+ 
+ # @login_required
+ def fortytwo_username(request):
+-	print("forty_two_username")
+-	print("REQUEST de 42 >>> ", request)
++	# print("forty_two_username")
++	# print("REQUEST de 42 >>> ", request)
+ 	if request.method == 'POST':
+-		print("DANS IF >>>>>>>>>>>>>")
++		# print("DANS IF >>>>>>>>>>>>>")
+ 		form = FortyTwoUsername(request.POST, request.FILES, instance=request.user)
+ 		if form.is_valid():
+ 			form.save()
+@@ -35,7 +36,7 @@ def fortytwo_username(request):
+ 			return redirect('home')
+ 			# return redirect('user_profile', username=request.user.username)
+ 	else:
+-		print("DANS ELSE >>>>>>>>>>>>>")
++		# print("DANS ELSE >>>>>>>>>>>>>")
+ 		form = FortyTwoUsername(instance=request.user)
+ 	return render(request, 'fortytwo/fortytwo_username.html', {'form': form})
+ 
+@@ -45,16 +46,16 @@ def fortytwo_username(request):
+ # HELPFUL TOOL
+ # SUPPRIMER
+ 
+-def foo(ft):
+-    foo.counter += 1
+-    print ("Step %d -> " % foo.counter, ft, " function")
+-foo.counter = 0
++# def foo(ft):
++#     foo.counter += 1
++#     print ("Step %d -> " % foo.counter, ft, " function")
++# foo.counter = 0
+ 
+ 
+ 
+ 
+ 
+-print("\n\n===================== VIEW DJANGO PONG GAME ==========================\n\n")
++# print("\n\n===================== VIEW DJANGO PONG GAME ==========================\n\n")
+ 
+ # Récupérer le client_id et client_secret depuis les settings
+ CLIENT_ID = settings.OAUTH_CLIENT_ID
+@@ -65,16 +66,17 @@ token_url = "https://api.intra.42.fr/oauth/token"
+ 
+ def oauth_callback(request):
+     """Cette vue gère la redirection après l'authentification 42"""
+-    foo("oauth_callback")
++    # foo("oauth_callback")
+     # Récupère le code d'autorisation depuis l'URL
+     authorization_code = request.GET.get("code")
+     # if not authorization_code:
+     #     authorization_code = request.session["authorization_code"]
+ 
+-    print("code recu >>>>>>>>>>>>>>>>> ", authorization_code)
++    # print("code recu >>>>>>>>>>>>>>>>> ", authorization_code)
+     
+     if not authorization_code:
+-        return JsonResponse({"error": "1- Pas de code d'autorisation fourni"}, status=500)
++        return JsonResponse({"error": _("1- No authorization code given")}, status=500)
++        # return JsonResponse({"error": "1- Pas de code d'autorisation fourni"}, status=500)
+ 
+     # Stocker le code en session avant la redirection
+     request.session["authorization_code"] = authorization_code
+@@ -86,8 +88,8 @@ def oauth_callback(request):
+ 
+ 
+ def exchange_code_for_token(request, code):
+-    foo( "exchange_code_for_token")
+-    print("dans exhange ft, code is : ", request.session.get("authorization_code"))
++    # foo( "exchange_code_for_token")
++    # print("dans exhange ft, code is : ", request.session.get("authorization_code"))
+     data = {
+         "grant_type": "authorization_code",
+         "client_id": CLIENT_ID,
+@@ -98,14 +100,16 @@ def exchange_code_for_token(request, code):
+     # Envoie la requête à l'API de 42 pour obtenir le token
+     response = requests.post(token_url, data=data)
+     if response.status_code != 200:
+-        print("❌>> Erreur dans la requête :", response.status_code, response.text)
+-        return JsonResponse({"error": "Erreur lors de l'echange de code contre un token d'acces"}, status=500)
++        # print("❌>> Erreur dans la requête :", response.status_code, response.text)
++        return JsonResponse({"error": _("Error during the access token exchange")}, status=500)
++        # return JsonResponse({"error": "Erreur lors de l'echange de code contre un token d'acces"}, status=500)
+     access_token = response.json().get('access_token')
+     if not access_token:
+-        return JsonResponse({"error": "2- Pas de code d'autorisation fourni"}, status=500)
++        return JsonResponse({"error": _("2- No authorization code given")}, status=500)
++        # return JsonResponse({"error": "2- Pas de code d'autorisation fourni"}, status=500)
+     
+     request.session["access_token"] = access_token
+-    print("1- DEBUG >>>", access_token)
++    # print("1- DEBUG >>>", access_token)
+ 
+     return (access_token)
+ 
+@@ -151,34 +155,37 @@ def download_avatar(url):
+     return None
+ 
+ def	pong_game(request):
+-    foo("pong_game")
++    # foo("pong_game")
+     authorization_code = request.session.get("authorization_code")
+     if not authorization_code:
+-        return JsonResponse({"error": "Code d'autorisation manquant en session"}, status=500)
+-    print("Code récupéré dans pong_game >>>>>>>>>>>>>>>>>", authorization_code)
++        return JsonResponse({"error": _("Missing authorization code during session")}, status=500)
++        # return JsonResponse({"error": "Code d'autorisation manquant en session"}, status=500)
++    # print("Code récupéré dans pong_game >>>>>>>>>>>>>>>>>", authorization_code)
+ 
+     # Maintenant, échange ce code contre un token
+     access_token = request.session.get("access_token")
+     if access_token:
+-        print ("Access token received!")
++        # print ("Access token received!")
+         return redirect('home')
+         # return HttpResponse("Hello, this will be the pong game.")
+ 
+     access_token = exchange_code_for_token(request, authorization_code)
+     if not access_token:
+-        return JsonResponse({"error": "Erreur lors de l'echange du code contre token"}, status=500)
++        return JsonResponse({"error": _("Error during the exchange of the code for the token")}, status=500)
++        # return JsonResponse({"error": "Erreur lors de l'echange du code contre token"}, status=500)
+     
+     if not is_token_valid(access_token):
+-        return JsonResponse({"error": "Token expired"}, status=401)
++        return JsonResponse({"error": _("Token expired")}, status=401)
+ 
+ 
+     user_info = get_42_user_info(access_token)
+     if user_info:
+-        print("! Infos du user obtenues !")
++        print("! Infos du user obtenues !")####
+         # print("Voici infos user >> ", user_info.get("login"))
+-        print("Voici infos user >> ", user_info)
++        # print("Voici infos user >> ", user_info)
+     else:
+-        return JsonResponse({"error": "Impossible de récupérer les infos utilisateur"}, status=500)
++        return JsonResponse({"error": _("Could not collect user informations")}, status=500)
++        # return JsonResponse({"error": "Impossible de récupérer les infos utilisateur"}, status=500)
+ 
+ 
+         # Vérifier si l'utilisateur existe déjà
+@@ -214,22 +221,22 @@ def	pong_game(request):
+     #     print(user.avatar)
+     #     user.save()
+ 
+-    print("REQUEST >>> ", request)
+-    print(request, request.method, request.POST, request.FILES, request.user)
++    # print("REQUEST >>> ", request)
++    # print(request, request.method, request.POST, request.FILES, request.user)
+ 
+-    print("42 USER >>> ", user)
++    # print("42 USER >>> ", user)
+     # Connecter l'utilisateur automatiquement
+ 
+     # Assigner un backend d'authentification au user
+     user.backend = 'allauth.account.auth_backends.AuthenticationBackend'
+     # fortytwo_username(request, user)
+     login(request, user)
+-    print(request.user)###
++    # print(request.user)###
+ 
+ 
+     request.session["access_token"] = access_token
+     request.session.modified = True
+-    print("2- ACCESS TOKEN >>>", request.session.get("access_token"))
++    # print("2- ACCESS TOKEN >>>", request.session.get("access_token"))
+ 
+     # return (fortytwo_username(request))
+     if (user.username):
+@@ -238,17 +245,8 @@ def	pong_game(request):
+     # return (redirect("home"))
+     # return (HttpResponse("Hello, this will be the pong game."))
+ 
+-class ProtectedView(APIView):
+-	permission_classes = [IsAuthenticated]
+-
+-	def get(self, request):
+-		return Response({"message": "This view is protected"})
+-    
+-
+-
+-
+-    
+-    
+-
+-
++# class ProtectedView(APIView):
++# 	permission_classes = [IsAuthenticated]
+ 
++# 	def get(self, request):
++# 		return Response({"message": "This view is protected"})
+\ No newline at end of file
+diff --git a/lets_see/prod/__init__.py b/lets_see/jeux_du_pong/__init__.py
+similarity index 100%
+rename from lets_see/prod/__init__.py
+rename to lets_see/jeux_du_pong/__init__.py
+diff --git a/lets_see/prod/admin.py b/lets_see/jeux_du_pong/admin.py
+similarity index 100%
+rename from lets_see/prod/admin.py
+rename to lets_see/jeux_du_pong/admin.py
+diff --git a/lets_see/prod/apps.py b/lets_see/jeux_du_pong/apps.py
+similarity index 82%
+rename from lets_see/prod/apps.py
+rename to lets_see/jeux_du_pong/apps.py
+index 1a20e08..a50a047 100644
+--- a/lets_see/prod/apps.py
++++ b/lets_see/jeux_du_pong/apps.py
+@@ -3,4 +3,4 @@ from django.apps import AppConfig
+ 
+ class ProdConfig(AppConfig):
+     default_auto_field = 'django.db.models.BigAutoField'
+-    name = 'prod'
++    name = 'jeux_du_pong'
+diff --git a/lets_see/jeux_du_pong/migrations/0001_initial.py b/lets_see/jeux_du_pong/migrations/0001_initial.py
+new file mode 100644
+index 0000000..896b4f1
+--- /dev/null
++++ b/lets_see/jeux_du_pong/migrations/0001_initial.py
+@@ -0,0 +1,29 @@
++# Generated by Django 5.1.3 on 2025-04-25 15:02
++
++import django.db.models.deletion
++from django.conf import settings
++from django.db import migrations, models
++
++
++class Migration(migrations.Migration):
++
++    initial = True
++
++    dependencies = [
++        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
++    ]
++
++    operations = [
++        migrations.CreateModel(
++            name='Match',
++            fields=[
++                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
++                ('opponent_alias', models.CharField(max_length=50)),
++                ('result', models.CharField(choices=[('win', 'Win'), ('loss', 'Loss')], max_length=10)),
++                ('player_score', models.PositiveIntegerField()),
++                ('opponent_score', models.PositiveIntegerField()),
++                ('played_at', models.DateTimeField(auto_now_add=True)),
++                ('player', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='matches', to=settings.AUTH_USER_MODEL)),
++            ],
++        ),
++    ]
+diff --git a/lets_see/jeux_du_pong/migrations/0002_delete_match.py b/lets_see/jeux_du_pong/migrations/0002_delete_match.py
+new file mode 100644
+index 0000000..2041740
+--- /dev/null
++++ b/lets_see/jeux_du_pong/migrations/0002_delete_match.py
+@@ -0,0 +1,16 @@
++# Generated by Django 5.1.3 on 2025-04-25 15:05
++
++from django.db import migrations
++
++
++class Migration(migrations.Migration):
++
++    dependencies = [
++        ('jeux_du_pong', '0001_initial'),
++    ]
++
++    operations = [
++        migrations.DeleteModel(
++            name='Match',
++        ),
++    ]
+diff --git a/lets_see/jeux_du_pong/migrations/0003_initial.py b/lets_see/jeux_du_pong/migrations/0003_initial.py
+new file mode 100644
+index 0000000..afe2b4d
+--- /dev/null
++++ b/lets_see/jeux_du_pong/migrations/0003_initial.py
+@@ -0,0 +1,30 @@
++# Generated by Django 5.1.3 on 2025-04-25 15:17
++
++import django.db.models.deletion
++from django.conf import settings
++from django.db import migrations, models
++
++
++class Migration(migrations.Migration):
++
++    initial = True
++
++    dependencies = [
++        ('jeux_du_pong', '0002_delete_match'),
++        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
++    ]
++
++    operations = [
++        migrations.CreateModel(
++            name='Match',
++            fields=[
++                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
++                ('opponent_alias', models.CharField(max_length=50)),
++                ('result', models.CharField(choices=[('win', 'Win'), ('loss', 'Loss')], max_length=10)),
++                ('player_score', models.PositiveIntegerField()),
++                ('opponent_score', models.PositiveIntegerField()),
++                ('played_at', models.DateTimeField(auto_now_add=True)),
++                ('player', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='matches', to=settings.AUTH_USER_MODEL)),
++            ],
++        ),
++    ]
+diff --git a/lets_see/prod/migrations/__init__.py b/lets_see/jeux_du_pong/migrations/__init__.py
+similarity index 100%
+rename from lets_see/prod/migrations/__init__.py
+rename to lets_see/jeux_du_pong/migrations/__init__.py
+diff --git a/lets_see/jeux_du_pong/models.py b/lets_see/jeux_du_pong/models.py
+new file mode 100644
+index 0000000..cae5c30
+--- /dev/null
++++ b/lets_see/jeux_du_pong/models.py
+@@ -0,0 +1,13 @@
++from django.db import models
++from django.conf import settings
++
++class Match(models.Model):
++	player = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='matches')
++	opponent_alias = models.CharField(max_length=50)
++	result = models.CharField(max_length=10, choices=[('win', 'Win'), ('loss', 'Loss')])
++	player_score = models.PositiveIntegerField()
++	opponent_score = models.PositiveIntegerField()
++	played_at = models.DateTimeField(auto_now_add=True)
++
++	def __str__(self):
++		return f"{self.player.username} vs {self_opponent_alias} - {self.result}"
+\ No newline at end of file
+diff --git a/lets_see/jeux_du_pong/static/js/pong.js b/lets_see/jeux_du_pong/static/js/pong.js
+new file mode 100644
+index 0000000..06773f0
+--- /dev/null
++++ b/lets_see/jeux_du_pong/static/js/pong.js
+@@ -0,0 +1,219 @@
++function getCookie(name) {
++	let cookieValue = null;
++	if (document.cookie && document.cookie !== '') {
++		for (let cookie of document.cookie.split(';')) {
++			cookie = cookie.trim();
++			if (cookie.startsWith(name + '=')) {
++				cookieValue = decodeURIComponent(cookie.slice(name.length + 1));
++				break;
++			}
++		}
++	}
++	return cookieValue;
++}
++
++console.log("Pong script loaded");
++
++const canvas = document.getElementById("pongCanvas");
++if (!canvas) {
++	alert("Canvas not found! Check the HTML and ID.");
++}
++
++// const canvas = document.getElementById("pongCanvas");
++const ctx = canvas.getContext("2d");
++
++// Game dimensions
++const paddleWidth = 10;
++const paddleHeight = 100;
++const ballSize = 10;
++
++// Paddle positions
++let player1Y = canvas.height / 2 - paddleHeight / 2;
++let player2Y = canvas.height / 2 - paddleHeight / 2;
++
++// Ball position and velocity
++let ballX = canvas.width / 8;
++let ballY = canvas.height / 2;
++let ballSpeedX = 20;
++let ballSpeedY = 30;
++
++// Input flags
++let wPressed = false;
++let sPressed = false;
++let upPressed = false;
++let downPressed = false;
++
++// Scores
++let score1 = 0;
++let score2 = 0;
++let gameOver = false;
++const winningScore = 5;
++
++//players
++const player2name = currentUserName;
++const player1name = "player";
++
++const playAgainBtn = document.getElementById("playAgainBtn");
++
++// Draw paddles
++function drawPaddles() {
++	ctx.fillStyle = "#000";
++	ctx.fillRect(0, player1Y, paddleWidth, paddleHeight);
++	ctx.fillRect(canvas.width - paddleWidth, player2Y, paddleWidth, paddleHeight);
++}
++
++// Draw ball
++function drawBall() {
++	ctx.beginPath();
++	ctx.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
++	ctx.fillStyle = "#f00";
++	ctx.fill();
++	ctx.closePath();
++}
++
++// Draw scores
++function drawScores() {
++	ctx.font = "20px Arial";
++	ctx.fillStyle = "#000";
++	ctx.fillText(`${player1name}: ${score1}`, 50, 30);
++	ctx.fillText(`${player2name}: ${score2}`, canvas.width - 100, 30);
++}
++
++// Game loop
++function draw() {
++	if (gameOver) return;
++
++	ctx.clearRect(0, 0, canvas.width, canvas.height);
++
++	// Move paddles
++	if (wPressed && player1Y > 0) player1Y -= 5;
++	if (sPressed && player1Y < canvas.height - paddleHeight) player1Y += 5;
++	if (upPressed && player2Y > 0) player2Y -= 5;
++	if (downPressed && player2Y < canvas.height - paddleHeight) player2Y += 5;
++
++	// Move ball
++	ballX += ballSpeedX;
++	ballY += ballSpeedY;
++
++	// Bounce off top/bottom
++	if (ballY + ballSize > canvas.height || ballY - ballSize < 0) {
++		ballSpeedY *= -1;
++	}
++
++	// Collision with paddles
++	if (ballX - ballSize < paddleWidth &&
++		ballY > player1Y &&
++		ballY < player1Y + paddleHeight) {
++		ballSpeedX *= -1;
++	}
++
++	if (ballX + ballSize > canvas.width - paddleWidth &&
++		ballY > player2Y &&
++		ballY < player2Y + paddleHeight) {
++		ballSpeedX *= -1;
++	}
++
++	// Score
++	if (ballX < 0) {
++		score2 += 1;
++		resetBall();
++	}
++	if (ballX > canvas.width) {
++		score1 += 1;
++		resetBall();
++	}
++
++	drawPaddles();
++	drawBall();
++	drawScores();
++
++	if (score1 >= winningScore || score2 >= winningScore) {
++		gameOver = true;
++
++		let playerScore, opponentScore, result, opponentAlias;
++
++		if (player1name === currentUserName) {
++			playerScore = score1;
++			opponentScore = score2;
++			opponentAlias = player2name;
++			result = score1 > score2 ? "win" : "loss";
++		} else if (player2name === currentUserName) {
++			playerScore = score2;
++			opponentScore = score1;
++			opponentAlias = player1name;
++			result = score2 > score1 ? "win" : "loss";
++		} else {
++			console.warn("Current user not in the match");
++		}
++
++		if (result) {
++			fetch(reportMatchUrl, {
++				method: "POST",
++				headers: {
++					"Content-Type": "application/json",
++					"X-CSRFToken": getCookie("csrftoken"),
++				},
++				body: JSON.stringify({
++					result: result,
++					player_score: playerScore,
++					opponent_score: opponentScore,
++					opponent_alias: opponentAlias
++				}),
++			});
++		}
++
++		const winnerName = score1 > score2 ? player1name : player2name;
++		ctx.fillStyle = "#000";
++		ctx.font = "40px Arial";
++		ctx.textAlign = "center";
++		ctx.fillText(
++			gettext("%s Wins !").replace("%s", winnerName),
++			// score1 > score2 ? `${currentUserName} Wins !` : "Player 2 Wins !",
++			canvas.width / 2,
++			canvas.height / 2
++		);
++		playAgainBtn.style.display = "block";
++		return;
++	}
++
++	requestAnimationFrame(draw);
++}
++
++function resetBall() {
++	ballX = canvas.width / 2;
++	ballY = canvas.height / 2;
++	ballSpeedX *= -1;
++	ballSpeedY = Math.random() * 4 - 2;
++}
++
++document.addEventListener("keydown", function (e) {
++	if (e.key === "w") wPressed = true;
++	if (e.key === "s") sPressed = true;
++	if (e.key === "ArrowUp") upPressed = true;
++	if (e.key === "ArrowDown") downPressed = true;
++});
++
++document.addEventListener("keyup", function (e) {
++	if (e.key === "w") wPressed = false;
++	if (e.key === "s") sPressed = false;
++	if (e.key === "ArrowUp") upPressed = false;
++	if (e.key === "ArrowDown") downPressed = false;
++});
++
++playAgainBtn.addEventListener("click", () => {
++	// Reset the game
++	score1 = 0;
++	score2 = 0;
++	player1Y = canvas.height / 2 - paddleHeight / 2;
++	player2Y = canvas.height / 2 - paddleHeight / 2;
++	ballX = canvas.width / 8;
++	ballY = canvas.height / 2;
++	ballSpeedX = 10;
++	ballSpeedY = 8;
++	gameOver = false;
++
++	playAgainBtn.style.display = "none";
++	draw();
++});
++
++draw();
+diff --git a/lets_see/jeux_du_pong/templates/jeux_du_pong/game.html b/lets_see/jeux_du_pong/templates/jeux_du_pong/game.html
+new file mode 100644
+index 0000000..9848512
+--- /dev/null
++++ b/lets_see/jeux_du_pong/templates/jeux_du_pong/game.html
+@@ -0,0 +1,17 @@
++{% extends "base.html" %}
++{% load i18n %}
++{% block title %}{% trans "Play Pong" %}{% endblock %}
++
++{% block content %}
++{% load static %}
++<h2>🎮 Pong Game</h2>
++<script>
++	const currentUserName = "{{ player_name|escapejs }}";
++	const reportMatchUrl = "{% url 'report_match' %}";
++</script>
++<canvas id="pongCanvas" width="800" height="500" style="border:1px solid #000;"></canvas>
++<button id="playAgainBtn" style="margin-top: 20px; display: none;">
++{% trans "Play Again" %}
++</button>
++<script src="{% static 'js/pong.js' %}"></script>
++{% endblock %}
+diff --git a/lets_see/prod/tests.py b/lets_see/jeux_du_pong/tests.py
+similarity index 100%
+rename from lets_see/prod/tests.py
+rename to lets_see/jeux_du_pong/tests.py
+diff --git a/lets_see/jeux_du_pong/urls.py b/lets_see/jeux_du_pong/urls.py
+new file mode 100644
+index 0000000..4e21d2b
+--- /dev/null
++++ b/lets_see/jeux_du_pong/urls.py
+@@ -0,0 +1,7 @@
++from django.urls import path
++from .views import pong_game, report_match
++
++urlpatterns = [
++	path('pong/', pong_game, name='pong_game'),
++	path('report-match/', report_match, name='report_match'),
++]
+\ No newline at end of file
+diff --git a/lets_see/jeux_du_pong/views.py b/lets_see/jeux_du_pong/views.py
+new file mode 100644
+index 0000000..66a6d43
+--- /dev/null
++++ b/lets_see/jeux_du_pong/views.py
+@@ -0,0 +1,39 @@
++from django.shortcuts import render
++from django.contrib.auth.decorators import login_required
++from django.views.decorators.csrf import csrf_exempt
++from django.http import JsonResponse
++import json
++from .models import Match
++from django.utils.translation import gettext as _
++
++@login_required
++def pong_game(request):
++	return render(request, 'jeux_du_pong/game.html', {'player_name': request.user.username})
++
++@csrf_exempt
++@login_required
++def report_match(request):
++	if request.method == "POST":
++		data = json.loads(request.body)
++
++		result = data.get("result")
++		player_score = data.get("player_score")
++		opponent_score = data.get("opponent_score")
++		opponent_alias = data.get("opponent_alias", "Player 2")
++
++		Match.objects.create(
++			player=request.user,
++			opponent_alias=opponent_alias,
++			result=result,
++			player_score=player_score,
++			opponent_score=opponent_score
++		)
++
++		if result == "win":
++			request.user.wins += 1
++		elif result == "loss":
++			request.user.losses += 1
++		request.user.save()
++
++		return JsonResponse({"status": _("ok")})
++	return JsonResponse({"error": _("Invalid request")}, status=400)
+\ No newline at end of file
+diff --git a/lets_see/lets_see/context_processors.py b/lets_see/lets_see/context_processors.py
+index d326d74..4153a63 100644
+--- a/lets_see/lets_see/context_processors.py
++++ b/lets_see/lets_see/context_processors.py
+@@ -1,11 +1,12 @@
+ import os
++from django.utils.translation import gettext as _
+ 
+ def client_id_context(request):
+     return {
+-        "env_client_id": os.getenv("OAUTH_CLIENT_ID", "Value does not exist")
++        "env_client_id": os.getenv("OAUTH_CLIENT_ID", _("Value does not exist"))
+     }
+ 
+ def uri_context(request):
+     return {
+-        "env_uri": os.getenv("REDIRECT_URI", "Value does not exist")
++        "env_uri": os.getenv("REDIRECT_URI", _("Value does not exist"))
+     }
+diff --git a/lets_see/lets_see/settings.py b/lets_see/lets_see/settings.py
+index de0d505..106f5f7 100644
+--- a/lets_see/lets_see/settings.py
++++ b/lets_see/lets_see/settings.py
+@@ -38,7 +38,10 @@ REDIRECT_URI = os.environ.get('REDIRECT_URI')
+ DJANGO_SETTINGS_MODULE = os.environ.get("DJANGO_SETTINGS_MODULE", "lets_see.settings")
+ 
+ # SECURITY WARNING: don't run with debug turned on in production!
+-DEBUG = strtobool(os.environ.get("DJANGO_DEBUG", "True"))
++DEBUG = True
++# DEBUG = False
++# DEBUG = strtobool(os.environ.get("DJANGO_DEBUG", "True")) ###### checke if it works
++
+ 
+ # ALLOWED_HOSTS = []
+ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")
+@@ -64,18 +67,24 @@ INSTALLED_APPS = [
+     'allauth.account',
+     'allauth.socialaccount',
+     # custom
+-    'users',
++    # 'users',
++    'users.apps.UsersConfig',
+     'tournament',
+     'fortytwo',
++    'jeux_du_pong',
+ ]
+ 
+ MIDDLEWARE = [
+     # default
+     'django.middleware.security.SecurityMiddleware',
+     'django.contrib.sessions.middleware.SessionMiddleware',
++    # Internationalization
++    'django.middleware.locale.LocaleMiddleware',
++    'users.middleware.UserLanguageMiddleware',
++    # default
++    'django.contrib.auth.middleware.AuthenticationMiddleware',
+     'django.middleware.common.CommonMiddleware',
+     'django.middleware.csrf.CsrfViewMiddleware',
+-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+     'django.contrib.messages.middleware.MessageMiddleware',
+     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     # allauth
+@@ -166,14 +175,25 @@ AUTH_PASSWORD_VALIDATORS = [
+ # Internationalization
+ # https://docs.djangoproject.com/en/5.1/topics/i18n/
+ 
+-LANGUAGE_CODE = 'en-us'
++LANGUAGE_CODE = 'en'
++USE_I18N = True
++USE_L10N = True
++LANGUAGES = [
++    ('en', 'English'),
++    ('fr', 'French'),
++    ('es', 'Spanish'),
++]
++
++LOCALE_PATHS = [
++    BASE_DIR / 'locale',
++]
+ 
+ TIME_ZONE = 'Europe/Paris'
+ 
+-USE_I18N = True
+-
+ USE_TZ = True
+ 
++
++
+ # Default primary key field type
+ # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+ 
+@@ -191,7 +211,8 @@ ACCOUNT_FORMS = {
+     'reset_password': 'allauth.account.forms.ResetPasswordForm',
+     'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
+     'set_password': 'allauth.account.forms.SetPasswordForm',
+-    'signup': 'allauth.account.forms.SignupForm',
++    # 'signup': 'allauth.account.forms.SignupForm',
++    'signup': 'users.forms.CustomSignupForm',
+     # 'home_game': 'allauth.account.forms.Home_gameForm',
+     'user_token': 'allauth.account.forms.UserTokenForm',
+ }
+diff --git a/lets_see/lets_see/urls.py b/lets_see/lets_see/urls.py
+index af247b1..097d667 100644
+--- a/lets_see/lets_see/urls.py
++++ b/lets_see/lets_see/urls.py
+@@ -17,8 +17,11 @@ Including another URLconf
+ from django.contrib import admin
+ from django.urls import path, include, re_path
+ from django.views.generic import TemplateView
+-from django.conf import settings
+-from django.conf.urls.static import static
++from django.views.i18n import JavaScriptCatalog
++from django.conf.urls.i18n import i18n_patterns
++from users.views import set_language_and_remember
++from django.conf import settings #####
++from django.conf.urls.static import static #####
+ from users import views as users_views
+ from . import views
+ 
+@@ -60,7 +63,19 @@ api_urlpatterns = [
+     path('fortytwo/', include('fortytwo.urls')),
+ ]
+ 
++
++# urlpatterns = [
++    # path('', TemplateView.as_view(template_name='home.html'), name='home'),
++    # path('admin/', admin.site.urls),
++    # path('tournament/', include('tournament.urls')),
++    # path('fortytwo/', include('fortytwo.urls')),
++    # path('i18n/', include('django.conf.urls.i18n')),
++
++# ]
++
+ urlpatterns = [
++    path('setlang/', set_language_and_remember, name='set_language'),
++    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+     path('admin/', admin.site.urls),    
+     # Serve API endpoints for AJAX content loading
+     path('api/', include((api_urlpatterns, 'api'))),
+@@ -69,6 +84,8 @@ urlpatterns = [
+     # Include other app URLs
+     path('tournament/', include('tournament.urls')),
+     path('fortytwo/', include('fortytwo.urls')),
++    path('jeux_du_pong/', include('jeux_du_pong.urls')),
++    path('users/', include('users.urls')),
+     
+     # Base SPA container - this should be the entry point
+     path('', views.home_view, name='home'),
+diff --git a/lets_see/locale/es/LC_MESSAGES/django.mo b/lets_see/locale/es/LC_MESSAGES/django.mo
+new file mode 100644
+index 0000000..3224ddf
+Binary files /dev/null and b/lets_see/locale/es/LC_MESSAGES/django.mo differ
+diff --git a/lets_see/locale/es/LC_MESSAGES/django.po b/lets_see/locale/es/LC_MESSAGES/django.po
+new file mode 100644
+index 0000000..62dfc4d
+--- /dev/null
++++ b/lets_see/locale/es/LC_MESSAGES/django.po
+@@ -0,0 +1,244 @@
++# SOME DESCRIPTIVE TITLE.
++# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the PACKAGE package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
++#
++#, fuzzy
++msgid ""
++msgstr ""
++"Project-Id-Version: PACKAGE VERSION\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2025-04-30 17:30+0200\n"
++"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
++"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
++"Language-Team: LANGUAGE <LL@li.org>\n"
++"Language: \n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
++"1 : 2;\n"
++
++#: fortytwo/templates/fortytwo/fortytwo_username.html:16
++msgid "Submit Username"
++msgstr ""
++
++#: fortytwo/views.py:78
++msgid "1- No authorization code given"
++msgstr ""
++
++#: fortytwo/views.py:104
++msgid "Error during the access token exchange"
++msgstr ""
++
++#: fortytwo/views.py:108
++msgid "2- No authorization code given"
++msgstr ""
++
++#: fortytwo/views.py:161
++msgid "Missing authorization code during session"
++msgstr ""
++
++#: fortytwo/views.py:174
++msgid "Error during the exchange of the code for the token"
++msgstr ""
++
++#: fortytwo/views.py:178
++msgid "Token expired"
++msgstr ""
++
++#: fortytwo/views.py:187
++msgid "Could not collect user informations"
++msgstr ""
++
++#: jeux_du_pong/templates/jeux_du_pong/game.html:3
++msgid "Play Pong"
++msgstr ""
++
++#: jeux_du_pong/templates/jeux_du_pong/game.html:14
++msgid "Play Again"
++msgstr ""
++
++#: jeux_du_pong/views.py:38
++msgid "ok"
++msgstr ""
++
++#: jeux_du_pong/views.py:39
++msgid "Invalid request"
++msgstr ""
++
++#: lets_see/context_processors.py:6 lets_see/context_processors.py:11
++msgid "Value does not exist"
++msgstr ""
++
++#: templates/base.html:156
++msgid "Search friends"
++msgstr ""
++
++#: templates/base.html:157
++msgid "Search"
++msgstr ""
++
++#: templates/base.html:166
++msgid "Logout"
++msgstr ""
++
++#: tournament/templates/tournament/match_history.html:13
++#, python-format
++msgid ""
++"\n"
++"\t\t%(username)s's match history\n"
++"\t"
++msgstr ""
++
++#: tournament/templates/tournament/match_history.html:22
++msgid "Opponent"
++msgstr ""
++
++#: tournament/templates/tournament/match_history.html:23
++msgid "Result"
++msgstr ""
++
++#: tournament/templates/tournament/match_history.html:24
++msgid "Score"
++msgstr ""
++
++#: tournament/templates/tournament/match_history.html:25
++msgid "Date"
++msgstr ""
++
++#: tournament/templates/tournament/match_history.html:35
++msgid "Win"
++msgstr ""
++
++#: tournament/templates/tournament/match_history.html:39
++msgid "Loss"
++msgstr ""
++
++#: tournament/templates/tournament/match_history.html:55
++msgid "No matches recorded yet."
++msgstr ""
++
++#: users/models.py:39
++msgid "Prefered Language"
++msgstr ""
++
++#: users/templates/users/friends.html:5
++msgid "My friends"
++msgstr ""
++
++#: users/templates/users/friends.html:17
++msgid "My Friends"
++msgstr ""
++
++#: users/templates/users/friends.html:31
++msgid "You have no friends yet."
++msgstr ""
++
++#: users/templates/users/profile.html:21
++#, python-format
++msgid ""
++"\n"
++"\t\tWins : %(wins)s | Losses : %(losses)s\n"
++"\t"
++msgstr ""
++
++#: users/templates/users/profile.html:27
++msgid "My Match History"
++msgstr ""
++
++#: users/templates/users/profile.html:31
++msgid "View friends"
++msgstr ""
++
++#: users/templates/users/profile.html:35
++msgid "Edit profile"
++msgstr ""
++
++#: users/templates/users/profile.html:39
++msgid "View Match History"
++msgstr ""
++
++#: users/templates/users/profile.html:43
++msgid "Add Friend"
++msgstr ""
++
++#: users/templates/users/profile.html:47
++msgid "Remove Friend"
++msgstr ""
++
++#: users/templates/users/profile.html:53
++msgid "Online"
++msgstr ""
++
++#: users/templates/users/profile.html:57
++msgid "Offline"
++msgstr ""
++
++#: users/templates/users/profile_update.html:16
++msgid "Save Changes"
++msgstr ""
++
++#: users/templates/users/search_results.html:8
++msgid "Search Friends"
++msgstr ""
++
++#: users/templates/users/search_results.html:20
++#, python-format
++msgid ""
++"\n"
++"\t\tSearch Results for \"%(query)s\"\n"
++"\t"
++msgstr ""
++
++#: users/templates/users/search_results.html:46
++msgid "No users found."
++msgstr ""
++
++#: users/validators.py:16
++#, python-format
++msgid "Avatar is too large (max %(max_size)s)."
++msgstr ""
++
++#: users/validators.py:24
++msgid "Unsuported image format. Only JPEG and PNG allowed."
++msgstr ""
++
++#: users/validators.py:26
++msgid "Invalide image file."
++msgstr ""
++
++#: users/validators.py:32
++msgid "This username is not allowed."
++msgstr ""
++
++#: users/views.py:35
++msgid "You can not be friends with yoursefl."
++msgstr ""
++
++#: users/views.py:38
++#, python-format
++msgid "You are already friends with %(username)s."
++msgstr ""
++
++#: users/views.py:42
++#, python-format
++msgid "You are now friends with %(username)s."
++msgstr ""
++
++#: users/views.py:52
++msgid "As you can not be friends with yourself, you can not unfriend yourself."
++msgstr ""
++
++#: users/views.py:57
++#, python-format
++msgid "You removed %(username)s from your friends"
++msgstr ""
++
++#: users/views.py:59
++#, python-format
++msgid "%(username)s is not in your friends list"
++msgstr ""
++
++#~ msgid "Home"
++#~ msgstr "la casa de la mama"
+diff --git a/lets_see/locale/es/LC_MESSAGES/djangojs.mo b/lets_see/locale/es/LC_MESSAGES/djangojs.mo
+new file mode 100644
+index 0000000..3224ddf
+Binary files /dev/null and b/lets_see/locale/es/LC_MESSAGES/djangojs.mo differ
+diff --git a/lets_see/locale/es/LC_MESSAGES/djangojs.po b/lets_see/locale/es/LC_MESSAGES/djangojs.po
+new file mode 100644
+index 0000000..59249b6
+--- /dev/null
++++ b/lets_see/locale/es/LC_MESSAGES/djangojs.po
+@@ -0,0 +1,25 @@
++# SOME DESCRIPTIVE TITLE.
++# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the PACKAGE package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
++#
++#, fuzzy
++msgid ""
++msgstr ""
++"Project-Id-Version: PACKAGE VERSION\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2025-04-29 20:11+0200\n"
++"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
++"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
++"Language-Team: LANGUAGE <LL@li.org>\n"
++"Language: \n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
++"1 : 2;\n"
++
++#: jeux_du_pong/static/js/pong.js:170
++#, javascript-format
++msgid "%s Wins !"
++msgstr ""
+diff --git a/lets_see/locale/fr/LC_MESSAGES/django.mo b/lets_see/locale/fr/LC_MESSAGES/django.mo
+new file mode 100644
+index 0000000..d5779d4
+Binary files /dev/null and b/lets_see/locale/fr/LC_MESSAGES/django.mo differ
+diff --git a/lets_see/locale/fr/LC_MESSAGES/django.po b/lets_see/locale/fr/LC_MESSAGES/django.po
+new file mode 100644
+index 0000000..581edcc
+--- /dev/null
++++ b/lets_see/locale/fr/LC_MESSAGES/django.po
+@@ -0,0 +1,272 @@
++# SOME DESCRIPTIVE TITLE.
++# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the PACKAGE package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
++#
++#, fuzzy
++msgid ""
++msgstr ""
++"Project-Id-Version: PACKAGE VERSION\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2025-04-30 17:30+0200\n"
++"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
++"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
++"Language-Team: LANGUAGE <LL@li.org>\n"
++"Language: \n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++"Plural-Forms: nplurals=2; plural=(n > 1);\n"
++
++#: fortytwo/templates/fortytwo/fortytwo_username.html:16
++msgid "Submit Username"
++msgstr "Soumettre nom d'utilisateur"
++
++#: fortytwo/views.py:78
++msgid "1- No authorization code given"
++msgstr "1 - Pas de code d'autorisation recu"
++
++#: fortytwo/views.py:104
++msgid "Error during the access token exchange"
++msgstr "Erreur pendant l'echange du token d'acces"
++
++#: fortytwo/views.py:108
++msgid "2- No authorization code given"
++msgstr "2 - Pas de code d'autorisation recu"
++
++#: fortytwo/views.py:161
++msgid "Missing authorization code during session"
++msgstr "Code d'autorisation manquant pour la session en court"
++
++#: fortytwo/views.py:174
++msgid "Error during the exchange of the code for the token"
++msgstr "Erreur pendant l'echange du code pour le token"
++
++#: fortytwo/views.py:178
++msgid "Token expired"
++msgstr "Token expirer"
++
++#: fortytwo/views.py:187
++msgid "Could not collect user informations"
++msgstr "Impossible de recuperer les informations utilisateurs"
++
++#: jeux_du_pong/templates/jeux_du_pong/game.html:3
++msgid "Play Pong"
++msgstr "Jouer au Pong"
++
++#: jeux_du_pong/templates/jeux_du_pong/game.html:14
++msgid "Play Again"
++msgstr "Jouer de nouveau"
++
++#: jeux_du_pong/views.py:38
++msgid "ok"
++msgstr "ok"
++
++#: jeux_du_pong/views.py:39
++msgid "Invalid request"
++msgstr "Requete invalide"
++
++#: lets_see/context_processors.py:6 lets_see/context_processors.py:11
++msgid "Value does not exist"
++msgstr "Cette valeur n'existe pas"
++
++#: templates/base.html:156
++msgid "Search friends"
++msgstr "Rechercher amies"
++
++#: templates/base.html:157
++msgid "Search"
++msgstr "Rechercher"
++
++#: templates/base.html:166
++msgid "Logout"
++msgstr "Se deconnecter"
++
++#: tournament/templates/tournament/match_history.html:13
++#, python-format
++msgid ""
++"\n"
++"\t\t%(username)s's match history\n"
++"\t"
++msgstr ""
++"\n"
++"\t\tHistorique des matchs de %(username)s\n"
++"\t"
++
++#: tournament/templates/tournament/match_history.html:22
++msgid "Opponent"
++msgstr "Adversaire"
++
++#: tournament/templates/tournament/match_history.html:23
++msgid "Result"
++msgstr "Resultat"
++
++#: tournament/templates/tournament/match_history.html:24
++msgid "Score"
++msgstr "Score"
++
++#: tournament/templates/tournament/match_history.html:25
++msgid "Date"
++msgstr "Date"
++
++#: tournament/templates/tournament/match_history.html:35
++msgid "Win"
++msgstr "Victoire"
++
++#: tournament/templates/tournament/match_history.html:39
++msgid "Loss"
++msgstr "Defaite"
++
++#: tournament/templates/tournament/match_history.html:55
++msgid "No matches recorded yet."
++msgstr "Pas de match effectue"
++
++#: users/models.py:39
++msgid "Prefered Language"
++msgstr "Langue selectionner"
++
++#: users/templates/users/friends.html:5
++msgid "My friends"
++msgstr "Mes amies"
++
++#: users/templates/users/friends.html:17
++msgid "My Friends"
++msgstr "Mes amies"
++
++#: users/templates/users/friends.html:31
++msgid "You have no friends yet."
++msgstr "Tu n'as pas encore d'amies"
++
++#: users/templates/users/profile.html:21
++#, python-format
++msgid ""
++"\n"
++"\t\tWins : %(wins)s | Losses : %(losses)s\n"
++"\t"
++msgstr ""
++"\n"
++"\t\tVictoires : %(wins)s | Defaites : %(losses)s\n"
++"\t"
++
++#: users/templates/users/profile.html:27
++msgid "My Match History"
++msgstr "Historique de mes matchs"
++
++#: users/templates/users/profile.html:31
++msgid "View friends"
++msgstr "Voir amies"
++
++#: users/templates/users/profile.html:35
++msgid "Edit profile"
++msgstr "Modifier profil"
++
++#: users/templates/users/profile.html:39
++msgid "View Match History"
++msgstr "Voir historique des matchs"
++
++#: users/templates/users/profile.html:43
++msgid "Add Friend"
++msgstr "Ajouter a la liste d'amies"
++
++#: users/templates/users/profile.html:47
++msgid "Remove Friend"
++msgstr "Retirer de la liste d'amies"
++
++#: users/templates/users/profile.html:53
++msgid "Online"
++msgstr "Actif"
++
++#: users/templates/users/profile.html:57
++msgid "Offline"
++msgstr "Inactif"
++
++#: users/templates/users/profile_update.html:16
++msgid "Save Changes"
++msgstr "Sauvegarder changements"
++
++#: users/templates/users/search_results.html:8
++msgid "Search Friends"
++msgstr "Rechercher amies"
++
++#: users/templates/users/search_results.html:20
++#, python-format
++msgid ""
++"\n"
++"\t\tSearch Results for \"%(query)s\"\n"
++"\t"
++msgstr ""
++"\n"
++"\t\tResultat de la recherche pour \"%(query)s\"\n"
++"\t"
++
++#: users/templates/users/search_results.html:46
++msgid "No users found."
++msgstr "Aucuns utilisateurs trouve"
++
++#: users/validators.py:16
++#, python-format
++msgid "Avatar is too large (max %(max_size)s)."
++msgstr "Avatar est trop grand (max %(max_size)s)."
++
++#: users/validators.py:24
++msgid "Unsuported image format. Only JPEG and PNG allowed."
++msgstr "Format de l'image non supporter. Seulement JPEG et PNG"
++
++#: users/validators.py:26
++msgid "Invalide image file."
++msgstr "Ficher image non valide"
++
++#: users/validators.py:32
++msgid "This username is not allowed."
++msgstr "Ce username n'est pas valide"
++
++#: users/views.py:35
++msgid "You can not be friends with yoursefl."
++msgstr "Pas possible de faire ca avec toi"
++
++#: users/views.py:38
++#, python-format
++msgid "You are already friends with %(username)s."
++msgstr "%(username)s est deja ton amies"
++
++#: users/views.py:42
++#, python-format
++msgid "You are now friends with %(username)s."
++msgstr "Desormais amies avec %(username)s"
++
++#: users/views.py:52
++msgid "As you can not be friends with yourself, you can not unfriend yourself."
++msgstr "Toujours pas possible de faire ca"
++
++#: users/views.py:57
++#, python-format
++msgid "You removed %(username)s from your friends"
++msgstr "C'est fini avec %(username)s"
++
++#: users/views.py:59
++#, python-format
++msgid "%(username)s is not in your friends list"
++msgstr "%(username)s n'est pas dans ta liste"
++
++#~ msgid "Home"
++#~ msgstr "Maison"
++
++#, fuzzy
++#~| msgid "Profile"
++#~ msgid "My Profile"
++#~ msgstr "Profil"
++
++#~ msgid "Login"
++#~ msgstr "Se connecter"
++
++#~ msgid "Sign Up"
++#~ msgstr "S'inscrire"
++
++#~ msgid "Login with 42"
++#~ msgstr "Se connecter avec 42"
++
++#~ msgid "WELCOME TO ENTROPIA"
++#~ msgstr "BIENVENUE SUR ENTROPIA"
++
++#~ msgid "Play Pong Now"
++#~ msgstr "Jouer au pong maintenant"
+diff --git a/lets_see/locale/fr/LC_MESSAGES/djangojs.mo b/lets_see/locale/fr/LC_MESSAGES/djangojs.mo
+new file mode 100644
+index 0000000..fb54ca1
+Binary files /dev/null and b/lets_see/locale/fr/LC_MESSAGES/djangojs.mo differ
+diff --git a/lets_see/locale/fr/LC_MESSAGES/djangojs.po b/lets_see/locale/fr/LC_MESSAGES/djangojs.po
+new file mode 100644
+index 0000000..e9e4721
+--- /dev/null
++++ b/lets_see/locale/fr/LC_MESSAGES/djangojs.po
+@@ -0,0 +1,27 @@
++# SOME DESCRIPTIVE TITLE.
++# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the PACKAGE package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
++#
++#, fuzzy
++msgid ""
++msgstr ""
++"Project-Id-Version: PACKAGE VERSION\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2025-04-29 20:11+0200\n"
++"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
++"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
++"Language-Team: LANGUAGE <LL@li.org>\n"
++"Language: \n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8bit\n"
++"Plural-Forms: nplurals=2; plural=(n > 1);\n"
++
++#: jeux_du_pong/static/js/pong.js:170
++#, javascript-format
++msgid "%s Wins !"
++msgstr "%s a gagner !"
++
++#~ msgid "Player 2 Wins !"
++#~ msgstr "Player 2 a gagner !"
+diff --git a/lets_see/media/default.png b/lets_see/media/default.png
+index eb5228a..2ab5216 100644
+Binary files a/lets_see/media/default.png and b/lets_see/media/default.png differ
+diff --git a/lets_see/prod/consumers.py b/lets_see/prod/consumers.py
+deleted file mode 100644
+index 1516600..0000000
+--- a/lets_see/prod/consumers.py
++++ /dev/null
+@@ -1,15 +0,0 @@
+-import json
+-from channels.generic.websocket import AsyncWebsocketConsumer
+-
+-class MyWevbSocketConsumer(AsyncWebsocketConsumer):
+-    async def connect(self):
+-        await self.accept()
+-        await self.send(text_data=json.dumps({"message": "Hello, WebSocket !"}))
+-        
+-    async def disconnect(self, close_code):
+-        pass
+-    
+-    async def receive(self, text_data):
+-        data = json.loads(text_data)
+-        message = data.get("message", "")
+-        await self.send(text_data=json.dumps({"response": f"You said: {message}"}))
+\ No newline at end of file
+diff --git a/lets_see/prod/models.py b/lets_see/prod/models.py
+deleted file mode 100644
+index 71a8362..0000000
+--- a/lets_see/prod/models.py
++++ /dev/null
+@@ -1,3 +0,0 @@
+-from django.db import models
+-
+-# Create your models here.
+diff --git a/lets_see/prod/views.py b/lets_see/prod/views.py
+deleted file mode 100644
+index 91ea44a..0000000
+--- a/lets_see/prod/views.py
++++ /dev/null
+@@ -1,3 +0,0 @@
+-from django.shortcuts import render
+-
+-# Create your views here.
+diff --git a/lets_see/run_dev.sh b/lets_see/run_dev.sh
+index 6bf32e5..dd26377 100644
+--- a/lets_see/run_dev.sh
++++ b/lets_see/run_dev.sh
+@@ -1,5 +1,11 @@
+ #!/bin/sh
+ 
++python3 manage.py makemessages -l fr
++python3 manage.py makemessages -l es
++python3 manage.py makemessages -d djangojs -l fr
++python3 manage.py makemessages -d djangojs -l es
++python3 manage.py compilemessages
++
+ python3 manage.py makemigrations users
+ python3 manage.py migrate
+ 
+@@ -8,10 +14,11 @@ echo "from users.models import CustomUser; import os; CustomUser.objects.create_
+ 
+ python3 manage.py makemigrations users
+ python3 manage.py makemigrations tournament
++python3 manage.py makemigrations sites
+ python3 manage.py makemigrations
+ python3 manage.py migrate
+ 
+-# echo 'yes' | python3 manage.py collectstatic
++# python3 manage.py collectstatic --noinput
+ 
+ # daphne -b 0.0.0.0 -p 8000 lets_see.asgi:application
+ python3 manage.py runserver 0.0.0.0:8000
+diff --git a/lets_see/run_prod.sh b/lets_see/run_prod.sh
+index e1997a4..cc16bb9 100644
+--- a/lets_see/run_prod.sh
++++ b/lets_see/run_prod.sh
+@@ -1,5 +1,11 @@
+ #!/bin/sh
+ 
++python3 manage.py makemessages -l fr
++python3 manage.py makemessages -l es
++python3 manage.py makemessages -d djangojs -l fr
++python3 manage.py makemessages -d djangojs -l es
++python3 manage.py compilemessages
++
+ python3 manage.py makemigrations users
+ python3 manage.py migrate
+ 
+@@ -8,6 +14,7 @@ echo "from users.models import CustomUser; import os; CustomUser.objects.create_
+ 
+ python3 manage.py makemigrations users
+ python3 manage.py makemigrations tournament
++python3 manage.py makemigrations sites
+ python3 manage.py makemigrations
+ python3 manage.py migrate
+ 
+diff --git a/lets_see/templates/base.html b/lets_see/templates/base.html
+index 6062ab6..a35952c 100644
+--- a/lets_see/templates/base.html
++++ b/lets_see/templates/base.html
+@@ -9,7 +9,8 @@ A INTEGRER ? JSAIS PAS COMMENT / C DANS LE .JSON DANS MON VITE -->
+ 
+ {% load static %}
+ <!DOCTYPE html>
+-<html lang="en">
++{% load i18n %}
++<html lang="{{ LANGUAGE_CODE }}">
+ 	<!-- {% if messages %}
+ 		<ul class=""messages>
+ 			{% for message in messages %}
+@@ -22,9 +23,12 @@ A INTEGRER ? JSAIS PAS COMMENT / C DANS LE .JSON DANS MON VITE -->
+ 	<head>
+ 		<meta charset="UTF-8">
+ 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
++		<title>
++			{% block title %}
++			Entropia
++			{% endblock %}
++		</title>
+ 		
+-		<title>ENTROPIA</title>
+-
+ 		<!-- Fonts et CSS -->
+ 		<link rel="preconnect" href="https://fonts.googleapis.com">
+ 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+@@ -109,6 +113,28 @@ A INTEGRER ? JSAIS PAS COMMENT / C DANS LE .JSON DANS MON VITE -->
+ 		transform: scale(1.05);
+ 		}
+ 
++		.message-popup {
++			position: fixed;
++			bottom: 20px;
++			right: 20px;
++			min-width: 250px;
++			padding: 15px;
++			border-radius: 8px;
++			color: white;
++			font-size: 16px;
++			display: none;
++			opacity: 0;
++			transition: opacity 0.5s ease-in-out;
++			z-index: 1000;
++			}
++			.message-popup.success { background-color: #4CAF50; } /* Green */
++			.message-popup.error { background-color: #f44336; } /* Red */
++			.message-popup.warning { background-color: #ff9800; } /* Orange */
++			.message-popup.show {
++				display: block;
++				opacity: 1;
++			}
++
+ 		</style>
+ 	
+ 
+@@ -127,27 +153,46 @@ A INTEGRER ? JSAIS PAS COMMENT / C DANS LE .JSON DANS MON VITE -->
+ 				<div class="nav-right" style="display: flex; flex-direction: row; align-items: center;">
+ 				<a href="/users/my_profile/" class="link_temp">My Profile</a>
+ 				<form class="search-form" method="GET" action="/users/search_friends/">
+-					<input type="text" name="q" placeholder="Search friends" required>
+-					<button type="submit" class="link_temp">Search</button>
++					<input type="text" name="q" placeholder={% trans "Search friends" %} required>
++					<button type="submit" class="link_temp">{% trans "Search" %}</button>
+ 				</form>
++			</div>
++			{% endif %}
++			<div>
++				{% if user.is_authenticated %}
+ 				<form method="post" action="/api/users/accounts/logout/" style="display: inline;">
+-						{% csrf_token %}
+-						<button type="submit" class="link_temp">Logout</button>
+-					</form>
+-				<a href="/users/profil/" class="link_temp">PROFIL / link</a>
+-				</div>
+-			{% else %}
+-			
++					{% csrf_token %}
++					<button type="submit" class="link_temp">
++						{% trans "Logout" %}
++					</button>
++				</form>
++				{% else %}
+ 			<div class="nav-right">
+-					<a href="{% url 'home' %}" class="link_temp">Sign In</a> 
+-					<a href="https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code" class="link_temp">Sign In with 42</a>
+-
+-					
+-
+-
+-			
++				<a href="{% url 'home' %}" class="link_temp">
++					{% trans "Sign In" %}
++				</a> 
++				<a href="https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code" class="link_temp">
++					{% trans "Sign In with 42" %}
++				</a>
++				{% comment %} <a href="https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code">
++					Log in with 42
++				</a> {% endcomment %}
+ 				{% endif %}
+ 			</div>
++			<div>
++				<form action="{% url 'set_language' %}" method="post">
++				{% csrf_token %}
++				<select name="language" onchange="this.form.submit()">
++					{% get_current_language as LANGUAGE_CODE %}
++					{% get_available_languages as LANGUAGES %}
++					{% for lang in LANGUAGES %}
++						<option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
++							{{lang.1}}
++						</option>
++					{% endfor %}
++				</select>
++				</form>
++			</div>
+ 		</nav>
+ 		
+ 		<div id="app-content">
+@@ -156,7 +201,9 @@ A INTEGRER ? JSAIS PAS COMMENT / C DANS LE .JSON DANS MON VITE -->
+ 	
+ 		<!-- Message Pop-up Container -->
+ 		<div id="message-popup" class="message-popup"></div>
+-		
++	
++		<script src="{% url 'javascript-catalog' %}">
++		</script>
+ 		<script>
+ 			document.addEventListener("DOMContentLoaded", function() {
+ 				const messagePopup = document.getElementById("message-popup");
+diff --git a/lets_see/templates/home.html b/lets_see/templates/home.html
+index 5d65868..e07a617 100644
+--- a/lets_see/templates/home.html
++++ b/lets_see/templates/home.html
+@@ -1,4 +1,7 @@
++{% extends "base.html" %}
++{% load i18n %}
+ {% load static %}
++
+ <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+ <script type="module" src="{% static '/js/password-condition.js' %}"></script>
+ <script type="module" src="{% static '/js/home.js' %}"></script>
+diff --git a/lets_see/tournament/migrations/0002_delete_match.py b/lets_see/tournament/migrations/0002_delete_match.py
+new file mode 100644
+index 0000000..bc841e7
+--- /dev/null
++++ b/lets_see/tournament/migrations/0002_delete_match.py
+@@ -0,0 +1,16 @@
++# Generated by Django 5.1.3 on 2025-04-25 16:25
++
++from django.db import migrations
++
++
++class Migration(migrations.Migration):
++
++    dependencies = [
++        ('tournament', '0001_initial'),
++    ]
++
++    operations = [
++        migrations.DeleteModel(
++            name='Match',
++        ),
++    ]
+diff --git a/lets_see/tournament/models.py b/lets_see/tournament/models.py
+index 00ec1a9..137941f 100644
+--- a/lets_see/tournament/models.py
++++ b/lets_see/tournament/models.py
+@@ -1,13 +1 @@
+ from django.db import models
+-from users.models import CustomUser
+-
+-# Create your models here.
+-
+-class Match(models.Model):
+-	player1 = models.ForeignKey(CustomUser, related_name='match_as_player1', on_delete=models.CASCADE)
+-	player2 = models.ForeignKey(CustomUser, related_name='match_as_player2', on_delete=models.CASCADE)
+-	winner = models.ForeignKey(CustomUser, related_name='matches_won', on_delete=models.CASCADE, null=True, blank=True)
+-	date_played = models.DateTimeField(auto_now_add=True)
+-
+-	def __str__(self):
+-		return f"{self.player1} vs {self.player2}"
+\ No newline at end of file
+diff --git a/lets_see/tournament/templates/tournament/match_history.html b/lets_see/tournament/templates/tournament/match_history.html
+index c440055..1a66e92 100644
+--- a/lets_see/tournament/templates/tournament/match_history.html
++++ b/lets_see/tournament/templates/tournament/match_history.html
+@@ -1,4 +1,5 @@
+ {% extends "base.html" %}
++{% load i18n %}
+ 
+ {% block content %}
+ <hr>
+@@ -9,6 +10,49 @@
+ <hr>
+ <hr>
+ <h1>
+-	{{ user.username }}'s match history'
++	{% blocktrans with username=user.username %}
++		{{ username }}'s match history
++	{% endblocktrans %}
+ </h1>
++
++	{% if matches %}
++		<table>
++			<thead>
++				<tr>
++					<th>{% trans "Opponent" %}</th>
++					<th>{% trans "Result" %}</th>
++					<th>{% trans "Score" %}</th>
++					<th>{% trans "Date" %}</th>
++				</tr>
++			</thead>
++			<tbody>
++				{% for match in matches %}
++					<tr>
++						<td>{{ match.opponent_alias }}</td>
++						<td>
++							{% if match.result == "win" %}
++								<span style="color: green;">
++									{% trans "Win" %}
++								</span>
++							{% else %}
++								<span style="color: red;">
++									{% trans "Loss" %}
++								</span>
++							{% endif %}
++						</td>
++						<td>
++							{{ match.player_score }} - {{ match.opponent_score }}
++						</td>
++						<td>
++							{{ match.played_at|date:"Y-m-d H:i" }}
++						</td>
++					</tr>
++				{% endfor %}
++			</tbody>
++		</table>
++	{% else %}
++		<p>
++			{% trans "No matches recorded yet." %}
++		</p>
++	{% endif %}
+ {% endblock %}
+diff --git a/lets_see/tournament/views.py b/lets_see/tournament/views.py
+index e34cd5a..20a4505 100644
+--- a/lets_see/tournament/views.py
++++ b/lets_see/tournament/views.py
+@@ -1,5 +1,5 @@
+-from django.shortcuts import render
+-from .models import Match
++from django.shortcuts import render, get_object_or_404
++from jeux_du_pong.models import Match
+ from users.models import CustomUser
+ from django.contrib.auth.decorators import login_required
+ 
+@@ -7,9 +7,13 @@ from django.contrib.auth.decorators import login_required
+ 
+ @login_required
+ def match_history(request, username):
+-	user = CustomUser.objects.get(username=username)
+-	matches = Match.objects.filter(player1=user) | Match.objects.filter(player2=user)
+-	return render(request, 'tournament/match_history.html', {'matches':matches, 'user':user})
++	user = get_object_or_404(CustomUser, username=username)
++	matches = Match.objects.filter(player=user).order_by('-played_at')
++	print(user)
++	return render(request, 'tournament/match_history.html', {
++		'matches': matches,
++		'user': user,
++	})
+ 
+ @login_required
+ def my_match_history(request):
+diff --git a/lets_see/users/consumers.py b/lets_see/users/consumers.py
+index 5b3d50d..9472eaa 100644
+--- a/lets_see/users/consumers.py
++++ b/lets_see/users/consumers.py
+@@ -1,14 +1,10 @@
+ from channels.generic.websocket import AsyncWebsocketConsumer
+ from channels.db import database_sync_to_async
+ import json
+-# import logging ####
+-# logger = logging.getLogger(__name__) ####
+ 
+ class OnlineStatusConsumer(AsyncWebsocketConsumer):
+ 	async def connect(self):
+-		# logger.info(f"WS CONNECT ATTEMPT ON : {self.scope['user']}") ####
+ 		if self.scope["user"].is_authenticated:
+-			# logger.info(f"{self.scope['user']} connected") ####
+ 			await self.set_online(True)
+ 		await self.accept()
+ 
+@@ -19,8 +15,4 @@ class OnlineStatusConsumer(AsyncWebsocketConsumer):
+ 	@database_sync_to_async
+ 	def set_online(self, status):
+ 		from users.models import CustomUser
+-		CustomUser.objects.filter(id=self.scope["user"].id).update(online_status=status)
+-		# user = self.scope["user"]
+-		# if user.is_authenticated:
+-		# 	user.online_status = status
+-		# 	user.save()
+\ No newline at end of file
++		CustomUser.objects.filter(id=self.scope["user"].id).update(online_status=status)
+\ No newline at end of file
+diff --git a/lets_see/users/forms.py b/lets_see/users/forms.py
+index e7cfee5..01d34c9 100644
+--- a/lets_see/users/forms.py
++++ b/lets_see/users/forms.py
+@@ -1,7 +1,21 @@
+ from django import forms
+ from .models import CustomUser
++from allauth.account.forms import SignupForm
++from .validators import validate_not_banned_username
+ 
+ class UserProfileForm(forms.ModelForm):
+     class Meta:
+         model = CustomUser
+-        fields = ['username', 'avatar']
+\ No newline at end of file
++        fields = ['username', 'avatar']
++
++class CustomSignupForm(SignupForm):
++    username = forms.CharField(
++        max_length=30,
++        label="Username",
++        # unique=True,
++        validators=[validate_not_banned_username],
++    )
++    
++    def save(self, request):
++        user = super().save(request)
++        return user
+\ No newline at end of file
+diff --git a/lets_see/users/middleware.py b/lets_see/users/middleware.py
+new file mode 100644
+index 0000000..5ecb004
+--- /dev/null
++++ b/lets_see/users/middleware.py
+@@ -0,0 +1,19 @@
++from django.utils import translation
++from django.conf import settings
++
++class UserLanguageMiddleware:
++	def __init__(self, get_response):
++		self.get_response = get_response
++
++	def __call__(self, request):
++		response = self.get_response(request)
++
++		if hasattr(request, 'user') and request.user.is_authenticated:
++			lang = getattr(request.user, 'preferred_language', None)
++			if lang:
++				request.session['django_language'] = lang
++				translation.activate(lang)
++				response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
++
++		# translation.deactivate()
++		return response
+\ No newline at end of file
+diff --git a/lets_see/users/migrations/0008_customuser_preferred_language.py b/lets_see/users/migrations/0008_customuser_preferred_language.py
+new file mode 100644
+index 0000000..df79070
+--- /dev/null
++++ b/lets_see/users/migrations/0008_customuser_preferred_language.py
+@@ -0,0 +1,18 @@
++# Generated by Django 5.1.3 on 2025-04-29 13:29
++
++from django.db import migrations, models
++
++
++class Migration(migrations.Migration):
++
++    dependencies = [
++        ('users', '0007_customuser_login_42'),
++    ]
++
++    operations = [
++        migrations.AddField(
++            model_name='customuser',
++            name='preferred_language',
++            field=models.CharField(choices=[('en', 'English'), ('fr', 'French'), ('es', 'Spanish')], default='en', max_length=10, verbose_name='Prefered Language'),
++        ),
++    ]
+diff --git a/lets_see/users/migrations/0009_alter_customuser_username.py b/lets_see/users/migrations/0009_alter_customuser_username.py
+new file mode 100644
+index 0000000..4f64fc0
+--- /dev/null
++++ b/lets_see/users/migrations/0009_alter_customuser_username.py
+@@ -0,0 +1,19 @@
++# Generated by Django 5.1.3 on 2025-04-29 17:19
++
++import users.validators
++from django.db import migrations, models
++
++
++class Migration(migrations.Migration):
++
++    dependencies = [
++        ('users', '0008_customuser_preferred_language'),
++    ]
++
++    operations = [
++        migrations.AlterField(
++            model_name='customuser',
++            name='username',
++            field=models.CharField(max_length=30, unique=True, validators=[users.validators.validate_not_banned_username]),
++        ),
++    ]
+diff --git a/lets_see/users/models.py b/lets_see/users/models.py
+index 370890b..39c2fd0 100644
+--- a/lets_see/users/models.py
++++ b/lets_see/users/models.py
+@@ -1,10 +1,13 @@
+ from django.contrib.auth.models import AbstractUser
+ from django.db import models
+-from .validators import validate_avatar
++from .validators import validate_avatar, validate_not_banned_username
+ import uuid
+ import os
+ from PIL import Image
+ from django.conf import settings
++from django.utils.translation import gettext_lazy as _
++
++LANGUAGE_CHOICES = settings.LANGUAGES
+ 
+ # modify the name of the uploaded avatar so that if 2 user upload
+ # an avatar with the same name django does not mix them
+@@ -14,7 +17,11 @@ def avatar_upload_path(instance, filename):
+ 	return os.path.join('avatars', filename) # saves in media avatars
+ 
+ class CustomUser(AbstractUser):
+-	username = models.CharField(max_length=30, unique=True)
++	username = models.CharField(
++		max_length=30,
++		unique=True,
++		validators=[validate_not_banned_username]
++	)
+ 	avatar = models.ImageField(
+ 		upload_to=avatar_upload_path,
+ 		validators=[validate_avatar],
+@@ -25,6 +32,12 @@ class CustomUser(AbstractUser):
+ 	losses = models.PositiveIntegerField(default=0)
+ 	online_status = models.BooleanField(default=False)
+ 	login_42 = models.CharField(max_length=30, blank=True)
++	preferred_language = models.CharField(
++		max_length=10,
++		choices=LANGUAGE_CHOICES,
++		default='en',
++		verbose_name=_("Prefered Language")
++	)
+ 
+ 	def __str__(self):
+ 		return self.username
+diff --git a/lets_see/users/signals.py b/lets_see/users/signals.py
+index f9c8bf3..53ee4c1 100644
+--- a/lets_see/users/signals.py
++++ b/lets_see/users/signals.py
+@@ -1,6 +1,8 @@
+ from django.db.models.signals import pre_save
+ from django.dispatch import receiver
+ from .models import CustomUser
++from django.contrib.auth.signals import user_logged_in
++from django.utils.translation import activate
+ 
+ @receiver(pre_save, sender=CustomUser)
+ def delete_old_avatar(sender, instance, **kwargs):
+@@ -12,6 +14,14 @@ def delete_old_avatar(sender, instance, **kwargs):
+ 	if old_avatar and old_avatar != instance.avatar and old_avatar.name != 'default.png':
+ 		old_avatar.delete(save=False)
+ 
++@receiver(user_logged_in)
++def set_language_after_login(sender, request, user, **kwargs):
++	if user.preferred_language:
++		lang = user.preferred_language
++		request.session['django_language'] = lang
++		activate(lang)
++		print(f"inside set_language_after_login\n language activated after login {lang}")
++
+ # @receiver(pre_save, sender=CustomUser)
+ # def assign_random_avatar(sender, instance, **kwargs):
+ # 	if not instance.pk and not instance.avatar: #only for new users without avatar
+diff --git a/lets_see/users/templates/users/friends.html b/lets_see/users/templates/users/friends.html
+index 449ca30..b2c7a06 100644
+--- a/lets_see/users/templates/users/friends.html
++++ b/lets_see/users/templates/users/friends.html
+@@ -1,7 +1,8 @@
+ {% extends "base.html" %}
++{% load i18n %}
+ 
+ {% block title %}
+-My friends
++{% trans "My friends" %}
+ {% endblock %}
+ 
+ {% block content %}
+@@ -13,7 +14,7 @@ My friends
+ <hr>
+ <hr>
+ <h2>
+-	My Friends
++	{% trans "My Friends" %}
+ </h2>
+ {% if friends %}
+ <ul>
+@@ -22,15 +23,12 @@ My friends
+ 		<a href="{% url 'user_profile' friend.username %}">
+ 			{{ friend.username }}
+ 		</a>
+-		<!-- <a href="{% url 'remove_friend' friend.username %}">
+-			Remove from friends
+-		</a> -->
+ 	</li>
+ 	{% endfor %}
+ </ul>
+ {% else %}
+ <p>
+-	You have no friends yet.
++	{% trans "You have no friends yet." %}
+ </p>
+ {% endif %}
+ {% endblock %}
+\ No newline at end of file
+diff --git a/lets_see/users/templates/users/profile.html b/lets_see/users/templates/users/profile.html
+index aa6d33b..657d38d 100644
+--- a/lets_see/users/templates/users/profile.html
++++ b/lets_see/users/templates/users/profile.html
+@@ -1,4 +1,5 @@
+ {% extends "base.html" %}
++{% load i18n %}
+ 
+ {% block content %}
+ <h1>
+@@ -17,37 +18,43 @@
+ {% endif %} -->
+ 
+ <p>
+-	Wins : {{ user.wins }} | Losses : {{ user.losses }}
++	{% blocktrans with wins=user.wins losses=user.losses %}
++		Wins : {{ wins }} | Losses : {{ losses }}
++	{% endblocktrans %}
+ </p>
+ {% if user == request.user %}
+-	<a href="{% url 'match_history' user.username %}">
+-		View Match History
++	<a href="{% url 'my_match_history' %}">
++		{% trans "My Match History" %}
+ 	</a>
+ 	<hr>
+ 	<a href="{% url 'friends_list' %}">
+-		View friends
++		{% trans "View friends" %}
+ 	</a>
+ 	<hr>
+ 	<a href="{% url 'profile_edit' %}">
+-		Edit profile
++		{% trans "Edit profile" %}
+ 	</a>
+ {% else %}
++	<a href="{% url 'match_history' user.username %}">
++		{% trans "View Match History" %}
++	</a>
++	<hr>
+ 	<a href="{% url 'add_friend' user.username %}">
+-		Add Friend
++		{% trans "Add Friend" %}
+ 	</a>
+ 	<hr>
+ 	<a href="{% url 'remove_friend' user.username %}">
+-		Remove Friend
++		{% trans "Remove Friend" %}
+ 	</a>
+ 	<hr>
+ 	<div>
+ 		{% if user.online_status %}
+ 			<span style="color:green">
+-				Online
++				{% trans "Online" %}
+ 			</span>
+ 		{% else %}
+ 			<span style="color:red">
+-				Offline
++				{% trans "Offline" %}
+ 			</span>
+ 		{% endif %}
+ 	</div>
+diff --git a/lets_see/users/templates/users/profile_update.html b/lets_see/users/templates/users/profile_update.html
+index a15e017..74084ef 100644
+--- a/lets_see/users/templates/users/profile_update.html
++++ b/lets_see/users/templates/users/profile_update.html
+@@ -1,3 +1,7 @@
++{% extends "base.html" %}
++{% load i18n %}
++
++{% block content %}
+ <hr>
+ <hr>
+ <hr>
+@@ -7,12 +11,9 @@
+ <hr>
+ <form method="post" enctype="multipart/form-data">
+ 	{% csrf_token %}
+-	<!-- {{ form.as_p }} -->
+ 	{{ form }}
+-	<!-- <img src="{{ user.avatar.url }}" width="100" height="100" alt="Avatar"> -->
+-	<!-- Curent avatar -->
+-	<!-- <hr> -->
+ 	<button type="submit">
+-		Save Changes
++		{% trans "Save Changes" %}
+ 	</button>
+ </form>
++{% endblock %}
+diff --git a/lets_see/users/templates/users/search_results.html b/lets_see/users/templates/users/search_results.html
+index 27d6ab7..2b5726b 100644
+--- a/lets_see/users/templates/users/search_results.html
++++ b/lets_see/users/templates/users/search_results.html
+@@ -1,10 +1,11 @@
+ {% extends "base.html" %}
++{% load i18n %}
+ {% load static %}
+ 
+ 
+ 
+ {% block title %}
+-Search Friends
++{% trans "Search Friends" %}
+ {% endblock %}
+ 
+ {% block content %}
+@@ -16,7 +17,9 @@ Search Friends
+ <hr>
+ <hr>
+ <h2>
+-	Search Results for "{{ query }}"
++	{% blocktrans with query=query %}
++		Search Results for "{{ query }}"
++	{% endblocktrans %}
+ </h2>
+ <div id="app-content"></div>
+ {% if results %}
+@@ -29,6 +32,7 @@ Search Friends
+ 		</button>
+ 	{% comment %}	<!-- <a href="{% url 'user_profile' user.username %}">
+ 			{{ user.username }}
++		</a>
+ 		</a> -->
+ 		<!-- <a href="{% url 'add_friend' user.username %}">
+ 			Add Friend
+@@ -38,12 +42,7 @@ Search Friends
+ </ul>
+ {% else %}
+ <p>
+-	No users found.
++	{% trans "No users found." %}
+ </p>
+ {% endif %}
+-<!-- <a href="{% url 'home' %}">
+-	Back to Home
+-</a> -->
+-<script type="module" src="{% static 'router.js' %}"></script>
+-
+ {% endblock %}
+\ No newline at end of file
+diff --git a/lets_see/users/validators.py b/lets_see/users/validators.py
+index 4d1b50a..aed0fc8 100644
+--- a/lets_see/users/validators.py
++++ b/lets_see/users/validators.py
+@@ -2,20 +2,31 @@ from django.contrib.auth.validators import ASCIIUsernameValidator
+ from django.core.exceptions import ValidationError
+ from django.template.defaultfilters import filesizeformat
+ from PIL import Image
+-
++from django.utils.translation import gettext as _
++# from .banned_usernames 
+ custom_username_validdators = [ASCIIUsernameValidator()]
++BANNED_USERNAMES = [
++	"admin", "administrator", "root", "support", "moderator", "staff", "null", "undefined", "username", "test", "you", "me", "ploub", "boulon", "bebou", "sniflou", "grozinzin", "troupoutte", "flaplap", "koulou", "krousti", "mistouch", "marc", "coussi", "zoupla", "prouton", "zip", "chodron", "zarma", "gribouille"
++]
+ 
+ def validate_avatar(image):
+ 	max_size = 2 * 1024 * 1024 # max avatar size = 2MB
+ 
+ 	if image.size > max_size:
+-		raise ValidationError(f"Avatar is too large (max {filesizeformat(max_size)}).")
++		raise ValidationError(_("Avatar is too large (max %(max_size)s).") % {'max_size' : filesizeformat(max_size)})
++		# raise ValidationError(f"Avatar is too large (max {filesizeformat(max_size)}).")
+ 
+ 	try:
+ 		img = Image.open(image)
+ 		img.verify() # checks if it is really an image
+ 		format = img.format.lower()
+ 		if format not in ['jpeg', 'png']:
+-			raise ValidationError("Unsuported image format. Only JPEG and PNG allowed.")
++			raise ValidationError(_("Unsuported image format. Only JPEG and PNG allowed."))
+ 	except Exception:
+-		raise ValidationError("Invalide image file.")
+\ No newline at end of file
++		raise ValidationError(_("Invalide image file."))
++
++
++def validate_not_banned_username(value):
++	if value.lower() in BANNED_USERNAMES:
++		
++		raise ValidationError(_("This username is not allowed."))
+diff --git a/lets_see/users/views.py b/lets_see/users/views.py
+index adab335..3ed3069 100644
+--- a/lets_see/users/views.py
++++ b/lets_see/users/views.py
+@@ -3,37 +3,43 @@ from django.contrib.auth.decorators import login_required
+ from .forms import UserProfileForm
+ from .models import CustomUser
+ from django.contrib import messages
++from django.utils.translation import gettext as _
++from django.views.decorators.csrf import csrf_exempt
++from django.views.i18n import set_language as django_set_language
++from django.conf import settings
+ import json
+ 
+ # Create your views here.
+ 
+ @login_required
+ def profile_update(request):
+-	print("profile_update")
++	# print("profile_update")
+ 	if request.method == 'POST':
+-		print("DANS IF >>>>>>>>>>>>>")
++		# print("DANS IF >>>>>>>>>>>>>")
+ 		form = UserProfileForm(request.POST, request.FILES, instance=request.user)
+ 		if form.is_valid():
+ 			form.save()
+ 			return redirect('my_profile')
+ 			# return redirect('user_profile', username=request.user.username)
+ 	else:
+-		print("DANS ELSE >>>>>>>>>>>>>")
++		# print("DANS ELSE >>>>>>>>>>>>>")
+ 		form = UserProfileForm(instance=request.user)
+ 	return render(request, 'users/profile_update.html', {'form': form})
+ 
++
++
+ @login_required
+ def add_friend(request, username):
+ 	# print("request in add friend is : \n\t", request)#####
+ 	if request.user.username == username:
+-		messages.error(request, "You can not be friends with yoursefl.", extra_tags="error")
++		messages.error(request, _("You can not be friends with yoursefl."), extra_tags="error")
+ 		return (redirect('my_profile'))
+ 	if request.user.friends.filter(username=username).exists():
+-		messages.error(request, f"You are already friends with {username}.", extra_tags="warning")
++		messages.error(request, _("You are already friends with %(username)s.") % {'username': username}, extra_tags="warning")
+ 	else:
+ 		user_to_add = get_object_or_404(CustomUser, username=username)
+ 		request.user.friends.add(user_to_add)
+-		messages.success(request, f"You are now friends with {username}.", extra_tags="success")
++		messages.success(request, _("You are now friends with %(username)s.") % {'username': username}, extra_tags="success")
+ 	return redirect('friends_list')
+ 	# print("\nuser_to_add in add friend is : \n\t", user_to_add.username, "\nrequest.user.username in add frisnd is : \n\t", request.user.username) #####
+ 	# if user_to_add.username == request.user.username or request.user.friends.filter(username=user_to_add.username):
+@@ -43,14 +49,14 @@ def add_friend(request, username):
+ @login_required
+ def remove_friend(request, username):
+ 	if request.user.username == username:
+-		messages.error(request, "As you can not be friends with yourself, you can not unfriend yourself.", extra_tags='error')
++		messages.error(request, _("As you can not be friends with yourself, you can not unfriend yourself."), extra_tags='error')
+ 		return (redirect('my_profile'))
+ 	if request.user.friends.filter(username=username).exists():
+ 		user_to_remove = get_object_or_404(CustomUser, username=username)
+ 		request.user.friends.remove(user_to_remove)
+-		messages.success(request, f"You removed {username} from your friends", extra_tags="success")
++		messages.success(request, _("You removed %(username)s from your friends") % {'username': username}, extra_tags="success")
+ 	else:
+-		messages.error(request, f"{username} is not in your friends list", extra_tags="warning")
++		messages.error(request, _("%(username)s is not in your friends list") % {'username': username}, extra_tags="warning")
+ 	return redirect('friends_list')
+ 
+ # @login_required
+@@ -103,4 +109,16 @@ def search_friends(request):
+ @login_required
+ def friends_list(request):
+ 	friends = request.user.friends.all()
+-	return render(request, 'users/friends.html', {'friends': friends})
+\ No newline at end of file
++	return render(request, 'users/friends.html', {'friends': friends})
++
++@csrf_exempt
++def set_language_and_remember(request):
++	response = django_set_language(request)
++
++	if hasattr(request, 'user') and request.user.is_authenticated:
++		lang_code = request.POST.get('language')
++		if lang_code in dict(settings.LANGUAGES):
++			request.user.preferred_language = lang_code
++			request.user.save()
++
++	return response
+\ No newline at end of file

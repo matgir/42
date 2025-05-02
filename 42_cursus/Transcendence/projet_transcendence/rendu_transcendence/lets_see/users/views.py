@@ -7,6 +7,7 @@ from django.utils.translation import gettext as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.i18n import set_language as django_set_language
 from django.conf import settings
+import json
 
 # Create your views here.
 
@@ -18,7 +19,7 @@ def profile_update(request):
 		form = UserProfileForm(request.POST, request.FILES, instance=request.user)
 		if form.is_valid():
 			form.save()
-			return redirect('my_profile')
+			return redirect('my_profil')
 			# return redirect('user_profile', username=request.user.username)
 	else:
 		# print("DANS ELSE >>>>>>>>>>>>>")
@@ -75,27 +76,33 @@ def remove_friend(request, username):
 #	 return render(request, 'users/profile.html', {'user': request.user})
 #	 return render(request, 'users/profile.html', {'user': user}) """
 
+# from django_otp.decorators import otp_required
 @login_required
+# @otp_required
 def user_profile(request, username):
 	# print("username in user_profile is : \n\t", username, "\nrequest in user_profile is : \n\t", request, "\nrequest.user.username in user_profile is : \n\t", request.user.username) #####
 	user = get_object_or_404(CustomUser, username=username)
 	# if user.username != request.user.username:
-	return render(request, 'users/profile.html', {'user': user})
+	return render(request, 'users/profil.html', {'user': user})
+	# return render(request, 'users/profile.html', {'user': user})
 	# else:
 		# return render(request, 'users/profile.html', {'user': request.user})
 
 @login_required
+# @otp_required
 def my_profile(request):
-	return(user_profile(request, request.user.username))
+	return(render(request, 'users/profil.html', {'user': request.user}))
 	# return render(request, 'users/profile.html', {'user': request.user})
 
 @login_required
 def search_friends(request):
 	# print("request in search friends is : \n\t", request)#####
 	query = request.GET.get('q', '')
+	# print("query in search friends is : \n\t", query)#####
 	user = request.user
 	if query:
 		results = CustomUser.objects.filter(username__icontains=query).exclude(id=user.id)
+		# results = CustomUser.objects.filter(username__icontains=query)
 	else:
 		None
 	# print("query in search friends is : \n\t", query, "\nresults in search friends is : \n\t", results)#####
@@ -105,6 +112,137 @@ def search_friends(request):
 def friends_list(request):
 	friends = request.user.friends.all()
 	return render(request, 'users/friends.html', {'friends': friends})
+
+
+
+#override Setup view to save the user 2fa state (on or off)
+from two_factor.views import SetupView
+from django_otp import user_has_device
+
+class CustomTwoFactorSetupView(SetupView):
+	def done(self, form_list, **kwargs):
+		print("======================== 2FA STATE ======================== \n")
+
+		response = super().done(form_list, **kwargs)
+		user = self.request.user
+
+		# Si l’utilisateur a activé 2FA, on le note en base
+		if user_has_device(user):
+			user.two_factor = True
+			user.save(update_fields=['two_factor'])
+		
+		print("2FA STATE ======= ", user.two_factor)
+
+		return redirect('two_factor_setup_complete')
+	
+
+from django.views.generic import TemplateView
+from django.urls import reverse_lazy
+
+class CustomSetupCompleteView(TemplateView):
+	template_name = 'two_factor/setup_complete.html'
+
+	def get(self, request, *args, **kwargs):
+		print("\n ~~~~~~~ 2FA STATE in SETUP COMPLETE ~~~~~~~ \n",)
+		# print("2FA STATE in SETUP COMPLETE ======= ", self.two_factor)
+	#	 # tu peux set two_factor ici si ce n’est pas déjà fait
+	#	 user = request.user
+	#	 if not user.two_factor:
+	#		 user.two_factor = True
+	#		 user.save()
+
+		# Rediriger directement sans afficher la page (optionnel)
+		return redirect(reverse_lazy('my_profile')) 
+
+
+# from two_factor.views import DisableView
+# class CustomTwoFactorDisableView(DisableView):
+# 	def done(self, form_list, **kwargs):
+# 		print("======================== 2FA STATE in disable ======================== \n")
+
+# 		response = super().done(form_list, **kwargs)
+# 		user = self.request.user
+
+# 		# Si l’utilisateur a désactivé 2FA, on le note en base
+# 		if user_has_device(user):
+# 			user.two_factor = True
+# 			user.save(update_fields=['two_factor'])
+		
+# 		print("2FA STATE ======= ", user.two_factor)
+
+# 		return redirect('two_factor_setup_complete')
+
+
+from two_factor.views import DisableView
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+
+class CustomDisable2FAView(DisableView):
+	def post(self, request, *args, **kwargs):
+		response = super().post(request, *args, **kwargs)
+		print("======================== 2FA  in disable ======================== \n")
+
+		# Une fois la 2FA désactivée, on met le champ à False
+		user = request.user
+		if user.is_authenticated and user.two_factor:
+			user.two_factor = False
+			user.save()
+
+		# return redirect(reverse_lazy('my_profile'))
+		return redirect(reverse_lazy('my_profile')) 
+
+
+# from django.contrib.auth.views import LoginView
+# from two_factor.views import LoginView as TwoFactorLoginView
+# from django.shortcuts import redirect
+# from django.contrib.auth import authenticate, login
+# from django.views import View
+# from django.shortcuts import render
+
+from allauth.account.views import LoginView as AllauthLoginView
+# from django.shortcuts import redirect
+from django.contrib.auth import login
+
+class ConditionalLoginView(AllauthLoginView):
+	def form_valid(self, form):
+		user = form.user
+
+		if user.two_factor:
+			# Stocke l'utilisateur pour la suite du process 2FA
+			print("/////////////////////// USER HAS ENABLED 2FA /////////////////////////")
+			self.request.session['pre_2fa_user_id'] = user.pk
+			# return redirect('account_verify')
+			return redirect('two_factor:login')
+		else:
+			print(self.request.session.get('pre_2fa_user_id'))
+			login(self.request, user)
+			return redirect(reverse_lazy('home'))
+
+
+# from django.shortcuts import redirect
+# from django.contrib.auth.views import LoginView
+# from django_otp.forms import OTPAuthenticationForm
+
+# class CustomTwoFactorLoginView(AllauthLoginView):
+#     form_class = OTPAuthenticationForm
+
+#     def form_valid(self, form):
+#         user = form.user
+        
+#         if user.is_authenticated and user.two_factor:  # Si l'utilisateur a activé la 2FA
+#             # Si l'utilisateur est authentifié, redirige directement vers la page TOTP
+#             return redirect('account_verify')  # ou le nom de la vue de validation du code
+#         else:
+#             # Sinon, continue le processus de login traditionnel
+#             return super().form_valid(form)
+
+# class CustomTwoFactorLoginView(LoginView):
+#     def dispatch(self, request, *args, **kwargs):
+#         if request.user.is_authenticated:
+#             if request.user.two_factor:
+#                 return redirect('two_factor:verify')  # Skip la page login, va directement vers la validation du 2FA
+#         return super().dispatch(request, *args, **kwargs)
+
 
 @csrf_exempt
 def set_language_and_remember(request):

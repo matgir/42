@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% comment %} {% extends "base.html" %} {% endcomment %}
 {% load i18n %}
 
 {% block content %}
@@ -34,6 +34,21 @@
 	<a href="{% url 'profile_edit' %}">
 		{% trans "Edit profile" %}
 	</a>
+
+	{% if not user.login_42 %}
+		{% if not user.two_factor %}
+			<hr>
+			<a href="{% url 'two_factor_setup' %}">
+				Enable 2FA
+			</a>
+		{% else %}
+			<hr>
+			<a href="{% url 'two_factor_disable' %}">
+				Disable 2FA
+			</a>
+		{% endif %}
+	{% endif %}
+
 {% else %}
 	<a href="{% url 'match_history' user.username %}">
 		{% trans "View Match History" %}
