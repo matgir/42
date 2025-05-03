@@ -15,14 +15,14 @@ function createScene() {
     let downloadDone = false;  // état pour bloquer après 1 clic
     
     // Supprimer l'ancien canvas s'il existe
-    const oldCanvas = document.querySelector('.webgl');
+    const oldCanvas = document.querySelector('.avatar-webgl');
     if (oldCanvas) {
         oldCanvas.remove();
     }
     
     // Créer et ajouter un nouveau canvas
     const canvas = document.createElement('canvas');
-    canvas.classList.add('webgl');
+    canvas.classList.add('avatar-webgl');
     document.body.appendChild(canvas);
 
     // Créer le renderer
@@ -427,6 +427,12 @@ return function cleanup() {
     allCanvases.forEach(canvas => {
         canvas.remove();
     });
+
+    // Remove the game-over-content
+    const gameOverContent = document.querySelector('.game-over-content');
+    if (gameOverContent) {
+        gameOverContent.remove();
+    }
 };
 }
 

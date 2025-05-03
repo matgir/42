@@ -23,7 +23,7 @@ urlpatterns = [
 	path('accounts/', include('allauth.urls')),
 	path('profile_edit/', views.profile_update, name='profile_edit'),
 	path('search_friends/', views.search_friends, name='search_friends'),
-	path('add-friend/<str:username>/', views.add_friend, name='add_friend'),
+	path('add_friend/<str:username>/', views.add_friend, name='add_friend'),
 	path('remove-friend/<str:username>/', views.remove_friend, name='remove_friend'),
 	path('profile/<str:username>/', views.user_profile, name='user_profile'),
 	path('user_profil/', views.user_profile, name='user_profil'),

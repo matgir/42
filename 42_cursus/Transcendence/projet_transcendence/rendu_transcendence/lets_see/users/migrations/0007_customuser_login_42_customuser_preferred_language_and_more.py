@@ -16,16 +16,6 @@ class Migration(migrations.Migration):
             name='login_42',
             field=models.CharField(blank=True, max_length=30),
         ),
-        migrations.AddField(
-            model_name='customuser',
-            name='preferred_language',
-            field=models.CharField(choices=[('en', 'English'), ('fr', 'French'), ('es', 'Spanish')], default='en', max_length=10, verbose_name='Prefered Language'),
-        ),
-        migrations.AddField(
-            model_name='customuser',
-            name='two_factor',
-            field=models.BooleanField(default=False),
-        ),
         migrations.AlterField(
             model_name='customuser',
             name='username',

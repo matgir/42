@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-# app_name = "tournament"
+app_name = "tournament"
 
 urlpatterns = [
 	path('<str:username>/match_history/', views.match_history, name='match_history'),

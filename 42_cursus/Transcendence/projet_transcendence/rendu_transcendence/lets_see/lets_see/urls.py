@@ -1,19 +1,3 @@
-"""
-URL configuration for lets_see project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
@@ -56,24 +40,12 @@ api_urlpatterns = [
     path('4_fall/', TemplateView.as_view(template_name='4_fall.html'), name='4_fall'), 
     path('6_torus/', TemplateView.as_view(template_name='6_torus.html'), name='6_torus'), 
     path('users/', include('users.urls')),
-
-
-    
     # path('profil/avatar/', TemplateView.as_view(template_name='avatar.html'), name='avatar'), 
     path('tournament/', include('tournament.urls')),
     path('fortytwo/', include('fortytwo.urls')),
     path('404/', TemplateView.as_view(template_name='404.html'), name='404'),
 ]
 
-
-# urlpatterns = [
-    # path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    # path('admin/', admin.site.urls),
-    # path('tournament/', include('tournament.urls')),
-    # path('fortytwo/', include('fortytwo.urls')),
-    # path('i18n/', include('django.conf.urls.i18n')),
-
-# ]
 
 urlpatterns = [
     path('setlang/', set_language_and_remember, name='set_language'),
@@ -84,7 +56,6 @@ urlpatterns = [
     
     
     # Include other app URLs
-    path('tournament/', include('tournament.urls')),
     path('fortytwo/', include('fortytwo.urls')),
     path('jeux_du_pong/', include('jeux_du_pong.urls')),
     # path('users/', include('users.urls')),
@@ -94,7 +65,7 @@ urlpatterns = [
     path('', views.home_view, name='home'),
     # Catch-all pattern for SPA routes - serve the base.html for client-side routing
     # This should be the last URL pattern to avoid overriding more specific ones
-    re_path(r'^(?!admin/|api/|static/|media/|tournament/|fortytwo/).*$', 
+    re_path(r'^(?!admin/|api/|static/|media/|fortytwo/).*$', 
             views.base_view, name='spa_routes'),
 ]
 

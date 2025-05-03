@@ -9,114 +9,102 @@
 {% comment %} <script src="{% url 'javascript-catalog' %}?lang={{ LANGUAGE_CODE }}"> {% endcomment %}
 
 <div id="app-content">
-	<div id="navigation" class="navig">
-		<!-- <div class="navig"> -->
-
-		<a href="/avatar/" class="link_temp" style="margin-top: 100px;">
-			{% trans "AVATAR / link" %}
-		</a>
-		<div class="blur-box_profil">
-			<div class="bento-container">
-
-				<div class="card bento_large">
-					<h4>
-						{% trans "Match history" %}
-					</h4>
-					<a href="{% url 'match_history' user.username %}">
-						{% trans "View Match History" %}
-					</a>
-					<!-- <button>Explore</button> -->
-				</div>
-
-				<div class="card bento_long">
-					<h1>
-						{{ user.username }}<br>
-					</h1>
-					<p>
-						{% blocktrans with wins=user.wins losses=user.losses %}
-							Wins : {{ wins }} | Losses : {{ losses }}
-						{% endblocktrans %}
-					</p>
-					{% if user == request.user %}
-						{% if not user.login_42 %}
-							{% if user.two_factor %}
-								<hr>
-								<a href="/users/accounts/two_factor/disable/">
-									{% trans "Disable 2FA" %}
-								</a>
-							{% else %}
-								<hr>
-								<a href="/users/accounts/two_factor/setup/">
-									{% trans "Enable 2FA" %}
-								</a>
-							{% endif %}
-						{% endif %}
-						<a href="/users/friends_list/">
-							{% trans "View friends" %}
+  <div id="navigation" class="navig">
+    <!-- <div class="navig"> -->
+      
+      <!-- <a class="settings" href="/avatar/" class="link_temp" style="margin-top: 100px;">AVATAR / link</a> -->
+      <div class="blur-box_profil">
+        <div class="bento-container">
+          
+          <div class="card bento_large">
+            <h4 class="titre">
+				{% trans "Match history" %}
+			</h4>
+            <a class="settings" href="/tournament/{{ user.username }}/match_history/">
+				{% trans "View Match History" %}
+            </a>
+            <!-- <button>Explore</button> -->
+          </div>
+          
+          <div class="card bento_long">
+            <h1 class="titre">
+              {{ user.username }}
+              <br>
+            </h1>
+            <p class="win_losse">
+				{% blocktrans with wins=user.wins losses=user.losses %}
+					Wins : {{ wins }} | Losses : {{ losses }}
+				{% endblocktrans %}
+            </p>
+            {% if user == request.user %}
+				{% if not user.login_42 %}
+					{% if user.two_factor %}
+						<hr>
+						<a href="/users/accounts/two_factor/disable/">
+							{% trans "Disable 2FA" %}
 						</a>
-						<h4>
-							{% trans "Profile" %}
-						</h4>
-				</div>
-
-				<div class="card bento_small">
-					<h3>
-						{% trans "Settings" %}
-					</h3>
-					<a href="/users/profile_edit/">
-						{% trans "Edit profile" %}
-					</a>
-				</div>
-
-				<div class="card bento_small">
-					<h3>
-					{% trans "Avatar" %}
-					</h3>
-					<img src="{{ user.avatar.url }}" alt="Avatar" width="256" height="256">
-				</div>
-					
-				{% comment %} <div class="card bento_small">
-					<h3>
-						{% if not user.login_42 %}
-							{% if user.two_factor %}
-								<hr>
-								<a href="{% url 'two_factor_disable' %}">
-									{% trans "Disable 2FA" %}
-								</a>
-							{% else %}
-								<hr>
-								<a href="{% url 'two_factor_setup' %}">
-									{% trans "Enable 2FA" %}
-								</a>
-							{% endif %}
-						{% endif %}
-					</h3>
-				</div> {% endcomment %}
-
-
-				{% else %}
-				<a href="/users/add_friend/">
-					{% trans "Add Friend" %}
-				</a>
-				<hr>
-				<a href="/users/remove_friend/">
-					{% trans "Remove Friend" %}
-				</a>
-				<hr>
-				<div>
-					{% if user.online_status %}
-					<span style="color:green">
-						{% trans "Online" %}
-					</span>
 					{% else %}
-					<span style="color:red">
-						{% trans "Offline" %}
-					</span>
+						<hr>
+						<a href="/users/accounts/two_factor/setup/">
+							{% trans "Enable 2FA" %}
+						</a>
 					{% endif %}
-				</div>
 				{% endif %}
-			</div>
-		</div>
-		</div>
 
-	</div>
+            <h4 class="titre">
+				{% trans "Profile" %}
+			</h4>
+            <a class="settings" href="/users/friends_list/">
+				{% trans "View friends" %}
+            </a>
+          </div>
+          
+          
+          <div class="card bento_small">
+            <img src="{{ user.avatar.url }}" class="avatar" alt="Avatar" width="256" height="256">
+            <h3 class="titre">
+			{% trans "Avatar" %}
+			</h3>
+            <a class="settings" href="/users/profile_edit/">
+              {% trans "Edit Avatar (a link)" %}
+            </a>
+            
+          </div>
+          <div class="card bento_small">
+            <h3 class="titre">
+				{% trans "Settings" %}
+			</h3>
+            <a class="settings" href="/users/profile_edit/">
+              {% trans "Edit profile" %}
+            </a>
+          </div>
+          
+            {% else %}
+              <a class="settings" href="/users/add_friend/">
+                {% trans "Add Friend" %}
+              </a>
+              <hr class="titre">
+              <a class="settings" href="/users/remove_friend/">
+                {% trans "Remove Friend" %}
+              </a>
+              <hr class="titre">
+              <div>
+                {% if user.online_status %}
+                  <span style="color:green">
+                    {% trans "Online" %}
+                  </span>
+                {% else %}
+                  <span style="color:red">
+                    {% trans "Offline" %}
+                  </span>
+                {% endif %}
+              </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+
+  

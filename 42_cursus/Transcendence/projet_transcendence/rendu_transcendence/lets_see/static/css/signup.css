@@ -114,14 +114,19 @@ input::placeholder {
   margin-right: 3px;
   margin-bottom: 3px;
   font-size: 12px;
-  color: #cccccce6;
+  color: #cccccc38;
   transition: color 0.3s ease;
+  background: none;
+  background: rgba(255, 0, 0, 0);
   /* border: solid 2px pink; */
 
 }
 
 .check-icon.checked {
-  color: #00ffff;
+  color: #05e6ff;
+  /* box-shadow: 0 8px 3px 0 rgb(166, 248, 255); */
+  background: rgba(255, 0, 0, 0);
+
 }
 
 p {

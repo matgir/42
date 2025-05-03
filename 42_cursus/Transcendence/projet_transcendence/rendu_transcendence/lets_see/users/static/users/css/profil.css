@@ -41,17 +41,56 @@ button, .bento_large {
   font-size: 3rem; /* Légèrement plus grand */
 }
 
-/* Mise en page générale */
 .navig {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  /* flex-direction: column; */
+  background: none;
 }
+
+.win_losse{
+  color: blue;
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+
+.settings{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;  /* Poids plus épais */
+  color: white;
+  font-size: 20px;
+  padding: 5px 17px;
+  text-decoration: none;
+  border: 2px solid white;
+  border-radius: 10px;
+  margin-top: 4px;
+
+
+}
+  
+.avatar{
+ /* border: 4px double rgb(255, 255, 255); */
+  /* border-radius: 15px; */
+  border-radius: 100px;
+  margin-bottom: 30px;
+  justify-content: center;
+  margin: 40px;
+  box-shadow: 0 8px 45px rgba(0, 0, 0);
+
+}
+  
+  .titre{
+    /* font-family: 'Roboto', sans-serif; */
+    font-weight: 300;  /* Poids plus épais */
+    color: white;
+    font-size: 60px;
+
+  
+  }
 
 /* Profil box */
 .blur-box_profil {
-  
   width: 80%;
   height: 70%;
   max-width: 1400px;
@@ -59,6 +98,8 @@ button, .bento_large {
   border-radius: 16px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+    align-items: flex-end;
   gap: 20px;
 }
 
@@ -72,16 +113,17 @@ button, .bento_large {
   grid-gap: 20px;
   width: 100%;
   height: 100%;
+  
 }
 
 /* Styles des cartes */
 .card {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(61, 43, 255, 0.112);
   border-radius: 14px;
-  backdrop-filter: blur(9px);
+  backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1.5px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 8px 32px rgba(9, 11, 41, 0.14);
+  border: 2px solid rgba(77, 68, 255, 0.1);
+  /* box-shadow: 0 8px 32px rgba(9, 11, 41, 0.14); */
   color: rgba(232, 232, 232, 0.784);
   display: flex;
   justify-content: flex-start;    /* bas */
@@ -93,13 +135,17 @@ button, .bento_large {
   font-weight: 100;
   /* font-size: 2rem; */
   font-size: 30px;
-
   font-family: 'Work Sans', sans-serif;
-font-weight: 100;
-font-size: 2rem;
-
-
+  font-weight: 100;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  /* box-shadow: 0 8px 28px rgb(0, 0, 0); */
   text-align: left;
+  background: rgba(53, 31, 255, 0.059);
+
 }
 
 /* Affectation des zones */
@@ -111,17 +157,21 @@ font-size: 2rem;
 .bento_long {
   grid-area: long;
   /* background: rgba(86, 245, 123, 0.886); */
+  /* background: rgba(121, 66, 199, 0.281); */
 
 }
 
 .bento_small:nth-child(3) {
   grid-area: small1;
-  background: rgba(99, 75, 237, 0.91);
+  background: rgba(25, 0, 255, 0.04);
+  border: solid 2px rgba(53, 52, 57, 0.099);
 
 }
 
 .bento_small:nth-child(4) {
   grid-area: small2;
+
+
 }
 
 /* Styles du bouton */

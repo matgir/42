@@ -335,42 +335,26 @@ border-radius: 5px;
 
 /* Styles pour l'overlay de victoire */
 .game-over-overlay {
-  display: none; /* Cacher l'overlay au début */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
-  color: white;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  font-size: 2em;
-  z-index: 1000; /* Au-dessus du reste de la page */
+  background-color: rgba(0, 0, 0, 0.8);
   display: none;
-  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  z-index: 1000;
 }
 
-.game-over-overlay p {
-  margin: 20px 0;
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(0, 255, 248, 0.5);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(0, 255, 248, 0.8);
+  }
 }
-
-.game-over-overlay button {
-  font-size: 1.5em;
-  padding: 10px 20px;
-  margin: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.game-over-overlay button:hover {
-  background-color: #45a049;
-}
-
 
 
 

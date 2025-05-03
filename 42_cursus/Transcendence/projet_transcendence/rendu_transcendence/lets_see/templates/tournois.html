@@ -114,11 +114,11 @@
                       <div class="matchup">
                           <div class="player-container">
                               <img src="" alt="Player 1" class="player-image player1-img">
-                              <div class="player player1" id="player_round1_match1">Globo 1</div>
+                              <div class="player player1 player-accent1" id="player_round1_match1">Globo 1</div>
                           </div>
                           <div class="player-container">
                               <img src="" alt="Player 2" class="player-image player2-img">
-                              <div class="player player2" id="player_round1_match2">Globo 2</div>
+                              <div class="player player2 player-accent2" id="player_round1_match2">Globo 2</div>
                           </div>
                       </div>
   
@@ -233,30 +233,11 @@
 
             <!-- Overlay de victoire -->
             <div id="gameOverOverlay" class="game-over-overlay">
-                <p id="winnerMessage">
-                  {% trans "Player X wins!" %}
-                </p>
-                <button id="playAgainButton">
-                  {% trans "Play Again" %}
-                </button>
-                <button id="quitButton">
-                  {% trans "Quit" %}
-                </button>
+                {% include "avatar.html" %}
             </div>
         </div>
     </section>
 </div>
-
-<script>
-window.addEventListener('DOMContentLoaded', function () {
-    setTimeout(function () {
-        const avatarSection = document.querySelector('.avatar-section');
-        if (avatarSection) {
-            avatarSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    }, 500);  // Attendre 500ms pour être sûr que tout est bien chargé
-});
-</script>
 
 <script type="module" src="{% static 'js/pong.js' %}"></script>
 </body>

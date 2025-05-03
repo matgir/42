@@ -30,7 +30,7 @@ width: 100%;
 z-index: 10;
 }
 
-.category , .category2 , .category3{
+.category , .category2 , .category3, .category4{
 background-color: #003c7424;
 font-family: "Roboto", sans-serif;
 font-weight: 1000;
@@ -55,9 +55,30 @@ background-color:blue;
 .category3 {
     margin-right: 70px;
     font-size: 15px;
+
     /* background-color: rgb(0, 0, 171); */
     background-color: blue;
 }
+
+.category4 {
+    position: absolute;
+    margin-right: 70px;
+    font-size: 15px;
+    /* background-color: rgb(0, 0, 171); */
+    background: none;
+
+    top: 14%;
+    right: 40%;
+    min-width: 200px;
+    min-height: 120px;
+    border: 3px double  #09eef6;
+
+    /* margin-right: 500px;
+     */
+     z-index: 10;
+}
+
+
 
 
 /* Options Section */
@@ -125,6 +146,13 @@ cursor: pointer;
       .option input[type="radio"] {
         display: none;
       }
+
+        /* Masquer l'input radio */
+        .option input[type="chekbox"] {
+            display: none;
+            
+          }
+          
       
       /* Boîte carrée personnalisée */
       .option label {
@@ -144,6 +172,17 @@ cursor: pointer;
         box-shadow: 0 0 8px #00ccff, 0 0 20px #0077aa inset;
         /* border-color: #00ccff; */
       }
+
+       /* Effet quand sélectionné */
+       .option input[type="checkbox"]:checked + label {
+        background-color: #002aff;
+        box-shadow: 0 0 8px #00ccff, 0 0 20px #0077aa inset;
+        /* border-color: #00ccff; */
+      }
+
+      .option input[type="checkbox"] {
+        display: none;
+      }
       
       /* Texte en dessous de la boîte */
       .option span {
@@ -154,6 +193,25 @@ cursor: pointer;
         font-size: 14px;
       }
       
+      .theme-1 .category4{
+        border: 3px double  #ff8ef7;
+      }
+      
+      .theme-1 .category4 {
+        border: 3px double  #f132ff;
+
+          /* background: blue; */
+        background: none;
+    }
+
+      .theme-2 .category4{
+          border: 3px double  #f6ab09;
+        }
+        
+        .theme-2 .category4 {
+            background: blue;
+          background: none;
+      }
 
       .theme-1 .category {
         border: 3px double blue;
@@ -179,8 +237,9 @@ cursor: pointer;
       
       .theme-2 .category2 {
         background: blue;
-
       }
+
+      
       
       .theme-2 .category3 {
         background: none;

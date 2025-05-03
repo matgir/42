@@ -1,7 +1,7 @@
 {% load static %}
 {% load i18n %}
 
-<form class="blur-box" method="post" id="signupForm" action="/api/users/accounts/signup/">
+<form class="blur-box" method="post" id="signupForm" action="/api/users/accounts/signup/" data-no-spa>
 
     {% csrf_token %}
     <div class="already_sign_up">

@@ -14,7 +14,7 @@
 
     <div class="settings-container">
       <img class="logo_" src="{% static 'logo/entropia9.png' %}" alt="Logo">
-      <div class="settings-container">
+      <form id="game-settings-form" action="/tournois/" method="get" class="settings-container" >
         <img class="logo_" src="{% static 'logo/entropia9.png' %}" alt="Logo">
       
         <!-- Level Category -->
@@ -22,17 +22,17 @@
           <h2>Level</h2>
           <div class="options">
             <div class="option">
-              <input type="radio" name="level" id="easy">
+              <input type="radio" name="level" id="easy" value="1">
               <label for="easy"></label>
               <span>Noob</span>
             </div>
             <div class="option">
-              <input type="radio" name="level" id="medium">
+              <input type="radio" name="level" id="medium" value="2" checked>
               <label for="medium"></label>
               <span>Medium</span>
             </div>
             <div class="option">
-              <input type="radio" name="level" id="hard">
+              <input type="radio" name="level" id="hard" value="3">
               <label for="hard"></label>
               <span>Hard</span>
             </div>
@@ -44,17 +44,17 @@
           <h2>Color Mode</h2>
           <div class="options">
             <div class="option">
-              <input type="radio" name="color" id="color1">
+              <input type="radio" name="color" id="color1" value="1" checked>
               <label for="color1"></label>
               <span>The Special</span>
             </div>
             <div class="option">
-              <input type="radio" name="color" id="color2">
+              <input type="radio" name="color" id="color2" value="2">
               <label for="color2"></label>
               <span>Too Blue</span>
             </div>
             <div class="option">
-              <input type="radio" name="color" id="color3">
+              <input type="radio" name="color" id="color3" value="3">
               <label for="color3"></label>
               <span>White Light</span>
             </div>
@@ -66,27 +66,40 @@
           <h2>Points to Win</h2>
           <div class="options">
             <div class="option">
-              <input type="radio" name="points" id="pt5">
+              <input type="radio" name="score" id="pt5" value="1" checked>
               <label for="pt5"></label>
               <span>3 points</span>
             </div>
             <div class="option">
-              <input type="radio" name="points" id="pt10">
+              <input type="radio" name="score" id="pt10" value="2">
               <label for="pt10"></label>
               <span>6 points</span>
             </div>
             <div class="option">
-              <input type="radio" name="points" id="pt15">
+              <input type="radio" name="score" id="pt15" value="3">
               <label for="pt15"></label>
               <span>12 points</span>
             </div>
           </div>
         </div>
+          <div class="category4">
+            <h2>Bonus</h2>
+            <!-- <div class="options"> -->
+              <div class="option">
+                <input type="checkbox" name="bonus" id="bonus_able">
+                <label for="bonus_able"></label>
+                <!-- <span>3 points</span> -->
+        <!-- </div> -->
+   
+    
+          </div>
+        </div>
       </div>   
       <div class="play_buttons">
         <button class="quit-button">QUIT</button>
-        <button class="play-button">PLAY</button>
+        <button class="play-button" type="submit">PLAY</button>
       </div>
+      </form>
 
     </div>
   <canvas class="webgl"></canvas>

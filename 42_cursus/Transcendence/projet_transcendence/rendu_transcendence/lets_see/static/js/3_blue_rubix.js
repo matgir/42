@@ -114,6 +114,35 @@
 
 function initialize() {
 
+// Add form action setting based on mode parameter
+// Set form action based on mode parameter
+const setFormAction = () => {
+    const form = document.getElementById('game-settings-form');
+    if (!form) return;
+    
+    // Use the SPA router's URL params if available, otherwise use normal URL parsing
+    let params;
+    if (window.getURLParams) {
+        params = window.getURLParams();
+    } else {
+        params = new URLSearchParams(window.location.search);
+    }
+    
+    const mode = params.get('mode');
+    console.log("mode", mode);
+    
+    if (mode === 'duel') {
+        form.action = '/duel/';
+    } else if (mode === 'tournois') {
+        form.action = '/tournois/';
+    }
+    
+    console.log('Form action set to:', form.action);
+};
+
+// Call this immediately and also when DOM is loaded to make sure it works
+setFormAction();
+document.addEventListener('DOMContentLoaded', setFormAction);
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl');

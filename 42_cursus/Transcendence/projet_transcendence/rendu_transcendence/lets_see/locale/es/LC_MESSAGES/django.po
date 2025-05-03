@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-02 20:05+0200\n"
+"POT-Creation-Date: 2025-05-03 19:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,16 +55,15 @@ msgstr "No se pudo recopilar la información del usuario"
 msgid "Play Pong"
 msgstr "Jugar al Pong"
 
-#: jeux_du_pong/templates/jeux_du_pong/game.html:15 templates/duel.html:218
-#: templates/pong.html:93 templates/tournois.html:240
+#: jeux_du_pong/templates/jeux_du_pong/game.html:15
 msgid "Play Again"
 msgstr "Jugar de nuevo"
 
-#: jeux_du_pong/views.py:38
+#: jeux_du_pong/views.py:41
 msgid "ok"
 msgstr "ok"
 
-#: jeux_du_pong/views.py:39
+#: jeux_du_pong/views.py:42
 msgid "Invalid request"
 msgstr "Solicitud inválida"
 
@@ -72,32 +71,40 @@ msgstr "Solicitud inválida"
 msgid "Value does not exist"
 msgstr "El valor no existe"
 
-#: templates/avatar.html:11
-msgid "NOP"
-msgstr "NO"
+#: templates/avatar.html:8
+msgid "VICTORY!"
+msgstr ""
 
-#: templates/avatar.html:14
-msgid "SELECT!"
-msgstr "¡SELECIONAR!"
+#: templates/avatar.html:13
+msgid "BACK TO MENU"
+msgstr "VOLVER AL MENÚ"
 
-#: templates/base.html:155
+#: templates/avatar.html:16
+msgid "DOWNLOAD!"
+msgstr "¡DESCARGAR!"
+
+#: templates/avatar.html:20
+msgid "Player X wins!"
+msgstr "¡El jugador X gana!"
+
+#: templates/base.html:224
 msgid "My Profile"
 msgstr "Mi perfil"
 
-#: templates/base.html:160
+#: templates/base.html:230
 msgid "Search"
 msgstr "Buscar"
 
-#: templates/base.html:170
+#: templates/base.html:240
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-#: templates/base.html:176 templates/home.html:66 templates/signin.html:13
+#: templates/base.html:246 templates/home.html:67 templates/signin.html:13
 #: templates/signup.html:12
 msgid "Sign In"
 msgstr "Iniciar sesión"
 
-#: templates/base.html:179 templates/home.html:70
+#: templates/base.html:249 templates/home.html:71
 msgid "Sign In with 42"
 msgstr "Iniciar sesión con 42"
 
@@ -141,29 +148,21 @@ msgstr "INVITADO GLOBO"
 msgid "⏸ / space"
 msgstr "⏸ / espacio"
 
-#: templates/duel.html:215 templates/pong.html:90 templates/tournois.html:237
-msgid "Player X wins!"
-msgstr "¡El jugador X gana!"
-
-#: templates/duel.html:221 templates/pong.html:96 templates/tournois.html:243
-msgid "Quit"
-msgstr "Salir"
-
-#: templates/home.html:42
+#: templates/home.html:43
 msgid "No account? Sign up first!"
 msgstr "¿No tienes cuenta? ¡Regístrate primero!"
 
-#: templates/home.html:45
+#: templates/home.html:46
 msgid "Sign up"
 msgstr "Regístrate"
 
-#: templates/home.html:50 templates/signin.html:31
+#: templates/home.html:51 templates/signin.html:31
 msgid "SIGN IN"
 msgstr "INICIAR SESION"
 
-#: templates/home.html:61
-msgid "Remember Me"
-msgstr "Recuérdame"
+#: templates/home.html:62
+msgid "I'm happy"
+msgstr "Estoy feliz"
 
 #: templates/signin.html:25
 msgid "Sign in"
@@ -275,73 +274,69 @@ msgstr "Mis amigos"
 msgid "You have no friends yet."
 msgstr "Aún no tienes amigos."
 
-#: users/templates/users/profil.html:17
-msgid "AVATAR / link"
-msgstr "AVATAR / enlace"
-
-#: users/templates/users/profil.html:24
+#: users/templates/users/profil.html:22
 msgid "Match history"
 msgstr "Historial de partidas"
 
-#: users/templates/users/profil.html:27 users/templates/users/profile.html:55
+#: users/templates/users/profil.html:25 users/templates/users/profile.html:55
 msgid "View Match History"
 msgstr "Ver historial de partidas"
 
-#: users/templates/users/profil.html:37
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t\t\t\tWins : %(wins)s | Losses : %(losses)s\n"
-#| "\t\t\t\t\t"
+#: users/templates/users/profil.html:36
+#, python-format
 msgid ""
 "\n"
-"\t\t\t\t\t\t\tWins : %(wins)s | Losses : %(losses)s\n"
-"\t\t\t\t\t\t"
+"\t\t\t\t\tWins : %(wins)s | Losses : %(losses)s\n"
+"\t\t\t\t"
 msgstr ""
 "\n"
 "\t\t\t\tVictorias: %(wins)s | Derrotas: %(losses)s\t\t\t\t"
 
-#: users/templates/users/profil.html:46
+#: users/templates/users/profil.html:45
 msgid "Disable 2FA"
-msgstr ""
+msgstr "Desactivar 2FA"
 
-#: users/templates/users/profil.html:51
+#: users/templates/users/profil.html:50
 msgid "Enable 2FA"
-msgstr ""
+msgstr "Activar 2FA"
 
-#: users/templates/users/profil.html:56 users/templates/users/profile.html:32
-msgid "View friends"
-msgstr "Ver amigos"
-
-#: users/templates/users/profil.html:59
+#: users/templates/users/profil.html:56
 msgid "Profile"
 msgstr "Perfil"
 
-#: users/templates/users/profil.html:65
-msgid "Settings"
-msgstr "Configuración"
+#: users/templates/users/profil.html:59 users/templates/users/profile.html:32
+msgid "View friends"
+msgstr "Ver amigos"
 
-#: users/templates/users/profil.html:68 users/templates/users/profile.html:36
-msgid "Edit profile"
-msgstr "Editar perfil"
-
-#: users/templates/users/profil.html:74
+#: users/templates/users/profil.html:67
 msgid "Avatar"
 msgstr "Avatar"
 
-#: users/templates/users/profil.html:101 users/templates/users/profile.html:59
+#: users/templates/users/profil.html:70
+msgid "Edit Avatar (a link)"
+msgstr "Editar Avatar (un enlace)"
+
+#: users/templates/users/profil.html:76
+msgid "Settings"
+msgstr "Configuración"
+
+#: users/templates/users/profil.html:79 users/templates/users/profile.html:36
+msgid "Edit profile"
+msgstr "Editar perfil"
+
+#: users/templates/users/profil.html:85 users/templates/users/profile.html:59
 msgid "Add Friend"
 msgstr "Añadir amigo"
 
-#: users/templates/users/profil.html:105 users/templates/users/profile.html:63
+#: users/templates/users/profil.html:89 users/templates/users/profile.html:63
 msgid "Remove Friend"
 msgstr "Eliminar amigo"
 
-#: users/templates/users/profil.html:111 users/templates/users/profile.html:69
+#: users/templates/users/profil.html:95 users/templates/users/profile.html:69
 msgid "Online"
 msgstr "En línea"
 
-#: users/templates/users/profil.html:115 users/templates/users/profile.html:73
+#: users/templates/users/profil.html:99 users/templates/users/profile.html:73
 msgid "Offline"
 msgstr "Desconectado"
 
@@ -359,7 +354,7 @@ msgstr ""
 msgid "My Match History"
 msgstr "Mi historial de partidas"
 
-#: users/templates/users/profile_update.html:15
+#: users/templates/users/profile_update.html:14
 msgid "Save Changes"
 msgstr "Guardar cambios"
 
@@ -423,6 +418,21 @@ msgstr "Eliminaste a %(username)s de tus amigos."
 #, python-format
 msgid "%(username)s is not in your friends list"
 msgstr "%(username)s no está en tu lista de amigos."
+
+#~ msgid "NOP"
+#~ msgstr "NO"
+
+#~ msgid "SELECT!"
+#~ msgstr "¡SELECIONAR!"
+
+#~ msgid "Quit"
+#~ msgstr "Salir"
+
+#~ msgid "Remember Me"
+#~ msgstr "Recuérdame"
+
+#~ msgid "AVATAR / link"
+#~ msgstr "AVATAR / enlace"
 
 #~ msgid "Search Friends"
 #~ msgstr "Buscar amigos"

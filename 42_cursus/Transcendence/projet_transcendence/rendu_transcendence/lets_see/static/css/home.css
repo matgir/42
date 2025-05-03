@@ -82,20 +82,24 @@ body {
   text-align: center;
   margin-bottom: 8px;
   text-decoration: none;
+  top: 14%;
   
 }
 
 .link_big_pages{
   border: solid 1px rgba(45, 255, 34, 0.461);
+  top: 14%;
 }
 
 .link_temp_test{
   border: solid 1px rgba(255, 34, 222, 0.461);
+  top: 14%;
 }
 
 
 .link_temp_template {
   border: solid 1px rgba(100, 115, 255, 0.461);
+  top: 14%;
 }
 
 

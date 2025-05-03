@@ -15,6 +15,8 @@ echo "from users.models import CustomUser; import os; CustomUser.objects.create_
 python3 manage.py makemigrations users
 python3 manage.py makemigrations tournament
 python3 manage.py makemigrations sites
+python3 manage.py makemigrations fortytwo
+python3 manage.py makemigrations jeux_du_pong
 python3 manage.py makemigrations
 python3 manage.py migrate
 

@@ -486,30 +486,24 @@ r */
 
 
 
-.player1 {
-  color: rgb(255, 255, 255);
-  border: 5px double rgb(219, 42, 255);
-  box-shadow: 0 0px 16px 0 rgba(100, 22, 255, 0.652);
-  border-radius: 17px;
-  padding: 20px 50px;
-
-  /* border-radius: 25px; */
-}
-
-.player2 {
-  color: rgb(255, 255, 255);
-  border: 5px double rgb(39, 179, 255);
-  box-shadow: 0 0px 16px 0 rgba(49, 22, 255, 0.602);
-  border-radius: 17px;
-  padding: 20px 50px;
-  /* border-radius: 25px; */
-
-}
-
-.player3, .player4 {
+.player1, .player2, .player3, .player4 {
   color: rgba(255, 255, 255, 0.583);
   border: 2px solid rgb(33, 17, 213);
   box-shadow: 0 0px 5px 0 rgba(80, 86, 255, 0.459);
+}
+
+.player-accent1 {
+  color: rgb(255, 255, 255);
+  border: 3px solid rgb(219, 42, 255);
+  box-shadow: 0 0px 16px 0 rgba(100, 22, 255, 0.988);
+  border-radius: 10px;
+}
+
+.player-accent2 {
+  color: rgb(255, 255, 255);
+  border: 3px solid rgb(39, 179, 255);
+  box-shadow: 0 0px 16px 0 rgba(100, 22, 255, 0.988);
+  border-radius: 10px;
 }
 
 .test{

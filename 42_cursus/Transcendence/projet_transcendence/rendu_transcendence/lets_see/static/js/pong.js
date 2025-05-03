@@ -8,9 +8,16 @@ if (!canvas) {
 }
 
 //VARIABLES SETTINGS
-const scoreChoice = 2; // 1 = 3 points, 2=6p, 3=10p
-const colorConfigChoice = 3; 
-const levelChoice = 2; // 1=easy 3=hard
+// Use the SPA router's URL parameters instead of document.location
+let params = window.getURLParams ? window.getURLParams() : new URLSearchParams(document.location.search);
+console.log("window.currentPath", window.currentPath);
+console.log("params from SPA router", params);
+const scoreChoice = parseInt(params.get('score'), 10) || 1; // 1 = 3 points, 2=6p, 3=10p
+const colorConfigChoice = parseInt(params.get('color'), 10) || 1; 
+const levelChoice = parseInt(params.get('level'), 10) || 2; // 1=easy 3=hard
+console.log("scoreChoice", scoreChoice);
+console.log("colorConfigChoice", colorConfigChoice);
+console.log("levelChoice", levelChoice);
 let bonus_ok = 0;
 
 
@@ -19,7 +26,7 @@ let count_failures = 0;
 
 //BONUS
 let sceneRotationTarget = 0; // en radians
-let sceneRotationProgress = 0; // progression de l’interpolation
+let sceneRotationProgress = 0; // progression de l'interpolation
 let rotating = false;
 let flipState = false; // savoir si on est retourné ou pas
 let rotation = 0
@@ -168,13 +175,15 @@ if (levelChoice === 1) {
 
 let maxScore;
 
-if (scoreChoice === 1) {
-    maxScore = 3;
-} else if (scoreChoice === 2) {
-    maxScore = 6;
-} else if (scoreChoice === 3) {
-    maxScore = 10;
-}
+// if (scoreChoice === 1) {
+//     maxScore = 3;
+// } else if (scoreChoice === 2) {
+//     maxScore = 6;
+// } else if (scoreChoice === 3) {
+//     maxScore = 12;
+// }
+
+maxScore = 1;
 
 document.getElementById("n_round").textContent = maxScore;
                                        
@@ -911,6 +920,7 @@ function startGame() {
 
 function handleVictory() {
     // Arrête les animations de score
+    console.log("handleVictory");
     let winnerName;
     
     if(count_2 == maxScore) {
@@ -936,25 +946,86 @@ function handleVictory() {
 
     // Affiche "VICTOIRE"
     countdownElement.style.display = 'block';
-    countdownNumber.textContent = "VICTOIRE";
+    countdownNumber.innerHTML = "VICTOIRE";
 
-    // Check if we're in tournament mode
-    const currentMatch = sessionStorage.getItem('currentMatch');
-    
+    // Use the existing overlay in the HTML template
     setTimeout(() => {
         countdownElement.style.display = 'none';
         
-        if (!currentMatch) {
-            // Only show "PRESS ENTER FOR NEW GAME" if not in tournament mode
-            setTimeout(() => {
-                countdownElement.style.display = 'block';
-                countdownNumber.textContent = gettext("PRESS ENTER FOR NEW GAME");
-            }, 800);
+        // Get the existing game over overlay
+        const gameOverOverlay = document.getElementById('gameOverOverlay');
+        const winnerMessage = document.getElementById('winnerMessage');
+        const quitButton = document.getElementById('quitButton');
+        const playAgainButton = document.getElementById('playAgainButton');
+        
+        if (gameOverOverlay && winnerMessage && quitButton) {
+            console.log("displaying overlay");
+            // Set winner message
+            winnerMessage.textContent = `${winnerName} a gagné la partie!`;
+            
+            // Show the overlay
+            gameOverOverlay.style.display = 'flex';
+
+            // show the avatar overlay
+            const avatarOverlay = document.querySelector('.avatar-webgl');
+            avatarOverlay.style.display = 'block';
+            
+            // Determine if we're on tournois.html or duel.html page
+            const isTournamentPage = document.querySelector('.bracket') && document.querySelector('.bracket').children.length > 1;
+            
+            // Update button text based on the page
+            if (isTournamentPage) {
+                quitButton.textContent = "TOURNAMENT";
+            } else {
+                quitButton.textContent = "QUIT";
+            }
+            
+            // Remove any existing event listeners by cloning and replacing the button
+            const newQuitButton = quitButton.cloneNode(true);
+            quitButton.parentNode.replaceChild(newQuitButton, quitButton);
+            
+            // Add event listener to the new button
+            newQuitButton.addEventListener('click', function() {
+                console.log("quitButton clicked");
+                // Hide overlay
+                gameOverOverlay.style.display = 'none';
+                avatarOverlay.style.display = 'none';
+                
+                // Reset the game
+                resetGame();
+                
+                // Only navigate to tournament section if we're on the tournament page
+                if (isTournamentPage) {
+                    const tournamentSection = document.querySelector('.tournois-section');
+                    if (tournamentSection) {
+                        tournamentSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                } else {
+                    // For duel page, we don't navigate anywhere specific
+                    console.log("Game ended in duel mode");
+                }
+            });
+            
+            // Also clone and replace the play again button to remove any existing listeners
+            if (playAgainButton) {
+                const newPlayAgainButton = playAgainButton.cloneNode(true);
+                playAgainButton.parentNode.replaceChild(newPlayAgainButton, playAgainButton);
+                
+                newPlayAgainButton.addEventListener('click', function() {
+                    gameOverOverlay.style.display = 'none';
+                    resetGame();
+                    startCountdown();
+                });
+            }
         } else {
-            // In tournament mode, automatically reset the game
+            console.error('Game over overlay elements not found in the DOM');
+            // Fallback for when the overlay is not in the DOM
             resetGame();
         }
-    }, 3000);
+    }, 2000);
+
+    // Check if we're in tournament mode
+    const currentMatch = sessionStorage.getItem('currentMatch');
 }
 
 

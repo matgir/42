@@ -35,5 +35,8 @@ def report_match(request):
 			request.user.losses += 1
 		request.user.save()
 
+		print(request.user)####
+		print("Match has been reported")####
+
 		return JsonResponse({"status": _("ok")})
 	return JsonResponse({"error": _("Invalid request")}, status=400)

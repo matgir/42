@@ -1,5 +1,20 @@
 export function initialize() {
-    document.documentElement.scrollTop = 0; // Assurez-vous que la page commence en haut
+    // Ensure the page starts at the top visually, even before scrolling to the section
+    document.documentElement.scrollTop = 0; 
+    document.body.scrollTop = 0; // For Safari
+
+    // Scroll the avatar section into view shortly after initialization
+    // Using requestAnimationFrame helps ensure the browser is ready for layout changes
+    requestAnimationFrame(() => {
+        setTimeout(() => { // Small delay to ensure elements are rendered
+            const avatarSection = document.querySelector('.avatar-section');
+            if (avatarSection) {
+                avatarSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                console.warn("Avatar section not found for initial scroll.");
+            }
+        }, 100); // 100ms delay, can be adjusted
+    });
 
     // Initialize scroll container state
     const scrollContainer = document.querySelector('.scroll-container');
@@ -448,6 +463,9 @@ if (playButton) {
             shuffleButton.style.display = 'none';
         }
         
+        // Highlight the first matchup
+        highlightCurrentMatchup();
+
         // Enable scrolling when play button is clicked
         const scrollContainer = document.querySelector('.scroll-container');
         if (scrollContainer) {
@@ -516,6 +534,7 @@ function advanceTournament(winner) {
     }
     
     // Store winner in the appropriate semifinal slot
+    console.log("=============");
     if (currentMatch === 0) {
         console.log("First match")
         // First match winner goes to finals slot 1
@@ -528,7 +547,12 @@ function advanceTournament(winner) {
         
         // Update bracket UI
         const semifinalist = document.getElementById('player_round2_match1');
-        if (semifinalist) semifinalist.textContent = winner.name;
+        console.log("Winner of first match:", winner.name);
+        console.log("Found semifinalist element:", semifinalist);
+        if (semifinalist) {
+            semifinalist.textContent = winner.name;
+            console.log("Updated semifinalist text content");
+        }
         
         // Return to tournament view and start next match
         returnToTournament(players[2], players[3]);
@@ -558,6 +582,7 @@ function advanceTournament(winner) {
     } 
     else if (currentMatch === 2) {
         // Final match winner
+        console.log("Final match")
         const finalist = document.getElementById('player_final_match1');
         if (finalist) {
             finalist.textContent = winner.name;
@@ -584,11 +609,6 @@ function advanceTournament(winner) {
             reportTournamentComplete(specialUserResults);
         }
         
-        // Return to tournament view to show the final result
-        const tournamentSection = document.querySelector('.tournois-section');
-        if (tournamentSection) {
-            tournamentSection.scrollIntoView({ behavior: 'smooth' });
-        }
     }
 }
 
@@ -596,14 +616,13 @@ function returnToTournament(player1, player2) {
     // First scroll back to tournament section
     const tournamentSection = document.querySelector('.tournois-section');
     if (tournamentSection) {
-        tournamentSection.scrollIntoView({ behavior: 'smooth' });
         
         // Then update UI for next match
         setTimeout(() => {
             // Update player names in pong section for the next match
             const name1Element = document.querySelector('.name1');
             const name2Element = document.querySelector('.name2');
-            if (name1Element && name2Element) {
+            if (name1Element && name2Element && player1 && player2) {
                 name1Element.textContent = player1.name;
                 name2Element.textContent = player2.name;
             }
@@ -621,25 +640,27 @@ function returnToTournament(player1, player2) {
 
 function highlightCurrentMatchup() {
     console.log("highlightCurrentMatchup")
-    // Reset all highlights
+    // Reset all highlights and accents
     document.querySelectorAll('.player, .player_round2').forEach(el => {
         el.classList.remove('current-match');
+        el.classList.remove('player-accent1'); // Remove accent class
+        el.classList.remove('player-accent2'); // Remove accent class
     });
     
     const currentMatch = parseInt(sessionStorage.getItem('currentMatch') || '0');
     
-    // Apply highlight based on current match
+    // Apply highlight and accents based on current match
     if (currentMatch === 0) {
-        document.getElementById('player_round1_match1').classList.add('current-match');
-        document.getElementById('player_round1_match2').classList.add('current-match');
+        document.getElementById('player_round1_match1').classList.add('current-match', 'player-accent1'); // Add accent1
+        document.getElementById('player_round1_match2').classList.add('current-match', 'player-accent2'); // Add accent2
     } 
     else if (currentMatch === 1) {
-        document.getElementById('player_round1_match3').classList.add('current-match');
-        document.getElementById('player_round1_match4').classList.add('current-match');
+        document.getElementById('player_round1_match3').classList.add('current-match', 'player-accent1'); // Add accent1
+        document.getElementById('player_round1_match4').classList.add('current-match', 'player-accent2'); // Add accent2
     } 
     else if (currentMatch === 2) {
-        document.getElementById('player_round2_match1').classList.add('current-match');
-        document.getElementById('player_round2_match2').classList.add('current-match');
+        document.getElementById('player_round2_match1').classList.add('current-match', 'player-accent1'); // Add accent1
+        document.getElementById('player_round2_match2').classList.add('current-match', 'player-accent2'); // Add accent2
     }
 }
 
@@ -720,6 +741,7 @@ function getCookie(name) {
 
 // Also report when the tournament is complete
 function reportTournamentComplete(specialUserResults) {
+
     if (!specialUserResults || specialUserResults.length === 0) return;
     
     const finalResult = specialUserResults[specialUserResults.length - 1];

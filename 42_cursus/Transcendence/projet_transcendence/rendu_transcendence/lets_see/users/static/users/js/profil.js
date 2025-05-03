@@ -2,8 +2,15 @@
 export function initialize() {
     console.log("Initializing profil.js");
     const scene = new THREE.Scene();
+        // Sizes
+    const sizes = {
+        width: window.innerWidth,
+        height: window.innerHeight
+    }
+    
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 2;
+
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -45,27 +52,88 @@ export function initialize() {
     });
 
     const plane = new THREE.Mesh(geometry, material);
-    scene.add(plane);
+    // scene.add(plane);
 
     // Controls (pour la vue)
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    // const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-    // Event souris
-    window.addEventListener('mousemove', (event) => {
-        uniforms.uMouse.value.x = event.clientX / window.innerWidth;
-        uniforms.uMouse.value.y = 1.0 - event.clientY / window.innerHeight;
-    });
+    // // Event souris
+    // window.addEventListener('mousemove', (event) => {
+    //     uniforms.uMouse.value.x = event.clientX / window.innerWidth;
+    //     uniforms.uMouse.value.y = 1.0 - event.clientY / window.innerHeight;
+    // });
 
-    // Animation
-    function animate(time) {
-        uniforms.uTime.value = time * 0.001;
-        controls.update();
-        renderer.render(scene, camera);
-        requestAnimationFrame(animate);
+
+    // Mouse interaction
+    const mouse = { x: 0, y: 0 };
+    const target = { x: 0, y: 0 };
+    
+    const mouseMoveHandler = (event) => {
+        mouse.x = (event.clientX / sizes.width - 0.5) * 2;
+        mouse.y = -(event.clientY / sizes.height - 0.5) * 2;
+    };
+    window.addEventListener('mousemove', mouseMoveHandler);
+
+
+    const cubes = [];
+    const cubeSize = 9;
+    const spacing = 14;
+    
+    const geometry2 = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+    const edges = new THREE.EdgesGeometry(geometry2); // Crée les arêtes du cube
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0030FF }); // Couleur des arêtes
+    
+    for (let x = -1; x <= 1; x++) {
+        for (let y = -1; y <= 1; y++) {
+            for (let z = -1; z <= 1; z++) {
+                const cube = new THREE.LineSegments(edges, lineMaterial); 
+    
+                cube.userData.basePosition = new THREE.Vector3(x * spacing, y * spacing, z * spacing);
+                cube.position.copy(cube.userData.basePosition);
+                scene.add(cube);
+                cubes.push(cube);
+            }
+        }
     }
 
-    animate();
+     // Animate
+    const clock = new THREE.Clock();
+    
+    const tick = () => {
+        const elapsedTime = clock.getElapsedTime();
+    
+        // Smooth interpolation for camera
+        target.x += (mouse.x - target.x) * 0.05;
+        target.y += (mouse.y - target.y) * 0.05;
+    
+        const radius = 6;  // élargir pour tout voir
+        const angleX = target.x * Math.PI;
+        const angleY = target.y * Math.PI / 4;
+    
+        camera.position.x = radius * Math.sin(angleX);
+        camera.position.z = radius * Math.cos(angleX);
+        camera.position.y = radius * Math.sin(angleY);
+        camera.lookAt(0, 0, 0);
+    
+        // Rubik cubes smooth motion
+        cubes.forEach((cube, index) => {
+            const frequency = 0.8;
+            const amplitude = 0.2;
+            cube.position.x = cube.userData.basePosition.x + Math.sin(elapsedTime * frequency + index) * amplitude;
+            cube.position.y = cube.userData.basePosition.y + Math.cos(elapsedTime * frequency + index) * amplitude;
+            cube.position.z = cube.userData.basePosition.z + Math.sin(elapsedTime * frequency + index * 0.5) * amplitude;
+        });
 
+// uniforms.uTime.value = time * 0.001;
+// controls.update();
+// renderer.render(scene, camera);
+// requestAnimationFrame(animate);
+    
+        renderer.render(scene, camera);
+        window.animationFrameId = window.requestAnimationFrame(tick);
+    };
+    
+    tick();
 
     return function cleanup() {
         console.log("Cleaning up profil.js resources...");
@@ -108,6 +176,9 @@ export function initialize() {
             }
             renderer.dispose(); // Dispose THREE.js resources associated with the renderer
             renderer.forceContextLoss(); // Helps release GPU resources
+                // Remove event listeners
+        window.removeEventListener('resize', resizeHandler);
+        window.removeEventListener('mousemove', mouseMoveHandler);
         }
 
         console.log("Profil.js cleanup complete.");
@@ -116,3 +187,183 @@ export function initialize() {
 
 window.currentModuleCleanup = initialize();
 
+
+
+
+
+
+
+
+
+
+
+// export function initialize() {
+//     // Canvas
+//     const canvas = document.querySelector('canvas.webgl');
+    
+//     // Scene
+//     const scene = new THREE.Scene();
+    
+//     // Sizes
+//     const sizes = {
+//         width: window.innerWidth,
+//         height: window.innerHeight
+//     }
+    
+//     // Camera
+//     const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
+//     camera.position.z = 8;
+//     scene.add(camera);
+    
+//     // Renderer
+//     const renderer = new THREE.WebGLRenderer({
+//         canvas: canvas,
+//         antialias: true
+//     });
+//     renderer.setSize(sizes.width, sizes.height);
+//     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    
+//     // Resize handler
+//     const resizeHandler = () => {
+//         sizes.width = window.innerWidth;
+//         sizes.height = window.innerHeight;
+//         camera.aspect = sizes.width / sizes.height;
+//         camera.updateProjectionMatrix();
+//         renderer.setSize(sizes.width, sizes.height);
+//         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+//     };
+//     window.addEventListener('resize', resizeHandler);
+    
+//     // Mouse interaction
+//     const mouse = { x: 0, y: 0 };
+//     const target = { x: 0, y: 0 };
+    
+//     const mouseMoveHandler = (event) => {
+//         mouse.x = (event.clientX / sizes.width - 0.5) * 2;
+//         mouse.y = -(event.clientY / sizes.height - 0.5) * 2;
+//     };
+//     window.addEventListener('mousemove', mouseMoveHandler);
+    
+//     // Create Rubik-like cubes
+//     const cubes = [];
+//     const cubeSize = 9;
+//     const spacing = 14;
+    
+//     const geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+//     const edges = new THREE.EdgesGeometry(geometry); // Crée les arêtes du cube
+//     const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0030FF }); // Couleur des arêtes
+    
+//     for (let x = -1; x <= 1; x++) {
+//         for (let y = -1; y <= 1; y++) {
+//             for (let z = -1; z <= 1; z++) {
+//                 const cube = new THREE.LineSegments(edges, lineMaterial); 
+    
+//                 cube.userData.basePosition = new THREE.Vector3(x * spacing, y * spacing, z * spacing);
+//                 cube.position.copy(cube.userData.basePosition);
+//                 scene.add(cube);
+//                 cubes.push(cube);
+//             }
+//         }
+//     }
+    
+//     // Add ambient light
+//     const ambientLight = new THREE.AmbientLight(0x404040, 0.5);  // Light color and intensity
+//     scene.add(ambientLight);
+    
+//     // Animate
+//     const clock = new THREE.Clock();
+    
+//     const tick = () => {
+//         const elapsedTime = clock.getElapsedTime();
+    
+//         // Smooth interpolation for camera
+//         target.x += (mouse.x - target.x) * 0.05;
+//         target.y += (mouse.y - target.y) * 0.05;
+    
+//         const radius = 6;  // élargir pour tout voir
+//         const angleX = target.x * Math.PI;
+//         const angleY = target.y * Math.PI / 4;
+    
+//         camera.position.x = radius * Math.sin(angleX);
+//         camera.position.z = radius * Math.cos(angleX);
+//         camera.position.y = radius * Math.sin(angleY);
+//         camera.lookAt(0, 0, 0);
+    
+//         // Rubik cubes smooth motion
+//         cubes.forEach((cube, index) => {
+//             const frequency = 0.8;
+//             const amplitude = 0.2;
+//             cube.position.x = cube.userData.basePosition.x + Math.sin(elapsedTime * frequency + index) * amplitude;
+//             cube.position.y = cube.userData.basePosition.y + Math.cos(elapsedTime * frequency + index) * amplitude;
+//             cube.position.z = cube.userData.basePosition.z + Math.sin(elapsedTime * frequency + index * 0.5) * amplitude;
+//         });
+// uniforms.uTime.value = time * 0.001;
+// controls.update();
+// renderer.render(scene, camera);
+// requestAnimationFrame(animate);
+    
+//         renderer.render(scene, camera);
+//         window.animationFrameId = window.requestAnimationFrame(tick);
+//     };
+    
+//     tick();
+    
+//     return function cleanup() {
+//         console.log("cleanup 2_pink_cubes.js");
+        
+//         // Only remove our specific canvas
+//         const canvas = document.querySelector('canvas.webgl');
+//         if (canvas) {
+//             canvas.remove();
+//         }
+        
+//         // Clean up THREE.js resources
+//         if (renderer) {
+//             renderer.dispose();
+//             if (renderer.domElement) {
+//                 renderer.domElement.remove();
+//             }
+//         }
+        
+//         // Clean up geometries and materials
+//         scene.children.forEach(child => {
+//             if (child.geometry) {
+//                 child.geometry.dispose();
+//             }
+//             if (child.material) {
+//                 if (Array.isArray(child.material)) {
+//                     child.material.forEach(material => material.dispose());
+//                 } else {
+//                     child.material.dispose();
+//                 }
+//             }
+//         });
+        
+//         // Dispose of geometries and materials explicitly
+//         if (geometry) {
+//             geometry.dispose();
+//         }
+        
+//         if (lineMaterial) {
+//             if (Array.isArray(lineMaterial)) {
+//                 lineMaterial.forEach(material => material.dispose());
+//             } else {
+//                 lineMaterial.dispose();
+//             }
+//         }
+        
+//         // Remove event listeners
+//         window.removeEventListener('resize', resizeHandler);
+//         window.removeEventListener('mousemove', mouseMoveHandler);
+        
+//         // Stop animation frame
+//         if (window.animationFrameId) {
+//             cancelAnimationFrame(window.animationFrameId);
+//         }
+//     }
+//     }
+    
+//     window.currentModuleCleanup = initialize();
+    
+    
+    

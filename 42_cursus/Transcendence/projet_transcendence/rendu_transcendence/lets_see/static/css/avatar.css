@@ -1,5 +1,6 @@
 
-canvas.webgl {
+canvas.avatar-webgl {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -8,6 +9,7 @@ canvas.webgl {
     border: solid 7px rgba(86, 196, 255, 0.025);
     /* border: solid 90px rgb(255, 255, 255); */
     border-radius: 5px;
+    z-index: 4;
 
 } 
 

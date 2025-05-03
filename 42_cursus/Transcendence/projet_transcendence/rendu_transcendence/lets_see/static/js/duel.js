@@ -1,6 +1,27 @@
 export function initialize() {
 
   document.documentElement.scrollTop = 0; // Assurez-vous que la page commence en haut
+  document.body.scrollTop = 0; // For Safari
+
+  // Scroll the avatar section into view shortly after initialization
+  // Using requestAnimationFrame helps ensure the browser is ready for layout changes
+  requestAnimationFrame(() => {
+    setTimeout(() => { // Small delay to ensure elements are rendered
+      const avatarSection = document.querySelector('.avatar-section');
+      if (avatarSection) {
+        avatarSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        console.warn("Avatar section not found for initial scroll.");
+      }
+    }, 100); // 100ms delay, can be adjusted
+  });
+
+  // Remove scrolling-enabled class initially
+  const scrollContainer = document.querySelector('.scroll-container');
+  if (scrollContainer) {
+    scrollContainer.classList.remove('scrolling-enabled');
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('section').classList.add('fade-in');
 });

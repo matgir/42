@@ -3,7 +3,7 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'css/signup.css' %}">
-<script type="module" src="{% static '/js/password-condition.js' %}"></script>
+<script type="module" src="{% static '/js/password_condition.js' %}"></script>
 <script type="module" src="{% static '/js/home.js' %}"></script>
 
 {% if not user.is_authenticated %}
@@ -30,11 +30,12 @@
             <a class="link_temp_test" href="/404/">AVATAR 404</a>
 
 
+
             <!-- <a class="link_temp_test" href="/choose_your_perso/">GLOBOS GRID</a> -->
 
           </div>
           <div class="blur-box-parent">
-              <form class="blur-box" method="post" id="loginForm" action="/api/users/accounts/login/">  
+              <form class="blur-box" method="post" id="loginForm" action="/api/users/accounts/login/" data-no-spa>  
                 
                 <div class="no_account">
                     <p class="no_account_sentence">
@@ -57,7 +58,7 @@
                   <label class="remember-container">
                       <input type="checkbox" name="remember">
                       <span>
-                        {% trans "Remember Me" %}
+                        {% trans "I'm happy" %}
                       </span>
                   </label>
 
