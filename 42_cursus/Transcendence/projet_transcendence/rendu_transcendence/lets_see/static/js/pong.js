@@ -7,6 +7,10 @@ if (!canvas) {
     return;
 }
 
+
+
+
+
 //VARIABLES SETTINGS
 // Use the SPA router's URL parameters instead of document.location
 let params = window.getURLParams ? window.getURLParams() : new URLSearchParams(document.location.search);
@@ -18,7 +22,7 @@ const levelChoice = parseInt(params.get('level'), 10) || 2; // 1=easy 3=hard
 console.log("scoreChoice", scoreChoice);
 console.log("colorConfigChoice", colorConfigChoice);
 console.log("levelChoice", levelChoice);
-let bonus_ok = 0;
+let bonus_ok = parseInt(params.get('bonus'), 10) || 0;
 
 
 let count_victories = 0;
@@ -175,15 +179,13 @@ if (levelChoice === 1) {
 
 let maxScore;
 
-// if (scoreChoice === 1) {
-//     maxScore = 3;
-// } else if (scoreChoice === 2) {
-//     maxScore = 6;
-// } else if (scoreChoice === 3) {
-//     maxScore = 12;
-// }
-
-maxScore = 1;
+if (scoreChoice === 1) {
+    maxScore = 1;
+} else if (scoreChoice === 2) {
+    maxScore = 6;
+} else if (scoreChoice === 3) {
+    maxScore = 12;
+}
 
 document.getElementById("n_round").textContent = maxScore;
                                        
@@ -693,6 +695,11 @@ const updateBoxes = () => {
         floor.position.y = floorBody.position.y;
     }
 
+    // test to rotate paddle
+    // if ((keys["r"])) {
+    //     floor.rotation.x += 0.3;
+    // }
+
     // Paddle droit (touches O/K)
     if ((keys["o"]) && floorBody2.position.y < hauteur) {
         floorBody2.position.y += paddleSpeed;
@@ -794,12 +801,8 @@ const countdownNumber = countdownElement.querySelector('.countdown-number');
 function updateText() {
         document.getElementById("scorePlayer1").textContent = count_1;
         document.getElementById("scorePlayer2").textContent = count_2;
-        document.getElementById("victories").textContent = count_victories;
-        document.getElementById("failures").textContent = count_failures;
 
 }
-
-
 
 
 
@@ -847,10 +850,12 @@ function updateBall()
     checkCollision_paddle(body, floor2); // Raquette droitea
     if (body.position.y >= 10) { 
         body.velocity.y *= -1;
+        // body.velocity.y > 0 ? body.velocity.y - 0.1 : body.velocity.y + 0.1; //anis : accelerer balle quand hit floor or roof
         body.position.y = 9.9; 
     } 
     else if (body.position.y <= -10) { 
         body.velocity.y *= -1;
+        // body.velocity.y > 0 ? body.velocity.y - 0.1 : body.velocity.y + 0.1; //anis : accelerer balle quand hit floor or roof
         body.position.y = -9.9; // Évite de rester pile à -10
     }
     if (body.position.z < -30)
@@ -918,6 +923,12 @@ function startGame() {
     body.velocity.set(0, 2 * direction, 20 * direction);
 }
 
+
+ let  gameState2 = "pas_victory"
+
+const countdown2Element = document.querySelector('.countdown2');
+ countdown2Element.style.visibility = 'hidden'; // ou display: 'none' si tu préfères
+
 function handleVictory() {
     // Arrête les animations de score
     console.log("handleVictory");
@@ -946,11 +957,33 @@ function handleVictory() {
 
     // Affiche "VICTOIRE"
     countdownElement.style.display = 'block';
-    countdownNumber.innerHTML = "VICTOIRE";
 
-    // Use the existing overlay in the HTML template
+
+
+ countdownElement.style.position = 'absolute'; // ou absolute si tu veux qu'il soit "détaché"
+ countdownElement.style.transform = 'translateY(-30px)';
+
+    //  name1Element.textContent = player1Name;
+    //  coutdownElement.textContent = player2Name;
+
+    countdownNumber.innerHTML = "VICTOIRE";
+    // countdownNumber.innerHTML = `VICTOIRE DE ${player2name}`;
+
+
+ 
     setTimeout(() => {
         countdownElement.style.display = 'none';
+        setTimeout(() => {
+             gameState2 = "victory"
+             countdown2Element.style.transition = 'visibility 0s, opacity 0.5s ease-in-out';
+             countdown2Element.style.opacity = '0';
+             countdown2Element.style.visibility = 'visible';
+             countdown2Element.style.opacity = '1';
+          }, 2000);
+    }, 3000);
+  
+    setTimeout(() => {
+       
         
         // Get the existing game over overlay
         const gameOverOverlay = document.getElementById('gameOverOverlay');
@@ -963,35 +996,24 @@ function handleVictory() {
             // Set winner message
             winnerMessage.textContent = `${winnerName} a gagné la partie!`;
             
-            // Show the overlay
             gameOverOverlay.style.display = 'flex';
-
-            // show the avatar overlay
             const avatarOverlay = document.querySelector('.avatar-webgl');
             avatarOverlay.style.display = 'block';
-            
-            // Determine if we're on tournois.html or duel.html page
             const isTournamentPage = document.querySelector('.bracket') && document.querySelector('.bracket').children.length > 1;
-            
-            // Update button text based on the page
             if (isTournamentPage) {
                 quitButton.textContent = "TOURNAMENT";
             } else {
                 quitButton.textContent = "QUIT";
             }
-            
-            // Remove any existing event listeners by cloning and replacing the button
             const newQuitButton = quitButton.cloneNode(true);
             quitButton.parentNode.replaceChild(newQuitButton, quitButton);
-            
-            // Add event listener to the new button
             newQuitButton.addEventListener('click', function() {
                 console.log("quitButton clicked");
-                // Hide overlay
                 gameOverOverlay.style.display = 'none';
+                countdown2Element.style.display = 'none';
                 avatarOverlay.style.display = 'none';
-                
-                // Reset the game
+                removeVictoryCube();
+                removeVictoryCube();
                 resetGame();
                 
                 // Only navigate to tournament section if we're on the tournament page
@@ -1013,6 +1035,9 @@ function handleVictory() {
                 
                 newPlayAgainButton.addEventListener('click', function() {
                     gameOverOverlay.style.display = 'none';
+                    countdown2Element.style.display = 'none';
+                    removeVictoryCube();
+                    removeVictoryCube();
                     resetGame();
                     startCountdown();
                 });
@@ -1022,11 +1047,14 @@ function handleVictory() {
             // Fallback for when the overlay is not in the DOM
             resetGame();
         }
-    }, 2000);
+        countdownElement.style.display = 'none';
+    }, 15000);
+
 
     // Check if we're in tournament mode
     const currentMatch = sessionStorage.getItem('currentMatch');
 }
+
 
 
 // TOUT WHIPPIN
@@ -1037,6 +1065,40 @@ document.addEventListener('keydown', (e) => {
         countdownElement.style.display = 'none'; // Cache le message
     }
 });
+
+function removeVictoryCube() {
+    if (!victoryCube) return;
+
+    // 1. Suppression de la scène
+    scene.remove(victoryCube);
+
+    // 2. Nettoyage profond des ressources
+    victoryCube.material.forEach(material => {
+        if (Array.isArray(material)) {
+            material.forEach(m => cleanMaterial(m));
+        } else {
+            cleanMaterial(material);
+        }
+    });
+
+    if (victoryCube.geometry) {
+        victoryCube.geometry.dispose();
+    }
+
+    // 3. Suppression des références
+    victoryCube = null;
+    cubeAnimationStart = 0;
+
+    // Fonction helper pour le nettoyage des matériaux
+    function cleanMaterial(mat) {
+        if (mat.map) mat.map.dispose();
+        if (mat.lightMap) mat.lightMap.dispose();
+        if (mat.bumpMap) mat.bumpMap.dispose();
+        if (mat.normalMap) mat.normalMap.dispose();
+        if (mat.specularMap) mat.specularMap.dispose();
+        mat.dispose();
+    }
+}
 
 function resetGame() 
 {
@@ -1484,7 +1546,7 @@ const radius = 20; // Distance entre la caméra et l'objet
 const heightAmplitude = 15; // Hauteur maximale de la caméra
 
 
-
+let victoryStateActive = false;
 let lastTime = Date.now();
 function measureFPS() {
     const now = Date.now();
@@ -1559,12 +1621,9 @@ function tick() {
             
                 console.log("prout")
                 console.log(rotation)
-                
             }
-            
         }
     }
-
 
     if(gameState === 'scored' ||  gameState === 'victory'){
         if (rotation % 2 == 1) {
@@ -1574,10 +1633,9 @@ function tick() {
             sceneRotationProgress = 0;
             rotating = true;
             rotation++;
+            }
     }
-    }
-
-
+  
     if (rotating) {
         if (rotation % 2 == 1) 
              sceneRotationProgress += 0.02;
@@ -1585,101 +1643,182 @@ function tick() {
            sceneRotationProgress += 0.001;
         const t = Math.min(sceneRotationProgress, 1);
         sceneGroup.rotation.y = THREE.MathUtils.lerp(sceneGroup.rotation.y, sceneRotationTarget, t);
-    
         if (t >= 1) {
             rotating = false;
         }
     }
-    
-    
-    
-
-    // for (const cubeData of cubes) {
-    //     const cube = cubeData.mesh;
-    //     if (!cubeData.exploded) {
-    //         cube.rotation.x += 0.01;
-    //         cube.rotation.y += 0.01;
-    //         cube.rotation.z += 0.01;
-    //         const yClose = Math.abs(cube.position.y - mesh.position.y) < 1;
-    //         const zClose = Math.abs(cube.position.z - mesh.position.z) < 1;
-    //         if (yClose && zClose) {
-    //             explodeAndRemoveCube(cubeData, scene);
-    //             angle = 0;
-    //             // if(direction === 0)
-    //             //     direction = 1;
-    //             // else 
-    //             // direction = 0;
-    //             // isCameraMoving = true;
-    //         }
-    //     }
-    // }
-    // if (!isCameraMoving) {
-    //     // Animation flottante pendant que la caméra n'est pas en mouvement de rotation
-    //     mesh.rotation.x += 0.002;
-    //     mesh.rotation.z += 0.01;
-    //     camera.position.z = Math.sin(elapsedTime) * 0.55;
-    //     camera.position.y = Math.cos(elapsedTime) * 0.35;
-    //     camera.lookAt(0, 0, 0);
-    // }
-
-    
-    // if (isCameraMoving) {
-    //     if (direction === 1) {
-    //         if (angle < stopAngle) {
-    //             // Distance restante avant la fin
-    //             const remaining = stopAngle - angle;
-    
-    //             // Diminuer la vitesse quand on approche de la fin
-    //             const speed = 0.02 * Math.min(1, remaining / 0.5);
-    //             angle += speed;
-    
-    //             camera.position.x = radius * Math.cos(angle);
-    //             camera.position.z = radius * Math.sin(angle);
-    //             camera.position.y = heightAmplitude * Math.sin(angle);
-    //             camera.lookAt(0, 0, 0);
-    //         } else if (!animation2Done) {
-    //             animation2Done = true;
-    
-    //             setTimeout(() => {
-    //                 isCameraMoving = false;
-    //                 animation2Done = false;
-    //                 direction = -1;
-    //             }, 500);
-    //         }
-    //     } else if (direction === -1) {
-    //         if (angle > -stopAngle) {
-    //             // Distance restante avant la fin
-    //             const remaining = stopAngle - Math.abs(angle);
-    
-    //             // Diminuer la vitesse quand on approche de la fin
-    //             const speed = 0.02 * Math.min(1, remaining / 0.5);
-    //             angle -= speed;
-    
-    //             camera.position.x = radius * Math.cos(angle);
-    //             camera.position.z = radius * Math.sin(angle);
-    //             camera.position.y = heightAmplitude * Math.sin(angle);
-    //             camera.lookAt(0, 0, 0);
-    //         } else if (!animation2Done) {
-    //             animation2Done = true;
-    
-    //             setTimeout(() => {
-    //                 isCameraMoving = false;
-    //                 animation2Done = false;
-    //                 direction = 1;
-    //             }, 500);
-    //         }
-    //     }
-    
-    
-    // }
-    
+  
+  
+       // Gestion d'état
+       if (gameState2 === 'victory') {
+        if (!victoryStateActive) {
+            // Premier passage en mode victoire
+            createVictoryCube();
+            victoryStateActive = true;
+        }
+        updateVictoryCube();
+    } else {
+        if (victoryStateActive) {
+            // Sortie du mode victoire
+            removeVictoryCube();
+            victoryStateActive = false;
+        }
+    }
 
 
-    
     renderer.render(scene, camera);
     animationFrameId = requestAnimationFrame(tick);
     measureFPS();
 }
+
+
+
+// ////////////////////////////////////
+// //######## ####  ######  ##    ## //
+// //   ##     ##  ##    ## ##   ##  //
+// //   ##     ##  ##       ##  ##   //
+// //   ##     ##  ##       #####    //
+// //   ##     ##  ##       ##  ##   //
+// //   ##     ##  ##    ## ##   ##  //
+// //   ##    ####  ######  ##    ## //
+// ////////////////////////////////////
+
+let victoryCube = null;
+let cubeAnimationStart = 0;
+
+function createVictoryCube() {
+    // Charger les 6 textures
+    const textureLoader = new THREE.TextureLoader();
+    const textures = [
+        textureLoader.load('/static/globos/globo_de_1.png'), // Face droite (+X)
+        textureLoader.load('/static/globos/globo_de_2.png'), // Face gauche (-X)
+        textureLoader.load('/static/globos/globo_de_3.png'), // Face haute (+Y)
+        textureLoader.load('/static/globos/globo_de_4.png'), // Face basse (-Y)
+        textureLoader.load('/static/globos/globo_de_5.png'), // Face avant (+Z)
+        textureLoader.load('/static/globos/globo_de_6.png')  // Face arrière (-Z)
+    ];
+
+    // Configurer les matériaux avec les textures
+    const materials = textures.map(texture => {
+        return new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.DoubleSide // Pour voir la texture de l'intérieur si nécessaire
+        });
+    });
+
+    // Créer le cube avec les matériaux texturés
+    const geometry = new THREE.BoxGeometry(9, 9, 9);
+    victoryCube = new THREE.Mesh(geometry, materials);
+    scene.add(victoryCube);
+    // victoryCube.position.y = 0.70.4;
+
+
+    cubeAnimationStart = Date.now();
+}
+
+
+function updateVictoryCube() {
+    if (gameState !== 'victory' || !victoryCube) return;
+
+    const now = Date.now();
+    const elapsed = now - cubeAnimationStart;
+    const totalDuration = 9000;
+    const finalScaleDuration = 950; // 1 seconde pour le scale final
+
+    // === Phase 1 : Saut d'apparition ===
+    if (elapsed < 1000) {
+        const t = elapsed / 1000;
+        const bounce = Math.sin(t * Math.PI);
+        victoryCube.position.y = 0.5 + bounce * 2;
+        victoryCube.scale.setScalar(1 + 0.1 * bounce);
+    }
+    // === Phase 2 : Rotation + ralentissement fluide ===
+    else if (elapsed < totalDuration) {
+        const t = (elapsed - 1000) / (totalDuration - 1000);
+        const easeOut = 1 - Math.pow(1 - t, 3);
+
+        // Rotation cible qui amène exactement la face 1 vers l'avant
+        const targetRotation = {
+            x: 0,
+            y: Math.PI, // Face 1 vers l'avant
+            z: 0
+        };
+
+        const totalRotation = {
+            x: targetRotation.x + Math.PI * 6,
+            y: targetRotation.y + Math.PI * 8,
+            z: targetRotation.z + Math.PI * 3
+        };
+
+        victoryCube.rotation.x = THREE.MathUtils.lerp(0, totalRotation.x, easeOut);
+        victoryCube.rotation.y = THREE.MathUtils.lerp(0, totalRotation.y, easeOut);
+        victoryCube.rotation.z = THREE.MathUtils.lerp(0, totalRotation.z, easeOut);
+
+        victoryCube.position.y = 0.45;
+        victoryCube.scale.set(1, 1, 1);
+    }
+    // === Phase 3 : Fin de l'animation, scale vers 1.3 ===
+    else if (elapsed < totalDuration + finalScaleDuration) {
+        // FORCER la rotation exacte pour la face 1
+        victoryCube.rotation.set(0, Math.PI, 0);
+        victoryCube.rotation.set(0, 0, 0);
+        
+        const t = (elapsed - totalDuration) / finalScaleDuration;
+        const scaleProgress = THREE.MathUtils.smoothstep(t, 0, 1);
+    
+        const scale = THREE.MathUtils.lerp(1, 1.3, scaleProgress);
+        victoryCube.position.y = 0.40;
+        victoryCube.scale.setScalar(scale);
+ 
+    }
+    // === État final ===
+    else {
+        // Verrouiller définitivement la rotation et l'échelle
+        victoryCube.rotation.set(0, 0, 0);
+        victoryCube.position.y = 0.40;
+        victoryCube.scale.setScalar(1.3);
+    }
+}
+
+  
+
+
+// function updateVictoryCube() {
+//   if (gameState !== 'victory' || !victoryCube) return;
+  
+//   const now = Date.now();
+//   const elapsed = now - cubeAnimationStart;
+//   const totalDuration = 10000; // 10 secondes au total
+  
+//   // Phase 1: Rotation rapide (5s)
+//   if (elapsed < 5000) {
+//     const progress = elapsed / 5000;
+//     // Rotation progressive avec easing
+//     victoryCube.rotation.x = THREE.MathUtils.lerp(0, Math.PI * 4, progress);
+//     victoryCube.rotation.y = THREE.MathUtils.lerp(0, Math.PI * 6, progress);
+//     victoryCube.rotation.z = THREE.MathUtils.lerp(0, Math.PI * 2, progress);
+//   } 
+//   // Phase 2: Ralentissement (5s)
+//   else if (elapsed < totalDuration) {
+//     const slowdownProgress = (elapsed - 5000) / 5000;
+//     // Continuer la rotation en ralentissant
+//     const easeOut = 1 - Math.pow(slowdownProgress, 3); // Easing cubique
+//     victoryCube.rotation.x += 0.02 * easeOut;
+//     victoryCube.rotation.y += 0.03 * easeOut;
+//     victoryCube.rotation.z += 0.01 * easeOut;
+//   }
+//   // Fin de l'animation
+//   else {
+//     scene.remove(victoryCube);
+//     victoryCube = null;
+//   }
+// }
+
+
+
+
+
+
 
 function easeOutBounce(x) {
     const n1 = 7.5625;
@@ -1696,34 +1835,54 @@ function easeOutBounce(x) {
 }
 
 
-function resetParticles() {
-    // Réinitialisation des positions et vitesses
-    for (let i = 0; i < numberOfParticles; i++) {
-        // Nouvelles positions aléatoires
-        positions[i * 3] = (Math.random() * 2 - 1) * 4;
-        positions[i * 3 + 1] = (Math.random() * 2 - 1) * 8;
-        positions[i * 3 + 2] = (Math.random() * 2 - 1) * 10;
-
-        // Nouvelles vitesses aléatoires
-        velocities[i * 3] = (Math.random() - 0.5) * speed * 0.1;
-        velocities[i * 3 + 1] = (Math.random() - 0.5) * speed * 0.1;
-        velocities[i * 3 + 2] = (Math.random() - 0.5) * speed * 0.1;
-
-        // Réinitialisation de la couleur
-        colors[i * 3] = default_color.r;
-        colors[i * 3 + 1] = default_color.g;
-        colors[i * 3 + 2] = default_color.b;
-    }
-
-    // Mise à jour de la géométrie
-    smokeGeometry.attributes.position.needsUpdate = true;
-    smokeGeometry.attributes.color.needsUpdate = true;
+function createSpinningCube() {
+    // Créer le cube
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
     
-    // Réinitialisation des paramètres matériaux
-    particleShaderMaterial.uniforms.uInterpolationFactor.value = 0.0;
-    particleShaderMaterial.uniforms.uTime.value = 0.0;
+    // Variables d'animation
+    let startTime = Date.now();
+    const duration = 5000; // 5 secondes
+    let isSlowingDown = false;
+    let speed = 0.05;
+  
+    // Fonction pour mettre à jour la rotation
+    function updateRotation() {
+      const currentTime = Date.now();
+      const elapsed = currentTime - startTime;
+  
+      if (elapsed < duration) {
+        // Rotation normale pendant 5 secondes
+        cube.rotation.x += speed;
+        cube.rotation.y += speed;
+      } else if (!isSlowingDown) {
+        // Commencer à ralentir après 5 secondes
+        isSlowingDown = true;
+      }
+  
+      if (isSlowingDown) {
+        // Ralentir progressivement
+        speed *= 0.95;
+        cube.rotation.x += speed;
+        cube.rotation.y += speed;
+  
+        // Arrêt complet quand c'est assez lent
+        if (speed < 0.001) {
+            speed = 0;
+            casino = 'start';
+        }
+      }
+    }
+  
+    // Retourne le cube et la fonction de mise à jour
+    return {
+      cube: cube,
+      update: updateRotation
+    };
+  }
 
-}
+
 
 
 window.addEventListener('keydown', (event) => {
@@ -1822,4 +1981,4 @@ return function cleanup() {
 }
 }
 
-window.currentModuleCleanup = initialize();
+window.pongCleanup = initialize();

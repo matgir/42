@@ -1,0 +1,86 @@
+@font-face {
+    font-family: 'Entropia_sansserif-Regular';
+    src: url('../fonts/Entropia_sansserif-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+ #module 
+  {
+    position: absolute;
+    bottom: 100px;
+
+
+}
+
+#app-content {
+    position: relative;
+
+    display: flex;
+    justify-content: space-between; /* Place les éléments aux extrémités gauche et droite */
+    align-items: flex-end;
+    flex-direction: column;
+    width: 100%; /* Assure-toi que la largeur de .navig est à 100% */
+    /* border: solid 2px pink; */
+    top: 17%;
+    right: 11%;
+
+  }
+
+  #blurBox {
+    
+    /* font-family: 'Entropia_sansserif-Regular', regular; */
+    font-size: 80px;
+    position: absolute;
+    /* width: 150px;
+    height: 150px; */
+    /* backdrop-filter: blur(10px); */
+    /* background: rgba(255, 255, 255, 0.1); */
+    border-radius: 10px;
+    /* top: */
+
+    z-index : 5;
+}
+
+.blur-box_404 {
+    display: flex;
+    justify-content: space-between; /* Place les éléments aux extrémités gauche et droite */
+    align-items: flex-start;
+    flex-direction: column;
+    /* background-color:white; */
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    /* color: white; */
+}
+
+h1 {
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-size: 130px;
+  }
+
+  p {
+    margin-top: -20px;
+    font-family: "Roboto", sans-serif;
+    font-size: 40px;
+    padding: 0px 0px;
+  }
+  
+  a {
+    padding: 5px 20px;
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 30px;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+  }
+
+  a:hover{
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+  }

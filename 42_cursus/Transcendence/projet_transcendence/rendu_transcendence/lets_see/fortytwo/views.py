@@ -22,6 +22,7 @@ from django.contrib.auth import get_backends
 # from django.contrib.auth.decorators import login_required
 from .forms import FortyTwoUsername
 from django.utils.translation import gettext as _
+from users.jwt_auth import get_tokens_for_user  # Import the JWT token function
 
 # @login_required
 def fortytwo_username(request):
@@ -32,9 +33,20 @@ def fortytwo_username(request):
 		form = FortyTwoUsername(request.POST, request.FILES, instance=request.user)
 		if form.is_valid():
 			form.save()
-			# return
-			return redirect('home')
-			# return redirect('user_profile', username=request.user.username)
+			 # Generate JWT tokens for the user
+			tokens = get_tokens_for_user(request.user)
+			
+			# Store tokens in session and cookies
+			request.session["jwt_access_token"] = tokens['access']
+			request.session["jwt_refresh_token"] = tokens['refresh']
+			request.session.modified = True
+			
+			# Set JWT tokens as cookies to be picked up by JavaScript
+			response = redirect('home')
+			response.set_cookie('jwt_access', tokens['access'], httponly=True, samesite='Lax', max_age=3600)  # 1 hour
+			response.set_cookie('jwt_refresh', tokens['refresh'], httponly=True, samesite='Lax', max_age=86400)  # 1 day
+			
+			return response
 	else:
 		# print("DANS ELSE >>>>>>>>>>>>>")
 		form = FortyTwoUsername(instance=request.user)
@@ -236,12 +248,24 @@ def	pong_game(request):
 
     request.session["access_token"] = access_token
     request.session.modified = True
-    # print("2- ACCESS TOKEN >>>", request.session.get("access_token"))
-
-    # return (fortytwo_username(request))
-    if (user.username):
-        return (redirect("home"))
-    return (redirect("/fortytwo/fortytwo_username/"))
+    
+    # Generate JWT tokens for the user if they already have a username
+    if user.username:
+        tokens = get_tokens_for_user(user)
+        
+        request.session["jwt_access_token"] = tokens['access']
+        request.session["jwt_refresh_token"] = tokens['refresh']
+        request.session.modified = True
+        
+        response = redirect("home")
+        response.set_cookie('jwt_access', tokens['access'], httponly=True, samesite='Lax', max_age=3600)  # 1 hour
+        response.set_cookie('jwt_refresh', tokens['refresh'], httponly=True, samesite='Lax', max_age=86400)  # 1 day
+        
+        return response
+    
+    # If user doesn't have a username yet, redirect to the username setting page
+    # JWT tokens will be generated after they set their username in fortytwo_username view
+    return redirect("/fortytwo/fortytwo_username/")
     # return (redirect("home"))
     # return (HttpResponse("Hello, this will be the pong game."))
 

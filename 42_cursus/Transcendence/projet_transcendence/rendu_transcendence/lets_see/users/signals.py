@@ -20,7 +20,7 @@ def set_language_after_login(sender, request, user, **kwargs):
 		lang = user.preferred_language
 		request.session['django_language'] = lang
 		activate(lang)
-		print(f"inside set_language_after_login\n language activated after login {lang}")
+		print(f"inside set_language_after_login\n language activated after login {lang}")####
 
 # @receiver(pre_save, sender=CustomUser)
 # def assign_random_avatar(sender, instance, **kwargs):

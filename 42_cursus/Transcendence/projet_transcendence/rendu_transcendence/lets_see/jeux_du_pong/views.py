@@ -13,6 +13,7 @@ def pong_game(request):
 @csrf_exempt
 @login_required
 def report_match(request):
+	print("in report match") ####
 	if request.method == "POST":
 		data = json.loads(request.body)
 

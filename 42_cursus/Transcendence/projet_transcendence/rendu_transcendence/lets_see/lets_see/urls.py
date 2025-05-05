@@ -39,8 +39,8 @@ api_urlpatterns = [
     path('3_blue_rubix/', TemplateView.as_view(template_name='3_blue_rubix.html'), name='3_blue_rubix'), 
     path('4_fall/', TemplateView.as_view(template_name='4_fall.html'), name='4_fall'), 
     path('6_torus/', TemplateView.as_view(template_name='6_torus.html'), name='6_torus'), 
-    path('users/', include('users.urls')),
     # path('profil/avatar/', TemplateView.as_view(template_name='avatar.html'), name='avatar'), 
+    path('users/', include('users.urls')),
     path('tournament/', include('tournament.urls')),
     path('fortytwo/', include('fortytwo.urls')),
     path('404/', TemplateView.as_view(template_name='404.html'), name='404'),
@@ -50,13 +50,12 @@ api_urlpatterns = [
 urlpatterns = [
     path('setlang/', set_language_and_remember, name='set_language'),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
-    path('admin/', admin.site.urls),    
+    # path('admin/', admin.site.urls),    
     # Serve API endpoints for AJAX content loading
     path('api/', include((api_urlpatterns, 'api'))),
     
     
     # Include other app URLs
-    path('fortytwo/', include('fortytwo.urls')),
     path('jeux_du_pong/', include('jeux_du_pong.urls')),
     # path('users/', include('users.urls')),
     path('', include(tf_urls)),
@@ -65,7 +64,7 @@ urlpatterns = [
     path('', views.home_view, name='home'),
     # Catch-all pattern for SPA routes - serve the base.html for client-side routing
     # This should be the last URL pattern to avoid overriding more specific ones
-    re_path(r'^(?!admin/|api/|static/|media/|fortytwo/).*$', 
+    re_path(r'^(?!admin/|api/|static/|media/).*$', 
             views.base_view, name='spa_routes'),
 ]
 

@@ -21,7 +21,8 @@ class CustomUser(AbstractUser):
 	username = models.CharField(
 		max_length=30,
 		unique=True,
-		validators=[validate_not_banned_username]
+		validators=[validate_not_banned_username],
+		verbose_name=_("Username")
 	)
 	avatar = models.ImageField(
 		upload_to=avatar_upload_path,

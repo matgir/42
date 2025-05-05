@@ -39,12 +39,12 @@
 		{% if not user.two_factor %}
 			<hr>
 			<a href="{% url 'two_factor_setup' %}">
-				Enable 2FA
+				{% trans "Enable 2FA" %}
 			</a>
 		{% else %}
 			<hr>
 			<a href="{% url 'two_factor_disable' %}">
-				Disable 2FA
+				{% trans "Disable 2FA" %}
 			</a>
 		{% endif %}
 	{% endif %}

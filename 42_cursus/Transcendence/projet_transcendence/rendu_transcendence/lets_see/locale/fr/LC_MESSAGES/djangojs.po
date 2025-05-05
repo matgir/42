@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-03 19:39+0200\n"
+"POT-Creation-Date: 2025-05-05 18:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,11 +23,11 @@ msgstr ""
 msgid "%s Wins !"
 msgstr "%s a gagner !"
 
-#: static/js/pong.js:809
+#: static/js/pong.js:812
 msgid "ARE YOU<br>READY?"
 msgstr "VOUS ETES<br>PRETS"
 
-#: static/js/pong.js:813
+#: static/js/pong.js:816
 msgid "GO !"
 msgstr "GO !"
 
