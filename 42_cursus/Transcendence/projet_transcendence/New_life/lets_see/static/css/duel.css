@@ -14,7 +14,6 @@
   align-items: center;
   text-align: center;
   position: relative; 
-  /* border: solid 2px red; */
 }
 
 .app-content2 {
@@ -29,6 +28,8 @@
   padding-right: 70px;
   margin-top: 100px;
   position: relative; 
+  /* border: solid 2px pink; */
+
 }
 
 body {
@@ -233,6 +234,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 60px ;
+
 }
 
 .blur-box_avatar, .canvas_tournois {
@@ -509,21 +511,15 @@ html, body {
 }
 
 .player-container {
-  /* backdrop-filter: blur(1px); */
+    backdrop-filter: blur(1px);
   padding: 40px;
   display: flex;
-  background-color: rgba(131, 59, 255, 0.133);
+  background-color: rgba(164, 112, 255, 0.165);
   flex-direction: column;
   align-items: center;
-  border: 2px solid rgba(216, 133, 255, 0.138);
+  border: 2px solid rgba(89, 85, 214, 0.255);
   border-radius: 15px;
-  /* box-shadow: 0 8px 200px 0 rgba(0, 5, 152, 0.193); */
-  /* border: 2px solid rgb(8, 0, 255); */
-
-  /* backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px); */
-  /* border: 2px solid rgba(232, 233, 255, 0.054); */
-  box-shadow: 0 0 7px 3px rgb(6, 3, 7); 
+  box-shadow: 0 8px 200px 0 rgba(0, 5, 152, 0.193);
 
 }
 
@@ -552,72 +548,7 @@ html, body {
   animation: fadeIn 0.5s ease-in 0.2s forwards; /* Le dernier 2s est le délai */
 }
 
-.first_to_choose {
-  font-family: "Roboto", sans-serif;
-  font-weight: 600;
-  color: white;
-  justify-content: left;
-  
-  
-}
-
-.first_to_choose {
-  font-family: "Roboto", sans-serif;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.898);
-  margin-top: 40px ;
-  background-color: rgba(4, 15, 92, 0.172);
-  border: solid 2px rgb(12, 187, 41);
-  padding: 7px 24px;
-  border-radius: 10px;
-}
-
-
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
-
-.countdown  {
-  font-family: 'Entropia_sansserif-Regular', regular;
-  font-size: 80px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  /* font-family: "Roboto", sans-serif; */
-  /* font-size: 90px; */
-  /* font-weight: bold; */
-  /* color: #0051ff; */
-  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
-  opacity: 0;
-  transition: opacity 0.3s;
-  z-index: 100;
-  animation: pulse 0.5s infinite alternate;
-}
-
-.countdown2  {
-
-  position: absolute;
-  top: 12px;
-  text-align: center;
-  font-family: "Roboto", sans-serif;
-  background-color: rgba(0, 0, 0, 0.55);
-  font-size: 50px;
-  font-weight: bold;
-  /* color: #0051ff; */
-  color: black;
-  border-radius: 20px;
-  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
-  opacity: 0;
-  transition: opacity 0.3s;
-  z-index: 100;
-  animation: pulse 0.7s infinite alternate;
-}
-
-
-
-

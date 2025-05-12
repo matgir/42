@@ -33,12 +33,15 @@ def fortytwo_username(request):
 		form = FortyTwoUsername(request.POST, request.FILES, instance=request.user)
 		if form.is_valid():
 			form.save()
+			 # Generate JWT tokens for the user
 			tokens = get_tokens_for_user(request.user)
 			
+			# Store tokens in session and cookies
 			request.session["jwt_access_token"] = tokens['access']
 			request.session["jwt_refresh_token"] = tokens['refresh']
 			request.session.modified = True
 			
+			# Set JWT tokens as cookies to be picked up by JavaScript
 			response = redirect('home')
 			response.set_cookie('jwt_access', tokens['access'], httponly=True, samesite='Lax', max_age=3600)  # 1 hour
 			response.set_cookie('jwt_refresh', tokens['refresh'], httponly=True, samesite='Lax', max_age=86400)  # 1 day
@@ -248,15 +251,12 @@ def	pong_game(request):
     
     # Generate JWT tokens for the user if they already have a username
     if user.username:
-        # Generate JWT tokens
         tokens = get_tokens_for_user(user)
         
-        # Store tokens in session and cookies
         request.session["jwt_access_token"] = tokens['access']
         request.session["jwt_refresh_token"] = tokens['refresh']
         request.session.modified = True
         
-        # Set JWT tokens as cookies to be picked up by JavaScript
         response = redirect("home")
         response.set_cookie('jwt_access', tokens['access'], httponly=True, samesite='Lax', max_age=3600)  # 1 hour
         response.set_cookie('jwt_refresh', tokens['refresh'], httponly=True, samesite='Lax', max_age=86400)  # 1 day

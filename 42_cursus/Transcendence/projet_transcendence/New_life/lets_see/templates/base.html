@@ -37,7 +37,7 @@
 			justify-content: space-between;  /* logo à gauche / liens à droite */
 			align-items: center;             /* les aligner verticalement */
 			padding: 10px;
-			position: absolute;
+			position: relative;
 			width: 100%;
 			background: transparent;
 			background: none;
@@ -45,14 +45,9 @@
 			 z-index: 3;
 		}
 
-		.nav-middle {
-			display: flex;
-			align-items: center;
-		}
-
 		.nav-right {
-			display: flex;
-			flex-direction: row;
+			display: flex;    console.log(event.target.dataset);
+			align-items: center;
 		}
 
 		nav a {
@@ -71,46 +66,21 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			flex-direction: row;
-			margin-top: 14px;
+			flex-direction: ro;
+			/* margin-right: 0px; */
 			margin-right: 0px;
-			margin-bottom: 10px;
+			margin-bottom: 25px;
+
+
 
 		}
-
-		.avatar-nav {
-			border-radius: 50%;
-			width: 40px;
-			height: 40px;
-			margin-right: 10px;
-			align-self: center;
-			cursor: pointer;
-		}
-
-		.search-form-container {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-		}
-
-		.search-results-dropdown {
-			display: absolute;
-			top: 100%;
-			left: 0;
-			width: 100%;
-			background-color: #333;
-			border: 1px solid #555;
-			border-radius: 4px;
-			z-index: 10;
-		}
-
 		.search-form input {
 			margin-top: 0px;
 			margin-bottom: 0px;
 			padding: 8px;
 			margin-right: 0px;
-			border: solid 1px rgba(255, 255, 255, 0.41);
+			border: solid 1px rgba(255, 255, 255, 0.188);
+
 		}
 		
 
@@ -134,6 +104,7 @@
 		font-size: 15px;
 		padding: 7px 17px;
 		color: rgba(255, 255, 255, 0.711);
+		margin-left: 14px;
 		background: none;
 		border-radius: 5px;
 		cursor: pointer;
@@ -144,6 +115,8 @@
 		}
 		.link_temp_logout {
 			background:rgb(0, 0, 222) ;
+			position: absolute;
+			right: 2%;
 			border: none;
 			color: rgba(255, 255, 255, 0.704);
 
@@ -153,39 +126,18 @@
 		}
 
 		.link_temp_langue{
-			font-family: "Roboto", sans-serif;
-			font-weight: 100;
-
-			margin-right:3px ;
-			padding-left: 10px; 
-			padding-right: 10px;
-			color: rgba(255, 255, 255, 0.601);
-			background:rgba(200, 200, 255, 0.089) ;
-			border: none;
-		}
-		.link_temp_logout {
-			background:rgb(0, 0, 222) ;
-			border: none;
-			color: rgba(255, 255, 255, 0.704);
-
-			font-family: "Roboto", sans-serif;
-			font-weight: 700;
-			top: 30px;
-		}
-
-		.link_temp_langue{
+			position: absolute;
 			right: 200px;
 			top: 30px;
 			font-family: "Roboto", sans-serif;
 			font-weight: 100;
 
-			margin-right:8px ;
-			padding-left: 8px; 
-			padding-right: 8px;
-			padding-left: 4px;
-
-			color: rgba(255, 255, 255, 0.356);
-			background:rgba(200, 200, 255, 0.074) ;
+			margin-right:3px ;
+			padding-left: 3px; 
+			padding-right: 3px;
+			color: rgba(255, 255, 255, 0.601);
+			background:rgba(200, 200, 255, 0.182) ;
+			position: absolute;
 			border: none;
 		}
 
@@ -199,6 +151,7 @@
 		font-size: 11px;
 		padding: 3px 15px;
 		color: rgba(255, 255, 255, 0.711);
+		margin-left: 14px;
 		background: none;
 		border-radius: 5px;
 		cursor: pointer;
@@ -243,42 +196,13 @@
 			transition: opacity 0.5s ease-in-out;
 			z-index: 1000;
 			}
-			.message-popup.success { background-color: #001aff; } /* Green */
-			.message-popup.error { background-color: #ffab0e; } /* Red */
-			.message-popup.warning { background-color: #b20cff; } /* Orange */
+			.message-popup.success { background-color: #4CAF50; } /* Green */
+			.message-popup.error { background-color: #f44336; } /* Red */
+			.message-popup.warning { background-color: #ff9800; } /* Orange */
 			.message-popup.show {
 				display: block;
 				opacity: 1;
 			}
-
-		/* Style for the results dropdown */
-		#search-results-dropdown {
-			position: absolute;
-			/* top: 100%; Position below the form */
-			/* left: 0; Align with the form */
-			background-color: #333; /* Dark background */
-			border: 1px solid #555;
-			border-radius: 4px;
-			max-height: 200px; /* Limit height */
-			overflow-y: auto; /* Add scroll if needed */
-			z-index: 10; /* Ensure it's above other elements */
-			display: none; /* Hidden by default */
-			min-width: 150px; /* Minimum width */
-			margin-top: 5px; /* Space between input and dropdown */
-		}
-
-		#search-results-dropdown a {
-			display: block;
-			padding: 8px 12px;
-			color: #eee;
-			text-decoration: none;
-			font-size: 14px;
-		}
-
-		#search-results-dropdown a:hover {
-			background-color: #555;
-		}
-		/* End style for dropdown */
 
 		</style>
 	
@@ -295,18 +219,41 @@
 			</div>
 		
 			{% if user.is_authenticated %}
-				<div class="nav-middle" style="display: flex; flex-direction: row; align-items: center;">
-					<div class="search-form-container">
-						<form class="search-form" id="search-friend-form" method="GET" action="/api/users/search_friends/" data-no-spa>
-							{% csrf_token %}
-							<input class="search-form" id="search-friend-input" type="text" name="q" placeholder="Search friends" required autocomplete="off">
-						</form>
-						<div id="search-results-dropdown" class="search-results-dropdown"></div>
-					</div>
-					<!-- Container for search results dropdown -->
-				</div>
+				<div class="nav-right" style="display: flex; flex-direction: row; align-items: center;">
+				<a href="/users/my_profile/" class="link_temp">
+					{% trans "My Profile" %}
+				</a>
+				<form class="search-form" method="GET" action="/users/search_friends/">
+					{% csrf_token %}
+					<input class="search-form" type="text" name="q" placeholder="Search friends" required>
+					<button type="submit" class="search-form2">
+						{% trans "Search" %}
+					</button>
+				</form>
+			</div>
 			{% endif %}
+			<div>
+				{% if user.is_authenticated %}
+				<form method="post" action="/api/users/accounts/logout/" style="display: inline;" data-no-spa>
+					{% csrf_token %}
+					<button type="submit" class="link_temp_logout">
+						{% trans "Logout" %}
+					</button>
+				</form>
+				{% else %}
 			<div class="nav-right">
+				<!-- <a href="{% url 'home' %}" class="link_temp">
+					{% trans "Sign In" %}
+				</a>  -->
+				<a href="https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code" class="link_temp">
+					{% trans "Sign In with 42" %}
+				</a>
+				{% comment %} <a href="https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code">
+					Log in with 42
+				</a> {% endcomment %}
+				{% endif %}
+			</div>
+			<div>
 				<form action="{% url 'set_language' %}" method="post">
 				{% csrf_token %}
 				<select class="link_temp_langue" name="language" onchange="this.form.submit()">
@@ -317,19 +264,8 @@
 							{{lang.1}}
 						</option>
 					{% endfor %}
-					</select>
+				</select>
 				</form>
-				{% if user.is_authenticated %}
-				<a href="/users/my_profile/" style="align-self: center;">
-					<img src="{{ user.avatar.url }}" class="avatar-nav" alt="Avatar">
-				</a>
-				<form method="post" action="/api/users/accounts/logout/" data-no-spa>
-					{% csrf_token %}
-					<button type="submit" class="link_temp_logout">
-						{% trans "Logout" %}
-					</button>
-				</form>
-				{% endif %}
 			</div>
 		</nav>
 		
@@ -370,66 +306,6 @@
 				
 				showMessage(0);
 				{% endif %}
-
-				// Search dropdown logic
-				const searchForm = document.getElementById('search-friend-form');
-				const searchInput = document.getElementById('search-friend-input');
-				const resultsDropdown = document.getElementById('search-results-dropdown');
-
-				if (searchForm && searchInput && resultsDropdown) {
-					searchInput.addEventListener('input', function(e) {
-						const query = e.target.value.trim();
-
-						if (query.length > 0) { // Minimum characters to trigger search (optional)
-							fetch(`/api/users/search_friends/?q=${encodeURIComponent(query)}`, {
-								method: 'GET',
-								headers: {
-									'X-Requested-With': 'XMLHttpRequest', // Identify as AJAX request
-									'Accept': 'application/json'
-								}
-							})
-							.then(response => response.json())
-							.then(data => {
-								resultsDropdown.innerHTML = ''; // Clear previous results
-								if (data.results && data.results.length > 0) {
-									data.results.forEach(user => {
-										const link = document.createElement('a');
-										link.href = user.profile_url; // Use the URL from JSON
-										link.textContent = user.username;
-										link.dataset.spaLink = ''; // Ensure SPA routing handles this link if needed
-										resultsDropdown.appendChild(link);
-									});
-									resultsDropdown.style.display = 'block'; // Show dropdown
-								} else {
-									resultsDropdown.style.display = 'none'; // Hide if no results
-								}
-							})
-							.catch(error => {
-								console.error('Error fetching search results:', error);
-								resultsDropdown.style.display = 'none';
-							});
-						} else {
-							resultsDropdown.innerHTML = '';
-							resultsDropdown.style.display = 'none'; // Hide if query is empty
-						}
-					});
-
-					// Prevent default form submission (which causes page reload)
-					searchForm.addEventListener('submit', function(e) {
-						e.preventDefault();
-						// Optionally, you could redirect to the first result or a dedicated search page here
-						// For now, just preventing the reload is enough for the dropdown.
-						console.log("Form submission prevented. Handled by input event.");
-					});
-
-					// Hide dropdown when clicking outside
-					document.addEventListener('click', function(e) {
-						if (!searchForm.contains(e.target)) {
-							resultsDropdown.style.display = 'none';
-						}
-					});
-				}
-				// End Search dropdown logic
 			});
 			
 			const ws_sheme = window.location.protocol === "https:" ? "wss" : "ws";

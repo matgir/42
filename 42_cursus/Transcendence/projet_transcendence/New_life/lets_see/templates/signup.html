@@ -1,7 +1,7 @@
 {% load static %}
 {% load i18n %}
 
-<form class="blur-box2" method="post" id="signupForm" action="/api/users/accounts/signup/" data-no-spa>
+<form class="blur-box" method="post" id="signupForm" action="/api/users/accounts/signup/" data-no-spa>
 
     {% csrf_token %}
     <div class="already_sign_up">
@@ -55,7 +55,7 @@
                 {% trans "A number" %}
             </p>
         </div>
-        <!-- <div class="requirement">
+        <div class="requirement">
             <span class="check-icon" id="check3">✔</span>
             <p class="condition" >
                 {% trans "Upper case" %}</p>
@@ -65,7 +65,7 @@
             <p class="condition" >
                 {% trans "A special symbol" %}
             </p>
-        </div> -->
+        </div>
     </div>
     
                 

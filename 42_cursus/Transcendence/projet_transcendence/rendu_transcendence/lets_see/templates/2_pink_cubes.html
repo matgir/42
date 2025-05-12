@@ -1,39 +1,30 @@
+
 {% load static %}
+{% load i18n %}
 
-<!-- Fonts et CSS -->
-<link rel="stylesheet" href="{% static 'css/profil.css' %}">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
-<script type="module" src="{% static 'js/2_pink_cubes.js' %}"></script>
+<!-- <link rel="stylesheet" href="{% static 'css/profil.css' %}"> -->
 <link rel="stylesheet" href="{% static 'css/2_pink_cubes.css' %}">
-
+<script type="module" src="{% static 'js/2_pink_cubes.js' %}"></script>
+<!-- <link rel="stylesheet" href="{% static 'css/404.css' %}"> -->
+<!-- <script type="module" src="{% static 'js/404.js' %}"></script> -->
 <div id="app-content">
-  <div id="navigation" class="navig">
-    <!-- <div class="navig"> -->
-
-      <div class="blur-box_profil">
-        <div class="bento-container">
-    
-       
-                
-    
-          <div class="card bento_long">
-                <h2>oe c'est plus pink et alors y'a quoi je fais ce que je veux</h2>
-          </div>
-    
-    
-    
-          <div class="card bento_small">
-           
-
-            <h3>slt les bg</h3>
-          </div>
-    
-        </div>
-      </div>
+  <div><h1>!WoW!</h1>
+  <div class="blur-box_404"><div class="unlock-wrapper">
+    <a class="unlock">
+        <h4 id="unlock_text">
+        {% trans "Winner!" %}
+        </br>
+        {% trans "You've unlocked" %}
+        </br/>
+        {% trans "new avatar!" %}
+        </h4>
+    </a>
     </div>
+      <div class="button-container">
 
+    <button class="select" id="generateImageBtn">
+      {% trans "DOWNLOAD!" %}
+    </button>
   </div>
-    
-  <canvas class="webgl"></canvas>
-
+</div>
+</div>

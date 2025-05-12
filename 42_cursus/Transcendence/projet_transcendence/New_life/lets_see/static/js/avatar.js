@@ -34,8 +34,6 @@ function createScene() {
     // Scene
     const scene = new THREE.Scene();
 
-    
-
     //physics 
     const world = new CANNON.World();
     world.gravity.set(0, 0, 0);
@@ -299,24 +297,12 @@ function createScene() {
         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-        targetRotation.y = mouse.x * 0.4;
-        targetRotation.x = mouse.y * 0.4;
-        targetRotation.z = mouse.x * -0.2;
-
-        rightEye.eyeGroup.rotation.copy(ringGroup.rotation);
-        leftEye.eyeGroup.rotation.copy(ringGroup.rotation);
+        targetRotation.y = mouse.x * 0.2;
+        targetRotation.x = mouse.y * 0.2;
+        targetRotation.z = mouse.x * -0.1;
     };
     window.addEventListener('mousemove', mouseMoveHandler);
 
-    const fadeMaterial = new THREE.MeshBasicMaterial({
-        color: 0xFF0000,
-        transparent: true,
-        opacity: 1.0,
-        depthTest: false,
-        depthWrite: false
-    });
-    
-  
     // Animation loop
     const clock = new THREE.Clock();
     let oldElapsedTime = 0;
@@ -325,8 +311,6 @@ function createScene() {
         const elapsedTime = clock.getElapsedTime();
         const deltaTime = elapsedTime - oldElapsedTime;
         oldElapsedTime = elapsedTime;
-        
-            
         
         // Interpoler progressivement vers la rotation cible
         ringGroup.rotation.x += (targetRotation.x - ringGroup.rotation.x) * smoothingFactor * 1.5;
@@ -371,7 +355,7 @@ function createScene() {
         }
     });
 
-    document.getElementById('nop')?.addEventListener('click', () => {
+    document.getElementById('nop').addEventListener('click', () => {
         console.log("EHHO");
         cleanupScene();
         createScene();
@@ -439,7 +423,7 @@ return function cleanup() {
     }
     
     // Additional cleanup for any other resources
-    const allCanvases = document.querySelectorAll('.avatar-webgl');
+    const allCanvases = document.querySelectorAll('.webgl');
     allCanvases.forEach(canvas => {
         canvas.remove();
     });
@@ -453,4 +437,3 @@ return function cleanup() {
 }
 
 window.currentModuleCleanup = initialize();
-window.avatarCleanup = initialize();

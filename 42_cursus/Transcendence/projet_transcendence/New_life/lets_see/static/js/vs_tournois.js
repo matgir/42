@@ -182,10 +182,7 @@ const createSphere = () => {
             roughness: 0.4,
             envMap: environmentMapTexture,
             envMapIntensity: 0.5,
-            wireframe: true,
-            transparent:true,
-            opacity:1
-         
+            wireframe: true
         })
     )
     sphere.castShadow = true
@@ -205,7 +202,7 @@ const createSphere = () => {
 }
 createSphere()
 
-const MAX_SPHERES = 60; // Limite maximale
+const MAX_SPHERES = 35; // Limite maximale
 
 // Intervalle avec gestion automatique
 // const sphereInterval = setInterval(() => {
@@ -228,7 +225,7 @@ let sphereInterval = setInterval(() => {
         clearInterval(sphereInterval)
         console.log("prout")
     }
-    }, 2500);
+    }, 3000);
 
 
 
@@ -262,9 +259,7 @@ const floor = new THREE.Mesh(
         roughness: 0.9,  // Beaucoup de rugosité pour rendre l'ombre plus nette
         envMap: environmentMapTexture,
         envMapIntensity: 0.2,
-        wireframe : true,
-        transparent:true,
-        opacity:1
+        wireframe : true
     })
 )
 floor.receiveShadow = true;
@@ -354,7 +349,6 @@ scene.add(directionalLight)
         if (isAnimating) return;
         isAnimating = true;
     
-    
         // 1. Positions et rotations initiales
         const startPosition = camera.position.clone();
         const startRotation = camera.rotation.clone();
@@ -370,14 +364,12 @@ scene.add(directionalLight)
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
         const smoothProgress = easeInOutQuint(progress);
- 
-   
+
         // Rotation verticale exagérée
         camera.rotation.x = startRotation.x + (targetRotationX - startRotation.x) * smoothProgress;
         
         // Recul progressif
         camera.position.z = startPosition.z + zoomOutDistance * smoothProgress;
-        
         
         // Point de regard qui monte vers le ciel
         const currentLookAtY = THREE.MathUtils.lerp(0, skyHeight, smoothProgress);
@@ -416,7 +408,6 @@ scene.add(directionalLight)
 // //   ##     ##  ##    ## ##   ##  //
 // //   ##    ####  ######  ##    ## //
 // ////////////////////////////////////
-let dark = 0;
 
 // Variable pour contrôler l'état des mouvements de caméra
 const targetRotation = new THREE.Vector3();
@@ -432,6 +423,7 @@ function toggleCameraControls(enable) {
 
 const clock = new THREE.Clock()
 let oldElapsedTime = 0
+// Modifiez votre boucle tick comme ceci :
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
     const deltaTime = elapsedTime - oldElapsedTime
@@ -447,7 +439,9 @@ const tick = () => {
         cameraGroup.rotation.z += (targetRotation.z - cameraGroup.rotation.z) * 0.03;
     }
 
+    // ... le reste de votre fonction tick reste inchangé ...
     world.step(1 / 60, deltaTime, 3);
+
 
     spheres.forEach(({ sphere, sphereBody }) => {
         sphere.position.copy(sphereBody.position);
@@ -478,27 +472,6 @@ const tick = () => {
         }
     });
 
-    if(dark)
-    {
-        spheres.forEach(({ sphere, sphereBody }) => {
-            if (!sphere.material) return;
-            
-            spheres.forEach(({ sphere }) => {
-                if (sphere.scale.x > 0.01) {  // Continue tant que la sphère est visible
-                    const shrinkSpeed = 0.2 * deltaTime;  // Vitesse de rétrécissement (ajustable)
-                    const newScale = Math.max(0.01, sphere.scale.x - shrinkSpeed);
-                    sphere.scale.set(newScale, newScale, newScale);
-                    
-                    // Rend invisible quand très petite
-                    if (newScale <= 0.01) {
-                        sphere.visible = false;
-                    }
-                }
-            });
-        });
-    }
-    
-    
     renderer.render(scene, camera);
     window.animationFrameId = window.requestAnimationFrame(tick);
 }
@@ -523,32 +496,17 @@ tick();
 //     height: window.innerHeight
 // }
 
-const baseScreen = 1920;
-function updateLogo() {
-    const logo = document.querySelector('.logo_');
-    console.log("logo", logo);
-    const width = window.innerWidth;
-    const percent = width / baseScreen;
-    if (percent < 0.60) {
-    logo.src = "/static/logo/logo_square.png";
-    logo.style.width = "280px";
-    } else {
-    logo.src = "/static/logo/entropia9.png";
-    logo.style.width = "550px";
-    }
-}
-window.addEventListener('load', updateLogo);
-
 window.addEventListener('resize', () =>
     {
-        console.log("resize")
-        updateLogo();
+        // Update sizes
         sizes.width = window.innerWidth
         sizes.height = window.innerHeight
     
+        // Update camera
         camera.aspect = sizes.width / sizes.height
         camera.updateProjectionMatrix()
     
+        // Update renderer
         renderer.setSize(sizes.width, sizes.height)
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     })
@@ -561,28 +519,53 @@ window.addEventListener('resize', () =>
             mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
     
             targetRotation.y = mouse.x * 0.2;
+            targetRotation.x = mouse.y * 0.2;
             targetRotation.z = mouse.x * -0.1;
         }
     });
+
+
+
+
+
+
+// // 2. Gestion du bouton de transition
+// const bouton_start = document.querySelectorAll('.start_transition');
+// bouton_start.forEach(bouton => {
+//     bouton.addEventListener('click', function() {
+//         if (!isAnimating) {
+//             // Stop la génération de sphères
+//             console.log("Création de sphères stoppée");
+            
+//             clearInterval(sphereInterval);
+//             toggleCameraControls(false);
+//             transitionCamera();
+//         }  
+//     });
+// });
 
 // Fonction pour gérer la transition de sortie
 function handleNavigationFadeOut(button, redirectUrl) {
     if (!isAnimating) {
         console.log("Arrêt des animations et fondu de la navigation...");
         
+        // ➤ 1. Arrête les animations en cours
         clearInterval(sphereInterval);
         toggleCameraControls(false);
         
+        // ➤ 2. Déclenche le fade-out de la navigation
         const navigation = document.getElementById('navigation');
         if (navigation) {
             navigation.classList.add('fade-out');
         }
         
+        // ➤ 3. Transition caméra (si nécessaire)
         transitionCamera();
         
+        // ➤ 4. Redirection après 1.5s (ajustable)
         setTimeout(() => {
             window.location.href = redirectUrl;
-        }, 1500); 
+        }, 1500); // Temps synchronisé avec la durée du fadeOut (1.5s)
     }
 }
 
@@ -591,8 +574,6 @@ document.querySelectorAll('.start_game').forEach(bouton => {
     bouton.addEventListener('click', (event) => {
         event.preventDefault();
         handleNavigationFadeOut(bouton, bouton.dataset.url);
-        dark=1;
-        
     });
 });
 
@@ -601,11 +582,20 @@ document.querySelectorAll('.join_tournament').forEach(bouton => {
     bouton.addEventListener('click', (event) => {
         event.preventDefault();
         handleNavigationFadeOut(bouton, bouton.dataset.url);
-        dark = 1;
     });
 });
 
-
+    window.addEventListener('mousemove', (event) => {
+        if (!isAnimating) {   // Si pas d'animation, on laisse le mouvement agir
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    
+            targetRotation.y = mouse.x * 0.2;
+            targetRotation.x = mouse.y * 0.2;
+            targetRotation.z = mouse.x * -0.1;
+        }
+    });
+    
     
 const boutons = document.querySelectorAll('.transition1');
 

@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load i18n %}
 <!-- Fonts et CSS -->
 <!-- <link rel="stylesheet" href="{% static 'css/3_blue_rubix.css' %}"> -->
 <script type="module" src="{% static 'js/3_blue_rubix.js' %}"></script>
@@ -21,7 +21,9 @@
 
             <!--BONUS-->
         <div class="category4">
-          <h2>Bonus</h2>
+          <h2>
+          {% trans "Bonus" %}
+          </h2>
           <div class="options">
             <div class="option">
               <input type="checkbox" name="bonus" id="bonus_able" value="1">
@@ -31,73 +33,73 @@
         </div>
         <!-- Level Category -->
         <div class="category">
-          <h2>Level</h2>
+          <h2>{% trans "Level" %}</h2>
           <div class="options">
             <div class="option">
               <input type="radio" name="level" id="easy" value="1">
               <label for="easy"></label>
-              <span>Noob</span>
+              <span>{% trans "Noob" %}</span>
             </div>
             <div class="option">
               <input type="radio" name="level" id="medium" value="2" checked>
               <label for="medium"></label>
-              <span>Medium</span>
+              <span>{% trans "Medium" %}</span>
             </div>
             <div class="option">
               <input type="radio" name="level" id="hard" value="3">
               <label for="hard"></label>
-              <span>Hard</span>
+              <span>{% trans "Hard" %}</span>
             </div>
           </div>
         </div>
       
         <!-- Colors Category -->
         <div class="category2">
-          <h2>Color Mode</h2>
+          <h2>{% trans "Color Mode" %}</h2>
           <div class="options">
             <div class="option">
               <input type="radio" name="color" id="color1" value="1" checked>
               <label for="color1"></label>
-              <span>The Special</span>
+              <span>{% trans "The Special" %}</span>
             </div>
             <div class="option">
               <input type="radio" name="color" id="color2" value="2">
               <label for="color2"></label>
-              <span>Too Blue</span>
+              <span>{% trans "Too Blue" %}</span>
             </div>
             <div class="option">
               <input type="radio" name="color" id="color3" value="3">
               <label for="color3"></label>
-              <span>White Light</span>
+              <span>{% trans "White Light" %}</span>
             </div>
           </div>
         </div>
       
         <!-- Points to Win Category -->
         <div class="category3">
-          <h2>Points to Win</h2>
+          <h2>{% trans "Points to Win" %}</h2>
           <div class="options">
             <div class="option">
               <input type="radio" name="score" id="pt5" value="1" checked>
               <label for="pt5"></label>
-              <span>3 points</span>
+              <span>3 {% trans "points" %}</span>
             </div>
             <div class="option">
               <input type="radio" name="score" id="pt10" value="2">
               <label for="pt10"></label>
-              <span>6 points</span>
+              <span>6 {% trans "points" %}</span>
             </div>
             <div class="option">
               <input type="radio" name="score" id="pt15" value="3">
               <label for="pt15"></label>
-              <span>12 points</span>
+              <span>12 {% trans "points" %}</span>
             </div>
           </div>
         </div>
 
     
-        <a class="quit-button" style="text-decoration: none;" href="/">QUIT</a>
-        <button class="play-button" type="submit">PLAY</button>
+        <a class="quit-button" style="text-decoration: none;" href="/">{% trans "Quit" %}</a>
+        <button class="play-button" type="submit">{% trans "Play" %}</button>
       </form>
           </div>
         </div>

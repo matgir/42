@@ -175,13 +175,19 @@
         <div id="app-content" class="pong-content">
             <div id="navigation" class="navig">
                 <div class="fixed-top">
-                    <div class="n_round" id="n_round">5</div>
-                    <div class="n_round">
+                    <div class="n_round_text">
                       {% trans "POINTS" %}
-                      <br>
                       {% trans "TO WIN" %}
                     </div>
-                </div>
+                    <div class="n_round" id="n_round">5</div>
+                   </div>
+                {% comment %}
+                 <div class="countdown3-wrapper"> {% endcomment %}
+                <!-- <h2 class="countdown" id="countdown">
+                  {% trans "Winner! You've unlocked a new avatar!" %}
+                </h2> -->
+                {% comment %} </div>
+                 {% endcomment %}
 
                 <div class="parent_controls_l">
                     <div class="controls">

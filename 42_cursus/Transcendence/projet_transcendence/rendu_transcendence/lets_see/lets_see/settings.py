@@ -42,6 +42,8 @@ DJANGO_SETTINGS_MODULE = os.environ.get("DJANGO_SETTINGS_MODULE", "lets_see.sett
 # DEBUG = False
 DEBUG = strtobool(os.environ.get("DJANGO_DEBUG", "True")) ###### checke if it works
 
+DEBUG = strtobool(os.environ.get("DJANGO_DEBUG", "True")) ###### checke if it works
+
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")
@@ -91,6 +93,10 @@ MIDDLEWARE = [
     'users.middleware.UserLanguageMiddleware',
     # default
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # JWT
+    'users.jwt_auth.JWTAuthenticationMiddleware',
+    'users.jwt_auth.JWTProtectionMiddleware',  # Add JWT protection middleware
+    #default
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -229,6 +235,25 @@ ACCOUNT_FORMS = {
     'signup': 'users.forms.CustomSignupForm',
     # 'home_game': 'allauth.account.forms.Home_gameForm',
     'user_token': 'allauth.account.forms.UserTokenForm',
+}
+
+# REST Framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+# SimpleJWT settings
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
 }
 
 CHANNEL_LAYERS = {

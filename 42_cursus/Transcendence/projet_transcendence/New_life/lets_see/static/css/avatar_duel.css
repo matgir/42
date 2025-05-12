@@ -4,7 +4,6 @@ html, body {
   padding: 0;
   height: 100%;
   box-sizing: border-box;
-  overflow: hidden;
   scroll-behavior: smooth;
 }
 
@@ -15,15 +14,12 @@ body {
   height: 100vh;
   overflow-y: hidden;
   scroll-snap-type: y mandatory; 
-  overflow: hidden;
 }
-
 
 .section {
   flex-shrink: 0;
   height: 100vh; 
   scroll-snap-align: start;
-  overflow: hidden;
 }
 .canvas_tournois, .blur-box_avatar {
   height: 100%;
@@ -32,7 +28,6 @@ body {
 
 .navig {
   display: flex;
-  overflow: hidden;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -246,8 +241,6 @@ character-card:hover img {
 #app-content, .navig, .blur-box_avatar, .canvas_tournois {
   position: static !important;
   transform: none !important;
-  /* border: solid 2px red; */
-
 }
 
 /* Ajustements visuels */
@@ -518,10 +511,22 @@ r */
     font-family: 'Entropia_sansserif-Regular', regular;
     font-size: 90px;
     text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
+    /* position: fixed; */
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    /* font-family: "Roboto", sans-serif; */
+    /* font-size: 90px; */
+    /* font-weight: bold; */
+    /* color: #0051ff; */
+
+
     z-index: 10;
+  
 }
 
 .character-button {
+  /* Remplacer complètement le style existant par : */
   color: #00d5ffc3 !important;
   font-family: "Roboto", sans-serif;
   font-size: 14px;
@@ -536,6 +541,3 @@ r */
   transition: all 0.3s ease;
   box-sizing: content-box; 
 }
-
-
-

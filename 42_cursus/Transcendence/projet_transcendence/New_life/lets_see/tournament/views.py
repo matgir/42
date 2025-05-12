@@ -6,12 +6,10 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 @login_required
-def match_history(request):
-	user = request.GET.get('user');
-	if user is None:
-		user = request.user
+def match_history(request, username):
+	user = get_object_or_404(CustomUser, username=username)
 	matches = Match.objects.filter(player=user).order_by('-played_at')
-
+	print(user)
 	return render(request, 'tournament/match_history.html', {
 		'matches': matches,
 		'user': user,

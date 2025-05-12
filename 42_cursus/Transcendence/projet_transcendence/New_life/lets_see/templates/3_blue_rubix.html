@@ -17,18 +17,6 @@
       <form id="game-settings-form" action="/tournois/" method="get" class="settings-container" >
         <img class="logo_" src="{% static 'logo/entropia9.png' %}" alt="Logo">
       
-
-
-            <!--BONUS-->
-        <div class="category4">
-          <h2>Bonus</h2>
-          <div class="options">
-            <div class="option">
-              <input type="checkbox" name="bonus" id="bonus_able" value="1">
-              <label for="bonus_able"></label>
-            </div>
-          </div>
-        </div>
         <!-- Level Category -->
         <div class="category">
           <h2>Level</h2>
@@ -94,17 +82,28 @@
             </div>
           </div>
         </div>
-
+          <div class="category4">
+            <h2>Bonus</h2>
+            <!-- <div class="options"> -->
+              <div class="option">
+                <input type="checkbox" name="bonus" id="bonus_able">
+                <label for="bonus_able"></label>
+                <!-- <span>3 points</span> -->
+        <!-- </div> -->
+   
     
-        <a class="quit-button" style="text-decoration: none;" href="/">QUIT</a>
-        <button class="play-button" type="submit">PLAY</button>
-      </form>
           </div>
         </div>
+      </div>   
+      <div class="play_buttons">
+        <button class="quit-button">QUIT</button>
+        <button class="play-button" type="submit">PLAY</button>
       </div>
+      </form>
 
     </div>
   <canvas class="webgl"></canvas>
+</div>
 </div>
 
 

@@ -41,8 +41,9 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  overflow-y: hidden;
+
   /* border: solid 2px pink; */
-  padding-top: 60px ;
 
 }
 
@@ -55,7 +56,6 @@ body {
 
   /* border: solid 2px pink; */
 }
-
 
 .image_column {
   position: absolute;
@@ -251,10 +251,10 @@ body {
 
 @keyframes pulse {
   from {
-    box-shadow: 0 0 10px rgb(255, 236, 25, 0.5);
+    box-shadow: 0 0 10px rgba(255, 25, 25, 0.5);
   }
   to {
-    box-shadow: 0 0 20px rgb(255, 236, 25, 0.9);
+    box-shadow: 0 0 20px rgba(51, 0, 255, 0.9);
   }
 }
 
@@ -262,22 +262,48 @@ body {
 .tournament-winner {
   font-size: 40px !important;
   font-weight: bold !important;
-  color: #ffff00 !important;
-  text-shadow: 0 0 20px rgba(255, 255, 0, 0.7) !important;
+  color: #00ff2a !important;
+  text-shadow: 0 0 20px rgba(0, 255, 72, 0.7) !important;
   animation: winPulse 3s infinite alternate !important;
-  border: 3px solid #ffff00 !important;
+  border: 3px solid #d400ff !important;
 }
 
 @keyframes winPulse {
   from {
-    text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    text-shadow: 0 0 10px rgba(255, 0, 221, 0.5);
     transform: scale(1);
   }
   to {
-    text-shadow: 0 0 30px rgba(255, 255, 0, 0.9);
+    text-shadow: 0 0 30px rgba(247, 0, 255, 0.9);
     transform: scale(1.1);
   }
 }
+
+
+
+/* .countdown2 {
+  font-size: 30px;
+  font-weight: bold;
+  background: linear-gradient(270deg, #ff0055, #ffcc00, #00ffcc, #0055ff, #ff0055);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-color: black;
+  background-clip: text; 
+  color: transparent;
+  animation: gradientText 5s linear infinite;
+  font-family: "Roboto", sans-serif;
+}
+
+@keyframes gradientText {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+} */
+
 
 .globo_tournament{
   font-size: 30px;
@@ -362,24 +388,6 @@ body {
   position: static !important;
   transform: none !important;
 
-}
-
-/* Reset des positions */
-.blur-box_avatar{
-
-  /* border: solid 2px pink;
-  background: rgba(10, 186, 255, 0.028);
-
-  border-radius: 14px;
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1.5px solid rgba(55, 83, 183, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(9, 11, 41, 0.139);
-  color: white;
-  box-shadow: 0px 0px 500px 0 rgba(24, 51, 255, 0.23); */
-  
-
-  
 }
 
 /* Ajustements visuels */
@@ -624,6 +632,43 @@ html, body {
   opacity: 0;
   animation: fadeIn 0.5s ease-in 0.2s forwards; /* Le dernier 2s est le délai */
 }
+
+
+.n_round_text{
+  margin-top: 20px;
+  line-height: 1;
+  font-size: 35px;
+  text-align: center;
+  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+}
+
+.n_round{
+  font-size: 100px;
+  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  line-height: 1;
+  font-size: 70px;
+  text-align: center;
+}
+
+
+.countdown2 {
+  color: #ffcc0000;
+  background: none;
+  border: none;
+}
+
+.countdown2-wrapper {
+
+  color: #ffcc0000;
+  background: none;
+  border: none;
+}
+
+
 
 @keyframes fadeIn {
   from { opacity: 0; }

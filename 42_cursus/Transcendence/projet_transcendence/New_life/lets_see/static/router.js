@@ -63,18 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
         htmlResponse = await fetch(apiPath);
       }
       
-      // Handle redirects (e.g., 302 Found)
-      // fetch automatically follows redirects, so check response.redirected
-      if (htmlResponse.redirected) {
-        const redirectUrl = new URL(htmlResponse.url); // URL after following redirects
-        // Ensure we are using the path relative to the domain for SPA routing
-        const newPath = redirectUrl.pathname + redirectUrl.search + redirectUrl.hash; 
-        console.log(`Redirect detected from ${apiPath} to: ${newPath}. Navigating...`);
-        // Navigate to the new path, letting that navigateTo call handle history
-        navigateTo(newPath, null); 
-        return 'redirected'; // Signal that navigation was handled due to redirect
-      }
-
       // If route doesn't exist, redirect to 404
       if (!htmlResponse.ok) {
         if (htmlResponse.status === 404) {
@@ -178,36 +166,27 @@ document.addEventListener("DOMContentLoaded", () => {
     // Special case for root path
     const htmlPath = path === "/" ? "/home/" : path;
 
-    // Prepare state object, but don't push history yet
+    // Update browser history
     const stateObj = {
       path: path,
       formData: formData,
     };
 
     console.log(
-      `Attempting navigation to: ${path}` // Updated log message
+      `Navigating to: ${path}, pushing state:`,
+      stateObj
     );
 
-    // Set global path variable - might be better to do this only on successful load?
-    // window.currentPath = path; // Moved down
+    // Set global path variable
+    window.currentPath = path;
 
-    // Load the page content first to make sure it exists/handle redirects
-    const loadResult = await loadPage(htmlPath, formData, true); // Pass true for updateHistory intent initially
+    // Load the page content first to make sure it exists
+    const success = await loadPage(htmlPath, formData);
     
-    // Only update history if page load was successful and not a redirect
-    if (loadResult === true) { // Explicitly check for true success
-      console.log(`Successfully loaded ${htmlPath}. Pushing state for ${path}.`);
-      window.currentPath = path; // Update global path tracking
-      path = path.replace('/api/', '/');
+    if (success) {
+      // Only update history if page load was successful
       window.history.pushState(stateObj, "", path);
       currentPage = path;
-    } else if (loadResult === 'redirected') {
-      console.log(`Redirect occurred while loading ${htmlPath}. Navigation and history handled by the redirect target.`);
-      // History is handled by the navigateTo call triggered inside loadPage
-    } else {
-      // loadResult might be false or undefined if loadPage failed
-      console.error(`Failed to load page ${htmlPath} (result: ${loadResult}). Navigation aborted for ${path}.`);
-       // Consider if any cleanup or error display is needed here
     }
   };
 

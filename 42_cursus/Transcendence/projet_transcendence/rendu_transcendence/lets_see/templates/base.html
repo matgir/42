@@ -27,6 +27,7 @@
 		<script src="https://cdn.jsdelivr.net/gh/KLA6/cannon-es-umd@v0.20.0/cannon-es.umd.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.min.js"></script>
+		<script src="{% static 'js/auth.js' %}"></script>
 		<script type="module" src="{% static 'router.js' %}"></script>
 		<link rel="stylesheet" href="{% static 'css/home.css' %}">
 		<style>
@@ -281,6 +282,7 @@
 		#search-results-dropdown a:hover {
 			background-color: #555;
 		}
+
 		/* End style for dropdown */
 
 		</style>
@@ -302,7 +304,7 @@
 					<div class="search-form-container">
 						<form class="search-form" id="search-friend-form" method="GET" action="/api/users/search_friends/" data-no-spa>
 							{% csrf_token %}
-							<input class="search-form" id="search-friend-input" type="text" name="q" placeholder="Search friends" required autocomplete="off">
+							<input class="search-form" id="search-friend-input" type="text" name="q" placeholder="{% trans 'Search friends' %}" required autocomplete="off">
 						</form>
 						<div id="search-results-dropdown" class="search-results-dropdown"></div>
 					</div>
@@ -448,6 +450,39 @@
 			}
 			
 			</script>
+			<script>
+				function checkURLandToggleNav() {
+				  const path = window.location.pathname;
+				  const nav = document.querySelector('nav');
+			  
+				  if (!nav) return;
+			  
+				  if (path.includes('/users/accounts/two_factor/')) {
+					nav.style.display = 'none';
+				  } else {
+					nav.style.display = ''; // reset to default (usually 'block' or CSS-defined)
+				  }
+				}
+			  
+				// Run on initial load
+				checkURLandToggleNav();
+			  
+				// Listen for URL changes
+				window.addEventListener('popstate', checkURLandToggleNav);
+			  
+				// Patch pushState and replaceState
+				const originalPushState = history.pushState;
+				history.pushState = function () {
+				  originalPushState.apply(this, arguments);
+				  checkURLandToggleNav();
+				};
+			  
+				const originalReplaceState = history.replaceState;
+				history.replaceState = function () {
+				  originalReplaceState.apply(this, arguments);
+				  checkURLandToggleNav();
+				};
+			</script>  
 	</body>
 	</html>
 	

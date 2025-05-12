@@ -1,44 +1,57 @@
+{% comment %} {% extends "base.html" %} {% endcomment %}
+{% load static %}
 {% load i18n %}
 
-<div class="match-history"  style="font-size: 1.5rem;" >
-{% if matches %}
-	<table >
-		<thead >
-			<tr>
-				<!-- <th>{% trans "Opponent" %}</th>
-				<th>{% trans "Result" %}</th>
-				<th>{% trans "Score" %}</th>
-				<th>{% trans "Date" %}</th> -->
-			</tr>
-		</thead>
-		<tbody>
-			{% for match in matches %}
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<h1>
+	{% blocktrans with username=user.username %}
+		{{ username }}'s match history
+	{% endblocktrans %}
+</h1>
+
+	{% if matches %}
+		<table>
+			<thead>
 				<tr>
-					<td>{{ match.opponent_alias }}</td>
-					<td>
-						{% if match.result == "win" %}
-							<span style="color: rgb(0, 217, 255);">
-								{% trans "Win" %}
-							</span>
-						{% else %}
-							<span style="color: rgb(204, 0, 255);">
-								{% trans "Loss" %}
-							</span>
-						{% endif %}
-					</td>
-					<td>
-						{{ match.player_score }} - {{ match.opponent_score }}
-					</td>
-					<td>
-						{{ match.played_at|date:"Y-m-d H:i" }}
-					</td>
+					<th>{% trans "Opponent" %}</th>
+					<th>{% trans "Result" %}</th>
+					<th>{% trans "Score" %}</th>
+					<th>{% trans "Date" %}</th>
 				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-{% else %}
-	<p>
-		{% trans "No matches recorded yet." %}
-	</p>
-{% endif %}
-</div>
+			</thead>
+			<tbody>
+				{% for match in matches %}
+					<tr>
+						<td>{{ match.opponent_alias }}</td>
+						<td>
+							{% if match.result == "win" %}
+								<span style="color: green;">
+									{% trans "Win" %}
+								</span>
+							{% else %}
+								<span style="color: red;">
+									{% trans "Loss" %}
+								</span>
+							{% endif %}
+						</td>
+						<td>
+							{{ match.player_score }} - {{ match.opponent_score }}
+						</td>
+						<td>
+							{{ match.played_at|date:"Y-m-d H:i" }}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<p>
+			{% trans "No matches recorded yet." %}
+		</p>
+	{% endif %}

@@ -8,11 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-<<<<<<< HEAD
-"POT-Creation-Date: 2025-05-03 19:33+0200\n"
-=======
 "POT-Creation-Date: 2025-05-04 16:00+0200\n"
->>>>>>> origin/jwt_token
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,33 +23,6 @@ msgstr ""
 msgid "Submit Username"
 msgstr "Enviar nombre de usuario"
 
-<<<<<<< HEAD
-#: fortytwo/views.py:78
-msgid "1- No authorization code given"
-msgstr "1 -No se proporcionó el código de autorización"
-
-#: fortytwo/views.py:104
-msgid "Error during the access token exchange"
-msgstr "Error durante el intercambio del token de acceso"
-
-#: fortytwo/views.py:108
-msgid "2- No authorization code given"
-msgstr "2- No se proporcionó el código de autorización"
-
-#: fortytwo/views.py:161
-msgid "Missing authorization code during session"
-msgstr "Falta el código de autorización durante la sesión"
-
-#: fortytwo/views.py:174
-msgid "Error during the exchange of the code for the token"
-msgstr "Error durante el intercambio del código por el token"
-
-#: fortytwo/views.py:178
-msgid "Token expired"
-msgstr "Token expirado"
-
-#: fortytwo/views.py:187
-=======
 #: fortytwo/views.py:90
 msgid "1- No authorization code given"
 msgstr "1 -No se proporcionó el código de autorización"
@@ -79,7 +48,6 @@ msgid "Token expired"
 msgstr "Token expirado"
 
 #: fortytwo/views.py:199
->>>>>>> origin/jwt_token
 msgid "Could not collect user informations"
 msgstr "No se pudo recopilar la información del usuario"
 
@@ -131,20 +99,12 @@ msgstr "Buscar"
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-<<<<<<< HEAD
-#: templates/base.html:246 templates/home.html:67 templates/signin.html:13
-=======
 #: templates/base.html:246 templates/home.html:75 templates/signin.html:13
->>>>>>> origin/jwt_token
 #: templates/signup.html:12
 msgid "Sign In"
 msgstr "Iniciar sesión"
 
-<<<<<<< HEAD
-#: templates/base.html:249 templates/home.html:71
-=======
 #: templates/base.html:249 templates/home.html:79
->>>>>>> origin/jwt_token
 msgid "Sign In with 42"
 msgstr "Iniciar sesión con 42"
 
@@ -154,7 +114,7 @@ msgstr "MODO BASICO"
 
 #: templates/basic_setting.html:22 templates/basic_setting_duel.html:22
 msgid "SETTINGS"
-msgstr "REGLAGES"
+msgstr "CONFIGURACION"
 
 #: templates/duel.html:101 templates/tournois.html:99
 msgid "OK"
@@ -200,11 +160,7 @@ msgstr "Regístrate"
 msgid "SIGN IN"
 msgstr "INICIAR SESION"
 
-<<<<<<< HEAD
-#: templates/home.html:62
-=======
 #: templates/home.html:70
->>>>>>> origin/jwt_token
 msgid "I'm happy"
 msgstr "Estoy feliz"
 
@@ -224,25 +180,6 @@ msgstr "¿Ya tienes una cuenta?"
 msgid "SIGN UP"
 msgstr "REGISTRARSE"
 
-<<<<<<< HEAD
-#: templates/signup.html:41
-msgid "Min 8 characters"
-msgstr "Mín 8 caracteres"
-
-#: templates/signup.html:47
-msgid "A number"
-msgstr "Un número"
-
-#: templates/signup.html:53
-msgid "Upper case"
-msgstr "Letra mayúscula"
-
-#: templates/signup.html:58
-msgid "A special symbol"
-msgstr "Un símbolo especial"
-
-#: templates/signup.html:65
-=======
 #: templates/signup.html:49
 msgid "Min 8 characters"
 msgstr "Mín 8 caracteres"
@@ -260,7 +197,6 @@ msgid "A special symbol"
 msgstr "Un símbolo especial"
 
 #: templates/signup.html:73
->>>>>>> origin/jwt_token
 msgid "Sign Up"
 msgstr "Registrarse"
 
@@ -294,71 +230,11 @@ msgstr ""
 "\n"
 "\t\tHistorial de partidas de %(username)s\t"
 
-<<<<<<< HEAD
-#: templates/signin.html:33
-msgid "If you have not created an account yet, then please sign up first."
-msgstr "Si aún no has creado una cuenta, por favor regístrate primero."
-
-#: templates/signup.html:9
-msgid "Already have an account?"
-msgstr "¿Ya tienes una cuenta?"
-
-#: templates/signup.html:18
-msgid "SIGN UP"
-msgstr "REGISTRARSE"
-
-#: templates/signup.html:41
-msgid "Min 8 characters"
-msgstr "Mín 8 caracteres"
-
-#: templates/signup.html:47
-msgid "A number"
-msgstr "Un número"
-
-#: templates/signup.html:53
-msgid "Upper case"
-msgstr "Letra mayúscula"
-
-#: templates/signup.html:58
-msgid "A special symbol"
-msgstr "Un símbolo especial"
-
-#: templates/signup.html:65
-msgid "Sign Up"
-msgstr "Registrarse"
-
-#: templates/tournois.html:162
-msgid "SHUFFLE"
-msgstr "MEZCLAR"
-
-#: templates/tournois.html:178
-msgid "POINTS"
-msgstr "PUNTOS"
-
-#: templates/tournois.html:180
-msgid "TO WIN"
-msgstr "PARA GANAR"
-
-#: templates/vs_tournois.html:21
-msgid "DUEL MODE"
-msgstr "MODO DUEL"
-
-#: templates/vs_tournois.html:24
-msgid "TOURNAMENT"
-msgstr "TORNEO"
-
-#: tournament/templates/tournament/match_history.html:8
-msgid "Opponent"
-msgstr "Oponente"
-
-#: tournament/templates/tournament/match_history.html:9
-=======
 #: tournament/templates/tournament/match_history.html:23
 msgid "Opponent"
 msgstr "Oponente"
 
 #: tournament/templates/tournament/match_history.html:24
->>>>>>> origin/jwt_token
 msgid "Result"
 msgstr "Resultado"
 
@@ -378,11 +254,7 @@ msgstr "Victoria"
 msgid "Loss"
 msgstr "Derrota"
 
-<<<<<<< HEAD
-#: tournament/templates/tournament/match_history.html:41
-=======
 #: tournament/templates/tournament/match_history.html:56
->>>>>>> origin/jwt_token
 msgid "No matches recorded yet."
 msgstr "Aún no hay partidas registradas."
 
@@ -390,11 +262,7 @@ msgstr "Aún no hay partidas registradas."
 msgid "Prefered Language"
 msgstr "Idioma preferido"
 
-<<<<<<< HEAD
-#: users/templates/users/friends.html:4
-=======
 #: users/templates/users/friends.html:6
->>>>>>> origin/jwt_token
 msgid "My friends"
 msgstr "Mis amigos"
 
@@ -522,77 +390,31 @@ msgstr "Archivo de imagen no válido."
 msgid "This username is not allowed."
 msgstr "Este nombre de usuario no está permitido."
 
-<<<<<<< HEAD
-#: users/views.py:35
-msgid "You can not be friends with yoursefl."
-msgstr "No puedes ser amigo de ti mismo."
-
-#: users/views.py:38
-msgid "Your avatar has been updated."
-msgstr ""
-
-#: users/views.py:40
-msgid "Please enter a valid avatar."
-msgstr ""
-
-#: users/views.py:50
-msgid "You can not be friends with yoursefl."
-msgstr "No puedes ser amigo de ti mismo."
-
-#: users/views.py:53
-=======
 #: users/views.py:37
 msgid "You can not be friends with yoursefl."
 msgstr "No puedes ser amigo de ti mismo."
 
 #: users/views.py:40
->>>>>>> origin/jwt_token
 #, python-format
 msgid "You are already friends with %(username)s."
 msgstr "Ya eres amigo de %(username)s."
 
-<<<<<<< HEAD
-#: users/views.py:42
-=======
 #: users/views.py:44
->>>>>>> origin/jwt_token
 #, python-format
 msgid "You are now friends with %(username)s."
 msgstr "Ahora eres amigo de %(username)s."
 
-<<<<<<< HEAD
-#: users/views.py:52
-=======
 #: users/views.py:54
->>>>>>> origin/jwt_token
 msgid "As you can not be friends with yourself, you can not unfriend yourself."
 msgstr ""
 "Como no puedes ser amigo de ti mismo, no puedes eliminarte de tus amigos."
 
-<<<<<<< HEAD
-#: users/views.py:57
-=======
 #: users/views.py:59
->>>>>>> origin/jwt_token
 #, python-format
 msgid "You removed %(username)s from your friends"
 msgstr "Eliminaste a %(username)s de tus amigos."
 
-<<<<<<< HEAD
-#: users/views.py:68
-msgid "As you can not be friends with yourself, you can not unfriend yourself."
-msgstr ""
-"Como no puedes ser amigo de ti mismo, no puedes eliminarte de tus amigos."
-
-#: users/views.py:73
-#, python-format
-msgid "You removed %(username)s from your friends"
-msgstr "Eliminaste a %(username)s de tus amigos."
-
-#: users/views.py:75
-=======
 #: users/views.py:61
->>>>>>> origin/jwt_token
 #, python-format
 msgid "%(username)s is not in your friends list"
 msgstr "%(username)s no está en tu lista de amigos."

@@ -18,6 +18,17 @@ export function initialize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
+    console.log("ICI");
+    const resizeHandler = () => {
+        sizes.width = window.innerWidth;
+        sizes.height = window.innerHeight;
+        camera.aspect = sizes.width / sizes.height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(sizes.width, sizes.height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    };
+    window.addEventListener('resize', resizeHandler);
+
     // Geometry
     const geometry = new THREE.PlaneGeometry(1, 1, 100, 100);
 
@@ -179,7 +190,8 @@ export function initialize() {
             renderer.dispose(); // Dispose THREE.js resources associated with the renderer
             renderer.forceContextLoss(); // Helps release GPU resources
                 // Remove event listeners
-        // window.removeEventListener('resize', resizeHandler);
+
+        window.removeEventListener('resize', resizeHandler);
         window.removeEventListener('mousemove', mouseMoveHandler);
         }
 
@@ -225,16 +237,16 @@ window.currentModuleCleanup = initialize();
 //     renderer.setSize(sizes.width, sizes.height);
 //     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     
-//     // Resize handler
-//     const resizeHandler = () => {
-//         sizes.width = window.innerWidth;
-//         sizes.height = window.innerHeight;
-//         camera.aspect = sizes.width / sizes.height;
-//         camera.updateProjectionMatrix();
-//         renderer.setSize(sizes.width, sizes.height);
-//         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-//     };
-//     window.addEventListener('resize', resizeHandler);
+    // // Resize handler
+    // const resizeHandler = () => {
+    //     sizes.width = window.innerWidth;
+    //     sizes.height = window.innerHeight;
+    //     camera.aspect = sizes.width / sizes.height;
+    //     camera.updateProjectionMatrix();
+    //     renderer.setSize(sizes.width, sizes.height);
+    //     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // };
+    // window.addEventListener('resize', resizeHandler);
     
 //     // Mouse interaction
 //     const mouse = { x: 0, y: 0 };

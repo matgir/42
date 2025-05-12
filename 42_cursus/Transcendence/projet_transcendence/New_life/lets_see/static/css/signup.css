@@ -3,29 +3,6 @@
   margin-top: 95px; 
 }
 
-
-.blur-box2 {
-  background: rgba(211, 209, 255, 0.025);
-  /* background: rgba(45, 44, 70, 0.1); */
-  border-radius: 14px;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 2px solid rgba(232, 233, 255, 0.054);
-  box-shadow: 0 0 400px 140px rgba(1, 2, 9, 0.242);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 30px 60px;
-  padding-bottom: 50px;
-  z-index: 3;
-}
-
-.blur-box2 {
-  will-change: box-shadow;
-}
-
 .already_sign_up {
   margin-left: auto; 
   margin-top: 0; 
@@ -47,7 +24,6 @@
   align-items: center; 
   justify-content: flex-start;
   margin-top: 0; 
-  margin-bottom: 20px;
 }
 
 

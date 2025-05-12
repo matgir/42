@@ -340,7 +340,7 @@ border-radius: 5px;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.007);
+  background-color: rgba(0, 0, 0, 0.8);
   display: none;
   justify-content: start;
   align-items: center;
@@ -358,13 +358,35 @@ border-radius: 5px;
 
 
 
+/* #countdown {
+  font-family: 'Entropia_sansserif-Regular', regular;
+  font-size: 90px;
+} */
+
+
+.countdown  {
+  font-family: 'Entropia_sansserif-Regular', regular;
+  font-size: 80px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  /* font-family: "Roboto", sans-serif; */
+  /* font-size: 90px; */
+  /* font-weight: bold; */
+  /* color: #0051ff; */
+  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 100;
+}
+
 .countdown.show , enter.show {
   opacity: 1;
 }
 
-.countdown-number  {
-  transform: translate(-50%, -50%);
-  transform-origin: center;
+.countdown-number , enter_button {
   animation: pulse 0.5s infinite alternate;
 }
 
@@ -468,7 +490,6 @@ border-radius: 5px;
   text-align: center;
   z-index: 10;
   border: 1px solid rgba(255, 255, 255, 0.09);
-  visibility: hidden;
 
 }
 
@@ -513,31 +534,32 @@ border-radius: 5px;
 }
 
 
+
+
+
+
+/* #countdown {
+  font-family: 'Entropia_sansserif-Regular', regular;
+  font-size: 90px;
+} */
+
+
 .countdown {
   font-family: 'Entropia_sansserif-Regular', regular;
   font-size: 90px;
-  @apply text-white text-4xl font-bold text-center;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: bounce 1s infinite;
+  /* font-family: "Roboto", sans-serif; */
+  /* font-size: 90px; */
+  /* font-weight: bold; */
+  /* color: #0051ff; */
   text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
   opacity: 0;
   transition: opacity 0.3s;
   z-index: 100;
 }
-
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translate(-50%, -52%);
-  }
-  50% {
-    transform: translate(-50%, -48%);
-  }
-}
-
 
 .countdown.show {
   opacity: 1;
@@ -607,9 +629,6 @@ border-radius: 5px;
     pointer-events: auto;
 }
 
-
-
-
 /* Hide all pong UI elements by default */
 .fixed-top,
 .parent_controls_l,
@@ -632,18 +651,9 @@ border-radius: 5px;
 .pong-section.visible .blur-box_score_parent_l,
 .pong-section.visible .blur-box_score_parent_r,
 .pong-section.visible .blur-box_parent_history,
-
+.pong-section.visible .fixed-bottom,
 .pong-section.visible .countdown,
 .pong-section.visible .game-over-overlay {
     visibility: visible;
     opacity: 1;
 }
-.pong-section.visible .fixed-bottom{
-  visibility: hidden;
-  opacity: 0;
-}
-/* .game-over-overlay {
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-} */

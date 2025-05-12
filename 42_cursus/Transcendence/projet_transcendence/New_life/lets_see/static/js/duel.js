@@ -42,7 +42,6 @@ window.addEventListener('keydown', function(e) {
 // Canvas
 const canvas = document.querySelector('canvas.webgl-bg');
 const scene = new THREE.Scene();
-scene.background = new THREE.Color("#000005");
 
 
 // SceneParamètres de taille de la fenêtre
@@ -88,7 +87,7 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Type d'ombre douce
 
 // Création d'un plan subdivisé
-const geometry = new THREE.PlaneGeometry(20, 20, 35, 35); // 100x100 segments
+const geometry = new THREE.PlaneGeometry(20, 20, 30, 30); // 100x100 segments
 const material = new THREE.MeshBasicMaterial({ color: 0x8E00EE, wireframe: true });
 const plane = new THREE.Mesh(geometry, material);
 scene.add(plane);
@@ -467,7 +466,7 @@ document.addEventListener('matchEnd', function(e) {
             
             // Report match result to server
             reportMatchToServer({
-                result: specialUserWon ? 'win' : 'loss',
+                result: specialUserWon ? 'win' : 'loose',
                 player_score: playerScore,
                 opponent_score: opponentScore,
                 opponent_alias: opponentName
@@ -480,8 +479,6 @@ document.addEventListener('matchEnd', function(e) {
 
 return function cleanup() {
     console.log("cleanup tournois");
-    window.avatarCleanup();
-    window.pongCleanup();
 }
 }
 

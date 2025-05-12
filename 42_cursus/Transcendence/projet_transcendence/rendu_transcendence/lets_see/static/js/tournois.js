@@ -1,4 +1,6 @@
 export function initialize() {
+
+
     // Ensure the page starts at the top visually, even before scrolling to the section
     document.documentElement.scrollTop = 0; 
     document.body.scrollTop = 0; // For Safari
@@ -62,6 +64,8 @@ const canvas = document.querySelector('canvas.webgl-bg');
 const scene = new THREE.Scene();
 scene.background = new THREE.Color("#000005");
 
+
+
 // Camera
 const sizes = {
     width: window.innerWidth,
@@ -89,40 +93,68 @@ window.addEventListener('resize', () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
-// Parameters
-const numCubes = 45;
-const waveLength = 3; // Longueur d'onde
-const waveAmplitude = 2; // Amplitude de l'onde
-const waveSpeed = 0.2; // Vitesse de propagation de l'onde plus douce
-const oscillationSpeed = 0.6; // Vitesse de l'oscillation des cubes plus douce
-const scaleFactor = 0.9; // Facteur d'échelle des cubes
-const cubeSize = 0.6; // Taille des cubes
 
-// Create cubes
+const cubeSize = 1.3; 
+const waveSpeed = 0.10; 
+const oscillationSpeed = 0.4; 
+const scaleFactor = 0.8;
+
+const waveLength = 5; 
+const waveAmplitude = 4; 
+const numCubes = 13; 
+
+const colors = [
+    0xff0000, 
+    0x0000ff, 
+    0x4b0082, 
+    0x9400d3  
+];
+
+
+
+const colorSettings = {
+    saturation: 0.98, 
+    lightness: 0.55,   
+    speed: 0.1,       
+    spread: 0.18      
+};
+
 const cubes = [];
-const geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize , 1, 1 ,2);
-const material = new THREE.MeshStandardMaterial({
-    color: 0x283aff, // Bleu brut
-    wireframe: true // Mode wireframe
-});
+const geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize, 2, 2, 2);
 
 for (let i = 0; i < numCubes; i++) {
+    // Choisir une couleur basée sur la position ou aléatoirement
+    const colorIndex = i % colors.length;
+    const material = new THREE.MeshStandardMaterial({
+        color: colors[colorIndex],
+        wireframe: true
+    });
+    
     const cube = new THREE.Mesh(geometry, material);
-    cube.castShadow = true; // Les cubes peuvent lancer des ombres
-    cube.receiveShadow = true; // Les cubes peuvent recevoir des ombres
+    cube.castShadow = true;
+    cube.receiveShadow = true;
     cubes.push(cube);
     scene.add(cube);
 }
-
-// Add light
-const ambientLight = new THREE.AmbientLight(0x404040, 1); // Lumière ambiante douce
+// Remplacer les lumières existantes par :
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.3); // Réduit un peu la lumière ambiante
 scene.add(ambientLight);
 
-// Light directionnelle
-const directionalLight = new THREE.DirectionalLight(0x02fff7, 1); // Lumière directionnelle douce
-directionalLight.position.set(5, 27, 14);
-directionalLight.castShadow = true; 
+// Lumière directionnelle principale plus intense
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+directionalLight.position.set(5, 10, 7);
+directionalLight.castShadow = true;
 scene.add(directionalLight);
+
+// Ajout d'une lumière ponctuelle colorée pour renforcer l'effet arc-en-ciel
+const pointLight = new THREE.PointLight(0xffffff, 1, 20);
+pointLight.position.set(0, 5, 10);
+scene.add(pointLight);
+
+// Light supplémentaire pour les reflets
+const rimLight = new THREE.DirectionalLight(0xffffff, 0.8);
+rimLight.position.set(-5, 5, -5);
+scene.add(rimLight);
 
 // Add a ground to receive shadows
 const groundGeometry = new THREE.PlaneGeometry(100, 100);
@@ -136,38 +168,56 @@ scene.add(ground);
 // Animate
 const clock = new THREE.Clock();
 
+
 const tick = () => {
     const elapsedTime = clock.getElapsedTime();
+    const smoothTime = elapsedTime * 0.7;
 
-    // Update cubes along the wave path
     cubes.forEach((cube, index) => {
-        const t = elapsedTime * waveSpeed + index * (Math.PI * 2 / numCubes);
+        const t = smoothTime * waveSpeed + index * (Math.PI * 2 / numCubes);
         const x = Math.sin(t) * waveLength;
         const y = Math.cos(t) * waveAmplitude;
 
-        // Position
-        cube.position.set(x, y, index * 0.15); // Positionnement plus proche
-
-        // Oscillation (position)
-        cube.position.x += Math.sin(elapsedTime * oscillationSpeed + index) * 0.15; // Oscillation plus douce
-        cube.position.y += Math.cos(elapsedTime * oscillationSpeed + index) * 0.15; // Oscillation plus douce
+        // Position Z inversée : les premiers indices (index=0) sont au fond
+        const zPosition = 10 - index * 0.3; // 10 = position de départ au fond
+        
+        cube.position.set(
+            x + Math.sin(smoothTime * oscillationSpeed + index) * 0.1,
+            y + Math.cos(smoothTime * oscillationSpeed + index) * 0.1,
+            zPosition // Les cubes avancent vers la caméra quand index augmente
+        );
 
         // Rotation
-        cube.rotation.x = t;
-        cube.rotation.y = t;
+        cube.rotation.x = t * 0.3;
+        cube.rotation.y = t * 0.5;
 
-        // Scale
-        const scale = 1 + Math.sin(elapsedTime + index) * scaleFactor;
-        cube.scale.set(scale, scale, scale);
+        // Scale qui augmente quand on se rapproche (z diminue)
+        const baseScale = 0.5; // Taille minimale au fond
+        const scaleGrowth = 0.08; // Facteur de croissance
+        const dynamicScale = baseScale + (10 - zPosition) * scaleGrowth; // Plus gros quand z diminue
+        const scale = dynamicScale + Math.sin(smoothTime * 0.5 + index) * scaleFactor;
+        cube.scale.setScalar(scale);
+
+        // Couleurs
+        const hue = (smoothTime * 0.1 + index * 0.07) % 1;
+        let adjustedHue = hue;
+        
+        if (hue < 0.1) adjustedHue = 0.8;
+        else if (hue >= 0.1 && hue < 0.25) adjustedHue = 0.6;
+        else if (hue >= 0.25 && hue < 0.4) adjustedHue = 0.4;
+
+        cube.material.color.setHSL(adjustedHue, 0.95, 0.65);
     });
 
-    // Render the scene
-    renderer.render(scene, camera);
+    // Position caméra ajustée
+    camera.position.z = 13.5;
+    camera.lookAt(0.8, 0.2, 5); // Regarde vers le milieu de la spirale
 
-    // Call the tick function recursively
+    renderer.render(scene, camera);
     window.requestAnimationFrame(tick);
 };
 
+// ... (le reste du code)
 // Start the animation loop
 tick();
 
@@ -702,7 +752,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // New function to report match results to server
 function reportMatchToServer(matchData) {
     const sessionId = getCookie('sessionid');
-    
+
+    // Build API URL dynamically based on current location
+    const protocol = window.location.protocol;
+    const host = window.location.host;
+    const reportUrl = `${protocol}//${host}/jeux_du_pong/report-match/`;
+
     // Prepare fetch options with the session ID cookie
     const fetchOptions = {
         method: 'POST',
@@ -715,7 +770,7 @@ function reportMatchToServer(matchData) {
     };
     
     // Send the API request
-    fetch('http://localhost:8000/jeux_du_pong/report-match/', fetchOptions)
+    fetch(reportUrl, fetchOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

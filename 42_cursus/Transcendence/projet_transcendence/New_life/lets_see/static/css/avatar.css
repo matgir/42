@@ -13,6 +13,10 @@ canvas.avatar-webgl {
 
 } 
 
+
+
+
+
 .casser {
     margin-top: -80px; /* Déplace un peu plus haut */
     display: flex;
@@ -26,7 +30,7 @@ canvas.avatar-webgl {
     border-radius: 5px;
     cursor: pointer;
     font-family: "Roboto", sans-serif;
-    /* border: solid 1px rgba(255, 255, 255, 0.461); */
+    border: solid 1px rgba(255, 255, 255, 0.461);
     text-align: left;
     z-index: 4;
   }
@@ -42,31 +46,22 @@ canvas.avatar-webgl {
     }
 
 .nop, .select {
-  font-family: "Roboto", sans-serif;
-  font-size: 70px;
-  font-weight: 600;
-
-    font-size: 25px;
-    margin: 20px;
-    padding: 10px 25px;
+    font-weight: 400;
+    font-size: 15px;
+    padding: 7px;
     min-width: 90px; /* largeur minimale */
     color: rgba(255, 255, 255, 0.711);
     margin-left: 15px;
-    /* background: none; */
-    border-radius: 10px;
+    background: none;
+    border-radius: 5px;
     cursor: pointer;
-    background-color: rgba(30, 0, 255, 0.875);
-    border: solid 1px rgba(255, 0, 0, 0);
+    font-family: "Roboto", sans-serif;
+    border: solid 1px rgba(255, 255, 255, 0.461);
     text-align: center;
-    /* backdrop-filter: blur(6px); */
+    backdrop-filter: blur(6px);
 }
-
-.nop{
-  background-color: rgba(135, 0, 203, 0.754);
-
-
-}
-
+    
+  
 .nop:hover, .select:hover{
     transform: scale(1.05);
   }

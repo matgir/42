@@ -221,7 +221,6 @@ character-card:hover img {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 40px 0;
   position: relative;
 }
 
@@ -287,7 +286,7 @@ character-card:hover img {
 /* Modifiez votre section .fullpage-section */
 .fullpage-section {
   width: 100% !important; /* Remplace 100vw par 100% */
-  overflow-x: hidden;
+  overflow-y: hidden;
   left: 0;
   right: 0;
 }
@@ -506,18 +505,7 @@ character-card:hover img {
     font-family: 'Entropia_sansserif-Regular', regular;
     font-size: 90px;
     text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
-    /* position: fixed; */
-    /* top: 50%; */
-    /* left: 50%; */
-    /* transform: translate(-50%, -50%); */
-    /* font-family: "Roboto", sans-serif; */
-    /* font-size: 90px; */
-    /* font-weight: bold; */
-    /* color: #0051ff; */
-
-
     z-index: 10;
-  
 }
 
 .character-button {
@@ -542,7 +530,6 @@ character-card:hover img {
   top: 9px !important;
   right: 10px !important;
   transform: none !important;
-<<<<<<< HEAD
 }
 
 .first_to_choose {
@@ -550,11 +537,8 @@ character-card:hover img {
   font-weight: 600;
   color: rgba(255, 255, 255, 0.898);
   margin-top: 40px ;
-  /* background-color: rgba(7, 40, 255, 0.494); */
+  background-color: rgba(0, 3, 23, 0.565);
   border: solid 2px blue;
   padding: 7px 24px;
   border-radius: 10px;
 }
-=======
-}
->>>>>>> origin/jwt_token

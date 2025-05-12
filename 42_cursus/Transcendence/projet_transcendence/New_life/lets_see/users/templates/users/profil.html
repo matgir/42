@@ -1,8 +1,6 @@
 {% load static %}
 {% load i18n %}
 
-{% load static %}
-{% load i18n %}
 <!-- Fonts et CSS -->
 <link rel="stylesheet" href="{% static 'users/css/profil.css' %}">
 <script type="module" src="{% static 'users/js/profil.js' %}"></script>
@@ -12,54 +10,86 @@
 
 <div id="app-content">
   <div id="navigation" class="navig">
-
+    <!-- <div class="navig"> -->
+      
+      <!-- <a class="settings" href="/avatar/" class="link_temp" style="margin-top: 100px;">AVATAR / link</a> -->
       <div class="blur-box_profil">
         <div class="bento-container">
           
-          <div class="card bento_large" id="2">
-            {% if user == request.user %}
-            <form method="post" enctype="multipart/form-data" action="/api/users/profile_edit/" style="margin: 0px;" data-no-spa id="username_form">
-              {% csrf_token %}
-              <input class="username_input" autocomplete="off" type="text" name="username" value="{{ user.username }}">
-              <div class="profil_edit_parent">
-              <h4 class="titre">Profil</h4>
-                {% if not user.login_42 %}
-                  {% if user.two_factor %}
-                    <hr>
-                    <a href="/users/accounts/two_factor/disable/">
-                      {% trans "Disable 2FA" %}
-                    </a>
-                    </hr>
-                  {% else %}
-                    <hr>
-
-                 
-                    <a class="settings" "/users/accounts/two_factor/setup/">
-                      {% trans "Enable 2FA" %}
-                    </a>
-                  
-                  </hr>
-                  {% endif %}
-                {% endif %}
-            </form>
-            </div>
-            {% else %}
-            <h5 class="username">
+          <div class="card bento_large">
+            <h4 class="titre">
+				{% trans "Match history" %}
+			</h4>
+            <a class="settings" href="/tournament/{{ user.username }}/match_history/">
+				{% trans "View Match History" %}
+            </a>
+            <!-- <button>Explore</button> -->
+          </div>
+          
+          <div class="card bento_long">
+            <h1 class="titre">
               {{ user.username }}
-            </h5>
-            <div class="profil_edit_parent" >
-              {% if isFriend %}
-              <a class="settings" href="/users/remove-friend/?username={{ user.username }}">
-                Remove Friend
+              <br>
+            </h1>
+            <p class="win_losse">
+				{% blocktrans with wins=user.wins losses=user.losses %}
+					Wins : {{ wins }} | Losses : {{ losses }}
+				{% endblocktrans %}
+            </p>
+            {% if user == request.user %}
+				{% if not user.login_42 %}
+					{% if user.two_factor %}
+						<hr>
+						<a href="/users/accounts/two_factor/disable/">
+							{% trans "Disable 2FA" %}
+						</a>
+					{% else %}
+						<hr>
+						<a href="/users/accounts/two_factor/setup/">
+							{% trans "Enable 2FA" %}
+						</a>
+					{% endif %}
+				{% endif %}
+
+            <h4 class="titre">
+				{% trans "Profile" %}
+			</h4>
+            <a class="settings" href="/users/friends_list/">
+				{% trans "View friends" %}
+            </a>
+          </div>
+          
+          
+          <div class="card bento_small">
+            <img src="{{ user.avatar.url }}" class="avatar" alt="Avatar" width="256" height="256">
+            <h3 class="titre">
+			{% trans "Avatar" %}
+			</h3>
+            <a class="settings" href="/users/profile_edit/">
+              {% trans "Edit Avatar (a link)" %}
+            </a>
+            
+          </div>
+          <div class="card bento_small">
+            <h3 class="titre">
+				{% trans "Settings" %}
+			</h3>
+            <a class="settings" href="/users/profile_edit/">
+              {% trans "Edit profile" %}
+            </a>
+          </div>
+          
+            {% else %}
+              <a class="settings" href="/users/add_friend/">
+                {% trans "Add Friend" %}
               </a>
-              {% else %}
-              <a class="settings" href="/users/add-friend/?username={{ user.username }}">
-                Add Friend
+              <hr class="titre">
+              <a class="settings" href="/users/remove_friend/">
+                {% trans "Remove Friend" %}
               </a>
-              {% endif %}
-            </div>
-            <div>
-              {% if user.online_status %}
+              <hr class="titre">
+              <div>
+                {% if user.online_status %}
                   <span style="color:green">
                     {% trans "Online" %}
                   </span>
@@ -70,45 +100,6 @@
                 {% endif %}
               </div>
             {% endif %}
-          </div>
-          
-          <div class="card bento_long" id="1">
-            {% include "tournament/match_history.html" with matches=matches user=user %}
-            <p class="win_losse">
-              Wins : {{ user.wins }} | Losses : {{ user.losses }}
-            </p>
-            <h4 class="titre">Match history</h4>
-          </div>
-          
-          
-          <div class="card bento_small" id="3">
-            {% if user == request.user %}
-            {% include "users/friends.html" with friends=friends %}
-            <h4 class="titre">Friends</h4>
-            {% endif %}
-          </div>
-
-          <div class="card bento_small" id="4">
-            {% if user == request.user %}
-              <img src="{{ user.avatar.url }}" class="avatar" alt="Avatar" width="100" height="100">
-                 <h3 class="titre">Avatar</h3>
-            <form method="post" enctype="multipart/form-data" action="/api/users/profile_avatar_edit/" style="margin: 0px;" data-no-spa id="avatar_form">
-              {% csrf_token %}
-              <div class="profil_edit_parent" >
-                <input type="file" name="avatar" id="avatar" accept="image/*">
-               <button class="settings" type="submit">
-                Edit
-              </button>
-            </div> 
-            </form>
-            {% else %}
-            <img src="{{ user.avatar.url }}" class="avatar" alt="Avatar" width="170" height="170">
-            <div class="profil_edit_parent" >
-              <h3 class="titre">Avatar</h3>
-            </div>
-            {% endif %}
-          </div>
-          
         </div>
       </div>
     </div>

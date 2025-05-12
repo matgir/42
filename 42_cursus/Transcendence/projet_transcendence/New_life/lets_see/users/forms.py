@@ -8,16 +8,6 @@ class UserProfileForm(forms.ModelForm):
         model = CustomUser
         fields = ['username', 'avatar']
 
-class UsernameProfileForm(forms.ModelForm):
-    class Meta:
-        model = CustomUser
-        fields = ['username']
-
-class AvatarProfileForm(forms.ModelForm):
-    class Meta:
-        model = CustomUser
-        fields = ['avatar']
-
 class CustomSignupForm(SignupForm):
     username = forms.CharField(
         max_length=30,

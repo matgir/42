@@ -28,5 +28,14 @@ def validate_avatar(image):
 
 def validate_not_banned_username(value):
 	if value.lower() in BANNED_USERNAMES:
-		
-		raise ValidationError(_("This username is not allowed."))
+	 	raise ValidationError(
+            _('Forbiden username.'),
+            params={'value': value},
+        )	
+	
+def validate_min_username_length(value):
+    if len(value) < 3:
+        raise ValidationError(
+            _('Username must be at least 3 characters long.'),
+            params={'value': value},
+        )

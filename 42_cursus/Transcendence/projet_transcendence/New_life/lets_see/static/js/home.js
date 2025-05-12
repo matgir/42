@@ -8,7 +8,6 @@ export function initialize() {
 //##       ##     ## ##     ## ##     ## ##       ##    ##     ##     ## ##     ## ##    ## //
 //########  #######  ##     ## ########  ######## ##     ##    ########  ##     ## ##     ##//
 //////////////////////////////////////////////////////////////////////////////////////////////
-
 console.log("init home.js");
 window.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('js-loader');
@@ -284,26 +283,8 @@ const sizes = {
     height: window.innerHeight
 }
 
-const baseScreen = 1920;
-function updateLogo() {
-    const logo = document.querySelector('.logo');
-    const width = window.innerWidth;
-    const percent = width / baseScreen;
-    if (percent < 0.60) {
-    logo.src = "/static/logo/logo_square.png"; 
-    logo.style.width = "280px";
-    logo.style.left = "15%";
-    } else {
-    logo.src = "/static/logo/entropia9.png";
-    logo.style.width = "550px";
-    logo.style.left = "25%";
-    }
-}
-window.addEventListener('load', updateLogo);
-
 window.addEventListener('resize', () =>
 {
-    updateLogo();
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
 

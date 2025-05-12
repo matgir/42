@@ -4,8 +4,9 @@
 <script type="module" src="{% static 'js/avatar.js' %}"></script>
 
 <div class="game-over-content">
-  <canvas id="foreground" class="avatar-webgl"></canvas>
-
+  <h2>
+    {% trans "VICTORY!" %}
+  </h2>
 
   <div class="button-container">
     <button class="nop" id="quitButton">
@@ -20,3 +21,4 @@
   </p>
 </div>
 
+<canvas id="foreground" class="avatar-webgl"></canvas>

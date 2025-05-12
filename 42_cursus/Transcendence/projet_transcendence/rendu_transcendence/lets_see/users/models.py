@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from .validators import validate_avatar, validate_not_banned_username
+from .validators import validate_avatar, validate_not_banned_username, validate_min_username_length
 import uuid
 import os
 from PIL import Image
@@ -20,8 +20,9 @@ class CustomUser(AbstractUser):
 	two_factor = models.BooleanField(default=False)
 	username = models.CharField(
 		max_length=30,
+		blank=True,
 		unique=True,
-		validators=[validate_not_banned_username],
+		validators=[validate_not_banned_username, validate_min_username_length],
 		verbose_name=_("Username")
 	)
 	avatar = models.ImageField(

@@ -27,7 +27,7 @@ function createScene() {
 
     // Créer le renderer
     const renderer = new THREE.WebGLRenderer({ canvas: canvas });
-    renderer.setSize(400, 400);
+    renderer.setSize(350, 350);
     
     console.log("logsdvcv");             
 
@@ -352,24 +352,24 @@ function createScene() {
     tick();
 
     // Event handlers for buttons
-    document.getElementById('generateImageBtn').addEventListener('click', () => {
-        if (downloadDone) return;
+    // document.getElementById('generateImageBtn').addEventListener('click', () => {
+    //     if (downloadDone) return;
 
-        if (renderer && scene && camera) {
-            renderer.render(scene, camera);
-            console.log("CARGO");
+    //     if (renderer && scene && camera) {
+    //         renderer.render(scene, camera);
+    //         console.log("CARGO");
 
-            const dataURL = renderer.domElement.toDataURL('image/png');
-            const link = document.createElement('a');
-            link.href = dataURL;
-            link.download = 'screenshot.png';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+    //         const dataURL = renderer.domElement.toDataURL('image/png');
+    //         const link = document.createElement('a');
+    //         link.href = dataURL;
+    //         link.download = 'screenshot.png';
+    //         document.body.appendChild(link);
+    //         link.click();
+    //         document.body.removeChild(link);
 
-            downloadDone = true;
-        }
-    });
+    //         downloadDone = true;
+    //     }
+    // });
 
     document.getElementById('nop')?.addEventListener('click', () => {
         console.log("EHHO");

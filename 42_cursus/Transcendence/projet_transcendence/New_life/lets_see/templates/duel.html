@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{% static 'css/avatar_duel.css' %}">
 <link rel="stylesheet" href="{% static 'css/pong.css' %}">
 
+<body>
 
 <!-- Canvas fixe en arrière-plan pour les sections 1 et 2 -->
 <canvas class="webgl-bg"></canvas>
@@ -17,9 +18,6 @@
     <section class="fullpage-section avatar-section" id="section">
         <div class="app-content">
             <div class="navig">
-          <!--//////////////////////////// NEW TEXT TO TRAD ///////////////////////////////-->
-              <h class="first_to_choose">Host, you're the first to choose!</h>
-
                 <div class="blur-box_avatar">
                  <div class="character-grid">
                 
@@ -157,10 +155,6 @@
                   </div>
                   <div class="n_round" id="n_round">5</div>
                 </div>
-                <h2 class="countdown2" id="countdown2">
-                  <!-- //////////////////NEW TRAD/////////////////// -->
-                  {% trans "Winner!<br> You've unlocked a new avatar!" %}
-                </h2>
 
                 <div class="parent_controls_l">
                     <div class="controls">
@@ -169,7 +163,7 @@
                     </div>
                 </div>
 
-                    <!-- <div class="blur-box_parent_history">
+                    <div class="blur-box_parent_history">
                       <div class="blur-box_history">
                           <div class="name3">
                             {% trans "I'M THE BOSS" %}
@@ -179,7 +173,7 @@
                             {% trans "OH NO I LOST" %}
                           </div>
                           <div class="score_moi" id="failures">0</div>
-                      </div> -->
+                      </div>
 
                 <div class="parent_controls_r">
                     <div class="controls">
@@ -206,10 +200,9 @@
                     </div>
                 </div>
 
-                <div class="fixed-bottom" id="fixedBottomElement">
-                  {% trans "⏸ / space" %}
-              </div>
-              
+                <div class="fixed-bottom">
+                    {% trans "⏸ / space" %}
+                </div>
 
                 <div id="countdown" class="countdown">
                     <div class="countdown-number"></div>
@@ -217,9 +210,11 @@
             </div>
 
             <!-- Overlay de victoire -->
-            <div id="gameOverOverlay" class="game-over-overlay" style="display: none; flex-direction: column;">
+            <div id="gameOverOverlay" class="game-over-overlay">
                 {% include "avatar.html" %}
             </div>
         </div>
     </section>
 </div>
+
+</body>

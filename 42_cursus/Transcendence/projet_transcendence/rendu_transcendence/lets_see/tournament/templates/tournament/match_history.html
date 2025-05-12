@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<div class="match-history"  style="font-size: 1.5rem;" >
+<div class="match-history"  style="font-size: 1.3rem;" >
 {% if matches %}
 	<table >
 		<thead >
@@ -26,11 +26,12 @@
 							</span>
 						{% endif %}
 					</td>
+					
 					<td>
 						{{ match.player_score }} - {{ match.opponent_score }}
 					</td>
 					<td>
-						{{ match.played_at|date:"Y-m-d H:i" }}
+						<br>{{ match.played_at|date:"Y-m-d H:i" }}<br>
 					</td>
 				</tr>
 			{% endfor %}

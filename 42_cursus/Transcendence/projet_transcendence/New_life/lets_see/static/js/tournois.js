@@ -60,7 +60,6 @@ const canvas = document.querySelector('canvas.webgl-bg');
 
 // Scene
 const scene = new THREE.Scene();
-scene.background = new THREE.Color("#000005");
 
 // Camera
 const sizes = {
@@ -102,7 +101,7 @@ const cubeSize = 0.6; // Taille des cubes
 const cubes = [];
 const geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize , 1, 1 ,2);
 const material = new THREE.MeshStandardMaterial({
-    color: 0x283aff, // Bleu brut
+    color: 0x0000ff, // Bleu brut
     wireframe: true // Mode wireframe
 });
 
@@ -115,18 +114,18 @@ for (let i = 0; i < numCubes; i++) {
 }
 
 // Add light
-const ambientLight = new THREE.AmbientLight(0x404040, 1); // Lumière ambiante douce
+const ambientLight = new THREE.AmbientLight(0x404040, 0.8); // Lumière ambiante douce
 scene.add(ambientLight);
 
 // Light directionnelle
-const directionalLight = new THREE.DirectionalLight(0x02fff7, 1); // Lumière directionnelle douce
-directionalLight.position.set(5, 27, 14);
-directionalLight.castShadow = true; 
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // Lumière directionnelle douce
+directionalLight.position.set(5, 5, 5); // Position de la lumière
+directionalLight.castShadow = true; // Lumière qui génère des ombres
 scene.add(directionalLight);
 
 // Add a ground to receive shadows
 const groundGeometry = new THREE.PlaneGeometry(100, 100);
-const groundMaterial = new THREE.ShadowMaterial({ opacity: 0.42 }); 
+const groundMaterial = new THREE.ShadowMaterial({ opacity: 0.3 }); // Opacité légère pour l'ombre
 const ground = new THREE.Mesh(groundGeometry, groundMaterial);
 ground.rotation.x = -Math.PI / 2;
 ground.position.y = -2;
@@ -527,7 +526,7 @@ function advanceTournament(winner) {
         
         // Send report to server API endpoint
         reportMatchToServer({
-            result: specialUserWon ? 'win' : 'loss',
+            result: specialUserWon ? 'win' : 'loose',
             player_score: playerScore,
             opponent_score: opponentScore,
             opponent_alias: matchResult.opponent
@@ -781,8 +780,6 @@ function reportTournamentComplete(specialUserResults) {
 
 return function cleanup() {
     console.log("cleanup tournois");
-    window.avatarCleanup();
-    window.pongCleanup();
 }
 }
 

@@ -1,42 +1,139 @@
 {% load static %}
 
   <!-- Fonts et CSS -->
-  <link rel="stylesheet" href="{% static 'css/profil.css' %}">
+  <link rel="stylesheet" href="{% static 'css/1_space_cubes.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
   
   <script type="module" src="{% static 'js/1_space_cubes.js' %}"></script>
   
   <div id="app-content">
     <div id="navigation" class="navig">
-      <!-- <div class="navig"> -->
-  
-        <!-- <button class="link_temp" id="avatar">AVATAR / link</button> -->
-        <div class="blur-box_profil">
-          <div class="bento-container">
-      
-            <div class="card bento_large">
-              <h4>Settings</h4>
-              <!-- <button>Explore</button> -->
-            </div>
-      
-            <div class="card bento_long">
-              <h4>Colors</h4>
-            </div>
-<!--       
-            <div class="card bento_small">
-              <h3>Settings</h3>
-            </div> -->
-      
-            <div class="card bento_small">
-        <button class="link_temp" id="avatar">test</button>
 
-              <h3>  Ball</h3>
-            </div>
-      
-          </div>
-        </div>
-      </div>
-  
-    </div>
-    <canvas class="webgl"></canvas> 
+    <style>
+        .navig {
+            font-family: "Arial", sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+          
+        }
+
+
+        .blur-box-parent { 
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin-top: 50px;
+            width: 100%;
+        }
+
+.blur-box {
+  margin-left: auto;
+  margin-right: auto;
+    background: rgba(221, 214, 255, 0);
+    border-radius: 14px;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 2px solid rgba(55, 49, 65, 0.07);
+    box-shadow: 0 0 40px 0px rgba(1, 2, 9, 0.5);
+    color: rgba(230, 225, 244, 0.39);
+
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    
+    gap: 4px;
+    padding-bottom: 70px;
+    margin-bottom: 30px;
+
+    padding-left: 0px;
+
+    z-index: 3;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+  left :40px;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    text-align: left;
+    width: 65%;
+}
+
+.column {
+    width: 25%; /* Largeur de chaque colonne */
+    padding-right: 20px; /* Espace entre les colonnes */
+  text-align: left;
+  }
+
+
+.column p {
+    text-indent: 1em; /* Indentation au début de chaque paragraphe */
+    margin: 0; /* Supprimer les marges de paragraphes par défaut */
+    padding-bottom: 5px; /* Espacement entre les paragraphes */
+    line-height: 1.2; /* Espacement des lignes plus serré */
+  text-align: left;
+  }
+
+.column br {
+    margin-bottom: 2px; /* Espacement après chaque saut de ligne */
+}
+
+
+
+        .blur-box {
+          will-change: box-shadow;
+        }
+    </style>
+
+    <div class="blur-box-parent">
+        <div class="blur-box">
+
+    <div class="column">
+        Tu n’as pas gagné.<br>
+        Mais regarde : elles sont là.<br>
+        Toutes les petites boîtes que tu as laissées derrière toi.<br><br>
+
+        Il y en a une pour chaque match, chaque moment où tu as failli,<br>
+        chaque fois où tu t’es battu sans bruit.<br><br>
+
+        Dedans, il y a ton attention fébrile,<br>
+        ton envie de bien faire,<br>
+        ta colère maîtrisée,<br>
+        ta fatigue que tu as ignorée.<br>
+        Tu y as mis plus que tu ne crois.<br>
+        Et à la fin, tu les as oubliées.<br>
+        Mais elles sont restées.<br><br>
+
+        Ces boîtes ne sont pas là pour compter tes victoires.<br>
+        Elles gardent autre chose :<br>
+        les preuves que tu étais là,<br>
+        que tu as tenu,<br>
+        que tu as tout donné même sans récompense.<br>
+
+ 
+        Elles ne brillent pas.<br>
+        Elles ne font pas de bruit.<br>
+        Mais elles t’écoutent.<br><br>
+
+        Assieds-toi un moment.<br>
+        Laisse-les tourner.<br><br>
+
+        Car elles ne se remplissent pas de victoires,<br>
+        Mais de toi.<br>
+        Et toi, tu es toujours là.<br><br>
+
+        Au si loin que les épreuves te porteront, tu seras toi.<br>
+        Et pour les autres<br>
+        Comme pour toi<br>
+        Maintenant tu seras<br>
+        Et tu resteras<br><br>
+
+        Un perdant, tout simplement.<br>
+   
+ </div>   </div>  
+
+      </div>    
+   </div>
+  <canvas class="webgl"></canvas> 
       

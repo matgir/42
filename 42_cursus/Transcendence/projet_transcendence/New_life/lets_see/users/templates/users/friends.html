@@ -1,13 +1,26 @@
+{% comment %} {% extends "base.html" %} {% endcomment %}
 {% load i18n %}
 
-<h2 style="font-size: 30px;">
+{% block title %}
 {% trans "My friends" %}
+{% endblock %}
+
+{% block content %}
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<h2>
+	{% trans "My Friends" %}
 </h2>
 {% if friends %}
 <ul>
 	{% for friend in friends %}
 	<li>
-		<a href="/users/profile/{{ friend.username }}">
+		<a href="{% url 'user_profile' friend.username %}">
 			{{ friend.username }}
 		</a>
 	</li>
@@ -18,3 +31,4 @@
 	{% trans "You have no friends yet." %}
 </p>
 {% endif %}
+{% endblock %}

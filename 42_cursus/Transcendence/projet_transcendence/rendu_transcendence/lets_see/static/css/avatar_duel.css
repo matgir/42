@@ -38,6 +38,7 @@ body {
   align-items: center;
   position: relative;
   z-index: 1; /* Pour placer au-dessus du canvas WebGL */
+  padding-bottom: 0px;
 }
 
 .logo_grid {
@@ -67,9 +68,10 @@ body {
   grid-template-columns: repeat(6, 1fr);
   gap: 25px;
   padding: 18px;
+  padding-bottom: 8px;
   width: 100%;
   height: auto;
-  /* margin-bottom: 20px; */
+  margin-bottom: 0px;
 }
 
 .character-card {
@@ -447,8 +449,8 @@ r */
   max-height: none; /* Supprimer la limitation */
   overflow-y: visible; /* Remplacer 'auto' */
   grid-template-rows: auto; /* Adapter automatiquement */
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 20px;
+  padding-bottom: 30px;
 }
 
 

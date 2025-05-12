@@ -13,7 +13,7 @@ def pong_game(request):
 @csrf_exempt
 @login_required
 def report_match(request):
-	print("in report match") ####
+	# print("in report match") ####
 	if request.method == "POST":
 		data = json.loads(request.body)
 
@@ -32,12 +32,12 @@ def report_match(request):
 
 		if result == "win":
 			request.user.wins += 1
-		elif result == "loss":
+		else:
 			request.user.losses += 1
 		request.user.save()
 
-		print(request.user)####
-		print("Match has been reported")####
+		# print(request.user)####
+		# print("Match has been reported")####
 
 		return JsonResponse({"status": _("ok")})
 	return JsonResponse({"error": _("Invalid request")}, status=400)

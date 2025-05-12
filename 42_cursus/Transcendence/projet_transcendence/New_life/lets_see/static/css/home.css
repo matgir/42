@@ -174,27 +174,30 @@ body {
 }
 
 .blur-box {
-  background: rgba(211, 209, 255, 0.025);
-  /* background: rgba(45, 44, 70, 0.1); */
+  /* background: rgba(255, 255, 255, 0.04); */
+  background: rgba(255, 255, 255, 0.02);
+
   border-radius: 14px;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 2px solid rgba(232, 233, 255, 0.054);
-  box-shadow: 0 0 400px 140px rgba(1, 2, 9, 0.242);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 8px 32px 0 rgba(9, 11, 41, 0.139);
+  /* padding: 20px; */
   color: white;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding: 40px 50px;
-  padding-bottom: 50px;
+  /* background-color: rgba(212, 208, 231, 0.034); */
+  /* backdrop-filter: blur(6px); */
+  /* border-radius: 10px; */
+  padding: 23px 50px;
   z-index: 3;
+  /* border: 1px solid rgba(255, 255, 255, 0.062); */
+  /* border: 1px solid rgba(232, 142, 226, 0.899); */
+  /* outline: 2px dashed red;  */
 }
-
-.blur-box {
-  will-change: box-shadow;
-}
-
 
 .sign_title {
   font-family: "Roboto", sans-serif;
@@ -211,7 +214,7 @@ body {
 .login, .password, .signin_submit, .signin_42 {
   margin: 0 auto;
   font-family: "Roboto", sans-serif;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.042);
   border-radius: 5px;
@@ -225,8 +228,6 @@ body {
 .no_account {
   margin-left: auto; 
   margin-top: 0; 
-  margin-bottom: 20px; 
-
   /* white-space: nowrap; */
   display: flex;
   align-items: center; 
@@ -249,7 +250,7 @@ body {
   
 
 .password, .login {
-  color: rgb(135, 136, 140);
+  color: rgb(107, 109, 113);
   font-weight: 600;
   font-size: 15px;
   padding: 10px;
@@ -281,8 +282,6 @@ body {
   background-color: #000000c7;
   color: #ffffffdb;
   border: none;
-  text-decoration: none;
-  text-align: center;
 }
 
 

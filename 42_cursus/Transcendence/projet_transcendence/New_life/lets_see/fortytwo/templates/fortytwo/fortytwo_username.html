@@ -1,64 +1,19 @@
+{% comment %} {% extends "base.html" %} {% endcomment %}
 {% load i18n %}
 
-<style>
-  .full_page {
-    font-family: "Roboto", sans-serif;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .username_form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .username_input {
-    border: none;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.755);
-    padding: 10px;
-    margin: 10px;
-    width: 300px;
-    height: 50px;
-    font-size: 20px;
-    font-weight: 300;
-    color: #000;
-	margin-bottom: 20px;
-  }
-  h2 {
-    font-size: 50px;
-    font-weight: 300;
-    color: #000;
-    margin-bottom: 20px;
-	color: white;
-  }
-  .settings {
-    font-family: "Roboto", sans-serif;
-    font-weight: 300; /* Poids plus épais */
-    color: white;
-    font-size: 20px;
-    padding: 5px 17px;
-    text-decoration: none;
-    border: 2px solid white;
-    border-radius: 10px;
-    margin-top: 4px;
-	background-color: rgba(255, 255, 255, 0.15);
-	cursor: pointer;
-  }
-</style>
-<div class="full_page">
-  <form
-    method="post"
-    action="/api/fortytwo/fortytwo_username/"
-    class="username_form"
-    data-no-spa
-  >
-    <h2 for="username">Please enter your username:</h2>
-    {% csrf_token %}
-    <input type="text" name="username" class="username_input" placeholder="Username" />
-    <button type="submit" class="settings">
-      {% trans "Use this username" %}
-    </button>
-  </form>
-</div>
+{% block content %}
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<form method="post">
+	{% csrf_token %}
+	{{ form }}
+	<button type="submit">
+		{% trans "Submit Username" %}
+	</button>
+</form>
+{% endblock %}

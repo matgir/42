@@ -164,14 +164,19 @@ body {
   transition: all 1s ease;
 }
 
-
 .blur-box-parent { 
+  position: absolute;
   display: flex;
   justify-content: flex-end;
-  padding-left: 17%;
-  padding-top: 5%;
-  /* border: solid 2px pink; */
+
+  top: 40%;
+  right: 13%;
+  transform: translateY(-50%); /* centre verticalement */
+
+  /* Optionnel pour marge à droite */
+  padding-right: 5%;
 }
+
 
 .blur-box {
   background: rgba(211, 209, 255, 0.025);

@@ -9,10 +9,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.i18n import set_language as django_set_language
 from django.conf import settings
 from django.urls import reverse_lazy
-from .jwt_auth import get_tokens_for_user
+from .jwt_auth import get_tokens_for_user, jwt_login_required
 import json
 from django.http import JsonResponse
-
+from .validators import validate_not_banned_username, custom_username_validdators, validate_avatar
+from django.core.exceptions import ValidationError
 # Create your views here.
 
 @login_required
@@ -20,14 +21,27 @@ def profile_update(request):
 	# print("profile_update")
 	if request.method == 'POST':
 		username = request.POST.get('username')
+
 		if username:
-			request.user.username = username
-			request.user.save()
-			messages.success(request, _("Your username has been updated."), extra_tags="success")
+			try:
+				# Check if username is not in banned list
+				validate_not_banned_username(username)
+				
+				# Apply all custom validators
+				for validator in custom_username_validdators:
+					validator(username)
+					
+				if CustomUser.objects.filter(username=username).exists():
+					messages.error(request, _("Username is already used."), extra_tags="error")
+				else:
+					request.user.username = username
+					request.user.save()
+					messages.success(request, _("Your username has been updated."), extra_tags="success")
+			except ValidationError as e:
+				messages.error(request, _(e.message), extra_tags="error")
 		else:
 			messages.error(request, _("Please enter a valid username."), extra_tags="error")
 	return redirect('/users/my_profile/')
-
 
 
 
@@ -37,9 +51,13 @@ def profile_avatar_update(request):
 	if request.method == 'POST':
 		avatar = request.FILES.get('avatar')
 		if avatar:
-			request.user.avatar = avatar
-			request.user.save()
-			messages.success(request, _("Your avatar has been updated."), extra_tags="success")
+			try:
+				validate_avatar(avatar)
+				request.user.avatar = avatar
+				request.user.save()
+				messages.success(request, _("Your avatar has been updated."), extra_tags="success")
+			except ValidationError as e:
+				messages.error(request, _(e.message), extra_tags="error")
 		else:
 			messages.error(request, _("Please enter a valid avatar."), extra_tags="error")
 	return redirect('/users/my_profile/')
@@ -51,14 +69,16 @@ def add_friend(request):
 	username = request.GET.get('username')
 	# print("request in add friend is : \n\t", request)#####
 	if request.user.username == username:
-		messages.error(request, _("You can not be friends with yoursefl."), extra_tags="error")
+		# messages.error(request, _("You can not be friends with yoursefl."), extra_tags="error")
 		return (redirect('my_profile'))
 	if request.user.friends.filter(username=username).exists():
-		messages.error(request, _("You are already friends with %(username)s.") % {'username': username}, extra_tags="warning")
+		console.log("Already your bruv")
+		# messages.error(request, _("You are already friends with %(username)s.") % {'username': username}, extra_tags="warning")
 	else:
 		user_to_add = get_object_or_404(CustomUser, username=username)
 		request.user.friends.add(user_to_add)
-		messages.success(request, _("You are now friends with %(username)s.") % {'username': username}, extra_tags="success")
+		# print("username in add friend is : \n\t", username)####
+		# messages.success(request, _("You are now friends with %(username)s.") % {'username': username}, extra_tags="success")
 	return redirect(f'/api/users/profile/{username}')
 	# print("\nuser_to_add in add friend is : \n\t", user_to_add.username, "\nrequest.user.username in add frisnd is : \n\t", request.user.username) #####
 	# if user_to_add.username == request.user.username or request.user.friends.filter(username=user_to_add.username):
@@ -69,15 +89,16 @@ def add_friend(request):
 def remove_friend(request):
 	username = request.GET.get('username')
 	if request.user.username == username:
-		messages.error(request, _("As you can not be friends with yourself, you can not unfriend yourself."), extra_tags='error')
+		# messages.error(request, _("As you can not be friends with yourself, you can not unfriend yourself."), extra_tags='error')
 		return (redirect('my_profile'))
 	if request.user.friends.filter(username=username).exists():
 		user_to_remove = get_object_or_404(CustomUser, username=username)
 		request.user.friends.remove(user_to_remove)
-		messages.success(request, _("You removed %(username)s from your friends") % {'username': username}, extra_tags="success")
+		# print("username in remove friend is : \n\t", username)####
+		# messages.success(request, _("You removed %(username)s from your friends") % {'username': username}, extra_tags="success")
 	else:
-		messages.error(request, _("%(username)s is not in your friends list") % {'username': username}, extra_tags="warning")
-	print("username in remove friend is : \n\t", username)
+		console.log("Not your bruv")
+		# messages.error(request, _("%(username)s is not in your friends list") % {'username': username}, extra_tags="warning")
 	return redirect(f'/api/users/profile/{username}')
 
 # @login_required
@@ -140,7 +161,7 @@ def search_friends(request):
 	# return render(request, 'users/search_results.html', {'results': results, 'query': query})
 	return JsonResponse({'results': results_list})
 
-@login_required
+@jwt_login_required
 def friends_list(request):
 	friends = request.user.friends.all()
 	return render(request, 'users/friends.html', {'friends': friends})
@@ -152,6 +173,7 @@ from two_factor.views import SetupView
 from django_otp import user_has_device
 
 class CustomTwoFactorSetupView(SetupView):
+
 	def done(self, form_list, **kwargs):
 		print("======================== 2FA STATE ======================== \n")####
 
@@ -244,7 +266,7 @@ class ConditionalLoginView(AllauthLoginView):
 			print("/////////////////////// USER HAS ENABLED 2FA /////////////////////////")####
 			self.request.session['pre_2fa_user_id'] = user.pk
 			# return redirect('account_verify')
-			return redirect('two_factor:login')
+			return redirect('/api/users/accounts/two_factor/login/')
 		else:
 			print(self.request.session.get('pre_2fa_user_id'))
 			login(self.request, user)
@@ -358,5 +380,39 @@ class CustomLogoutView(AllauthLogoutView):
         
         # Log the action for debugging
         print("======================== LOGOUT: JWT COOKIES CLEARED ========================")####
+        
+        return response
+
+# Import the TwoFactorLoginView from django-two-factor-auth
+from two_factor.views import LoginView as TwoFactorLoginView
+from django.contrib.auth import get_user_model
+
+class CustomTwoFactorLoginView(TwoFactorLoginView):
+    """
+    Custom two-factor authentication view that issues JWT tokens
+    after successful 2FA verification.
+    """
+    
+    def done(self, form_list, **kwargs):
+        """
+        Login the user and redirect to the home page after successful
+        two-factor authentication.
+        """
+        # Call the parent method to handle the standard 2FA login
+        response = super().done(form_list, **kwargs)
+        
+        # Generate JWT tokens for the authenticated user
+        tokens = get_tokens_for_user(self.request.user)
+        
+        # Store tokens in session and cookies
+        self.request.session["jwt_access_token"] = tokens['access']
+        self.request.session["jwt_refresh_token"] = tokens['refresh']
+        self.request.session.modified = True
+        
+        # Set JWT tokens as cookies to be picked up by JavaScript
+        response.set_cookie('jwt_access', tokens['access'], httponly=True, samesite='Lax', max_age=3600)  # 1 hour
+        response.set_cookie('jwt_refresh', tokens['refresh'], httponly=True, samesite='Lax', max_age=86400)  # 1 day
+        
+        print("======================== JWT TOKENS ISSUED AFTER 2FA ========================")
         
         return response

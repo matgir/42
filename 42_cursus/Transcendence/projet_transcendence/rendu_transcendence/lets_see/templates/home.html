@@ -13,19 +13,19 @@
 
           <div class="links_boutons">
             <!-- <a class="link_big_pages" href="/pong/">PONG</a> -->
-            <a class="link_big_pages" href="/tournois/">TOURNAMENT</a>
-            <a class="link_big_pages" href="/duel/">DUEL</a>
+            {% comment %} <a class="link_big_pages" href="/tournois/">TOURNAMENT</a> {% endcomment %}
+            {% comment %} <a class="link_big_pages" href="/duel/">DUEL</a> {% endcomment %}
 
-            <a class="link_temp" href="/vs_tournois/">VS MENU</a>
-            <a class="link_temp" href="/basic_setting/">SETTINGS MENU</a>
-            <a class="link_temp" href="/3_blue_rubix/">SETTINGS<a>
+            {% comment %} <a class="link_temp" href="/vs_tournois/">VS MENU</a> {% endcomment %}
+            {% comment %} <a class="link_temp" href="/basic_setting/">SETTINGS MENU</a> {% endcomment %}
+            {% comment %} <a class="link_temp" href="/3_blue_rubix/">SETTINGS<a> {% endcomment %}
             <a class="link_temp" href="/4_fall/">CREDITS</a>
 
             <a class="link_temp_template" href="/1_space_cubes/">3D SPACE_CUBES</a>
             <a class="link_temp_template" href="/2_pink_cubes/">3D PINK_CUBES</a>
             <!-- <a class="link_temp_template" href="/6_torus/">3D TORUS</a> -->
-            <a class="link_temp_test" href="/testeur/">TESTEUR</a>
-            <a class="link_temp_test" href="/avatar/">AVATAR PNG</a>
+            {% comment %} <a class="link_temp_test" href="/testeur/">TESTEUR</a> {% endcomment %}
+            {% comment %} <a class="link_temp_test" href="/avatar/">AVATAR PNG</a> {% endcomment %}
             <a class="link_temp_test" href="/404/">AVATAR 404</a>
 
 
@@ -33,7 +33,7 @@
             <!-- <a class="link_temp_test" href="/choose_your_perso/">GLOBOS GRID</a> -->
 
           </div>
-          <div class="blur-box-parent">
+          <div class="blur-box-parent" style="z-index: 10;">
               <form class="blur-box" method="post" id="loginForm" action="/api/users/accounts/login/" data-no-spa>  
                 
                 <div class="no_account">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-03 19:33+0200\n"
+"POT-Creation-Date: 2025-05-04 16:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,35 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: fortytwo/templates/fortytwo/fortytwo_username.html:61
-msgid "Use this username"
-msgstr ""
+#: fortytwo/templates/fortytwo/fortytwo_username.html:17
+msgid "Submit Username"
+msgstr "Soumettre nom d'utilisateur"
 
-#: fortytwo/views.py:78
+#: fortytwo/views.py:90
 msgid "1- No authorization code given"
 msgstr "1 - Pas de code d'autorisation recu"
 
-#: fortytwo/views.py:104
+#: fortytwo/views.py:116
 msgid "Error during the access token exchange"
 msgstr "Erreur pendant l'echange du token d'acces"
 
-#: fortytwo/views.py:108
+#: fortytwo/views.py:120
 msgid "2- No authorization code given"
 msgstr "2 - Pas de code d'autorisation recu"
 
-#: fortytwo/views.py:161
+#: fortytwo/views.py:173
 msgid "Missing authorization code during session"
 msgstr "Code d'autorisation manquant pour la session en court"
 
-#: fortytwo/views.py:174
+#: fortytwo/views.py:186
 msgid "Error during the exchange of the code for the token"
 msgstr "Erreur pendant l'echange du code pour le token"
 
-#: fortytwo/views.py:178
+#: fortytwo/views.py:190
 msgid "Token expired"
 msgstr "Token expirer"
 
-#: fortytwo/views.py:187
+#: fortytwo/views.py:199
 msgid "Could not collect user informations"
 msgstr "Impossible de recuperer les informations utilisateurs"
 
@@ -98,12 +98,12 @@ msgstr "Rechercher"
 msgid "Logout"
 msgstr "Deconnexion"
 
-#: templates/base.html:246 templates/home.html:67 templates/signin.html:13
+#: templates/base.html:246 templates/home.html:75 templates/signin.html:13
 #: templates/signup.html:12
 msgid "Sign In"
 msgstr "Se connecter"
 
-#: templates/base.html:249 templates/home.html:71
+#: templates/base.html:249 templates/home.html:79
 msgid "Sign In with 42"
 msgstr "Se connecter avec 42"
 
@@ -125,7 +125,7 @@ msgstr "JOUER"
 
 #: templates/duel.html:154
 msgid "FIRST TO"
-msgstr "POINT PAR SET:"
+msgstr "PREMIER A"
 
 #: templates/duel.html:169 templates/tournois.html:192
 msgid "I'M THE BOSS"
@@ -159,7 +159,7 @@ msgstr "S'inscrire"
 msgid "SIGN IN"
 msgstr "SE CONNECTER"
 
-#: templates/home.html:62
+#: templates/home.html:70
 msgid "I'm happy"
 msgstr "Content"
 
@@ -179,23 +179,23 @@ msgstr "Deja un compte"
 msgid "SIGN UP"
 msgstr "S'INSCRIRE"
 
-#: templates/signup.html:41
+#: templates/signup.html:49
 msgid "Min 8 characters"
 msgstr "Min 8 caracteres"
 
-#: templates/signup.html:47
+#: templates/signup.html:55
 msgid "A number"
 msgstr "Un nombre"
 
-#: templates/signup.html:53
+#: templates/signup.html:61
 msgid "Upper case"
 msgstr "Majuscule"
 
-#: templates/signup.html:58
+#: templates/signup.html:66
 msgid "A special symbol"
 msgstr "Symbole special"
 
-#: templates/signup.html:65
+#: templates/signup.html:73
 msgid "Sign Up"
 msgstr "S'inscrire"
 
@@ -230,83 +230,31 @@ msgstr ""
 "\t\tHistorique des matchs de %(username)s\n"
 "\t"
 
-#: templates/signin.html:33
-msgid "If you have not created an account yet, then please sign up first."
-msgstr "Si vous n'avez par encore de compte il faut s'inscrire d'abord."
-
-#: templates/signup.html:9
-msgid "Already have an account?"
-msgstr "Deja un compte"
-
-#: templates/signup.html:18
-msgid "SIGN UP"
-msgstr "S'INSCRIRE"
-
-#: templates/signup.html:41
-msgid "Min 8 characters"
-msgstr "Min 8 caracteres"
-
-#: templates/signup.html:47
-msgid "A number"
-msgstr "Un nombre"
-
-#: templates/signup.html:53
-msgid "Upper case"
-msgstr "Majuscule"
-
-#: templates/signup.html:58
-msgid "A special symbol"
-msgstr "Symbole special"
-
-#: templates/signup.html:65
-msgid "Sign Up"
-msgstr "S'inscrire"
-
-#: templates/tournois.html:162
-msgid "SHUFFLE"
-msgstr "MELANGER"
-
-#: templates/tournois.html:178
-msgid "POINTS"
-msgstr "POINTS"
-
-#: templates/tournois.html:180
-msgid "TO WIN"
-msgstr "POUR GAGNER"
-
-#: templates/vs_tournois.html:21
-msgid "DUEL MODE"
-msgstr "MODE DUEL"
-
-#: templates/vs_tournois.html:24
-msgid "TOURNAMENT"
-msgstr "TOURNOI"
-
-#: tournament/templates/tournament/match_history.html:8
+#: tournament/templates/tournament/match_history.html:23
 msgid "Opponent"
 msgstr "Adversaire"
 
-#: tournament/templates/tournament/match_history.html:9
+#: tournament/templates/tournament/match_history.html:24
 msgid "Result"
 msgstr "Resultat"
 
-#: tournament/templates/tournament/match_history.html:10
+#: tournament/templates/tournament/match_history.html:25
 msgid "Score"
 msgstr "Score"
 
-#: tournament/templates/tournament/match_history.html:11
+#: tournament/templates/tournament/match_history.html:26
 msgid "Date"
 msgstr "Date"
 
-#: tournament/templates/tournament/match_history.html:21
+#: tournament/templates/tournament/match_history.html:36
 msgid "Win"
 msgstr "Victoire"
 
-#: tournament/templates/tournament/match_history.html:25
+#: tournament/templates/tournament/match_history.html:40
 msgid "Loss"
 msgstr "Defaite"
 
-#: tournament/templates/tournament/match_history.html:41
+#: tournament/templates/tournament/match_history.html:56
 msgid "No matches recorded yet."
 msgstr "Pas de match effectue"
 
@@ -314,11 +262,15 @@ msgstr "Pas de match effectue"
 msgid "Prefered Language"
 msgstr "Langue selectionner"
 
-#: users/templates/users/friends.html:4
+#: users/templates/users/friends.html:6
 msgid "My friends"
 msgstr "Mes amies"
 
 #: users/templates/users/friends.html:18
+msgid "My Friends"
+msgstr "Mes amies"
+
+#: users/templates/users/friends.html:32
 msgid "You have no friends yet."
 msgstr "Tu n'as pas encore d'amies"
 
@@ -458,104 +410,33 @@ msgstr "Ficher image non valide"
 msgid "This username is not allowed."
 msgstr "Ce username n'est pas valide"
 
-#: users/views.py:24
-#, fuzzy
-#| msgid "This username is not allowed."
-msgid "Your username has been updated."
-msgstr "Ce username n'est pas valide"
-
-#: users/views.py:26
-msgid "Please enter a valid username."
-msgstr ""
-
-#: users/views.py:38
-msgid "Your avatar has been updated."
-msgstr ""
-
-#: users/views.py:40
-msgid "Please enter a valid avatar."
-msgstr ""
-
-#: users/views.py:50
+#: users/views.py:37
 msgid "You can not be friends with yoursefl."
 msgstr "Pas possible de faire ca avec toi"
 
-#: users/views.py:53
+#: users/views.py:40
 #, python-format
 msgid "You are already friends with %(username)s."
 msgstr "%(username)s est deja ton amies"
 
-#: users/views.py:57
+#: users/views.py:44
 #, python-format
 msgid "You are now friends with %(username)s."
 msgstr "Desormais amies avec %(username)s"
 
-#: users/views.py:68
+#: users/views.py:54
 msgid "As you can not be friends with yourself, you can not unfriend yourself."
 msgstr "Toujours pas possible de faire ca"
 
-#: users/views.py:73
+#: users/views.py:59
 #, python-format
 msgid "You removed %(username)s from your friends"
 msgstr "C'est fini avec %(username)s"
 
-#: users/views.py:75
+#: users/views.py:61
 #, python-format
 msgid "%(username)s is not in your friends list"
 msgstr "%(username)s n'est pas dans ta liste"
-
-#~ msgid "NOP"
-#~ msgstr "NON"
-
-#~ msgid "SELECT!"
-#~ msgstr "SELECTIONER"
-
-#~ msgid "Quit"
-#~ msgstr "Quitter"
-
-#~ msgid "Remember Me"
-#~ msgstr "Se souvenir de moi"
-
-#~ msgid "AVATAR / link"
-#~ msgstr "AVATAR / lien"
-
-#~ msgid "Login"
-#~ msgstr "Se connecter"
-
-#, python-format
-#~ msgid "Wins : %(wins)s | Losses : %(losses)s"
-#~ msgstr "Victoires : %(wins)s | Defaites : %(losses)s\n"
-
-#~ msgid "Match history"
-#~ msgstr "Historique de mes matchs"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "\t\t\t\t\tWins : %(wins)s | Losses : %(losses)s\n"
-#~ "\t\t\t\t"
-#~ msgstr ""
-#~ "\n"
-#~ "\t\tVictoires : %(wins)s | Defaites : %(losses)s\n"
-#~ "\t"
-
-#~ msgid "Disable 2FA"
-#~ msgstr "Desactiver la 2FA"
-
-#~ msgid "Enable 2FA"
-#~ msgstr "Activer la 2FA"
-
-#~ msgid "Profile"
-#~ msgstr "Mon Profil"
-
-#~ msgid "Avatar"
-#~ msgstr "Avatar"
-
-#~ msgid "Edit Avatar (a link)"
-#~ msgstr "Changer d'avatar (un lien)"
-
-#~ msgid "Settings"
-#~ msgstr "Reglages"
 
 #~ msgid "NOP"
 #~ msgstr "NON"

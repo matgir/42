@@ -542,19 +542,4 @@ character-card:hover img {
   top: 9px !important;
   right: 10px !important;
   transform: none !important;
-<<<<<<< HEAD
 }
-
-.first_to_choose {
-  font-family: "Roboto", sans-serif;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.898);
-  margin-top: 40px ;
-  /* background-color: rgba(7, 40, 255, 0.494); */
-  border: solid 2px blue;
-  padding: 7px 24px;
-  border-radius: 10px;
-}
-=======
-}
->>>>>>> origin/jwt_token

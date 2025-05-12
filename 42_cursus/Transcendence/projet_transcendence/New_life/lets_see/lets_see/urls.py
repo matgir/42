@@ -56,6 +56,7 @@ urlpatterns = [
     
     
     # Include other app URLs
+    path('fortytwo/', include('fortytwo.urls')),
     path('jeux_du_pong/', include('jeux_du_pong.urls')),
     # path('users/', include('users.urls')),
     path('', include(tf_urls)),
@@ -64,7 +65,7 @@ urlpatterns = [
     path('', views.home_view, name='home'),
     # Catch-all pattern for SPA routes - serve the base.html for client-side routing
     # This should be the last URL pattern to avoid overriding more specific ones
-    re_path(r'^(?!admin/|api/|static/|media/).*$', 
+    re_path(r'^(?!admin/|api/|static/|media/|fortytwo/).*$', 
             views.base_view, name='spa_routes'),
 ]
 

@@ -1,8 +1,5 @@
 {% load static %}
 {% load i18n %}
-
-{% load static %}
-{% load i18n %}
 <!-- Fonts et CSS -->
 <link rel="stylesheet" href="{% static 'users/css/profil.css' %}">
 <script type="module" src="{% static 'users/js/profil.js' %}"></script>
@@ -18,7 +15,7 @@
           
           <div class="card bento_large" id="2">
             {% if user == request.user %}
-            <form method="post" enctype="multipart/form-data" action="/api/users/profile_edit/" style="margin: 0px;" data-no-spa id="username_form">
+            <form method="post" enctype="multipart/form-data" action="/api/users/profile_edit/" style="margin: 0px;" id="username_form" data-no-spa>
               {% csrf_token %}
               <input class="username_input" autocomplete="off" type="text" name="username" value="{{ user.username }}">
               <div class="profil_edit_parent">
@@ -34,7 +31,7 @@
                     </hr>
                   {% else %}
                     <hr>
-                    <a class="settings" "/users/accounts/two_factor/setup/">
+                    <a class="settings" href="/users/accounts/two_factor/setup/">
                       {% trans "Enable 2FA" %}
                     </a>
                   
@@ -43,13 +40,11 @@
                 {% endif %} {% endcomment %}
                 {% if not user.login_42 %}
                   {% if not user.two_factor %}
-                    <hr>
-                    <a href="/users/accounts/two_factor/setup/">
+                    <a href="/users/accounts/two_factor/setup/" class="settings">
                       {% trans "Enable 2FA" %}
                     </a>
                   {% else %}
-                    <hr>
-                    <a href="/users/accounts/two_factor/disable/">
+                    <a href="/users/accounts/two_factor/disable/" class="settings">
                       {% trans "Disable 2FA" %}
                     </a>
                   {% endif %}
@@ -88,11 +83,20 @@
           
           <div class="card bento_long" id="1">
             {% include "tournament/match_history.html" with matches=matches user=user %}
-            <p class="win_losse">
-            	{% blocktrans with wins=user.wins losses=user.losses %}
-            		Wins : {{ wins }} | Losses : {{ losses }}
-            	{% endblocktrans %}
-            </p>
+            {% if user.losses > user.wins %}
+              <p class="win_losse">
+                  {% blocktrans with wins=user.wins %}Wins: {{ wins }}{% endblocktrans %} |
+                  <a href="/aux_limbes_les_perdants" style="cursor:pointer" class="unlock">
+                      {% blocktrans with losses=user.losses %}Losses: {{ losses }}{% endblocktrans %}
+                  </a>
+              </p>
+            {% else %}
+                <p class="win_losse">
+                    {% blocktrans with wins=user.wins %}Wins: {{ wins }}{% endblocktrans %} |
+                    {% blocktrans with losses=user.losses %}Losses: {{ losses }}{% endblocktrans %}
+                </p>
+            {% endif %}
+
             <h4 class="titre">
             {% trans "Match history" %}
             </h4>
@@ -101,7 +105,9 @@
           
           <div class="card bento_small" id="3">
             {% if user == request.user %}
+            <div class="scrollable-content">
             {% include "users/friends.html" with friends=friends %}
+            </div>
             <h4 class="titre">
             {% trans "Friends" %}
             </h4>
@@ -110,10 +116,7 @@
 
           <div class="card bento_small" id="4">
             {% if user == request.user %}
-              <img src="{{ user.avatar.url }}" class="avatar" alt="Avatar" width="100" height="100">
-                 <h3 class="titre">
-                 {% trans "Avatar" %}
-                 </h3>
+              <img src="{{ user.avatar.url }}" class="avatar" alt="Avatar">
             <form method="post" enctype="multipart/form-data" action="/api/users/profile_avatar_edit/" style="margin: 0px;" data-no-spa id="avatar_form">
               {% csrf_token %}
               <div class="profil_edit_parent" >
@@ -123,8 +126,11 @@
               </button>
             </div> 
             </form>
+                 <h3 class="titre">
+                 {% trans "Avatar" %}
+                 </h3>
             {% else %}
-            <img src="{{ user.avatar.url }}" class="avatar" alt="Avatar" width="170" height="170">
+            <img src="{{ user.avatar.url }}" class="avatar" alt="Avatar">
             <div class="profil_edit_parent" >
               <h3 class="titre">
               {% trans "Avatar" %}
@@ -138,6 +144,3 @@
     </div>
     
   </div>
-
-
-  

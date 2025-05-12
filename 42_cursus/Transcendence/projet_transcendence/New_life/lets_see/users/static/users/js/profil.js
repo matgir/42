@@ -7,8 +7,6 @@ export function initialize() {
         width: window.innerWidth,
         height: window.innerHeight
     }
-    scene.background = new THREE.Color("#0000FF");
-
     
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 2;
@@ -83,7 +81,7 @@ export function initialize() {
     
     const geometry2 = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
     const edges = new THREE.EdgesGeometry(geometry2); // Crée les arêtes du cube
-    const lineMaterial = new THREE.LineBasicMaterial({ color: 0xFFFFFF }); // Couleur des arêtes
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0030FF }); // Couleur des arêtes
     
     for (let x = -1; x <= 1; x++) {
         for (let y = -1; y <= 1; y++) {
@@ -179,7 +177,7 @@ export function initialize() {
             renderer.dispose(); // Dispose THREE.js resources associated with the renderer
             renderer.forceContextLoss(); // Helps release GPU resources
                 // Remove event listeners
-        // window.removeEventListener('resize', resizeHandler);
+        window.removeEventListener('resize', resizeHandler);
         window.removeEventListener('mousemove', mouseMoveHandler);
         }
 

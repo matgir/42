@@ -626,6 +626,11 @@ window.currentModuleCleanup = initialize();
 function reportMatchToServer(matchData) {
     const sessionId = getCookie('sessionid');
     
+    // Build API URL dynamically based on current location
+    const protocol = window.location.protocol;
+    const host = window.location.host;
+    const reportUrl = `${protocol}//${host}/jeux_du_pong/report-match/`;
+    
     // Prepare fetch options with the session ID cookie
     const fetchOptions = {
         method: 'POST',
@@ -638,7 +643,7 @@ function reportMatchToServer(matchData) {
     };
     
     // Send the API request
-    fetch('http://localhost:8000/jeux_du_pong/report-match/', fetchOptions)
+    fetch(reportUrl, fetchOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

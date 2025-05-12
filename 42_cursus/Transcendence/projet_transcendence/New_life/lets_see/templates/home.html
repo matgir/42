@@ -2,10 +2,11 @@
 {% load i18n %}
 {% load static %}
 
-{% if not user.is_authenticated %}
 <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 <script type="module" src="{% static '/js/password_condition.js' %}"></script>
 <script type="module" src="{% static '/js/home.js' %}"></script>
+
+{% if not user.is_authenticated %}
 <div id="navigation">
 
         <img class="logo" src="{% static 'logo/entropia9.png' %}" alt="Logo">
@@ -73,9 +74,14 @@
                       {% trans "Sign In" %}
                     </button>
 
-                    <a href="https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code" class="signin_42">
+                    <button class="signin_42" id="signin_42" href="https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code">
                       {% trans "Sign In with 42" %}
-                    </a>
+                    </button>
+                          <script>
+                            document.getElementById('signin_42').onclick = function() {
+                              window.location.href = 'https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code';
+                            }
+                          </script>
 
                     <!-- <button class="forgot">Forgot password?</button>  -->
 
@@ -86,14 +92,30 @@
               <div class="blur-box-parent">
 </div>
 
-{% comment %} <div id="js-loader" class="loader-overlay">
+<!-- <div id="js-loader" class="loader-overlay">
   <div class="loader-bar"></div>
-</div> {% endcomment %}
+</div> -->
 
 <canvas id="background" class="webgl"></canvas>
 
 <script>
-    
+    const baseScreen = 1920;
+    function updateLogo() {
+      const logo = document.querySelector('.logo');
+      const width = window.innerWidth;
+      const percent = width / baseScreen;
+      if (percent < 0.60) {
+        logo.src = "{% static 'logo/logo_square.png' %}"; 
+        logo.style.width = "280px";
+        logo.style.left = "15%";
+      } else {
+        logo.src = "{% static 'logo/entropia9.png' %}";
+        logo.style.width = "550px";
+        logo.style.left = "25%";
+      }
+    }
+    window.addEventListener('resize', updateLogo);
+    window.addEventListener('load', updateLogo);
 </script>
 {% else %}
 {% include 'vs_tournois.html' %}

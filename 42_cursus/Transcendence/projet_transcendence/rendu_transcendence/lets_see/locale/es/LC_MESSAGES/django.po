@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-05 20:11+0200\n"
+"POT-Creation-Date: 2025-05-07 13:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,41 +19,57 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
 "1 : 2;\n"
 
-#: fortytwo/templates/fortytwo/fortytwo_username.html:58
-msgid "Please enter your username"
+#: fortytwo/templates/fortytwo/fortytwo_username.html:173
+msgid "Welcome! Choose your username"
+msgstr "¡Bienvenido! Elige tu nombre de usuario"
+
+#: fortytwo/templates/fortytwo/fortytwo_username.html:178
+msgid "Username cannot be used:"
+msgstr "Usuario no puede ser usado:"
+
+#: fortytwo/templates/fortytwo/fortytwo_username.html:188
+msgid "Enter your username"
 msgstr "Introduce tu nombre de usuario"
 
-#: fortytwo/templates/fortytwo/fortytwo_username.html:63
-msgid "Use this username"
-msgstr "Usar este nombre de usuario"
+#: fortytwo/templates/fortytwo/fortytwo_username.html:190
+msgid "Continue"
+msgstr "Continuar"
 
-#: fortytwo/views.py:90
+#: fortytwo/views.py:114
 msgid "1- No authorization code given"
 msgstr "1 -No se proporcionó el código de autorización"
 
-#: fortytwo/views.py:116
+#: fortytwo/views.py:140
 msgid "Error during the access token exchange"
 msgstr "Error durante el intercambio del token de acceso"
 
-#: fortytwo/views.py:120
+#: fortytwo/views.py:144
 msgid "2- No authorization code given"
 msgstr "2- No se proporcionó el código de autorización"
 
-#: fortytwo/views.py:173
+#: fortytwo/views.py:197
 msgid "Missing authorization code during session"
 msgstr "Falta el código de autorización durante la sesión"
 
-#: fortytwo/views.py:186
+#: fortytwo/views.py:210
 msgid "Error during the exchange of the code for the token"
 msgstr "Error durante el intercambio del código por el token"
 
-#: fortytwo/views.py:190
+#: fortytwo/views.py:214
 msgid "Token expired"
 msgstr "Token expirado"
 
-#: fortytwo/views.py:199
+#: fortytwo/views.py:223
 msgid "Could not collect user informations"
 msgstr "No se pudo recopilar la información del usuario"
+
+#: fortytwo/views.py:253
+msgid "Username already taken. updated to: "
+msgstr "Usuario ya tomado. actualizado a: "
+
+#: fortytwo/views.py:256
+msgid "Your username is: "
+msgstr "Tu nombre de usuario es: "
 
 #: jeux_du_pong/templates/jeux_du_pong/game.html:4
 msgid "Play Pong"
@@ -75,6 +91,75 @@ msgstr "Solicitud inválida"
 msgid "Value does not exist"
 msgstr "El valor no existe"
 
+#: templates/2_pink_cubes.html:15
+msgid "Winner!"
+msgstr "¡Ganador!"
+
+#: templates/2_pink_cubes.html:17
+msgid "You've unlocked"
+msgstr "¡Has desbloqueado un"
+
+#: templates/2_pink_cubes.html:19
+msgid "new avatar!"
+msgstr "nuevo avatar!"
+
+#: templates/2_pink_cubes.html:26 templates/avatar.html:15
+msgid "DOWNLOAD!"
+msgstr "¡DESCARGAR!"
+
+#: templates/3_blue_rubix.html:25
+msgid "Bonus"
+msgstr "Bonus"
+
+#: templates/3_blue_rubix.html:36
+msgid "Level"
+msgstr "Nivel"
+
+#: templates/3_blue_rubix.html:41
+msgid "Noob"
+msgstr "Novato"
+
+#: templates/3_blue_rubix.html:46
+msgid "Medium"
+msgstr "Medio"
+
+#: templates/3_blue_rubix.html:51
+msgid "Hard"
+msgstr "Dificil"
+
+#: templates/3_blue_rubix.html:58
+msgid "Color Mode"
+msgstr "Modo de color"
+
+#: templates/3_blue_rubix.html:63
+msgid "The Special"
+msgstr "El especial"
+
+#: templates/3_blue_rubix.html:68
+msgid "Too Blue"
+msgstr "Demasiado azul"
+
+#: templates/3_blue_rubix.html:73
+msgid "White Light"
+msgstr "Luz blanca"
+
+#: templates/3_blue_rubix.html:80
+msgid "Points to Win"
+msgstr "Puntos para ganar"
+
+#: templates/3_blue_rubix.html:85 templates/3_blue_rubix.html:90
+#: templates/3_blue_rubix.html:95
+msgid "points"
+msgstr "puntos"
+
+#: templates/3_blue_rubix.html:101
+msgid "Quit"
+msgstr "Salir"
+
+#: templates/3_blue_rubix.html:102
+msgid "Play"
+msgstr "Jugar"
+
 #: templates/404.html:9
 msgid "Page not found"
 msgstr "Página no encontrada"
@@ -87,15 +172,15 @@ msgstr "Volver al inicio"
 msgid "BACK TO MENU"
 msgstr "VOLVER AL MENÚ"
 
-#: templates/avatar.html:15
-msgid "DOWNLOAD!"
-msgstr "¡DESCARGAR!"
-
 #: templates/avatar.html:19
 msgid "Player X wins!"
 msgstr "¡El jugador X gana!"
 
-#: templates/base.html:332
+#: templates/base.html:307
+msgid "Search friends"
+msgstr "Buscar amigo.a.s"
+
+#: templates/base.html:334
 msgid "Logout"
 msgstr "Cerrar sesión"
 
@@ -123,51 +208,55 @@ msgstr "JUGAR"
 msgid "FIRST TO"
 msgstr "PRIMERO A"
 
-#: templates/duel.html:164
-msgid "Winner!<br> You've unlocked a new avatar!"
-msgstr "¡Ganador!<br> ¡Has desbloqueado un nuevo avatar!"
+#: templates/duel.html:165 templates/tournois.html:188
+msgid "Winner! You've unlocked a new avatar!"
+msgstr "¡Ganador! ¡Has desbloqueado un nuevo avatar!"
 
-#: templates/duel.html:177 templates/tournois.html:196
-msgid "I'M THE BOSS"
-msgstr "¡SOY EL JEFE!"
-
-#: templates/duel.html:181 templates/tournois.html:200
-msgid "OH NO I LOST"
-msgstr "¡OH NO, PERDI!"
-
-#: templates/duel.html:196 templates/pong.html:57 templates/tournois.html:215
+#: templates/duel.html:187 templates/pong.html:57 templates/tournois.html:223
 msgid "ME"
 msgstr "YO"
 
-#: templates/duel.html:205 templates/pong.html:66 templates/tournois.html:224
+#: templates/duel.html:196 templates/pong.html:66 templates/tournois.html:232
 msgid "GLOBO GUEST"
 msgstr "INVITADO GLOBO"
 
-#: templates/duel.html:212 templates/pong.html:74 templates/tournois.html:230
+#: templates/duel.html:203 templates/pong.html:74 templates/tournois.html:238
 msgid "⏸ / space"
 msgstr "⏸ / espacio"
 
-#: templates/home.html:42
+#: templates/home.html:28
+msgid "CREDITS"
+msgstr "CRÉDITOS"
+
+#: templates/home.html:52
 msgid "No account? Sign up first!"
 msgstr "¿No tienes cuenta? ¡Regístrate primero!"
 
-#: templates/home.html:45
+#: templates/home.html:55
 msgid "Sign up"
 msgstr "Regístrate"
 
-#: templates/home.html:50 templates/signin.html:31
+#: templates/home.html:60 templates/signin.html:31
 msgid "SIGN IN"
 msgstr "INICIAR SESION"
 
-#: templates/home.html:69
+#: templates/home.html:72 templates/signin.html:38
+msgid "Login"
+msgstr "Usuario"
+
+#: templates/home.html:73 templates/signin.html:43 templates/signup.html:36
+msgid "Password"
+msgstr "Contraseña"
+
+#: templates/home.html:79
 msgid "I'm happy"
 msgstr "Estoy feliz"
 
-#: templates/home.html:74 templates/signin.html:13 templates/signup.html:12
+#: templates/home.html:84 templates/signin.html:13 templates/signup.html:12
 msgid "Sign In"
 msgstr "Iniciar sesión"
 
-#: templates/home.html:78
+#: templates/home.html:88
 msgid "Sign In with 42"
 msgstr "Iniciar sesión con 42"
 
@@ -186,6 +275,14 @@ msgstr "¿Ya tienes una cuenta?"
 #: templates/signup.html:18
 msgid "SIGN UP"
 msgstr "REGISTRARSE"
+
+#: templates/signup.html:31 users/forms.py:25 users/models.py:26
+msgid "Username"
+msgstr "Enviar nombre de usuario"
+
+#: templates/signup.html:42
+msgid "Confirm Password"
+msgstr "Confirmar"
 
 #: templates/signup.html:49
 msgid "Min 8 characters"
@@ -211,13 +308,21 @@ msgstr "Registrarse"
 msgid "SHUFFLE"
 msgstr "MEZCLAR"
 
-#: templates/tournois.html:180
+#: templates/tournois.html:179
 msgid "POINTS"
 msgstr "PUNTOS"
 
-#: templates/tournois.html:182
+#: templates/tournois.html:180
 msgid "TO WIN"
 msgstr "PARA GANAR"
+
+#: templates/tournois.html:204
+msgid "I'M THE BOSS"
+msgstr "¡SOY EL JEFE!"
+
+#: templates/tournois.html:208
+msgid "OH NO I LOST"
+msgstr "¡OH NO, PERDI!"
 
 #: templates/vs_tournois.html:21
 msgid "DUEL MODE"
@@ -251,79 +356,80 @@ msgstr "Victoria"
 msgid "Loss"
 msgstr "Derrota"
 
-#: tournament/templates/tournament/match_history.html:41
+#: tournament/templates/tournament/match_history.html:42
 msgid "No matches recorded yet."
 msgstr "Aún no hay partidas registradas."
 
-#: users/forms.py:25 users/models.py:25
-msgid "Username"
-msgstr "Enviar nombre de usuario"
+#: users/jwt_auth.py:160
+msgid "Authentication required. Please login to access this page."
+msgstr ""
+"Autenticación requerida. Por favor, inicia sesión para acceder a esta página."
 
-#: users/models.py:41
+#: users/models.py:42
 msgid "Prefered Language"
 msgstr "Idioma preferido"
 
-#: users/templates/users/friends.html:4
+#: users/templates/users/friends.html:14
 msgid "My friends"
-msgstr "Mis amigos"
+msgstr "Mis amigo.a.s"
 
-#: users/templates/users/friends.html:18
+#: users/templates/users/friends.html:28
 msgid "You have no friends yet."
-msgstr "Aún no tienes amigos."
+msgstr "Aún no tienes amigo.a.s."
 
-#: users/templates/users/profil.html:27
+#: users/templates/users/profil.html:24
 msgid "Profil"
 msgstr "Perfil"
 
-#: users/templates/users/profil.html:50 users/templates/users/profile.html:43
+#: users/templates/users/profil.html:46 users/templates/users/profile.html:43
 msgid "Enable 2FA"
 msgstr "Activar 2FA"
 
-#: users/templates/users/profil.html:55 users/templates/users/profile.html:48
+#: users/templates/users/profil.html:50 users/templates/users/profile.html:48
 msgid "Disable 2FA"
 msgstr "Desactivar 2FA"
 
-#: users/templates/users/profil.html:69 users/templates/users/profile.html:63
+#: users/templates/users/profil.html:64 users/templates/users/profile.html:63
 msgid "Remove Friend"
 msgstr "Eliminar amigo"
 
-#: users/templates/users/profil.html:73 users/templates/users/profile.html:59
+#: users/templates/users/profil.html:68 users/templates/users/profile.html:59
 msgid "Add Friend"
 msgstr "Añadir amigo"
 
-#: users/templates/users/profil.html:80 users/templates/users/profile.html:69
+#: users/templates/users/profil.html:75 users/templates/users/profile.html:69
 msgid "Online"
 msgstr "En línea"
 
-#: users/templates/users/profil.html:84 users/templates/users/profile.html:73
+#: users/templates/users/profil.html:79 users/templates/users/profile.html:73
 msgid "Offline"
 msgstr "Desconectado"
 
-#: users/templates/users/profil.html:94
+#: users/templates/users/profil.html:90 users/templates/users/profil.html:97
 #, python-format
-msgid ""
-"\n"
-"            \t\tWins : %(wins)s | Losses : %(losses)s\n"
-"            \t"
-msgstr ""
-"\n"
-"\t\tVictorias: %(wins)s | Derrotas: %(losses)s\t"
+msgid "Wins: %(wins)s"
+msgstr "Victorias: %(wins)s"
 
-#: users/templates/users/profil.html:99
+#: users/templates/users/profil.html:92 users/templates/users/profil.html:98
+#, python-format
+msgid "Losses: %(losses)s"
+msgstr "Derrotas: %(losses)s"
+
+#: users/templates/users/profil.html:103
 msgid "Match history"
 msgstr "Historial de partidas"
 
-#: users/templates/users/profil.html:108
+#: users/templates/users/profil.html:114
 msgid "Friends"
-msgstr "Amigos"
+msgstr "Amigo.a.s"
 
-#: users/templates/users/profil.html:117 users/templates/users/profil.html:132
-msgid "Avatar"
-msgstr "Avatar"
-
-#: users/templates/users/profil.html:124
+#: users/templates/users/profil.html:127
 msgid "Edit"
 msgstr "Editar"
+
+#: users/templates/users/profil.html:132 users/templates/users/profil.html:138
+msgid "Avatar"
+msgstr "Avatar"
 
 #: users/templates/users/profile.html:22
 #, python-format
@@ -341,7 +447,7 @@ msgstr "Mi historial de partidas"
 
 #: users/templates/users/profile.html:32
 msgid "View friends"
-msgstr "Ver amigos"
+msgstr "Ver amigo.a.s"
 
 #: users/templates/users/profile.html:36
 msgid "Edit profile"
@@ -384,56 +490,79 @@ msgid "Invalide image file."
 msgstr "Archivo de imagen no válido."
 
 #: users/validators.py:32
-msgid "This username is not allowed."
-msgstr "Este nombre de usuario no está permitido."
+msgid "Forbiden username."
+msgstr "Nombre de usuario prohibido."
 
-#: users/views.py:26
+#: users/validators.py:39
+msgid "Username must be at least 3 characters long."
+msgstr "El nombre de usuario debe tener al menos 3 caracteres."
+
+#: users/views.py:35
+msgid "Username is already used."
+msgstr "El nombre de usuario ya está en uso."
+
+#: users/views.py:39
 msgid "Your username has been updated."
 msgstr "Tu nombre de usuario ha sido actualizado."
 
-#: users/views.py:28
+#: users/views.py:43
 msgid "Please enter a valid username."
 msgstr "Introduce un nombre de usuario válido."
 
-#: users/views.py:42
+#: users/views.py:58
 msgid "Your avatar has been updated."
 msgstr "Tu avatar ha sido actualizado."
 
-#: users/views.py:44
+#: users/views.py:62
 msgid "Please enter a valid avatar."
 msgstr "Por favor, introduce un avatar válido."
 
-#: users/views.py:54
-msgid "You can not be friends with yoursefl."
-msgstr "No puedes ser amigo de ti mismo."
-
-#: users/views.py:57
-#, python-format
-msgid "You are already friends with %(username)s."
-msgstr "Ya eres amigo de %(username)s."
-
-#: users/views.py:61
-#, python-format
-msgid "You are now friends with %(username)s."
-msgstr "Ahora eres amigo de %(username)s."
-
-#: users/views.py:72
-msgid "As you can not be friends with yourself, you can not unfriend yourself."
-msgstr "Como no puedes ser amigo de ti mismo, no puedes eliminarte de tus amigos."
-
-#: users/views.py:77
-#, python-format
-msgid "You removed %(username)s from your friends"
-msgstr "Eliminaste a %(username)s de tus amigos."
-
-#: users/views.py:79
-#, python-format
-msgid "%(username)s is not in your friends list"
-msgstr "%(username)s no está en tu lista de amigos."
-
-#: users/views.py:273
+#: users/views.py:295
 msgid "Invalid username or password."
 msgstr "Nombre de usuario o contraseña inválidos."
+
+#~ msgid "You can not be friends with yoursefl."
+#~ msgstr "No puedes ser amigo de ti mismo."
+
+#, python-format
+#~ msgid "You are already friends with %(username)s."
+#~ msgstr "Ya eres amigo de %(username)s."
+
+#, python-format
+#~ msgid "You are now friends with %(username)s."
+#~ msgstr "Ahora eres amigo de %(username)s."
+
+#~ msgid ""
+#~ "As you can not be friends with yourself, you can not unfriend yourself."
+#~ msgstr ""
+#~ "Como no puedes ser amigo de ti mismo, no puedes eliminarte de tus amigo.a."
+#~ "s."
+
+#, python-format
+#~ msgid "You removed %(username)s from your friends"
+#~ msgstr "Eliminaste a %(username)s de tus amigo.a.s."
+
+#, python-format
+#~ msgid "%(username)s is not in your friends list"
+#~ msgstr "%(username)s no está en tu lista de amigo.a.s."
+
+#~ msgid "%(value)s is not an allowed username."
+#~ msgstr "Introduce un nombre de usuario válido."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "            \t\tWins : %(wins)s | Losses : %(losses)s\n"
+#~ "            \t"
+#~ msgstr ""
+#~ "\n"
+#~ "\t\tVictorias: %(wins)s | Derrotas: %(losses)s\t"
+
+#~ msgid "This username is not allowed."
+#~ msgstr "Este nombre de usuario no está permitido."
+
+#~ msgid "Use this username"
+#~ msgstr "Usar este nombre de usuario"
 
 #~ msgid "My Profile"
 #~ msgstr "Mi perfil"
@@ -471,23 +600,11 @@ msgstr "Nombre de usuario o contraseña inválidos."
 #~ msgid "SELECT!"
 #~ msgstr "¡SELECIONAR!"
 
-#~ msgid "Quit"
-#~ msgstr "Salir"
-
 #~ msgid "Remember Me"
 #~ msgstr "Recuérdame"
 
 #~ msgid "AVATAR / link"
 #~ msgstr "AVATAR / enlace"
-
-#~ msgid "Search Friends"
-#~ msgstr "Buscar amigos"
-
-#~ msgid "Login"
-#~ msgstr "Usuario"
-
-#~ msgid "Password"
-#~ msgstr "Contraseña"
 
 #~ msgid "Home"
 #~ msgstr "la casa de la mama"

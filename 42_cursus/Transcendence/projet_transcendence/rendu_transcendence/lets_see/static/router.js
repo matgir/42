@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(`Failed to load page: ${htmlResponse.status} ${htmlResponse.statusText}`);
       }
       
+      
       const html = await htmlResponse.text();
 
       // Create a temporary element to parse the HTML
@@ -243,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const href = targetLink.getAttribute('href');
     
     // Skip if no href, external link, or non-routing link
-    if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('data:')) {
+    if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('data:')  || href.startsWith('/fortytwo') || href.includes('fortytwo/')) {
       return;
     }
     
