@@ -1,0 +1,32 @@
+{% load static %}
+{% load i18n %}
+<link rel="stylesheet" href="{% static 'css/vs_tournois.css' %}">
+<script type="module" src="{% static 'js/vs_tournois.js' %}"></script>
+<canvas class="webgl"></canvas>
+<!-- Fonts et CSS -->
+<div id="app-content">
+
+    {% comment %} <div id="js-loader" class="loader-overlay">
+        <div class="loader-bar"></div>
+    </div> {% endcomment %}
+    <div id="navigation" class="navig">
+        
+        <!-- <div class="vs_tournois_content"> -->
+            <img class="logo_" src="{% static 'logo/entropia9.png' %}" alt="Logo">
+            
+            <form class="blur-box_" method="post">
+                <!-- <a id="start_game" class="start_game" href="/duel/">DUEL MODE</a> -->
+                <button id="start_game" class="start_game" data-url="/basic_setting_duel/">
+                    {% trans "DUEL MODE" %}
+                </button>
+                <a id="join_tournament" class="join_tournament" data-url="/basic_setting/">
+                    {% trans "TOURNAMENT" %}
+                </a>
+
+            </form>
+            <a id="credits" class="link_temp" href="/credits" style="opacity: 70%; font-size: x-small; font-weight: 600;">
+                CREDITS
+            </a>
+        </div>
+
+</div>

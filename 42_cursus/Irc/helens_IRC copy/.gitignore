@@ -1,0 +1,13 @@
+todo.txt
+.nfs*
+*.dSYM
+ircserv
+.vscode
+objects/
+
+commands_parsing_exec_roadmap.txt
+sources/commands/cmd.txt
+
+sources/commands/channels_operations/rfc_channels.txt
+sources/commands/registration/rfc_registration.txt
+

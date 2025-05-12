@@ -1,0 +1,17 @@
+ul {
+    margin-top: 200px;
+}
+
+li {
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+
+.link_temp {
+    text-decoration: none;
+}
+
+.link_temp:hover {
+    text-decoration: none;
+    cursor: pointer;
+}

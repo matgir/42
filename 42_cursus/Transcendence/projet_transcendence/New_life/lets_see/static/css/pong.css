@@ -1,0 +1,659 @@
+@font-face {
+  font-family: 'Entropia_sansserif-Regular';
+  src: url('../fonts/Entropia_sansserif-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.navig {
+  display: flex;
+  justify-content: space-between; /* Place les éléments aux extrémités gauche et droite */
+  align-items: center;
+  width: 100%; /* Assure-toi que la largeur de .navig est à 100% */
+  /* border: solid 2px pink; */
+}
+
+.logo_ {
+  width: 550px;
+  z-index: 0;
+  margin-top: -40px; 
+  margin-bottom: 30px;
+  /* border: solid 2px pink; */
+}
+
+.blur-box_parent_history {
+  position: fixed;
+  bottom: 35%;
+  left: 10px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px;
+  align-items: flex-end;
+  /* border: 1.5px solid rgb(253, 24, 184); */
+  z-index: 2; 
+}
+
+.blur-box_history {
+  position: fixed;
+
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 14px;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1.5px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 8px 32px 0 rgba(9, 11, 41, 0.139);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 15px;
+  z-index: 3;
+  width: 150px; /* Boîte de taille fixe */
+  height: auto;
+  box-sizing: border-box;
+}
+
+.score_moi {
+  font-family: "Roboto", sans-serif;
+  text-shadow: 0 0 1px #00ff2a, 0 0 1px #0400ff;
+  color: rgba(255, 255, 255, 0.802);
+  background-color: #ec17ff00;
+  border-radius: 11px;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1.5px solid rgba(7, 232, 48, 0.879);
+  box-shadow: 0 0px 15px 0 rgba(58, 255, 40, 0.652);
+  z-index: 2;
+  font-weight: 800;
+  font-size: 25px;
+  padding: 3px;
+  /* margin-top: 7px; */
+  width: 70%;
+  text-align: center;
+}
+
+.name3 {
+  font-family: "Roboto", sans-serif;
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 2;
+  font-weight: 800;
+  /* padding: 3px 0px; */
+  font-size: 16px;
+  text-align: center;
+  white-space: nowrap; /* Empêche la coupure du texte en plusieurs lignes */
+  overflow: hidden; /* Cache le texte qui dépasse */
+  text-overflow: ellipsis; /* Ajoute "..." à la fin du texte qui dépasse */
+  width: 90%; /* La largeur de la boîte est fixe, donc le texte s'adapte */
+}
+
+.name1 {
+  font-family: "Roboto", sans-serif;
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 2;
+  font-weight: 800;
+  font-size: 17px;
+  text-align: center;
+  white-space: nowrap; /* Empêche la coupure du texte en plusieurs lignes */
+  overflow: hidden; /* Cache le texte qui dépasse */
+  text-overflow: ellipsis; /* Ajoute "..." à la fin du texte qui dépasse */
+  width: 100%; /* La largeur de la boîte est fixe, donc le texte s'adapte */
+}
+
+.name2 {
+  font-family: "Roboto", sans-serif;
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 2;
+  font-weight: 800;
+  font-size: 17px;
+  text-align: center;
+  white-space: nowrap; /* Empêche la coupure du texte en plusieurs lignes */
+  overflow: hidden; /* Cache le texte qui dépasse */
+  text-overflow: ellipsis; /* Ajoute "..." à la fin du texte qui dépasse */
+  width: 100%; /* La largeur de la boîte est fixe, donc le texte s'adapte */
+}
+
+
+.blur-box_score_parent_l {
+  position: fixed;
+  bottom: 5%; /* Place la boîte un peu au-dessus du bas */
+  left: 5%; /* Place la boîte à gauche */
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px;
+  align-items: flex-end;
+  z-index: 2;
+}
+
+.blur-box_score_parent_r {
+  position: fixed;
+  bottom: 5%; /* Place la boîte un peu au-dessus du bas */
+  right: 5%; /* Place la boîte à droite */
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  align-items: flex-end;
+  z-index: 2;
+  justify-content: center;
+}
+
+.blur-box_score {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 14px;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1.5px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 8px 32px 0 rgba(9, 11, 41, 0.139);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  z-index: 3;
+  width: 200px; /* Boîte de taille fixe */
+  height: auto;
+  box-sizing: border-box;
+}
+
+.name1 {
+  font-family: "Roboto", sans-serif;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  z-index: 2;
+  font-weight: 800;
+  font-size: 23px;
+  text-align: center;
+  white-space: nowrap; /* Empêche la coupure du texte en plusieurs lignes */
+  overflow: hidden; /* Cache le texte qui dépasse */
+  text-overflow: ellipsis; /* Ajoute "..." à la fin du texte qui dépasse */
+  width: 100%; /* La largeur de la boîte est fixe, donc le texte s'adapte */
+}
+
+.name2 {
+  font-family: "Roboto", sans-serif;
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 2;
+  font-weight: 800;
+  font-size: 23px;
+  text-align: center;
+  white-space: nowrap; /* Empêche la coupure du texte en plusieurs lignes */
+  overflow: hidden; /* Cache le texte qui dépasse */
+  text-overflow: ellipsis; /* Ajoute "..." à la fin du texte qui dépasse */
+  width: 100%; /* La largeur de la boîte est fixe, donc le texte s'adapte */
+}
+
+.score1 {
+  font-family: "Roboto", sans-serif;
+  text-shadow: 0 0 1px #ff00c8, 0 0 1px #0400ff;
+  
+  color: rgba(255, 255, 255, 0.916);
+
+  background-color: #ec17ff00;
+  border-radius: 14px;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1.5px solid rgb(212, 0, 255);
+  box-shadow: 0 0px 15px 0 rgba(223, 40, 255, 0.652);
+  z-index: 2;
+  font-weight: 800;
+  font-size: 45px;
+  padding: 10px;
+  margin-top: 7px;
+  width: 90%;
+  text-align: center;
+}
+
+.score2 {
+  font-family: "Roboto", sans-serif;
+  text-shadow: 0 0 1px #0400ff, 0 0 1px #0400ff;
+  
+  color: rgba(255, 255, 255, 0.851);
+
+  background-color: #0062ff00;
+  border-radius: 14px;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1.5px solid rgb(26, 87, 255);
+  box-shadow: 0 0px 15px 0 rgb(9, 25, 255);
+  margin-top: 10px;
+  z-index: 2;
+  font-weight: 800;
+  font-size: 45px;
+  padding: 7px;
+  width: 90%;
+  text-align: center;
+}
+
+
+/* Optionnel: pour le responsive */
+@media (max-width: 768px) {
+  .score1, .score2 {
+    font-size: 30px;
+  }
+  .logo_ {
+    width: 300px;
+  }
+}
+/* Optionnel: pour le responsive */
+@media (max-width: 768px) {
+  .score1, .score2 {
+    font-size: 30px;
+  }
+  .logo_ {
+    width: 300px;
+  }
+}
+
+.start_game {
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.042);
+  border-radius: 5px;
+  cursor: pointer;
+  width: 75%;
+  max-width: 230px;
+}
+
+h2{
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  /* background-color: rgba(255, 255, 255, 0.054); */
+  /* backdrop-filter: 3px; */
+  font-family: "Roboto", sans-serif;
+border-radius: 5px;
+  color: rgba(255, 255, 255, 0.711);
+  font-weight: 400;
+  font-size: 10px;
+
+}
+
+
+.pause {
+  margin-top: -80px; /* Déplace un peu plus haut */
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  font-size: 15px;
+  padding: 7px 17px;
+  color: rgba(255, 255, 255, 0.711);
+  /* margin-left: 15px; */
+  background: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  border: solid 1px rgba(255, 255, 255, 0.461);
+  text-align: left;
+}
+
+.pause:hover {
+  transform: scale(1.05);
+}
+
+
+.blur-box_ {
+  /* width: 420px;
+  max-height: 530px; */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: rgba(183, 182, 185, 0.058);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  padding: 30px 60px;
+  border: 1px solid rgba(255, 255, 255, 0.155);
+  z-index: 1;
+  margin-top: -60px; /* Déplace un peu plus haut */
+  gap: 20px;
+}
+
+
+.start_game , .join_tournament {
+  font-family: "Roboto", sans-serif;
+  font-weight: 1000;
+  font-size: 22px;
+  /* font-style: bold; */
+  padding: 12px 30px;
+  /* margin-top: 15px; */
+  color: rgba(255, 255, 255, 0.859);
+  background-color: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.042);
+  border-radius: 5px;
+  border: none;
+}
+
+
+.start_game:hover, .join_tournament:hover {
+  background-color: #c4c4c4c6; /* Change légèrement la couleur de fond au survol */
+}
+
+
+/* Styles pour l'overlay de victoire */
+.game-over-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: start;
+  align-items: center;
+  z-index: 1000;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(0, 255, 248, 0.5);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(0, 255, 248, 0.8);
+  }
+}
+
+
+
+/* #countdown {
+  font-family: 'Entropia_sansserif-Regular', regular;
+  font-size: 90px;
+} */
+
+
+.countdown  {
+  font-family: 'Entropia_sansserif-Regular', regular;
+  font-size: 80px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  /* font-family: "Roboto", sans-serif; */
+  /* font-size: 90px; */
+  /* font-weight: bold; */
+  /* color: #0051ff; */
+  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 100;
+}
+
+.countdown.show , enter.show {
+  opacity: 1;
+}
+
+.countdown-number , enter_button {
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
+
+
+
+
+
+
+
+.parent_controls_l {
+  position: fixed;
+  bottom:14%;
+  left:0px;
+  display: flex;
+  justify-content: flex-start;
+  /* padding: 20px; */
+  align-items: flex-end;
+  /* border: 1.5px solid rgb(253, 24, 184); */
+  z-index: 2; 
+}
+
+.parent_controls_r {
+  position: fixed;
+  bottom:14%;
+  right: 14px;
+  display: flex;
+  justify-content: center;
+  /* padding: 7px; */
+  align-items: flex-end;
+  z-index: 2;
+}
+
+
+.controls{
+  border-radius: 10px;
+  /* border: 1px solid rgba(255, 255, 255, 0.06); */
+  /* color: rgba(255, 255, 255, 0.669); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 0px 15px;
+  z-index: 3;
+  height: auto;
+  box-sizing: border-box;
+
+}
+
+.fleche {
+  font-family: "Roboto", sans-serif;
+
+  color: rgba(255, 255, 255, 0.463);
+
+  z-index: 2;
+  font-weight: 800;
+  font-size: 20px;
+  text-align: center;
+  width: 100%; /* La largeur de la boîte est fixe, donc le texte s'adapte */
+}
+
+
+.fixed-top {
+  position: fixed; /* indispensable pour la placer précisément */
+  top: 80px;
+  left: 46px;
+  
+  font-family: 'Entropia_sansserif-Regular', regular;
+  font-size: 46px;
+  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
+
+  border-radius: 7px;
+  padding: 10px;
+  text-align: center;
+  z-index: 10;
+
+  /* width: 200px; */
+  /* height: auto; */
+  /* box-sizing: border-box; */
+  /* border: 1.5px solid rgb(212, 0, 255); */
+  /* box-shadow: 0 0px 15px 0 rgba(223, 40, 255, 0.652); */
+}
+
+
+.fixed-bottom {
+  font-family: "Roboto", sans-serif;
+  color: rgba(255, 255, 255, 0.541);
+  font-size: 13px;
+
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 7px;
+  width: 150px;
+  padding: 5px;
+  text-align: center;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+
+}
+
+
+/* @keyframes blinkBounce {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.3);
+  }
+}
+
+.blink-bounce {
+  animation: blinkBounce 0.8s infinite;
+} */
+
+
+@keyframes blur-box_score {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+ 
+
+  }
+}
+
+.blink-bounce {
+  animation: blur-box_score 0.8s infinite;
+  background-color: #b300ff30;
+}
+
+.blink-bounce2 {
+  animation: blur-box_score 0.8s infinite;
+  background-color: #1500ff30;
+}
+
+
+
+
+
+
+/* #countdown {
+  font-family: 'Entropia_sansserif-Regular', regular;
+  font-size: 90px;
+} */
+
+
+.countdown {
+  font-family: 'Entropia_sansserif-Regular', regular;
+  font-size: 90px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* font-family: "Roboto", sans-serif; */
+  /* font-size: 90px; */
+  /* font-weight: bold; */
+  /* color: #0051ff; */
+  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 100;
+}
+
+.countdown.show {
+  opacity: 1;
+}
+
+.countdown-number {
+  animation: pulse 0.5s infinite alternate;
+}
+
+.to_win{
+  font-family: "Roboto", sans-serif;
+  font-weight: 800;
+}
+
+.n_round_text{
+  margin-top: 20px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  line-height: 0.5;
+  font-size: 50px;
+  text-align: center;
+}
+
+.n_round{
+ 
+  font-family: 'Entropia_sansserif-Regular', regular;
+  font-size: 100px;
+  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
+  /* font-family: "Roboto", sans-serif;
+  font-weight: 900; */
+  line-height: 0.9;
+  /* font-size: 50px; */
+  text-align: center;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
+
+.webgl-pong {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+}
+
+.pong-section {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.pong-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.pong-content * {
+    pointer-events: auto;
+}
+
+/* Hide all pong UI elements by default */
+.fixed-top,
+.parent_controls_l,
+.parent_controls_r,
+.blur-box_score_parent_l,
+.blur-box_score_parent_r,
+.blur-box_parent_history,
+.fixed-bottom,
+.countdown,
+.game-over-overlay {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Show UI elements only when pong section is visible */
+.pong-section.visible .fixed-top,
+.pong-section.visible .parent_controls_l,
+.pong-section.visible .parent_controls_r,
+.pong-section.visible .blur-box_score_parent_l,
+.pong-section.visible .blur-box_score_parent_r,
+.pong-section.visible .blur-box_parent_history,
+.pong-section.visible .fixed-bottom,
+.pong-section.visible .countdown,
+.pong-section.visible .game-over-overlay {
+    visibility: visible;
+    opacity: 1;
+}

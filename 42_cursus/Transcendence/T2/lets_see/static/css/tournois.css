@@ -1,0 +1,676 @@
+@font-face {
+  font-family: 'Entropia_sansserif-Regular';
+  src: url('../fonts/Entropia_sansserif-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.app-content {
+  width: 100%;
+  max-width: 1200px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative; 
+}
+
+.app-content2 {
+  width: 100%;
+  max-width: 1200px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-right: 90px;
+  margin-top: 100px;
+  position: relative; 
+  right: 5%;
+  /* border: solid 2px red; */
+}
+
+body {
+  position: relative;
+  overflow: hidden;
+}
+
+.navig {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: hidden;
+
+  /* border: solid 2px pink; */
+
+}
+
+.logo_ {
+  position: absolute;
+  top: 0px;        /* distance depuis le haut */
+  right: 0px;      /* distance depuis la droite */
+  width: 430px;
+  z-index: 10;
+
+  /* border: solid 2px pink; */
+}
+
+.image_column {
+  position: absolute;
+  top: 53%;
+  left: 150px; /* 30px + 40px de décalage */
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  z-index: 5;
+  height: auto;
+  border-radius: 12px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  /* border-radius: solid 9px rgb(91, 46, 255); */
+
+}
+
+
+
+
+.bracket {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  /* outline: 4px solid rgba(255, 255, 255, 0.8);  */
+}
+
+
+.round {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 60px;
+  flex: 1;
+  position: relative;
+  /* outline: 4px solid rgba(255, 255, 255, 0.8);  */
+}
+
+.round.final {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.round.final .matchup {
+  transform: scale(1.2);
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.round.final #player_final_match1 {
+  min-width: 200px;
+  min-height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player_final{
+  font-size: 30px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.583);
+
+  border: 2px solid rgb(33, 17, 213);
+  box-shadow: 0 0px 5px 0 rgba(80, 86, 255, 0.459);
+  padding: 22px 20px;
+  margin: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 8px;
+
+}
+
+
+
+
+.matchup {
+  border-radius: 12px;
+  padding-right:30px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  text-align: center;
+}
+
+.player-container  {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin: 0px 0px;
+}
+
+.player-image {
+  min-width: none;
+  /* width: 100%; */
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+  /* border: 2px solid rgb(33, 17, 213); */
+  /* box-shadow: 0 0px 5px 0 rgba(80, 86, 255, 0.459); */
+  margin: 5px; 
+  padding-bottom: 10px ;
+  margin-right: 25px;
+}
+
+.matchup {
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  text-align: center;
+}
+
+
+.player {
+  /* background: rgba(0, 0, 0, 0.2); */
+  padding: 10px 10px;
+  border-radius: 6px;
+}
+
+/* Update player styles to work with the new container */
+.player, .player1, .player2, .player3, .player4, .player_round2 {
+  flex: 1;
+  font-size: 30px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.659);
+  border: 1px solid rgba(254, 254, 255, 0.586);
+  /* box-shadow: 0 0px 5px 0 rgba(80, 92, 255, 0.108); */
+  padding: 22px 45px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  margin: 0; 
+}
+
+
+
+.player_round2{
+
+  border: 2px solid rgb(33, 17, 213);
+  margin: 10px 10px;
+
+}
+
+
+.player1, .player2{
+  font-size: 30px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.583);
+  /* border: 2px solid rgb(184, 17, 213); */
+  border: 2px solid rgb(15, 163, 255);
+
+  box-shadow: 0 0px 10px 0 rgba(0, 17, 255, 0.733);
+  padding: 22px 50px;
+  margin: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.player3, .player4{
+  font-size: 30px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.583);
+
+  border: 2px solid rgb(33, 17, 213);
+  box-shadow: 0 0px 5px 0 rgba(80, 86, 255, 0.459);
+  padding: 22px 50px;
+  margin: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* Highlight style for current match */
+.current-match {
+  border: 2px solid rgb(255, 236, 25);
+  box-shadow: 0 0 15px rgb(255, 236, 25, 0.7);
+  color: rgb(255, 255, 255);
+  animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 10px rgba(255, 25, 25, 0.5);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(51, 0, 255, 0.9);
+  }
+}
+
+/* Style for the tournament winner */
+.tournament-winner {
+  font-size: 40px !important;
+  font-weight: bold !important;
+  color: #00ff2a !important;
+  text-shadow: 0 0 20px rgba(0, 255, 72, 0.7) !important;
+  animation: winPulse 3s infinite alternate !important;
+  border: 3px solid #d400ff !important;
+}
+
+@keyframes winPulse {
+  from {
+    text-shadow: 0 0 10px rgba(255, 0, 221, 0.5);
+    transform: scale(1);
+  }
+  to {
+    text-shadow: 0 0 30px rgba(247, 0, 255, 0.9);
+    transform: scale(1.1);
+  }
+}
+
+
+
+/* .countdown2 {
+  font-size: 30px;
+  font-weight: bold;
+  background: linear-gradient(270deg, #ff0055, #ffcc00, #00ffcc, #0055ff, #ff0055);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-color: black;
+  background-clip: text; 
+  color: transparent;
+  animation: gradientText 5s linear infinite;
+  font-family: "Roboto", sans-serif;
+}
+
+@keyframes gradientText {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+} */
+
+
+.globo_tournament{
+  font-size: 30px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  color: rgba(204, 252, 32, 0.659);
+  border: 1px solid rgb(143, 13, 163);
+  box-shadow: 0 0px 5px 0 rgba(127, 80, 255, 0.459);
+  padding: 22px 50px;
+  margin: 10px 20px;
+  border-radius: 10px;
+  /* outline: 4px solid rgba(255, 255, 255, 0.8); */
+  
+
+}
+
+.globo_tournois {
+  width: 120px; /* un peu plus grand */
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  /* border-radius: solid 9px rgb(91, 46, 255); */
+  outline: 1px solid rgba(33, 43, 132, 0.071);
+  /* border: 1px solid rgba(33, 17, 213, 0.578); */
+  box-shadow: 0 0px 5px 0 rgba(80, 86, 255, 0.459);
+
+}
+
+
+.webgl-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+  z-index: -1;
+}
+
+.scroll-container {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 100vh;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+.scroll-container.scrolling-enabled {
+  overflow-y: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scroll-container::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+.fullpage-section {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Adaptation des styles existants */
+.navig {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+
+}
+
+.blur-box_avatar, .canvas_tournois {
+  transform: translateZ(50px);
+}
+
+/* Reset des positions */
+#app-content, .navig, .blur-box_avatar, .canvas_tournois {
+  position: static !important;
+  transform: none !important;
+
+}
+
+/* Ajustements visuels */
+.character-grid {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.canvas_tournois {
+  max-width: 90vw;
+  margin: 0 auto;
+  border-radius: solid 9px rgb(91, 46, 255);
+
+  
+}
+
+/* Scroll personnalisé */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 4px;
+}
+
+
+
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Modifiez votre section .fullpage-section */
+.fullpage-section {
+  width: 100% !important; /* Remplace 100vw par 100% */
+  overflow-x: hidden;
+  left: 0;
+  right: 0;
+}
+
+/* Ajoutez ce conteneur wrapper */
+.scroll-container {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.globo_name{
+  border: none;
+  border-radius: 19px; /* Bords arrondis */
+}
+
+
+
+
+html, body {
+  scroll-behavior: auto;
+}
+
+
+/* Animation de défilement des images */
+@keyframes scrollImages {
+  0% {
+      transform: translateY(0);
+  }
+  100% {
+      transform: translateY(-100px);
+  }
+}
+
+/* Appliquer l'animation au lancement */
+.slot-image {
+  animation: scrollImages 0.5s ease-in-out infinite;
+}
+
+
+.fullpage-section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  align-items: center; /* centre verticalement */
+}
+
+
+
+
+.play-button, .shuffle{
+  font-size: 35px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  /* box-shadow: 0 0px 5px 0 rgba(80, 92, 255, 0.108); */
+  padding: 14px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  margin: 0; 
+  background: none;
+  border-color: rgb(22, 18, 255);
+  background: rgba(217, 0, 255, 0);
+  box-shadow: 0 0px 15px 0 rgb(24, 51, 255);
+  /* border: 3px double rgb(221, 0, 255); */
+  /* border-image: linear-gradient(45deg, rgb(0, 51, 255),pink, rgb(255, 34, 255)) 1; */
+}
+
+
+
+.play-button:hover {
+  transform: scale(1.05);
+  background: rgba(222, 35, 255, 0.872);
+  color: rgb(255, 255, 255);
+  border: 3px double rgb(227, 67, 255);
+
+}
+
+
+
+/* .play-button.active {
+  cursor: pointer;
+  background: rgb(217, 0, 255);
+  box-shadow: 0 0px 5px 0 rgba(197, 80, 255, 0.459);
+  border: 3px outset rgb(248, 200, 255);
+} */
+
+/* .play-button.active:hover {
+  transform: scale(1.1);
+  background: rgb(217, 0, 255);
+  color: rgb(255, 255, 255);
+} */
+
+/* .play-button:disabled {
+  pointer-events: none; 
+} */
+
+
+
+.play_buttons {
+  position: absolute;
+  bottom: -20px;
+  right: 30px;
+  width: 200px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column; 
+  gap: 28px;             
+}
+
+
+
+.shuffle {
+  position: absolute;
+  right:30px ;
+  bottom: 80px;
+  font-size: 18px;
+  border-radius:50px ;
+  padding: 14px 18px;
+  color: rgb(255, 255, 255);
+  background: rgb(33, 17, 255);
+  border: 3px outset rgba(20, 20, 130, 0.804);
+  box-shadow: 0 0px 15px 0 rgb(10, 24, 136);
+}
+
+.shuffle:hover {
+  color: rgba(255, 255, 255, 0.812);
+
+  background: rgb(15, 0, 219);
+  border: 3px outset rgba(73, 73, 196, 0.56);
+  transform: scale(0.95);
+
+}
+
+
+
+
+.win {
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transform: translate(-50%, -50%); /* Centre parfaitement l'élément */
+  font-size: 40px;
+  font-weight: bold;
+  color: #ffff00;
+  text-shadow: 0 0 20px rgba(255, 255, 0, 0.7);
+  animation: winPulse 3s infinite alternate;
+  border-radius: 10px;
+  z-index: 10;
+  font-family: 'Entropia_sansserif-Regular', regular;
+}
+
+@keyframes winPulse {
+  from {
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    transform: scale(1);
+  }
+  to {
+    text-shadow: 0 0 30px rgba(255, 255, 0, 0.9);
+    transform: scale(1.1);
+  }
+}
+
+.confirmButton {
+  /* Styles de base */
+  font-size: 35px;
+  padding: 7px 40px;
+  color: rgb(255, 255, 255);
+  background: #1b00b700;
+  border-radius: 5px;
+  cursor: not-allowed; /* Curseur interdit par défaut */
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  border: 3px double rgb(4, 0, 214);
+  text-align: center;
+  margin-bottom: 60px;
+  opacity: 0.35;
+  transition: all 0.3s ease;
+}
+
+.confirmButton.active {
+  cursor: pointer;
+  opacity: 1;
+  border: 4px double rgb(11, 7, 255);
+
+  color: rgb(255, 255, 255);
+}
+
+.confirmButton.active:hover {
+  background: #1b00b7fd;
+  transform: scale(1.1);
+}
+
+.confirmButton:disabled {
+  /* Styles quand non clicable */
+  pointer-events: none; /* Désactive les interactions */
+}
+
+#section {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in 0.2s forwards; /* Le dernier 2s est le délai */
+}
+
+
+.n_round_text{
+  margin-top: 20px;
+  line-height: 1;
+  font-size: 35px;
+  text-align: center;
+  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+}
+
+.n_round{
+  font-size: 100px;
+  text-shadow: 0 0 1px #ffffff, 0 0 2px #ffffff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  line-height: 1;
+  font-size: 70px;
+  text-align: center;
+}
+
+
+.countdown2 {
+  color: #ffcc0000;
+  background: none;
+  border: none;
+}
+
+.countdown2-wrapper {
+
+  color: #ffcc0000;
+  background: none;
+  border: none;
+}
+
+
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -1,0 +1,13 @@
+main	ft_parsing		find_y						fdf_get_next_line
+						ft_store_z					fdf_get_next_line
+													ft_fdf_split
+													free_z
+		incorporate_z
+		window			mlx_init
+						mlx_new_window
+						mlx_new_image
+						mlx_get_data_addr
+						my_mlx_pixel_put
+						draw_line					ft_to_trace
+						mlx_put_image_to_window
+						mlx_loop

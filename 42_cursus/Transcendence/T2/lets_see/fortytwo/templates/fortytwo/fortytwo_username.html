@@ -1,0 +1,194 @@
+{% load i18n %}
+{% load static %}
+
+<style>
+  body {
+    margin: 0;
+    background-color: #000000;
+    overflow: hidden;
+  }
+  
+  .full_page {
+    font-family: "Roboto", sans-serif;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #000000;
+  }
+  
+  .blur-box {
+    background: rgba(61, 19, 250, 0.088);
+    border-radius: 14px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(89, 96, 117, 0.17);
+    box-shadow: 0 8px 32px 0 rgba(1, 2, 21, 0.139);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 450px;
+    padding: 40px;
+    z-index: 1;
+    position: relative;
+  }
+  
+  .username_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .username_input {
+    border: none;
+    border-bottom: 2px solid rgba(0, 136, 255, 0.6);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    width: 100%;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 30px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .username_input:focus {
+    outline: none;
+    border-bottom: 2px solid rgba(0, 217, 255, 0.9);
+    box-shadow: 0 0 15px rgba(0, 195, 255, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  .username_input:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  .username_input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  
+  h2 {
+    font-size: 40px;
+    font-weight: 300;
+    color: white;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 149, 255, 0.3);
+  }
+  
+  .submit-btn {
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: white;
+    padding: 12px 30px;
+    background: rgba(0, 89, 255, 0.3);
+    border: 2px solid rgba(0, 195, 255, 0.3);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .submit-btn:hover {
+    background: rgba(0, 102, 255, 0.5);
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(0, 183, 255, 0.4);
+  }
+  
+  .logo {
+    width: 120px;
+    margin-bottom: 30px;
+    opacity: 0.9;
+  }
+
+  /* Error styles */
+  .error-container {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    color: #ff8a8a;
+    font-size: 14px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .error-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .error-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  .error-list li {
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .error-list li::before {
+    content: "•";
+    color: #ff5e5e;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: 0.5em;
+  }
+
+  /* Fix autofill styles to match theme */
+  input.username_input:-webkit-autofill,
+  input.username_input:-webkit-autofill:hover,
+  input.username_input:-webkit-autofill:focus,
+  input.username_input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: white !important;
+    box-shadow: 0 0 0 1000px transparent inset !important;
+  }
+</style>
+
+<div class="full_page">
+  <div class="blur-box">
+    <img src="{% static 'logo/logo_square.png' %}" alt="Logo" class="logo">
+    
+    <form method="post" action="/fortytwo/fortytwo_username/" class="username_form" data-no-spa>
+      <h2>
+        {% trans "Welcome! Choose your username" %}
+      </h2>
+      
+      {% if form.username.errors %}
+      <div class="error-container">
+        <div class="error-title">{% trans "Username cannot be used:" %}</div>
+        <ul class="error-list">
+          {% for error in form.username.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      
+      {% csrf_token %}
+      <input type="text" name="username" class="username_input" placeholder="{% trans 'Enter your username' %}" value="{{ form.username.value|default:'' }}" required autofocus>
+      <button type="submit" class="submit-btn">
+        {% trans "Continue" %}
+      </button>
+    </form>
+  </div>
+</div>

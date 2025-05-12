@@ -1,0 +1,30 @@
+{% load i18n %}
+
+
+<style>
+    li {
+        list-style-type: none;
+    }
+	a {
+		text-decoration: none;
+		color: white;
+	}
+</style>
+<h2 style="font-size: 30px;">
+{% trans "My friends" %}
+</h2>
+{% if friends %}
+<ul>
+	{% for friend in friends %}
+	<li>
+		<a href="/users/profile/{{ friend.username }}">
+			{{ friend.username }}
+		</a>
+	</li>
+	{% endfor %}
+</ul>
+{% else %}
+<p>
+	{% trans "You have no friends yet." %}
+</p>
+{% endif %}

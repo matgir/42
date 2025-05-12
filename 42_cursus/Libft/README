@@ -1,0 +1,137 @@
+/*
+int		ft_atoi(const char *nptr))
+		prend un char et le transforme en int selon certaine conditions, retourne cet int
+
+void	ft_bzero(void *s, size_t n))
+		remplace n bytes par '\0' a partir du pointeur s, n'a pas de valeur de retour
+
+void	*ft_calloc(size_t nmemb, size_t size))
+		allou nmemb de taille size et les rempli par '\0', retourne un pointeur
+		sur cette zone allouer ou NULL si : size == 0, nmemb == 0, ou
+		l'allocation a echouer'
+
+int		ft_isalnum(int c))
+		indique si c est alphanumeric, retourne 0 si ce n'est pas le cas
+
+int		ft_isalpha(int c))
+		indique si c est alphabetic maj ou min, retourne 0 si ce n'est pas le cas
+
+int		ft_isascii(int c))
+		indique si c fait parti de la table ascii, retourne 0 si ce n'est pas le cas
+
+int		ft_isdigit(int c))
+		indique si c est un chiffre, retourne 0 si ce n'est pas le cas
+
+int		ft_isprint(int c))
+		indique si c est imprimable, retourne 0 si ce n'est pas le cas
+
+char	*ft_itoa(int n)
+		transforme l'int recu en chaine de caracteres dans une string qu'il vient
+		d'allouer et retroune cette derniere
+
+void	ft_lstadd_back(t_list **alst, t_list *new)
+		ajoute la new a la fin de la liste chainer commencant par alst
+
+void	ft_lstadd_front(t_list **alst, t_list *new)
+		ajoute new au debut de la liste chainer alst et fait pointer le debut de
+		cette liste sur new
+
+void	ft_lstclear(t_list **lst, void(*del)(void*))
+		supprime pqr lq fonction del et free l'espace pointer par **lst et sa
+		suite puis le met a NULL
+
+void	ft_lstdelone(t_list *lst, void(*del)(void*))
+		supprime par la fonction del et free la t_list lst
+
+void	ft_lstiter(t_list *lst, void (*f)(void *))
+		applique la fonction f sur tout les lst->content de chaque mayon de la
+		liste chainer
+
+t_list	*ft_lstlast(t_list *lst)
+		retourne le dernier element de la list commencant par le pointeur *lst
+
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+		applique la fonction f a tout les lst->content de la liste et les stock dans une nouvelle list chainer, del est utiliser en cas d'echec d'allocation, retourne un pointeur sur le debut de la nouvelle liste
+
+t_list	*ft_lstnew(void *content)
+		allou et creer un t_list new dont new-> sera egale a content passer en parametres, retourne un pointeur sur cette t_list
+
+int		ft_lstsize(t_list *lst)
+		compte le nombre d'element de la lst, retourne le nomber d'elements de la lst
+
+void	*ft_memchr(const void *s, int c, size_t n))
+		recherche sur n bytes a partir du pointeur s la premier occurence de c interpreter comme un unsigned char et la retourne
+
+int		ft_memcmp(const void *s1, const void *s2, size_t n))
+		compare les premiers n bytes de s1 et s2 interpreter comme des unsigned char, retourne la difference si il y en a 0 sinon
+
+void	*ft_memcpy(void *dest, const void *src, size_t n))
+		copie n bytes de src dans dest et retourne un pointeur sur dest
+
+void	*ft_memmove(void *dest, const void *src, size_t n))
+		copie n bytes de src dans dest en utilisant une variable tmp dont la memoire ne chevauche pas celle des autres, retourne un pointeur sur dest
+
+void	*ft_memset(void *s, int c, size_t n))
+		rempli n bytes a partir de s par c interpreter comme un unsigned char retourne un pointeur sur s
+
+void	ft_putchar_fd(char c, int fd)
+		ecrit c dans le file descriptor fd
+
+void	ft_putendl_fd(char *s, int fd)
+		ecrit s suivi d'un '\0' dans le file descriptor fd
+
+void	ft_putnbr_fd(int n, int fd)
+		ecrit n dans le file descriptor fd
+
+void	ft_putstr_fd(char *s, int fd)
+		ecrit s dans le file descriptor fd
+
+char	**ft_split(char const *s, char c)
+		allou et retourne un tableau de string obtenu en separant s par c, retour NULL si alloc non focntionnelle
+
+char	*ft_strchr(const char *s, int c))
+		trouve la premiere occurence de (unsigned char)c dans s et retourne un pointeur de s sur cette occurence
+
+char	*ft_strdup(const char *s))
+		creer une nouvelle string qui est le duplicata de s et retourne un pointeur sur la nouvelle string
+
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+		applique la focntion f a chaque caractere de s en lui donnant l'index de ce dernier
+
+char	*ft_strjoin(const char *s1, const char *s2)
+		creer une nouvelle string qui est le duplicata de s1 suivi de s2 avec un '\0' a la fin, retourne un pointeur sur la nouvelle string
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size))
+		copi size - ldst - 1 de src a la suite de dst et termine nvdst par '\0', retourne : ls + size si ld >= size, ls + ls sinon
+ 
+size_t	ft_strlcpy(char *dst, const char *src, size_t size))
+		copi size - 1 de src dans dst et termine ndst par '\0', retourne la taille de src
+
+size_t	ft_strlen(const char *s))
+		calcule la taille de s sans compte '\0', retourne cette taille
+
+char	*ft_strmapi(char const *s, char(*f)(unsigned int, char))
+		applique la fonction f a chaque caratceres de s en fournissant son index, allou et rempli une nouvelle string avec chacun des resultats obtenu
+
+int		ft_strncmp(const char *s1, const char *s2, size_t n))
+		compare les s1 et s2 pendant n carateres, retourne la difference si il y en a 0 sinon
+
+char	*ft_strnstr(const char *big, const char *little, size_t len))
+		trouve la premiere occurence de little dans les n premiers caracteres de big, si little vide retourne big, si little non trouve retourne NULL, si little trouver retourne le pointeur du debut de little dans big
+
+char	*ft_strrchr(const char *s, int c)
+		trouve la derniere occurence de (unsigned char)c dans s et retourne un pointeur de s sur cette occurence
+
+char	*ft_strtrim(char const *s1, char const *set)
+		allou et creer une nouvelle string qui est la copie de s1 sans les caracteres de set en debut et en fin, retourne la nouvelle string
+
+char	*ft_substr(char const *s, unsigned int start, size_t len))
+		allou et retourne une chaine de caractere issu de *s commence a lindex
+		start et ayant pour taille max len
+
+int		ft_tolower(int c))
+		transforme c en sa lowercase si possible, retourne le nouveau c ou pas
+
+int		ft_toupper(int c))
+		transforme c en son uppercase si possible, retourne le nouveau c ou pas
+*/

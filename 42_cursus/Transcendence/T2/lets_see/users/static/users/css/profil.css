@@ -1,0 +1,348 @@
+/* Taille très fine pour des titres ou sous-titres */
+h1, h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 4rem;  /* Taille plus grande */
+}
+
+/* Taille médium pour des sous-titres ou du texte important */
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 2.5rem; /* Moyenne taille */
+}
+
+/* Taille médium pour des sous-titres ou du texte important */
+h4 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 3rem; /* Moyenne taille */
+}
+
+/* Taille standard pour du texte normal */
+p, .card {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;  /* Poids normal */
+  font-size: 1.4rem; /* Taille normale */
+}
+
+/* Taille semi-gras pour du texte plus marqué */
+strong, .bento_small {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;  /* Semi-gras */
+  font-size: 1.4rem;  /* Taille similaire à la normale */
+}
+
+/* Taille très grasse pour les éléments importants */
+button, .bento_large {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;  /* Poids plus épais */
+  font-size: 3rem; /* Légèrement plus grand */
+}
+
+.navig {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: column; */
+  background: none;
+}
+
+.win_losse{
+  color: white;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-size: 30px;
+  align-self: center;
+  
+}
+
+.settings{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;  /* Poids plus épais */
+  color: white;
+  font-size: 20px;
+  padding: 5px 17px;
+  text-decoration: none;
+  border: 2px solid white;
+  border-radius: 10px;
+  margin-top: 4px;
+}
+
+.username_input {
+  border: 2px solid rgba(4, 0, 255, 0.458);
+  color: rgba(224, 227, 255, 0.461);
+  background-color: rgba(42, 123, 194, 0) !important; /* Force le fond */
+  font-size: 70px;
+  font-weight: 400;
+  border-radius: 15px;
+  padding-top: 20px;
+  width: 100%; /* Pour une meilleure occupation de l'espace */
+  margin: 0;
+  padding: 0;
+  /* border: none; */
+  /* background: none; */
+
+  color: inherit;
+  color: rgba(255, 255, 255, 0.784);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+
+.avatar{
+  min-height: 70px;
+  min-width: 70px;
+  /* border-radius: 15px; */
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  /* padding: 20px; */
+  /* box-shadow: 0 4px 40px rgba(145, 2, 255, 0.254); */
+
+}
+  
+.titre{
+  /* font-family: 'Roboto', sans-serif; */
+  font-weight: 300;  /* Poids plus épais */
+  color: white;
+  font-size: 50px;
+}
+
+.username{
+  /* font-family: 'Roboto', sans-serif; */
+  font-weight: 400;  /* Poids plus épais */
+  color: rgb(255, 255, 255);
+  font-size: 100px;
+  padding-top: 10px;
+
+}
+
+
+
+.profil_edit_parent {
+  display: flex;
+  align-items: flex-end;
+  margin-top: 10px;
+  gap: 12px; /* Espace entre les éléments */
+  /* border: red 2px solid; */
+}
+
+
+.settings {
+  margin: 12px;
+  text-decoration: none;
+  background-color: blue;
+  order: 2; /* Met le lien après le titre */
+}
+
+.settings:hover {
+  margin: 12px;
+  text-decoration: none;
+  transform: scale(1.05);
+  /* color: rgb(0, 0, 199);
+   */
+   border-color: rgb(0, 17, 128);
+  background-color: blue;
+
+  order: 2; /* Met le lien après le titre */
+}
+
+
+
+
+
+/* Profil box */
+.blur-box_profil {
+  width: 80%;
+  height: 70%;
+  max-width: 1400px;
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+    align-items: flex-end;
+  gap: 20px;
+}
+
+/* Grille des cartes */
+.bento-container {
+  display: grid;
+  grid-template-areas: 
+    "main main long"
+    "small1 small2 long";
+  grid-template-columns: 2fr 2fr 3fr;
+  grid-gap: 20px;
+  width: 100%;
+  height: 100%;
+  
+}
+
+/* Styles des cartes */
+.card {
+  background: rgba(61, 43, 255, 0.112);
+  border-radius: 14px;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.228);
+  /* border: solid 6px red; */
+
+  /* box-shadow: 0 8px 32px rgba(9, 11, 41, 0.14); */
+  color: rgba(232, 232, 232, 0.784);
+  display: flex;
+  /*justify-content: flex-start;    /* bas */
+  /* align-items: flex-end;      /* gauche */
+  padding: 20px ;
+  min-height: 150px;
+  position: relative;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  /* font-size: 2rem; */
+  font-size: 28px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 100;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  /* box-shadow: 0 8px 28px rgb(0, 0, 0); */
+  text-align: left;
+  background: rgba(53, 31, 255, 0);
+}
+
+/* Affectation des zones */
+.bento_large {
+  grid-area: main;
+  /* padding-top: 5px; */
+  /* background: rgba(255, 242, 242, 0.91); */
+}
+
+.bento_long {
+  grid-area: long;
+  justify-content: flex-end;
+  /* background: rgba(86, 245, 123, 0.886); */
+  /* background: rgba(121, 66, 199, 0.281); */
+  padding: 40px 40px 20px 40px;
+
+  box-shadow: 0 0 400px 0px rgba(0, 24, 177, 0.696);
+}
+
+.bento_small:nth-child(3) {
+  grid-area: small1;
+  background: rgba(25, 0, 255, 0.04);
+  box-shadow: 0 0 400px 0px rgba(0, 24, 177, 0.656);
+  min-height: 265px;
+}
+
+.bento_small:nth-child(4) {
+  grid-area: small2;
+  background-color: black;
+  border: none;
+  min-height: 265px;
+}
+
+.scrollable-content {
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  margin-bottom: 10px;
+}
+
+.scrollable-content::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+/* Styles du bouton */
+button {
+  padding: 10px 20px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* .card {
+  transition: transform 0.4s ease, border-radius 0.4s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  border-radius: 20px 40px 20px 40px;
+} */
+
+.card {
+  filter: url(#liquidDistort);
+  transition: filter 0.3s ease;
+}
+
+.card:hover {
+  filter: none;
+}
+
+#1 {
+	max-height: 400px; /* Adjust this value as needed */
+	overflow-y: auto;
+}
+
+/* TODO this is the match history */
+.match-history {
+  max-height: 400px; /* Adjust this value as needed */
+  overflow-y: auto;
+}
+input:focus {
+  background-color: transparent !important;
+  outline: none;
+  box-shadow: none;
+}
+
+.unlock {
+  font-size: 32px;
+  font-weight: bold;
+  background: linear-gradient(270deg, #e75d8b, #e44e80, #d8376d, #e02c68, #df0c52);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* Pour compatibilité Firefox */
+  color: transparent;
+  animation: gradientText 5s linear infinite;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  min-width:200px ;
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  background-color: transparent !important;
+  color: inherit !important;
+}
+input.username_input:-webkit-autofill,
+input.username_input:-webkit-autofill:hover,
+input.username_input:-webkit-autofill:focus,
+input.username_input:-internal-autofill-selected {
+  box-shadow: 0 0 0 1000px transparent inset !important;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  background-color: transparent !important;
+  color: inherit !important;
+  transition: background-color 9999s ease-out !important;
+  transition-delay: 9999s !important;
+}

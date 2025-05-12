@@ -1,0 +1,38 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-03 19:39+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: jeux_du_pong/static/js/QQQQ.js:171
+#, javascript-format
+msgid "%s Wins !"
+msgstr "%s a gagner !"
+
+#: static/js/pong.js:809
+msgid "ARE YOU<br>READY?"
+msgstr "VOUS ETES<br>PRETS"
+
+#: static/js/pong.js:813
+msgid "GO !"
+msgstr "GO !"
+
+#~ msgid "PRESS ENTER FOR NEW GAME"
+#~ msgstr "ENTRE POUR LANCER UNE NOUVELLE PARTIE"
+
+#~ msgid "Player 2 Wins !"
+#~ msgstr "Player 2 a gagner !"

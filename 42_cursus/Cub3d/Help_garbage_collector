@@ -1,0 +1,22 @@
+typedef struct s_pos
+{
+	struct s_list	*start;
+	int				*size;
+}	t_pos;
+
+typedef struct s_list
+{
+	struct s_list	*next;
+	struct s_list	*back;
+	void			*content;
+	struct s_pos	*pos;
+}	t_list;
+
+// garbge collector help
+https://dev.to/saviourcode/how-to-create-objects-and-write-it-s-garbage-collector-in-c-4p8e
+
+// cub3d help
+https://hackmd.io/@nszl/H1LXByIE2
+
+// raycasting help
+https://harm-smits.github.io/42docs/projects/cub3d

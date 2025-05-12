@@ -1,0 +1,15 @@
+{% comment %} {% extends "base.html" %} {% endcomment %}
+{% load i18n %}
+
+<style>
+    #id_username {
+		margin-top: 100px;
+	}
+</style>
+<form method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form }}
+	<button type="submit">
+		{% trans "Save Changes" %}
+	</button>
+</form>

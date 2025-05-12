@@ -1,0 +1,327 @@
+{% load static %}
+<!DOCTYPE html>
+{% load i18n %}
+<html lang="{{ LANGUAGE_CODE }}">
+	<!-- {% if messages %}
+		<ul class=""messages>
+			{% for message in messages %}
+				<li class="{{ message.tags }}">
+					{{ message }}
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %} -->
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}
+			Entropia
+			{% endblock %}
+		</title>
+		
+		<!-- Fonts et CSS -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;800&display=swap" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/gh/KLA6/cannon-es-umd@v0.20.0/cannon-es.umd.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.min.js"></script>
+		<script type="module" src="{% static 'router.js' %}"></script>
+		<link rel="stylesheet" href="{% static 'css/home.css' %}">
+		<style>
+
+		nav {
+			font-family: "roboto";
+			display: flex;
+			justify-content: space-between;  /* logo à gauche / liens à droite */
+			align-items: center;             /* les aligner verticalement */
+			padding: 10px;
+			position: relative;
+			width: 100%;
+			background: transparent;
+			background: none;
+ 			/* border: 1px solid rgb(255, 255, 255); */
+			 z-index: 3;
+		}
+
+		.nav-right {
+			display: flex;    console.log(event.target.dataset);
+			align-items: center;
+		}
+
+		nav a {
+			font-weight: 600;
+			text-decoration: none;
+			margin: 0px 10px;
+			padding: 8px 8px;
+			color: #9a98983d;
+			border-radius: 5px;
+			/* border: solid 1px #ffffff; */
+			background: transparent;
+			background: none;
+		}
+
+		.search-form {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: ro;
+			/* margin-right: 0px; */
+			margin-right: 0px;
+			margin-bottom: 25px;
+
+
+
+		}
+		.search-form input {
+			margin-top: 0px;
+			margin-bottom: 0px;
+			padding: 8px;
+			margin-right: 0px;
+			border: solid 1px rgba(255, 255, 255, 0.188);
+
+		}
+		
+
+		.home-logo:hover {
+			background: none;
+		}
+
+		.home-logo img {
+			height: 45px;
+			width: auto;
+			transition: transform 0.2s ease;
+		}
+
+		.home-logo:hover img {
+			transform: scale(1.1);
+		}
+
+
+		.link_temp , .link_temp_logout, .link_temp_langue{
+		font-weight: 400;
+		font-size: 15px;
+		padding: 7px 17px;
+		color: rgba(255, 255, 255, 0.711);
+		margin-left: 14px;
+		background: none;
+		border-radius: 5px;
+		cursor: pointer;
+		font-family: "Roboto", sans-serif;
+		border: solid 1px rgba(255, 255, 255, 0.461);
+		text-align: center;
+		top: 14%;
+		}
+		.link_temp_logout {
+			background:rgb(0, 0, 222) ;
+			position: absolute;
+			right: 2%;
+			border: none;
+			color: rgba(255, 255, 255, 0.704);
+
+			font-family: "Roboto", sans-serif;
+			font-weight: 700;
+			top: 30px;
+		}
+
+		.link_temp_langue{
+			position: absolute;
+			right: 200px;
+			top: 30px;
+			font-family: "Roboto", sans-serif;
+			font-weight: 100;
+
+			margin-right:3px ;
+			padding-left: 3px; 
+			padding-right: 3px;
+			color: rgba(255, 255, 255, 0.601);
+			background:rgba(200, 200, 255, 0.182) ;
+			position: absolute;
+			border: none;
+		}
+
+		.link_temp:hover {
+		transform: scale(1.05);
+		}
+
+
+		.search-form {
+		font-weight: 400;
+		font-size: 11px;
+		padding: 3px 15px;
+		color: rgba(255, 255, 255, 0.711);
+		margin-left: 14px;
+		background: none;
+		border-radius: 5px;
+		cursor: pointer;
+		font-family: "Roboto", sans-serif;
+		/* border: solid 1px rgba(255, 255, 255, 0.461); */
+		text-align: left;
+		margin-right: 0px;
+		border: none;
+
+		
+		}
+
+		.search-form2 {
+			margin-top: 0px;
+		font-weight: 400;
+		font-size: 14px;
+		padding: 6px 17px;
+		color: rgba(255, 255, 255, 0.434);
+		margin-left: 14px;
+		background: none;
+		border-radius: 5px;
+		cursor: pointer;
+		font-family: "Roboto", sans-serif;
+		border: solid 1px rgba(255, 255, 255, 0.461);
+		text-align: center;
+		margin-left: 7px;
+
+		
+		}
+
+		.message-popup {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			min-width: 250px;
+			padding: 15px;
+			border-radius: 8px;
+			color: white;
+			font-size: 16px;
+			display: none;
+			opacity: 0;
+			transition: opacity 0.5s ease-in-out;
+			z-index: 1000;
+			}
+			.message-popup.success { background-color: #4CAF50; } /* Green */
+			.message-popup.error { background-color: #f44336; } /* Red */
+			.message-popup.warning { background-color: #ff9800; } /* Orange */
+			.message-popup.show {
+				display: block;
+				opacity: 1;
+			}
+
+		</style>
+	
+
+	 <link rel="icon" href="{% static 'icons/icon4/favicon-96x96.png' %}" type="image/png">	
+			
+	</head>
+	<body>
+		<nav>
+			<div class="nav-left">
+				<a href="{% url 'home' %}" class="home-logo">
+					<img src="{% static 'logo/logo_square.png' %}" alt="Logo">
+				</a>
+			</div>
+		
+			{% if user.is_authenticated %}
+				<div class="nav-right" style="display: flex; flex-direction: row; align-items: center;">
+				<a href="/users/my_profile/" class="link_temp">
+					{% trans "My Profile" %}
+				</a>
+				<form class="search-form" method="GET" action="/users/search_friends/">
+					{% csrf_token %}
+					<input class="search-form" type="text" name="q" placeholder="Search friends" required>
+					<button type="submit" class="search-form2">
+						{% trans "Search" %}
+					</button>
+				</form>
+			</div>
+			{% endif %}
+			<div>
+				{% if user.is_authenticated %}
+				<form method="post" action="/api/users/accounts/logout/" style="display: inline;" data-no-spa>
+					{% csrf_token %}
+					<button type="submit" class="link_temp_logout">
+						{% trans "Logout" %}
+					</button>
+				</form>
+				{% else %}
+			<div class="nav-right">
+				<!-- <a href="{% url 'home' %}" class="link_temp">
+					{% trans "Sign In" %}
+				</a>  -->
+				<a href="https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code" class="link_temp">
+					{% trans "Sign In with 42" %}
+				</a>
+				{% comment %} <a href="https://api.intra.42.fr/oauth/authorize?client_id={{ env_client_id }}&redirect_uri={{ env_uri }}&response_type=code">
+					Log in with 42
+				</a> {% endcomment %}
+				{% endif %}
+			</div>
+			<div>
+				<form action="{% url 'set_language' %}" method="post">
+				{% csrf_token %}
+				<select class="link_temp_langue" name="language" onchange="this.form.submit()">
+					{% get_current_language as LANGUAGE_CODE %}
+					{% get_available_languages as LANGUAGES %}
+					{% for lang in LANGUAGES %}
+						<option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+							{{lang.1}}
+						</option>
+					{% endfor %}
+				</select>
+				</form>
+			</div>
+		</nav>
+		
+		<div id="app-content">
+			<!-- This is where SPA content will be loaded by router.js -->
+		</div>
+	
+		<!-- Message Pop-up Container -->
+		<div id="message-popup" class="message-popup"></div>
+	
+		<script src="{% url 'javascript-catalog' %}?lang={{ LANGUAGE_CODE }}">
+		</script>
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				const messagePopup = document.getElementById("message-popup");
+				
+				{% if messages %}
+				let messages = [
+					{% for message in messages %}
+					{ text: "{{ message|escapejs }}", tag: "{{ message.tags }}" },
+					{% endfor %}
+				];
+				function showMessage(index) {
+					if (index < messages.length) {
+						let msg = messages[index];
+						
+						messagePopup.innerText = msg.text;
+						messagePopup.className = "message-popup " + msg.tag + " show";
+						
+						setTimeout(() => {
+							messagePopup.classList.remove("show");
+							setTimeout(() => {
+								showMessage(index + 1);
+							}, 500);  // Delay before next message
+						}, 3000);  // Message duration
+					}
+				}
+				
+				showMessage(0);
+				{% endif %}
+			});
+			
+			const ws_sheme = window.location.protocol === "https:" ? "wss" : "ws";
+			
+			const socket = new WebSocket(ws_sheme + '://' + window.location.host + '/ws/status/');
+			
+			socket.onopen = function(e) {
+				console.log("WebSocket connected");
+			}
+			
+			socket.onclose = function(e) {
+				console.log("WebSocket disconnected");
+			}
+			
+			</script>
+	</body>
+	</html>
+	
+

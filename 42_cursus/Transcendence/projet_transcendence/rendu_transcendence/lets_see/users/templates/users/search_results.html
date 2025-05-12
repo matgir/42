@@ -1,0 +1,43 @@
+{% load i18n %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/search_results.css' %}">
+	{% comment %} {% block title %}
+	{% trans "Search Friends" %}
+	{% endblock %}
+
+	{% block content %}
+	</h2> {% endcomment %}
+	{% if results %}
+		<h2>
+		{% blocktrans with query=query %}
+		Search Results for "{{ query }}"
+		{% endblocktrans %}
+		</h2>
+	<ul>
+		{% for user in results %}
+		<li>
+		{% csrf_token %}
+			{% comment %} <button class="link_temp" id="user_profil" params='{"username": "{{ user.username }}"}'>
+				{{ user.username }}
+			</button> {% endcomment %}
+			<a class="link_temp" id="user_profil" href="/users/profile/{{ user.username }}">
+				{{ user.username }}
+			</a>
+		{% comment %}	<!-- <a href="{% url 'user_profile' user.username %}">
+				{{ user.username }}
+			</a>
+			</a> -->
+			<!-- <a href="{% url 'add_friend' user.username %}">
+				Add Friend
+			</a> --> {% endcomment %}
+		</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>
+		{% trans "No users found." %}
+	</p>
+	{% endif %}
+	{% comment %} {% endblock %} {% endcomment %}
+{% endblock %}

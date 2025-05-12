@@ -1,0 +1,4 @@
+MODE command,
+on se base sur IRSSI comme client de reference
+irssi -c localhost -w <password> -p <port> -n <chosen_nickname>
+./ircserv <port> <password>

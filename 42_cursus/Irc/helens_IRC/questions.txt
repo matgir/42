@@ -1,0 +1,58 @@
+Quels modes implémenter pour les channels, et pour les users ?
+
+The various modes available for channels are as follows:
+i - invite-only channel flag;
+    /MODE <chanel_name> +i
+    /MODE <chanel_name> -i
+t - topic settable by channel operator only flag;
+    /MODE <chanel_name> +t
+    /MODE <chanel_name> -t
+o - give/take channel operator privileges;
+    /MODE <channel_name> +o <user_nick> <user_nick2> <...>
+    /MODE <channel_name> -o <user_nick> <user_nick2> <...>
+    <user_nick> must be a registered nickname
+    you can revoke your own privileges
+    be attentive about not leaving a channel without operator
+k - set a channel key (password).
+    /MODE <channel_name> +k <chosen_password>
+    /MODE <channel_name> -k
+l - set the user limit to channel;
+    /MODE <channel_name> +l <user_limit>
+    /MODE <channel_name> -l
+    <user_limit> must be a digit
+
+It is possible to modify several channel modes in the same command,
+adding or revoking as well
+/MODE +<modes> <parameters>
+/MODE -<modes> <parameters>
+the parameters must in the same order as the modes
+if params not good with chosen mode return
+    501 ERR_UMODEUNKNOWNFLAG :Unknown mode
+if no params when needed return
+    461 ERR_NEEDMOREPARAMS :Not enough parameters
+when processing /MODE command take the first mode, if param needed take first params
+if good then process, if not return error and continu processing /MODE command
+use next mode but keep same param if it didn't work forr the first mode
+
+    p - private channel flag;
+    s - secret channel flag;
+    n - no messages to channel from clients on the outside;
+    m - moderated channel;
+    b - set a ban mask to keep users out;
+    v - give/take the ability to speak on a moderated channel;
+
+The available (user) modes are as follows:
+    i - marks a users as invisible;
+    s - marks a user for receipt of server notices;
+    w - user receives wallops;
+    o - operator flag.
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Doit on implementer les channels private et et secret, ou juste public ? 
+
+Faut-il implémenter les server operators ? vu qu'a qu'un seul serveur et que doit pas
+gérer les échanges inter-serveurs
+
+Limite de 512 caractères par buffer envoyé (510 en enlevant le CRLF) : choix arbitraire de l'implémenter ou non ?

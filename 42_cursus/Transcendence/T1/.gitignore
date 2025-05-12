@@ -1,0 +1,25 @@
+### Core ###
+*.swp
+.env
+.DS_Store
+django/ft_transcendence/core/static/core/css/test.css
+django/ft_transcendence/media/avatars/
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+django/ft_transcendence/staticfiles
+django/ft_transcendence/core/migrations
+
+### DB ###
+django/ft_transcendence/chat/migrations/
+django/ft_transcendence/api/migrations/
+django/ft_transcendence/game/migrations/
+### Commitzen ###
+package.json
+package-lock.json
+node_modules

@@ -1,0 +1,135 @@
+struct addrinfo
+{
+	int				ai_flags;		//AI_PASSIVE, AI_CANONNAME, etc
+	int				ai_family;		//AF_INET (IPv4), AF_INET6 (IPv6), AF_UNSPEC
+										// (toutes), tye de famille d'adresse desire
+	int				ai_socktype;	//type de socket, SOCK_STREAM, SOCK_DGRAM ...
+										// if = 0 means any socket type
+	int				ai_protocol;	//use of 0 for "any" (tcp, ip, udp),
+										// security protocols
+	size_t			ai_addrlen;		//size of the ai_addr in bytes
+	struct sockaddr	*ai_addr;		//struct sockaddr_in or _in6
+	char			*ai_canonname;	//full canonical hostname
+
+	struct addrinfo	*ai_next;		//linked list, next node
+}
+
+int	getaddrinfo(const char *node,
+				const char *service,
+				const struct addrinfo *hints,
+				struct addrinfo **res);
+	node 	= host name to connect to, or an IP address
+	service	= port number, or service name (http, ftp, telnet, smtp ...)
+	hints	= points to a struct addrinfo filled out with relevant information
+	res		= pointer to a linked list res that will be filled by getaddrinfo itself
+returns one or more addrinfo struct wich contains and internet adress that can be use
+in a call bind() or connect()
+
+int	socket(	int domain,
+			int type,
+			int protocol)
+	domain		= communication domain, the protocol family used for the communication,
+				usualy ai_family of a struct addrinfo
+	type		= socket type, usualy ai_socktype of a struct addrinfo
+	protocol	= specifies particular protocol to use, usualy ai_protocols of a
+				struct addrinfo, 0 if no need to specifie a specific protocol
+creates an endpoint for communications and return a file descriptor that refers
+to that endpoint, e.g. the socket file descriptor
+
+int	setsockopt(	int sockfd,
+				int level,
+				int optname,
+				const void optval[.optlen],
+				socklen_t optlen)
+	sockfd	= socket file descriptor (return of socket())
+	level	= level at wich the option reside, SOL_SOCKET for the API level
+	optname	= specified options passed to appropriate protocol module for
+			interpretation, SO_REUSEADDR for reuse of local addresses, a socket may
+			bind except when there is an active listening socket bound to the
+			address
+	optval/optlen	= not important here but optval cannot be equal to 0
+manipulates options for the socket reffered by sockfd
+
+int	fcntl(	int fd,
+			int op,
+			.../* arg */)
+	fd			= the open file descriptor on witch the orperations are gonna be done
+	op			= operations done to the file descriptor, F_SETFL set the file status
+				flag specified by arg
+	/* arg */	= depends on op, O_NONBLOCK for I/O operations won't cause the
+				colling process to wait
+
+struct sockaddr
+{
+	unsigned short	sa_family;		//adress family, AF_XXX
+	char			sa_data[14];	//14 byte of protocol address, destination adress
+										//and prot number for the socket
+}
+
+int	bind(	int sockfd,
+			const struct sockaddr *addr,
+			socklen_t addrlen)
+	sockfd	= socket file descriptor
+	addr	= address that will be assigned to sockfd, usualy ai_addr of struct 
+			addrinfo
+	addrlen	= size of the assigned address, usualy ai_addrlen of struct addrinfo
+when a socket is created with socket() a name space exist but no address is assigned
+to it, bind() assign an address to the socket, "assigning a name to a socket"
+necessary before a SOCK_STREAM can receive connections
+
+int	listen(	int sockfd,
+			int backlog)
+	sockfd	= socket file descriptor
+	backlog	= max number of pending connection to the socket identified by sockfd
+mark the socket referenced by sock fd as passive, meaning it becomes a socket that
+will accept incomming connection request using accept()
+
+struct pollfd
+{
+    int   fd;
+        // File descriptor to monitor, can represent sockets, pipes, or orther
+        // I/O ressources
+    short events;
+        // Events to monitor, POLLIN (data available to read), POLLOUT (ready for
+        // writting), POLLERR (an error condition occured), POLLHUP (hang up occured
+        // on the file descriptor), POLLPRI high priority data available to read)...
+    short revents;
+        // Events that occurred on fd, contain part or all the events requested in
+        // events this is set by poll()
+};
+
+
+int	poll(	struct pollfd *fds,
+			nfds_t nfds,
+			int timeout)
+	fds		= set of file descriptors to be monitored, composed of an array of
+			struct pollfd
+	nfds	= number of struct pollfd in the array
+	timeout	= number of miliseconds that poll() should block waiting for a fd 
+			to become ready, if negative means infinite timeout
+
+char	*strerror(int errnum)
+	errnum	= error code
+return a pointer to a string that describes the error code errnum
+
+ssize_t	recv(	int sockfd,
+				void buf[.len],
+				size_t len,
+				int flags)
+	sockfd		= socket file descriptor
+	buf[.len]	= buffer to be filled by the function
+	len			= size of the buffer
+	flags		= flags, if set to 0 then no flags
+used to receive message from a socket, fill buff with it at a certain size
+on error return -1 else the length of the message
+
+ssize_t	send(	int sockfd,
+				const void buf[.len],
+				size_t len,
+				int flags)
+	sockfd		= socket file descriptor
+	buf[.len]	= buffer with the message to be send
+	len			= size of the buffer
+	flags		= flags, if set to 0 then no flags
+used to send a message from a socket identified by sockfd, the socket must be
+in connected state, so that the intented recipient is know
