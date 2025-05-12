@@ -1,0 +1,61 @@
+server {
+		listen 443 ssl default_server;
+			# listen to incomming connections on port 443 and enables SSL
+		listen [::]:443 ssl default_server;
+			# same but from IPv6 adresses
+
+		ssl_protocols TLSv1.3; # specifies witch protocols are gonna be used
+		ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+		ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+
+
+		# ssl
+		include snippets/ssl-params.conf;	# strong encryption
+
+		root /var/www/html/wordpress;
+		index index.php;
+
+		server_name mgirardo.42.fr;
+		
+		# logging
+		access_log /var/log/nginx/wordpress.access.log;
+		error_log /var/log/nginx/wordpress.error.log;
+
+		location / {
+			# define settings for the root directory
+				try_files $uri $uri/ =404;
+					# check if the requested file or directory exist, if not return 404
+		}
+
+		# fastcgi in general are used for enhancing performances of web servers
+		# when interacting with applications
+		location ~ \.php$ {
+			# dealing with PHP files
+				try_files $uri = 404;
+					# if the PHP file doesnt exist, return 404
+				fastcgi_split_path_info ^(.+\.php)(/.+)$;
+					# for better PHP processing
+				fastcgi_pass wordpress:9000; 
+					# redirect to wordpress container
+				fastcgi_index index.php;
+					# set the index to index.php
+				include fastcgi_params;
+					# use default fastcgi params
+				fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+					# set full path of the PHP file executed
+				fastcgi_param PATH_INFO $fastcgi_path_info;
+					# provides additionnal path info about PHP script
+		}
+
+		error_page 403 404 /404.html;
+		location = /404.html {
+				root /var/www/html/web-404;
+				internal;
+		}
+
+		error_page 500 502 503 504 /505.html;
+		location = /505.html {
+				root /var/www/html/web-500;
+				internal;
+		}
+}

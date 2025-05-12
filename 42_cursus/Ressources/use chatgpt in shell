@@ -1,0 +1,8 @@
+sgpt --chat inception "salut je suis jimmy"
+	parle en chat sur la conversation inception qui est sauvergarder
+sgpt --repl temp
+	creer une conversation temporaire avec interface
+sgpt --repl inception
+	parle sur la conversation inception en interface et sauvergarde
+sgpt --shell "liste les dossier dans mon homme qui contiennent la lettre o"
+	demande la commane pour faire ca
