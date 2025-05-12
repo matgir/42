@@ -1,9 +1,0 @@
-*.o
-*.a
-tags
-a.out
-.DS_Store
-*.git
-*.swp
-*.vscode
-*.d
