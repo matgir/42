@@ -1,0 +1,5 @@
+ # Launch 42_EXAM in ONE COMMAND : 
+ bash -c "$(curl https://grademe.fr)"
+
+ # Erase google chrome cache to start it on 42 computer
+ rm -rf ~/.config/google-chrome/SingletonLock

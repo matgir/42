@@ -1,0 +1,248 @@
+COMMAND
+	DOCKER
+		docker build -t <docker_name> .
+			build a docker with the name <docker_name> using the Dockerfile in the
+			current directory
+
+		docker run [OPTIONS] <docker_name>/<docker_image[:TAG]>
+			[OPTIONS]
+				-it			: starts the container and open a terminal inside it
+				-d			: run container in background
+				-p			: publish a container port(s) to the host
+				--rm		: automaticaly remove the container when it exits, so at the
+							  end
+				--hostname	: container hostname
+				--name		: assign a name to the container
+				--mount		: to use a container with volume/mount/tmpfs existing
+				--env-file	: to create the container with an envfile
+				--network	: to create the container connected to a network
+			exemple
+				$ docker run -d -ti -p 80:80 --rm --name web-ngnix --hostname nginx
+				container nginx:latest
+				$ docker run -d --name TestBindMount --mount
+				type=bind,source=/data/,target=/usr/share/nginx/html -p 80:80
+				nginx:latest
+				$ docker run -tid --name testenv --env-file .ENV debian:latest
+				$ docker run -d --name c1 --network mynetwork nginx:latest
+
+		docker start <container_id>/<name>
+			it starts the container affiliated to the <container_id>
+
+		docker stop <container_id>/<name>
+			it stops the container affiliated to the <container_id>
+
+		docker exec -it <container_name> bash
+			lets you go inside a container and interact with it in bash
+		
+		sudo docker exec -it <continer id> bash
+			let you get inside a container that won't stop
+
+		service --status-all
+			show the service running in a container and that may block the stopping of
+			it
+		
+		service <service_name> stop
+			stop a particular service so that the container may be stopped
+
+		exit (inside a docker terminal)
+			exits the docker
+
+		docker logs <container_name>
+			give you the logs from the container
+
+		docker system prune
+			erase everything related to docker compose
+
+		ps -aux | grep "docker compose up" | awk ' NR==1{ print $2 }' | xargs kill -9 $1
+			kill the container running, still has to delete images and containers
+
+
+	DOCKER IMAGES
+		docker image ls
+			show the list of all existing docker image, with their id
+
+		docker rmi <image_id>
+			delete the image designated by image id
+
+		sudo docker rmi -f $(sudo docker image ls -aq)
+			delete all images forcefully (-f)
+
+
+	DOCKER CONTAINER
+		docker ps -as
+			show lists of all containers on the system, running or stopped
+
+		docker rm <container_id>
+			it erased the container affiliated to the <container_id>
+
+		sudo docker rm -f $(sudo docker ps -aq)
+			remove all container forcefully, even if it is running
+
+	DOCKER COMPOSE
+		docker-compose images
+			show list of the images created with the current docker-compose.yml
+
+		docker-compose ps
+			this command list all the containers in the current docker-compose file.
+			They can then either be running or stopped.
+
+		docker-compose run <service_name>
+			this is similar to the docker run command. It will create containers
+			from images built for the <service_name> mentioned in the compose file
+
+		docker-compose start
+			to start a container
+
+		docker-compose stop
+			this command stops the running containers of specified services
+
+		docker-compose down
+			to stop and delete a container
+
+		docker-compose build
+			it will build the images using the docker-compose.yml
+
+		docker-compose up -d
+			to run containers in the daemon mode
+
+		docker-compose up --build -d
+			it builds and runs conatiner in daemon mode
+
+	DOCKER VOLUMES
+		docker volume ls
+			list volumes created
+
+		docker volume create <volume_name>
+			creates a new volume with <volume_name>
+
+		docker volume rm <volume_name>
+			delete the volume designated by <volume_name>
+
+		docker volume inspect <volume_name>
+			inspection of a volume, gives you information about it
+
+	DOCKER NETWORK
+		docker network ls
+			list networks
+
+		docker create <network_name>
+			creates network
+
+		docker network rm <network_name>
+			remove one or more networks
+
+		docker network inspect <network_name>
+			display information on one or more networks
+
+	MYSQL IN MARIADB
+		mysql -uroot
+			To connect on mysql CLIENT, as root
+		
+		mysqldump -u username -p databasename > filename.sql
+			To export the file
+
+		mysql -uroot -p $MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /usr/local/bin/wordpress.sql
+			To import the file
+		
+		SELECT user,host,password FROM mysql.user;
+			To see all the users, host and password on mysql
+
+		USE wordpress
+			To connect on your wordpress database
+		
+		SHOW databases;
+			show all the databases
+		
+		SHOW tables;
+			show all the tables from the database you selected
+		
+		SELECT wp_users.display_name FROM wp_users;
+			display username from wordpress database
+		
+		SELECT * FROM wp_users;
+			display all info from wordpress users
+
+	SSL
+		openssl x509 -in /path_to/nginx-selfsigned.crt -text -noout
+			to check if your contract is valid
+
+		sudo openssl rsa -in /path_to/nginx-selfsigned.key -check
+			to check if your key is valid
+
+WEBSITES
+	How to remove docker images "CONSULTED"
+		https://www.cherryservers.com/blog/how-to-remove-docker-images
+	Getting stardockrted with Docker and Kubernetes: A beginners guide "CONSULTED"
+		https://www.educative.io/blog/docker-kubernetes-beginners-guide
+	Install Docker Engine on Debian "NOT"
+		https://docs.docker.com/engine/install/debian/
+	Docker Compose Tutorial: Advanced Docker made simple "CONSULTED"
+		https://www.educative.io/blog/docker-compose-tutorial
+	Docker Networking "CONSULTED"
+		https://www.aquasec.com/cloud-native-academy/docker-container/docker-networking/
+	vbachele / Inception
+		https://github.com/vbachele/Inception/tree/main
+	llescure / 42_Inception
+		https://github.com/llescure/42_Inception
+	Set environment variables within your containers environment
+		https://docs.docker.com/compose/environment-variables/set-environment-variables/
+	tblaase / inception
+		https://github.com/tblaase/inception
+	Forstman1 / inception-42 
+		https://github.com/Forstman1/inception-42
+	docker compose command "CONSULTED"
+		https://docs.docker.com/reference/cli/docker/compose/
+	explanation docker compose version
+		https://stackoverflow.com/questions/76156527/what-does-the-first-line-in-the-docker-compose-yml-file-that-specifies-the-ve
+	help about php and wordpress config
+		https://howto.wared.fr/installation-wordpress-ubuntu-nginx/
+	Tliot / inception
+		https://github.com/Theo2lt/Inception/blob/main/README.md
+
+TO KNOW
+	-	To erase a docker image if it is still linked to a container, you must stop
+		the container, then delete it then erase your docker image
+	-	Dockerfile :	text document that contains the commands to call on the command
+						line to build an image
+	-	Docker compose :	tool for defining and running multi-container docker
+							applications. Information descirbing services and networks
+							for an application are contained within a YAML file, called
+							docker-compose.yml
+	-	To cleanly install docker on your Ubuntu machine :
+		a.	remove any conflicting packages
+			for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+		b.	set up docker's apt repository
+			# Add Docker's official GPG key:
+			sudo apt-get update
+			sudo apt-get install ca-certificates curl
+			sudo install -m 0755 -d /etc/apt/keyrings
+			sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+			sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+			# Add the repository to Apt sources:
+			echo \
+			"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+			$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+			sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+			sudo apt-get update
+		c.	Instal latest version
+			sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+		d.	Verify if it is succesfull
+			sudo docker run hello-world
+
+	-	To make your current user to use docker without sudo
+		a.	sudo groupadd docker
+		b.	sudo usermod -aG docker $USER
+		c.	newgrp docker
+		d.	docker run hello-world
+
+	-	When you want to communicate between container on a network you created, you
+		should refer to the container with their <container_name>, because their
+		ip address might change depending on the order they are started
+
+	-	Docker is usefull for its adaptability over every plateform ,inside a container
+		you can run whatever you want, everything you need can be installed automaticaly
+		thanks to a Dockerfile
+
+	-	Docker compose is a way to start and launch a whole lot of container at the
+		same time and make them work with each other
